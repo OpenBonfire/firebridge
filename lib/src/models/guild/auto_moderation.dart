@@ -1,30 +1,31 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/guild/auto_moderation.dart';
 import 'package:nyxx/src/http/managers/auto_moderation_manager.dart';
-import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/channel/text_channel.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
-import 'package:nyxx/src/models/guild/member.dart';
-import 'package:nyxx/src/models/role.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
-import 'package:nyxx/src/models/user/user.dart';
 import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
-/// A partial [AutoModerationRule].
-class PartialAutoModerationRule extends WritableSnowflakeEntity<AutoModerationRule> {
-  @override
-  final AutoModerationManager manager;
+part 'auto_moderation.mapper.dart';
 
+/// A partial [AutoModerationRule].
+@MappableClass()
+class PartialAutoModerationRule
+    extends WritableSnowflakeEntity<AutoModerationRule>
+    with PartialAutoModerationRuleMappable {
   /// Create a new [PartialAutoModerationRule].
   /// @nodoc
-  PartialAutoModerationRule({required super.id, required this.manager});
+  PartialAutoModerationRule({required super.id});
 }
 
 /// {@template auto_moderation_rule}
 /// A rule use for auto-moderation in a [Guild].
 /// {@endtemplate}
-class AutoModerationRule extends PartialAutoModerationRule {
+@MappableClass()
+class AutoModerationRule extends PartialAutoModerationRule
+    with AutoModerationRuleMappable {
   /// The ID of the guild this rule is in.
   final Snowflake guildId;
 
@@ -59,7 +60,6 @@ class AutoModerationRule extends PartialAutoModerationRule {
   /// @nodoc
   AutoModerationRule({
     required super.id,
-    required super.manager,
     required this.guildId,
     required this.name,
     required this.creatorId,
@@ -71,20 +71,11 @@ class AutoModerationRule extends PartialAutoModerationRule {
     required this.exemptRoleIds,
     required this.exemptChannelIds,
   });
-
-  PartialGuild get guild => manager.client.guilds[guildId];
-
-  PartialUser get creator => manager.client.users[creatorId];
-
-  PartialMember get creatorMember => guild.members[creatorId];
-
-  List<PartialRole> get exemptRoles => exemptRoleIds.map((e) => guild.roles[e]).toList();
-
-  List<PartialChannel> get exemptChannels => exemptChannelIds.map((e) => manager.client.channels[e]).toList();
 }
 
 /// The type of event on which an [AutoModerationRule] triggers.
-final class AutoModerationEventType extends EnumLike<int, AutoModerationEventType> {
+final class AutoModerationEventType
+    extends EnumLike<int, AutoModerationEventType> {
   /// When a member sends or edits a message in the guild.
   static const messageSend = AutoModerationEventType(1);
 
@@ -94,12 +85,15 @@ final class AutoModerationEventType extends EnumLike<int, AutoModerationEventTyp
   /// @nodoc
   const AutoModerationEventType(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   AutoModerationEventType.parse(int value) : this(value);
 }
 
 /// The type of a trigger for an [AutoModerationRule]
-final class TriggerType extends EnumLike<int, TriggerType> {
+@MappableClass()
+final class TriggerType extends EnumLike<int, TriggerType>
+    with TriggerTypeMappable {
   /// Check if content contains words from a user defined list of keywords.
   static const keyword = TriggerType(1);
 
@@ -118,7 +112,8 @@ final class TriggerType extends EnumLike<int, TriggerType> {
   /// @nodoc
   const TriggerType(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   TriggerType.parse(int value) : this(value);
 }
 
@@ -126,7 +121,10 @@ final class TriggerType extends EnumLike<int, TriggerType> {
 /// Additional metadata associated with the trigger for an [AutoModerationRule].
 /// {@endtemplate}
 // TODO(abitofevrything): Remove `implements TriggerMetadataBuilder`
-class TriggerMetadata with ToStringHelper implements TriggerMetadataBuilder {
+@MappableClass()
+class TriggerMetadata
+    with ToStringHelper, TriggerMetadataMappable
+    implements TriggerMetadataBuilder {
   @override
   final List<String>? keywordFilter;
 
@@ -170,7 +168,9 @@ class TriggerMetadata with ToStringHelper implements TriggerMetadataBuilder {
 }
 
 /// A preset list of trigger keywords for an [AutoModerationRule].
-final class KeywordPresetType extends EnumLike<int, KeywordPresetType> {
+@MappableClass()
+final class KeywordPresetType extends EnumLike<int, KeywordPresetType>
+    with KeywordPresetTypeMappable {
   static const profanity = KeywordPresetType(1);
   static const sexualContent = KeywordPresetType(2);
   static const slurs = KeywordPresetType(3);
@@ -178,7 +178,8 @@ final class KeywordPresetType extends EnumLike<int, KeywordPresetType> {
   /// @nodoc
   const KeywordPresetType(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   KeywordPresetType.parse(int value) : this(value);
 }
 
@@ -186,7 +187,10 @@ final class KeywordPresetType extends EnumLike<int, KeywordPresetType> {
 /// Describes an action to take when an [AutoModerationRule] is triggered.
 /// {@endtemplate}
 // TODO(abitofevrything): Remove `implements AutoModerationActionBuilder`
-class AutoModerationAction with ToStringHelper implements AutoModerationActionBuilder {
+@MappableClass()
+class AutoModerationAction
+    with ToStringHelper, AutoModerationActionMappable
+    implements AutoModerationActionBuilder {
   @override
   final ActionType type;
 
@@ -209,7 +213,9 @@ class AutoModerationAction with ToStringHelper implements AutoModerationActionBu
 }
 
 /// The type of action for an [AutoModerationAction].
-final class ActionType extends EnumLike<int, ActionType> {
+@MappableClass()
+final class ActionType extends EnumLike<int, ActionType>
+    with ActionTypeMappable {
   static const blockMessage = ActionType(1);
   static const sendAlertMessage = ActionType(2);
   static const timeout = ActionType(3);
@@ -218,7 +224,8 @@ final class ActionType extends EnumLike<int, ActionType> {
   /// @nodoc
   const ActionType(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   ActionType.parse(int value) : this(value);
 }
 
@@ -226,7 +233,10 @@ final class ActionType extends EnumLike<int, ActionType> {
 /// Additional metadata associated with an [AutoModerationAction].
 /// {@endtemplate}
 // TODO(abitofevrything): Remove `implements ActionMetadataBuilder`
-class ActionMetadata with ToStringHelper implements ActionMetadataBuilder {
+@MappableClass()
+class ActionMetadata
+    with ToStringHelper, ActionMetadataMappable
+    implements ActionMetadataBuilder {
   final AutoModerationManager manager;
 
   @override
@@ -248,7 +258,9 @@ class ActionMetadata with ToStringHelper implements ActionMetadataBuilder {
   });
 
   /// The channel to send the alert message to.
-  PartialTextChannel? get channel => channelId == null ? null : manager.client.channels[channelId!] as PartialTextChannel?;
+  PartialTextChannel? get channel => channelId == null
+      ? null
+      : manager.client.channels[channelId!] as PartialTextChannel?;
 
   @override
   @Deprecated('Use ActionMetadataBuilder instead')

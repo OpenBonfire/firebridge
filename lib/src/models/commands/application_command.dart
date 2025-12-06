@@ -1,8 +1,6 @@
-import 'package:nyxx/src/http/managers/application_command_manager.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/application.dart';
 import 'package:nyxx/src/models/commands/application_command_option.dart';
-import 'package:nyxx/src/models/commands/application_command_permissions.dart';
-import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/interaction.dart';
 import 'package:nyxx/src/models/locale.dart';
 import 'package:nyxx/src/models/permissions.dart';
@@ -10,17 +8,16 @@ import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/utils/enum_like.dart';
 
-/// A partial [ApplicationCommand].
-class PartialApplicationCommand extends WritableSnowflakeEntity<ApplicationCommand> {
-  @override
-  final ApplicationCommandManager manager;
+part 'application_command.mapper.dart';
 
+/// A partial [ApplicationCommand]
+@MappableClass()
+class PartialApplicationCommand
+    extends WritableSnowflakeEntity<ApplicationCommand>
+    with PartialApplicationCommandMappable {
   /// Create a new [PartialApplicationCommand].
   /// @nodoc
-  PartialApplicationCommand({required super.id, required this.manager});
-
-  /// Fetch the permissions for this command in a given guild.
-  Future<CommandPermissions> fetchPermissions(Snowflake guildId) => manager.client.guilds[guildId].commands.fetchPermissions(id);
+  PartialApplicationCommand({required super.id});
 }
 
 /// {@template application_command}
@@ -28,7 +25,9 @@ class PartialApplicationCommand extends WritableSnowflakeEntity<ApplicationComma
 ///
 /// Also known as "Slash commands".
 /// {@endtemplate}
-class ApplicationCommand extends PartialApplicationCommand {
+@MappableClass()
+class ApplicationCommand extends PartialApplicationCommand
+    with ApplicationCommandMappable {
   /// The type of this command.
   final ApplicationCommandType type;
 
@@ -76,7 +75,6 @@ class ApplicationCommand extends PartialApplicationCommand {
   /// @nodoc
   ApplicationCommand({
     required super.id,
-    required super.manager,
     required this.type,
     required this.applicationId,
     required this.guildId,
@@ -92,16 +90,11 @@ class ApplicationCommand extends PartialApplicationCommand {
     required this.contexts,
     required this.version,
   });
-
-  /// The application this command belongs to.
-  PartialApplication get application => manager.client.applications[applicationId];
-
-  /// The guild this command belongs to.
-  PartialGuild? get guild => guildId == null ? null : manager.client.guilds[guildId!];
 }
 
 /// The type of an [ApplicationCommand].
-final class ApplicationCommandType extends EnumLike<int, ApplicationCommandType> {
+final class ApplicationCommandType
+    extends EnumLike<int, ApplicationCommandType> {
   /// A chat input command.
   static const chatInput = ApplicationCommandType(1);
 
@@ -114,6 +107,7 @@ final class ApplicationCommandType extends EnumLike<int, ApplicationCommandType>
   /// @nodoc
   const ApplicationCommandType(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   ApplicationCommandType.parse(int value) : this(value);
 }

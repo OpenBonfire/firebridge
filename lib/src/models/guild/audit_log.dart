@@ -1,29 +1,29 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/http/managers/audit_log_manager.dart';
 import 'package:nyxx/src/models/application.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
-import 'package:nyxx/src/models/channel/text_channel.dart';
-import 'package:nyxx/src/models/message/message.dart';
 import 'package:nyxx/src/models/permission_overwrite.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
-import 'package:nyxx/src/models/user/user.dart';
 import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
-/// A partial [AuditLogEntry].
-class PartialAuditLogEntry extends ManagedSnowflakeEntity<AuditLogEntry> {
-  @override
-  final AuditLogManager manager;
+part 'audit_log.mapper.dart';
 
+/// A partial [AuditLogEntry].
+@MappableClass()
+class PartialAuditLogEntry extends ManagedSnowflakeEntity<AuditLogEntry>
+    with PartialAuditLogEntryMappable {
   /// Create a new [PartialAuditLogEntry].
   /// @nodoc
-  PartialAuditLogEntry({required super.id, required this.manager});
+  PartialAuditLogEntry({required super.id});
 }
 
 /// {@template audit_log_entry}
 /// An entry in a [Guild]'s audit log.
 /// {@endtemplate}
-class AuditLogEntry extends PartialAuditLogEntry {
+@MappableClass()
+class AuditLogEntry extends PartialAuditLogEntry with AuditLogEntryMappable {
   /// The ID of the targeted entity.
   final Snowflake? targetId;
 
@@ -46,7 +46,6 @@ class AuditLogEntry extends PartialAuditLogEntry {
   /// @nodoc
   AuditLogEntry({
     required super.id,
-    required super.manager,
     required this.targetId,
     required this.changes,
     required this.userId,
@@ -54,15 +53,13 @@ class AuditLogEntry extends PartialAuditLogEntry {
     required this.options,
     required this.reason,
   });
-
-  /// The user that triggered the action.
-  PartialUser? get user => userId == null ? null : manager.client.users[userId!];
 }
 
 /// {@template audit_log_change}
 /// A change to an object's field in an [AuditLogEntry].
 /// {@endtemplate}
-class AuditLogChange with ToStringHelper {
+@MappableClass()
+class AuditLogChange with ToStringHelper, AuditLogChangeMappable {
   /// The old, unparsed value of the field.
   final dynamic oldValue;
 
@@ -82,7 +79,9 @@ class AuditLogChange with ToStringHelper {
 }
 
 /// The type of event an [AuditLogEntry] represents.
-final class AuditLogEvent extends EnumLike<int, AuditLogEvent> {
+@MappableClass()
+final class AuditLogEvent extends EnumLike<int, AuditLogEvent>
+    with AuditLogEventMappable {
   static const guildUpdate = AuditLogEvent(1);
   static const channelCreate = AuditLogEvent(10);
   static const channelUpdate = AuditLogEvent(11);
@@ -150,14 +149,16 @@ final class AuditLogEvent extends EnumLike<int, AuditLogEvent> {
   /// @nodoc
   const AuditLogEvent(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   AuditLogEvent.parse(int value) : this(value);
 }
 
 /// {@template audit_log_entry_info}
 /// Extra information associated with an [AuditLogEntry].
 /// {@endtemplate}
-class AuditLogEntryInfo with ToStringHelper {
+@MappableClass()
+class AuditLogEntryInfo with ToStringHelper, AuditLogEntryInfoMappable {
   /// The manager for this [AuditLogEntryInfo].
   final AuditLogManager manager;
 
@@ -216,11 +217,11 @@ class AuditLogEntryInfo with ToStringHelper {
   });
 
   /// The application whose permissions were targeted.
-  PartialApplication? get application => applicationId == null ? null : manager.client.applications[applicationId!];
+  PartialApplication? get application => applicationId == null
+      ? null
+      : manager.client.applications[applicationId!];
 
   /// The channel in which entities were targeted.
-  PartialChannel? get channel => channelId == null ? null : manager.client.channels[channelId!];
-
-  /// The targeted message.
-  PartialMessage? get message => messageId == null ? null : (channel as PartialTextChannel?)?.messages[messageId!];
+  PartialChannel? get channel =>
+      channelId == null ? null : manager.client.channels[channelId!];
 }

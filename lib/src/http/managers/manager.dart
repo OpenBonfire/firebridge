@@ -15,10 +15,9 @@ abstract class ReadOnlyManager<T extends ManagedSnowflakeEntity<T>> {
   final NyxxRest client;
 
   /// Create a new read-only manager.
-  ReadOnlyManager(CacheConfig<T> config, this.client, {required String identifier}) : cache = client.cache.getCache(identifier, config);
-
-  /// Parse the [raw] data received from the API into an instance of the type of this manager.
-  T parse(Map<String, Object?> raw);
+  ReadOnlyManager(CacheConfig<T> config, this.client,
+      {required String identifier})
+      : cache = client.cache.getCache(identifier, config);
 
   /// Get an item by its [id] from the cache if it exists, else [fetch] it from the API.
   Future<T> get(Snowflake id) async => cache[id] ?? await fetch(id);
@@ -46,7 +45,8 @@ abstract class ReadOnlyManager<T extends ManagedSnowflakeEntity<T>> {
 /// [parse] can be used to convert a raw API response into an instance of the managed type.
 ///
 /// {@endtemplate}
-abstract class Manager<T extends WritableSnowflakeEntity<T>> extends ReadOnlyManager<T> {
+abstract class Manager<T extends WritableSnowflakeEntity<T>>
+    extends ReadOnlyManager<T> {
   /// Create a new manager.
   ///
   /// {@macro manager}

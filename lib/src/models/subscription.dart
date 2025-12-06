@@ -1,3 +1,4 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/http/managers/subscription_manager.dart';
 import 'package:nyxx/src/models/entitlement.dart';
 import 'package:nyxx/src/models/sku.dart';
@@ -6,8 +7,12 @@ import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/models/user/user.dart';
 import 'package:nyxx/src/utils/enum_like.dart';
 
+part 'subscription.mapper.dart';
+
 /// A partial [Subscription].
-class PartialSubscription extends ManagedSnowflakeEntity<Subscription> {
+@MappableClass()
+class PartialSubscription extends ManagedSnowflakeEntity<Subscription>
+    with PartialSubscriptionMappable {
   @override
   final SubscriptionManager manager;
 
@@ -62,12 +67,15 @@ class Subscription extends PartialSubscription {
 
   /// The SKUs this subscription is for.
   List<PartialSku> get skus => [
-        for (final skuId in skuIds) manager.client.applications[manager.applicationId].skus[skuId],
+        for (final skuId in skuIds)
+          manager.client.applications[manager.applicationId].skus[skuId],
       ];
 
   /// The entitlements this subscription grants.
   List<PartialEntitlement> get entitlements => [
-        for (final entitlementId in entitlementIds) manager.client.applications[manager.applicationId].entitlements[entitlementId],
+        for (final entitlementId in entitlementIds)
+          manager.client.applications[manager.applicationId]
+              .entitlements[entitlementId],
       ];
 }
 

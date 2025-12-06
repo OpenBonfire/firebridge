@@ -1,6 +1,9 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/snowflake.dart';
+
+part 'channel_mention.mapper.dart';
 
 /// {@template channel_mention}
 /// A channel mentioned in a [Message].
@@ -8,7 +11,8 @@ import 'package:nyxx/src/models/snowflake.dart';
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#channel-mention-object
 /// {@endtemplate}
-class ChannelMention extends PartialChannel {
+@MappableClass()
+class ChannelMention extends PartialChannel with ChannelMentionMappable {
   /// The ID of the [Guild] containing the mentioned channel.
   final Snowflake guildId;
 
@@ -22,12 +26,8 @@ class ChannelMention extends PartialChannel {
   /// @nodoc
   ChannelMention({
     required super.id,
-    required super.manager,
     required this.guildId,
     required this.type,
     required this.name,
   });
-
-  /// The guild containing the mentioned channel.
-  PartialGuild get guild => manager.client.guilds[guildId];
 }

@@ -1,29 +1,21 @@
-import 'package:nyxx/src/http/cdn/cdn_asset.dart';
-import 'package:nyxx/src/http/managers/soundboard_manager.dart';
-import 'package:nyxx/src/http/route.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/emoji.dart';
-import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/models/user/user.dart';
 
-class PartialSoundboardSound extends WritableSnowflakeEntity<SoundboardSound> {
-  @override
-  final SoundboardManager manager;
+part 'soundboard.mapper.dart';
 
+@MappableClass()
+class PartialSoundboardSound extends WritableSnowflakeEntity<SoundboardSound>
+    with PartialSoundboardSoundMappable {
   /// @nodoc
-  PartialSoundboardSound({required super.id, required this.manager});
-
-  /// The sound asset for this soundboard sound.
-  CdnAsset get sound => CdnAsset(
-        client: manager.client,
-        base: HttpRoute()..soundboardSounds(id: id.toString()),
-        hash: '',
-        defaultFormat: CdnFormat.mp3,
-      );
+  PartialSoundboardSound({required super.id});
 }
 
-class SoundboardSound extends PartialSoundboardSound {
+@MappableClass()
+class SoundboardSound extends PartialSoundboardSound
+    with SoundboardSoundMappable {
   /// The name of this sound.
   final String name;
 
@@ -51,7 +43,6 @@ class SoundboardSound extends PartialSoundboardSound {
   /// @nodoc
   SoundboardSound({
     required super.id,
-    required super.manager,
     required this.name,
     required this.volume,
     required this.emoji,
@@ -61,6 +52,4 @@ class SoundboardSound extends PartialSoundboardSound {
     required this.isAvailable,
     required this.user,
   });
-
-  PartialGuild get guild => manager.client.guilds[guildId!];
 }

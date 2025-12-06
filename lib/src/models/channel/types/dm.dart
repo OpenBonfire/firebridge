@@ -1,13 +1,16 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/channel/text_channel.dart';
-import 'package:nyxx/src/models/message/message.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/user/user.dart';
+
+part 'dm.mapper.dart';
 
 /// {@template dm_channel}
 /// A DM channel.
 /// {@endtemplate}
-class DmChannel extends TextChannel {
+@MappableClass()
+class DmChannel extends TextChannel with DmChannelMappable {
   /// The recipient of this channel.
   final User recipient;
 
@@ -27,13 +30,9 @@ class DmChannel extends TextChannel {
   /// @nodoc
   DmChannel({
     required super.id,
-    required super.manager,
     required this.recipient,
     required this.lastMessageId,
     required this.lastPinTimestamp,
     required this.rateLimitPerUser,
   });
-
-  @override
-  PartialMessage? get lastMessage => lastMessageId == null ? null : messages[lastMessageId!];
 }

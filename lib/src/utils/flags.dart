@@ -1,9 +1,14 @@
 import 'dart:collection';
 
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
+part 'flags.mapper.dart';
+
 /// A set of flags that can be either enabled or disabled.
-class Flags<T extends Flags<T>> extends IterableBase<Flag<T>> with ToStringHelper {
+@MappableClass()
+class Flags<T extends Flags<T>> extends IterableBase<Flag<T>>
+    with ToStringHelper, FlagsMappable<T> {
   /// The integer value encoding the flags as a bitfield.
   final int value;
 
@@ -29,7 +34,8 @@ class Flags<T extends Flags<T>> extends IterableBase<Flag<T>> with ToStringHelpe
   Flags<T> operator ~() => Flags(~value);
 
   @override
-  bool operator ==(Object other) => identical(this, other) || (other is Flags<T> && other.value == value);
+  bool operator ==(Object other) =>
+      identical(this, other) || (other is Flags<T> && other.value == value);
 
   @override
   int get hashCode => value.hashCode;
@@ -39,7 +45,8 @@ class Flags<T extends Flags<T>> extends IterableBase<Flag<T>> with ToStringHelpe
 }
 
 /// A flag within a set of [Flags].
-class Flag<T extends Flags<T>> extends Flags<T> {
+@MappableClass()
+class Flag<T extends Flags<T>> extends Flags<T> with FlagMappable<T> {
   /// Create a new [Flag].
   const Flag(super.value);
 

@@ -1,7 +1,10 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/permissions.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+
+part 'permission_overwrite.mapper.dart';
 
 /// {@template permission_overwrite}
 /// A set of overwrites to apply to permissions within a specific channel.
@@ -9,7 +12,8 @@ import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#overwrite-object
 /// {@endtemplate}
-class PermissionOverwrite with ToStringHelper {
+@MappableClass()
+class PermissionOverwrite with ToStringHelper, PermissionOverwriteMappable {
   /// The id of the entity the permission changes will apply to.
   ///
   /// This can be the ID of a [Member] or of a [Role], depending on [type].
@@ -43,7 +47,8 @@ class PermissionOverwrite with ToStringHelper {
 }
 
 /// The type of a permission overwrite.
-final class PermissionOverwriteType extends EnumLike<int, PermissionOverwriteType> {
+final class PermissionOverwriteType
+    extends EnumLike<int, PermissionOverwriteType> {
   /// The overwrite applies to a [Role]'s permissions.
   static const role = PermissionOverwriteType(0);
 
@@ -53,6 +58,7 @@ final class PermissionOverwriteType extends EnumLike<int, PermissionOverwriteTyp
   /// @nodoc
   const PermissionOverwriteType(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   PermissionOverwriteType.parse(int value) : this(value);
 }

@@ -1,3 +1,4 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/role.dart';
 import 'package:nyxx/src/http/cdn/cdn_asset.dart';
 import 'package:nyxx/src/http/managers/role_manager.dart';
@@ -10,8 +11,12 @@ import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/utils/flags.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
+part 'role.mapper.dart';
+
 /// A partial [Role].
-class PartialRole extends WritableSnowflakeEntity<Role> {
+@MappableClass()
+class PartialRole extends WritableSnowflakeEntity<Role>
+    with PartialRoleMappable {
   @override
   final RoleManager manager;
 
@@ -25,7 +30,8 @@ class PartialRole extends WritableSnowflakeEntity<Role> {
   /// * [RoleManager.update]
   /// * Discord API Reference: https://discord.com/developers/docs/resources/guild#modify-guild-role
   @override
-  Future<Role> update(RoleUpdateBuilder builder, {String? auditLogReason}) => manager.update(id, builder, auditLogReason: auditLogReason);
+  Future<Role> update(RoleUpdateBuilder builder, {String? auditLogReason}) =>
+      manager.update(id, builder, auditLogReason: auditLogReason);
 
   /// Delete this role.
   ///
@@ -33,7 +39,8 @@ class PartialRole extends WritableSnowflakeEntity<Role> {
   /// * [RoleManager.delete]
   /// * Discord API Reference: https://discord.com/developers/docs/resources/guild#delete-guild-role
   @override
-  Future<void> delete({String? auditLogReason}) => manager.delete(id, auditLogReason: auditLogReason);
+  Future<void> delete({String? auditLogReason}) =>
+      manager.delete(id, auditLogReason: auditLogReason);
 }
 
 /// {@template role}
@@ -42,7 +49,10 @@ class PartialRole extends WritableSnowflakeEntity<Role> {
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/topics/permissions#role-object
 /// {@endtemplate}
-class Role extends PartialRole implements CommandOptionMentionable<Role> {
+@MappableClass()
+class Role extends PartialRole
+    with RoleMappable
+    implements CommandOptionMentionable<Role> {
   /// The name of this role.
   final String name;
 

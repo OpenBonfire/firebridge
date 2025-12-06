@@ -28,16 +28,17 @@ abstract class ApplicationCommandManager extends Manager<ApplicationCommand> {
   final Snowflake applicationId;
 
   /// Create a new [ApplicationCommandManager].
-  ApplicationCommandManager(super.config, super.client, {required this.applicationId, required super.identifier});
+  ApplicationCommandManager(super.config, super.client,
+      {required this.applicationId, required super.identifier});
 
   @override
-  PartialApplicationCommand operator [](Snowflake id) => PartialApplicationCommand(id: id, manager: this);
+  PartialApplicationCommand operator [](Snowflake id) =>
+      PartialApplicationCommand(id: id);
 
   @override
   ApplicationCommand parse(Map<String, Object?> raw) {
     return ApplicationCommand(
       id: Snowflake.parse(raw['id']!),
-      manager: this,
       type: ApplicationCommandType(raw['type'] as int? ?? 1),
       applicationId: Snowflake.parse(raw['application_id']!),
       guildId: maybeParse(raw['guild_id'], Snowflake.parse),
@@ -56,10 +57,13 @@ abstract class ApplicationCommandManager extends Manager<ApplicationCommand> {
         ),
       ),
       options: maybeParseMany(raw['options'], parseApplicationCommandOption),
-      defaultMemberPermissions: maybeParse(raw['default_member_permissions'], (String raw) => Permissions(int.parse(raw))),
+      defaultMemberPermissions: maybeParse(raw['default_member_permissions'],
+          (String raw) => Permissions(int.parse(raw))),
       hasDmPermission: raw['dm_permission'] as bool?,
       isNsfw: raw['nsfw'] as bool?,
-      integrationTypes: maybeParseMany(raw['integration_types'], ApplicationIntegrationType.new) ?? [ApplicationIntegrationType.guildInstall],
+      integrationTypes: maybeParseMany(
+              raw['integration_types'], ApplicationIntegrationType.new) ??
+          [ApplicationIntegrationType.guildInstall],
       contexts: maybeParseMany(raw['contexts'], InteractionContextType.new),
       version: Snowflake.parse(raw['version']!),
     );
@@ -115,7 +119,10 @@ abstract class ApplicationCommandManager extends Manager<ApplicationCommand> {
     if (_guildId != null) route.guilds(id: _guildId!.toString());
     route.commands();
 
-    final request = BasicRequest(route, queryParameters: {if (withLocalizations != null) 'with_localizations': withLocalizations.toString()});
+    final request = BasicRequest(route, queryParameters: {
+      if (withLocalizations != null)
+        'with_localizations': withLocalizations.toString()
+    });
 
     final response = await client.httpHandler.executeSafe(request);
     final commands = parseMany(response.jsonBody as List, parse);
@@ -145,7 +152,8 @@ abstract class ApplicationCommandManager extends Manager<ApplicationCommand> {
     if (_guildId != null) route.guilds(id: _guildId!.toString());
     route.commands();
 
-    final request = BasicRequest(route, method: 'POST', body: jsonEncode(builder.build()));
+    final request =
+        BasicRequest(route, method: 'POST', body: jsonEncode(builder.build()));
 
     final response = await client.httpHandler.executeSafe(request);
     final command = parse(response.jsonBody as Map<String, Object?>);
@@ -155,12 +163,14 @@ abstract class ApplicationCommandManager extends Manager<ApplicationCommand> {
   }
 
   @override
-  Future<ApplicationCommand> update(Snowflake id, ApplicationCommandUpdateBuilder builder) async {
+  Future<ApplicationCommand> update(
+      Snowflake id, ApplicationCommandUpdateBuilder builder) async {
     final route = HttpRoute()..applications(id: applicationId.toString());
     if (_guildId != null) route.guilds(id: _guildId!.toString());
     route.commands(id: id.toString());
 
-    final request = BasicRequest(route, method: 'PATCH', body: jsonEncode(builder.build()));
+    final request =
+        BasicRequest(route, method: 'PATCH', body: jsonEncode(builder.build()));
 
     final response = await client.httpHandler.executeSafe(request);
     final command = parse(response.jsonBody as Map<String, Object?>);
@@ -182,12 +192,15 @@ abstract class ApplicationCommandManager extends Manager<ApplicationCommand> {
   }
 
   /// Remove all existing commands and replace them with the commands defined in [builders].
-  Future<List<ApplicationCommand>> bulkOverride(List<ApplicationCommandBuilder> builders) async {
+  Future<List<ApplicationCommand>> bulkOverride(
+      List<ApplicationCommandBuilder> builders) async {
     final route = HttpRoute()..applications(id: applicationId.toString());
     if (_guildId != null) route.guilds(id: _guildId!.toString());
     route.commands();
 
-    final request = BasicRequest(route, method: 'PUT', body: jsonEncode([for (final builder in builders) builder.build()]));
+    final request = BasicRequest(route,
+        method: 'PUT',
+        body: jsonEncode([for (final builder in builders) builder.build()]));
 
     final response = await client.httpHandler.executeSafe(request);
     final commands = parseMany(response.jsonBody as List, parse);
@@ -216,7 +229,8 @@ class GuildApplicationCommandManager extends ApplicationCommandManager {
     required super.applicationId,
     required this.guildId,
     required CacheConfig<CommandPermissions> permissionsConfig,
-  })  : permissionsCache = client.cache.getCache('$guildId.commandPermissions', permissionsConfig),
+  })  : permissionsCache = client.cache
+            .getCache('$guildId.commandPermissions', permissionsConfig),
         super(identifier: '$guildId.commands');
 
   /// Parse a [CommandPermissions] from [raw].
@@ -226,7 +240,8 @@ class GuildApplicationCommandManager extends ApplicationCommandManager {
       id: Snowflake.parse(raw['id']!),
       applicationId: Snowflake.parse(raw['application_id']!),
       guildId: Snowflake.parse(raw['guild_id']!),
-      permissions: parseMany(raw['permissions'] as List, parseCommandPermission),
+      permissions:
+          parseMany(raw['permissions'] as List, parseCommandPermission),
     );
   }
 
@@ -249,7 +264,8 @@ class GuildApplicationCommandManager extends ApplicationCommandManager {
     final request = BasicRequest(route);
 
     final response = await client.httpHandler.executeSafe(request);
-    final permissions = parseMany(response.jsonBody as List, parseCommandPermissions);
+    final permissions =
+        parseMany(response.jsonBody as List, parseCommandPermissions);
 
     permissions.forEach(client.updateCacheWith);
     return permissions;
@@ -266,7 +282,8 @@ class GuildApplicationCommandManager extends ApplicationCommandManager {
 
     try {
       final response = await client.httpHandler.executeSafe(request);
-      final permissions = parseCommandPermissions(response.jsonBody as Map<String, Object?>);
+      final permissions =
+          parseCommandPermissions(response.jsonBody as Map<String, Object?>);
 
       client.updateCacheWith(permissions);
       return permissions;
@@ -274,7 +291,12 @@ class GuildApplicationCommandManager extends ApplicationCommandManager {
       // 10066 = Unknown application command permissions
       // Means there are no overrides for this command... why is this an error, Discord?
       if (e.errorCode == 10066) {
-        return CommandPermissions(manager: this, id: id, applicationId: applicationId, guildId: guildId, permissions: []);
+        return CommandPermissions(
+            manager: this,
+            id: id,
+            applicationId: applicationId,
+            guildId: guildId,
+            permissions: []);
       }
 
       rethrow;
@@ -290,5 +312,7 @@ class GlobalApplicationCommandManager extends ApplicationCommandManager {
   Null get _guildId => null;
 
   /// Create a new [GlobalApplicationCommandManager].
-  GlobalApplicationCommandManager(super.config, super.client, {required super.applicationId}) : super(identifier: 'commands');
+  GlobalApplicationCommandManager(super.config, super.client,
+      {required super.applicationId})
+      : super(identifier: 'commands');
 }

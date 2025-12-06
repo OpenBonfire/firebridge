@@ -1,33 +1,17 @@
-import 'package:nyxx/src/builders/message/message.dart';
-import 'package:nyxx/src/http/managers/message_manager.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/message/message.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 
-/// A partial [TextChannel].
-class PartialTextChannel extends PartialChannel {
-  /// A [Manager] for the [Message]s of this channel.
-  MessageManager get messages => MessageManager(manager.client.options.messageCacheConfig, manager.client, channelId: id);
+part 'text_channel.mapper.dart';
 
+/// A partial [TextChannel].
+@MappableClass()
+class PartialTextChannel extends PartialChannel
+    with PartialTextChannelMappable {
   /// Create a new [PartialTextChannel].
   /// @nodoc
-  PartialTextChannel({required super.id, required super.manager});
-
-  /// Send a message to this channel.
-  ///
-  /// Returns the created message.
-  ///
-  /// External references:
-  /// * [MessageManager.create]
-  /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#create-message
-  Future<Message> sendMessage(MessageBuilder builder) => messages.create(builder);
-
-  /// Trigger a typing indicator in this channel from the current user.
-  ///
-  /// External references:
-  /// * [ChannelManager.triggerTyping]
-  /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#trigger-typing-indicator
-  Future<void> triggerTyping() => manager.triggerTyping(id);
+  PartialTextChannel({required super.id});
 
   // DO NOT override get() and fetch() to return TextChannels
   // Although this improves the API, all PartialChannels returned
@@ -37,7 +21,10 @@ class PartialTextChannel extends PartialChannel {
 }
 
 //// A text channel
-abstract class TextChannel extends PartialTextChannel implements Channel {
+@MappableClass()
+abstract class TextChannel extends PartialTextChannel
+    with TextChannelMappable
+    implements Channel {
   /// The ID of the last [Message] sent in this channel, or `null` if no messages have been sent.
   Snowflake? get lastMessageId;
 
@@ -48,8 +35,5 @@ abstract class TextChannel extends PartialTextChannel implements Channel {
   DateTime? get lastPinTimestamp;
 
   /// @nodoc
-  TextChannel({required super.id, required super.manager});
-
-  /// The last message sent in this channel, or `null` if no messages have been sent.
-  PartialMessage? get lastMessage;
+  TextChannel({required super.id});
 }

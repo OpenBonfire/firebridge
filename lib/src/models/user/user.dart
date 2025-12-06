@@ -1,24 +1,24 @@
-import 'package:nyxx/src/http/cdn/cdn_asset.dart';
-import 'package:nyxx/src/http/managers/user_manager.dart';
-import 'package:nyxx/src/http/route.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/commands/application_command_option.dart';
 import 'package:nyxx/src/models/discord_color.dart';
 import 'package:nyxx/src/models/locale.dart';
 import 'package:nyxx/src/models/message/author.dart';
+import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/models/user/avatar_decoration_data.dart';
 import 'package:nyxx/src/models/user/primary_guild.dart';
 import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/flags.dart';
 
-/// A partial [User] object.
-class PartialUser extends ManagedSnowflakeEntity<User> {
-  @override
-  final UserManager manager;
+part 'user.mapper.dart';
 
+/// A partial [User] object.
+@MappableClass()
+class PartialUser extends ManagedSnowflakeEntity<User>
+    with PartialUserMappable {
   /// Create a new [PartialUser].
   /// @nodoc
-  PartialUser({required super.id, required this.manager});
+  PartialUser({required super.id});
 }
 
 /// {@template user}
@@ -30,7 +30,10 @@ class PartialUser extends ManagedSnowflakeEntity<User> {
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/user#users-resource
 /// {@endtemplate}
-class User extends PartialUser implements MessageAuthor, CommandOptionMentionable<User> {
+@MappableClass()
+class User extends PartialUser
+    with UserMappable
+    implements MessageAuthor, CommandOptionMentionable<User> {
   /// The user's username.
   @override
   final String username;
@@ -84,7 +87,6 @@ class User extends PartialUser implements MessageAuthor, CommandOptionMentionabl
   /// {@macro user}
   /// @nodoc
   User({
-    required super.manager,
     required super.id,
     required this.username,
     required this.discriminator,
@@ -103,50 +105,11 @@ class User extends PartialUser implements MessageAuthor, CommandOptionMentionabl
     required this.avatarDecorationData,
     required this.primaryGuild,
   });
-
-  /// This user's banner.
-  CdnAsset? get banner => bannerHash == null
-      ? null
-      : CdnAsset(
-          client: manager.client,
-          base: HttpRoute()..banners(id: id.toString()),
-          hash: bannerHash!,
-        );
-
-  /// This user's default avatar.
-  CdnAsset get defaultAvatar {
-    final parsedDiscriminator = int.tryParse(discriminator);
-    final hash = parsedDiscriminator == null || parsedDiscriminator == 0 ? (id.value >> 22) % 6 : parsedDiscriminator % 5;
-
-    return CdnAsset(
-      client: manager.client,
-      base: HttpRoute()
-        ..embed()
-        ..avatars(),
-      hash: hash.toString(),
-    );
-  }
-
-  @override
-  CdnAsset get avatar => avatarHash == null
-      ? defaultAvatar
-      : CdnAsset(
-          client: manager.client,
-          base: HttpRoute()..avatars(id: id.toString()),
-          hash: avatarHash!,
-        );
-
-  CdnAsset? get avatarDecoration => avatarDecorationHash == null
-      ? null
-      : CdnAsset(
-          client: manager.client,
-          base: HttpRoute()..avatarDecorationPresets(),
-          hash: avatarDecorationHash!,
-        );
 }
 
 /// A set of [Flags] a user can have.
-class UserFlags extends Flags<UserFlags> {
+@MappableClass()
+class UserFlags extends Flags<UserFlags> with UserFlagsMappable {
   /// The user is a Discord employee.
   static const staff = Flag<UserFlags>.fromOffset(0);
 
@@ -252,6 +215,7 @@ final class NitroType extends EnumLike<int, NitroType> {
   /// @nodoc
   const NitroType(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   NitroType.parse(int value) : this(value);
 }

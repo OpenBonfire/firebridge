@@ -1,14 +1,17 @@
-import 'dart:async';
-
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/http/managers/sticker_manager.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/models/sticker/global_sticker.dart';
 
+part 'sticker_pack.mapper.dart';
+
 /// {@template sticker_pack}
 /// A Sticker Pack -- group of stickers that are gated behind Nitro.
 /// {@endtemplate}
-class StickerPack extends SnowflakeEntity<StickerPack> {
+@MappableClass()
+class StickerPack extends SnowflakeEntity<StickerPack>
+    with StickerPackMappable {
   /// Global sticker manager
   final GlobalStickerManager manager;
 
@@ -40,10 +43,4 @@ class StickerPack extends SnowflakeEntity<StickerPack> {
       required this.coverStickerId,
       required this.description,
       required this.bannerAssetId});
-
-  @override
-  Future<StickerPack> fetch() async => manager.fetchStickerPack(id);
-
-  @override
-  Future<StickerPack> get() async => this;
 }

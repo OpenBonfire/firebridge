@@ -1,35 +1,36 @@
-import 'package:nyxx/src/http/cdn/cdn_asset.dart';
-import 'package:nyxx/src/http/managers/emoji_manager.dart';
-import 'package:nyxx/src/http/route.dart';
-import 'package:nyxx/src/models/role.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/models/user/user.dart';
 
-/// A partial [Emoji] object.
-class PartialEmoji extends WritableSnowflakeEntity<Emoji> {
-  @override
-  final EmojiManager manager;
+part 'emoji.mapper.dart';
 
+/// A partial [Emoji] object.
+@MappableClass()
+class PartialEmoji extends WritableSnowflakeEntity<Emoji>
+    with PartialEmojiMappable {
   /// Create a new [PartialEmoji].
   /// @nodoc
-  PartialEmoji({required super.id, required this.manager});
+  PartialEmoji({
+    required super.id,
+  });
 }
 
 /// An emoji. Either a [TextEmoji], an [ApplicationEmoji] or a [GuildEmoji].
-abstract class Emoji extends PartialEmoji {
+@MappableClass()
+abstract class Emoji extends PartialEmoji with EmojiMappable {
   /// The emoji's name. Can be `dartlang` for a custom emoji, or `❤️` for a text emoji.
   String? get name;
 
   /// @nodoc
   Emoji({
     required super.id,
-    required super.manager,
   });
 }
 
 /// A text emoji, such as `❤️`.
-class TextEmoji extends Emoji {
+@MappableClass()
+class TextEmoji extends Emoji with TextEmojiMappable {
   @override
   final String name;
 
@@ -39,13 +40,8 @@ class TextEmoji extends Emoji {
   /// @nodoc
   TextEmoji({
     required super.id,
-    required super.manager,
     required this.name,
   });
-
-  // Intercept fetch since the manager will throw if we attempt to fetch a text emoji
-  @override
-  Future<TextEmoji> fetch() async => this;
 
   // we actually need to override this with a custom [==] operator, otherwise it'd be delegated to the parent `SnowflakeEntity` class
   @override
@@ -54,7 +50,8 @@ class TextEmoji extends Emoji {
 
 // Apparently an ApplicationEmoji contains a `roles` field, but it's always an empty list, so we don't include it here.
 /// A custom emoji created on the application's emoji tab.
-class ApplicationEmoji extends Emoji {
+@MappableClass()
+class ApplicationEmoji extends Emoji with ApplicationEmojiMappable {
   @override
   final String name;
 
@@ -76,7 +73,6 @@ class ApplicationEmoji extends Emoji {
   /// @nodoc
   ApplicationEmoji({
     required super.id,
-    required ApplicationEmojiManager super.manager,
     required this.name,
     required this.user,
     required this.requiresColons,
@@ -84,18 +80,11 @@ class ApplicationEmoji extends Emoji {
     required this.isAnimated,
     required this.isAvailable,
   });
-
-  /// This emoji's image.
-  CdnAsset get image => CdnAsset(
-        client: manager.client,
-        base: HttpRoute()..emojis(),
-        hash: id.toString(),
-        isAnimated: isAnimated,
-      );
 }
 
 /// A custom guild emoji.
-class GuildEmoji extends Emoji {
+@MappableClass()
+class GuildEmoji extends Emoji with GuildEmojiMappable {
   @override
   final String? name;
 
@@ -120,7 +109,6 @@ class GuildEmoji extends Emoji {
   /// @nodoc
   GuildEmoji({
     required super.id,
-    required GuildEmojiManager super.manager,
     required this.name,
     required this.roleIds,
     required this.user,
@@ -129,15 +117,4 @@ class GuildEmoji extends Emoji {
     required this.isAnimated,
     required this.isAvailable,
   });
-
-  /// The roles allowed to use this emoji.
-  List<PartialRole>? get roles => roleIds?.map((e) => manager.client.guilds[(manager as GuildEmojiManager).guildId].roles[e]).toList();
-
-  /// This emoji's image.
-  CdnAsset get image => CdnAsset(
-        client: manager.client,
-        base: HttpRoute()..emojis(),
-        hash: id.toString(),
-        isAnimated: isAnimated,
-      );
 }

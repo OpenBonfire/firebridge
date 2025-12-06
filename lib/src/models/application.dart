@@ -1,3 +1,5 @@
+import 'package:dart_mappable/dart_mappable.dart';
+import 'package:nyxx/nyxx.dart';
 import 'package:nyxx/src/http/cdn/cdn_asset.dart';
 import 'package:nyxx/src/http/managers/application_manager.dart';
 import 'package:nyxx/src/http/managers/emoji_manager.dart';
@@ -16,10 +18,13 @@ import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/flags.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
+part 'application.mapper.dart';
+
 /// A partial [Application] object.
 // We intentionally do not use SnowflakeEntity as applications do not have the same access in the API as other entities with IDs, so they cannot be thought of
 // as being in a "group".
-class PartialApplication with ToStringHelper {
+@MappableClass()
+class PartialApplication with ToStringHelper, PartialApplicationMappable {
   /// The ID of this application.
   final Snowflake id;
 
@@ -27,35 +32,48 @@ class PartialApplication with ToStringHelper {
   final ApplicationManager manager;
 
   /// An [EntitlementManager] for this application's [Entitlement]s.
-  EntitlementManager get entitlements => EntitlementManager(manager.client.options.entitlementConfig, manager.client, applicationId: id);
+  EntitlementManager get entitlements => EntitlementManager(
+      manager.client.options.entitlementConfig, manager.client,
+      applicationId: id);
 
   /// An [ApplicationEmojiManager] for this application's [Emoji]s.
-  ApplicationEmojiManager get emojis => ApplicationEmojiManager(manager.client.options.emojiCacheConfig, manager.client, applicationId: id);
+  ApplicationEmojiManager get emojis => ApplicationEmojiManager(
+      manager.client.options.emojiCacheConfig, manager.client,
+      applicationId: id);
 
   /// An [SkuManager] for this application's [Sku]s.
-  SkuManager get skus => SkuManager(manager.client.options.skuConfig, manager.client, applicationId: id);
+  SkuManager get skus =>
+      SkuManager(manager.client.options.skuConfig, manager.client,
+          applicationId: id);
 
   /// Create a new [PartialApplication].
   /// @nodoc
   PartialApplication({required this.id, required this.manager});
 
   /// Fetch this application's role connection metadata.
-  Future<List<ApplicationRoleConnectionMetadata>> fetchRoleConnectionMetadata() => manager.fetchApplicationRoleConnectionMetadata(id);
+  Future<List<ApplicationRoleConnectionMetadata>>
+      fetchRoleConnectionMetadata() =>
+          manager.fetchApplicationRoleConnectionMetadata(id);
 
   /// Update and fetch this application's role connection metadata.
-  Future<List<ApplicationRoleConnectionMetadata>> updateRoleConnectionMetadata() => manager.updateApplicationRoleConnectionMetadata(id);
+  Future<List<ApplicationRoleConnectionMetadata>>
+      updateRoleConnectionMetadata() =>
+          manager.updateApplicationRoleConnectionMetadata(id);
 
   /// List this application's SKUs.
   @Deprecated('Use skus.list() instead')
   Future<List<Sku>> listSkus() => manager.listSkus(id);
 }
 
-class ApplicationIntegrationTypeConfiguration {
+@MappableClass()
+class ApplicationIntegrationTypeConfiguration
+    with ApplicationIntegrationTypeConfigurationMappable {
   /// Install params for each installation context's default in-app authorization link.
   final InstallationParameters? oauth2InstallParameters;
 
   /// @nodoc
-  ApplicationIntegrationTypeConfiguration({required this.oauth2InstallParameters});
+  ApplicationIntegrationTypeConfiguration(
+      {required this.oauth2InstallParameters});
 }
 
 /// {@template application}
@@ -132,7 +150,8 @@ class Application extends PartialApplication {
   final InstallationParameters? installationParameters;
 
   /// Default scopes and permissions for each supported installation context.
-  final Map<ApplicationIntegrationType, ApplicationIntegrationTypeConfiguration>? integrationTypesConfig;
+  final Map<ApplicationIntegrationType,
+      ApplicationIntegrationTypeConfiguration>? integrationTypesConfig;
 
   /// The custom authorization link for this application.
   final Uri? customInstallUrl;
@@ -198,7 +217,8 @@ class Application extends PartialApplication {
         );
 }
 
-final class ApplicationIntegrationType extends EnumLike<int, ApplicationIntegrationType> {
+final class ApplicationIntegrationType
+    extends EnumLike<int, ApplicationIntegrationType> {
   /// App is installable to servers.
   static const guildInstall = ApplicationIntegrationType(0);
 
@@ -208,14 +228,16 @@ final class ApplicationIntegrationType extends EnumLike<int, ApplicationIntegrat
   /// @nodoc
   const ApplicationIntegrationType(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   ApplicationIntegrationType.parse(int value) : this(value);
 }
 
 /// Flags for an [Application].
 class ApplicationFlags extends Flags<ApplicationFlags> {
   /// Indicates if an app uses the Auto Moderation API.
-  static const applicationAutoModerationRuleCreateBadge = Flag<ApplicationFlags>.fromOffset(6);
+  static const applicationAutoModerationRuleCreateBadge =
+      Flag<ApplicationFlags>.fromOffset(6);
 
   /// Intent required for bots in 100 or more servers to receive presence_update events.
   static const gatewayPresence = Flag<ApplicationFlags>.fromOffset(12);
@@ -227,10 +249,12 @@ class ApplicationFlags extends Flags<ApplicationFlags> {
   static const gatewayGuildMembers = Flag<ApplicationFlags>.fromOffset(14);
 
   /// Intent required for bots in under 100 servers to receive member-related events like guild_member_add, found on the Bot page in your app's settings. See the list of member-related events under GUILD_MEMBERS.
-  static const gatewayGuildMembersLimited = Flag<ApplicationFlags>.fromOffset(15);
+  static const gatewayGuildMembersLimited =
+      Flag<ApplicationFlags>.fromOffset(15);
 
   /// Indicates unusual growth of an app that prevents verification.
-  static const verificationPendingGuildLimit = Flag<ApplicationFlags>.fromOffset(16);
+  static const verificationPendingGuildLimit =
+      Flag<ApplicationFlags>.fromOffset(16);
 
   /// Indicates if an app is embedded within the Discord client (currently unavailable publicly).
   static const embedded = Flag<ApplicationFlags>.fromOffset(17);
@@ -239,13 +263,15 @@ class ApplicationFlags extends Flags<ApplicationFlags> {
   static const gatewayMessageContent = Flag<ApplicationFlags>.fromOffset(18);
 
   /// Intent required for bots in under 100 servers to receive message content, found on the Bot page in your app's settings.
-  static const gatewayMessageContentLimited = Flag<ApplicationFlags>.fromOffset(19);
+  static const gatewayMessageContentLimited =
+      Flag<ApplicationFlags>.fromOffset(19);
 
   /// Indicates if an app has registered global application commands.
   static const applicationCommandBadge = Flag<ApplicationFlags>.fromOffset(23);
 
   /// Whether this application has the [applicationAutoModerationRuleCreateBadge] flag set.
-  bool get usesApplicationAutoModerationRuleCreateBadge => has(applicationAutoModerationRuleCreateBadge);
+  bool get usesApplicationAutoModerationRuleCreateBadge =>
+      has(applicationAutoModerationRuleCreateBadge);
 
   /// Whether this application has the [gatewayPresence] flag set.
   bool get hasGatewayPresence => has(gatewayPresence);
@@ -260,7 +286,8 @@ class ApplicationFlags extends Flags<ApplicationFlags> {
   bool get hasGatewayGuildMembersLimited => has(gatewayGuildMembersLimited);
 
   /// Whether this application has the [verificationPendingGuildLimit] flag set.
-  bool get isVerificationPendingGuildLimit => has(verificationPendingGuildLimit);
+  bool get isVerificationPendingGuildLimit =>
+      has(verificationPendingGuildLimit);
 
   /// Whether this application has the [embedded] flag set.
   bool get isEmbedded => has(embedded);
@@ -331,7 +358,8 @@ class ApplicationRoleConnectionMetadata with ToStringHelper {
 }
 
 /// The type of an [ApplicationRoleConnectionMetadata].
-final class ConnectionMetadataType extends EnumLike<int, ConnectionMetadataType> {
+final class ConnectionMetadataType
+    extends EnumLike<int, ConnectionMetadataType> {
   static const integerLessThanOrEqual = ConnectionMetadataType(1);
   static const integerGreaterThanOrEqual = ConnectionMetadataType(2);
   static const integerEqual = ConnectionMetadataType(3);
@@ -344,6 +372,7 @@ final class ConnectionMetadataType extends EnumLike<int, ConnectionMetadataType>
   /// @nodoc
   const ConnectionMetadataType(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   ConnectionMetadataType.parse(int value) : this(value);
 }

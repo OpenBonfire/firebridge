@@ -1,11 +1,12 @@
-import 'package:nyxx/src/http/managers/message_manager.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
-import 'package:nyxx/src/models/channel/text_channel.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/message/message.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+
+part 'reference.mapper.dart';
 
 /// {@template message_reference}
 /// A reference to an external entity contained in a message.
@@ -45,10 +46,8 @@ import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#message-reference-object
 /// {@endtemplate}
-class MessageReference with ToStringHelper {
-  /// The manager for this [MessageReference].
-  final MessageManager manager;
-
+@MappableClass()
+class MessageReference with ToStringHelper, MessageReferenceMappable {
   /// The type of reference.
   final MessageReferenceType type;
 
@@ -64,24 +63,16 @@ class MessageReference with ToStringHelper {
   /// {@macro message_reference}
   /// @nodoc
   MessageReference({
-    required this.manager,
     required this.type,
     required this.messageId,
     required this.channelId,
     required this.guildId,
   });
-
-  /// The originating message's channel.
-  PartialChannel get channel => manager.client.channels[channelId];
-
-  /// The originating message.
-  PartialMessage? get message => messageId == null ? null : (channel as PartialTextChannel).messages[messageId!];
-
-  /// The guild of the originating message.
-  PartialGuild? get guild => guildId == null ? null : manager.client.guilds[guildId!];
 }
 
-final class MessageReferenceType extends EnumLike<int, MessageReferenceType> {
+@MappableClass()
+final class MessageReferenceType extends EnumLike<int, MessageReferenceType>
+    with MessageReferenceTypeMappable {
   static const defaultType = MessageReferenceType(0);
   static const forward = MessageReferenceType(1);
 

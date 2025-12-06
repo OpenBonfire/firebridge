@@ -1,6 +1,20 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/nyxx.dart';
+import 'package:nyxx/src/models/channel/has_threads_channel.dart';
+import 'package:nyxx/src/models/snowflake.dart';
 
-abstract class ThreadsOnlyChannel implements HasThreadsChannel {
+part 'thread_aggregate.mapper.dart';
+
+@MappableClass()
+abstract class ThreadsOnlyChannel
+    with ThreadsOnlyChannelMappable
+    implements HasThreadsChannel {
+  @override
+  Snowflake get id;
+
+  /// @nodoc
+  ThreadsOnlyChannel({required Snowflake id});
+
   /// The topic of this channel.
   String? get topic;
 
@@ -27,11 +41,4 @@ abstract class ThreadsOnlyChannel implements HasThreadsChannel {
 
   /// The default sort order in this channel
   ForumSort? get defaultSortOrder;
-
-  /// Create a thread in this thread aggregate channel.
-  ///
-  /// External references:
-  /// * [ChannelManager.createForumThread]
-  /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#start-thread-in-forum-channel
-  Future<Thread> createForumThread(ForumThreadBuilder builder, {String? auditLogReason});
 }

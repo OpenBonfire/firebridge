@@ -1,8 +1,14 @@
+import 'package:dart_mappable/dart_mappable.dart';
+import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/models/user/user.dart';
 import 'package:nyxx/src/utils/enum_like.dart';
 
-final class StickerType extends EnumLike<int, StickerType> {
+part 'sticker.mapper.dart';
+
+@MappableClass()
+final class StickerType extends EnumLike<int, StickerType>
+    with StickerTypeMappable {
   static const standard = StickerType(1);
   static const guild = StickerType(2);
 
@@ -12,7 +18,9 @@ final class StickerType extends EnumLike<int, StickerType> {
   StickerType.parse(int value) : this(value);
 }
 
-final class StickerFormatType extends EnumLike<int, StickerFormatType> {
+@MappableClass()
+final class StickerFormatType extends EnumLike<int, StickerFormatType>
+    with StickerFormatTypeMappable {
   static const png = StickerFormatType(1);
   static const apng = StickerFormatType(2);
   static const lottie = StickerFormatType(3);
@@ -21,11 +29,13 @@ final class StickerFormatType extends EnumLike<int, StickerFormatType> {
   /// @nodoc
   const StickerFormatType(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   StickerFormatType.parse(int value) : this(value);
 }
 
 /// Mixin with shared properties with stickers
+@MappableClass()
 mixin Sticker {
   /// Name of the sticker
   String get name;
@@ -58,7 +68,9 @@ mixin Sticker {
 /// {@template sticker_item}
 /// A representation of a sticker with minimal information
 /// {@endtemplate}
-class StickerItem extends SnowflakeEntity<StickerItem> {
+@MappableClass()
+class StickerItem extends SnowflakeEntity<StickerItem>
+    with StickerItemMappable {
   /// Name of sticker
   final String name;
 
@@ -67,11 +79,6 @@ class StickerItem extends SnowflakeEntity<StickerItem> {
 
   /// {@macro sticker_item}
   /// @nodoc
-  StickerItem({required super.id, required this.name, required this.formatType});
-
-  @override
-  Future<StickerItem> fetch() => get();
-
-  @override
-  Future<StickerItem> get() async => this;
+  StickerItem(
+      {required super.id, required this.name, required this.formatType});
 }

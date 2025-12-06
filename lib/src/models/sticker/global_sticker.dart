@@ -1,21 +1,24 @@
-import 'package:nyxx/src/http/managers/sticker_manager.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/models/sticker/sticker.dart';
 import 'package:nyxx/src/models/user/user.dart';
 
-class PartialGlobalSticker extends ManagedSnowflakeEntity<GlobalSticker> {
-  @override
-  final GlobalStickerManager manager;
+part 'global_sticker.mapper.dart';
 
+@MappableClass()
+class PartialGlobalSticker extends ManagedSnowflakeEntity<GlobalSticker>
+    with PartialGlobalStickerMappable {
   /// @nodoc
-  PartialGlobalSticker({required super.id, required this.manager});
+  PartialGlobalSticker({required super.id});
 }
 
 /// {@template global_sticker}
 /// A sticker that can be sent in messages. Represents global stickers (default stickers)
 /// {@endtemplate}
-class GlobalSticker extends PartialGlobalSticker with Sticker {
+@MappableClass()
+class GlobalSticker extends PartialGlobalSticker
+    with Sticker, GlobalStickerMappable {
   /// Name of the sticker
   @override
   final String name;
@@ -55,7 +58,6 @@ class GlobalSticker extends PartialGlobalSticker with Sticker {
   /// @nodoc
   GlobalSticker({
     required super.id,
-    required super.manager,
     required this.name,
     required this.description,
     required this.tags,

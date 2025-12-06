@@ -1,8 +1,19 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
+import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/utils/enum_like.dart';
 
+part 'voice_channel.mapper.dart';
+
 /// A voice channel.
-abstract class VoiceChannel implements Channel {
+@MappableClass()
+abstract class VoiceChannel with VoiceChannelMappable implements Channel {
+  @override
+  Snowflake get id;
+
+  /// @nodoc
+  VoiceChannel({required Snowflake id});
+
   /// The bitrate of the channel in bits/s.
   int get bitrate;
 
@@ -17,7 +28,9 @@ abstract class VoiceChannel implements Channel {
 }
 
 /// The quality mode of cameras in a [VoiceChannel].
-final class VideoQualityMode extends EnumLike<int, VideoQualityMode> {
+@MappableClass()
+final class VideoQualityMode extends EnumLike<int, VideoQualityMode>
+    with VideoQualityModeMappable {
   /// Automatic.
   static const auto = VideoQualityMode(1);
 
@@ -27,6 +40,7 @@ final class VideoQualityMode extends EnumLike<int, VideoQualityMode> {
   /// @nodoc
   const VideoQualityMode(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   VideoQualityMode.parse(int value) : this(value);
 }

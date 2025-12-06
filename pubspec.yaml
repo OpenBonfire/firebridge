@@ -17,6 +17,7 @@ dependencies:
   runtime_type: ^1.1.0
   meta: ^1.16.0
   oauth2: ^2.0.3
+  dart_mappable: ^4.6.1
 
 dev_dependencies:
   test: ^1.25.14
@@ -25,3 +26,5 @@ dev_dependencies:
   mocktail: ^1.0.4
   matcher: ^0.12.17
   string_similarity: ^2.1.1
+  build_runner: ^2.10.4
+  dart_mappable_builder: ^4.6.1

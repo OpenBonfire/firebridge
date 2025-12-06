@@ -1,3 +1,4 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/http/managers/sku_manager.dart';
 import 'package:nyxx/src/http/managers/subscription_manager.dart';
 import 'package:nyxx/src/models/application.dart';
@@ -6,14 +7,18 @@ import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/flags.dart';
 
+part 'sku.mapper.dart';
+
 /// A partial [Sku].
-class PartialSku extends ManagedSnowflakeEntity<Sku> {
+@MappableClass()
+class PartialSku extends ManagedSnowflakeEntity<Sku> with PartialSkuMappable {
   @override
   final SkuManager manager;
 
   /// A manager for this [Sku]'s [Subscription]s.
-  SubscriptionManager get subscriptions =>
-      SubscriptionManager(manager.client.options.subscriptionConfig, manager.client, applicationId: manager.applicationId, skuId: id);
+  SubscriptionManager get subscriptions => SubscriptionManager(
+      manager.client.options.subscriptionConfig, manager.client,
+      applicationId: manager.applicationId, skuId: id);
 
   /// @nodoc
   PartialSku({required this.manager, required super.id});
@@ -22,7 +27,8 @@ class PartialSku extends ManagedSnowflakeEntity<Sku> {
 /// {@template sku}
 /// A premium offering that can be made available to your application's users or guilds.
 /// {@endtemplate}
-class Sku extends PartialSku {
+@MappableClass()
+class Sku extends PartialSku with SkuMappable {
   /// This SKU's type.
   final SkuType type;
 
@@ -51,11 +57,13 @@ class Sku extends PartialSku {
   });
 
   /// The application this SKU belongs to.
-  PartialApplication get application => PartialApplication(id: applicationId, manager: manager.client.applications);
+  PartialApplication get application => PartialApplication(
+      id: applicationId, manager: manager.client.applications);
 }
 
 /// The type of an [Sku].
-final class SkuType extends EnumLike<int, SkuType> {
+@MappableClass()
+final class SkuType extends EnumLike<int, SkuType> with SkuTypeMappable {
   /// Durable one-time purchase.
   static const durable = SkuType(2);
 
@@ -71,12 +79,14 @@ final class SkuType extends EnumLike<int, SkuType> {
   /// @nodoc
   const SkuType(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   SkuType.parse(int value) : this(value);
 }
 
 /// Flags applied to an [Sku].
-class SkuFlags extends Flags<SkuFlags> {
+@MappableClass()
+class SkuFlags extends Flags<SkuFlags> with SkuFlagsMappable {
   /// The SKU is available for purchase.
   static const available = Flag<SkuFlags>.fromOffset(2);
 

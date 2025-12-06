@@ -1,52 +1,20 @@
-import 'package:nyxx/src/builders/guild/member.dart';
-import 'package:nyxx/src/http/cdn/cdn_asset.dart';
-import 'package:nyxx/src/http/managers/member_manager.dart';
-import 'package:nyxx/src/http/route.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/permissions.dart';
-import 'package:nyxx/src/models/role.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/models/user/avatar_decoration_data.dart';
 import 'package:nyxx/src/models/user/user.dart';
 import 'package:nyxx/src/utils/flags.dart';
 
-/// A partial [Member].
-class PartialMember extends WritableSnowflakeEntity<Member> {
-  @override
-  final MemberManager manager;
+part 'member.mapper.dart';
 
+/// A partial [Member].
+@MappableClass()
+class PartialMember extends WritableSnowflakeEntity<Member>
+    with PartialMemberMappable {
   /// Create a new [PartialMember].
   /// @nodoc
-  PartialMember({required super.id, required this.manager});
-
-  /// Add a role to this member.
-  Future<void> addRole(Snowflake roleId, {String? auditLogReason}) => manager.addRole(id, roleId, auditLogReason: auditLogReason);
-
-  /// Remove a role from this member.
-  Future<void> removeRole(Snowflake roleId, {String? auditLogReason}) => manager.removeRole(id, roleId);
-
-  /// Ban this member.
-  Future<void> ban({Duration? deleteMessages, String? auditLogReason}) =>
-      manager.client.guilds[manager.guildId].createBan(id, auditLogReason: auditLogReason, deleteMessages: deleteMessages);
-
-  /// Unban this member.
-  Future<void> unban({String? auditLogReason}) => manager.client.guilds[manager.guildId].deleteBan(id, auditLogReason: auditLogReason);
-
-  /// Update this member, returning the updated member.
-  ///
-  /// External references:
-  /// * [MemberManager.update]
-  /// * Discord API Reference: https://discord.com/developers/docs/resources/guild#modify-guild-member
-  @override
-  Future<Member> update(MemberUpdateBuilder builder, {String? auditLogReason}) => manager.update(id, builder, auditLogReason: auditLogReason);
-
-  /// Kick this member.
-  ///
-  /// External references:
-  /// * [MemberManager.delete]
-  /// * Discord API Reference: https://discord.com/developers/docs/resources/guild#remove-guild-member
-  @override
-  Future<void> delete({String? auditLogReason}) => manager.delete(id, auditLogReason: auditLogReason);
+  PartialMember({required super.id});
 }
 
 /// {@template member}
@@ -104,7 +72,6 @@ class Member extends PartialMember {
   /// @nodoc
   Member({
     required super.id,
-    required super.manager,
     required this.user,
     required this.nick,
     required this.avatarHash,
@@ -121,40 +88,6 @@ class Member extends PartialMember {
     required this.avatarDecorationData,
     required this.avatarDecorationHash,
   });
-
-  /// The roles this member has.
-  List<PartialRole> get roles => roleIds.map((e) => manager.client.guilds[manager.guildId].roles[e]).toList();
-
-  /// This member's avatar.
-  CdnAsset? get avatar => avatarHash == null
-      ? null
-      : CdnAsset(
-          client: manager.client,
-          base: HttpRoute()
-            ..guilds(id: manager.guildId.toString())
-            ..users(id: id.toString())
-            ..avatars(),
-          hash: avatarHash!,
-        );
-
-  CdnAsset? get avatarDecoration => avatarDecorationHash == null
-      ? null
-      : CdnAsset(
-          client: manager.client,
-          base: HttpRoute()..avatarDecorationPresets(),
-          hash: avatarDecorationHash!,
-        );
-
-  CdnAsset? get banner => bannerHash == null
-      ? null
-      : CdnAsset(
-          client: manager.client,
-          base: HttpRoute()
-            ..guilds(id: manager.guildId.toString())
-            ..users(id: id.toString())
-            ..banners(),
-          hash: bannerHash!,
-        );
 }
 
 /// Flags that can be applied to a [Member].

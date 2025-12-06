@@ -1,14 +1,22 @@
-import 'package:nyxx/src/http/managers/channel_manager.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/channel/guild_channel.dart';
 import 'package:nyxx/src/models/channel/text_channel.dart';
 import 'package:nyxx/src/models/guild/member.dart';
 import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/models/user/user.dart';
 import 'package:nyxx/src/utils/flags.dart';
 
+part 'thread.mapper.dart';
+
 /// A thread channel.
-abstract class Thread implements TextChannel, GuildChannel {
+@MappableClass()
+abstract class Thread with ThreadMappable implements TextChannel, GuildChannel {
+  @override
+  Snowflake get id;
+
+  /// @nodoc
+  Thread({required Snowflake id});
+
   /// The ID of the user that created this thread.
   Snowflake get ownerId;
 
@@ -45,46 +53,13 @@ abstract class Thread implements TextChannel, GuildChannel {
 
   /// The flags this thread has applied.
   ChannelFlags? get flags;
-
-  /// The user that created this thread.
-  PartialUser get owner;
-
-  /// The member for the user that created this thread.
-  PartialMember get ownerMember;
-
-  /// Add a member to this thread.
-  ///
-  /// External references:
-  /// * [ChannelManager.addThreadMember]
-  /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#add-thread-member
-  Future<void> addThreadMember(Snowflake memberId);
-
-  /// Remove a member from this thread.
-  ///
-  /// External references:
-  /// * [ChannelManager.removeThreadMember]
-  /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#remove-thread-member
-  Future<void> removeThreadMember(Snowflake memberId);
-
-  /// Fetch the [ThreadMember] for a given member.
-  ///
-  /// External reference:
-  /// * [ChannelManager.fetchThreadMember]
-  /// * Discord API References: https://discord.com/developers/docs/resources/channel#remove-thread-member
-  Future<ThreadMember> fetchThreadMember(Snowflake memberId);
-
-  /// List the members of this thread.
-  ///
-  /// External references:
-  /// * [ChannelManager.listThreadMembers]
-  /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#list-thread-members
-  Future<List<ThreadMember>> listThreadMembers({bool? withMembers, Snowflake? after, int? limit});
 }
 
 /// {@template partial_thread_member}
 /// A partial [ThreadMember].
 /// {@endtemplate}
-class PartialThreadMember {
+@MappableClass()
+class PartialThreadMember with PartialThreadMemberMappable {
   /// The time at which this member joined the thread.
   final DateTime joinTimestamp;
 
@@ -99,10 +74,8 @@ class PartialThreadMember {
 /// {@template thread_member}
 /// Additional information associated with a [Member] in a [Thread].
 /// {@endtemplate}
-class ThreadMember extends PartialThreadMember {
-  /// The manager for this [ThreadMember].
-  final ChannelManager manager;
-
+@MappableClass()
+class ThreadMember extends PartialThreadMember with ThreadMemberMappable {
   /// The ID of the thread this member is in.
   final Snowflake threadId;
 
@@ -116,15 +89,8 @@ class ThreadMember extends PartialThreadMember {
   ThreadMember({
     required super.joinTimestamp,
     required super.flags,
-    required this.manager,
     required this.threadId,
     required this.userId,
     required this.member,
   });
-
-  /// The thread this member is in.
-  PartialTextChannel get thread => manager.client.channels[threadId] as PartialTextChannel;
-
-  /// The user associated with this thread member.
-  PartialUser get user => manager.client.users[userId];
 }

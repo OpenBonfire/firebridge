@@ -1,4 +1,4 @@
-import 'package:nyxx/src/http/managers/entitlement_manager.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/application.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/snowflake.dart';
@@ -6,23 +6,22 @@ import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/models/user/user.dart';
 import 'package:nyxx/src/utils/enum_like.dart';
 
-/// A partial [Entitlement].
-class PartialEntitlement extends ManagedSnowflakeEntity<Entitlement> {
-  @override
-  final EntitlementManager manager;
+part 'entitlement.mapper.dart';
 
+/// A partial [Entitlement].
+@MappableClass()
+class PartialEntitlement extends ManagedSnowflakeEntity<Entitlement>
+    with PartialEntitlementMappable {
   /// Create a new [PartialEntitlement].
   /// @nodoc
-  PartialEntitlement({required this.manager, required super.id});
-
-  /// Marks a entitlement for the user as consumed.
-  Future<void> consume() => manager.consume(id);
+  PartialEntitlement({required super.id});
 }
 
 /// {@template entitlement}
 /// Premium access a user or guild has for an application.
 /// {@endtemplate}
-class Entitlement extends PartialEntitlement {
+@MappableClass()
+class Entitlement extends PartialEntitlement with EntitlementMappable {
   /// The ID of the SKU.
   final Snowflake skuId;
 
@@ -53,7 +52,6 @@ class Entitlement extends PartialEntitlement {
   /// {@macro entitlement}
   /// @nodoc
   Entitlement({
-    required super.manager,
     required super.id,
     required this.skuId,
     required this.userId,
@@ -65,19 +63,12 @@ class Entitlement extends PartialEntitlement {
     required this.startsAt,
     required this.endsAt,
   });
-
-  /// The user this entitlement is for.
-  PartialUser? get user => userId == null ? null : PartialUser(id: userId!, manager: manager.client.users);
-
-  /// The guild this entitlement is for.
-  PartialGuild? get guild => guildId == null ? null : PartialGuild(id: guildId!, manager: manager.client.guilds);
-
-  /// The application this entitlement is for.
-  PartialApplication get application => PartialApplication(id: applicationId, manager: manager.client.applications);
 }
 
 /// The type of an [Entitlement].
-final class EntitlementType extends EnumLike<int, EntitlementType> {
+@MappableClass()
+final class EntitlementType extends EnumLike<int, EntitlementType>
+    with EntitlementTypeMappable {
   /// Entitlement was purchased by user.
   static const EntitlementType purchase = EntitlementType(1);
 
@@ -104,6 +95,7 @@ final class EntitlementType extends EnumLike<int, EntitlementType> {
 
   const EntitlementType(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   EntitlementType.parse(int value) : this(value);
 }

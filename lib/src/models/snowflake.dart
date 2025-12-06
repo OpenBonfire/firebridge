@@ -1,3 +1,7 @@
+import 'package:dart_mappable/dart_mappable.dart';
+
+part 'snowflake.mapper.dart';
+
 /// A unique ID used to identify objects in the API.
 ///
 /// {@template snowflake}
@@ -13,7 +17,8 @@
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/reference#snowflakes
 /// {@endtemplate}
-class Snowflake implements Comparable<Snowflake> {
+@MappableClass()
+class Snowflake with SnowflakeMappable implements Comparable<Snowflake> {
   /// A [DateTime] representing the start of the Discord epoch.
   ///
   /// This is used as the epoch for [millisecondsSinceEpoch].
@@ -31,7 +36,8 @@ class Snowflake implements Comparable<Snowflake> {
   final int value;
 
   /// The time at which this snowflake was created.
-  DateTime get timestamp => epoch.add(Duration(milliseconds: millisecondsSinceEpoch));
+  DateTime get timestamp =>
+      epoch.add(Duration(milliseconds: millisecondsSinceEpoch));
 
   /// The number of milliseconds since the [epoch].
   ///
@@ -106,7 +112,8 @@ class Snowflake implements Comparable<Snowflake> {
   /// Create a snowflake representing the oldest time at which bulk delete operations will work.
   ///
   /// {@macro snowflake}
-  factory Snowflake.firstBulk() => Snowflake.fromDateTime(DateTime.now().subtract(bulkDeleteLimit));
+  factory Snowflake.firstBulk() =>
+      Snowflake.fromDateTime(DateTime.now().subtract(bulkDeleteLimit));
 
   /// Return `true` if this snowflake has a [timestamp] before [other]'s timestamp.
   bool isBefore(Snowflake other) => timestamp.isBefore(other.timestamp);
@@ -115,17 +122,20 @@ class Snowflake implements Comparable<Snowflake> {
   bool isAfter(Snowflake other) => timestamp.isAfter(other.timestamp);
 
   /// Return `true` if this snowflake has a [timestamp] at the same time as [other]'s timestamp.
-  bool isAtSameMomentAs(Snowflake other) => timestamp.isAtSameMomentAs(other.timestamp);
+  bool isAtSameMomentAs(Snowflake other) =>
+      timestamp.isAtSameMomentAs(other.timestamp);
 
   /// Return a snowflake [duration] after this snowflake.
   ///
   /// The returned snowflake has no [workerId], [processId] or [increment].
-  Snowflake operator +(Duration duration) => Snowflake.fromDateTime(timestamp.add(duration));
+  Snowflake operator +(Duration duration) =>
+      Snowflake.fromDateTime(timestamp.add(duration));
 
   /// Return a snowflake [duration] before this snowflake.
   ///
   /// The returned snowflake has no [workerId], [processId] or [increment].
-  Snowflake operator -(Duration duration) => Snowflake.fromDateTime(timestamp.subtract(duration));
+  Snowflake operator -(Duration duration) =>
+      Snowflake.fromDateTime(timestamp.subtract(duration));
 
   @override
   int compareTo(Snowflake other) => value.compareTo(other.value);
@@ -141,7 +151,8 @@ class Snowflake implements Comparable<Snowflake> {
   bool operator >(Snowflake other) => isAfter(other);
 
   @override
-  bool operator ==(Object other) => identical(this, other) || (other is Snowflake && other.value == value);
+  bool operator ==(Object other) =>
+      identical(this, other) || (other is Snowflake && other.value == value);
 
   @override
   int get hashCode => value.hashCode;

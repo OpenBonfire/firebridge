@@ -1,14 +1,16 @@
-import 'package:nyxx/src/models/application.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/channel/text_channel.dart';
-import 'package:nyxx/src/models/message/message.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/user/user.dart';
+
+part 'group_dm.mapper.dart';
 
 /// {@template group_dm_channel}
 /// A DM channel with multiple recipients.
 /// {@endtemplate}
-class GroupDmChannel extends TextChannel {
+@MappableClass()
+class GroupDmChannel extends TextChannel with GroupDmChannelMappable {
   /// The name of this channel.
   final String name;
 
@@ -43,7 +45,6 @@ class GroupDmChannel extends TextChannel {
   /// @nodoc
   GroupDmChannel({
     required super.id,
-    required super.manager,
     required this.name,
     required this.recipients,
     required this.iconHash,
@@ -54,13 +55,4 @@ class GroupDmChannel extends TextChannel {
     required this.lastPinTimestamp,
     required this.rateLimitPerUser,
   });
-
-  @override
-  PartialMessage? get lastMessage => lastMessageId == null ? null : messages[lastMessageId!];
-
-  /// This channel's owner.
-  PartialUser get owner => manager.client.users[ownerId];
-
-  /// The application that created this channel, if it was created by an application.
-  PartialApplication? get application => applicationId == null ? null : manager.client.applications[applicationId!];
 }

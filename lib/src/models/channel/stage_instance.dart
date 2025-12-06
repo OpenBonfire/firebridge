@@ -1,5 +1,4 @@
-import 'dart:async';
-
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/http/managers/channel_manager.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
@@ -8,10 +7,14 @@ import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/utils/enum_like.dart';
 
+part 'stage_instance.mapper.dart';
+
 /// {@template stage_instance}
 /// Information about a live stage.
 /// {@endtemplate}
-class StageInstance extends SnowflakeEntity<StageInstance> {
+@MappableClass()
+class StageInstance extends SnowflakeEntity<StageInstance>
+    with StageInstanceMappable {
   /// The manager this [StageInstance] is associated with.
   final ChannelManager manager;
 
@@ -47,25 +50,19 @@ class StageInstance extends SnowflakeEntity<StageInstance> {
 
   /// The channel this instance is in.
   PartialChannel get channel => manager.client.channels[channelId];
-
-  /// The scheduled event associated with this instance.
-  PartialScheduledEvent? get scheduledEvent => scheduledEventId == null ? null : guild.scheduledEvents[scheduledEventId!];
-
-  @override
-  Future<StageInstance> fetch() => manager.fetchStageInstance(channelId);
-
-  @override
-  Future<StageInstance> get() async => manager.stageInstanceCache[channelId] ?? await fetch();
 }
 
 /// The privacy level of a [StageInstance].
-final class PrivacyLevel extends EnumLike<int, PrivacyLevel> {
+@MappableClass()
+final class PrivacyLevel extends EnumLike<int, PrivacyLevel>
+    with PrivacyLevelMappable {
   static const public = PrivacyLevel(1);
   static const guildOnly = PrivacyLevel(2);
 
   /// @nodoc
   const PrivacyLevel(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   PrivacyLevel.parse(int value) : this(value);
 }

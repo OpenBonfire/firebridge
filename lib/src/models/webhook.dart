@@ -1,3 +1,4 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/message/message.dart';
 import 'package:nyxx/src/builders/webhook.dart';
 import 'package:nyxx/src/http/cdn/cdn_asset.dart';
@@ -13,8 +14,12 @@ import 'package:nyxx/src/http/managers/webhook_manager.dart';
 import 'package:nyxx/src/models/user/user.dart';
 import 'package:nyxx/src/utils/enum_like.dart';
 
+part 'webhook.mapper.dart';
+
 /// A partial [Webhook].
-class PartialWebhook extends WritableSnowflakeEntity<Webhook> {
+@MappableClass()
+class PartialWebhook extends WritableSnowflakeEntity<Webhook>
+    with PartialWebhookMappable {
   @override
   final WebhookManager manager;
 
@@ -28,7 +33,8 @@ class PartialWebhook extends WritableSnowflakeEntity<Webhook> {
   /// * [WebhookManager.update]
   /// * Discord API Reference: https://discord.com/developers/docs/resources/webhook#modify-webhook
   @override
-  Future<Webhook> update(WebhookUpdateBuilder builder, {String? token, String? auditLogReason}) =>
+  Future<Webhook> update(WebhookUpdateBuilder builder,
+          {String? token, String? auditLogReason}) =>
       manager.update(id, builder, token: token, auditLogReason: auditLogReason);
 
   /// Delete this webhook.
@@ -37,7 +43,8 @@ class PartialWebhook extends WritableSnowflakeEntity<Webhook> {
   /// * [WebhookManager.delete]
   /// * Discord API Reference: https://discord.com/developers/docs/resources/webhook#delete-webhook
   @override
-  Future<void> delete({String? token, String? auditLogReason}) => manager.delete(id, token: token, auditLogReason: auditLogReason);
+  Future<void> delete({String? token, String? auditLogReason}) =>
+      manager.delete(id, token: token, auditLogReason: auditLogReason);
 
   /// Execute this webhook using its [token].
   ///
@@ -49,9 +56,21 @@ class PartialWebhook extends WritableSnowflakeEntity<Webhook> {
   /// * [WebhookManager.execute]
   /// * Discord API Reference: https://discord.com/developers/docs/resources/webhook#execute-webhook
   Future<Message?> execute(MessageBuilder builder,
-          {required String token, bool? wait, Snowflake? threadId, String? threadName, List<Snowflake>? appliedTags, String? username, String? avatarUrl}) =>
+          {required String token,
+          bool? wait,
+          Snowflake? threadId,
+          String? threadName,
+          List<Snowflake>? appliedTags,
+          String? username,
+          String? avatarUrl}) =>
       manager.execute(id, builder,
-          token: token, wait: wait, threadId: threadId, threadName: threadName, appliedTags: appliedTags, username: username, avatarUrl: avatarUrl);
+          token: token,
+          wait: wait,
+          threadId: threadId,
+          threadName: threadName,
+          appliedTags: appliedTags,
+          username: username,
+          avatarUrl: avatarUrl);
 
   /// Fetch a message sent by this webhook using its [token].
   ///
@@ -60,8 +79,10 @@ class PartialWebhook extends WritableSnowflakeEntity<Webhook> {
   /// External references:
   /// * [WebhookManager.fetchWebhookMessage]
   /// * Discord API Reference: https://discord.com/developers/docs/resources/webhook#get-webhook-message
-  Future<Message> fetchMessage(Snowflake messageId, {required String token, Snowflake? threadId}) =>
-      manager.fetchWebhookMessage(id, messageId, token: token, threadId: threadId);
+  Future<Message> fetchMessage(Snowflake messageId,
+          {required String token, Snowflake? threadId}) =>
+      manager.fetchWebhookMessage(id, messageId,
+          token: token, threadId: threadId);
 
   /// Update a message sent by this webhook using its [token].
   ///
@@ -70,7 +91,9 @@ class PartialWebhook extends WritableSnowflakeEntity<Webhook> {
   /// External references:
   /// * [WebhookManager.updateWebhookMessage]
   /// * Discord API Reference: https://discord.com/developers/docs/resources/webhook#edit-webhook-message
-  Future<Message> updateMessage(Snowflake messageId, MessageUpdateBuilder builder, {required String token, Snowflake? threadId}) =>
+  Future<Message> updateMessage(
+          Snowflake messageId, MessageUpdateBuilder builder,
+          {required String token, Snowflake? threadId}) =>
       manager.updateWebhookMessage(id, messageId, builder, token: token);
 
   /// Delete a message sent by this webhook using its [token].
@@ -80,8 +103,10 @@ class PartialWebhook extends WritableSnowflakeEntity<Webhook> {
   /// External references:
   /// * [WebhookManager.deleteWebhookMessage]
   /// * Discord API Reference: https://discord.com/developers/docs/resources/webhook#delete-webhook-message
-  Future<void> deleteMessage(Snowflake messageId, {required String token, Snowflake? threadId}) =>
-      manager.deleteWebhookMessage(id, messageId, token: token, threadId: threadId);
+  Future<void> deleteMessage(Snowflake messageId,
+          {required String token, Snowflake? threadId}) =>
+      manager.deleteWebhookMessage(id, messageId,
+          token: token, threadId: threadId);
 }
 
 /// A partial [Webhook] sent as part of a [Message].
@@ -94,7 +119,11 @@ class WebhookAuthor extends PartialWebhook implements MessageAuthor {
 
   /// Create a new [WebhookAuthor].
   /// @nodoc
-  WebhookAuthor({required super.id, required super.manager, required this.avatarHash, required this.username});
+  WebhookAuthor(
+      {required super.id,
+      required super.manager,
+      required this.avatarHash,
+      required this.username});
 
   @override
   CdnAsset? get avatar => avatarHash == null
@@ -164,13 +193,17 @@ class Webhook extends PartialWebhook {
   });
 
   /// The guild this webhook is for, if any.
-  PartialGuild? get guild => guildId == null ? null : manager.client.guilds[guildId!];
+  PartialGuild? get guild =>
+      guildId == null ? null : manager.client.guilds[guildId!];
 
   /// The channel this webhook is for, if any.
-  PartialChannel? get channel => channelId == null ? null : manager.client.channels[channelId!];
+  PartialChannel? get channel =>
+      channelId == null ? null : manager.client.channels[channelId!];
 
   /// The application that created this webhook.
-  PartialApplication? get application => applicationId == null ? null : manager.client.applications[applicationId!];
+  PartialApplication? get application => applicationId == null
+      ? null
+      : manager.client.applications[applicationId!];
 }
 
 /// The type of a [Webhook].
@@ -187,6 +220,7 @@ final class WebhookType extends EnumLike<int, WebhookType> {
   /// @nodoc
   const WebhookType(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   WebhookType.parse(int value) : this(value);
 }

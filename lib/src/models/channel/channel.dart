@@ -1,55 +1,37 @@
-import 'package:nyxx/src/builders/builder.dart';
-import 'package:nyxx/src/http/managers/channel_manager.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/flags.dart';
 
-/// A partial [Channel] object.
-class PartialChannel extends ManagedSnowflakeEntity<Channel> {
-  @override
-  final ChannelManager manager;
+part 'channel.mapper.dart';
 
+/// A partial [Channel] object.
+@MappableClass()
+class PartialChannel extends ManagedSnowflakeEntity<Channel>
+    with PartialChannelMappable {
   /// Create a new [PartialChannel].
   /// @nodoc
-  PartialChannel({required super.id, required this.manager});
-
-  /// Update this channel.
-  ///
-  /// External references:
-  /// * [ChannelManager.update]
-  /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#modify-channel
-  Future<Channel> update(UpdateBuilder<Channel> builder) => manager.update(id, builder);
-
-  /// Delete this channel.
-  ///
-  /// External references:
-  /// * [ChannelManager.delete]
-  /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#deleteclose-channel
-  Future<void> delete({String? auditLogReason}) => manager.delete(id, auditLogReason: auditLogReason);
-
-  /// Follow another channel's announcement messages in this channel.
-  ///
-  /// External references:
-  /// * [ChannelManager.followChannel]
-  /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#follow-announcement-channel
-  Future<void> follow(Snowflake id, {String? auditLogReason}) => manager.followChannel(this.id, id, auditLogReason: auditLogReason);
+  PartialChannel({required super.id});
 }
 
 /// {@template channel}
 /// A channel of any type.
 /// {@endtemplate}
-abstract class Channel extends PartialChannel {
+@MappableClass()
+abstract class Channel extends PartialChannel with ChannelMappable {
   /// The type of this channel.
   ChannelType get type;
 
   /// {@macro channel}
   /// @nodoc
-  Channel({required super.id, required super.manager});
+  Channel({required super.id});
 }
 
 /// The type of a channel.
-final class ChannelType extends EnumLike<int, ChannelType> {
+@MappableClass()
+final class ChannelType extends EnumLike<int, ChannelType>
+    with ChannelTypeMappable {
   /// A text channel in a [Guild].
   static const guildText = ChannelType(0);
 
@@ -92,13 +74,15 @@ final class ChannelType extends EnumLike<int, ChannelType> {
   /// @nodoc
   const ChannelType(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   ChannelType.parse(int value) : this(value);
 }
 
 /// A set of flags applied to channels.
 // Currently only used in forum channels and threads
-class ChannelFlags extends Flags<ChannelFlags> {
+@MappableClass()
+class ChannelFlags extends Flags<ChannelFlags> with ChannelFlagsMappable {
   /// The channel is pinned in a forum channel.
   static const pinned = Flag<ChannelFlags>.fromOffset(1);
 

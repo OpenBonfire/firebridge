@@ -1,7 +1,5 @@
-import 'package:nyxx/src/http/cdn/cdn_asset.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/http/managers/scheduled_event_manager.dart';
-import 'package:nyxx/src/http/route.dart';
-import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/channel/stage_instance.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/guild/member.dart';
@@ -11,24 +9,22 @@ import 'package:nyxx/src/models/user/user.dart';
 import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
-/// A partial [ScheduledEvent].
-class PartialScheduledEvent extends WritableSnowflakeEntity<ScheduledEvent> {
-  @override
-  final ScheduledEventManager manager;
+part 'scheduled_event.mapper.dart';
 
+/// A partial [ScheduledEvent].
+@MappableClass()
+class PartialScheduledEvent extends WritableSnowflakeEntity<ScheduledEvent>
+    with PartialScheduledEventMappable {
   /// Create a new [PartialScheduledEvent].
   /// @nodoc
-  PartialScheduledEvent({required super.id, required this.manager});
-
-  /// List the users that have followed this event.
-  Future<List<ScheduledEventUser>> listUsers({int? limit, bool? withMembers, Snowflake? before, Snowflake? after}) =>
-      manager.listEventUsers(id, withMembers: withMembers, after: after, before: before, limit: limit);
+  PartialScheduledEvent({required super.id});
 }
 
 /// {@template scheduled_event}
 /// A scheduled event in a [Guild].
 /// {@endtemplate}
-class ScheduledEvent extends PartialScheduledEvent {
+@MappableClass()
+class ScheduledEvent extends PartialScheduledEvent with ScheduledEventMappable {
   /// The ID of the guild this event is in.
   final Snowflake guildId;
 
@@ -83,7 +79,6 @@ class ScheduledEvent extends PartialScheduledEvent {
   /// @nodoc
   ScheduledEvent({
     required super.id,
-    required super.manager,
     required this.guildId,
     required this.channelId,
     required this.creatorId,
@@ -101,28 +96,12 @@ class ScheduledEvent extends PartialScheduledEvent {
     required this.coverImageHash,
     required this.recurrenceRule,
   });
-
-  /// The guild this event is in.
-  PartialGuild get guild => manager.client.guilds[guildId];
-
-  /// The channel this event will be hosted in.
-  PartialChannel? get channel => channelId == null ? null : manager.client.channels[channelId!];
-
-  /// The member for the user that created this event.
-  PartialMember? get creatorMember => creatorId == null ? null : guild.members[creatorId!];
-
-  /// This scheduled event's cover image.
-  CdnAsset? get coverImage => coverImageHash == null
-      ? null
-      : CdnAsset(
-          client: manager.client,
-          base: HttpRoute()..guildEvents(id: id.toString()),
-          hash: coverImageHash!,
-        );
 }
 
 /// The status of a [ScheduledEvent].
-final class EventStatus extends EnumLike<int, EventStatus> {
+@MappableClass()
+final class EventStatus extends EnumLike<int, EventStatus>
+    with EventStatusMappable {
   static const scheduled = EventStatus(1);
   static const active = EventStatus(2);
   static const completed = EventStatus(3);
@@ -131,12 +110,15 @@ final class EventStatus extends EnumLike<int, EventStatus> {
   /// @nodoc
   const EventStatus(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   EventStatus.parse(int value) : this(value);
 }
 
 /// The type of the entity associated with a [ScheduledEvent].
-final class ScheduledEntityType extends EnumLike<int, ScheduledEntityType> {
+@MappableClass()
+final class ScheduledEntityType extends EnumLike<int, ScheduledEntityType>
+    with ScheduledEntityTypeMappable {
   static const stageInstance = ScheduledEntityType(1);
   static const voice = ScheduledEntityType(2);
   static const external = ScheduledEntityType(3);
@@ -144,14 +126,16 @@ final class ScheduledEntityType extends EnumLike<int, ScheduledEntityType> {
   /// @nodoc
   const ScheduledEntityType(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   ScheduledEntityType.parse(int value) : this(value);
 }
 
 /// {@template entity_metadata}
 /// Additional metadata associated with a [ScheduledEvent].
 /// {@endtemplate}
-class EntityMetadata with ToStringHelper {
+@MappableClass()
+class EntityMetadata with ToStringHelper, EntityMetadataMappable {
   /// The location the event will take place in.
   final String? location;
 
@@ -163,7 +147,8 @@ class EntityMetadata with ToStringHelper {
 /// {@template scheduled_event_user}
 /// A user that has followed a [ScheduledEvent].
 /// {@endtemplate}
-class ScheduledEventUser with ToStringHelper {
+@MappableClass()
+class ScheduledEventUser with ToStringHelper, ScheduledEventUserMappable {
   final ScheduledEventManager manager;
 
   /// The ID of the event the user followed.
@@ -192,7 +177,8 @@ class ScheduledEventUser with ToStringHelper {
 ///
 /// See also:
 /// * https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-recurrence-rule-object
-class RecurrenceRule with ToStringHelper {
+@MappableClass()
+class RecurrenceRule with ToStringHelper, RecurrenceRuleMappable {
   /// The start of the interval within which the event recurs.
   final DateTime start;
 
@@ -239,7 +225,10 @@ class RecurrenceRule with ToStringHelper {
 }
 
 /// The frequency with which a [ScheduledEvent] can recur.
-final class RecurrenceRuleFrequency extends EnumLike<int, RecurrenceRuleFrequency> {
+@MappableClass()
+final class RecurrenceRuleFrequency
+    extends EnumLike<int, RecurrenceRuleFrequency>
+    with RecurrenceRuleFrequencyMappable {
   /// The event recurs at an interval in years.
   static const yearly = RecurrenceRuleFrequency(0);
 
@@ -257,7 +246,9 @@ final class RecurrenceRuleFrequency extends EnumLike<int, RecurrenceRuleFrequenc
 }
 
 /// The weekday on which a [ScheduledEvent] recurs.
-final class RecurrenceRuleWeekday extends EnumLike<int, RecurrenceRuleWeekday> {
+@MappableClass()
+final class RecurrenceRuleWeekday extends EnumLike<int, RecurrenceRuleWeekday>
+    with RecurrenceRuleWeekdayMappable {
   static const monday = RecurrenceRuleWeekday(0);
   static const tuesday = RecurrenceRuleWeekday(1);
   static const wednesday = RecurrenceRuleWeekday(2);
@@ -271,7 +262,9 @@ final class RecurrenceRuleWeekday extends EnumLike<int, RecurrenceRuleWeekday> {
 }
 
 /// The week and weekday on which a [ScheduledEvent] recurs.
-class RecurrenceRuleNWeekday with ToStringHelper {
+@MappableClass()
+class RecurrenceRuleNWeekday
+    with ToStringHelper, RecurrenceRuleNWeekdayMappable {
   /// The index of the week in which the event recurs.
   ///
   /// This will always be at least 1 and at most 5.
@@ -285,7 +278,9 @@ class RecurrenceRuleNWeekday with ToStringHelper {
 }
 
 /// The month on which a [ScheduledEvent] recurs.
-final class RecurrenceRuleMonth extends EnumLike<int, RecurrenceRuleMonth> {
+@MappableClass()
+final class RecurrenceRuleMonth extends EnumLike<int, RecurrenceRuleMonth>
+    with RecurrenceRuleMonthMappable {
   static const january = RecurrenceRuleMonth(0);
   static const february = RecurrenceRuleMonth(1);
   static const march = RecurrenceRuleMonth(2);

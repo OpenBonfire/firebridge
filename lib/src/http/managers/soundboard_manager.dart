@@ -5,7 +5,6 @@ import 'package:nyxx/src/errors.dart';
 import 'package:nyxx/src/http/managers/manager.dart';
 import 'package:nyxx/src/http/request.dart';
 import 'package:nyxx/src/http/route.dart';
-import 'package:nyxx/src/models/emoji.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/soundboard/soundboard.dart';
 import 'package:nyxx/src/utils/cache_helpers.dart';
@@ -13,30 +12,6 @@ import 'package:nyxx/src/utils/parsing_helpers.dart';
 
 abstract class SoundboardManager extends Manager<SoundboardSound> {
   SoundboardManager(super.config, super.client, {required super.identifier});
-
-  @override
-  SoundboardSound parse(Map<String, Object?> raw) {
-    final guildId = maybeParse(raw['guild_id'], Snowflake.parse);
-
-    Emoji? emoji = maybeParse(raw['emoji_name'], (emoji) => client.guilds[guildId ?? Snowflake.zero].emojis.parse({'id': null, 'name': emoji}));
-
-    final emojiId = maybeParse(raw['emoji_id'], Snowflake.parse);
-
-    emoji ??= client.guilds[guildId ?? Snowflake.zero].emojis.cache[emojiId];
-
-    return SoundboardSound(
-      id: Snowflake.parse(raw['sound_id']!),
-      manager: this,
-      name: raw['name'] as String,
-      volume: (raw['volume'] as num).toDouble(),
-      emoji: emoji,
-      emojiName: raw['emoji_name'] as String?,
-      emojiId: emojiId,
-      guildId: guildId,
-      isAvailable: raw['available'] as bool,
-      user: maybeParse(raw['user'], client.users.parse),
-    );
-  }
 
   Future<List<SoundboardSound>> list();
 }
@@ -46,10 +21,12 @@ class GuildSoundboardManager extends SoundboardManager {
   /// The guild this manager is for.
   final Snowflake guildId;
 
-  GuildSoundboardManager(super.config, super.client, {required this.guildId}) : super(identifier: '$guildId.soundboard');
+  GuildSoundboardManager(super.config, super.client, {required this.guildId})
+      : super(identifier: '$guildId.soundboard');
 
   @override
-  PartialSoundboardSound operator [](Snowflake id) => PartialSoundboardSound(id: id, manager: this);
+  PartialSoundboardSound operator [](Snowflake id) =>
+      PartialSoundboardSound(id: id);
 
   @override
   Future<SoundboardSound> fetch(Snowflake id) async {
@@ -61,7 +38,8 @@ class GuildSoundboardManager extends SoundboardManager {
 
     final response = await client.httpHandler.executeSafe(request);
 
-    final sound = parse(response.jsonBody as Map<String, Object?>);
+    final sound = SoundboardSoundMapper.fromMap(
+        response.jsonBody as Map<String, Object?>);
     client.updateCacheWith(sound);
 
     return sound;
@@ -77,9 +55,10 @@ class GuildSoundboardManager extends SoundboardManager {
 
     final response = await client.httpHandler.executeSafe(request);
 
-    final raw = (response.jsonBody as Map<String, Object?>)['items'] as List<Object?>;
+    final raw =
+        (response.jsonBody as Map<String, Object?>)['items'] as List<Object?>;
 
-    final sounds = parseMany(raw, parse);
+    final sounds = parseMany(raw, SoundboardSoundMapper.fromMap);
 
     sounds.forEach(client.updateCacheWith);
 
@@ -87,16 +66,21 @@ class GuildSoundboardManager extends SoundboardManager {
   }
 
   @override
-  Future<SoundboardSound> create(SoundboardSoundBuilder builder, {String? auditLogReason}) async {
+  Future<SoundboardSound> create(SoundboardSoundBuilder builder,
+      {String? auditLogReason}) async {
     final route = HttpRoute()
       ..guilds(id: guildId.toString())
       ..soundboardSounds();
 
-    final request = BasicRequest(route, method: 'POST', auditLogReason: auditLogReason, body: jsonEncode(builder.build()));
+    final request = BasicRequest(route,
+        method: 'POST',
+        auditLogReason: auditLogReason,
+        body: jsonEncode(builder.build()));
 
     final response = await client.httpHandler.executeSafe(request);
 
-    final soundboard = parse(response.jsonBody as Map<String, Object?>);
+    final soundboard = SoundboardSoundMapper.fromMap(
+        response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(soundboard);
 
@@ -104,16 +88,22 @@ class GuildSoundboardManager extends SoundboardManager {
   }
 
   @override
-  Future<SoundboardSound> update(Snowflake id, SoundboardSoundUpdateBuilder builder, {String? auditLogReason}) async {
+  Future<SoundboardSound> update(
+      Snowflake id, SoundboardSoundUpdateBuilder builder,
+      {String? auditLogReason}) async {
     final route = HttpRoute()
       ..guilds(id: guildId.toString())
       ..soundboardSounds(id: id.toString());
 
-    final request = BasicRequest(route, method: 'PATCH', auditLogReason: auditLogReason, body: jsonEncode(builder.build()));
+    final request = BasicRequest(route,
+        method: 'PATCH',
+        auditLogReason: auditLogReason,
+        body: jsonEncode(builder.build()));
 
     final response = await client.httpHandler.executeSafe(request);
 
-    final soundboard = parse(response.jsonBody as Map<String, Object?>);
+    final soundboard = SoundboardSoundMapper.fromMap(
+        response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(soundboard);
 
@@ -126,7 +116,8 @@ class GuildSoundboardManager extends SoundboardManager {
       ..guilds(id: guildId.toString())
       ..soundboardSounds(id: id.toString());
 
-    final request = BasicRequest(route, method: 'DELETE', auditLogReason: auditLogReason);
+    final request =
+        BasicRequest(route, method: 'DELETE', auditLogReason: auditLogReason);
 
     await client.httpHandler.executeSafe(request);
     cache.remove(id);
@@ -134,23 +125,31 @@ class GuildSoundboardManager extends SoundboardManager {
 
   /// Send a soundboard sound to a voice channel the user is connected to. [soundId] is the id of the soundboard sound to play,
   /// while [sourceGuildId] is the id of the guild the soundboard sound is from. (Required to play sounds from different servers.)
-  Future<void> sendSoundboardSound(Snowflake channelId, {required Snowflake soundId, Snowflake? sourceGuildId}) async {
+  Future<void> sendSoundboardSound(Snowflake channelId,
+      {required Snowflake soundId, Snowflake? sourceGuildId}) async {
     final route = HttpRoute()
       ..channels(id: channelId.toString())
       ..sendSoundboardSound();
 
-    final request =
-        BasicRequest(route, method: 'POST', body: jsonEncode({'sound_id': soundId.toString(), 'source_guild_id': (sourceGuildId ?? guildId).toString()}));
+    final request = BasicRequest(route,
+        method: 'POST',
+        body: jsonEncode({
+          'sound_id': soundId.toString(),
+          'source_guild_id': (sourceGuildId ?? guildId).toString()
+        }));
 
     await client.httpHandler.executeSafe(request);
   }
 }
 
-class GlobalSoundboardManager extends SoundboardManager implements ReadOnlyManager<SoundboardSound> {
-  GlobalSoundboardManager(super.config, super.client) : super(identifier: 'soundboard');
+class GlobalSoundboardManager extends SoundboardManager
+    implements ReadOnlyManager<SoundboardSound> {
+  GlobalSoundboardManager(super.config, super.client)
+      : super(identifier: 'soundboard');
 
   @override
-  PartialSoundboardSound operator [](Snowflake id) => PartialSoundboardSound(id: id, manager: this);
+  PartialSoundboardSound operator [](Snowflake id) =>
+      PartialSoundboardSound(id: id);
 
   @override
   Future<SoundboardSound> fetch(Snowflake id) async {
@@ -175,7 +174,7 @@ class GlobalSoundboardManager extends SoundboardManager implements ReadOnlyManag
 
     final raw = response.jsonBody as List<Object?>;
 
-    final sounds = parseMany(raw, parse);
+    final sounds = parseMany(raw, SoundboardSoundMapper.fromMap);
 
     sounds.forEach(client.updateCacheWith);
 
@@ -183,12 +182,17 @@ class GlobalSoundboardManager extends SoundboardManager implements ReadOnlyManag
   }
 
   @override
-  Future<void> delete(Snowflake id, {String? auditLogReason}) => throw UnsupportedError('Cannot delete a global soundboard sound');
+  Future<void> delete(Snowflake id, {String? auditLogReason}) =>
+      throw UnsupportedError('Cannot delete a global soundboard sound');
 
   @override
-  Future<SoundboardSound> create(SoundboardSoundBuilder builder, {String? auditLogReason}) => throw UnsupportedError('Cannot create a global soundboard sound');
+  Future<SoundboardSound> create(SoundboardSoundBuilder builder,
+          {String? auditLogReason}) =>
+      throw UnsupportedError('Cannot create a global soundboard sound');
 
   @override
-  Future<SoundboardSound> update(Snowflake id, SoundboardSoundUpdateBuilder builder, {String? auditLogReason}) =>
+  Future<SoundboardSound> update(
+          Snowflake id, SoundboardSoundUpdateBuilder builder,
+          {String? auditLogReason}) =>
       throw UnsupportedError('Cannot update a global soundboard sound');
 }

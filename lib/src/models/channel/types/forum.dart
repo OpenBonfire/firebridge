@@ -1,24 +1,21 @@
-import 'package:nyxx/src/builders/channel/thread.dart';
-import 'package:nyxx/src/builders/invite.dart';
-import 'package:nyxx/src/builders/permission_overwrite.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/channel/guild_channel.dart';
-import 'package:nyxx/src/models/channel/thread.dart';
 import 'package:nyxx/src/models/channel/thread_aggregate.dart';
-import 'package:nyxx/src/models/channel/thread_list.dart';
-import 'package:nyxx/src/models/guild/guild.dart';
-import 'package:nyxx/src/models/invite/invite.dart';
-import 'package:nyxx/src/models/invite/invite_metadata.dart';
 import 'package:nyxx/src/models/permission_overwrite.dart';
 import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/models/webhook.dart';
 import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+
+part 'forum.mapper.dart';
 
 /// {@template forum_channel}
 /// A forum channel.
 /// {@endtemplate}
-class ForumChannel extends Channel implements GuildChannel, ThreadsOnlyChannel {
+@MappableClass()
+class ForumChannel extends Channel
+    with ForumChannelMappable
+    implements GuildChannel, ThreadsOnlyChannel {
   /// The default layout in this channel
   final ForumLayout? defaultLayout;
 
@@ -77,7 +74,6 @@ class ForumChannel extends Channel implements GuildChannel, ThreadsOnlyChannel {
   /// @nodoc
   ForumChannel({
     required super.id,
-    required super.manager,
     required this.defaultLayout,
     required this.topic,
     required this.rateLimitPerUser,
@@ -96,54 +92,13 @@ class ForumChannel extends Channel implements GuildChannel, ThreadsOnlyChannel {
     required this.permissionOverwrites,
     required this.position,
   });
-
-  @override
-  PartialGuild get guild => manager.client.guilds[guildId];
-
-  @override
-  PartialChannel? get parent => parentId == null ? null : manager.client.channels[parentId!];
-
-  @override
-  Future<Thread> createForumThread(ForumThreadBuilder builder, {String? auditLogReason}) =>
-      manager.createForumThread(id, builder, auditLogReason: auditLogReason);
-
-  @override
-  Future<Thread> createThread(ThreadBuilder builder, {String? auditLogReason}) => throw UnsupportedError('Cannot create a non forum thread in a forum channel');
-
-  @override
-  Future<Thread> createThreadFromMessage(Snowflake messageId, ThreadFromMessageBuilder builder, {String? auditLogReason}) =>
-      throw UnsupportedError('Cannot create a non forum thread in a forum channel');
-
-  @override
-  Future<void> deletePermissionOverwrite(Snowflake id) => manager.deletePermissionOverwrite(this.id, id);
-
-  @override
-  Future<ThreadList> listPrivateArchivedThreads({DateTime? before, int? limit}) => manager.listPrivateArchivedThreads(id, before: before, limit: limit);
-
-  @override
-  Future<ThreadList> listPublicArchivedThreads({DateTime? before, int? limit}) => manager.listPublicArchivedThreads(id, before: before, limit: limit);
-
-  @override
-  Future<ThreadList> listJoinedPrivateArchivedThreads({DateTime? before, int? limit}) =>
-      manager.listJoinedPrivateArchivedThreads(id, before: before, limit: limit);
-
-  @override
-  Future<void> updatePermissionOverwrite(PermissionOverwriteBuilder builder) => manager.updatePermissionOverwrite(id, builder);
-
-  @override
-  Future<List<Webhook>> fetchWebhooks() => manager.client.webhooks.fetchChannelWebhooks(id);
-
-  @override
-  Future<List<InviteWithMetadata>> listInvites() => manager.listInvites(id);
-
-  @override
-  Future<Invite> createInvite(InviteBuilder builder, {String? auditLogReason}) => manager.createInvite(id, builder, auditLogReason: auditLogReason);
 }
 
 /// {@template forum_tag}
 /// A tag in a forum channel.
 /// {@endtemplate}
-class ForumTag with ToStringHelper {
+@MappableClass()
+class ForumTag with ToStringHelper, ForumTagMappable {
   /// The ID of this tag.
   final Snowflake id;
 
@@ -173,7 +128,8 @@ class ForumTag with ToStringHelper {
 /// {@template default_reaction}
 /// A default reaction in a [ForumChannel].
 /// {@endtemplate}
-class DefaultReaction with ToStringHelper {
+@MappableClass()
+class DefaultReaction with ToStringHelper, DefaultReactionMappable {
   /// The ID of the emoji.
   final Snowflake? emojiId;
 
@@ -186,19 +142,23 @@ class DefaultReaction with ToStringHelper {
 }
 
 /// The sorting order in a [ForumChannel].
-final class ForumSort extends EnumLike<int, ForumSort> {
+@MappableClass()
+final class ForumSort extends EnumLike<int, ForumSort> with ForumSortMappable {
   static const latestActivity = ForumSort(0);
   static const creationDate = ForumSort(1);
 
   /// @nodoc
   const ForumSort(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   ForumSort.parse(int value) : this(value);
 }
 
 /// The layout in a [ForumChannel].
-final class ForumLayout extends EnumLike<int, ForumLayout> {
+@MappableClass()
+final class ForumLayout extends EnumLike<int, ForumLayout>
+    with ForumLayoutMappable {
   static const notSet = ForumLayout(0);
   static const listView = ForumLayout(1);
   static const galleryView = ForumLayout(2);
@@ -206,6 +166,7 @@ final class ForumLayout extends EnumLike<int, ForumLayout> {
   /// @nodoc
   const ForumLayout(super.value);
 
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
+  @Deprecated(
+      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
   ForumLayout.parse(int value) : this(value);
 }

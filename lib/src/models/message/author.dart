@@ -1,4 +1,3 @@
-import 'package:nyxx/src/http/cdn/cdn_asset.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 
 /// An author of a message.
@@ -13,7 +12,4 @@ abstract class MessageAuthor {
 
   /// The avatar hash of this entity.
   String? get avatarHash;
-
-  /// The avatar of this entity.
-  CdnAsset? get avatar;
 }
