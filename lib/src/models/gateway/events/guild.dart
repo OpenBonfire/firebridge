@@ -1,9 +1,11 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/channel/guild_channel.dart';
 import 'package:nyxx/src/models/channel/stage_instance.dart';
 import 'package:nyxx/src/models/channel/thread.dart';
 import 'package:nyxx/src/models/emoji.dart';
 import 'package:nyxx/src/models/gateway/event.dart';
 import 'package:nyxx/src/models/gateway/events/presence.dart';
+import 'package:nyxx/src/models/gateway/opcode.dart';
 import 'package:nyxx/src/models/guild/audit_log.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/guild/member.dart';
@@ -14,10 +16,14 @@ import 'package:nyxx/src/models/sticker/guild_sticker.dart';
 import 'package:nyxx/src/models/user/user.dart';
 import 'package:nyxx/src/models/voice/voice_state.dart';
 
+part 'guild.mapper.dart';
+
 /// {@template unavailable_guild_create_event}
 /// Emitted when the client is added to an unavailable guild, or when initially receiving guilds over the Gateway.
 /// {@endtemplate}
-class UnavailableGuildCreateEvent extends DispatchEvent {
+@MappableClass()
+class UnavailableGuildCreateEvent extends DispatchEvent
+    with UnavailableGuildCreateEventMappable {
   /// The guild the client was added to.
   final PartialGuild guild;
 
@@ -29,7 +35,9 @@ class UnavailableGuildCreateEvent extends DispatchEvent {
 /// {@template guild_create_event}
 /// Emitted when a client is added to a guild or when initially receiving guilds over the Gateway.
 /// {@endtemplate}
+@MappableClass()
 class GuildCreateEvent extends DispatchEvent
+    with GuildCreateEventMappable
     implements UnavailableGuildCreateEvent {
   @override
   final Guild guild;
@@ -84,7 +92,8 @@ class GuildCreateEvent extends DispatchEvent
 /// {@template guild_update_event}
 /// Emitted when a guild is updated.
 /// {@endtemplate}
-class GuildUpdateEvent extends DispatchEvent {
+@MappableClass()
+class GuildUpdateEvent extends DispatchEvent with GuildUpdateEventMappable {
   /// The guild as it was cached before the update.
   final Guild? oldGuild;
 
@@ -99,7 +108,8 @@ class GuildUpdateEvent extends DispatchEvent {
 /// {@template guild_delete_event}
 /// Emitted when the client is removed from a guild.
 /// {@endtemplate}
-class GuildDeleteEvent extends DispatchEvent {
+@MappableClass()
+class GuildDeleteEvent extends DispatchEvent with GuildDeleteEventMappable {
   /// The guild the client was removed from.
   final PartialGuild guild;
 
@@ -120,7 +130,9 @@ class GuildDeleteEvent extends DispatchEvent {
 /// {@template guild_audit_log_create_event}
 /// Emitted when an audit log entry is created in a guild.
 /// {@endtemplate}
-class GuildAuditLogCreateEvent extends DispatchEvent {
+@MappableClass()
+class GuildAuditLogCreateEvent extends DispatchEvent
+    with GuildAuditLogCreateEventMappable {
   /// The entry that was created.
   final AuditLogEntry entry;
 
@@ -135,7 +147,8 @@ class GuildAuditLogCreateEvent extends DispatchEvent {
 /// {@template guild_ban_add_event}
 /// Emitted when a user is banned in a guild.
 /// {@endtemplate}
-class GuildBanAddEvent extends DispatchEvent {
+@MappableClass()
+class GuildBanAddEvent extends DispatchEvent with GuildBanAddEventMappable {
   /// The ID of the guild the user was banned in.
   final Snowflake guildId;
 
@@ -150,7 +163,9 @@ class GuildBanAddEvent extends DispatchEvent {
 /// {@template guild_ban_remove_event}
 /// Emitted when a user is unbanned in a guild.
 /// {@endtemplate}
-class GuildBanRemoveEvent extends DispatchEvent {
+@MappableClass()
+class GuildBanRemoveEvent extends DispatchEvent
+    with GuildBanRemoveEventMappable {
   /// The ID of the guild the user was unbanned from.
   final Snowflake guildId;
 
@@ -165,7 +180,9 @@ class GuildBanRemoveEvent extends DispatchEvent {
 /// {@template guild_emojis_update_event}
 /// Emitted when a guild's emojis are updated.
 /// {@endtemplate}
-class GuildEmojisUpdateEvent extends DispatchEvent {
+@MappableClass()
+class GuildEmojisUpdateEvent extends DispatchEvent
+    with GuildEmojisUpdateEventMappable {
   /// The ID of the guild.
   final Snowflake guildId;
 
@@ -180,7 +197,9 @@ class GuildEmojisUpdateEvent extends DispatchEvent {
 /// {@template guild_stickers_update_event}
 /// Emitted when a guild's stickers are updated.
 /// {@endtemplate}
-class GuildStickersUpdateEvent extends DispatchEvent {
+@MappableClass()
+class GuildStickersUpdateEvent extends DispatchEvent
+    with GuildStickersUpdateEventMappable {
   /// The ID ot the guild.
   final Snowflake guildId;
 
@@ -195,7 +214,9 @@ class GuildStickersUpdateEvent extends DispatchEvent {
 /// {@template guild_integrations_update_event}
 /// Emitted when a guild's integrations are updated.
 /// {@endtemplate}
-class GuildIntegrationsUpdateEvent extends DispatchEvent {
+@MappableClass()
+class GuildIntegrationsUpdateEvent extends DispatchEvent
+    with GuildIntegrationsUpdateEventMappable {
   /// The ID of the guild.
   final Snowflake guildId;
 
@@ -207,7 +228,9 @@ class GuildIntegrationsUpdateEvent extends DispatchEvent {
 /// {@template guild_member_add_event}
 /// Emitted when a member joins a guild.
 /// {@endtemplate}
-class GuildMemberAddEvent extends DispatchEvent {
+@MappableClass()
+class GuildMemberAddEvent extends DispatchEvent
+    with GuildMemberAddEventMappable {
   /// The ID of the guild.
   final Snowflake guildId;
 
@@ -222,7 +245,9 @@ class GuildMemberAddEvent extends DispatchEvent {
 /// {@template guild_member_remove_event}
 /// Emitted when a member is removed from a guild.
 /// {@endtemplate}
-class GuildMemberRemoveEvent extends DispatchEvent {
+@MappableClass()
+class GuildMemberRemoveEvent extends DispatchEvent
+    with GuildMemberRemoveEventMappable {
   /// The ID of the guild.
   final Snowflake guildId;
 
@@ -241,7 +266,9 @@ class GuildMemberRemoveEvent extends DispatchEvent {
 /// {@template guild_member_update_event}
 /// Emitted when a guild member is updated.
 /// {@endtemplate}
-class GuildMemberUpdateEvent extends DispatchEvent {
+@MappableClass()
+class GuildMemberUpdateEvent extends DispatchEvent
+    with GuildMemberUpdateEventMappable {
   /// The member as it was cached before the update.
   final Member? oldMember;
 
@@ -260,7 +287,9 @@ class GuildMemberUpdateEvent extends DispatchEvent {
 /// {@template guild_members_chunk_event}
 /// Emitted as a response to [Gateway.listGuildMembers].
 /// {@endtemplate}
-class GuildMembersChunkEvent extends DispatchEvent {
+@MappableClass()
+class GuildMembersChunkEvent extends DispatchEvent
+    with GuildMembersChunkEventMappable {
   /// The ID of the guild.
   final Snowflake guildId;
 
@@ -298,7 +327,9 @@ class GuildMembersChunkEvent extends DispatchEvent {
 /// {@template guild_role_create_event}
 /// Emitted when a role is created in a guild.
 /// {@endtemplate}
-class GuildRoleCreateEvent extends DispatchEvent {
+@MappableClass()
+class GuildRoleCreateEvent extends DispatchEvent
+    with GuildRoleCreateEventMappable {
   /// The ID of the guild.
   final Snowflake guildId;
 
@@ -313,7 +344,9 @@ class GuildRoleCreateEvent extends DispatchEvent {
 /// {@template guild_role_update_event}
 /// Emitted when a role is updated in a guild
 /// {@endtemplate}
-class GuildRoleUpdateEvent extends DispatchEvent {
+@MappableClass()
+class GuildRoleUpdateEvent extends DispatchEvent
+    with GuildRoleUpdateEventMappable {
   /// The ID of the guild.
   final Snowflake guildId;
 
@@ -332,7 +365,9 @@ class GuildRoleUpdateEvent extends DispatchEvent {
 /// {@template guild_role_delete_event}
 /// Emitted when a role is deleted in a guild.
 /// {@endtemplate}
-class GuildRoleDeleteEvent extends DispatchEvent {
+@MappableClass()
+class GuildRoleDeleteEvent extends DispatchEvent
+    with GuildRoleDeleteEventMappable {
   /// The ID of the guild.
   final Snowflake guildId;
 
@@ -351,7 +386,9 @@ class GuildRoleDeleteEvent extends DispatchEvent {
 /// {@template guild_scheduled_event_create_event}
 /// Emitted when a scheduled event is created.
 /// {@endtemplate}
-class GuildScheduledEventCreateEvent extends DispatchEvent {
+@MappableClass()
+class GuildScheduledEventCreateEvent extends DispatchEvent
+    with GuildScheduledEventCreateEventMappable {
   /// The event that was created.
   final ScheduledEvent event;
 
@@ -363,7 +400,9 @@ class GuildScheduledEventCreateEvent extends DispatchEvent {
 /// {@template guild_scheduled_event_update_event}
 /// Emitted when a scheduled event is updated.
 /// {@endtemplate}
-class GuildScheduledEventUpdateEvent extends DispatchEvent {
+@MappableClass()
+class GuildScheduledEventUpdateEvent extends DispatchEvent
+    with GuildScheduledEventUpdateEventMappable {
   /// The event as it was in the cache before it was updated.
   final ScheduledEvent? oldEvent;
 
@@ -378,7 +417,9 @@ class GuildScheduledEventUpdateEvent extends DispatchEvent {
 /// {@template guild_scheduled_event_delete_event}
 /// Emitted when a scheduled event is deleted.
 /// {@endtemplate}
-class GuildScheduledEventDeleteEvent extends DispatchEvent {
+@MappableClass()
+class GuildScheduledEventDeleteEvent extends DispatchEvent
+    with GuildScheduledEventDeleteEventMappable {
   /// The event that was deleted.
   final ScheduledEvent event;
 
@@ -390,7 +431,9 @@ class GuildScheduledEventDeleteEvent extends DispatchEvent {
 /// {@template guild_scheduled_event_user_add_event}
 /// Emitted when a user is added to a scheduled event.
 /// {@endtemplate}
-class GuildScheduledEventUserAddEvent extends DispatchEvent {
+@MappableClass()
+class GuildScheduledEventUserAddEvent extends DispatchEvent
+    with GuildScheduledEventUserAddEventMappable {
   /// The ID of the scheduled event.
   final Snowflake scheduledEventId;
 
@@ -411,7 +454,9 @@ class GuildScheduledEventUserAddEvent extends DispatchEvent {
 /// {@template guild_scheduled_event_user_remove_event}
 /// Emitted when a user is removed from a scheduled event.
 /// {@endtemplate}
-class GuildScheduledEventUserRemoveEvent extends DispatchEvent {
+@MappableClass()
+class GuildScheduledEventUserRemoveEvent extends DispatchEvent
+    with GuildScheduledEventUserRemoveEventMappable {
   /// The ID of the scheduled event.
   final Snowflake scheduledEventId;
 

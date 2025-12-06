@@ -1,11 +1,17 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/gateway/event.dart';
+import 'package:nyxx/src/models/gateway/opcode.dart';
 import 'package:nyxx/src/models/guild/auto_moderation.dart';
 import 'package:nyxx/src/models/snowflake.dart';
+
+part 'auto_moderation.mapper.dart';
 
 /// {@template auto_moderation_rule_create_event}
 /// Emitted when an auto moderation rule is created.
 /// {@endtemplate}
-class AutoModerationRuleCreateEvent extends DispatchEvent {
+@MappableClass()
+class AutoModerationRuleCreateEvent extends DispatchEvent
+    with AutoModerationActionExecutionEventMappable {
   /// The rule that was created.
   final AutoModerationRule rule;
 
@@ -17,7 +23,9 @@ class AutoModerationRuleCreateEvent extends DispatchEvent {
 /// {@template auto_moderation_rule_update_event}
 /// Emitted when an auto moderation rule is updated.
 /// {@endtemplate}
-class AutoModerationRuleUpdateEvent extends DispatchEvent {
+@MappableClass()
+class AutoModerationRuleUpdateEvent extends DispatchEvent
+    with AutoModerationRuleUpdateEventMappable {
   /// The rule as it was cached before it was updated.
   final AutoModerationRule? oldRule;
 
@@ -32,7 +40,9 @@ class AutoModerationRuleUpdateEvent extends DispatchEvent {
 /// {@template auto_moderation_rule_delete_event}
 /// Emitted when an auto moderation rule is deleted.
 /// {@endtemplate}
-class AutoModerationRuleDeleteEvent extends DispatchEvent {
+@MappableClass()
+class AutoModerationRuleDeleteEvent extends DispatchEvent
+    with AutoModerationRuleDeleteEventMappable {
   /// The rule that was deleted.
   final AutoModerationRule rule;
 
@@ -44,7 +54,9 @@ class AutoModerationRuleDeleteEvent extends DispatchEvent {
 /// {@template auto_moderation_action_execution_event}
 /// Emitted when an auto moderation action is taken.
 /// {@endtemplate}
-class AutoModerationActionExecutionEvent extends DispatchEvent {
+@MappableClass()
+class AutoModerationActionExecutionEvent extends DispatchEvent
+    with AutoModerationActionExecutionEventMappable {
   /// The ID of the guild the event was triggered in.
   final Snowflake guildId;
 

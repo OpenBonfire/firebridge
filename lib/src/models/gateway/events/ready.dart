@@ -1,12 +1,17 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/application.dart';
 import 'package:nyxx/src/models/gateway/event.dart';
+import 'package:nyxx/src/models/gateway/opcode.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/user/user.dart';
+
+part 'ready.mapper.dart';
 
 /// {@template ready_event}
 /// Emitted when the client's Gateway session is established.
 /// {@endtemplate}
-class ReadyEvent extends DispatchEvent {
+@MappableClass()
+class ReadyEvent extends DispatchEvent with ReadyEventMappable {
   /// The version of the API being used.
   final int version;
 
@@ -34,7 +39,6 @@ class ReadyEvent extends DispatchEvent {
   /// {@macro ready_event}
   /// @nodoc
   ReadyEvent({
-    required super.gateway,
     required this.version,
     required this.user,
     required this.guilds,
@@ -49,8 +53,5 @@ class ReadyEvent extends DispatchEvent {
 /// {@template resumed_event}
 /// Emitted when
 /// {@endtemplate}
-class ResumedEvent extends DispatchEvent {
-  /// {@macro resumed_event}
-  /// @nodoc
-  ResumedEvent({required super.gateway});
-}
+@MappableClass()
+class ResumedEvent extends DispatchEvent with ResumedEventMappable {}

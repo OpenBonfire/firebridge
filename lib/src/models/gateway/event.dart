@@ -1,9 +1,13 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/gateway/opcode.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+
+part 'event.mapper.dart';
 
 /// {@template gateway_event}
 /// The base class for all events received from the Gateway.
 /// {@endtemplate}
+@MappableClass()
 abstract class GatewayEvent with ToStringHelper {
   /// The opcode of this event.
   final Opcode opcode;
@@ -16,7 +20,8 @@ abstract class GatewayEvent with ToStringHelper {
 /// {@template raw_dispatch_event}
 /// An unparsed dispatch event.
 /// {@endtemplate}
-class RawDispatchEvent extends GatewayEvent {
+@MappableClass()
+class RawDispatchEvent extends GatewayEvent with RawDispatchEventMappable {
   /// The sequence number for this event.
   final int seq;
 
@@ -36,7 +41,8 @@ class RawDispatchEvent extends GatewayEvent {
 /// {@template dispatch_event}
 /// The base class for all events sent by dispatch.
 /// {@endtemplate}
-abstract class DispatchEvent extends GatewayEvent {
+@MappableClass()
+abstract class DispatchEvent extends GatewayEvent with DispatchEventMappable {
   /// {@macro dispatch_event}
   /// @nodoc
   DispatchEvent() : super(opcode: Opcode.dispatch);
@@ -47,7 +53,9 @@ abstract class DispatchEvent extends GatewayEvent {
 ///
 /// This either means the event is internal and not documented, or that nyxx has not yet updated to support it.
 /// {@endtemplate}
-class UnknownDispatchEvent extends DispatchEvent {
+@MappableClass()
+class UnknownDispatchEvent extends DispatchEvent
+    with UnknownDispatchEventMappable {
   /// The [RawDispatchEvent] that couldn't be parsed.
   final RawDispatchEvent raw;
 
@@ -59,7 +67,8 @@ class UnknownDispatchEvent extends DispatchEvent {
 /// {@template heartbeat_event}
 /// Emitted when the client receives a request to heartbeat.
 /// {@endtemplate}
-class HeartbeatEvent extends GatewayEvent {
+@MappableClass()
+class HeartbeatEvent extends GatewayEvent with HeartbeatEventMappable {
   /// {@macro heartbeat_event}
   HeartbeatEvent() : super(opcode: Opcode.heartbeat);
 }
@@ -67,7 +76,8 @@ class HeartbeatEvent extends GatewayEvent {
 /// {@template reconnect_event}
 /// Emitted when the client receives a request to reconnect.
 /// {@endtemplate}
-class ReconnectEvent extends GatewayEvent {
+@MappableClass()
+class ReconnectEvent extends GatewayEvent with ReconnectEventMappable {
   /// {@macro reconnect_event}
   ReconnectEvent() : super(opcode: Opcode.reconnect);
 }
@@ -75,7 +85,9 @@ class ReconnectEvent extends GatewayEvent {
 /// {@template invalid_session_event}
 /// Emitted when the client's session is invalid.
 /// {@endtemplate}
-class InvalidSessionEvent extends GatewayEvent {
+@MappableClass()
+class InvalidSessionEvent extends GatewayEvent
+    with InvalidSessionEventMappable {
   /// Whether the client can resume the session on a new connection.
   final bool isResumable;
 
@@ -88,7 +100,8 @@ class InvalidSessionEvent extends GatewayEvent {
 /// {@template hello_event}
 /// Emitted when the client first establishes a connection to the gateway.
 /// {@endtemplate}
-class HelloEvent extends GatewayEvent {
+@MappableClass()
+class HelloEvent extends GatewayEvent with HelloEventMappable {
   /// The interval at which the client should heartbeat.
   final Duration heartbeatInterval;
 
@@ -100,7 +113,8 @@ class HelloEvent extends GatewayEvent {
 /// {@template heartbeat_ack_event}
 /// Emitted when the server acknowledges the client's heartbeat.
 /// {@endtemplate}
-class HeartbeatAckEvent extends GatewayEvent {
+@MappableClass()
+class HeartbeatAckEvent extends GatewayEvent with HeartbeatAckEventMappable {
   /// The time taken for this event to be sent in response to the last [Opcode.heartbeat] message.
   final Duration latency;
 

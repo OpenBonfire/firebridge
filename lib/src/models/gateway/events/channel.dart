@@ -1,12 +1,17 @@
+import 'package:dart_mappable/dart_mappable.dart';
+import 'package:nyxx/nyxx.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/channel/thread.dart';
 import 'package:nyxx/src/models/gateway/event.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 
+part 'channel.mapper.dart';
+
 /// {@template channel_create_event}
 /// Emitted when a channel is created.
 /// {@endtemplate}
-class ChannelCreateEvent extends DispatchEvent {
+@MappableClass()
+class ChannelCreateEvent extends DispatchEvent with ChannelCreateEventMappable {
   /// The created channel.
   final Channel channel;
 
@@ -18,7 +23,8 @@ class ChannelCreateEvent extends DispatchEvent {
 /// {@template channel_update_event}
 /// Emitted when a channel is updated.
 /// {@endtemplate}
-class ChannelUpdateEvent extends DispatchEvent {
+@MappableClass()
+class ChannelUpdateEvent extends DispatchEvent with ChannelUpdateEventMappable {
   /// The channel as it was in the cache before it was updated.
   final Channel? oldChannel;
 
@@ -33,7 +39,8 @@ class ChannelUpdateEvent extends DispatchEvent {
 /// {@template channel_delete_event}
 /// Emitted when a channel is deleted.
 /// {@endtemplate}
-class ChannelDeleteEvent extends DispatchEvent {
+@MappableClass()
+class ChannelDeleteEvent extends DispatchEvent with ChannelUpdateEventMappable {
   /// The channel which was deleted.
   final Channel channel;
 
@@ -45,7 +52,8 @@ class ChannelDeleteEvent extends DispatchEvent {
 /// {@template thread_create_event}
 /// Emitted when a thread is created.
 /// {@endtemplate}
-class ThreadCreateEvent extends DispatchEvent {
+@MappableClass()
+class ThreadCreateEvent extends DispatchEvent with ThreadCreateEventMappable {
   /// The thread that was created.
   final Thread thread;
 
@@ -57,7 +65,8 @@ class ThreadCreateEvent extends DispatchEvent {
 /// {@template thread_update_event}
 /// Emitted when a thread is updated.
 /// {@endtemplate}
-class ThreadUpdateEvent extends DispatchEvent {
+@MappableClass()
+class ThreadUpdateEvent extends DispatchEvent with ThreadUpdateEventMappable {
   /// The thread as it was cached before it was updated.
   final Thread? oldThread;
 
@@ -72,7 +81,8 @@ class ThreadUpdateEvent extends DispatchEvent {
 /// {@template thread_delete_event}
 /// Emitted when a thread is deleted.
 /// {@endtemplate}
-class ThreadDeleteEvent extends DispatchEvent {
+@MappableClass()
+class ThreadDeleteEvent extends DispatchEvent with ThreadDeleteEventMappable {
   /// The thread which was deleted.
   final PartialChannel thread;
 
@@ -87,7 +97,9 @@ class ThreadDeleteEvent extends DispatchEvent {
 /// {@template thread_list_sync_event}
 /// Emitted when the client's thread list is synced.
 /// {@endtemplate}
-class ThreadListSyncEvent extends DispatchEvent {
+@MappableClass()
+class ThreadListSyncEvent extends DispatchEvent
+    with ThreadListSyncEventMappable {
   /// The ID of the guild threads are syncing for.
   final Snowflake guildId;
 
@@ -113,7 +125,9 @@ class ThreadListSyncEvent extends DispatchEvent {
 /// {@template thread_member_update_event}
 /// Emitted when the client's thread member is updated.
 /// {@endtemplate}
-class ThreadMemberUpdateEvent extends DispatchEvent {
+@MappableClass()
+class ThreadMemberUpdateEvent extends DispatchEvent
+    with ThreadMemberUpdateEventMappable {
   /// The updated member.
   final ThreadMember member;
 
@@ -128,7 +142,9 @@ class ThreadMemberUpdateEvent extends DispatchEvent {
 /// {@template thread_members_update_event}
 /// Emitted when a members in a thread are updated.
 /// {@endtemplate}
-class ThreadMembersUpdateEvent extends DispatchEvent {
+@MappableClass()
+class ThreadMembersUpdateEvent extends DispatchEvent
+    with ThreadMembersUpdateEventMappable {
   /// The ID of the thread the members were updated in.
   final Snowflake id;
 
@@ -158,7 +174,9 @@ class ThreadMembersUpdateEvent extends DispatchEvent {
 /// {@template channel_pins_update_event}
 /// Emitted when the pinned messages in a channel are changed.
 /// {@endtemplate}
-class ChannelPinsUpdateEvent extends DispatchEvent {
+@MappableClass()
+class ChannelPinsUpdateEvent extends DispatchEvent
+    with ChannelPinsUpdateEventMappable {
   /// The ID of the guild the channel is in.
   final Snowflake? guildId;
 

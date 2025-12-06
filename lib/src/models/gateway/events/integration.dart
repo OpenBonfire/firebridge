@@ -1,11 +1,17 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/gateway/event.dart';
+import 'package:nyxx/src/models/gateway/opcode.dart';
 import 'package:nyxx/src/models/guild/integration.dart';
 import 'package:nyxx/src/models/snowflake.dart';
+
+part 'integration.mapper.dart';
 
 /// {@template integration_create_event}
 /// Emitted when an integration is created.
 /// {@endtemplate}
-class IntegrationCreateEvent extends DispatchEvent {
+@MappableClass()
+class IntegrationCreateEvent extends DispatchEvent
+    with IntegrationCreateEventMappable {
   /// The ID of the guild.
   final Snowflake guildId;
 
@@ -20,7 +26,9 @@ class IntegrationCreateEvent extends DispatchEvent {
 /// {@template integration_update_event}
 /// Emitted when an integration is updated.
 /// {@endtemplate}
-class IntegrationUpdateEvent extends DispatchEvent {
+@MappableClass()
+class IntegrationUpdateEvent extends DispatchEvent
+    with IntegrationUpdateEventMappable {
   /// The ID of the guild
   final Snowflake guildId;
 
@@ -41,7 +49,9 @@ class IntegrationUpdateEvent extends DispatchEvent {
 /// {@template integration_delete_event}
 /// Emitted when an integration is deleted.
 /// {@endtemplate}
-class IntegrationDeleteEvent extends DispatchEvent {
+@MappableClass()
+class IntegrationDeleteEvent extends DispatchEvent
+    with IntegrationDeleteEventMappable {
   /// The ID of the deleted integration.
   final Snowflake id;
 

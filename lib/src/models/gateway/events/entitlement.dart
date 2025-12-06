@@ -1,10 +1,16 @@
+import 'package:dart_mappable/dart_mappable.dart';
+import 'package:nyxx/nyxx.dart';
 import 'package:nyxx/src/models/entitlement.dart';
 import 'package:nyxx/src/models/gateway/event.dart';
+
+part 'entitlement.mapper.dart';
 
 /// {@template entitlement_create_event}
 /// Emitted when an entitlement is created.
 /// {@endtemplate}
-class EntitlementCreateEvent extends DispatchEvent {
+@MappableClass()
+class EntitlementCreateEvent extends DispatchEvent
+    with EntitlementCreateEventMappable {
   /// The entitlement that was created,
   final Entitlement entitlement;
 
@@ -16,7 +22,9 @@ class EntitlementCreateEvent extends DispatchEvent {
 /// {@template entitlement_update_event}
 /// Emitted when an entitlement is updated.
 /// {@endtemplate}
-class EntitlementUpdateEvent extends DispatchEvent {
+@MappableClass()
+class EntitlementUpdateEvent extends DispatchEvent
+    with EntitlementUpdateEventMappable {
   /// The updated entitlement.
   final Entitlement entitlement;
 
@@ -32,7 +40,9 @@ class EntitlementUpdateEvent extends DispatchEvent {
 /// {@template entitlement_delete_event}
 /// Emitted when an entitlement is deleted.
 /// {@endtemplate}
-class EntitlementDeleteEvent extends DispatchEvent {
+@MappableClass()
+class EntitlementDeleteEvent extends DispatchEvent
+    with EntitlementDeleteEventMappable {
   /// The entitlement that was deleted.
   final Entitlement entitlement;
 

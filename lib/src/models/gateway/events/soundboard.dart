@@ -1,11 +1,17 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/gateway/event.dart';
+import 'package:nyxx/src/models/gateway/opcode.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/soundboard/soundboard.dart';
+
+part 'soundboard.mapper.dart';
 
 /// {@template soundboard_sound_create_event}
 /// Emitted when a guild soundboard sound is created.
 /// {@endtemplate}
-class SoundboardSoundCreateEvent extends DispatchEvent {
+@MappableClass()
+class SoundboardSoundCreateEvent extends DispatchEvent
+    with SoundboardSoundCreateEventMappable {
   /// The sound that was created.
   final SoundboardSound sound;
 
@@ -17,7 +23,9 @@ class SoundboardSoundCreateEvent extends DispatchEvent {
 /// {@template soundboard_sound_update_event}
 /// Emitted when a guild soundboard sound is updated.
 /// {@endtemplate}
-class SoundboardSoundUpdateEvent extends DispatchEvent {
+@MappableClass()
+class SoundboardSoundUpdateEvent extends DispatchEvent
+    with SoundboardSoundUpdateEventMappable {
   /// The sound that was updated.
   final SoundboardSound sound;
 
@@ -32,7 +40,9 @@ class SoundboardSoundUpdateEvent extends DispatchEvent {
 /// {@template soundboard_sound_delete_event}
 /// Emitted when a guild soundboard sound is deleted.
 /// {@endtemplate}
-class SoundboardSoundDeleteEvent extends DispatchEvent {
+@MappableClass()
+class SoundboardSoundDeleteEvent extends DispatchEvent
+    with SoundboardSoundDeleteEventMappable {
   /// The sound that was deleted.
   final SoundboardSound? sound;
 
@@ -51,7 +61,9 @@ class SoundboardSoundDeleteEvent extends DispatchEvent {
 /// {@template soundboard_sounds_update_event}
 /// Emitted when multiple guild soundboard sounds are updated.
 /// {@endtemplate}
-class SoundboardSoundsUpdateEvent extends DispatchEvent {
+@MappableClass()
+class SoundboardSoundsUpdateEvent extends DispatchEvent
+    with SoundboardSoundsUpdateEventMappable {
   /// The ID of the guild where the sounds were updated.
   final Snowflake guildId;
 

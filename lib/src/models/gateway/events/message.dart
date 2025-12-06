@@ -1,16 +1,19 @@
-import 'package:nyxx/src/models/channel/text_channel.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/emoji.dart';
 import 'package:nyxx/src/models/gateway/event.dart';
-import 'package:nyxx/src/models/guild/guild.dart';
+import 'package:nyxx/src/models/gateway/opcode.dart';
 import 'package:nyxx/src/models/guild/member.dart';
 import 'package:nyxx/src/models/message/message.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/user/user.dart';
 
+part 'message.mapper.dart';
+
 /// {@template message_create_event}
 /// Emitted when a message is sent.
 /// {@endtemplate}
-class MessageCreateEvent extends DispatchEvent {
+@MappableClass()
+class MessageCreateEvent extends DispatchEvent with MessageCreateEventMappable {
   /// The ID of the guild the message was sent in.
   final Snowflake? guildId;
 
@@ -26,21 +29,17 @@ class MessageCreateEvent extends DispatchEvent {
   /// {@macro message_create_event}
   /// @nodoc
   MessageCreateEvent(
-      {required super.gateway,
-      required this.guildId,
+      {required this.guildId,
       required this.member,
       required this.mentions,
       required this.message});
-
-  /// The guild the message was sent in.
-  PartialGuild? get guild =>
-      guildId == null ? null : gateway.client.guilds[guildId!];
 }
 
 /// {@template message_update_event}
 /// Emitted when a message is updated.
 /// {@endtemplate}
-class MessageUpdateEvent extends DispatchEvent {
+@MappableClass()
+class MessageUpdateEvent extends DispatchEvent with MessageUpdateEventMappable {
   /// The ID of the guild the message was in.
   final Snowflake? guildId;
 
@@ -59,23 +58,19 @@ class MessageUpdateEvent extends DispatchEvent {
   /// {@macro message_update_event}
   /// @nodoc
   MessageUpdateEvent({
-    required super.gateway,
     required this.guildId,
     required this.member,
     required this.mentions,
     required this.message,
     required this.oldMessage,
   });
-
-  /// The guild the message was updated in.
-  PartialGuild? get guild =>
-      guildId == null ? null : gateway.client.guilds[guildId!];
 }
 
 /// {@template message_delete_event}
 /// Emitted when a message is deleted.
 /// {@endtemplate}
-class MessageDeleteEvent extends DispatchEvent {
+@MappableClass()
+class MessageDeleteEvent extends DispatchEvent with MessageDeleteEventMappable {
   /// The ID of the deleted message.
   final Snowflake id;
 
@@ -91,25 +86,18 @@ class MessageDeleteEvent extends DispatchEvent {
   /// {@macro message_delete_event}
   /// @nodoc
   MessageDeleteEvent(
-      {required super.gateway,
-      required this.id,
+      {required this.id,
       required this.channelId,
       required this.guildId,
       required this.deletedMessage});
-
-  /// The guild the message was deleted in.
-  PartialGuild? get guild =>
-      guildId == null ? null : gateway.client.guilds[guildId!];
-
-  /// The channel the message was deleted in.
-  PartialTextChannel get channel =>
-      gateway.client.channels[channelId] as PartialTextChannel;
 }
 
 /// {@template message_bulk_delete_event}
 /// Emitted when multiple messages are bulk deleted.
 /// {@endtemplate}
-class MessageBulkDeleteEvent extends DispatchEvent {
+@MappableClass()
+class MessageBulkDeleteEvent extends DispatchEvent
+    with MessageBulkDeleteEventMappable {
   /// A list of the IDs of the deleted messages.
   final List<Snowflake> ids;
 
@@ -125,25 +113,18 @@ class MessageBulkDeleteEvent extends DispatchEvent {
   /// {@macro message_bulk_delete_event}
   /// @nodoc
   MessageBulkDeleteEvent(
-      {required super.gateway,
-      required this.ids,
+      {required this.ids,
       required this.deletedMessages,
       required this.channelId,
       required this.guildId});
-
-  /// The guild the messages were deleted in.
-  PartialGuild? get guild =>
-      guildId == null ? null : gateway.client.guilds[guildId!];
-
-  /// The channel the messages were deleted in.
-  PartialTextChannel get channel =>
-      gateway.client.channels[channelId] as PartialTextChannel;
 }
 
 /// {@template message_reaction_add_event}
 /// Emitted when a reaction is added to a message.
 /// {@endtemplate}
-class MessageReactionAddEvent extends DispatchEvent {
+@MappableClass()
+class MessageReactionAddEvent extends DispatchEvent
+    with MessageReactionAddEventMappable {
   /// The ID of the user that added the reaction.
   final Snowflake userId;
 
@@ -168,7 +149,6 @@ class MessageReactionAddEvent extends DispatchEvent {
   /// {@macro message_reaction_add_event}
   /// @nodoc
   MessageReactionAddEvent({
-    required super.gateway,
     required this.userId,
     required this.channelId,
     required this.messageId,
@@ -177,27 +157,14 @@ class MessageReactionAddEvent extends DispatchEvent {
     required this.emoji,
     required this.messageAuthorId,
   });
-
-  /// The guild the message is in.
-  PartialGuild? get guild =>
-      guildId == null ? null : gateway.client.guilds[guildId!];
-
-  /// The channel the message is in.
-  PartialTextChannel get channel =>
-      gateway.client.channels[channelId] as PartialTextChannel;
-
-  /// The user that added the reaction.
-  PartialUser get user => gateway.client.users[userId];
-
-  /// The user that sent the message the reaction was added to
-  PartialUser? get messageAuthor =>
-      messageAuthorId == null ? null : gateway.client.users[messageAuthorId!];
 }
 
 /// {@template message_reaction_remove_event}
 /// Emitted when a reaction is removed from a message.
 /// {@endtemplate}
-class MessageReactionRemoveEvent extends DispatchEvent {
+@MappableClass()
+class MessageReactionRemoveEvent extends DispatchEvent
+    with MessageReactionRemoveEventMappable {
   /// The ID of the user that removed their reaction.
   final Snowflake userId;
 
@@ -216,30 +183,20 @@ class MessageReactionRemoveEvent extends DispatchEvent {
   /// {@macro message_reaction_remove_event}
   /// @nodoc
   MessageReactionRemoveEvent({
-    required super.gateway,
     required this.userId,
     required this.channelId,
     required this.messageId,
     required this.guildId,
     required this.emoji,
   });
-
-  /// The guild the message is in.
-  PartialGuild? get guild =>
-      guildId == null ? null : gateway.client.guilds[guildId!];
-
-  /// The channel the message is in.
-  PartialTextChannel get channel =>
-      gateway.client.channels[channelId] as PartialTextChannel;
-
-  /// The user that removed the reaction.
-  PartialUser get user => gateway.client.users[userId];
 }
 
 /// {@template message_reaction_remove_all_event}
 /// Emitted when all reactions are removed from a message.
 /// {@endtemplate}
-class MessageReactionRemoveAllEvent extends DispatchEvent {
+@MappableClass()
+class MessageReactionRemoveAllEvent extends DispatchEvent
+    with MessageReactionRemoveAllEventMappable {
   /// The ID of the channel the message is in.
   final Snowflake channelId;
 
@@ -252,25 +209,18 @@ class MessageReactionRemoveAllEvent extends DispatchEvent {
   /// {@macro message_reaction_remove_all_event}
   /// @nodoc
   MessageReactionRemoveAllEvent({
-    required super.gateway,
     required this.channelId,
     required this.messageId,
     required this.guildId,
   });
-
-  /// The guild the message is in.
-  PartialGuild? get guild =>
-      guildId == null ? null : gateway.client.guilds[guildId!];
-
-  /// The channel the message is in.
-  PartialTextChannel get channel =>
-      gateway.client.channels[channelId] as PartialTextChannel;
 }
 
 /// {@template message_reaction_remove_emoji_event}
 /// Emitted when all reactions of a specific emoji are removed from a message.
 /// {@endtemplate}
-class MessageReactionRemoveEmojiEvent extends DispatchEvent {
+@MappableClass()
+class MessageReactionRemoveEmojiEvent extends DispatchEvent
+    with MessageReactionRemoveEmojiEventMappable {
   /// The ID of the channel the message is in.
   final Snowflake channelId;
 
@@ -285,26 +235,19 @@ class MessageReactionRemoveEmojiEvent extends DispatchEvent {
   /// {@macro message_reaction_remove_emoji_event}
   /// @nodoc
   MessageReactionRemoveEmojiEvent({
-    required super.gateway,
     required this.channelId,
     required this.messageId,
     required this.guildId,
     required this.emoji,
   });
-
-  /// The guild the message is in.
-  PartialGuild? get guild =>
-      guildId == null ? null : gateway.client.guilds[guildId!];
-
-  /// The channel the message is in.
-  PartialTextChannel get channel =>
-      gateway.client.channels[channelId] as PartialTextChannel;
 }
 
 /// {@template message_poll_vote_add_event}
 /// Emitted when user votes on a poll. If the poll allows multiple selection, one event will be sent per answer.
 /// {@endtemplate}
-class MessagePollVoteAddEvent extends DispatchEvent {
+@MappableClass()
+class MessagePollVoteAddEvent extends DispatchEvent
+    with MessagePollVoteAddEventMappable {
   /// The ID of the user that voted on a poll.
   final Snowflake userId;
 
@@ -323,30 +266,20 @@ class MessagePollVoteAddEvent extends DispatchEvent {
   /// {@macro message_poll_vote_add_event}
   /// @nodoc
   MessagePollVoteAddEvent({
-    required super.gateway,
     required this.userId,
     required this.channelId,
     required this.messageId,
     required this.guildId,
     required this.answerId,
   });
-
-  /// The user that voted on a poll.
-  PartialUser get user => gateway.client.users[userId];
-
-  /// The channel the message is in.
-  PartialTextChannel get channel =>
-      gateway.client.channels[channelId] as PartialTextChannel;
-
-  /// The guild the message is in.
-  PartialGuild? get guild =>
-      guildId == null ? null : gateway.client.guilds[guildId!];
 }
 
 /// {@template message_poll_vote_remove_event}
 /// Emitted when user removes their vote on a poll. If the poll allows for multiple selections, one event will be sent per answer.
 /// {@endtemplate}
-class MessagePollVoteRemoveEvent extends DispatchEvent {
+@MappableClass()
+class MessagePollVoteRemoveEvent extends DispatchEvent
+    with MessagePollVoteRemoveEventMappable {
   /// The ID of the user that removed their vote from a poll.
   final Snowflake userId;
 
@@ -365,22 +298,10 @@ class MessagePollVoteRemoveEvent extends DispatchEvent {
   /// {@macro message_poll_vote_remove_event}
   /// @nodoc
   MessagePollVoteRemoveEvent({
-    required super.gateway,
     required this.userId,
     required this.channelId,
     required this.messageId,
     required this.guildId,
     required this.answerId,
   });
-
-  /// The user that removed their vote from a poll.
-  PartialUser get user => gateway.client.users[userId];
-
-  /// The channel the message is in.
-  PartialTextChannel get channel =>
-      gateway.client.channels[channelId] as PartialTextChannel;
-
-  /// The guild the message is in.
-  PartialGuild? get guild =>
-      guildId == null ? null : gateway.client.guilds[guildId!];
 }

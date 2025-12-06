@@ -1,6 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/emoji.dart';
 import 'package:nyxx/src/models/gateway/event.dart';
+import 'package:nyxx/src/models/gateway/opcode.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/voice/voice_state.dart';
 
@@ -10,7 +11,8 @@ part 'voice.mapper.dart';
 /// Emitted when a user's voice state is updated.
 /// {@endtemplate}
 @MappableClass()
-class VoiceStateUpdateEvent extends DispatchEvent {
+class VoiceStateUpdateEvent extends DispatchEvent
+    with VoiceStateUpdateEventMappable {
   /// The updated voice state.
   final VoiceState state;
 
@@ -25,7 +27,9 @@ class VoiceStateUpdateEvent extends DispatchEvent {
 /// {@template voice_server_update_event}
 /// Emitted when joining a voice channel to update the voice servers.
 /// {@endtemplate}
-class VoiceServerUpdateEvent extends DispatchEvent {
+@MappableClass()
+class VoiceServerUpdateEvent extends DispatchEvent
+    with VoiceServerUpdateEventMappable {
   /// The voice token.
   final String token;
 
@@ -44,7 +48,9 @@ class VoiceServerUpdateEvent extends DispatchEvent {
 /// {@template voice_channel_effect_send_event}
 /// Emitted when someone sends an effect, such as an emoji reaction or a soundboard sound, in a voice channel the current user is connected to.
 /// {@endtemplate}
-class VoiceChannelEffectSendEvent extends DispatchEvent {
+@MappableClass()
+class VoiceChannelEffectSendEvent extends DispatchEvent
+    with VoiceChannelEffectSendEventMappable {
   /// The ID of the channel this effect was sent in.
   final Snowflake channelId;
 

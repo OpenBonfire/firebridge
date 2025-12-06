@@ -1,10 +1,16 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/commands/application_command_permissions.dart';
 import 'package:nyxx/src/models/gateway/event.dart';
+import 'package:nyxx/src/models/gateway/opcode.dart';
+
+part 'application_command.mapper.dart';
 
 /// {@template application_command_permissions_update_event}
 /// Emitted when the permissions for an application command are updated.
 /// {@endtemplate}
-class ApplicationCommandPermissionsUpdateEvent extends DispatchEvent {
+@MappableClass()
+class ApplicationCommandPermissionsUpdateEvent extends DispatchEvent
+    with ApplicationCommandPermissionsUpdateEventMappable {
   /// The permissions that were updated.
   final CommandPermissions permissions;
 

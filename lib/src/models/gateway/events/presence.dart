@@ -1,15 +1,21 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/channel/text_channel.dart';
 import 'package:nyxx/src/models/gateway/event.dart';
+import 'package:nyxx/src/models/gateway/opcode.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/guild/member.dart';
 import 'package:nyxx/src/models/presence.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/user/user.dart';
 
+part 'presence.mapper.dart';
+
 /// {@template presence_update_event}
 /// Emitted when a user updates their presence.
 /// {@endtemplate}
-class PresenceUpdateEvent extends DispatchEvent {
+@MappableClass()
+class PresenceUpdateEvent extends DispatchEvent
+    with PresenceUpdateEventMappable {
   /// The user that updated their presence.
   final PartialUser? user;
 
@@ -28,23 +34,19 @@ class PresenceUpdateEvent extends DispatchEvent {
   /// {@macro presence_update_event}
   /// @nodoc
   PresenceUpdateEvent({
-    required super.gateway,
     required this.user,
     required this.guildId,
     required this.status,
     required this.activities,
     required this.clientStatus,
   });
-
-  /// The guild the presence was updated in.
-  PartialGuild? get guild =>
-      guildId == null ? null : gateway.client.guilds[guildId!];
 }
 
 /// {@template typing_start_event}
 /// Emitted when a user starts typing in a channel.
 /// {@endtemplate}
-class TypingStartEvent extends DispatchEvent {
+@MappableClass()
+class TypingStartEvent extends DispatchEvent with TypingStartEventMappable {
   /// The ID of the channel.
   final Snowflake channelId;
 
@@ -63,30 +65,19 @@ class TypingStartEvent extends DispatchEvent {
   /// {@macro typing_start_event}
   /// @nodoc
   TypingStartEvent({
-    required super.gateway,
     required this.channelId,
     required this.guildId,
     required this.userId,
     required this.timestamp,
     required this.member,
   });
-
-  /// The guild the user started typing in.
-  PartialGuild? get guild =>
-      guildId == null ? null : gateway.client.guilds[guildId!];
-
-  /// The channel the user started typing in.
-  PartialTextChannel get channel =>
-      gateway.client.channels[channelId] as PartialTextChannel;
-
-  /// The user that started typing.
-  PartialUser get user => gateway.client.users[userId];
 }
 
 /// {@template user_update_event}
 /// Emitted when a user is updated.
 /// {@endtemplate}
-class UserUpdateEvent extends DispatchEvent {
+@MappableClass()
+class UserUpdateEvent extends DispatchEvent with UserUpdateEventMappable {
   /// The user as it was cached before it was updated.
   final User? oldUser;
 

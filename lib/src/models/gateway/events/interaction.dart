@@ -1,11 +1,16 @@
+import 'package:dart_mappable/dart_mappable.dart';
+import 'package:nyxx/nyxx.dart';
 import 'package:nyxx/src/models/gateway/event.dart';
 import 'package:nyxx/src/models/interaction.dart';
+
+part 'interaction.mapper.dart';
 
 /// {@template interaction_create_event}
 /// Emitted when an interaction is received by the client.
 /// {@endtemplate}
+@MappableClass()
 class InteractionCreateEvent<T extends Interaction<dynamic>>
-    extends DispatchEvent {
+    extends DispatchEvent with InteractionCreateEventMappable {
   // The created interaction.
   final T interaction;
 

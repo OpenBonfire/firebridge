@@ -1,10 +1,16 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/channel/stage_instance.dart';
 import 'package:nyxx/src/models/gateway/event.dart';
+import 'package:nyxx/src/models/gateway/opcode.dart';
+
+part 'stage_instance.mapper.dart';
 
 /// {@template stage_instance_create_event}
 /// Emitted when a stage instance is created.
 /// {@endtemplate}
-class StageInstanceCreateEvent extends DispatchEvent {
+@MappableClass()
+class StageInstanceCreateEvent extends DispatchEvent
+    with StageInstanceCreateEventMappable {
   /// The updated stage instance.
   final StageInstance instance;
 
@@ -16,7 +22,9 @@ class StageInstanceCreateEvent extends DispatchEvent {
 /// {@template stage_instance_update_event}
 /// Emitted when a stage instance is updated.
 /// {@endtemplate}
-class StageInstanceUpdateEvent extends DispatchEvent {
+@MappableClass()
+class StageInstanceUpdateEvent extends DispatchEvent
+    with StageInstanceUpdateEventMappable {
   /// The stage instance as it was cached before the update.
   final StageInstance? oldInstance;
 
@@ -31,7 +39,9 @@ class StageInstanceUpdateEvent extends DispatchEvent {
 /// {@template stage_instance_delete_event}
 /// Emitted when a stage instance is deleted.
 /// {@endtemplate}
-class StageInstanceDeleteEvent extends DispatchEvent {
+@MappableClass()
+class StageInstanceDeleteEvent extends DispatchEvent
+    with StageInstanceDeleteEventMappable {
   /// The stage instance that was deleted.
   final StageInstance instance;
 

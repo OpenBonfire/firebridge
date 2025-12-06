@@ -1,14 +1,16 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/gateway/event.dart';
-import 'package:nyxx/src/models/guild/guild.dart';
+import 'package:nyxx/src/models/gateway/opcode.dart';
 import 'package:nyxx/src/models/invite/invite_metadata.dart';
 import 'package:nyxx/src/models/snowflake.dart';
+
+part 'invite.mapper.dart';
 
 /// {@template invite_create_event}
 /// Emitted when an invite is created.
 /// {@endtemplate}
-class InviteCreateEvent extends DispatchEvent {
+@MappableClass()
+class InviteCreateEvent extends DispatchEvent with InviteCreateEventMappable {
   /// The invite that was created.
   final InviteWithMetadata invite;
 
@@ -20,7 +22,8 @@ class InviteCreateEvent extends DispatchEvent {
 /// {@template invite_delete_event}
 /// Emitted when an invite is deleted.
 /// {@endtemplate}
-class InviteDeleteEvent extends DispatchEvent {
+@MappableClass()
+class InviteDeleteEvent extends DispatchEvent with InviteDeleteEventMappable {
   /// The ID of the channel the invite was for.
   final Snowflake channelId;
 
