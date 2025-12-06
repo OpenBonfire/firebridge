@@ -6,7 +6,6 @@ import 'package:nyxx/src/models/locale.dart';
 import 'package:nyxx/src/models/permissions.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 
 part 'application_command.mapper.dart';
 
@@ -93,21 +92,17 @@ class ApplicationCommand extends PartialApplicationCommand
 }
 
 /// The type of an [ApplicationCommand].
-final class ApplicationCommandType
-    extends EnumLike<int, ApplicationCommandType> {
+@MappableEnum()
+enum ApplicationCommandType {
   /// A chat input command.
-  static const chatInput = ApplicationCommandType(1);
+  @MappableValue(1)
+  chatInput,
 
   /// A user command.
-  static const user = ApplicationCommandType(2);
+  @MappableValue(2)
+  user,
 
   /// A message command.
-  static const message = ApplicationCommandType(3);
-
-  /// @nodoc
-  const ApplicationCommandType(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  ApplicationCommandType.parse(int value) : this(value);
+  @MappableValue(3)
+  message
 }

@@ -294,9 +294,6 @@ abstract class GlobalStickerCopyWith<$R, $In extends GlobalSticker, $Out>
     implements PartialGlobalStickerCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  StickerTypeCopyWith<$R, StickerType, StickerType> get type;
-  StickerFormatTypeCopyWith<$R, StickerFormatType, StickerFormatType>
-  get formatType;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get packId;
   PartialUserCopyWith<$R, PartialUser, PartialUser>? get user;
   @override
@@ -326,13 +323,6 @@ class _GlobalStickerCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  StickerTypeCopyWith<$R, StickerType, StickerType> get type =>
-      $value.type.copyWith.$chain((v) => call(type: v));
-  @override
-  StickerFormatTypeCopyWith<$R, StickerFormatType, StickerFormatType>
-  get formatType =>
-      $value.formatType.copyWith.$chain((v) => call(formatType: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get packId =>
       $value.packId.copyWith.$chain((v) => call(packId: v));

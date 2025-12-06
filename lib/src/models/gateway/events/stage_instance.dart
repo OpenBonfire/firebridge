@@ -10,7 +10,7 @@ class StageInstanceCreateEvent extends DispatchEvent {
 
   /// {@macro stage_instance_create_event}
   /// @nodoc
-  StageInstanceCreateEvent({required super.gateway, required this.instance});
+  StageInstanceCreateEvent({required this.instance});
 }
 
 /// {@template stage_instance_update_event}
@@ -25,7 +25,7 @@ class StageInstanceUpdateEvent extends DispatchEvent {
 
   /// {@macro stage_instance_update_event}
   /// @nodoc
-  StageInstanceUpdateEvent({required super.gateway, required this.oldInstance, required this.instance});
+  StageInstanceUpdateEvent({required this.oldInstance, required this.instance});
 }
 
 /// {@template stage_instance_delete_event}
@@ -37,5 +37,5 @@ class StageInstanceDeleteEvent extends DispatchEvent {
 
   /// {@macro stage_instance_delete_event}
   /// @nodoc
-  StageInstanceDeleteEvent({required super.gateway, required this.instance});
+  StageInstanceDeleteEvent({required this.instance});
 }

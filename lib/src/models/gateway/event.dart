@@ -1,4 +1,3 @@
-import 'package:nyxx/src/gateway/gateway.dart';
 import 'package:nyxx/src/models/gateway/opcode.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
@@ -29,19 +28,18 @@ class RawDispatchEvent extends GatewayEvent {
 
   /// {@macro raw_dispatch_event}
   /// @nodoc
-  RawDispatchEvent({required this.seq, required this.name, required this.payload}) : super(opcode: Opcode.dispatch);
+  RawDispatchEvent(
+      {required this.seq, required this.name, required this.payload})
+      : super(opcode: Opcode.dispatch);
 }
 
 /// {@template dispatch_event}
 /// The base class for all events sent by dispatch.
 /// {@endtemplate}
 abstract class DispatchEvent extends GatewayEvent {
-  /// The gateway that handled this event.
-  final Gateway gateway;
-
   /// {@macro dispatch_event}
   /// @nodoc
-  DispatchEvent({required this.gateway}) : super(opcode: Opcode.dispatch);
+  DispatchEvent() : super(opcode: Opcode.dispatch);
 }
 
 /// {@template unknown_dispatch_event}
@@ -55,7 +53,7 @@ class UnknownDispatchEvent extends DispatchEvent {
 
   /// {@macro unknown_dispatch_event}
   /// @nodoc
-  UnknownDispatchEvent({required super.gateway, required this.raw});
+  UnknownDispatchEvent({required this.raw});
 }
 
 /// {@template heartbeat_event}
@@ -83,7 +81,8 @@ class InvalidSessionEvent extends GatewayEvent {
 
   /// {@macro invalid_session_event}
   /// @nodoc
-  InvalidSessionEvent({required this.isResumable}) : super(opcode: Opcode.invalidSession);
+  InvalidSessionEvent({required this.isResumable})
+      : super(opcode: Opcode.invalidSession);
 }
 
 /// {@template hello_event}
@@ -107,5 +106,6 @@ class HeartbeatAckEvent extends GatewayEvent {
 
   /// {@macro heartbeat_ack_event}
   /// @nodoc
-  HeartbeatAckEvent({required this.latency}) : super(opcode: Opcode.heartbeatAck);
+  HeartbeatAckEvent({required this.latency})
+      : super(opcode: Opcode.heartbeatAck);
 }

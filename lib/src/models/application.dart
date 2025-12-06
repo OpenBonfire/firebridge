@@ -1,11 +1,8 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/nyxx.dart';
-import 'package:nyxx/src/http/cdn/cdn_asset.dart';
 import 'package:nyxx/src/http/managers/application_manager.dart';
 import 'package:nyxx/src/http/managers/emoji_manager.dart';
 import 'package:nyxx/src/http/managers/entitlement_manager.dart';
 import 'package:nyxx/src/http/managers/sku_manager.dart';
-import 'package:nyxx/src/http/route.dart';
 import 'package:nyxx/src/models/emoji.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/locale.dart';
@@ -78,7 +75,8 @@ class ApplicationIntegrationTypeConfiguration
 /// {@template application}
 /// An OAuth2 application.
 /// {@endtemplate}
-class Application extends PartialApplication {
+@MappableClass()
+class Application extends PartialApplication with ApplicationMappable {
   /// The name of this application.
   final String name;
 
@@ -196,24 +194,6 @@ class Application extends PartialApplication {
     required this.roleConnectionsVerificationUrl,
     required this.approximateUserInstallCount,
   });
-
-  /// This application's icon.
-  CdnAsset? get icon => iconHash == null
-      ? null
-      : CdnAsset(
-          client: manager.client,
-          base: HttpRoute()..appIcons(id: id.toString()),
-          hash: iconHash!,
-        );
-
-  /// This application's cover image.
-  CdnAsset? get coverImage => coverImageHash == null
-      ? null
-      : CdnAsset(
-          client: manager.client,
-          base: HttpRoute()..appIcons(id: id.toString()),
-          hash: coverImageHash!,
-        );
 }
 
 @MappableEnum(mode: ValuesMode.indexed)
@@ -296,7 +276,9 @@ class ApplicationFlags extends Flags<ApplicationFlags>
 /// {@template installation_parameters}
 /// Configuration for an [Application]'s authorization link.
 /// {@endtemplate}
-class InstallationParameters with ToStringHelper {
+@MappableClass()
+class InstallationParameters
+    with ToStringHelper, InstallationParametersMappable {
   /// The OAuth2 scopes to add the application to the guild with.
   final List<String> scopes;
 
@@ -314,7 +296,9 @@ class InstallationParameters with ToStringHelper {
 /// {@template application_role_connection_metadata}
 /// Metadata for an app's role connections.
 /// {@endtemplate}
-class ApplicationRoleConnectionMetadata with ToStringHelper {
+@MappableClass()
+class ApplicationRoleConnectionMetadata
+    with ToStringHelper, ApplicationRoleConnectionMetadataMappable {
   /// The type of connection.
   final ConnectionMetadataType type;
 

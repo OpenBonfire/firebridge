@@ -1,6 +1,8 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/discord_color.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+
+part 'embed.mapper.dart';
 
 /// {@template embed}
 /// Rich content that can be embedded into a message, such as a video, image or custom text.
@@ -8,7 +10,9 @@ import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#embed-object
 /// {@endtemplate}
-class Embed {
+///
+@MappableClass()
+class Embed with EmbedMappable {
   /// The title of this embed.
   final String? title;
 
@@ -68,16 +72,15 @@ class Embed {
 }
 
 /// The type of an embed.
-final class EmbedType extends EnumLike<String, EmbedType> {
-  static const rich = EmbedType('rich');
-  static const image = EmbedType('image');
-  static const video = EmbedType('video');
-  static const gifv = EmbedType('gifv');
-  static const article = EmbedType('article');
-  static const link = EmbedType('link');
-  static const pollResult = EmbedType('poll_result');
-// @nodoc
-  const EmbedType(super.value);
+@MappableEnum()
+enum EmbedType {
+  rich,
+  image,
+  video,
+  gifv,
+  article,
+  link,
+  pollResult,
 }
 
 /// {@template embed_footer}

@@ -7,6 +7,52 @@
 
 part of 'reference.dart';
 
+class MessageReferenceTypeMapper extends EnumMapper<MessageReferenceType> {
+  MessageReferenceTypeMapper._();
+
+  static MessageReferenceTypeMapper? _instance;
+  static MessageReferenceTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = MessageReferenceTypeMapper._());
+    }
+    return _instance!;
+  }
+
+  static MessageReferenceType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  MessageReferenceType decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return MessageReferenceType.defaultType;
+      case 1:
+        return MessageReferenceType.forward;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(MessageReferenceType self) {
+    switch (self) {
+      case MessageReferenceType.defaultType:
+        return 0;
+      case MessageReferenceType.forward:
+        return 1;
+    }
+  }
+}
+
+extension MessageReferenceTypeMapperExtension on MessageReferenceType {
+  dynamic toValue() {
+    MessageReferenceTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<MessageReferenceType>(this);
+  }
+}
+
 class MessageReferenceMapper extends ClassMapperBase<MessageReference> {
   MessageReferenceMapper._();
 
@@ -126,8 +172,6 @@ extension MessageReferenceValueCopy<$R, $Out>
 
 abstract class MessageReferenceCopyWith<$R, $In extends MessageReference, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  MessageReferenceTypeCopyWith<$R, MessageReferenceType, MessageReferenceType>
-  get type;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get messageId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get channelId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
@@ -150,9 +194,6 @@ class _MessageReferenceCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<MessageReference> $mapper =
       MessageReferenceMapper.ensureInitialized();
-  @override
-  MessageReferenceTypeCopyWith<$R, MessageReferenceType, MessageReferenceType>
-  get type => $value.type.copyWith.$chain((v) => call(type: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get messageId =>
       $value.messageId?.copyWith.$chain((v) => call(messageId: v));
@@ -188,128 +229,5 @@ class _MessageReferenceCopyWithImpl<$R, $Out>
   MessageReferenceCopyWith<$R2, MessageReference, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   ) => _MessageReferenceCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
-class MessageReferenceTypeMapper extends ClassMapperBase<MessageReferenceType> {
-  MessageReferenceTypeMapper._();
-
-  static MessageReferenceTypeMapper? _instance;
-  static MessageReferenceTypeMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = MessageReferenceTypeMapper._());
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'MessageReferenceType';
-
-  static const Field<MessageReferenceType, dynamic> _f$value = Field(
-    'value',
-    null,
-    mode: FieldMode.param,
-  );
-
-  @override
-  final MappableFields<MessageReferenceType> fields = const {#value: _f$value};
-
-  static MessageReferenceType _instantiate(DecodingData data) {
-    return MessageReferenceType(data.dec(_f$value));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static MessageReferenceType fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<MessageReferenceType>(map);
-  }
-
-  static MessageReferenceType fromJson(String json) {
-    return ensureInitialized().decodeJson<MessageReferenceType>(json);
-  }
-}
-
-mixin MessageReferenceTypeMappable {
-  String toJson() {
-    return MessageReferenceTypeMapper.ensureInitialized()
-        .encodeJson<MessageReferenceType>(this as MessageReferenceType);
-  }
-
-  Map<String, dynamic> toMap() {
-    return MessageReferenceTypeMapper.ensureInitialized()
-        .encodeMap<MessageReferenceType>(this as MessageReferenceType);
-  }
-
-  MessageReferenceTypeCopyWith<
-    MessageReferenceType,
-    MessageReferenceType,
-    MessageReferenceType
-  >
-  get copyWith =>
-      _MessageReferenceTypeCopyWithImpl<
-        MessageReferenceType,
-        MessageReferenceType
-      >(this as MessageReferenceType, $identity, $identity);
-  @override
-  String toString() {
-    return MessageReferenceTypeMapper.ensureInitialized().stringifyValue(
-      this as MessageReferenceType,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return MessageReferenceTypeMapper.ensureInitialized().equalsValue(
-      this as MessageReferenceType,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return MessageReferenceTypeMapper.ensureInitialized().hashValue(
-      this as MessageReferenceType,
-    );
-  }
-}
-
-extension MessageReferenceTypeValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, MessageReferenceType, $Out> {
-  MessageReferenceTypeCopyWith<$R, MessageReferenceType, $Out>
-  get $asMessageReferenceType => $base.as(
-    (v, t, t2) => _MessageReferenceTypeCopyWithImpl<$R, $Out>(v, t, t2),
-  );
-}
-
-abstract class MessageReferenceTypeCopyWith<
-  $R,
-  $In extends MessageReferenceType,
-  $Out
->
-    implements ClassCopyWith<$R, $In, $Out> {
-  $R call({dynamic value});
-  MessageReferenceTypeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _MessageReferenceTypeCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, MessageReferenceType, $Out>
-    implements MessageReferenceTypeCopyWith<$R, MessageReferenceType, $Out> {
-  _MessageReferenceTypeCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<MessageReferenceType> $mapper =
-      MessageReferenceTypeMapper.ensureInitialized();
-  @override
-  $R call({dynamic value}) => $apply(FieldCopyWithData({#value: value}));
-  @override
-  MessageReferenceType $make(CopyWithData data) =>
-      MessageReferenceType(data.get(#value));
-
-  @override
-  MessageReferenceTypeCopyWith<$R2, MessageReferenceType, $Out2>
-  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _MessageReferenceTypeCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 

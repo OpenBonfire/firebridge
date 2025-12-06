@@ -7,7 +7,7 @@
 
 part of 'sticker.dart';
 
-class StickerTypeMapper extends ClassMapperBase<StickerType> {
+class StickerTypeMapper extends EnumMapper<StickerType> {
   StickerTypeMapper._();
 
   static StickerTypeMapper? _instance;
@@ -18,106 +18,42 @@ class StickerTypeMapper extends ClassMapperBase<StickerType> {
     return _instance!;
   }
 
-  @override
-  final String id = 'StickerType';
-
-  static const Field<StickerType, dynamic> _f$value = Field(
-    'value',
-    null,
-    mode: FieldMode.param,
-  );
-
-  @override
-  final MappableFields<StickerType> fields = const {#value: _f$value};
-
-  static StickerType _instantiate(DecodingData data) {
-    return StickerType(data.dec(_f$value));
+  static StickerType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
   }
 
   @override
-  final Function instantiate = _instantiate;
-
-  static StickerType fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<StickerType>(map);
-  }
-
-  static StickerType fromJson(String json) {
-    return ensureInitialized().decodeJson<StickerType>(json);
-  }
-}
-
-mixin StickerTypeMappable {
-  String toJson() {
-    return StickerTypeMapper.ensureInitialized().encodeJson<StickerType>(
-      this as StickerType,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return StickerTypeMapper.ensureInitialized().encodeMap<StickerType>(
-      this as StickerType,
-    );
-  }
-
-  StickerTypeCopyWith<StickerType, StickerType, StickerType> get copyWith =>
-      _StickerTypeCopyWithImpl<StickerType, StickerType>(
-        this as StickerType,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return StickerTypeMapper.ensureInitialized().stringifyValue(
-      this as StickerType,
-    );
+  StickerType decode(dynamic value) {
+    switch (value) {
+      case 1:
+        return StickerType.standard;
+      case 2:
+        return StickerType.guild;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
   }
 
   @override
-  bool operator ==(Object other) {
-    return StickerTypeMapper.ensureInitialized().equalsValue(
-      this as StickerType,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return StickerTypeMapper.ensureInitialized().hashValue(this as StickerType);
+  dynamic encode(StickerType self) {
+    switch (self) {
+      case StickerType.standard:
+        return 1;
+      case StickerType.guild:
+        return 2;
+    }
   }
 }
 
-extension StickerTypeValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, StickerType, $Out> {
-  StickerTypeCopyWith<$R, StickerType, $Out> get $asStickerType =>
-      $base.as((v, t, t2) => _StickerTypeCopyWithImpl<$R, $Out>(v, t, t2));
+extension StickerTypeMapperExtension on StickerType {
+  dynamic toValue() {
+    StickerTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<StickerType>(this);
+  }
 }
 
-abstract class StickerTypeCopyWith<$R, $In extends StickerType, $Out>
-    implements ClassCopyWith<$R, $In, $Out> {
-  $R call({dynamic value});
-  StickerTypeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
-}
-
-class _StickerTypeCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, StickerType, $Out>
-    implements StickerTypeCopyWith<$R, StickerType, $Out> {
-  _StickerTypeCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<StickerType> $mapper =
-      StickerTypeMapper.ensureInitialized();
-  @override
-  $R call({dynamic value}) => $apply(FieldCopyWithData({#value: value}));
-  @override
-  StickerType $make(CopyWithData data) => StickerType(data.get(#value));
-
-  @override
-  StickerTypeCopyWith<$R2, StickerType, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _StickerTypeCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
-class StickerFormatTypeMapper extends ClassMapperBase<StickerFormatType> {
+class StickerFormatTypeMapper extends EnumMapper<StickerFormatType> {
   StickerFormatTypeMapper._();
 
   static StickerFormatTypeMapper? _instance;
@@ -128,117 +64,47 @@ class StickerFormatTypeMapper extends ClassMapperBase<StickerFormatType> {
     return _instance!;
   }
 
-  @override
-  final String id = 'StickerFormatType';
-
-  static const Field<StickerFormatType, dynamic> _f$value = Field(
-    'value',
-    null,
-    mode: FieldMode.param,
-  );
-
-  @override
-  final MappableFields<StickerFormatType> fields = const {#value: _f$value};
-
-  static StickerFormatType _instantiate(DecodingData data) {
-    return StickerFormatType(data.dec(_f$value));
+  static StickerFormatType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
   }
 
   @override
-  final Function instantiate = _instantiate;
-
-  static StickerFormatType fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<StickerFormatType>(map);
-  }
-
-  static StickerFormatType fromJson(String json) {
-    return ensureInitialized().decodeJson<StickerFormatType>(json);
-  }
-}
-
-mixin StickerFormatTypeMappable {
-  String toJson() {
-    return StickerFormatTypeMapper.ensureInitialized()
-        .encodeJson<StickerFormatType>(this as StickerFormatType);
-  }
-
-  Map<String, dynamic> toMap() {
-    return StickerFormatTypeMapper.ensureInitialized()
-        .encodeMap<StickerFormatType>(this as StickerFormatType);
-  }
-
-  StickerFormatTypeCopyWith<
-    StickerFormatType,
-    StickerFormatType,
-    StickerFormatType
-  >
-  get copyWith =>
-      _StickerFormatTypeCopyWithImpl<StickerFormatType, StickerFormatType>(
-        this as StickerFormatType,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return StickerFormatTypeMapper.ensureInitialized().stringifyValue(
-      this as StickerFormatType,
-    );
+  StickerFormatType decode(dynamic value) {
+    switch (value) {
+      case 1:
+        return StickerFormatType.png;
+      case 2:
+        return StickerFormatType.apng;
+      case 3:
+        return StickerFormatType.lottie;
+      case 4:
+        return StickerFormatType.gif;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
   }
 
   @override
-  bool operator ==(Object other) {
-    return StickerFormatTypeMapper.ensureInitialized().equalsValue(
-      this as StickerFormatType,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return StickerFormatTypeMapper.ensureInitialized().hashValue(
-      this as StickerFormatType,
-    );
+  dynamic encode(StickerFormatType self) {
+    switch (self) {
+      case StickerFormatType.png:
+        return 1;
+      case StickerFormatType.apng:
+        return 2;
+      case StickerFormatType.lottie:
+        return 3;
+      case StickerFormatType.gif:
+        return 4;
+    }
   }
 }
 
-extension StickerFormatTypeValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, StickerFormatType, $Out> {
-  StickerFormatTypeCopyWith<$R, StickerFormatType, $Out>
-  get $asStickerFormatType => $base.as(
-    (v, t, t2) => _StickerFormatTypeCopyWithImpl<$R, $Out>(v, t, t2),
-  );
-}
-
-abstract class StickerFormatTypeCopyWith<
-  $R,
-  $In extends StickerFormatType,
-  $Out
->
-    implements ClassCopyWith<$R, $In, $Out> {
-  $R call({dynamic value});
-  StickerFormatTypeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _StickerFormatTypeCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, StickerFormatType, $Out>
-    implements StickerFormatTypeCopyWith<$R, StickerFormatType, $Out> {
-  _StickerFormatTypeCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<StickerFormatType> $mapper =
-      StickerFormatTypeMapper.ensureInitialized();
-  @override
-  $R call({dynamic value}) => $apply(FieldCopyWithData({#value: value}));
-  @override
-  StickerFormatType $make(CopyWithData data) =>
-      StickerFormatType(data.get(#value));
-
-  @override
-  StickerFormatTypeCopyWith<$R2, StickerFormatType, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _StickerFormatTypeCopyWithImpl<$R2, $Out2>($value, $cast, t);
+extension StickerFormatTypeMapperExtension on StickerFormatType {
+  dynamic toValue() {
+    StickerFormatTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<StickerFormatType>(this);
+  }
 }
 
 class StickerItemMapper extends ClassMapperBase<StickerItem> {
@@ -346,8 +212,6 @@ abstract class StickerItemCopyWith<$R, $In extends StickerItem, $Out>
     implements SnowflakeEntityCopyWith<$R, $In, $Out, StickerItem> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  StickerFormatTypeCopyWith<$R, StickerFormatType, StickerFormatType>
-  get formatType;
   @override
   $R call({Snowflake? id, String? name, StickerFormatType? formatType});
   StickerItemCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
@@ -364,10 +228,6 @@ class _StickerItemCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  StickerFormatTypeCopyWith<$R, StickerFormatType, StickerFormatType>
-  get formatType =>
-      $value.formatType.copyWith.$chain((v) => call(formatType: v));
   @override
   $R call({Snowflake? id, String? name, StickerFormatType? formatType}) =>
       $apply(

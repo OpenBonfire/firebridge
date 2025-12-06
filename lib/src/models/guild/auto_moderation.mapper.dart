@@ -7,6 +7,217 @@
 
 part of 'auto_moderation.dart';
 
+class AutoModerationEventTypeMapper
+    extends EnumMapper<AutoModerationEventType> {
+  AutoModerationEventTypeMapper._();
+
+  static AutoModerationEventTypeMapper? _instance;
+  static AutoModerationEventTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(
+        _instance = AutoModerationEventTypeMapper._(),
+      );
+    }
+    return _instance!;
+  }
+
+  static AutoModerationEventType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  AutoModerationEventType decode(dynamic value) {
+    switch (value) {
+      case 1:
+        return AutoModerationEventType.messageSend;
+      case 2:
+        return AutoModerationEventType.memberUpdate;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(AutoModerationEventType self) {
+    switch (self) {
+      case AutoModerationEventType.messageSend:
+        return 1;
+      case AutoModerationEventType.memberUpdate:
+        return 2;
+    }
+  }
+}
+
+extension AutoModerationEventTypeMapperExtension on AutoModerationEventType {
+  dynamic toValue() {
+    AutoModerationEventTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<AutoModerationEventType>(this);
+  }
+}
+
+class TriggerTypeMapper extends EnumMapper<TriggerType> {
+  TriggerTypeMapper._();
+
+  static TriggerTypeMapper? _instance;
+  static TriggerTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = TriggerTypeMapper._());
+    }
+    return _instance!;
+  }
+
+  static TriggerType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  TriggerType decode(dynamic value) {
+    switch (value) {
+      case 1:
+        return TriggerType.keyword;
+      case 3:
+        return TriggerType.spam;
+      case 4:
+        return TriggerType.keywordPreset;
+      case 5:
+        return TriggerType.mentionSpam;
+      case 6:
+        return TriggerType.memberProfile;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(TriggerType self) {
+    switch (self) {
+      case TriggerType.keyword:
+        return 1;
+      case TriggerType.spam:
+        return 3;
+      case TriggerType.keywordPreset:
+        return 4;
+      case TriggerType.mentionSpam:
+        return 5;
+      case TriggerType.memberProfile:
+        return 6;
+    }
+  }
+}
+
+extension TriggerTypeMapperExtension on TriggerType {
+  dynamic toValue() {
+    TriggerTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<TriggerType>(this);
+  }
+}
+
+class KeywordPresetTypeMapper extends EnumMapper<KeywordPresetType> {
+  KeywordPresetTypeMapper._();
+
+  static KeywordPresetTypeMapper? _instance;
+  static KeywordPresetTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = KeywordPresetTypeMapper._());
+    }
+    return _instance!;
+  }
+
+  static KeywordPresetType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  KeywordPresetType decode(dynamic value) {
+    switch (value) {
+      case 1:
+        return KeywordPresetType.profanity;
+      case 2:
+        return KeywordPresetType.sexualContent;
+      case 3:
+        return KeywordPresetType.slurs;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(KeywordPresetType self) {
+    switch (self) {
+      case KeywordPresetType.profanity:
+        return 1;
+      case KeywordPresetType.sexualContent:
+        return 2;
+      case KeywordPresetType.slurs:
+        return 3;
+    }
+  }
+}
+
+extension KeywordPresetTypeMapperExtension on KeywordPresetType {
+  dynamic toValue() {
+    KeywordPresetTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<KeywordPresetType>(this);
+  }
+}
+
+class ActionTypeMapper extends EnumMapper<ActionType> {
+  ActionTypeMapper._();
+
+  static ActionTypeMapper? _instance;
+  static ActionTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = ActionTypeMapper._());
+    }
+    return _instance!;
+  }
+
+  static ActionType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  ActionType decode(dynamic value) {
+    switch (value) {
+      case 1:
+        return ActionType.blockMessage;
+      case 2:
+        return ActionType.sendAlertMessage;
+      case 3:
+        return ActionType.timeout;
+      case 4:
+        return ActionType.blockMemberInteraction;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(ActionType self) {
+    switch (self) {
+      case ActionType.blockMessage:
+        return 1;
+      case ActionType.sendAlertMessage:
+        return 2;
+      case ActionType.timeout:
+        return 3;
+      case ActionType.blockMemberInteraction:
+        return 4;
+    }
+  }
+}
+
+extension ActionTypeMapperExtension on ActionType {
+  dynamic toValue() {
+    ActionTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<ActionType>(this);
+  }
+}
+
 class PartialAutoModerationRuleMapper
     extends ClassMapperBase<PartialAutoModerationRule> {
   PartialAutoModerationRuleMapper._();
@@ -158,6 +369,7 @@ class AutoModerationRuleMapper extends ClassMapperBase<AutoModerationRule> {
       MapperContainer.globals.use(_instance = AutoModerationRuleMapper._());
       PartialAutoModerationRuleMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
+      AutoModerationEventTypeMapper.ensureInitialized();
       TriggerTypeMapper.ensureInitialized();
       TriggerMetadataMapper.ensureInitialized();
       AutoModerationActionMapper.ensureInitialized();
@@ -327,7 +539,6 @@ abstract class AutoModerationRuleCopyWith<
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get creatorId;
-  TriggerTypeCopyWith<$R, TriggerType, TriggerType> get triggerType;
   TriggerMetadataCopyWith<$R, TriggerMetadata, TriggerMetadata> get metadata;
   ListCopyWith<
     $R,
@@ -375,9 +586,6 @@ class _AutoModerationRuleCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get creatorId =>
       $value.creatorId.copyWith.$chain((v) => call(creatorId: v));
-  @override
-  TriggerTypeCopyWith<$R, TriggerType, TriggerType> get triggerType =>
-      $value.triggerType.copyWith.$chain((v) => call(triggerType: v));
   @override
   TriggerMetadataCopyWith<$R, TriggerMetadata, TriggerMetadata> get metadata =>
       $value.metadata.copyWith.$chain((v) => call(metadata: v));
@@ -453,116 +661,6 @@ class _AutoModerationRuleCopyWithImpl<$R, $Out>
   AutoModerationRuleCopyWith<$R2, AutoModerationRule, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   ) => _AutoModerationRuleCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
-class TriggerTypeMapper extends ClassMapperBase<TriggerType> {
-  TriggerTypeMapper._();
-
-  static TriggerTypeMapper? _instance;
-  static TriggerTypeMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = TriggerTypeMapper._());
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'TriggerType';
-
-  static const Field<TriggerType, dynamic> _f$value = Field(
-    'value',
-    null,
-    mode: FieldMode.param,
-  );
-
-  @override
-  final MappableFields<TriggerType> fields = const {#value: _f$value};
-
-  static TriggerType _instantiate(DecodingData data) {
-    return TriggerType(data.dec(_f$value));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static TriggerType fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<TriggerType>(map);
-  }
-
-  static TriggerType fromJson(String json) {
-    return ensureInitialized().decodeJson<TriggerType>(json);
-  }
-}
-
-mixin TriggerTypeMappable {
-  String toJson() {
-    return TriggerTypeMapper.ensureInitialized().encodeJson<TriggerType>(
-      this as TriggerType,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return TriggerTypeMapper.ensureInitialized().encodeMap<TriggerType>(
-      this as TriggerType,
-    );
-  }
-
-  TriggerTypeCopyWith<TriggerType, TriggerType, TriggerType> get copyWith =>
-      _TriggerTypeCopyWithImpl<TriggerType, TriggerType>(
-        this as TriggerType,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return TriggerTypeMapper.ensureInitialized().stringifyValue(
-      this as TriggerType,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return TriggerTypeMapper.ensureInitialized().equalsValue(
-      this as TriggerType,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return TriggerTypeMapper.ensureInitialized().hashValue(this as TriggerType);
-  }
-}
-
-extension TriggerTypeValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, TriggerType, $Out> {
-  TriggerTypeCopyWith<$R, TriggerType, $Out> get $asTriggerType =>
-      $base.as((v, t, t2) => _TriggerTypeCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class TriggerTypeCopyWith<$R, $In extends TriggerType, $Out>
-    implements ClassCopyWith<$R, $In, $Out> {
-  $R call({dynamic value});
-  TriggerTypeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
-}
-
-class _TriggerTypeCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, TriggerType, $Out>
-    implements TriggerTypeCopyWith<$R, TriggerType, $Out> {
-  _TriggerTypeCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<TriggerType> $mapper =
-      TriggerTypeMapper.ensureInitialized();
-  @override
-  $R call({dynamic value}) => $apply(FieldCopyWithData({#value: value}));
-  @override
-  TriggerType $make(CopyWithData data) => TriggerType(data.get(#value));
-
-  @override
-  TriggerTypeCopyWith<$R2, TriggerType, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _TriggerTypeCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class TriggerMetadataMapper extends ClassMapperBase<TriggerMetadata> {
@@ -708,7 +806,7 @@ abstract class TriggerMetadataCopyWith<$R, $In extends TriggerMetadata, $Out>
   ListCopyWith<
     $R,
     KeywordPresetType,
-    KeywordPresetTypeCopyWith<$R, KeywordPresetType, KeywordPresetType>
+    ObjectCopyWith<$R, KeywordPresetType, KeywordPresetType>
   >?
   get presets;
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>? get allowList;
@@ -755,12 +853,12 @@ class _TriggerMetadataCopyWithImpl<$R, $Out>
   ListCopyWith<
     $R,
     KeywordPresetType,
-    KeywordPresetTypeCopyWith<$R, KeywordPresetType, KeywordPresetType>
+    ObjectCopyWith<$R, KeywordPresetType, KeywordPresetType>
   >?
   get presets => $value.presets != null
       ? ListCopyWith(
           $value.presets!,
-          (v, t) => v.copyWith.$chain(t),
+          (v, t) => ObjectCopyWith(v, $identity, t),
           (v) => call(presets: v),
         )
       : null;
@@ -812,130 +910,6 @@ class _TriggerMetadataCopyWithImpl<$R, $Out>
   TriggerMetadataCopyWith<$R2, TriggerMetadata, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   ) => _TriggerMetadataCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
-class KeywordPresetTypeMapper extends ClassMapperBase<KeywordPresetType> {
-  KeywordPresetTypeMapper._();
-
-  static KeywordPresetTypeMapper? _instance;
-  static KeywordPresetTypeMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = KeywordPresetTypeMapper._());
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'KeywordPresetType';
-
-  static const Field<KeywordPresetType, dynamic> _f$value = Field(
-    'value',
-    null,
-    mode: FieldMode.param,
-  );
-
-  @override
-  final MappableFields<KeywordPresetType> fields = const {#value: _f$value};
-
-  static KeywordPresetType _instantiate(DecodingData data) {
-    return KeywordPresetType(data.dec(_f$value));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static KeywordPresetType fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<KeywordPresetType>(map);
-  }
-
-  static KeywordPresetType fromJson(String json) {
-    return ensureInitialized().decodeJson<KeywordPresetType>(json);
-  }
-}
-
-mixin KeywordPresetTypeMappable {
-  String toJson() {
-    return KeywordPresetTypeMapper.ensureInitialized()
-        .encodeJson<KeywordPresetType>(this as KeywordPresetType);
-  }
-
-  Map<String, dynamic> toMap() {
-    return KeywordPresetTypeMapper.ensureInitialized()
-        .encodeMap<KeywordPresetType>(this as KeywordPresetType);
-  }
-
-  KeywordPresetTypeCopyWith<
-    KeywordPresetType,
-    KeywordPresetType,
-    KeywordPresetType
-  >
-  get copyWith =>
-      _KeywordPresetTypeCopyWithImpl<KeywordPresetType, KeywordPresetType>(
-        this as KeywordPresetType,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return KeywordPresetTypeMapper.ensureInitialized().stringifyValue(
-      this as KeywordPresetType,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return KeywordPresetTypeMapper.ensureInitialized().equalsValue(
-      this as KeywordPresetType,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return KeywordPresetTypeMapper.ensureInitialized().hashValue(
-      this as KeywordPresetType,
-    );
-  }
-}
-
-extension KeywordPresetTypeValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, KeywordPresetType, $Out> {
-  KeywordPresetTypeCopyWith<$R, KeywordPresetType, $Out>
-  get $asKeywordPresetType => $base.as(
-    (v, t, t2) => _KeywordPresetTypeCopyWithImpl<$R, $Out>(v, t, t2),
-  );
-}
-
-abstract class KeywordPresetTypeCopyWith<
-  $R,
-  $In extends KeywordPresetType,
-  $Out
->
-    implements ClassCopyWith<$R, $In, $Out> {
-  $R call({dynamic value});
-  KeywordPresetTypeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _KeywordPresetTypeCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, KeywordPresetType, $Out>
-    implements KeywordPresetTypeCopyWith<$R, KeywordPresetType, $Out> {
-  _KeywordPresetTypeCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<KeywordPresetType> $mapper =
-      KeywordPresetTypeMapper.ensureInitialized();
-  @override
-  $R call({dynamic value}) => $apply(FieldCopyWithData({#value: value}));
-  @override
-  KeywordPresetType $make(CopyWithData data) =>
-      KeywordPresetType(data.get(#value));
-
-  @override
-  KeywordPresetTypeCopyWith<$R2, KeywordPresetType, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _KeywordPresetTypeCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class AutoModerationActionMapper extends ClassMapperBase<AutoModerationAction> {
@@ -1048,7 +1022,6 @@ abstract class AutoModerationActionCopyWith<
   $Out
 >
     implements ClassCopyWith<$R, $In, $Out> {
-  ActionTypeCopyWith<$R, ActionType, ActionType> get type;
   ActionMetadataCopyWith<$R, ActionMetadata, ActionMetadata>? get metadata;
   $R call({ActionType? type, ActionMetadata? metadata});
   AutoModerationActionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
@@ -1064,9 +1037,6 @@ class _AutoModerationActionCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<AutoModerationAction> $mapper =
       AutoModerationActionMapper.ensureInitialized();
-  @override
-  ActionTypeCopyWith<$R, ActionType, ActionType> get type =>
-      $value.type.copyWith.$chain((v) => call(type: v));
   @override
   ActionMetadataCopyWith<$R, ActionMetadata, ActionMetadata>? get metadata =>
       $value.metadata?.copyWith.$chain((v) => call(metadata: v));
@@ -1089,116 +1059,6 @@ class _AutoModerationActionCopyWithImpl<$R, $Out>
       _AutoModerationActionCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class ActionTypeMapper extends ClassMapperBase<ActionType> {
-  ActionTypeMapper._();
-
-  static ActionTypeMapper? _instance;
-  static ActionTypeMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = ActionTypeMapper._());
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'ActionType';
-
-  static const Field<ActionType, dynamic> _f$value = Field(
-    'value',
-    null,
-    mode: FieldMode.param,
-  );
-
-  @override
-  final MappableFields<ActionType> fields = const {#value: _f$value};
-
-  static ActionType _instantiate(DecodingData data) {
-    return ActionType(data.dec(_f$value));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static ActionType fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<ActionType>(map);
-  }
-
-  static ActionType fromJson(String json) {
-    return ensureInitialized().decodeJson<ActionType>(json);
-  }
-}
-
-mixin ActionTypeMappable {
-  String toJson() {
-    return ActionTypeMapper.ensureInitialized().encodeJson<ActionType>(
-      this as ActionType,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return ActionTypeMapper.ensureInitialized().encodeMap<ActionType>(
-      this as ActionType,
-    );
-  }
-
-  ActionTypeCopyWith<ActionType, ActionType, ActionType> get copyWith =>
-      _ActionTypeCopyWithImpl<ActionType, ActionType>(
-        this as ActionType,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return ActionTypeMapper.ensureInitialized().stringifyValue(
-      this as ActionType,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return ActionTypeMapper.ensureInitialized().equalsValue(
-      this as ActionType,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return ActionTypeMapper.ensureInitialized().hashValue(this as ActionType);
-  }
-}
-
-extension ActionTypeValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, ActionType, $Out> {
-  ActionTypeCopyWith<$R, ActionType, $Out> get $asActionType =>
-      $base.as((v, t, t2) => _ActionTypeCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class ActionTypeCopyWith<$R, $In extends ActionType, $Out>
-    implements ClassCopyWith<$R, $In, $Out> {
-  $R call({dynamic value});
-  ActionTypeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
-}
-
-class _ActionTypeCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, ActionType, $Out>
-    implements ActionTypeCopyWith<$R, ActionType, $Out> {
-  _ActionTypeCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<ActionType> $mapper =
-      ActionTypeMapper.ensureInitialized();
-  @override
-  $R call({dynamic value}) => $apply(FieldCopyWithData({#value: value}));
-  @override
-  ActionType $make(CopyWithData data) => ActionType(data.get(#value));
-
-  @override
-  ActionTypeCopyWith<$R2, ActionType, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _ActionTypeCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class ActionMetadataMapper extends ClassMapperBase<ActionMetadata> {
   ActionMetadataMapper._();
 
@@ -1214,11 +1074,6 @@ class ActionMetadataMapper extends ClassMapperBase<ActionMetadata> {
   @override
   final String id = 'ActionMetadata';
 
-  static AutoModerationManager _$manager(ActionMetadata v) => v.manager;
-  static const Field<ActionMetadata, AutoModerationManager> _f$manager = Field(
-    'manager',
-    _$manager,
-  );
   static Snowflake? _$channelId(ActionMetadata v) => v.channelId;
   static const Field<ActionMetadata, Snowflake> _f$channelId = Field(
     'channelId',
@@ -1239,7 +1094,6 @@ class ActionMetadataMapper extends ClassMapperBase<ActionMetadata> {
 
   @override
   final MappableFields<ActionMetadata> fields = const {
-    #manager: _f$manager,
     #channelId: _f$channelId,
     #duration: _f$duration,
     #customMessage: _f$customMessage,
@@ -1247,7 +1101,6 @@ class ActionMetadataMapper extends ClassMapperBase<ActionMetadata> {
 
   static ActionMetadata _instantiate(DecodingData data) {
     return ActionMetadata(
-      manager: data.dec(_f$manager),
       channelId: data.dec(_f$channelId),
       duration: data.dec(_f$duration),
       customMessage: data.dec(_f$customMessage),
@@ -1317,12 +1170,7 @@ extension ActionMetadataValueCopy<$R, $Out>
 abstract class ActionMetadataCopyWith<$R, $In extends ActionMetadata, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
-  $R call({
-    AutoModerationManager? manager,
-    Snowflake? channelId,
-    Duration? duration,
-    String? customMessage,
-  });
+  $R call({Snowflake? channelId, Duration? duration, String? customMessage});
   ActionMetadataCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -1341,13 +1189,11 @@ class _ActionMetadataCopyWithImpl<$R, $Out>
       $value.channelId?.copyWith.$chain((v) => call(channelId: v));
   @override
   $R call({
-    AutoModerationManager? manager,
     Object? channelId = $none,
     Object? duration = $none,
     Object? customMessage = $none,
   }) => $apply(
     FieldCopyWithData({
-      if (manager != null) #manager: manager,
       if (channelId != $none) #channelId: channelId,
       if (duration != $none) #duration: duration,
       if (customMessage != $none) #customMessage: customMessage,
@@ -1355,7 +1201,6 @@ class _ActionMetadataCopyWithImpl<$R, $Out>
   );
   @override
   ActionMetadata $make(CopyWithData data) => ActionMetadata(
-    manager: data.get(#manager, or: $value.manager),
     channelId: data.get(#channelId, or: $value.channelId),
     duration: data.get(#duration, or: $value.duration),
     customMessage: data.get(#customMessage, or: $value.customMessage),

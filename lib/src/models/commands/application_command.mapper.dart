@@ -7,6 +7,56 @@
 
 part of 'application_command.dart';
 
+class ApplicationCommandTypeMapper extends EnumMapper<ApplicationCommandType> {
+  ApplicationCommandTypeMapper._();
+
+  static ApplicationCommandTypeMapper? _instance;
+  static ApplicationCommandTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = ApplicationCommandTypeMapper._());
+    }
+    return _instance!;
+  }
+
+  static ApplicationCommandType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  ApplicationCommandType decode(dynamic value) {
+    switch (value) {
+      case 1:
+        return ApplicationCommandType.chatInput;
+      case 2:
+        return ApplicationCommandType.user;
+      case 3:
+        return ApplicationCommandType.message;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(ApplicationCommandType self) {
+    switch (self) {
+      case ApplicationCommandType.chatInput:
+        return 1;
+      case ApplicationCommandType.user:
+        return 2;
+      case ApplicationCommandType.message:
+        return 3;
+    }
+  }
+}
+
+extension ApplicationCommandTypeMapperExtension on ApplicationCommandType {
+  dynamic toValue() {
+    ApplicationCommandTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<ApplicationCommandType>(this);
+  }
+}
+
 class PartialApplicationCommandMapper
     extends ClassMapperBase<PartialApplicationCommand> {
   PartialApplicationCommandMapper._();
@@ -158,6 +208,8 @@ class ApplicationCommandMapper extends ClassMapperBase<ApplicationCommand> {
       MapperContainer.globals.use(_instance = ApplicationCommandMapper._());
       PartialApplicationCommandMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
+      ApplicationCommandTypeMapper.ensureInitialized();
+      CommandOptionMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
       InteractionContextTypeMapper.ensureInitialized();
     }
@@ -374,7 +426,7 @@ abstract class ApplicationCommandCopyWith<
   ListCopyWith<
     $R,
     CommandOption,
-    ObjectCopyWith<$R, CommandOption, CommandOption>
+    CommandOptionCopyWith<$R, CommandOption, CommandOption>
   >?
   get options;
   ListCopyWith<
@@ -452,12 +504,12 @@ class _ApplicationCommandCopyWithImpl<$R, $Out>
   ListCopyWith<
     $R,
     CommandOption,
-    ObjectCopyWith<$R, CommandOption, CommandOption>
+    CommandOptionCopyWith<$R, CommandOption, CommandOption>
   >?
   get options => $value.options != null
       ? ListCopyWith(
           $value.options!,
-          (v, t) => ObjectCopyWith(v, $identity, t),
+          (v, t) => v.copyWith.$chain(t),
           (v) => call(options: v),
         )
       : null;

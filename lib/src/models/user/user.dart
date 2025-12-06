@@ -7,7 +7,6 @@ import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/models/user/avatar_decoration_data.dart';
 import 'package:nyxx/src/models/user/primary_guild.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/flags.dart';
 
 part 'user.mapper.dart';
@@ -206,16 +205,5 @@ class UserFlags extends Flags<UserFlags> with UserFlagsMappable {
 }
 
 /// The types of Discord Nitro subscription a user can have.
-final class NitroType extends EnumLike<int, NitroType> {
-  static const none = NitroType(0);
-  static const classic = NitroType(1);
-  static const nitro = NitroType(2);
-  static const basic = NitroType(3);
-
-  /// @nodoc
-  const NitroType(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  NitroType.parse(int value) : this(value);
-}
+@MappableEnum(mode: ValuesMode.indexed)
+enum NitroType { none, classic, nitro, basic }

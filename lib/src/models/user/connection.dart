@@ -60,48 +60,90 @@ class Connection with ToStringHelper, ConnectionMappable {
 ///
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/user#connection-object-services
+@MappableEnum(caseStyle: CaseStyle.lowerCase)
 enum ConnectionType {
-  battleNet._('battlenet', 'Battle.net'),
-  bungieNet._('bungie', 'Bungie.net'),
-  bluesky._('bluesky', 'Bluesky'),
-  crunchyroll._('crunchyroll', 'Crunchyroll'),
-  domain._('domain', 'Domain'),
-  ebay._('ebay', 'eBay'),
-  epicGames._('epicgames', 'Epic Games'),
-  facebook._('facebook', 'Facebook'),
-  github._('github', 'GitHub'),
-  instagram._('instagram', 'Instagram'),
-  leagueOfLegends._('leagueoflegends', 'League of Legends'),
-  mastodon._('mastodon', 'Mastodon'),
-  paypal._('paypal', 'PayPal'),
-  playstation._('playstation', 'PlayStation Network'),
-  reddit._('reddit', 'Reddit'),
-  riotGames._('riotgames', 'Riot Games'),
-  roblox._('roblox', 'ROBLOX'),
-  spotify._('spotify', 'Spotify'),
-  skype._('skype', 'Skype'),
-  steam._('steam', 'Steam'),
-  tikTok._('tiktok', 'TikTok'),
-  twitch._('twitch', 'Twitch'),
-  twitter._('twitter', 'Twitter'),
-  xbox._('xbox', 'Xbox'),
-  youtube._('youtube', 'YouTube');
-
-  /// The value of this connection type.
-  final String value;
+  battleNet,
+  @MappableValue('bungie')
+  bungieNet,
+  bluesky,
+  crunchyroll,
+  domain,
+  ebay,
+  epicGames,
+  facebook,
+  github,
+  instagram,
+  leagueOfLegends,
+  mastodon,
+  paypal,
+  playstation,
+  reddit,
+  riotGames,
+  roblox,
+  spotify,
+  skype,
+  steam,
+  tikTok,
+  twitch,
+  twitter,
+  xbox,
+  youtube;
 
   /// A human-readable name for this connection type.
-  final String name;
-
-  const ConnectionType._(this.value, this.name);
-
-  /// Parse a string to a [ConnectionType].
-  ///
-  /// The [value] must be a string containing a valid [ConnectionType.value].
-  factory ConnectionType.parse(String value) => values.firstWhere(
-        (type) => type.value == value,
-        orElse: () => throw FormatException('Unknown ConnectionType', value),
-      );
+  String get name {
+    switch (this) {
+      case ConnectionType.battleNet:
+        return 'Battle.net';
+      case ConnectionType.bungieNet:
+        return 'Bungie.net';
+      case ConnectionType.bluesky:
+        return 'Bluesky';
+      case ConnectionType.crunchyroll:
+        return 'Crunchyroll';
+      case ConnectionType.domain:
+        return 'Domain';
+      case ConnectionType.ebay:
+        return 'eBay';
+      case ConnectionType.epicGames:
+        return 'Epic Games';
+      case ConnectionType.facebook:
+        return 'Facebook';
+      case ConnectionType.github:
+        return 'GitHub';
+      case ConnectionType.instagram:
+        return 'Instagram';
+      case ConnectionType.leagueOfLegends:
+        return 'League of Legends';
+      case ConnectionType.mastodon:
+        return 'Mastodon';
+      case ConnectionType.paypal:
+        return 'PayPal';
+      case ConnectionType.playstation:
+        return 'PlayStation Network';
+      case ConnectionType.reddit:
+        return 'Reddit';
+      case ConnectionType.riotGames:
+        return 'Riot Games';
+      case ConnectionType.roblox:
+        return 'ROBLOX';
+      case ConnectionType.spotify:
+        return 'Spotify';
+      case ConnectionType.skype:
+        return 'Skype';
+      case ConnectionType.steam:
+        return 'Steam';
+      case ConnectionType.tikTok:
+        return 'TikTok';
+      case ConnectionType.twitch:
+        return 'Twitch';
+      case ConnectionType.twitter:
+        return 'Twitter';
+      case ConnectionType.xbox:
+        return 'Xbox';
+      case ConnectionType.youtube:
+        return 'YouTube';
+    }
+  }
 }
 
 /// The visibility level of a connection.

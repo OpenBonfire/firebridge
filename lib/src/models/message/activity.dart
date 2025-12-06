@@ -1,5 +1,7 @@
-import 'package:nyxx/src/utils/enum_like.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+
+part 'activity.mapper.dart';
 
 /// {@template message_activity}
 /// Activity data for rich presence related messages.
@@ -26,15 +28,14 @@ class MessageActivity with ToStringHelper {
 ///
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#message-object-message-activity-types
-final class MessageActivityType extends EnumLike<int, MessageActivityType> {
-  static const join = MessageActivityType(1);
-  static const spectate = MessageActivityType(2);
-  static const listen = MessageActivityType(3);
-  static const joinRequest = MessageActivityType(5);
-
-  /// @nodoc
-  const MessageActivityType(super.value);
-
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  MessageActivityType.parse(int value) : this(value);
+@MappableEnum()
+enum MessageActivityType {
+  @MappableValue(1)
+  join,
+  @MappableValue(2)
+  spectate,
+  @MappableValue(3)
+  listen,
+  @MappableValue(5)
+  joinRequest
 }

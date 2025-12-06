@@ -1,58 +1,59 @@
 /// @docImport 'package:nyxx/nyxx.dart';
 library;
 
-import 'dart:typed_data';
-
-import 'package:http/http.dart';
-import 'package:nyxx/src/client.dart';
-import 'package:nyxx/src/http/cdn/cdn_asset.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/http/managers/message_manager.dart';
-import 'package:nyxx/src/http/route.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/discord_color.dart';
 import 'package:nyxx/src/models/emoji.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/user/user.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
+part 'component.mapper.dart';
+
 /// The type of a [MessageComponent].
-final class MessageComponentType extends EnumLike<int, MessageComponentType> {
-  static const actionRow = MessageComponentType(1);
-  static const button = MessageComponentType(2);
-  static const stringSelect = MessageComponentType(3);
-  static const textInput = MessageComponentType(4);
-  static const userSelect = MessageComponentType(5);
-  static const roleSelect = MessageComponentType(6);
-  static const mentionableSelect = MessageComponentType(7);
-  static const channelSelect = MessageComponentType(8);
-  static const section = MessageComponentType(9);
-  static const textDisplay = MessageComponentType(10);
-  static const thumbnail = MessageComponentType(11);
-  static const mediaGallery = MessageComponentType(12);
-  static const file = MessageComponentType(13);
-  static const separator = MessageComponentType(14);
-  static const container = MessageComponentType(17);
-  static const label = MessageComponentType(18);
-  static const fileUpload = MessageComponentType(19);
-
-  /// @nodoc
-  const MessageComponentType(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  MessageComponentType.parse(int value) : this(value);
+@MappableEnum()
+enum MessageComponentType {
+  @MappableValue(1)
+  actionRow,
+  @MappableValue(2)
+  button,
+  @MappableValue(3)
+  stringSelect,
+  @MappableValue(4)
+  textInput,
+  @MappableValue(5)
+  userSelect,
+  @MappableValue(6)
+  roleSelect,
+  @MappableValue(7)
+  mentionableSelect,
+  @MappableValue(8)
+  channelSelect,
+  @MappableValue(9)
+  section,
+  @MappableValue(10)
+  textDisplay,
+  @MappableValue(11)
+  thumbnail,
+  @MappableValue(12)
+  mediaGallery,
+  @MappableValue(13)
+  file,
+  @MappableValue(14)
+  separator,
+  @MappableValue(17)
+  container,
+  @MappableValue(18)
+  label,
+  @MappableValue(19)
+  fileUpload,
 }
 
-class UnfurledMediaItem with ToStringHelper implements CdnAsset {
-  /// The manager for this [UnfurledMediaItem].
-  final MessageManager manager;
-
-  @override
-  Nyxx get client => manager.client;
-
+@MappableClass()
+class UnfurledMediaItem with ToStringHelper, UnfurledMediaItemMappable {
   /// The URL of this media item.
-  @override
   final Uri url;
 
   /// A proxied URL of this media item.
@@ -66,52 +67,16 @@ class UnfurledMediaItem with ToStringHelper implements CdnAsset {
 
   /// @nodoc
   UnfurledMediaItem({
-    required this.manager,
     required this.url,
     required this.proxiedUrl,
     required this.height,
     required this.width,
   });
-
-  @override
-  HttpRoute get base =>
-      throw UnsupportedError('Cannot get the base URL for a media item');
-
-  @override
-  CdnFormat get defaultFormat =>
-      throw UnsupportedError('Cannot get the default format for a media item');
-
-  @override
-  String get hash =>
-      throw UnsupportedError('Cannot get the hash for a media item');
-
-  @override
-  bool get isAnimated => false;
-
-  @override
-  Future<Uint8List> fetch({CdnFormat? format, int? size}) async {
-    if (format != null || size != null) {
-      throw UnsupportedError('Cannot specify attachment format or size');
-    }
-
-    final response = await client.httpHandler.httpClient.get(url);
-    return response.bodyBytes;
-  }
-
-  @override
-  Stream<List<int>> fetchStreamed({CdnFormat? format, int? size}) async* {
-    if (format != null || size != null) {
-      throw UnsupportedError('Cannot specify attachment format or size');
-    }
-
-    final response =
-        await client.httpHandler.httpClient.send(Request('GET', url));
-    yield* response.stream;
-  }
 }
 
 /// A component in a [Message].
-abstract class MessageComponent with ToStringHelper {
+@MappableClass()
+abstract class MessageComponent with ToStringHelper, MessageComponentMappable {
   /// The type of this component.
   MessageComponentType get type;
 
@@ -123,7 +88,9 @@ abstract class MessageComponent with ToStringHelper {
 }
 
 /// A [MessageComponent] that contains multiple child [MessageComponent]s.
-class ActionRowComponent extends MessageComponent {
+@MappableClass()
+class ActionRowComponent extends MessageComponent
+    with ActionRowComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.actionRow;
 
@@ -136,7 +103,8 @@ class ActionRowComponent extends MessageComponent {
 }
 
 /// A clickable button.
-class ButtonComponent extends MessageComponent {
+@MappableClass()
+class ButtonComponent extends MessageComponent with ButtonComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.button;
 
@@ -176,24 +144,26 @@ class ButtonComponent extends MessageComponent {
 }
 
 /// The style of a [ButtonComponent].
-final class ButtonStyle extends EnumLike<int, ButtonStyle> {
-  static const primary = ButtonStyle(1);
-  static const secondary = ButtonStyle(2);
-  static const success = ButtonStyle(3);
-  static const danger = ButtonStyle(4);
-  static const link = ButtonStyle(5);
-  static const premium = ButtonStyle(6);
-
-  /// @nodoc
-  const ButtonStyle(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  ButtonStyle.parse(int value) : this(value);
+@MappableEnum()
+enum ButtonStyle {
+  @MappableValue(1)
+  primary,
+  @MappableValue(2)
+  seconday,
+  @MappableValue(3)
+  success,
+  @MappableValue(4)
+  danger,
+  @MappableValue(5)
+  link,
+  @MappableValue(6)
+  premium
 }
 
 /// A dropdown menu in which users can select from on or more choices.
-class SelectMenuComponent extends MessageComponent {
+@MappableClass()
+class SelectMenuComponent extends MessageComponent
+    with SelectMenuComponentMappable {
   @override
   final MessageComponentType type;
 
@@ -248,22 +218,12 @@ class SelectMenuComponent extends MessageComponent {
 }
 
 /// The type of a [SelectMenuDefaultValue].
-final class SelectMenuDefaultValueType
-    extends EnumLike<String, SelectMenuDefaultValueType> {
-  static const user = SelectMenuDefaultValueType('user');
-  static const role = SelectMenuDefaultValueType('role');
-  static const channel = SelectMenuDefaultValueType('channel');
-
-  /// @nodoc
-  const SelectMenuDefaultValueType(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  SelectMenuDefaultValueType.parse(String value) : this(value);
-}
+@MappableEnum()
+enum SelectMenuDefaultValueType { user, role, channel }
 
 /// A default value in a [SelectMenuComponent].
-class SelectMenuDefaultValue {
+@MappableClass()
+class SelectMenuDefaultValue with SelectMenuDefaultValueMappable {
   /// The ID of this entity.
   final Snowflake id;
 
@@ -276,7 +236,8 @@ class SelectMenuDefaultValue {
 }
 
 /// An option in a [SelectMenuComponent].
-class SelectMenuOption with ToStringHelper {
+@MappableClass()
+class SelectMenuOption with ToStringHelper, SelectMenuOptionMappable {
   /// The label shown to the user.
   final String label;
 
@@ -306,7 +267,9 @@ class SelectMenuOption with ToStringHelper {
 /// A text field in a modal.
 @Deprecated(
     'Use SubmittedTextInputComponent instead. The fields on this class are never populated.')
+@MappableClass()
 class TextInputComponent extends MessageComponent
+    with TextInputComponentMappable
     implements SubmittedTextInputComponent {
   @override
   MessageComponentType get type => MessageComponentType.textInput;
@@ -360,20 +323,19 @@ class TextInputComponent extends MessageComponent
 }
 
 /// The type of a [SubmittedTextInputComponent].
-final class TextInputStyle extends EnumLike<int, TextInputStyle> {
-  static const short = TextInputStyle(1);
-  static const paragraph = TextInputStyle(2);
-
-  /// @nodoc
-  const TextInputStyle(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  TextInputStyle.parse(int value) : this(value);
+@MappableEnum()
+enum TextInputStyle {
+  @MappableValue(0)
+  short,
+  @MappableValue(1)
+  paragraph
 }
 
 /// An unknown component.
-class UnknownComponent extends MessageComponent implements SubmittedComponent {
+@MappableClass()
+class UnknownComponent extends MessageComponent
+    with UnknownComponentMappable
+    implements SubmittedComponent {
   @override
   final MessageComponentType type;
 
@@ -382,7 +344,8 @@ class UnknownComponent extends MessageComponent implements SubmittedComponent {
 }
 
 /// A section in a message, with small accessory component.
-class SectionComponent extends MessageComponent {
+@MappableClass()
+class SectionComponent extends MessageComponent with SectionComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.section;
 
@@ -398,7 +361,9 @@ class SectionComponent extends MessageComponent {
 }
 
 /// A component that displays text.
-class TextDisplayComponent extends MessageComponent {
+@MappableClass()
+class TextDisplayComponent extends MessageComponent
+    with TextDisplayComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.textDisplay;
 
@@ -410,7 +375,9 @@ class TextDisplayComponent extends MessageComponent {
 }
 
 /// A component that shows a small image.
-class ThumbnailComponent extends MessageComponent {
+@MappableClass()
+class ThumbnailComponent extends MessageComponent
+    with ThumbnailComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.thumbnail;
 
@@ -431,8 +398,8 @@ class ThumbnailComponent extends MessageComponent {
       required this.isSpoiler});
 }
 
-/// An item in a [MediaGalleryComponent].
-class MediaGalleryItem with ToStringHelper {
+@MappableClass()
+class MediaGalleryItem with ToStringHelper, MediaGalleryItemMappable {
   /// The item to display.
   final UnfurledMediaItem media;
 
@@ -450,7 +417,9 @@ class MediaGalleryItem with ToStringHelper {
 }
 
 /// A component that displays several child media items.
-class MediaGalleryComponent extends MessageComponent {
+@MappableClass()
+class MediaGalleryComponent extends MessageComponent
+    with MediaGalleryComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.mediaGallery;
 
@@ -462,16 +431,18 @@ class MediaGalleryComponent extends MessageComponent {
 }
 
 /// The size of the spacing introduced by a [SeparatorComponent].
-final class SeparatorSpacingSize extends EnumLike<int, SeparatorSpacingSize> {
-  static const small = SeparatorSpacingSize(1);
-  static const large = SeparatorSpacingSize(2);
-
-  /// @nodoc
-  const SeparatorSpacingSize(super.value);
+@MappableEnum()
+enum SeparatorSpacingSize {
+  @MappableValue(1)
+  small,
+  @MappableValue(2)
+  large
 }
 
 /// A component that introduces space between two other components.
-class SeparatorComponent extends MessageComponent {
+@MappableClass()
+class SeparatorComponent extends MessageComponent
+    with SeparatorComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.separator;
 
@@ -487,7 +458,8 @@ class SeparatorComponent extends MessageComponent {
 }
 
 /// A component that displays a downloadable file.
-class FileComponent extends MessageComponent {
+@MappableClass()
+class FileComponent extends MessageComponent with FileComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.file;
 
@@ -503,7 +475,9 @@ class FileComponent extends MessageComponent {
 }
 
 /// A component that contains several other components.
-class ContainerComponent extends MessageComponent {
+@MappableClass()
+class ContainerComponent extends MessageComponent
+    with ContainerComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.container;
 
@@ -524,7 +498,9 @@ class ContainerComponent extends MessageComponent {
       required this.components});
 }
 
-class FileUploadComponent extends MessageComponent {
+@MappableClass()
+class FileUploadComponent extends MessageComponent
+    with FileUploadComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.fileUpload;
 
@@ -550,12 +526,16 @@ class FileUploadComponent extends MessageComponent {
 }
 
 /// A component received as part of an [Interaction].
-abstract class SubmittedComponent extends MessageComponent {
+@MappableClass()
+abstract class SubmittedComponent extends MessageComponent
+    with SubmittedComponentMappable {
   /// @nodoc
   SubmittedComponent({required super.id});
 }
 
-class SubmittedFileUploadComponent extends SubmittedComponent {
+@MappableClass()
+class SubmittedFileUploadComponent extends SubmittedComponent
+    with SubmittedFileUploadComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.fileUpload;
 
@@ -571,7 +551,9 @@ class SubmittedFileUploadComponent extends SubmittedComponent {
 }
 
 /// An [ActionRowComponent] received in an [Interaction].
-class SubmittedActionRowComponent extends SubmittedComponent {
+@MappableClass()
+class SubmittedActionRowComponent extends SubmittedComponent
+    with SubmittedActionRowComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.actionRow;
 
@@ -583,7 +565,9 @@ class SubmittedActionRowComponent extends SubmittedComponent {
 }
 
 /// A text input received in an [Interaction].
-class SubmittedTextInputComponent extends SubmittedComponent {
+@MappableClass()
+class SubmittedTextInputComponent extends SubmittedComponent
+    with SubmittedTextInputComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.textInput;
 
@@ -599,7 +583,9 @@ class SubmittedTextInputComponent extends SubmittedComponent {
 }
 
 /// A label received in an [Interaction].
-class SubmittedLabelComponent extends SubmittedComponent {
+@MappableClass()
+class SubmittedLabelComponent extends SubmittedComponent
+    with SubmittedLabelComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.label;
 
@@ -611,7 +597,9 @@ class SubmittedLabelComponent extends SubmittedComponent {
 }
 
 /// A [SelectMenuComponent] received in an [Interaction].
-class SubmittedSelectMenuComponent extends SubmittedComponent {
+@MappableClass()
+class SubmittedSelectMenuComponent extends SubmittedComponent
+    with SubmittedSelectMenuComponentMappable {
   final MessageManager manager;
 
   @override
@@ -655,7 +643,9 @@ class SubmittedSelectMenuComponent extends SubmittedComponent {
 }
 
 /// A [TextDisplayComponent] received in an [Interaction].
-class SubmittedTextDisplayComponent extends SubmittedComponent {
+@MappableClass()
+class SubmittedTextDisplayComponent extends SubmittedComponent
+    with SubmittedTextDisplayComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.textDisplay;
 

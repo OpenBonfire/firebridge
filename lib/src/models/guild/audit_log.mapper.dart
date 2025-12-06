@@ -7,6 +7,296 @@
 
 part of 'audit_log.dart';
 
+class AuditLogEventMapper extends EnumMapper<AuditLogEvent> {
+  AuditLogEventMapper._();
+
+  static AuditLogEventMapper? _instance;
+  static AuditLogEventMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = AuditLogEventMapper._());
+    }
+    return _instance!;
+  }
+
+  static AuditLogEvent fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  AuditLogEvent decode(dynamic value) {
+    switch (value) {
+      case 1:
+        return AuditLogEvent.guildUpdate;
+      case 10:
+        return AuditLogEvent.channelCreate;
+      case 11:
+        return AuditLogEvent.channelUpdate;
+      case 12:
+        return AuditLogEvent.channelDelete;
+      case 13:
+        return AuditLogEvent.channelOverwriteCreate;
+      case 14:
+        return AuditLogEvent.channelOverwriteUpdate;
+      case 15:
+        return AuditLogEvent.channelOverwriteDelete;
+      case 20:
+        return AuditLogEvent.memberKick;
+      case 21:
+        return AuditLogEvent.memberPrune;
+      case 22:
+        return AuditLogEvent.memberBanAdd;
+      case 23:
+        return AuditLogEvent.memberBanRemove;
+      case 24:
+        return AuditLogEvent.memberUpdate;
+      case 25:
+        return AuditLogEvent.memberRoleUpdate;
+      case 26:
+        return AuditLogEvent.memberMove;
+      case 27:
+        return AuditLogEvent.memberDisconnect;
+      case 28:
+        return AuditLogEvent.botAdd;
+      case 30:
+        return AuditLogEvent.roleCreate;
+      case 31:
+        return AuditLogEvent.roleUpdate;
+      case 32:
+        return AuditLogEvent.roleDelete;
+      case 40:
+        return AuditLogEvent.inviteCreate;
+      case 41:
+        return AuditLogEvent.inviteUpdate;
+      case 42:
+        return AuditLogEvent.inviteDelete;
+      case 50:
+        return AuditLogEvent.webhookCreate;
+      case 51:
+        return AuditLogEvent.webhookUpdate;
+      case 52:
+        return AuditLogEvent.webhookDelete;
+      case 60:
+        return AuditLogEvent.emojiCreate;
+      case 61:
+        return AuditLogEvent.emojiUpdate;
+      case 62:
+        return AuditLogEvent.emojiDelete;
+      case 72:
+        return AuditLogEvent.messageDelete;
+      case 73:
+        return AuditLogEvent.messageBulkDelete;
+      case 74:
+        return AuditLogEvent.messagePin;
+      case 75:
+        return AuditLogEvent.messageUnpin;
+      case 80:
+        return AuditLogEvent.integrationCreate;
+      case 81:
+        return AuditLogEvent.integrationUpdate;
+      case 82:
+        return AuditLogEvent.integrationDelete;
+      case 83:
+        return AuditLogEvent.stageInstanceCreate;
+      case 84:
+        return AuditLogEvent.stageInstanceUpdate;
+      case 85:
+        return AuditLogEvent.stageInstanceDelete;
+      case 90:
+        return AuditLogEvent.stickerCreate;
+      case 91:
+        return AuditLogEvent.stickerUpdate;
+      case 92:
+        return AuditLogEvent.stickerDelete;
+      case 100:
+        return AuditLogEvent.guildScheduledEventCreate;
+      case 101:
+        return AuditLogEvent.guildScheduledEventUpdate;
+      case 102:
+        return AuditLogEvent.guildScheduledEventDelete;
+      case 110:
+        return AuditLogEvent.threadCreate;
+      case 111:
+        return AuditLogEvent.threadUpdate;
+      case 112:
+        return AuditLogEvent.threadDelete;
+      case 121:
+        return AuditLogEvent.applicationCommandPermissionUpdate;
+      case 140:
+        return AuditLogEvent.autoModerationRuleCreate;
+      case 141:
+        return AuditLogEvent.autoModerationRuleUpdate;
+      case 142:
+        return AuditLogEvent.autoModerationRuleDelete;
+      case 143:
+        return AuditLogEvent.autoModerationBlockMessage;
+      case 144:
+        return AuditLogEvent.autoModerationFlagToChannel;
+      case 145:
+        return AuditLogEvent.autoModerationUserCommunicationDisabled;
+      case 150:
+        return AuditLogEvent.creatorMonetizationRequestCreated;
+      case 151:
+        return AuditLogEvent.creatorMonetizationTermsAccepted;
+      case 163:
+        return AuditLogEvent.onboardingPromptCreate;
+      case 164:
+        return AuditLogEvent.onboardingPromptUpdate;
+      case 165:
+        return AuditLogEvent.onboardingPromptDelete;
+      case 166:
+        return AuditLogEvent.onboardingCreate;
+      case 167:
+        return AuditLogEvent.onboardingUpdate;
+      case 190:
+        return AuditLogEvent.homeSettingsCreate;
+      case 191:
+        return AuditLogEvent.homeSettingsUpdate;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(AuditLogEvent self) {
+    switch (self) {
+      case AuditLogEvent.guildUpdate:
+        return 1;
+      case AuditLogEvent.channelCreate:
+        return 10;
+      case AuditLogEvent.channelUpdate:
+        return 11;
+      case AuditLogEvent.channelDelete:
+        return 12;
+      case AuditLogEvent.channelOverwriteCreate:
+        return 13;
+      case AuditLogEvent.channelOverwriteUpdate:
+        return 14;
+      case AuditLogEvent.channelOverwriteDelete:
+        return 15;
+      case AuditLogEvent.memberKick:
+        return 20;
+      case AuditLogEvent.memberPrune:
+        return 21;
+      case AuditLogEvent.memberBanAdd:
+        return 22;
+      case AuditLogEvent.memberBanRemove:
+        return 23;
+      case AuditLogEvent.memberUpdate:
+        return 24;
+      case AuditLogEvent.memberRoleUpdate:
+        return 25;
+      case AuditLogEvent.memberMove:
+        return 26;
+      case AuditLogEvent.memberDisconnect:
+        return 27;
+      case AuditLogEvent.botAdd:
+        return 28;
+      case AuditLogEvent.roleCreate:
+        return 30;
+      case AuditLogEvent.roleUpdate:
+        return 31;
+      case AuditLogEvent.roleDelete:
+        return 32;
+      case AuditLogEvent.inviteCreate:
+        return 40;
+      case AuditLogEvent.inviteUpdate:
+        return 41;
+      case AuditLogEvent.inviteDelete:
+        return 42;
+      case AuditLogEvent.webhookCreate:
+        return 50;
+      case AuditLogEvent.webhookUpdate:
+        return 51;
+      case AuditLogEvent.webhookDelete:
+        return 52;
+      case AuditLogEvent.emojiCreate:
+        return 60;
+      case AuditLogEvent.emojiUpdate:
+        return 61;
+      case AuditLogEvent.emojiDelete:
+        return 62;
+      case AuditLogEvent.messageDelete:
+        return 72;
+      case AuditLogEvent.messageBulkDelete:
+        return 73;
+      case AuditLogEvent.messagePin:
+        return 74;
+      case AuditLogEvent.messageUnpin:
+        return 75;
+      case AuditLogEvent.integrationCreate:
+        return 80;
+      case AuditLogEvent.integrationUpdate:
+        return 81;
+      case AuditLogEvent.integrationDelete:
+        return 82;
+      case AuditLogEvent.stageInstanceCreate:
+        return 83;
+      case AuditLogEvent.stageInstanceUpdate:
+        return 84;
+      case AuditLogEvent.stageInstanceDelete:
+        return 85;
+      case AuditLogEvent.stickerCreate:
+        return 90;
+      case AuditLogEvent.stickerUpdate:
+        return 91;
+      case AuditLogEvent.stickerDelete:
+        return 92;
+      case AuditLogEvent.guildScheduledEventCreate:
+        return 100;
+      case AuditLogEvent.guildScheduledEventUpdate:
+        return 101;
+      case AuditLogEvent.guildScheduledEventDelete:
+        return 102;
+      case AuditLogEvent.threadCreate:
+        return 110;
+      case AuditLogEvent.threadUpdate:
+        return 111;
+      case AuditLogEvent.threadDelete:
+        return 112;
+      case AuditLogEvent.applicationCommandPermissionUpdate:
+        return 121;
+      case AuditLogEvent.autoModerationRuleCreate:
+        return 140;
+      case AuditLogEvent.autoModerationRuleUpdate:
+        return 141;
+      case AuditLogEvent.autoModerationRuleDelete:
+        return 142;
+      case AuditLogEvent.autoModerationBlockMessage:
+        return 143;
+      case AuditLogEvent.autoModerationFlagToChannel:
+        return 144;
+      case AuditLogEvent.autoModerationUserCommunicationDisabled:
+        return 145;
+      case AuditLogEvent.creatorMonetizationRequestCreated:
+        return 150;
+      case AuditLogEvent.creatorMonetizationTermsAccepted:
+        return 151;
+      case AuditLogEvent.onboardingPromptCreate:
+        return 163;
+      case AuditLogEvent.onboardingPromptUpdate:
+        return 164;
+      case AuditLogEvent.onboardingPromptDelete:
+        return 165;
+      case AuditLogEvent.onboardingCreate:
+        return 166;
+      case AuditLogEvent.onboardingUpdate:
+        return 167;
+      case AuditLogEvent.homeSettingsCreate:
+        return 190;
+      case AuditLogEvent.homeSettingsUpdate:
+        return 191;
+    }
+  }
+}
+
+extension AuditLogEventMapperExtension on AuditLogEvent {
+  dynamic toValue() {
+    AuditLogEventMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<AuditLogEvent>(this);
+  }
+}
+
 class PartialAuditLogEntryMapper extends ClassMapperBase<PartialAuditLogEntry> {
   PartialAuditLogEntryMapper._();
 
@@ -287,7 +577,6 @@ abstract class AuditLogEntryCopyWith<$R, $In extends AuditLogEntry, $Out>
   >?
   get changes;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get userId;
-  AuditLogEventCopyWith<$R, AuditLogEvent, AuditLogEvent> get actionType;
   AuditLogEntryInfoCopyWith<$R, AuditLogEntryInfo, AuditLogEntryInfo>?
   get options;
   @override
@@ -333,9 +622,6 @@ class _AuditLogEntryCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get userId =>
       $value.userId?.copyWith.$chain((v) => call(userId: v));
-  @override
-  AuditLogEventCopyWith<$R, AuditLogEvent, AuditLogEvent> get actionType =>
-      $value.actionType.copyWith.$chain((v) => call(actionType: v));
   @override
   AuditLogEntryInfoCopyWith<$R, AuditLogEntryInfo, AuditLogEntryInfo>?
   get options => $value.options?.copyWith.$chain((v) => call(options: v));
@@ -516,118 +802,6 @@ class _AuditLogChangeCopyWithImpl<$R, $Out>
   AuditLogChangeCopyWith<$R2, AuditLogChange, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   ) => _AuditLogChangeCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
-class AuditLogEventMapper extends ClassMapperBase<AuditLogEvent> {
-  AuditLogEventMapper._();
-
-  static AuditLogEventMapper? _instance;
-  static AuditLogEventMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = AuditLogEventMapper._());
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'AuditLogEvent';
-
-  static const Field<AuditLogEvent, dynamic> _f$value = Field(
-    'value',
-    null,
-    mode: FieldMode.param,
-  );
-
-  @override
-  final MappableFields<AuditLogEvent> fields = const {#value: _f$value};
-
-  static AuditLogEvent _instantiate(DecodingData data) {
-    return AuditLogEvent(data.dec(_f$value));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static AuditLogEvent fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<AuditLogEvent>(map);
-  }
-
-  static AuditLogEvent fromJson(String json) {
-    return ensureInitialized().decodeJson<AuditLogEvent>(json);
-  }
-}
-
-mixin AuditLogEventMappable {
-  String toJson() {
-    return AuditLogEventMapper.ensureInitialized().encodeJson<AuditLogEvent>(
-      this as AuditLogEvent,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return AuditLogEventMapper.ensureInitialized().encodeMap<AuditLogEvent>(
-      this as AuditLogEvent,
-    );
-  }
-
-  AuditLogEventCopyWith<AuditLogEvent, AuditLogEvent, AuditLogEvent>
-  get copyWith => _AuditLogEventCopyWithImpl<AuditLogEvent, AuditLogEvent>(
-    this as AuditLogEvent,
-    $identity,
-    $identity,
-  );
-  @override
-  String toString() {
-    return AuditLogEventMapper.ensureInitialized().stringifyValue(
-      this as AuditLogEvent,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return AuditLogEventMapper.ensureInitialized().equalsValue(
-      this as AuditLogEvent,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return AuditLogEventMapper.ensureInitialized().hashValue(
-      this as AuditLogEvent,
-    );
-  }
-}
-
-extension AuditLogEventValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, AuditLogEvent, $Out> {
-  AuditLogEventCopyWith<$R, AuditLogEvent, $Out> get $asAuditLogEvent =>
-      $base.as((v, t, t2) => _AuditLogEventCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class AuditLogEventCopyWith<$R, $In extends AuditLogEvent, $Out>
-    implements ClassCopyWith<$R, $In, $Out> {
-  $R call({dynamic value});
-  AuditLogEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
-}
-
-class _AuditLogEventCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, AuditLogEvent, $Out>
-    implements AuditLogEventCopyWith<$R, AuditLogEvent, $Out> {
-  _AuditLogEventCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<AuditLogEvent> $mapper =
-      AuditLogEventMapper.ensureInitialized();
-  @override
-  $R call({dynamic value}) => $apply(FieldCopyWithData({#value: value}));
-  @override
-  AuditLogEvent $make(CopyWithData data) => AuditLogEvent(data.get(#value));
-
-  @override
-  AuditLogEventCopyWith<$R2, AuditLogEvent, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _AuditLogEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class AuditLogEntryInfoMapper extends ClassMapperBase<AuditLogEntryInfo> {

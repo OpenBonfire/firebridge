@@ -2,36 +2,27 @@ import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/models/user/user.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 
 part 'sticker.mapper.dart';
 
-@MappableClass()
-final class StickerType extends EnumLike<int, StickerType>
-    with StickerTypeMappable {
-  static const standard = StickerType(1);
-  static const guild = StickerType(2);
-
-  /// @nodoc
-  const StickerType(super.value);
-
-  StickerType.parse(int value) : this(value);
+@MappableEnum()
+enum StickerType {
+  @MappableValue(1)
+  standard,
+  @MappableValue(2)
+  guild
 }
 
-@MappableClass()
-final class StickerFormatType extends EnumLike<int, StickerFormatType>
-    with StickerFormatTypeMappable {
-  static const png = StickerFormatType(1);
-  static const apng = StickerFormatType(2);
-  static const lottie = StickerFormatType(3);
-  static const gif = StickerFormatType(4);
-
-  /// @nodoc
-  const StickerFormatType(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  StickerFormatType.parse(int value) : this(value);
+@MappableEnum(mode: ValuesMode.indexed)
+enum StickerFormatType {
+  @MappableValue(1)
+  png,
+  @MappableValue(2)
+  apng,
+  @MappableValue(3)
+  lottie,
+  @MappableValue(4)
+  gif,
 }
 
 /// Mixin with shared properties with stickers

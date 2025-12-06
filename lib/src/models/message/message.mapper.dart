@@ -7,6 +7,192 @@
 
 part of 'message.dart';
 
+class MessageTypeMapper extends EnumMapper<MessageType> {
+  MessageTypeMapper._();
+
+  static MessageTypeMapper? _instance;
+  static MessageTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = MessageTypeMapper._());
+    }
+    return _instance!;
+  }
+
+  static MessageType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  MessageType decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return MessageType.normal;
+      case 1:
+        return MessageType.recipientAdd;
+      case 2:
+        return MessageType.recipientRemove;
+      case 3:
+        return MessageType.call;
+      case 4:
+        return MessageType.channelNameChange;
+      case 5:
+        return MessageType.channelIconChange;
+      case 6:
+        return MessageType.channelPinnedMessage;
+      case 7:
+        return MessageType.userJoin;
+      case 8:
+        return MessageType.guildBoost;
+      case 9:
+        return MessageType.guildBoostTier1;
+      case 10:
+        return MessageType.guildBoostTier2;
+      case 11:
+        return MessageType.guildBoostTier3;
+      case 12:
+        return MessageType.channelFollowAdd;
+      case 14:
+        return MessageType.guildDiscoveryDisqualified;
+      case 15:
+        return MessageType.guildDiscoveryRequalified;
+      case 16:
+        return MessageType.guildDiscoveryGracePeriodInitialWarning;
+      case 17:
+        return MessageType.guildDiscoveryGracePeriodFinalWarning;
+      case 18:
+        return MessageType.threadCreated;
+      case 19:
+        return MessageType.reply;
+      case 20:
+        return MessageType.chatInputCommand;
+      case 21:
+        return MessageType.threadStarterMessage;
+      case 22:
+        return MessageType.guildInviteReminder;
+      case 23:
+        return MessageType.contextMenuCommand;
+      case 24:
+        return MessageType.autoModerationAction;
+      case 25:
+        return MessageType.roleSubscriptionPurchase;
+      case 26:
+        return MessageType.interactionPremiumUpsell;
+      case 27:
+        return MessageType.stageStart;
+      case 28:
+        return MessageType.stageEnd;
+      case 29:
+        return MessageType.stageSpeaker;
+      case 31:
+        return MessageType.stageTopic;
+      case 32:
+        return MessageType.guildApplicationPremiumSubscription;
+      case 36:
+        return MessageType.guildIncidentAlertModeEnabled;
+      case 37:
+        return MessageType.guildIncidentAlertModeDisabled;
+      case 38:
+        return MessageType.guildIncidentReportRaid;
+      case 39:
+        return MessageType.guildIncidentReportFalseAlarm;
+      case 44:
+        return MessageType.purchaseNotification;
+      case 46:
+        return MessageType.pollResult;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(MessageType self) {
+    switch (self) {
+      case MessageType.normal:
+        return 0;
+      case MessageType.recipientAdd:
+        return 1;
+      case MessageType.recipientRemove:
+        return 2;
+      case MessageType.call:
+        return 3;
+      case MessageType.channelNameChange:
+        return 4;
+      case MessageType.channelIconChange:
+        return 5;
+      case MessageType.channelPinnedMessage:
+        return 6;
+      case MessageType.userJoin:
+        return 7;
+      case MessageType.guildBoost:
+        return 8;
+      case MessageType.guildBoostTier1:
+        return 9;
+      case MessageType.guildBoostTier2:
+        return 10;
+      case MessageType.guildBoostTier3:
+        return 11;
+      case MessageType.channelFollowAdd:
+        return 12;
+      case MessageType.guildDiscoveryDisqualified:
+        return 14;
+      case MessageType.guildDiscoveryRequalified:
+        return 15;
+      case MessageType.guildDiscoveryGracePeriodInitialWarning:
+        return 16;
+      case MessageType.guildDiscoveryGracePeriodFinalWarning:
+        return 17;
+      case MessageType.threadCreated:
+        return 18;
+      case MessageType.reply:
+        return 19;
+      case MessageType.chatInputCommand:
+        return 20;
+      case MessageType.threadStarterMessage:
+        return 21;
+      case MessageType.guildInviteReminder:
+        return 22;
+      case MessageType.contextMenuCommand:
+        return 23;
+      case MessageType.autoModerationAction:
+        return 24;
+      case MessageType.roleSubscriptionPurchase:
+        return 25;
+      case MessageType.interactionPremiumUpsell:
+        return 26;
+      case MessageType.stageStart:
+        return 27;
+      case MessageType.stageEnd:
+        return 28;
+      case MessageType.stageSpeaker:
+        return 29;
+      case MessageType.stageTopic:
+        return 31;
+      case MessageType.guildApplicationPremiumSubscription:
+        return 32;
+      case MessageType.guildIncidentAlertModeEnabled:
+        return 36;
+      case MessageType.guildIncidentAlertModeDisabled:
+        return 37;
+      case MessageType.guildIncidentReportRaid:
+        return 38;
+      case MessageType.guildIncidentReportFalseAlarm:
+        return 39;
+      case MessageType.purchaseNotification:
+        return 44;
+      case MessageType.pollResult:
+        return 46;
+    }
+  }
+}
+
+extension MessageTypeMapperExtension on MessageType {
+  dynamic toValue() {
+    MessageTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<MessageType>(this);
+  }
+}
+
 class PartialMessageMapper extends ClassMapperBase<PartialMessage> {
   PartialMessageMapper._();
 
@@ -140,12 +326,18 @@ class MessageMapper extends ClassMapperBase<Message> {
       SnowflakeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       ChannelMentionMapper.ensureInitialized();
+      AttachmentMapper.ensureInitialized();
+      EmbedMapper.ensureInitialized();
+      MessageTypeMapper.ensureInitialized();
       PartialApplicationMapper.ensureInitialized();
       MessageReferenceMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
       ThreadMapper.ensureInitialized();
+      MessageComponentMapper.ensureInitialized();
+      RoleSubscriptionDataMapper.ensureInitialized();
       StickerItemMapper.ensureInitialized();
       ResolvedDataMapper.ensureInitialized();
+      PollMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -456,9 +648,9 @@ abstract class MessageCopyWith<$R, $In extends Message, $Out>
     ChannelMentionCopyWith<$R, ChannelMention, ChannelMention>
   >
   get channelMentions;
-  ListCopyWith<$R, Attachment, ObjectCopyWith<$R, Attachment, Attachment>>
+  ListCopyWith<$R, Attachment, AttachmentCopyWith<$R, Attachment, Attachment>>
   get attachments;
-  ListCopyWith<$R, Embed, ObjectCopyWith<$R, Embed, Embed>> get embeds;
+  ListCopyWith<$R, Embed, EmbedCopyWith<$R, Embed, Embed>> get embeds;
   ListCopyWith<$R, Reaction, ObjectCopyWith<$R, Reaction, Reaction>>
   get reactions;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get webhookId;
@@ -481,6 +673,8 @@ abstract class MessageCopyWith<$R, $In extends Message, $Out>
     ObjectCopyWith<$R, MessageComponent, MessageComponent>
   >?
   get components;
+  RoleSubscriptionDataCopyWith<$R, RoleSubscriptionData, RoleSubscriptionData>?
+  get roleSubscriptionData;
   ListCopyWith<
     $R,
     StickerItem,
@@ -488,6 +682,7 @@ abstract class MessageCopyWith<$R, $In extends Message, $Out>
   >
   get stickers;
   ResolvedDataCopyWith<$R, ResolvedData, ResolvedData>? get resolved;
+  PollCopyWith<$R, Poll, Poll>? get poll;
   @override
   $R call({
     Snowflake? id,
@@ -565,17 +760,17 @@ class _MessageCopyWithImpl<$R, $Out>
     (v) => call(channelMentions: v),
   );
   @override
-  ListCopyWith<$R, Attachment, ObjectCopyWith<$R, Attachment, Attachment>>
+  ListCopyWith<$R, Attachment, AttachmentCopyWith<$R, Attachment, Attachment>>
   get attachments => ListCopyWith(
     $value.attachments,
-    (v, t) => ObjectCopyWith(v, $identity, t),
+    (v, t) => v.copyWith.$chain(t),
     (v) => call(attachments: v),
   );
   @override
-  ListCopyWith<$R, Embed, ObjectCopyWith<$R, Embed, Embed>> get embeds =>
+  ListCopyWith<$R, Embed, EmbedCopyWith<$R, Embed, Embed>> get embeds =>
       ListCopyWith(
         $value.embeds,
-        (v, t) => ObjectCopyWith(v, $identity, t),
+        (v, t) => v.copyWith.$chain(t),
         (v) => call(embeds: v),
       );
   @override
@@ -633,6 +828,11 @@ class _MessageCopyWithImpl<$R, $Out>
         )
       : null;
   @override
+  RoleSubscriptionDataCopyWith<$R, RoleSubscriptionData, RoleSubscriptionData>?
+  get roleSubscriptionData => $value.roleSubscriptionData?.copyWith.$chain(
+    (v) => call(roleSubscriptionData: v),
+  );
+  @override
   ListCopyWith<
     $R,
     StickerItem,
@@ -646,6 +846,9 @@ class _MessageCopyWithImpl<$R, $Out>
   @override
   ResolvedDataCopyWith<$R, ResolvedData, ResolvedData>? get resolved =>
       $value.resolved?.copyWith.$chain((v) => call(resolved: v));
+  @override
+  PollCopyWith<$R, Poll, Poll>? get poll =>
+      $value.poll?.copyWith.$chain((v) => call(poll: v));
   @override
   $R call({
     Snowflake? id,

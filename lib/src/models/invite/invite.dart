@@ -1,16 +1,19 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/application.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/guild/scheduled_event.dart';
 import 'package:nyxx/src/models/user/user.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/flags.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+
+part 'invite.mapper.dart';
 
 /// {@template invite}
 /// An invite to a [Guild] or [Channel].
 /// If the invite is to a [Channel], this will be a [GroupDmChannel].
 /// {@endtemplate}
+@MappableClass()
 class Invite with ToStringHelper {
   /// The type of this invite.
   final InviteType type;
@@ -79,29 +82,28 @@ class Invite with ToStringHelper {
 }
 
 /// The type of an [Invite]'s target.
-final class TargetType extends EnumLike<int, TargetType> {
-  static const stream = TargetType(1);
-  static const embeddedApplication = TargetType(2);
-
-  /// @nodoc
-  const TargetType(super.value);
-
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  TargetType.parse(int value) : this(value);
+@MappableEnum()
+enum TargetType {
+  @MappableValue(1)
+  stream,
+  @MappableValue(2)
+  embeddedApplication
 }
 
-/// The type of an [Invite].
-final class InviteType extends EnumLike<int, InviteType> {
-  static const guild = InviteType(0);
-  static const groupDm = InviteType(1);
-  static const friend = InviteType(3);
-
-  /// @nodoc
-  const InviteType(super.value);
+@MappableEnum()
+enum InviteType {
+  @MappableValue(0)
+  guild,
+  @MappableValue(1)
+  groupDm,
+  @MappableValue(3)
+  friend
 }
 
 /// Flags for [Invite]s.
-class GuildInviteFlags extends Flags<GuildInviteFlags> {
+@MappableClass()
+class GuildInviteFlags extends Flags<GuildInviteFlags>
+    with GuildInviteFlagsMappable {
   /// The invite is a guest invite for a voice channel.
   static const isGuestInvite = Flag<GuildInviteFlags>.fromOffset(1 << 0);
 

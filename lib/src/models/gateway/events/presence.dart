@@ -37,7 +37,8 @@ class PresenceUpdateEvent extends DispatchEvent {
   });
 
   /// The guild the presence was updated in.
-  PartialGuild? get guild => guildId == null ? null : gateway.client.guilds[guildId!];
+  PartialGuild? get guild =>
+      guildId == null ? null : gateway.client.guilds[guildId!];
 }
 
 /// {@template typing_start_event}
@@ -71,10 +72,12 @@ class TypingStartEvent extends DispatchEvent {
   });
 
   /// The guild the user started typing in.
-  PartialGuild? get guild => guildId == null ? null : gateway.client.guilds[guildId!];
+  PartialGuild? get guild =>
+      guildId == null ? null : gateway.client.guilds[guildId!];
 
   /// The channel the user started typing in.
-  PartialTextChannel get channel => gateway.client.channels[channelId] as PartialTextChannel;
+  PartialTextChannel get channel =>
+      gateway.client.channels[channelId] as PartialTextChannel;
 
   /// The user that started typing.
   PartialUser get user => gateway.client.users[userId];
@@ -92,5 +95,5 @@ class UserUpdateEvent extends DispatchEvent {
 
   /// {@macro user_update_event}
   /// @nodoc
-  UserUpdateEvent({required super.gateway, required this.oldUser, required this.user});
+  UserUpdateEvent({required this.oldUser, required this.user});
 }

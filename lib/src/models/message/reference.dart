@@ -3,7 +3,6 @@ import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/message/message.dart';
 import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'reference.mapper.dart';
@@ -70,11 +69,5 @@ class MessageReference with ToStringHelper, MessageReferenceMappable {
   });
 }
 
-@MappableClass()
-final class MessageReferenceType extends EnumLike<int, MessageReferenceType>
-    with MessageReferenceTypeMappable {
-  static const defaultType = MessageReferenceType(0);
-  static const forward = MessageReferenceType(1);
-
-  const MessageReferenceType(super.value);
-}
+@MappableEnum(mode: ValuesMode.indexed)
+enum MessageReferenceType { defaultType, forward }

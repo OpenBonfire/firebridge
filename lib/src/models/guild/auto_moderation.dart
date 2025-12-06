@@ -1,11 +1,8 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/guild/auto_moderation.dart';
-import 'package:nyxx/src/http/managers/auto_moderation_manager.dart';
-import 'package:nyxx/src/models/channel/text_channel.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'auto_moderation.mapper.dart';
@@ -74,47 +71,36 @@ class AutoModerationRule extends PartialAutoModerationRule
 }
 
 /// The type of event on which an [AutoModerationRule] triggers.
-final class AutoModerationEventType
-    extends EnumLike<int, AutoModerationEventType> {
-  /// When a member sends or edits a message in the guild.
-  static const messageSend = AutoModerationEventType(1);
-
-  /// When a member edits their profile.
-  static const memberUpdate = AutoModerationEventType(2);
-
-  /// @nodoc
-  const AutoModerationEventType(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  AutoModerationEventType.parse(int value) : this(value);
+@MappableEnum()
+enum AutoModerationEventType {
+  @MappableValue(1)
+  messageSend,
+  @MappableValue(2)
+  memberUpdate
 }
 
 /// The type of a trigger for an [AutoModerationRule]
-@MappableClass()
-final class TriggerType extends EnumLike<int, TriggerType>
-    with TriggerTypeMappable {
+@MappableEnum()
+enum TriggerType {
   /// Check if content contains words from a user defined list of keywords.
-  static const keyword = TriggerType(1);
+  @MappableValue(1)
+  keyword,
 
   /// Check if content represents generic spam.
-  static const spam = TriggerType(3);
+  @MappableValue(3)
+  spam,
 
   /// Check if content contains words from internal pre-defined wordsets.
-  static const keywordPreset = TriggerType(4);
+  @MappableValue(4)
+  keywordPreset,
 
   /// Check if content contains more unique mentions than allowed.
-  static const mentionSpam = TriggerType(5);
+  @MappableValue(5)
+  mentionSpam,
 
   /// Check if member profile contains words from a user defined list of keywords.
-  static const memberProfile = TriggerType(6);
-
-  /// @nodoc
-  const TriggerType(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  TriggerType.parse(int value) : this(value);
+  @MappableValue(6)
+  memberProfile,
 }
 
 /// {@template trigger_metadata}
@@ -154,33 +140,17 @@ class TriggerMetadata
     required this.mentionTotalLimit,
     required this.isMentionRaidProtectionEnabled,
   });
-
-  @override
-  @Deprecated('Use TriggerMetadataBuilder instead')
-  Map<String, Object?> build() => {
-        'keyword_filter': keywordFilter,
-        'regex_patterns': regexPatterns,
-        'presets': presets?.map((type) => type.value).toList(),
-        'allow_list': allowList,
-        'mention_total_limit': mentionTotalLimit,
-        'mention_raid_protection_enabled': isMentionRaidProtectionEnabled,
-      };
 }
 
 /// A preset list of trigger keywords for an [AutoModerationRule].
-@MappableClass()
-final class KeywordPresetType extends EnumLike<int, KeywordPresetType>
-    with KeywordPresetTypeMappable {
-  static const profanity = KeywordPresetType(1);
-  static const sexualContent = KeywordPresetType(2);
-  static const slurs = KeywordPresetType(3);
-
-  /// @nodoc
-  const KeywordPresetType(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  KeywordPresetType.parse(int value) : this(value);
+@MappableEnum()
+enum KeywordPresetType {
+  @MappableValue(1)
+  profanity,
+  @MappableValue(2)
+  sexualContent,
+  @MappableValue(3)
+  slurs,
 }
 
 /// {@template auto_moderation_action}
@@ -188,13 +158,9 @@ final class KeywordPresetType extends EnumLike<int, KeywordPresetType>
 /// {@endtemplate}
 // TODO(abitofevrything): Remove `implements AutoModerationActionBuilder`
 @MappableClass()
-class AutoModerationAction
-    with ToStringHelper, AutoModerationActionMappable
-    implements AutoModerationActionBuilder {
-  @override
+class AutoModerationAction with ToStringHelper, AutoModerationActionMappable {
   final ActionType type;
 
-  @override
   final ActionMetadata? metadata;
 
   /// {@macro auto_moderation_action}
@@ -203,30 +169,19 @@ class AutoModerationAction
     required this.type,
     required this.metadata,
   });
-
-  @override
-  @Deprecated('Use AutoModerationActionBuilder instead')
-  Map<String, Object?> build() => {
-        'type': type.value,
-        if (metadata != null) 'metadata': metadata!.build(),
-      };
 }
 
 /// The type of action for an [AutoModerationAction].
-@MappableClass()
-final class ActionType extends EnumLike<int, ActionType>
-    with ActionTypeMappable {
-  static const blockMessage = ActionType(1);
-  static const sendAlertMessage = ActionType(2);
-  static const timeout = ActionType(3);
-  static const blockMemberInteraction = ActionType(4);
-
-  /// @nodoc
-  const ActionType(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  ActionType.parse(int value) : this(value);
+@MappableEnum()
+enum ActionType {
+  @MappableValue(1)
+  blockMessage,
+  @MappableValue(2)
+  sendAlertMessage,
+  @MappableValue(3)
+  timeout,
+  @MappableValue(4)
+  blockMemberInteraction,
 }
 
 /// {@template action_metadata}
@@ -234,39 +189,18 @@ final class ActionType extends EnumLike<int, ActionType>
 /// {@endtemplate}
 // TODO(abitofevrything): Remove `implements ActionMetadataBuilder`
 @MappableClass()
-class ActionMetadata
-    with ToStringHelper, ActionMetadataMappable
-    implements ActionMetadataBuilder {
-  final AutoModerationManager manager;
-
-  @override
+class ActionMetadata with ToStringHelper, ActionMetadataMappable {
   final Snowflake? channelId;
 
-  @override
   final Duration? duration;
 
-  @override
   final String? customMessage;
 
   /// {@macro action_metadata}
   /// @nodoc
   ActionMetadata({
-    required this.manager,
     required this.channelId,
     required this.duration,
     required this.customMessage,
   });
-
-  /// The channel to send the alert message to.
-  PartialTextChannel? get channel => channelId == null
-      ? null
-      : manager.client.channels[channelId!] as PartialTextChannel?;
-
-  @override
-  @Deprecated('Use ActionMetadataBuilder instead')
-  Map<String, Object?> build() => {
-        'channel_id': channelId?.toString(),
-        'duration_seconds': duration?.inSeconds,
-        'custom_message': customMessage,
-      };
 }

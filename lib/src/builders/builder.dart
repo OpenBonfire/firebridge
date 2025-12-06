@@ -1,7 +1,7 @@
 abstract class Builder<T> {
   const Builder();
 
-  Map<String, Object?> build();
+  Map<String, Object?> toMap();
 }
 
 abstract class CreateBuilder<T> extends Builder<T> {

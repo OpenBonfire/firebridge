@@ -1,8 +1,4 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/builders/role.dart';
-import 'package:nyxx/src/http/cdn/cdn_asset.dart';
-import 'package:nyxx/src/http/managers/role_manager.dart';
-import 'package:nyxx/src/http/route.dart';
 import 'package:nyxx/src/models/commands/application_command_option.dart';
 import 'package:nyxx/src/models/discord_color.dart';
 import 'package:nyxx/src/models/permissions.dart';
@@ -17,30 +13,9 @@ part 'role.mapper.dart';
 @MappableClass()
 class PartialRole extends WritableSnowflakeEntity<Role>
     with PartialRoleMappable {
-  @override
-  final RoleManager manager;
-
   /// Create a new [PartialRole].
   /// @nodoc
-  PartialRole({required super.id, required this.manager});
-
-  /// Update this role, returning the updated role.
-  ///
-  /// External references:
-  /// * [RoleManager.update]
-  /// * Discord API Reference: https://discord.com/developers/docs/resources/guild#modify-guild-role
-  @override
-  Future<Role> update(RoleUpdateBuilder builder, {String? auditLogReason}) =>
-      manager.update(id, builder, auditLogReason: auditLogReason);
-
-  /// Delete this role.
-  ///
-  /// External references:
-  /// * [RoleManager.delete]
-  /// * Discord API Reference: https://discord.com/developers/docs/resources/guild#delete-guild-role
-  @override
-  Future<void> delete({String? auditLogReason}) =>
-      manager.delete(id, auditLogReason: auditLogReason);
+  PartialRole({required super.id});
 }
 
 /// {@template role}
@@ -93,7 +68,6 @@ class Role extends PartialRole
   /// @nodoc
   Role({
     required super.id,
-    required super.manager,
     required this.name,
     required this.color,
     required this.colors,
@@ -106,21 +80,13 @@ class Role extends PartialRole
     required this.tags,
     required this.flags,
   });
-
-  /// This role's icon.
-  CdnAsset? get icon => iconHash == null
-      ? null
-      : CdnAsset(
-          client: manager.client,
-          base: HttpRoute()..roleIcons(id: id.toString()),
-          hash: iconHash!,
-        );
 }
 
 /// {@template role_tags}
 /// Additional metadata associated with a role.
 /// {@endtemplate}
-class RoleTags with ToStringHelper {
+@MappableClass()
+class RoleTags with ToStringHelper, RoleTagsMappable {
   /// The ID of the bot this role belongs to.
   final Snowflake? botId;
 
@@ -152,7 +118,8 @@ class RoleTags with ToStringHelper {
 }
 
 /// The flags for a [Role].
-class RoleFlags extends Flags<RoleFlags> {
+@MappableClass()
+class RoleFlags extends Flags<RoleFlags> with RoleFlagsMappable {
   /// Whether the role is in an [Onboarding] prompt.
   static const inPrompt = Flag<RoleFlags>.fromOffset(0);
 
@@ -164,7 +131,8 @@ class RoleFlags extends Flags<RoleFlags> {
 }
 
 /// The colors for the [Role].
-class RoleColors {
+@MappableClass()
+class RoleColors with RoleColorsMappable {
   /// The primary color for the role.
   final DiscordColor primary;
 

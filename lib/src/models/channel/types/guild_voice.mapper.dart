@@ -233,8 +233,6 @@ abstract class GuildVoiceChannelCopyWith<
     PermissionOverwriteCopyWith<$R, PermissionOverwrite, PermissionOverwrite>
   >
   get permissionOverwrites;
-  VideoQualityModeCopyWith<$R, VideoQualityMode, VideoQualityMode>
-  get videoQualityMode;
   @override
   $R call({
     Snowflake? id,
@@ -288,10 +286,6 @@ class _GuildVoiceChannelCopyWithImpl<$R, $Out>
     (v, t) => v.copyWith.$chain(t),
     (v) => call(permissionOverwrites: v),
   );
-  @override
-  VideoQualityModeCopyWith<$R, VideoQualityMode, VideoQualityMode>
-  get videoQualityMode =>
-      $value.videoQualityMode.copyWith.$chain((v) => call(videoQualityMode: v));
   @override
   $R call({
     Snowflake? id,

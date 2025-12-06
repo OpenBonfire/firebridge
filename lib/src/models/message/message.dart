@@ -21,7 +21,6 @@ import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/models/sticker/sticker.dart';
 import 'package:nyxx/src/models/user/user.dart';
 import 'package:nyxx/src/models/webhook.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/flags.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
@@ -204,51 +203,82 @@ class Message extends PartialMessage
 ///
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#message-object-message-types
-final class MessageType extends EnumLike<int, MessageType> {
-  static const normal = MessageType(0);
-  static const recipientAdd = MessageType(1);
-  static const recipientRemove = MessageType(2);
-  static const call = MessageType(3);
-  static const channelNameChange = MessageType(4);
-  static const channelIconChange = MessageType(5);
-  static const channelPinnedMessage = MessageType(6);
-  static const userJoin = MessageType(7);
-  static const guildBoost = MessageType(8);
-  static const guildBoostTier1 = MessageType(9);
-  static const guildBoostTier2 = MessageType(10);
-  static const guildBoostTier3 = MessageType(11);
-  static const channelFollowAdd = MessageType(12);
-  static const guildDiscoveryDisqualified = MessageType(14);
-  static const guildDiscoveryRequalified = MessageType(15);
-  static const guildDiscoveryGracePeriodInitialWarning = MessageType(16);
-  static const guildDiscoveryGracePeriodFinalWarning = MessageType(17);
-  static const threadCreated = MessageType(18);
-  static const reply = MessageType(19);
-  static const chatInputCommand = MessageType(20);
-  static const threadStarterMessage = MessageType(21);
-  static const guildInviteReminder = MessageType(22);
-  static const contextMenuCommand = MessageType(23);
-  static const autoModerationAction = MessageType(24);
-  static const roleSubscriptionPurchase = MessageType(25);
-  static const interactionPremiumUpsell = MessageType(26);
-  static const stageStart = MessageType(27);
-  static const stageEnd = MessageType(28);
-  static const stageSpeaker = MessageType(29);
-  static const stageTopic = MessageType(31);
-  static const guildApplicationPremiumSubscription = MessageType(32);
-  static const guildIncidentAlertModeEnabled = MessageType(36);
-  static const guildIncidentAlertModeDisabled = MessageType(37);
-  static const guildIncidentReportRaid = MessageType(38);
-  static const guildIncidentReportFalseAlarm = MessageType(39);
-  static const purchaseNotification = MessageType(44);
-  static const pollResult = MessageType(46);
-
-  /// @nodoc
-  const MessageType(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  MessageType.parse(int value) : this(value);
+@MappableEnum()
+enum MessageType {
+  @MappableValue(0)
+  normal,
+  @MappableValue(1)
+  recipientAdd,
+  @MappableValue(2)
+  recipientRemove,
+  @MappableValue(3)
+  call,
+  @MappableValue(4)
+  channelNameChange,
+  @MappableValue(5)
+  channelIconChange,
+  @MappableValue(6)
+  channelPinnedMessage,
+  @MappableValue(7)
+  userJoin,
+  @MappableValue(8)
+  guildBoost,
+  @MappableValue(9)
+  guildBoostTier1,
+  @MappableValue(10)
+  guildBoostTier2,
+  @MappableValue(11)
+  guildBoostTier3,
+  @MappableValue(12)
+  channelFollowAdd,
+  @MappableValue(14)
+  guildDiscoveryDisqualified,
+  @MappableValue(15)
+  guildDiscoveryRequalified,
+  @MappableValue(16)
+  guildDiscoveryGracePeriodInitialWarning,
+  @MappableValue(17)
+  guildDiscoveryGracePeriodFinalWarning,
+  @MappableValue(18)
+  threadCreated,
+  @MappableValue(19)
+  reply,
+  @MappableValue(20)
+  chatInputCommand,
+  @MappableValue(21)
+  threadStarterMessage,
+  @MappableValue(22)
+  guildInviteReminder,
+  @MappableValue(23)
+  contextMenuCommand,
+  @MappableValue(24)
+  autoModerationAction,
+  @MappableValue(25)
+  roleSubscriptionPurchase,
+  @MappableValue(26)
+  interactionPremiumUpsell,
+  @MappableValue(27)
+  stageStart,
+  @MappableValue(28)
+  stageEnd,
+  @MappableValue(29)
+  stageSpeaker,
+  @MappableValue(31)
+  stageTopic,
+  @MappableValue(32)
+  guildApplicationPremiumSubscription,
+  @MappableValue(36)
+  guildIncidentAlertModeEnabled,
+  @MappableValue(37)
+  guildIncidentAlertModeDisabled,
+  @MappableValue(38)
+  guildIncidentReportRaid,
+  @MappableValue(39)
+  guildIncidentReportFalseAlarm,
+  @MappableValue(44)
+  purchaseNotification,
+  @MappableValue(46)
+  pollResult,
 }
 
 /// Flags that can be applied to a [Message].

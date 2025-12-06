@@ -7,6 +7,56 @@
 
 part of 'application_command_permissions.dart';
 
+class CommandPermissionTypeMapper extends EnumMapper<CommandPermissionType> {
+  CommandPermissionTypeMapper._();
+
+  static CommandPermissionTypeMapper? _instance;
+  static CommandPermissionTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = CommandPermissionTypeMapper._());
+    }
+    return _instance!;
+  }
+
+  static CommandPermissionType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  CommandPermissionType decode(dynamic value) {
+    switch (value) {
+      case 1:
+        return CommandPermissionType.role;
+      case 2:
+        return CommandPermissionType.user;
+      case 3:
+        return CommandPermissionType.channel;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(CommandPermissionType self) {
+    switch (self) {
+      case CommandPermissionType.role:
+        return 1;
+      case CommandPermissionType.user:
+        return 2;
+      case CommandPermissionType.channel:
+        return 3;
+    }
+  }
+}
+
+extension CommandPermissionTypeMapperExtension on CommandPermissionType {
+  dynamic toValue() {
+    CommandPermissionTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<CommandPermissionType>(this);
+  }
+}
+
 class CommandPermissionsMapper extends ClassMapperBase<CommandPermissions> {
   CommandPermissionsMapper._();
 
@@ -16,6 +66,7 @@ class CommandPermissionsMapper extends ClassMapperBase<CommandPermissions> {
       MapperContainer.globals.use(_instance = CommandPermissionsMapper._());
       SnowflakeEntityMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
+      CommandPermissionMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -143,7 +194,7 @@ abstract class CommandPermissionsCopyWith<
   ListCopyWith<
     $R,
     CommandPermission,
-    ObjectCopyWith<$R, CommandPermission, CommandPermission>
+    CommandPermissionCopyWith<$R, CommandPermission, CommandPermission>
   >
   get permissions;
   @override
@@ -180,11 +231,11 @@ class _CommandPermissionsCopyWithImpl<$R, $Out>
   ListCopyWith<
     $R,
     CommandPermission,
-    ObjectCopyWith<$R, CommandPermission, CommandPermission>
+    CommandPermissionCopyWith<$R, CommandPermission, CommandPermission>
   >
   get permissions => ListCopyWith(
     $value.permissions,
-    (v, t) => ObjectCopyWith(v, $identity, t),
+    (v, t) => v.copyWith.$chain(t),
     (v) => call(permissions: v),
   );
   @override
@@ -216,5 +267,161 @@ class _CommandPermissionsCopyWithImpl<$R, $Out>
   CommandPermissionsCopyWith<$R2, CommandPermissions, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   ) => _CommandPermissionsCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
+class CommandPermissionMapper extends ClassMapperBase<CommandPermission> {
+  CommandPermissionMapper._();
+
+  static CommandPermissionMapper? _instance;
+  static CommandPermissionMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = CommandPermissionMapper._());
+      SnowflakeMapper.ensureInitialized();
+      CommandPermissionTypeMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'CommandPermission';
+
+  static Snowflake _$id(CommandPermission v) => v.id;
+  static const Field<CommandPermission, Snowflake> _f$id = Field('id', _$id);
+  static CommandPermissionType _$type(CommandPermission v) => v.type;
+  static const Field<CommandPermission, CommandPermissionType> _f$type = Field(
+    'type',
+    _$type,
+  );
+  static bool _$hasPermission(CommandPermission v) => v.hasPermission;
+  static const Field<CommandPermission, bool> _f$hasPermission = Field(
+    'hasPermission',
+    _$hasPermission,
+    key: r'has_permission',
+  );
+
+  @override
+  final MappableFields<CommandPermission> fields = const {
+    #id: _f$id,
+    #type: _f$type,
+    #hasPermission: _f$hasPermission,
+  };
+
+  static CommandPermission _instantiate(DecodingData data) {
+    return CommandPermission(
+      id: data.dec(_f$id),
+      type: data.dec(_f$type),
+      hasPermission: data.dec(_f$hasPermission),
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static CommandPermission fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<CommandPermission>(map);
+  }
+
+  static CommandPermission fromJson(String json) {
+    return ensureInitialized().decodeJson<CommandPermission>(json);
+  }
+}
+
+mixin CommandPermissionMappable {
+  String toJson() {
+    return CommandPermissionMapper.ensureInitialized()
+        .encodeJson<CommandPermission>(this as CommandPermission);
+  }
+
+  Map<String, dynamic> toMap() {
+    return CommandPermissionMapper.ensureInitialized()
+        .encodeMap<CommandPermission>(this as CommandPermission);
+  }
+
+  CommandPermissionCopyWith<
+    CommandPermission,
+    CommandPermission,
+    CommandPermission
+  >
+  get copyWith =>
+      _CommandPermissionCopyWithImpl<CommandPermission, CommandPermission>(
+        this as CommandPermission,
+        $identity,
+        $identity,
+      );
+  @override
+  String toString() {
+    return CommandPermissionMapper.ensureInitialized().stringifyValue(
+      this as CommandPermission,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return CommandPermissionMapper.ensureInitialized().equalsValue(
+      this as CommandPermission,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return CommandPermissionMapper.ensureInitialized().hashValue(
+      this as CommandPermission,
+    );
+  }
+}
+
+extension CommandPermissionValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, CommandPermission, $Out> {
+  CommandPermissionCopyWith<$R, CommandPermission, $Out>
+  get $asCommandPermission => $base.as(
+    (v, t, t2) => _CommandPermissionCopyWithImpl<$R, $Out>(v, t, t2),
+  );
+}
+
+abstract class CommandPermissionCopyWith<
+  $R,
+  $In extends CommandPermission,
+  $Out
+>
+    implements ClassCopyWith<$R, $In, $Out> {
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  $R call({Snowflake? id, CommandPermissionType? type, bool? hasPermission});
+  CommandPermissionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  );
+}
+
+class _CommandPermissionCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, CommandPermission, $Out>
+    implements CommandPermissionCopyWith<$R, CommandPermission, $Out> {
+  _CommandPermissionCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<CommandPermission> $mapper =
+      CommandPermissionMapper.ensureInitialized();
+  @override
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
+      $value.id.copyWith.$chain((v) => call(id: v));
+  @override
+  $R call({Snowflake? id, CommandPermissionType? type, bool? hasPermission}) =>
+      $apply(
+        FieldCopyWithData({
+          if (id != null) #id: id,
+          if (type != null) #type: type,
+          if (hasPermission != null) #hasPermission: hasPermission,
+        }),
+      );
+  @override
+  CommandPermission $make(CopyWithData data) => CommandPermission(
+    id: data.get(#id, or: $value.id),
+    type: data.get(#type, or: $value.type),
+    hasPermission: data.get(#hasPermission, or: $value.hasPermission),
+  );
+
+  @override
+  CommandPermissionCopyWith<$R2, CommandPermission, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _CommandPermissionCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 

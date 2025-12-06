@@ -1,20 +1,17 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/emoji.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+
+part 'poll.mapper.dart';
 
 /// A layout type indicating how poll looks.
 ///
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/poll#layout-type
-final class PollLayoutType extends EnumLike<int, PollLayoutType> {
-  /// The default layout type.
-  static const defaultLayout = PollLayoutType(1);
-
-  /// @nodoc
-  const PollLayoutType(super.value);
-
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  PollLayoutType.parse(int value) : this(value);
+@MappableEnum()
+enum PollLayoutType {
+  @MappableValue(1)
+  defaultLayout
 }
 
 /// {@template poll_media}
@@ -25,7 +22,8 @@ final class PollLayoutType extends EnumLike<int, PollLayoutType> {
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/poll#poll-media-object
 /// {@endtemplate}
-class PollMedia with ToStringHelper {
+@MappableClass()
+class PollMedia with ToStringHelper, PollMediaMappable {
   /// The text of the field.
   String? text;
 
@@ -45,7 +43,8 @@ class PollMedia with ToStringHelper {
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/poll#poll-answer-object
 /// {@endtemplate}
-class PollAnswer with ToStringHelper {
+@MappableClass()
+class PollAnswer with ToStringHelper, PollAnswerMappable {
   /// The ID of the answer.
   final int id;
 
@@ -57,7 +56,8 @@ class PollAnswer with ToStringHelper {
   PollAnswer({required this.id, required this.pollMedia});
 }
 
-class PollAnswerCount with ToStringHelper {
+@MappableClass()
+class PollAnswerCount with ToStringHelper, PollAnswerCountMappable {
   /// The ID of the answer.
   final int answerId;
 
@@ -68,7 +68,8 @@ class PollAnswerCount with ToStringHelper {
   final bool me;
 
   /// @nodoc
-  PollAnswerCount({required this.answerId, required this.count, required this.me});
+  PollAnswerCount(
+      {required this.answerId, required this.count, required this.me});
 }
 
 /// {@template poll_results}
@@ -82,7 +83,8 @@ class PollAnswerCount with ToStringHelper {
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/poll#poll-results-object
 /// {@endtemplate}
-class PollResults with ToStringHelper {
+@MappableClass()
+class PollResults with ToStringHelper, PollResultsMappable {
   /// Whether the votes have been precisely counted.
   final bool isFinalized;
 
@@ -102,7 +104,8 @@ class PollResults with ToStringHelper {
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/poll#poll-object
 /// {@endtemplate}
-class Poll with ToStringHelper {
+@MappableClass()
+class Poll with ToStringHelper, PollMappable {
   /// The question of the poll.
   final PollMedia question;
 
@@ -123,5 +126,11 @@ class Poll with ToStringHelper {
 
   /// {@macro poll}
   /// @nodoc
-  Poll({required this.question, required this.answers, required this.endsAt, required this.allowsMultiselect, required this.layoutType, required this.results});
+  Poll(
+      {required this.question,
+      required this.answers,
+      required this.endsAt,
+      required this.allowsMultiselect,
+      required this.layoutType,
+      required this.results});
 }

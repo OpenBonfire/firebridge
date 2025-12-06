@@ -5,7 +5,6 @@ import 'package:nyxx/src/models/commands/application_command.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'application_command_permissions.mapper.dart';
@@ -49,7 +48,8 @@ class CommandPermissions extends SnowflakeEntity<CommandPermissions>
 /// {@template command_permission}
 /// The permission for a role, user or channel to use an [ApplicationCommand].
 /// {@endtemplate}
-class CommandPermission with ToStringHelper {
+@MappableClass()
+class CommandPermission with ToStringHelper, CommandPermissionMappable {
   /// The ID of the target entity.
   final Snowflake id;
 
@@ -66,20 +66,12 @@ class CommandPermission with ToStringHelper {
 }
 
 /// The type of a [CommandPermission].
-final class CommandPermissionType extends EnumLike<int, CommandPermissionType> {
-  /// The permission applies to a role.
-  static const role = CommandPermissionType(1);
-
-  /// The permission applies to a user.
-  static const user = CommandPermissionType(2);
-
-  /// The permission applies to a channel.
-  static const channel = CommandPermissionType(3);
-
-  /// @nodoc
-  const CommandPermissionType(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  CommandPermissionType.parse(int value) : this(value);
+@MappableEnum()
+enum CommandPermissionType {
+  @MappableValue(1)
+  role,
+  @MappableValue(2)
+  user,
+  @MappableValue(3)
+  channel
 }

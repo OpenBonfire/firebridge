@@ -15,7 +15,7 @@ class WebhooksUpdateEvent extends DispatchEvent {
 
   /// {@macro webhooks_update_event}
   /// @nodoc
-  WebhooksUpdateEvent({required super.gateway, required this.guildId, required this.channelId});
+  WebhooksUpdateEvent({required this.guildId, required this.channelId});
 
   /// The guild the webhook was updated in.
   PartialGuild get guild => gateway.client.guilds[guildId];

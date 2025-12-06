@@ -341,6 +341,7 @@ class ResolvedDataMapper extends ClassMapperBase<ResolvedData> {
       RoleMapper.ensureInitialized();
       PartialChannelMapper.ensureInitialized();
       PartialMessageMapper.ensureInitialized();
+      AttachmentMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -481,7 +482,7 @@ abstract class ResolvedDataCopyWith<$R, $In extends ResolvedData, $Out>
     $R,
     Snowflake,
     Attachment,
-    ObjectCopyWith<$R, Attachment, Attachment>
+    AttachmentCopyWith<$R, Attachment, Attachment>
   >?
   get attachments;
   $R call({
@@ -563,12 +564,12 @@ class _ResolvedDataCopyWithImpl<$R, $Out>
     $R,
     Snowflake,
     Attachment,
-    ObjectCopyWith<$R, Attachment, Attachment>
+    AttachmentCopyWith<$R, Attachment, Attachment>
   >?
   get attachments => $value.attachments != null
       ? MapCopyWith(
           $value.attachments!,
-          (v, t) => ObjectCopyWith(v, $identity, t),
+          (v, t) => v.copyWith.$chain(t),
           (v) => call(attachments: v),
         )
       : null;
@@ -1511,6 +1512,7 @@ class ApplicationCommandInteractionDataMapper
         _instance = ApplicationCommandInteractionDataMapper._(),
       );
       SnowflakeMapper.ensureInitialized();
+      ApplicationCommandTypeMapper.ensureInitialized();
       ResolvedDataMapper.ensureInitialized();
       InteractionOptionMapper.ensureInitialized();
     }
@@ -1770,6 +1772,7 @@ class InteractionOptionMapper extends ClassMapperBase<InteractionOption> {
   static InteractionOptionMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = InteractionOptionMapper._());
+      CommandOptionTypeMapper.ensureInitialized();
       InteractionOptionMapper.ensureInitialized();
     }
     return _instance!;
@@ -2439,6 +2442,7 @@ class MessageComponentInteractionDataMapper
       MapperContainer.globals.use(
         _instance = MessageComponentInteractionDataMapper._(),
       );
+      MessageComponentTypeMapper.ensureInitialized();
       ResolvedDataMapper.ensureInitialized();
     }
     return _instance!;
@@ -3099,6 +3103,7 @@ class ModalSubmitInteractionDataMapper
       MapperContainer.globals.use(
         _instance = ModalSubmitInteractionDataMapper._(),
       );
+      SubmittedComponentMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -3207,7 +3212,7 @@ abstract class ModalSubmitInteractionDataCopyWith<
   ListCopyWith<
     $R,
     SubmittedComponent,
-    ObjectCopyWith<$R, SubmittedComponent, SubmittedComponent>
+    SubmittedComponentCopyWith<$R, SubmittedComponent, SubmittedComponent>
   >
   get components;
   $R call({String? customId, List<SubmittedComponent>? components});
@@ -3233,11 +3238,11 @@ class _ModalSubmitInteractionDataCopyWithImpl<$R, $Out>
   ListCopyWith<
     $R,
     SubmittedComponent,
-    ObjectCopyWith<$R, SubmittedComponent, SubmittedComponent>
+    SubmittedComponentCopyWith<$R, SubmittedComponent, SubmittedComponent>
   >
   get components => ListCopyWith(
     $value.components,
-    (v, t) => ObjectCopyWith(v, $identity, t),
+    (v, t) => v.copyWith.$chain(t),
     (v) => call(components: v),
   );
   @override

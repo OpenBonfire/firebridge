@@ -7,6 +7,60 @@
 
 part of 'user.dart';
 
+class NitroTypeMapper extends EnumMapper<NitroType> {
+  NitroTypeMapper._();
+
+  static NitroTypeMapper? _instance;
+  static NitroTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = NitroTypeMapper._());
+    }
+    return _instance!;
+  }
+
+  static NitroType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  NitroType decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return NitroType.none;
+      case 1:
+        return NitroType.classic;
+      case 2:
+        return NitroType.nitro;
+      case 3:
+        return NitroType.basic;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(NitroType self) {
+    switch (self) {
+      case NitroType.none:
+        return 0;
+      case NitroType.classic:
+        return 1;
+      case NitroType.nitro:
+        return 2;
+      case NitroType.basic:
+        return 3;
+    }
+  }
+}
+
+extension NitroTypeMapperExtension on NitroType {
+  dynamic toValue() {
+    NitroTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<NitroType>(this);
+  }
+}
+
 class PartialUserMapper extends ClassMapperBase<PartialUser> {
   PartialUserMapper._();
 
@@ -134,7 +188,10 @@ class UserMapper extends ClassMapperBase<User> {
       MapperContainer.globals.use(_instance = UserMapper._());
       PartialUserMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
+      DiscordColorMapper.ensureInitialized();
       UserFlagsMapper.ensureInitialized();
+      NitroTypeMapper.ensureInitialized();
+      UserPrimaryGuildMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -321,8 +378,11 @@ abstract class UserCopyWith<$R, $In extends User, $Out>
     implements PartialUserCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get accentColor;
   UserFlagsCopyWith<$R, UserFlags, UserFlags>? get flags;
   UserFlagsCopyWith<$R, UserFlags, UserFlags>? get publicFlags;
+  UserPrimaryGuildCopyWith<$R, UserPrimaryGuild, UserPrimaryGuild>?
+  get primaryGuild;
   @override
   $R call({
     Snowflake? id,
@@ -356,11 +416,18 @@ class _UserCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, User, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
+  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get accentColor =>
+      $value.accentColor?.copyWith.$chain((v) => call(accentColor: v));
+  @override
   UserFlagsCopyWith<$R, UserFlags, UserFlags>? get flags =>
       $value.flags?.copyWith.$chain((v) => call(flags: v));
   @override
   UserFlagsCopyWith<$R, UserFlags, UserFlags>? get publicFlags =>
       $value.publicFlags?.copyWith.$chain((v) => call(publicFlags: v));
+  @override
+  UserPrimaryGuildCopyWith<$R, UserPrimaryGuild, UserPrimaryGuild>?
+  get primaryGuild =>
+      $value.primaryGuild?.copyWith.$chain((v) => call(primaryGuild: v));
   @override
   $R call({
     Snowflake? id,

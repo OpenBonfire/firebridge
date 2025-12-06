@@ -13,5 +13,6 @@ class ApplicationCommandPermissionsUpdateEvent extends DispatchEvent {
 
   /// {@macro application_command_permissions_update_event}
   /// @nodoc
-  ApplicationCommandPermissionsUpdateEvent({required super.gateway, required this.permissions, required this.oldPermissions});
+  ApplicationCommandPermissionsUpdateEvent(
+      {required this.permissions, required this.oldPermissions});
 }

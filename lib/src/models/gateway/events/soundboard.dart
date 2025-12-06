@@ -1,5 +1,4 @@
 import 'package:nyxx/src/models/gateway/event.dart';
-import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/soundboard/soundboard.dart';
 
@@ -12,7 +11,7 @@ class SoundboardSoundCreateEvent extends DispatchEvent {
 
   /// {@macro soundboard_sound_create_event}
   /// @nodoc
-  SoundboardSoundCreateEvent({required super.gateway, required this.sound});
+  SoundboardSoundCreateEvent({required this.sound});
 }
 
 /// {@template soundboard_sound_update_event}
@@ -27,7 +26,7 @@ class SoundboardSoundUpdateEvent extends DispatchEvent {
 
   /// {@macro soundboard_sound_update_event}
   /// @nodoc
-  SoundboardSoundUpdateEvent({required super.gateway, required this.sound, required this.oldSound});
+  SoundboardSoundUpdateEvent({required this.sound, required this.oldSound});
 }
 
 /// {@template soundboard_sound_delete_event}
@@ -45,9 +44,8 @@ class SoundboardSoundDeleteEvent extends DispatchEvent {
 
   /// {@macro soundboard_sound_delete_event}
   /// @nodoc
-  SoundboardSoundDeleteEvent({required super.gateway, required this.sound, required this.guildId, required this.soundId});
-
-  PartialGuild get guild => gateway.client.guilds[guildId];
+  SoundboardSoundDeleteEvent(
+      {required this.sound, required this.guildId, required this.soundId});
 }
 
 /// {@template soundboard_sounds_update_event}
@@ -65,5 +63,6 @@ class SoundboardSoundsUpdateEvent extends DispatchEvent {
 
   /// {@macro soundboard_sounds_update_event}
   /// @nodoc
-  SoundboardSoundsUpdateEvent({required super.gateway, required this.guildId, required this.sounds, required this.oldSounds});
+  SoundboardSoundsUpdateEvent(
+      {required this.guildId, required this.sounds, required this.oldSounds});
 }

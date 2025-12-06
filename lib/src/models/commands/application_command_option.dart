@@ -1,13 +1,16 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/locale.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+
+part 'application_command_option.mapper.dart';
 
 /// {@template command_option}
 /// An option in an [ApplicationCommand] with a type of [ApplicationCommandType.chatInput].
 /// {@endtemplate}
-class CommandOption with ToStringHelper {
+@MappableClass()
+class CommandOption with ToStringHelper, CommandOptionMappable {
   /// The type of this option.
   final CommandOptionType type;
 
@@ -71,30 +74,37 @@ class CommandOption with ToStringHelper {
 }
 
 /// The type of a [CommandOption].
-final class CommandOptionType extends EnumLike<int, CommandOptionType> {
-  static const subCommand = CommandOptionType(1);
-  static const subCommandGroup = CommandOptionType(2);
-  static const string = CommandOptionType(3);
-  static const integer = CommandOptionType(4);
-  static const boolean = CommandOptionType(5);
-  static const user = CommandOptionType(6);
-  static const channel = CommandOptionType(7);
-  static const role = CommandOptionType(8);
-  static const mentionable = CommandOptionType(9);
-  static const number = CommandOptionType(10);
-  static const attachment = CommandOptionType(11);
-
-  /// @nodoc
-  const CommandOptionType(super.value);
-
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  CommandOptionType.parse(int value) : this(value);
+@MappableEnum()
+enum CommandOptionType {
+  @MappableValue(1)
+  subCommand,
+  @MappableValue(2)
+  subCommandGroup,
+  @MappableValue(3)
+  string,
+  @MappableValue(4)
+  integer,
+  @MappableValue(5)
+  boolean,
+  @MappableValue(6)
+  user,
+  @MappableValue(7)
+  channel,
+  @MappableValue(8)
+  role,
+  @MappableValue(9)
+  mentionable,
+  @MappableValue(10)
+  number,
+  @MappableValue(11)
+  attachment,
 }
 
 /// {@template command_option_choice}
 /// A choice for a [CommandOption].
 /// {@endtemplate}
-class CommandOptionChoice {
+@MappableClass()
+class CommandOptionChoice with CommandOptionChoiceMappable {
   /// The name of this choice.
   final String name;
 
@@ -106,10 +116,14 @@ class CommandOptionChoice {
 
   /// {@macro command_option_choice}
   /// @nodoc
-  CommandOptionChoice({required this.name, required this.nameLocalizations, required this.value});
+  CommandOptionChoice(
+      {required this.name,
+      required this.nameLocalizations,
+      required this.value});
 }
 
 /// A common superclass for entities that can be passed in options of type [CommandOptionType.mentionable].
 ///
 /// The only subtypes are [User] and [Role].
-abstract interface class CommandOptionMentionable<T extends CommandOptionMentionable<T>> implements SnowflakeEntity<T> {}
+abstract interface class CommandOptionMentionable<
+    T extends CommandOptionMentionable<T>> implements SnowflakeEntity<T> {}

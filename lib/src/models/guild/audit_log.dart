@@ -5,7 +5,6 @@ import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/permission_overwrite.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'audit_log.mapper.dart';
@@ -79,79 +78,134 @@ class AuditLogChange with ToStringHelper, AuditLogChangeMappable {
 }
 
 /// The type of event an [AuditLogEntry] represents.
-@MappableClass()
-final class AuditLogEvent extends EnumLike<int, AuditLogEvent>
-    with AuditLogEventMappable {
-  static const guildUpdate = AuditLogEvent(1);
-  static const channelCreate = AuditLogEvent(10);
-  static const channelUpdate = AuditLogEvent(11);
-  static const channelDelete = AuditLogEvent(12);
-  static const channelOverwriteCreate = AuditLogEvent(13);
-  static const channelOverwriteUpdate = AuditLogEvent(14);
-  static const channelOverwriteDelete = AuditLogEvent(15);
-  static const memberKick = AuditLogEvent(20);
-  static const memberPrune = AuditLogEvent(21);
-  static const memberBanAdd = AuditLogEvent(22);
-  static const memberBanRemove = AuditLogEvent(23);
-  static const memberUpdate = AuditLogEvent(24);
-  static const memberRoleUpdate = AuditLogEvent(25);
-  static const memberMove = AuditLogEvent(26);
-  static const memberDisconnect = AuditLogEvent(27);
-  static const botAdd = AuditLogEvent(28);
-  static const roleCreate = AuditLogEvent(30);
-  static const roleUpdate = AuditLogEvent(31);
-  static const roleDelete = AuditLogEvent(32);
-  static const inviteCreate = AuditLogEvent(40);
-  static const inviteUpdate = AuditLogEvent(41);
-  static const inviteDelete = AuditLogEvent(42);
-  static const webhookCreate = AuditLogEvent(50);
-  static const webhookUpdate = AuditLogEvent(51);
-  static const webhookDelete = AuditLogEvent(52);
-  static const emojiCreate = AuditLogEvent(60);
-  static const emojiUpdate = AuditLogEvent(61);
-  static const emojiDelete = AuditLogEvent(62);
-  static const messageDelete = AuditLogEvent(72);
-  static const messageBulkDelete = AuditLogEvent(73);
-  static const messagePin = AuditLogEvent(74);
-  static const messageUnpin = AuditLogEvent(75);
-  static const integrationCreate = AuditLogEvent(80);
-  static const integrationUpdate = AuditLogEvent(81);
-  static const integrationDelete = AuditLogEvent(82);
-  static const stageInstanceCreate = AuditLogEvent(83);
-  static const stageInstanceUpdate = AuditLogEvent(84);
-  static const stageInstanceDelete = AuditLogEvent(85);
-  static const stickerCreate = AuditLogEvent(90);
-  static const stickerUpdate = AuditLogEvent(91);
-  static const stickerDelete = AuditLogEvent(92);
-  static const guildScheduledEventCreate = AuditLogEvent(100);
-  static const guildScheduledEventUpdate = AuditLogEvent(101);
-  static const guildScheduledEventDelete = AuditLogEvent(102);
-  static const threadCreate = AuditLogEvent(110);
-  static const threadUpdate = AuditLogEvent(111);
-  static const threadDelete = AuditLogEvent(112);
-  static const applicationCommandPermissionUpdate = AuditLogEvent(121);
-  static const autoModerationRuleCreate = AuditLogEvent(140);
-  static const autoModerationRuleUpdate = AuditLogEvent(141);
-  static const autoModerationRuleDelete = AuditLogEvent(142);
-  static const autoModerationBlockMessage = AuditLogEvent(143);
-  static const autoModerationFlagToChannel = AuditLogEvent(144);
-  static const autoModerationUserCommunicationDisabled = AuditLogEvent(145);
-  static const creatorMonetizationRequestCreated = AuditLogEvent(150);
-  static const creatorMonetizationTermsAccepted = AuditLogEvent(151);
-  static const onboardingPromptCreate = AuditLogEvent(163);
-  static const onboardingPromptUpdate = AuditLogEvent(164);
-  static const onboardingPromptDelete = AuditLogEvent(165);
-  static const onboardingCreate = AuditLogEvent(166);
-  static const onboardingUpdate = AuditLogEvent(167);
-  static const homeSettingsCreate = AuditLogEvent(190);
-  static const homeSettingsUpdate = AuditLogEvent(191);
-
-  /// @nodoc
-  const AuditLogEvent(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  AuditLogEvent.parse(int value) : this(value);
+@MappableEnum()
+enum AuditLogEvent {
+  @MappableValue(1)
+  guildUpdate,
+  @MappableValue(10)
+  channelCreate,
+  @MappableValue(11)
+  channelUpdate,
+  @MappableValue(12)
+  channelDelete,
+  @MappableValue(13)
+  channelOverwriteCreate,
+  @MappableValue(14)
+  channelOverwriteUpdate,
+  @MappableValue(15)
+  channelOverwriteDelete,
+  @MappableValue(20)
+  memberKick,
+  @MappableValue(21)
+  memberPrune,
+  @MappableValue(22)
+  memberBanAdd,
+  @MappableValue(23)
+  memberBanRemove,
+  @MappableValue(24)
+  memberUpdate,
+  @MappableValue(25)
+  memberRoleUpdate,
+  @MappableValue(26)
+  memberMove,
+  @MappableValue(27)
+  memberDisconnect,
+  @MappableValue(28)
+  botAdd,
+  @MappableValue(30)
+  roleCreate,
+  @MappableValue(31)
+  roleUpdate,
+  @MappableValue(32)
+  roleDelete,
+  @MappableValue(40)
+  inviteCreate,
+  @MappableValue(41)
+  inviteUpdate,
+  @MappableValue(42)
+  inviteDelete,
+  @MappableValue(50)
+  webhookCreate,
+  @MappableValue(51)
+  webhookUpdate,
+  @MappableValue(52)
+  webhookDelete,
+  @MappableValue(60)
+  emojiCreate,
+  @MappableValue(61)
+  emojiUpdate,
+  @MappableValue(62)
+  emojiDelete,
+  @MappableValue(72)
+  messageDelete,
+  @MappableValue(73)
+  messageBulkDelete,
+  @MappableValue(74)
+  messagePin,
+  @MappableValue(75)
+  messageUnpin,
+  @MappableValue(80)
+  integrationCreate,
+  @MappableValue(81)
+  integrationUpdate,
+  @MappableValue(82)
+  integrationDelete,
+  @MappableValue(83)
+  stageInstanceCreate,
+  @MappableValue(84)
+  stageInstanceUpdate,
+  @MappableValue(85)
+  stageInstanceDelete,
+  @MappableValue(90)
+  stickerCreate,
+  @MappableValue(91)
+  stickerUpdate,
+  @MappableValue(92)
+  stickerDelete,
+  @MappableValue(100)
+  guildScheduledEventCreate,
+  @MappableValue(101)
+  guildScheduledEventUpdate,
+  @MappableValue(102)
+  guildScheduledEventDelete,
+  @MappableValue(110)
+  threadCreate,
+  @MappableValue(111)
+  threadUpdate,
+  @MappableValue(112)
+  threadDelete,
+  @MappableValue(121)
+  applicationCommandPermissionUpdate,
+  @MappableValue(140)
+  autoModerationRuleCreate,
+  @MappableValue(141)
+  autoModerationRuleUpdate,
+  @MappableValue(142)
+  autoModerationRuleDelete,
+  @MappableValue(143)
+  autoModerationBlockMessage,
+  @MappableValue(144)
+  autoModerationFlagToChannel,
+  @MappableValue(145)
+  autoModerationUserCommunicationDisabled,
+  @MappableValue(150)
+  creatorMonetizationRequestCreated,
+  @MappableValue(151)
+  creatorMonetizationTermsAccepted,
+  @MappableValue(163)
+  onboardingPromptCreate,
+  @MappableValue(164)
+  onboardingPromptUpdate,
+  @MappableValue(165)
+  onboardingPromptDelete,
+  @MappableValue(166)
+  onboardingCreate,
+  @MappableValue(167)
+  onboardingUpdate,
+  @MappableValue(190)
+  homeSettingsCreate,
+  @MappableValue(191)
+  homeSettingsUpdate,
 }
 
 /// {@template audit_log_entry_info}

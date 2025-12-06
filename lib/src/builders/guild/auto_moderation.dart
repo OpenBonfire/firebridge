@@ -1,3 +1,4 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/builder.dart';
 import 'package:nyxx/src/models/guild/auto_moderation.dart';
 import 'package:nyxx/src/models/snowflake.dart';
@@ -134,12 +135,16 @@ class AutoModerationRuleBuilder extends CreateBuilder<AutoModerationRule> {
         if (metadata != null) 'trigger_metadata': metadata!.build(),
         'actions': actions.map((a) => a.build()).toList(),
         if (isEnabled != null) 'enabled': isEnabled,
-        if (exemptRoleIds != null) 'exempt_roles': exemptRoleIds!.map((id) => id.toString()).toList(),
-        if (exemptChannelIds != null) 'exempt_channels': exemptChannelIds!.map((id) => id.toString()).toList(),
+        if (exemptRoleIds != null)
+          'exempt_roles': exemptRoleIds!.map((id) => id.toString()).toList(),
+        if (exemptChannelIds != null)
+          'exempt_channels':
+              exemptChannelIds!.map((id) => id.toString()).toList(),
       };
 }
 
-class AutoModerationRuleUpdateBuilder extends UpdateBuilder<AutoModerationRule> {
+class AutoModerationRuleUpdateBuilder
+    extends UpdateBuilder<AutoModerationRule> {
   /// {@macro auto_moderation_rule_name}
   String? name;
 
@@ -170,17 +175,6 @@ class AutoModerationRuleUpdateBuilder extends UpdateBuilder<AutoModerationRule> 
     this.exemptRoleIds,
     this.exemptChannelIds,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        if (name != null) 'name': name,
-        if (eventType != null) 'event_type': eventType!.value,
-        if (metadata != null) 'trigger_metadata': metadata!.build(),
-        if (actions != null) 'actions': actions!.map((a) => a.build()).toList(),
-        if (isEnabled != null) 'enabled': isEnabled,
-        if (exemptRoleIds != null) 'exempt_roles': exemptRoleIds!.map((id) => id.toString()).toList(),
-        if (exemptChannelIds != null) 'exempt_channels': exemptChannelIds!.map((id) => id.toString()).toList(),
-      };
 }
 
 class TriggerMetadataBuilder extends CreateBuilder<TriggerMetadata> {
@@ -210,47 +204,11 @@ class TriggerMetadataBuilder extends CreateBuilder<TriggerMetadata> {
     this.mentionTotalLimit,
     this.isMentionRaidProtectionEnabled,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        'keyword_filter': keywordFilter,
-        'regex_patterns': regexPatterns,
-        'presets': presets?.map((type) => type.value).toList(),
-        'allow_list': allowList,
-        'mention_total_limit': mentionTotalLimit,
-        'mention_raid_protection_enabled': isMentionRaidProtectionEnabled,
-      };
 }
 
-class AutoModerationActionBuilder extends CreateBuilder<AutoModerationAction> {
-  /// The type of action to perform.
-  final ActionType type;
-
-  /// Metadata needed to perform the action.
-  final ActionMetadataBuilder? metadata;
-
-  AutoModerationActionBuilder({required this.type, this.metadata});
-
-  AutoModerationActionBuilder.blockMessage({String? customMessage})
-      : type = ActionType.blockMessage,
-        metadata = customMessage == null ? null : ActionMetadataBuilder(customMessage: customMessage);
-
-  AutoModerationActionBuilder.sendAlertMessage({required Snowflake channelId})
-      : type = ActionType.sendAlertMessage,
-        metadata = ActionMetadataBuilder(channelId: channelId);
-
-  AutoModerationActionBuilder.timeout({required Duration duration})
-      : type = ActionType.timeout,
-        metadata = ActionMetadataBuilder(duration: duration);
-
-  @override
-  Map<String, Object?> build() => {
-        'type': type.value,
-        if (metadata != null) 'metadata': metadata!.build(),
-      };
-}
-
-class ActionMetadataBuilder extends CreateBuilder<ActionMetadata> {
+@MappableClass()
+class ActionMetadataBuilder extends CreateBuilder<ActionMetadata>
+    with ActionMetadataMappable {
   /// The ID of the channel to send the alert message to.
   final Snowflake? channelId;
 
@@ -265,11 +223,4 @@ class ActionMetadataBuilder extends CreateBuilder<ActionMetadata> {
     this.duration,
     this.customMessage,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        if (channelId != null) 'channel_id': channelId!.toString(),
-        if (duration != null) 'duration_seconds': duration!.inSeconds,
-        if (customMessage != null) 'custom_message': customMessage,
-      };
 }

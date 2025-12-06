@@ -435,7 +435,8 @@ enum MfaLevel { none, elevated }
 
 /// The configuration of a guild's system channel.
 @MappableClass()
-class SystemChannelFlags extends Flags<SystemChannelFlags> {
+class SystemChannelFlags extends Flags<SystemChannelFlags>
+    with SystemChannelFlagsMappable {
   /// Suppress member join notifications.
   static const suppressJoinNotifications =
       Flag<SystemChannelFlags>.fromOffset(0);

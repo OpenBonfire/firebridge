@@ -7,6 +7,144 @@
 
 part of 'connection.dart';
 
+class ConnectionTypeMapper extends EnumMapper<ConnectionType> {
+  ConnectionTypeMapper._();
+
+  static ConnectionTypeMapper? _instance;
+  static ConnectionTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = ConnectionTypeMapper._());
+    }
+    return _instance!;
+  }
+
+  static ConnectionType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  ConnectionType decode(dynamic value) {
+    switch (value) {
+      case r'battlenet':
+        return ConnectionType.battleNet;
+      case 'bungie':
+        return ConnectionType.bungieNet;
+      case r'bluesky':
+        return ConnectionType.bluesky;
+      case r'crunchyroll':
+        return ConnectionType.crunchyroll;
+      case r'domain':
+        return ConnectionType.domain;
+      case r'ebay':
+        return ConnectionType.ebay;
+      case r'epicgames':
+        return ConnectionType.epicGames;
+      case r'facebook':
+        return ConnectionType.facebook;
+      case r'github':
+        return ConnectionType.github;
+      case r'instagram':
+        return ConnectionType.instagram;
+      case r'leagueoflegends':
+        return ConnectionType.leagueOfLegends;
+      case r'mastodon':
+        return ConnectionType.mastodon;
+      case r'paypal':
+        return ConnectionType.paypal;
+      case r'playstation':
+        return ConnectionType.playstation;
+      case r'reddit':
+        return ConnectionType.reddit;
+      case r'riotgames':
+        return ConnectionType.riotGames;
+      case r'roblox':
+        return ConnectionType.roblox;
+      case r'spotify':
+        return ConnectionType.spotify;
+      case r'skype':
+        return ConnectionType.skype;
+      case r'steam':
+        return ConnectionType.steam;
+      case r'tiktok':
+        return ConnectionType.tikTok;
+      case r'twitch':
+        return ConnectionType.twitch;
+      case r'twitter':
+        return ConnectionType.twitter;
+      case r'xbox':
+        return ConnectionType.xbox;
+      case r'youtube':
+        return ConnectionType.youtube;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(ConnectionType self) {
+    switch (self) {
+      case ConnectionType.battleNet:
+        return r'battlenet';
+      case ConnectionType.bungieNet:
+        return 'bungie';
+      case ConnectionType.bluesky:
+        return r'bluesky';
+      case ConnectionType.crunchyroll:
+        return r'crunchyroll';
+      case ConnectionType.domain:
+        return r'domain';
+      case ConnectionType.ebay:
+        return r'ebay';
+      case ConnectionType.epicGames:
+        return r'epicgames';
+      case ConnectionType.facebook:
+        return r'facebook';
+      case ConnectionType.github:
+        return r'github';
+      case ConnectionType.instagram:
+        return r'instagram';
+      case ConnectionType.leagueOfLegends:
+        return r'leagueoflegends';
+      case ConnectionType.mastodon:
+        return r'mastodon';
+      case ConnectionType.paypal:
+        return r'paypal';
+      case ConnectionType.playstation:
+        return r'playstation';
+      case ConnectionType.reddit:
+        return r'reddit';
+      case ConnectionType.riotGames:
+        return r'riotgames';
+      case ConnectionType.roblox:
+        return r'roblox';
+      case ConnectionType.spotify:
+        return r'spotify';
+      case ConnectionType.skype:
+        return r'skype';
+      case ConnectionType.steam:
+        return r'steam';
+      case ConnectionType.tikTok:
+        return r'tiktok';
+      case ConnectionType.twitch:
+        return r'twitch';
+      case ConnectionType.twitter:
+        return r'twitter';
+      case ConnectionType.xbox:
+        return r'xbox';
+      case ConnectionType.youtube:
+        return r'youtube';
+    }
+  }
+}
+
+extension ConnectionTypeMapperExtension on ConnectionType {
+  dynamic toValue() {
+    ConnectionTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<ConnectionType>(this);
+  }
+}
+
 class ConnectionVisibilityMapper extends EnumMapper<ConnectionVisibility> {
   ConnectionVisibilityMapper._();
 
@@ -60,6 +198,7 @@ class ConnectionMapper extends ClassMapperBase<Connection> {
   static ConnectionMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ConnectionMapper._());
+      ConnectionTypeMapper.ensureInitialized();
       PartialIntegrationMapper.ensureInitialized();
       ConnectionVisibilityMapper.ensureInitialized();
     }
