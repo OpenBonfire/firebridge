@@ -12,7 +12,7 @@ part 'message.mapper.dart';
 /// {@template message_create_event}
 /// Emitted when a message is sent.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "MESSAGE_CREATE")
 class MessageCreateEvent extends DispatchEvent with MessageCreateEventMappable {
   /// The ID of the guild the message was sent in.
   final Snowflake? guildId;
@@ -38,7 +38,7 @@ class MessageCreateEvent extends DispatchEvent with MessageCreateEventMappable {
 /// {@template message_update_event}
 /// Emitted when a message is updated.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "MESSAGE_UPDATE")
 class MessageUpdateEvent extends DispatchEvent with MessageUpdateEventMappable {
   /// The ID of the guild the message was in.
   final Snowflake? guildId;
@@ -69,7 +69,7 @@ class MessageUpdateEvent extends DispatchEvent with MessageUpdateEventMappable {
 /// {@template message_delete_event}
 /// Emitted when a message is deleted.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "MESSAGE_DELETE")
 class MessageDeleteEvent extends DispatchEvent with MessageDeleteEventMappable {
   /// The ID of the deleted message.
   final Snowflake id;
@@ -95,7 +95,7 @@ class MessageDeleteEvent extends DispatchEvent with MessageDeleteEventMappable {
 /// {@template message_bulk_delete_event}
 /// Emitted when multiple messages are bulk deleted.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "MESSAGE_DELETE_BULK")
 class MessageBulkDeleteEvent extends DispatchEvent
     with MessageBulkDeleteEventMappable {
   /// A list of the IDs of the deleted messages.
@@ -122,7 +122,7 @@ class MessageBulkDeleteEvent extends DispatchEvent
 /// {@template message_reaction_add_event}
 /// Emitted when a reaction is added to a message.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "MESSAGE_REACTION_ADD")
 class MessageReactionAddEvent extends DispatchEvent
     with MessageReactionAddEventMappable {
   /// The ID of the user that added the reaction.
@@ -162,7 +162,7 @@ class MessageReactionAddEvent extends DispatchEvent
 /// {@template message_reaction_remove_event}
 /// Emitted when a reaction is removed from a message.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "MESSAGE_REACTION_REMOVE")
 class MessageReactionRemoveEvent extends DispatchEvent
     with MessageReactionRemoveEventMappable {
   /// The ID of the user that removed their reaction.
@@ -194,7 +194,7 @@ class MessageReactionRemoveEvent extends DispatchEvent
 /// {@template message_reaction_remove_all_event}
 /// Emitted when all reactions are removed from a message.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "MESSAGE_REACTION_REMOVE_ALL")
 class MessageReactionRemoveAllEvent extends DispatchEvent
     with MessageReactionRemoveAllEventMappable {
   /// The ID of the channel the message is in.
@@ -218,7 +218,7 @@ class MessageReactionRemoveAllEvent extends DispatchEvent
 /// {@template message_reaction_remove_emoji_event}
 /// Emitted when all reactions of a specific emoji are removed from a message.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "MESSAGE_REACTION_REMOVE_EMOJI")
 class MessageReactionRemoveEmojiEvent extends DispatchEvent
     with MessageReactionRemoveEmojiEventMappable {
   /// The ID of the channel the message is in.
@@ -245,7 +245,7 @@ class MessageReactionRemoveEmojiEvent extends DispatchEvent
 /// {@template message_poll_vote_add_event}
 /// Emitted when user votes on a poll. If the poll allows multiple selection, one event will be sent per answer.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "MESSAGE_POLL_VOTE_ADD")
 class MessagePollVoteAddEvent extends DispatchEvent
     with MessagePollVoteAddEventMappable {
   /// The ID of the user that voted on a poll.
@@ -277,7 +277,7 @@ class MessagePollVoteAddEvent extends DispatchEvent
 /// {@template message_poll_vote_remove_event}
 /// Emitted when user removes their vote on a poll. If the poll allows for multiple selections, one event will be sent per answer.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "MESSAGE_POLL_VOTE_REMOVE")
 class MessagePollVoteRemoveEvent extends DispatchEvent
     with MessagePollVoteRemoveEventMappable {
   /// The ID of the user that removed their vote from a poll.

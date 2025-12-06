@@ -8,7 +8,7 @@
 part of 'application_command.dart';
 
 class ApplicationCommandPermissionsUpdateEventMapper
-    extends ClassMapperBase<ApplicationCommandPermissionsUpdateEvent> {
+    extends SubClassMapperBase<ApplicationCommandPermissionsUpdateEvent> {
   ApplicationCommandPermissionsUpdateEventMapper._();
 
   static ApplicationCommandPermissionsUpdateEventMapper? _instance;
@@ -17,7 +17,7 @@ class ApplicationCommandPermissionsUpdateEventMapper
       MapperContainer.globals.use(
         _instance = ApplicationCommandPermissionsUpdateEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       CommandPermissionsMapper.ensureInitialized();
     }
     return _instance!;
@@ -58,6 +58,14 @@ class ApplicationCommandPermissionsUpdateEventMapper
         #oldPermissions: _f$oldPermissions,
         #opcode: _f$opcode,
       };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "APPLICATION_COMMAND_PERMISSIONS_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static ApplicationCommandPermissionsUpdateEvent _instantiate(
     DecodingData data,

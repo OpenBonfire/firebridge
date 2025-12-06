@@ -7,14 +7,14 @@
 
 part of 'ready.dart';
 
-class ReadyEventMapper extends ClassMapperBase<ReadyEvent> {
+class ReadyEventMapper extends SubClassMapperBase<ReadyEvent> {
   ReadyEventMapper._();
 
   static ReadyEventMapper? _instance;
   static ReadyEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ReadyEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       UserMapper.ensureInitialized();
       PartialGuildMapper.ensureInitialized();
       PartialApplicationMapper.ensureInitialized();
@@ -82,6 +82,14 @@ class ReadyEventMapper extends ClassMapperBase<ReadyEvent> {
     #application: _f$application,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'READY';
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static ReadyEvent _instantiate(DecodingData data) {
     return ReadyEvent(
@@ -245,14 +253,14 @@ class _ReadyEventCopyWithImpl<$R, $Out>
   ) => _ReadyEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class ResumedEventMapper extends ClassMapperBase<ResumedEvent> {
+class ResumedEventMapper extends SubClassMapperBase<ResumedEvent> {
   ResumedEventMapper._();
 
   static ResumedEventMapper? _instance;
   static ResumedEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ResumedEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
     }
     return _instance!;
   }
@@ -269,6 +277,14 @@ class ResumedEventMapper extends ClassMapperBase<ResumedEvent> {
 
   @override
   final MappableFields<ResumedEvent> fields = const {#opcode: _f$opcode};
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'RESUMED';
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static ResumedEvent _instantiate(DecodingData data) {
     return ResumedEvent();

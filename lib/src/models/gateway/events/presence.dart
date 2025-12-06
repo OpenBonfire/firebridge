@@ -1,8 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/models/channel/text_channel.dart';
 import 'package:nyxx/src/models/gateway/event.dart';
 import 'package:nyxx/src/models/gateway/opcode.dart';
-import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/guild/member.dart';
 import 'package:nyxx/src/models/presence.dart';
 import 'package:nyxx/src/models/snowflake.dart';
@@ -13,7 +11,7 @@ part 'presence.mapper.dart';
 /// {@template presence_update_event}
 /// Emitted when a user updates their presence.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "PRESENCE_UPDATE")
 class PresenceUpdateEvent extends DispatchEvent
     with PresenceUpdateEventMappable {
   /// The user that updated their presence.
@@ -45,7 +43,7 @@ class PresenceUpdateEvent extends DispatchEvent
 /// {@template typing_start_event}
 /// Emitted when a user starts typing in a channel.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "TYPING_START")
 class TypingStartEvent extends DispatchEvent with TypingStartEventMappable {
   /// The ID of the channel.
   final Snowflake channelId;
@@ -76,7 +74,7 @@ class TypingStartEvent extends DispatchEvent with TypingStartEventMappable {
 /// {@template user_update_event}
 /// Emitted when a user is updated.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "USER_UPDATE")
 class UserUpdateEvent extends DispatchEvent with UserUpdateEventMappable {
   /// The user as it was cached before it was updated.
   final User? oldUser;

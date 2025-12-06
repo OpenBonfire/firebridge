@@ -8,14 +8,14 @@
 part of 'entitlement.dart';
 
 class EntitlementCreateEventMapper
-    extends ClassMapperBase<EntitlementCreateEvent> {
+    extends SubClassMapperBase<EntitlementCreateEvent> {
   EntitlementCreateEventMapper._();
 
   static EntitlementCreateEventMapper? _instance;
   static EntitlementCreateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = EntitlementCreateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       EntitlementMapper.ensureInitialized();
     }
     return _instance!;
@@ -39,6 +39,14 @@ class EntitlementCreateEventMapper
     #entitlement: _f$entitlement,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "ENTITLEMENT_CREATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static EntitlementCreateEvent _instantiate(DecodingData data) {
     return EntitlementCreateEvent(entitlement: data.dec(_f$entitlement));
@@ -150,14 +158,14 @@ class _EntitlementCreateEventCopyWithImpl<$R, $Out>
 }
 
 class EntitlementUpdateEventMapper
-    extends ClassMapperBase<EntitlementUpdateEvent> {
+    extends SubClassMapperBase<EntitlementUpdateEvent> {
   EntitlementUpdateEventMapper._();
 
   static EntitlementUpdateEventMapper? _instance;
   static EntitlementUpdateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = EntitlementUpdateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       EntitlementMapper.ensureInitialized();
     }
     return _instance!;
@@ -186,6 +194,14 @@ class EntitlementUpdateEventMapper
     #oldEntitlement: _f$oldEntitlement,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "ENTITLEMENT_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static EntitlementUpdateEvent _instantiate(DecodingData data) {
     return EntitlementUpdateEvent(
@@ -308,14 +324,14 @@ class _EntitlementUpdateEventCopyWithImpl<$R, $Out>
 }
 
 class EntitlementDeleteEventMapper
-    extends ClassMapperBase<EntitlementDeleteEvent> {
+    extends SubClassMapperBase<EntitlementDeleteEvent> {
   EntitlementDeleteEventMapper._();
 
   static EntitlementDeleteEventMapper? _instance;
   static EntitlementDeleteEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = EntitlementDeleteEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       EntitlementMapper.ensureInitialized();
     }
     return _instance!;
@@ -348,6 +364,14 @@ class EntitlementDeleteEventMapper
     #deletedEntitlement: _f$deletedEntitlement,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "ENTITLEMENT_DELETE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static EntitlementDeleteEvent _instantiate(DecodingData data) {
     return EntitlementDeleteEvent(

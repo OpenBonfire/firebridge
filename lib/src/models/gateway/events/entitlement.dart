@@ -8,7 +8,7 @@ part 'entitlement.mapper.dart';
 /// {@template entitlement_create_event}
 /// Emitted when an entitlement is created.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "ENTITLEMENT_CREATE")
 class EntitlementCreateEvent extends DispatchEvent
     with EntitlementCreateEventMappable {
   /// The entitlement that was created,
@@ -22,7 +22,7 @@ class EntitlementCreateEvent extends DispatchEvent
 /// {@template entitlement_update_event}
 /// Emitted when an entitlement is updated.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "ENTITLEMENT_UPDATE")
 class EntitlementUpdateEvent extends DispatchEvent
     with EntitlementUpdateEventMappable {
   /// The updated entitlement.
@@ -40,7 +40,7 @@ class EntitlementUpdateEvent extends DispatchEvent
 /// {@template entitlement_delete_event}
 /// Emitted when an entitlement is deleted.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "ENTITLEMENT_DELETE")
 class EntitlementDeleteEvent extends DispatchEvent
     with EntitlementDeleteEventMappable {
   /// The entitlement that was deleted.

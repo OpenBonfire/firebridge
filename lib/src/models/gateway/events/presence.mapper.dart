@@ -7,14 +7,15 @@
 
 part of 'presence.dart';
 
-class PresenceUpdateEventMapper extends ClassMapperBase<PresenceUpdateEvent> {
+class PresenceUpdateEventMapper
+    extends SubClassMapperBase<PresenceUpdateEvent> {
   PresenceUpdateEventMapper._();
 
   static PresenceUpdateEventMapper? _instance;
   static PresenceUpdateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = PresenceUpdateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       PartialUserMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       UserStatusMapper.ensureInitialized();
@@ -69,6 +70,14 @@ class PresenceUpdateEventMapper extends ClassMapperBase<PresenceUpdateEvent> {
     #clientStatus: _f$clientStatus,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "PRESENCE_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static PresenceUpdateEvent _instantiate(DecodingData data) {
     return PresenceUpdateEvent(
@@ -225,14 +234,14 @@ class _PresenceUpdateEventCopyWithImpl<$R, $Out>
       _PresenceUpdateEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class TypingStartEventMapper extends ClassMapperBase<TypingStartEvent> {
+class TypingStartEventMapper extends SubClassMapperBase<TypingStartEvent> {
   TypingStartEventMapper._();
 
   static TypingStartEventMapper? _instance;
   static TypingStartEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = TypingStartEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -285,6 +294,14 @@ class TypingStartEventMapper extends ClassMapperBase<TypingStartEvent> {
     #member: _f$member,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "TYPING_START";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static TypingStartEvent _instantiate(DecodingData data) {
     return TypingStartEvent(
@@ -422,14 +439,14 @@ class _TypingStartEventCopyWithImpl<$R, $Out>
   ) => _TypingStartEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class UserUpdateEventMapper extends ClassMapperBase<UserUpdateEvent> {
+class UserUpdateEventMapper extends SubClassMapperBase<UserUpdateEvent> {
   UserUpdateEventMapper._();
 
   static UserUpdateEventMapper? _instance;
   static UserUpdateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = UserUpdateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       UserMapper.ensureInitialized();
     }
     return _instance!;
@@ -459,6 +476,14 @@ class UserUpdateEventMapper extends ClassMapperBase<UserUpdateEvent> {
     #user: _f$user,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "USER_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static UserUpdateEvent _instantiate(DecodingData data) {
     return UserUpdateEvent(

@@ -162,14 +162,14 @@ class _UnavailableGuildCreateEventCopyWithImpl<$R, $Out>
       _UnavailableGuildCreateEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class GuildCreateEventMapper extends ClassMapperBase<GuildCreateEvent> {
+class GuildCreateEventMapper extends SubClassMapperBase<GuildCreateEvent> {
   GuildCreateEventMapper._();
 
   static GuildCreateEventMapper? _instance;
   static GuildCreateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildCreateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       GuildMapper.ensureInitialized();
       VoiceStateMapper.ensureInitialized();
       GuildChannelMapper.ensureInitialized();
@@ -266,6 +266,14 @@ class GuildCreateEventMapper extends ClassMapperBase<GuildCreateEvent> {
     #scheduledEvents: _f$scheduledEvents,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_CREATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildCreateEvent _instantiate(DecodingData data) {
     return GuildCreateEvent(
@@ -520,14 +528,14 @@ class _GuildCreateEventCopyWithImpl<$R, $Out>
   ) => _GuildCreateEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class GuildUpdateEventMapper extends ClassMapperBase<GuildUpdateEvent> {
+class GuildUpdateEventMapper extends SubClassMapperBase<GuildUpdateEvent> {
   GuildUpdateEventMapper._();
 
   static GuildUpdateEventMapper? _instance;
   static GuildUpdateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildUpdateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       GuildMapper.ensureInitialized();
     }
     return _instance!;
@@ -560,6 +568,14 @@ class GuildUpdateEventMapper extends ClassMapperBase<GuildUpdateEvent> {
     #guild: _f$guild,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildUpdateEvent _instantiate(DecodingData data) {
     return GuildUpdateEvent(
@@ -672,14 +688,14 @@ class _GuildUpdateEventCopyWithImpl<$R, $Out>
   ) => _GuildUpdateEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class GuildDeleteEventMapper extends ClassMapperBase<GuildDeleteEvent> {
+class GuildDeleteEventMapper extends SubClassMapperBase<GuildDeleteEvent> {
   GuildDeleteEventMapper._();
 
   static GuildDeleteEventMapper? _instance;
   static GuildDeleteEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildDeleteEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       PartialGuildMapper.ensureInitialized();
       GuildMapper.ensureInitialized();
     }
@@ -720,6 +736,14 @@ class GuildDeleteEventMapper extends ClassMapperBase<GuildDeleteEvent> {
     #deletedGuild: _f$deletedGuild,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'GUILD_DELETE';
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildDeleteEvent _instantiate(DecodingData data) {
     return GuildDeleteEvent(
@@ -840,7 +864,7 @@ class _GuildDeleteEventCopyWithImpl<$R, $Out>
 }
 
 class GuildAuditLogCreateEventMapper
-    extends ClassMapperBase<GuildAuditLogCreateEvent> {
+    extends SubClassMapperBase<GuildAuditLogCreateEvent> {
   GuildAuditLogCreateEventMapper._();
 
   static GuildAuditLogCreateEventMapper? _instance;
@@ -849,7 +873,7 @@ class GuildAuditLogCreateEventMapper
       MapperContainer.globals.use(
         _instance = GuildAuditLogCreateEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       AuditLogEntryMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
     }
@@ -883,6 +907,14 @@ class GuildAuditLogCreateEventMapper
     #guildId: _f$guildId,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'GUILD_AUDIT_LOG_ENTRY_CREATE';
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildAuditLogCreateEvent _instantiate(DecodingData data) {
     return GuildAuditLogCreateEvent(
@@ -1004,14 +1036,14 @@ class _GuildAuditLogCreateEventCopyWithImpl<$R, $Out>
       _GuildAuditLogCreateEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class GuildBanAddEventMapper extends ClassMapperBase<GuildBanAddEvent> {
+class GuildBanAddEventMapper extends SubClassMapperBase<GuildBanAddEvent> {
   GuildBanAddEventMapper._();
 
   static GuildBanAddEventMapper? _instance;
   static GuildBanAddEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildBanAddEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
     }
@@ -1042,6 +1074,14 @@ class GuildBanAddEventMapper extends ClassMapperBase<GuildBanAddEvent> {
     #user: _f$user,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_BAN_ADD";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildBanAddEvent _instantiate(DecodingData data) {
     return GuildBanAddEvent(
@@ -1154,14 +1194,15 @@ class _GuildBanAddEventCopyWithImpl<$R, $Out>
   ) => _GuildBanAddEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class GuildBanRemoveEventMapper extends ClassMapperBase<GuildBanRemoveEvent> {
+class GuildBanRemoveEventMapper
+    extends SubClassMapperBase<GuildBanRemoveEvent> {
   GuildBanRemoveEventMapper._();
 
   static GuildBanRemoveEventMapper? _instance;
   static GuildBanRemoveEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildBanRemoveEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
     }
@@ -1192,6 +1233,14 @@ class GuildBanRemoveEventMapper extends ClassMapperBase<GuildBanRemoveEvent> {
     #user: _f$user,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_BAN_REMOVE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildBanRemoveEvent _instantiate(DecodingData data) {
     return GuildBanRemoveEvent(
@@ -1313,14 +1362,14 @@ class _GuildBanRemoveEventCopyWithImpl<$R, $Out>
 }
 
 class GuildEmojisUpdateEventMapper
-    extends ClassMapperBase<GuildEmojisUpdateEvent> {
+    extends SubClassMapperBase<GuildEmojisUpdateEvent> {
   GuildEmojisUpdateEventMapper._();
 
   static GuildEmojisUpdateEventMapper? _instance;
   static GuildEmojisUpdateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildEmojisUpdateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       EmojiMapper.ensureInitialized();
     }
@@ -1354,6 +1403,14 @@ class GuildEmojisUpdateEventMapper
     #emojis: _f$emojis,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_EMOJIS_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildEmojisUpdateEvent _instantiate(DecodingData data) {
     return GuildEmojisUpdateEvent(
@@ -1480,7 +1537,7 @@ class _GuildEmojisUpdateEventCopyWithImpl<$R, $Out>
 }
 
 class GuildStickersUpdateEventMapper
-    extends ClassMapperBase<GuildStickersUpdateEvent> {
+    extends SubClassMapperBase<GuildStickersUpdateEvent> {
   GuildStickersUpdateEventMapper._();
 
   static GuildStickersUpdateEventMapper? _instance;
@@ -1489,7 +1546,7 @@ class GuildStickersUpdateEventMapper
       MapperContainer.globals.use(
         _instance = GuildStickersUpdateEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -1521,6 +1578,14 @@ class GuildStickersUpdateEventMapper
     #stickers: _f$stickers,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_STICKERS_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildStickersUpdateEvent _instantiate(DecodingData data) {
     return GuildStickersUpdateEvent(
@@ -1648,7 +1713,7 @@ class _GuildStickersUpdateEventCopyWithImpl<$R, $Out>
 }
 
 class GuildIntegrationsUpdateEventMapper
-    extends ClassMapperBase<GuildIntegrationsUpdateEvent> {
+    extends SubClassMapperBase<GuildIntegrationsUpdateEvent> {
   GuildIntegrationsUpdateEventMapper._();
 
   static GuildIntegrationsUpdateEventMapper? _instance;
@@ -1657,7 +1722,7 @@ class GuildIntegrationsUpdateEventMapper
       MapperContainer.globals.use(
         _instance = GuildIntegrationsUpdateEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -1681,6 +1746,14 @@ class GuildIntegrationsUpdateEventMapper
     #guildId: _f$guildId,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_INTEGRATIONS_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildIntegrationsUpdateEvent _instantiate(DecodingData data) {
     return GuildIntegrationsUpdateEvent(guildId: data.dec(_f$guildId));
@@ -1802,14 +1875,15 @@ class _GuildIntegrationsUpdateEventCopyWithImpl<$R, $Out>
       _GuildIntegrationsUpdateEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class GuildMemberAddEventMapper extends ClassMapperBase<GuildMemberAddEvent> {
+class GuildMemberAddEventMapper
+    extends SubClassMapperBase<GuildMemberAddEvent> {
   GuildMemberAddEventMapper._();
 
   static GuildMemberAddEventMapper? _instance;
   static GuildMemberAddEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildMemberAddEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -1842,6 +1916,14 @@ class GuildMemberAddEventMapper extends ClassMapperBase<GuildMemberAddEvent> {
     #member: _f$member,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_MEMBER_ADD";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildMemberAddEvent _instantiate(DecodingData data) {
     return GuildMemberAddEvent(
@@ -1959,14 +2041,14 @@ class _GuildMemberAddEventCopyWithImpl<$R, $Out>
 }
 
 class GuildMemberRemoveEventMapper
-    extends ClassMapperBase<GuildMemberRemoveEvent> {
+    extends SubClassMapperBase<GuildMemberRemoveEvent> {
   GuildMemberRemoveEventMapper._();
 
   static GuildMemberRemoveEventMapper? _instance;
   static GuildMemberRemoveEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildMemberRemoveEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
     }
@@ -2007,6 +2089,14 @@ class GuildMemberRemoveEventMapper
     #removedMember: _f$removedMember,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_MEMBER_REMOVE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildMemberRemoveEvent _instantiate(DecodingData data) {
     return GuildMemberRemoveEvent(
@@ -2133,14 +2223,14 @@ class _GuildMemberRemoveEventCopyWithImpl<$R, $Out>
 }
 
 class GuildMemberUpdateEventMapper
-    extends ClassMapperBase<GuildMemberUpdateEvent> {
+    extends SubClassMapperBase<GuildMemberUpdateEvent> {
   GuildMemberUpdateEventMapper._();
 
   static GuildMemberUpdateEventMapper? _instance;
   static GuildMemberUpdateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildMemberUpdateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -2180,6 +2270,14 @@ class GuildMemberUpdateEventMapper
     #guildId: _f$guildId,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_MEMBER_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildMemberUpdateEvent _instantiate(DecodingData data) {
     return GuildMemberUpdateEvent(
@@ -2302,14 +2400,14 @@ class _GuildMemberUpdateEventCopyWithImpl<$R, $Out>
 }
 
 class GuildMembersChunkEventMapper
-    extends ClassMapperBase<GuildMembersChunkEvent> {
+    extends SubClassMapperBase<GuildMembersChunkEvent> {
   GuildMembersChunkEventMapper._();
 
   static GuildMembersChunkEventMapper? _instance;
   static GuildMembersChunkEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildMembersChunkEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       PresenceUpdateEventMapper.ensureInitialized();
     }
@@ -2372,6 +2470,14 @@ class GuildMembersChunkEventMapper
     #nonce: _f$nonce,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_MEMBERS_CHUNK";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildMembersChunkEvent _instantiate(DecodingData data) {
     return GuildMembersChunkEvent(
@@ -2558,14 +2664,15 @@ class _GuildMembersChunkEventCopyWithImpl<$R, $Out>
       _GuildMembersChunkEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class GuildRoleCreateEventMapper extends ClassMapperBase<GuildRoleCreateEvent> {
+class GuildRoleCreateEventMapper
+    extends SubClassMapperBase<GuildRoleCreateEvent> {
   GuildRoleCreateEventMapper._();
 
   static GuildRoleCreateEventMapper? _instance;
   static GuildRoleCreateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildRoleCreateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       RoleMapper.ensureInitialized();
     }
@@ -2599,6 +2706,14 @@ class GuildRoleCreateEventMapper extends ClassMapperBase<GuildRoleCreateEvent> {
     #role: _f$role,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_ROLE_CREATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildRoleCreateEvent _instantiate(DecodingData data) {
     return GuildRoleCreateEvent(
@@ -2719,14 +2834,15 @@ class _GuildRoleCreateEventCopyWithImpl<$R, $Out>
       _GuildRoleCreateEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class GuildRoleUpdateEventMapper extends ClassMapperBase<GuildRoleUpdateEvent> {
+class GuildRoleUpdateEventMapper
+    extends SubClassMapperBase<GuildRoleUpdateEvent> {
   GuildRoleUpdateEventMapper._();
 
   static GuildRoleUpdateEventMapper? _instance;
   static GuildRoleUpdateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildRoleUpdateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       RoleMapper.ensureInitialized();
     }
@@ -2767,6 +2883,14 @@ class GuildRoleUpdateEventMapper extends ClassMapperBase<GuildRoleUpdateEvent> {
     #role: _f$role,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_ROLE_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildRoleUpdateEvent _instantiate(DecodingData data) {
     return GuildRoleUpdateEvent(
@@ -2894,14 +3018,15 @@ class _GuildRoleUpdateEventCopyWithImpl<$R, $Out>
       _GuildRoleUpdateEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class GuildRoleDeleteEventMapper extends ClassMapperBase<GuildRoleDeleteEvent> {
+class GuildRoleDeleteEventMapper
+    extends SubClassMapperBase<GuildRoleDeleteEvent> {
   GuildRoleDeleteEventMapper._();
 
   static GuildRoleDeleteEventMapper? _instance;
   static GuildRoleDeleteEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildRoleDeleteEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       RoleMapper.ensureInitialized();
     }
@@ -2943,6 +3068,14 @@ class GuildRoleDeleteEventMapper extends ClassMapperBase<GuildRoleDeleteEvent> {
     #deletedRole: _f$deletedRole,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_ROLE_DELETE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildRoleDeleteEvent _instantiate(DecodingData data) {
     return GuildRoleDeleteEvent(
@@ -3075,7 +3208,7 @@ class _GuildRoleDeleteEventCopyWithImpl<$R, $Out>
 }
 
 class GuildScheduledEventCreateEventMapper
-    extends ClassMapperBase<GuildScheduledEventCreateEvent> {
+    extends SubClassMapperBase<GuildScheduledEventCreateEvent> {
   GuildScheduledEventCreateEventMapper._();
 
   static GuildScheduledEventCreateEventMapper? _instance;
@@ -3084,7 +3217,7 @@ class GuildScheduledEventCreateEventMapper
       MapperContainer.globals.use(
         _instance = GuildScheduledEventCreateEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       ScheduledEventMapper.ensureInitialized();
     }
     return _instance!;
@@ -3108,6 +3241,14 @@ class GuildScheduledEventCreateEventMapper
     #event: _f$event,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_SCHEDULED_EVENT_CREATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildScheduledEventCreateEvent _instantiate(DecodingData data) {
     return GuildScheduledEventCreateEvent(event: data.dec(_f$event));
@@ -3237,7 +3378,7 @@ class _GuildScheduledEventCreateEventCopyWithImpl<$R, $Out>
 }
 
 class GuildScheduledEventUpdateEventMapper
-    extends ClassMapperBase<GuildScheduledEventUpdateEvent> {
+    extends SubClassMapperBase<GuildScheduledEventUpdateEvent> {
   GuildScheduledEventUpdateEventMapper._();
 
   static GuildScheduledEventUpdateEventMapper? _instance;
@@ -3246,7 +3387,7 @@ class GuildScheduledEventUpdateEventMapper
       MapperContainer.globals.use(
         _instance = GuildScheduledEventUpdateEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       ScheduledEventMapper.ensureInitialized();
     }
     return _instance!;
@@ -3275,6 +3416,14 @@ class GuildScheduledEventUpdateEventMapper
     #event: _f$event,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_SCHEDULED_EVENT_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildScheduledEventUpdateEvent _instantiate(DecodingData data) {
     return GuildScheduledEventUpdateEvent(
@@ -3418,7 +3567,7 @@ class _GuildScheduledEventUpdateEventCopyWithImpl<$R, $Out>
 }
 
 class GuildScheduledEventDeleteEventMapper
-    extends ClassMapperBase<GuildScheduledEventDeleteEvent> {
+    extends SubClassMapperBase<GuildScheduledEventDeleteEvent> {
   GuildScheduledEventDeleteEventMapper._();
 
   static GuildScheduledEventDeleteEventMapper? _instance;
@@ -3427,7 +3576,7 @@ class GuildScheduledEventDeleteEventMapper
       MapperContainer.globals.use(
         _instance = GuildScheduledEventDeleteEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       ScheduledEventMapper.ensureInitialized();
     }
     return _instance!;
@@ -3451,6 +3600,14 @@ class GuildScheduledEventDeleteEventMapper
     #event: _f$event,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_SCHEDULED_EVENT_DELETE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildScheduledEventDeleteEvent _instantiate(DecodingData data) {
     return GuildScheduledEventDeleteEvent(event: data.dec(_f$event));
@@ -3580,7 +3737,7 @@ class _GuildScheduledEventDeleteEventCopyWithImpl<$R, $Out>
 }
 
 class GuildScheduledEventUserAddEventMapper
-    extends ClassMapperBase<GuildScheduledEventUserAddEvent> {
+    extends SubClassMapperBase<GuildScheduledEventUserAddEvent> {
   GuildScheduledEventUserAddEventMapper._();
 
   static GuildScheduledEventUserAddEventMapper? _instance;
@@ -3589,7 +3746,7 @@ class GuildScheduledEventUserAddEventMapper
       MapperContainer.globals.use(
         _instance = GuildScheduledEventUserAddEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -3626,6 +3783,14 @@ class GuildScheduledEventUserAddEventMapper
     #guildId: _f$guildId,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_SCHEDULED_EVENT_USER_ADD";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildScheduledEventUserAddEvent _instantiate(DecodingData data) {
     return GuildScheduledEventUserAddEvent(
@@ -3787,7 +3952,7 @@ class _GuildScheduledEventUserAddEventCopyWithImpl<$R, $Out>
 }
 
 class GuildScheduledEventUserRemoveEventMapper
-    extends ClassMapperBase<GuildScheduledEventUserRemoveEvent> {
+    extends SubClassMapperBase<GuildScheduledEventUserRemoveEvent> {
   GuildScheduledEventUserRemoveEventMapper._();
 
   static GuildScheduledEventUserRemoveEventMapper? _instance;
@@ -3796,7 +3961,7 @@ class GuildScheduledEventUserRemoveEventMapper
       MapperContainer.globals.use(
         _instance = GuildScheduledEventUserRemoveEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -3830,6 +3995,14 @@ class GuildScheduledEventUserRemoveEventMapper
     #guildId: _f$guildId,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_SCHEDULED_EVENT_USER_REMOVE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static GuildScheduledEventUserRemoveEvent _instantiate(DecodingData data) {
     return GuildScheduledEventUserRemoveEvent(

@@ -8,14 +8,14 @@
 part of 'interaction.dart';
 
 class InteractionCreateEventMapper
-    extends ClassMapperBase<InteractionCreateEvent> {
+    extends SubClassMapperBase<InteractionCreateEvent> {
   InteractionCreateEventMapper._();
 
   static InteractionCreateEventMapper? _instance;
   static InteractionCreateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = InteractionCreateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       InteractionMapper.ensureInitialized();
     }
     return _instance!;
@@ -44,6 +44,19 @@ class InteractionCreateEventMapper
     #interaction: _f$interaction,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "INTERACTION_CREATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
+
+  @override
+  DecodingContext inherit(DecodingContext context) {
+    return context.inherit(args: () => [Interaction<dynamic>]);
+  }
 
   static InteractionCreateEvent<T> _instantiate<T extends Interaction<dynamic>>(
     DecodingData data,

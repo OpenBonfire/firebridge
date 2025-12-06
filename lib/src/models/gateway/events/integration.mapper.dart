@@ -8,14 +8,14 @@
 part of 'integration.dart';
 
 class IntegrationCreateEventMapper
-    extends ClassMapperBase<IntegrationCreateEvent> {
+    extends SubClassMapperBase<IntegrationCreateEvent> {
   IntegrationCreateEventMapper._();
 
   static IntegrationCreateEventMapper? _instance;
   static IntegrationCreateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = IntegrationCreateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       IntegrationMapper.ensureInitialized();
     }
@@ -47,6 +47,14 @@ class IntegrationCreateEventMapper
     #integration: _f$integration,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "INTEGRATION_CREATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static IntegrationCreateEvent _instantiate(DecodingData data) {
     return IntegrationCreateEvent(
@@ -169,14 +177,14 @@ class _IntegrationCreateEventCopyWithImpl<$R, $Out>
 }
 
 class IntegrationUpdateEventMapper
-    extends ClassMapperBase<IntegrationUpdateEvent> {
+    extends SubClassMapperBase<IntegrationUpdateEvent> {
   IntegrationUpdateEventMapper._();
 
   static IntegrationUpdateEventMapper? _instance;
   static IntegrationUpdateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = IntegrationUpdateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       IntegrationMapper.ensureInitialized();
     }
@@ -213,6 +221,14 @@ class IntegrationUpdateEventMapper
     #integration: _f$integration,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "INTEGRATION_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static IntegrationUpdateEvent _instantiate(DecodingData data) {
     return IntegrationUpdateEvent(
@@ -350,14 +366,14 @@ class _IntegrationUpdateEventCopyWithImpl<$R, $Out>
 }
 
 class IntegrationDeleteEventMapper
-    extends ClassMapperBase<IntegrationDeleteEvent> {
+    extends SubClassMapperBase<IntegrationDeleteEvent> {
   IntegrationDeleteEventMapper._();
 
   static IntegrationDeleteEventMapper? _instance;
   static IntegrationDeleteEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = IntegrationDeleteEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       IntegrationMapper.ensureInitialized();
     }
@@ -405,6 +421,14 @@ class IntegrationDeleteEventMapper
     #deletedIntegration: _f$deletedIntegration,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "INTEGRATION_DELETE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static IntegrationDeleteEvent _instantiate(DecodingData data) {
     return IntegrationDeleteEvent(

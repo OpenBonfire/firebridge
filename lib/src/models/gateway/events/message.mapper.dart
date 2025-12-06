@@ -7,14 +7,14 @@
 
 part of 'message.dart';
 
-class MessageCreateEventMapper extends ClassMapperBase<MessageCreateEvent> {
+class MessageCreateEventMapper extends SubClassMapperBase<MessageCreateEvent> {
   MessageCreateEventMapper._();
 
   static MessageCreateEventMapper? _instance;
   static MessageCreateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = MessageCreateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       PartialMemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
@@ -62,6 +62,14 @@ class MessageCreateEventMapper extends ClassMapperBase<MessageCreateEvent> {
     #message: _f$message,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "MESSAGE_CREATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static MessageCreateEvent _instantiate(DecodingData data) {
     return MessageCreateEvent(
@@ -211,14 +219,14 @@ class _MessageCreateEventCopyWithImpl<$R, $Out>
   ) => _MessageCreateEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class MessageUpdateEventMapper extends ClassMapperBase<MessageUpdateEvent> {
+class MessageUpdateEventMapper extends SubClassMapperBase<MessageUpdateEvent> {
   MessageUpdateEventMapper._();
 
   static MessageUpdateEventMapper? _instance;
   static MessageUpdateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = MessageUpdateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       PartialMemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
@@ -273,6 +281,14 @@ class MessageUpdateEventMapper extends ClassMapperBase<MessageUpdateEvent> {
     #oldMessage: _f$oldMessage,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "MESSAGE_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static MessageUpdateEvent _instantiate(DecodingData data) {
     return MessageUpdateEvent(
@@ -433,14 +449,14 @@ class _MessageUpdateEventCopyWithImpl<$R, $Out>
   ) => _MessageUpdateEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class MessageDeleteEventMapper extends ClassMapperBase<MessageDeleteEvent> {
+class MessageDeleteEventMapper extends SubClassMapperBase<MessageDeleteEvent> {
   MessageDeleteEventMapper._();
 
   static MessageDeleteEventMapper? _instance;
   static MessageDeleteEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = MessageDeleteEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
     }
@@ -485,6 +501,14 @@ class MessageDeleteEventMapper extends ClassMapperBase<MessageDeleteEvent> {
     #deletedMessage: _f$deletedMessage,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "MESSAGE_DELETE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static MessageDeleteEvent _instantiate(DecodingData data) {
     return MessageDeleteEvent(
@@ -631,14 +655,14 @@ class _MessageDeleteEventCopyWithImpl<$R, $Out>
 }
 
 class MessageBulkDeleteEventMapper
-    extends ClassMapperBase<MessageBulkDeleteEvent> {
+    extends SubClassMapperBase<MessageBulkDeleteEvent> {
   MessageBulkDeleteEventMapper._();
 
   static MessageBulkDeleteEventMapper? _instance;
   static MessageBulkDeleteEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = MessageBulkDeleteEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
     }
@@ -684,6 +708,14 @@ class MessageBulkDeleteEventMapper
     #guildId: _f$guildId,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "MESSAGE_DELETE_BULK";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static MessageBulkDeleteEvent _instantiate(DecodingData data) {
     return MessageBulkDeleteEvent(
@@ -840,7 +872,7 @@ class _MessageBulkDeleteEventCopyWithImpl<$R, $Out>
 }
 
 class MessageReactionAddEventMapper
-    extends ClassMapperBase<MessageReactionAddEvent> {
+    extends SubClassMapperBase<MessageReactionAddEvent> {
   MessageReactionAddEventMapper._();
 
   static MessageReactionAddEventMapper? _instance;
@@ -849,7 +881,7 @@ class MessageReactionAddEventMapper
       MapperContainer.globals.use(
         _instance = MessageReactionAddEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       EmojiMapper.ensureInitialized();
     }
@@ -915,6 +947,14 @@ class MessageReactionAddEventMapper
     #messageAuthorId: _f$messageAuthorId,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "MESSAGE_REACTION_ADD";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static MessageReactionAddEvent _instantiate(DecodingData data) {
     return MessageReactionAddEvent(
@@ -1084,7 +1124,7 @@ class _MessageReactionAddEventCopyWithImpl<$R, $Out>
 }
 
 class MessageReactionRemoveEventMapper
-    extends ClassMapperBase<MessageReactionRemoveEvent> {
+    extends SubClassMapperBase<MessageReactionRemoveEvent> {
   MessageReactionRemoveEventMapper._();
 
   static MessageReactionRemoveEventMapper? _instance;
@@ -1093,7 +1133,7 @@ class MessageReactionRemoveEventMapper
       MapperContainer.globals.use(
         _instance = MessageReactionRemoveEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       EmojiMapper.ensureInitialized();
     }
@@ -1142,6 +1182,14 @@ class MessageReactionRemoveEventMapper
     #emoji: _f$emoji,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "MESSAGE_REACTION_REMOVE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static MessageReactionRemoveEvent _instantiate(DecodingData data) {
     return MessageReactionRemoveEvent(
@@ -1306,7 +1354,7 @@ class _MessageReactionRemoveEventCopyWithImpl<$R, $Out>
 }
 
 class MessageReactionRemoveAllEventMapper
-    extends ClassMapperBase<MessageReactionRemoveAllEvent> {
+    extends SubClassMapperBase<MessageReactionRemoveAllEvent> {
   MessageReactionRemoveAllEventMapper._();
 
   static MessageReactionRemoveAllEventMapper? _instance;
@@ -1315,7 +1363,7 @@ class MessageReactionRemoveAllEventMapper
       MapperContainer.globals.use(
         _instance = MessageReactionRemoveAllEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -1347,6 +1395,14 @@ class MessageReactionRemoveAllEventMapper
     #guildId: _f$guildId,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "MESSAGE_REACTION_REMOVE_ALL";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static MessageReactionRemoveAllEvent _instantiate(DecodingData data) {
     return MessageReactionRemoveAllEvent(
@@ -1497,7 +1553,7 @@ class _MessageReactionRemoveAllEventCopyWithImpl<$R, $Out>
 }
 
 class MessageReactionRemoveEmojiEventMapper
-    extends ClassMapperBase<MessageReactionRemoveEmojiEvent> {
+    extends SubClassMapperBase<MessageReactionRemoveEmojiEvent> {
   MessageReactionRemoveEmojiEventMapper._();
 
   static MessageReactionRemoveEmojiEventMapper? _instance;
@@ -1506,7 +1562,7 @@ class MessageReactionRemoveEmojiEventMapper
       MapperContainer.globals.use(
         _instance = MessageReactionRemoveEmojiEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       PartialEmojiMapper.ensureInitialized();
     }
@@ -1545,6 +1601,14 @@ class MessageReactionRemoveEmojiEventMapper
     #emoji: _f$emoji,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "MESSAGE_REACTION_REMOVE_EMOJI";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static MessageReactionRemoveEmojiEvent _instantiate(DecodingData data) {
     return MessageReactionRemoveEmojiEvent(
@@ -1716,7 +1780,7 @@ class _MessageReactionRemoveEmojiEventCopyWithImpl<$R, $Out>
 }
 
 class MessagePollVoteAddEventMapper
-    extends ClassMapperBase<MessagePollVoteAddEvent> {
+    extends SubClassMapperBase<MessagePollVoteAddEvent> {
   MessagePollVoteAddEventMapper._();
 
   static MessagePollVoteAddEventMapper? _instance;
@@ -1725,7 +1789,7 @@ class MessagePollVoteAddEventMapper
       MapperContainer.globals.use(
         _instance = MessagePollVoteAddEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -1780,6 +1844,14 @@ class MessagePollVoteAddEventMapper
     #answerId: _f$answerId,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "MESSAGE_POLL_VOTE_ADD";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static MessagePollVoteAddEvent _instantiate(DecodingData data) {
     return MessagePollVoteAddEvent(
@@ -1931,7 +2003,7 @@ class _MessagePollVoteAddEventCopyWithImpl<$R, $Out>
 }
 
 class MessagePollVoteRemoveEventMapper
-    extends ClassMapperBase<MessagePollVoteRemoveEvent> {
+    extends SubClassMapperBase<MessagePollVoteRemoveEvent> {
   MessagePollVoteRemoveEventMapper._();
 
   static MessagePollVoteRemoveEventMapper? _instance;
@@ -1940,7 +2012,7 @@ class MessagePollVoteRemoveEventMapper
       MapperContainer.globals.use(
         _instance = MessagePollVoteRemoveEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -1989,6 +2061,14 @@ class MessagePollVoteRemoveEventMapper
     #answerId: _f$answerId,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "MESSAGE_POLL_VOTE_REMOVE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static MessagePollVoteRemoveEvent _instantiate(DecodingData data) {
     return MessagePollVoteRemoveEvent(

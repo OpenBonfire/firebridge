@@ -7,14 +7,14 @@
 
 part of 'invite.dart';
 
-class InviteCreateEventMapper extends ClassMapperBase<InviteCreateEvent> {
+class InviteCreateEventMapper extends SubClassMapperBase<InviteCreateEvent> {
   InviteCreateEventMapper._();
 
   static InviteCreateEventMapper? _instance;
   static InviteCreateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = InviteCreateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
     }
     return _instance!;
   }
@@ -39,6 +39,14 @@ class InviteCreateEventMapper extends ClassMapperBase<InviteCreateEvent> {
     #invite: _f$invite,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "INVITE_CREATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static InviteCreateEvent _instantiate(DecodingData data) {
     return InviteCreateEvent(invite: data.dec(_f$invite));
@@ -143,14 +151,14 @@ class _InviteCreateEventCopyWithImpl<$R, $Out>
   ) => _InviteCreateEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class InviteDeleteEventMapper extends ClassMapperBase<InviteDeleteEvent> {
+class InviteDeleteEventMapper extends SubClassMapperBase<InviteDeleteEvent> {
   InviteDeleteEventMapper._();
 
   static InviteDeleteEventMapper? _instance;
   static InviteDeleteEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = InviteDeleteEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -187,6 +195,14 @@ class InviteDeleteEventMapper extends ClassMapperBase<InviteDeleteEvent> {
     #code: _f$code,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "INVITE_DELETE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static InviteDeleteEvent _instantiate(DecodingData data) {
     return InviteDeleteEvent(

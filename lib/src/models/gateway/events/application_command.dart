@@ -8,7 +8,7 @@ part 'application_command.mapper.dart';
 /// {@template application_command_permissions_update_event}
 /// Emitted when the permissions for an application command are updated.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "APPLICATION_COMMAND_PERMISSIONS_UPDATE")
 class ApplicationCommandPermissionsUpdateEvent extends DispatchEvent
     with ApplicationCommandPermissionsUpdateEventMappable {
   /// The permissions that were updated.

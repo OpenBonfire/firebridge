@@ -8,7 +8,7 @@ part 'interaction.mapper.dart';
 /// {@template interaction_create_event}
 /// Emitted when an interaction is received by the client.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "INTERACTION_CREATE")
 class InteractionCreateEvent<T extends Interaction<dynamic>>
     extends DispatchEvent with InteractionCreateEventMappable {
   // The created interaction.

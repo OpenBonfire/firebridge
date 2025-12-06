@@ -54,14 +54,14 @@ extension AnimationTypeMapperExtension on AnimationType {
 }
 
 class VoiceStateUpdateEventMapper
-    extends ClassMapperBase<VoiceStateUpdateEvent> {
+    extends SubClassMapperBase<VoiceStateUpdateEvent> {
   VoiceStateUpdateEventMapper._();
 
   static VoiceStateUpdateEventMapper? _instance;
   static VoiceStateUpdateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = VoiceStateUpdateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       VoiceStateMapper.ensureInitialized();
     }
     return _instance!;
@@ -94,6 +94,14 @@ class VoiceStateUpdateEventMapper
     #state: _f$state,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "VOICE_STATE_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static VoiceStateUpdateEvent _instantiate(DecodingData data) {
     return VoiceStateUpdateEvent(
@@ -215,14 +223,14 @@ class _VoiceStateUpdateEventCopyWithImpl<$R, $Out>
 }
 
 class VoiceServerUpdateEventMapper
-    extends ClassMapperBase<VoiceServerUpdateEvent> {
+    extends SubClassMapperBase<VoiceServerUpdateEvent> {
   VoiceServerUpdateEventMapper._();
 
   static VoiceServerUpdateEventMapper? _instance;
   static VoiceServerUpdateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = VoiceServerUpdateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -261,6 +269,14 @@ class VoiceServerUpdateEventMapper
     #endpoint: _f$endpoint,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "VOICE_SERVER_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static VoiceServerUpdateEvent _instantiate(DecodingData data) {
     return VoiceServerUpdateEvent(
@@ -383,7 +399,7 @@ class _VoiceServerUpdateEventCopyWithImpl<$R, $Out>
 }
 
 class VoiceChannelEffectSendEventMapper
-    extends ClassMapperBase<VoiceChannelEffectSendEvent> {
+    extends SubClassMapperBase<VoiceChannelEffectSendEvent> {
   VoiceChannelEffectSendEventMapper._();
 
   static VoiceChannelEffectSendEventMapper? _instance;
@@ -392,7 +408,7 @@ class VoiceChannelEffectSendEventMapper
       MapperContainer.globals.use(
         _instance = VoiceChannelEffectSendEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       EmojiMapper.ensureInitialized();
       AnimationTypeMapper.ensureInitialized();
@@ -465,6 +481,14 @@ class VoiceChannelEffectSendEventMapper
     #soundVolume: _f$soundVolume,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "VOICE_CHANNEL_EFFECT_SEND";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static VoiceChannelEffectSendEvent _instantiate(DecodingData data) {
     return VoiceChannelEffectSendEvent(

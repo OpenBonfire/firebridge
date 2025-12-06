@@ -8,7 +8,7 @@
 part of 'stage_instance.dart';
 
 class StageInstanceCreateEventMapper
-    extends ClassMapperBase<StageInstanceCreateEvent> {
+    extends SubClassMapperBase<StageInstanceCreateEvent> {
   StageInstanceCreateEventMapper._();
 
   static StageInstanceCreateEventMapper? _instance;
@@ -17,7 +17,7 @@ class StageInstanceCreateEventMapper
       MapperContainer.globals.use(
         _instance = StageInstanceCreateEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       StageInstanceMapper.ensureInitialized();
     }
     return _instance!;
@@ -41,6 +41,14 @@ class StageInstanceCreateEventMapper
     #instance: _f$instance,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "STAGE_INSTANCE_CREATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static StageInstanceCreateEvent _instantiate(DecodingData data) {
     return StageInstanceCreateEvent(instance: data.dec(_f$instance));
@@ -151,7 +159,7 @@ class _StageInstanceCreateEventCopyWithImpl<$R, $Out>
 }
 
 class StageInstanceUpdateEventMapper
-    extends ClassMapperBase<StageInstanceUpdateEvent> {
+    extends SubClassMapperBase<StageInstanceUpdateEvent> {
   StageInstanceUpdateEventMapper._();
 
   static StageInstanceUpdateEventMapper? _instance;
@@ -160,7 +168,7 @@ class StageInstanceUpdateEventMapper
       MapperContainer.globals.use(
         _instance = StageInstanceUpdateEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       StageInstanceMapper.ensureInitialized();
     }
     return _instance!;
@@ -189,6 +197,14 @@ class StageInstanceUpdateEventMapper
     #instance: _f$instance,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "STAGE_INSTANCE_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static StageInstanceUpdateEvent _instantiate(DecodingData data) {
     return StageInstanceUpdateEvent(
@@ -311,7 +327,7 @@ class _StageInstanceUpdateEventCopyWithImpl<$R, $Out>
 }
 
 class StageInstanceDeleteEventMapper
-    extends ClassMapperBase<StageInstanceDeleteEvent> {
+    extends SubClassMapperBase<StageInstanceDeleteEvent> {
   StageInstanceDeleteEventMapper._();
 
   static StageInstanceDeleteEventMapper? _instance;
@@ -320,7 +336,7 @@ class StageInstanceDeleteEventMapper
       MapperContainer.globals.use(
         _instance = StageInstanceDeleteEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       StageInstanceMapper.ensureInitialized();
     }
     return _instance!;
@@ -344,6 +360,14 @@ class StageInstanceDeleteEventMapper
     #instance: _f$instance,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "STAGE_INSTANCE_DELETE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static StageInstanceDeleteEvent _instantiate(DecodingData data) {
     return StageInstanceDeleteEvent(instance: data.dec(_f$instance));

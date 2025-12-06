@@ -7,14 +7,15 @@
 
 part of 'webhook.dart';
 
-class WebhooksUpdateEventMapper extends ClassMapperBase<WebhooksUpdateEvent> {
+class WebhooksUpdateEventMapper
+    extends SubClassMapperBase<WebhooksUpdateEvent> {
   WebhooksUpdateEventMapper._();
 
   static WebhooksUpdateEventMapper? _instance;
   static WebhooksUpdateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = WebhooksUpdateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -48,6 +49,14 @@ class WebhooksUpdateEventMapper extends ClassMapperBase<WebhooksUpdateEvent> {
     #channelId: _f$channelId,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "WEBHOOKS_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static WebhooksUpdateEvent _instantiate(DecodingData data) {
     return WebhooksUpdateEvent(

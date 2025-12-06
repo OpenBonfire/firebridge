@@ -8,7 +8,7 @@
 part of 'auto_moderation.dart';
 
 class AutoModerationRuleCreateEventMapper
-    extends ClassMapperBase<AutoModerationRuleCreateEvent> {
+    extends SubClassMapperBase<AutoModerationRuleCreateEvent> {
   AutoModerationRuleCreateEventMapper._();
 
   static AutoModerationRuleCreateEventMapper? _instance;
@@ -17,7 +17,7 @@ class AutoModerationRuleCreateEventMapper
       MapperContainer.globals.use(
         _instance = AutoModerationRuleCreateEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       AutoModerationRuleMapper.ensureInitialized();
     }
     return _instance!;
@@ -41,6 +41,14 @@ class AutoModerationRuleCreateEventMapper
     #rule: _f$rule,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "AUTO_MODERATION_RULE_CREATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static AutoModerationRuleCreateEvent _instantiate(DecodingData data) {
     return AutoModerationRuleCreateEvent(rule: data.dec(_f$rule));
@@ -167,7 +175,7 @@ class _AutoModerationRuleCreateEventCopyWithImpl<$R, $Out>
 }
 
 class AutoModerationRuleUpdateEventMapper
-    extends ClassMapperBase<AutoModerationRuleUpdateEvent> {
+    extends SubClassMapperBase<AutoModerationRuleUpdateEvent> {
   AutoModerationRuleUpdateEventMapper._();
 
   static AutoModerationRuleUpdateEventMapper? _instance;
@@ -176,7 +184,7 @@ class AutoModerationRuleUpdateEventMapper
       MapperContainer.globals.use(
         _instance = AutoModerationRuleUpdateEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       AutoModerationRuleMapper.ensureInitialized();
     }
     return _instance!;
@@ -205,6 +213,14 @@ class AutoModerationRuleUpdateEventMapper
     #rule: _f$rule,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "AUTO_MODERATION_RULE_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static AutoModerationRuleUpdateEvent _instantiate(DecodingData data) {
     return AutoModerationRuleUpdateEvent(
@@ -346,7 +362,7 @@ class _AutoModerationRuleUpdateEventCopyWithImpl<$R, $Out>
 }
 
 class AutoModerationRuleDeleteEventMapper
-    extends ClassMapperBase<AutoModerationRuleDeleteEvent> {
+    extends SubClassMapperBase<AutoModerationRuleDeleteEvent> {
   AutoModerationRuleDeleteEventMapper._();
 
   static AutoModerationRuleDeleteEventMapper? _instance;
@@ -355,7 +371,7 @@ class AutoModerationRuleDeleteEventMapper
       MapperContainer.globals.use(
         _instance = AutoModerationRuleDeleteEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       AutoModerationRuleMapper.ensureInitialized();
     }
     return _instance!;
@@ -379,6 +395,14 @@ class AutoModerationRuleDeleteEventMapper
     #rule: _f$rule,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "AUTO_MODERATION_RULE_DELETE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static AutoModerationRuleDeleteEvent _instantiate(DecodingData data) {
     return AutoModerationRuleDeleteEvent(rule: data.dec(_f$rule));
@@ -505,7 +529,7 @@ class _AutoModerationRuleDeleteEventCopyWithImpl<$R, $Out>
 }
 
 class AutoModerationActionExecutionEventMapper
-    extends ClassMapperBase<AutoModerationActionExecutionEvent> {
+    extends SubClassMapperBase<AutoModerationActionExecutionEvent> {
   AutoModerationActionExecutionEventMapper._();
 
   static AutoModerationActionExecutionEventMapper? _instance;
@@ -514,7 +538,7 @@ class AutoModerationActionExecutionEventMapper
       MapperContainer.globals.use(
         _instance = AutoModerationActionExecutionEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       AutoModerationActionMapper.ensureInitialized();
       TriggerTypeMapper.ensureInitialized();
@@ -597,6 +621,14 @@ class AutoModerationActionExecutionEventMapper
     #matchedContent: _f$matchedContent,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "AUTO_MODERATION_ACTION_EXECUTION";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static AutoModerationActionExecutionEvent _instantiate(DecodingData data) {
     return AutoModerationActionExecutionEvent(

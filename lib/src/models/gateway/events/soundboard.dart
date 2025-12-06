@@ -9,7 +9,7 @@ part 'soundboard.mapper.dart';
 /// {@template soundboard_sound_create_event}
 /// Emitted when a guild soundboard sound is created.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "GUILD_SOUNDBOARD_SOUND_CREATE")
 class SoundboardSoundCreateEvent extends DispatchEvent
     with SoundboardSoundCreateEventMappable {
   /// The sound that was created.
@@ -23,7 +23,7 @@ class SoundboardSoundCreateEvent extends DispatchEvent
 /// {@template soundboard_sound_update_event}
 /// Emitted when a guild soundboard sound is updated.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "GUILD_SOUNDBOARD_SOUND_UPDATE")
 class SoundboardSoundUpdateEvent extends DispatchEvent
     with SoundboardSoundUpdateEventMappable {
   /// The sound that was updated.
@@ -40,7 +40,7 @@ class SoundboardSoundUpdateEvent extends DispatchEvent
 /// {@template soundboard_sound_delete_event}
 /// Emitted when a guild soundboard sound is deleted.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "GUILD_SOUNDBOARD_SOUND_DELETE")
 class SoundboardSoundDeleteEvent extends DispatchEvent
     with SoundboardSoundDeleteEventMappable {
   /// The sound that was deleted.
@@ -61,7 +61,7 @@ class SoundboardSoundDeleteEvent extends DispatchEvent
 /// {@template soundboard_sounds_update_event}
 /// Emitted when multiple guild soundboard sounds are updated.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "GUILD_SOUNDBOARD_SOUNDS_UPDATE")
 class SoundboardSoundsUpdateEvent extends DispatchEvent
     with SoundboardSoundsUpdateEventMappable {
   /// The ID of the guild where the sounds were updated.

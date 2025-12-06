@@ -9,7 +9,7 @@ part 'integration.mapper.dart';
 /// {@template integration_create_event}
 /// Emitted when an integration is created.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "INTEGRATION_CREATE")
 class IntegrationCreateEvent extends DispatchEvent
     with IntegrationCreateEventMappable {
   /// The ID of the guild.
@@ -26,7 +26,7 @@ class IntegrationCreateEvent extends DispatchEvent
 /// {@template integration_update_event}
 /// Emitted when an integration is updated.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "INTEGRATION_UPDATE")
 class IntegrationUpdateEvent extends DispatchEvent
     with IntegrationUpdateEventMappable {
   /// The ID of the guild
@@ -49,7 +49,7 @@ class IntegrationUpdateEvent extends DispatchEvent
 /// {@template integration_delete_event}
 /// Emitted when an integration is deleted.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "INTEGRATION_DELETE")
 class IntegrationDeleteEvent extends DispatchEvent
     with IntegrationDeleteEventMappable {
   /// The ID of the deleted integration.

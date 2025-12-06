@@ -9,7 +9,7 @@ part 'invite.mapper.dart';
 /// {@template invite_create_event}
 /// Emitted when an invite is created.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "INVITE_CREATE")
 class InviteCreateEvent extends DispatchEvent with InviteCreateEventMappable {
   /// The invite that was created.
   final InviteWithMetadata invite;
@@ -22,7 +22,7 @@ class InviteCreateEvent extends DispatchEvent with InviteCreateEventMappable {
 /// {@template invite_delete_event}
 /// Emitted when an invite is deleted.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "INVITE_DELETE")
 class InviteDeleteEvent extends DispatchEvent with InviteDeleteEventMappable {
   /// The ID of the channel the invite was for.
   final Snowflake channelId;

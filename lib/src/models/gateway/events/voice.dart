@@ -10,7 +10,7 @@ part 'voice.mapper.dart';
 /// {@template voice_state_update_event}
 /// Emitted when a user's voice state is updated.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "VOICE_STATE_UPDATE")
 class VoiceStateUpdateEvent extends DispatchEvent
     with VoiceStateUpdateEventMappable {
   /// The updated voice state.
@@ -27,7 +27,7 @@ class VoiceStateUpdateEvent extends DispatchEvent
 /// {@template voice_server_update_event}
 /// Emitted when joining a voice channel to update the voice servers.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "VOICE_SERVER_UPDATE")
 class VoiceServerUpdateEvent extends DispatchEvent
     with VoiceServerUpdateEventMappable {
   /// The voice token.
@@ -48,7 +48,7 @@ class VoiceServerUpdateEvent extends DispatchEvent
 /// {@template voice_channel_effect_send_event}
 /// Emitted when someone sends an effect, such as an emoji reaction or a soundboard sound, in a voice channel the current user is connected to.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "VOICE_CHANNEL_EFFECT_SEND")
 class VoiceChannelEffectSendEvent extends DispatchEvent
     with VoiceChannelEffectSendEventMappable {
   /// The ID of the channel this effect was sent in.

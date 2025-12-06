@@ -10,7 +10,7 @@ part 'ready.mapper.dart';
 /// {@template ready_event}
 /// Emitted when the client's Gateway session is established.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: 'READY')
 class ReadyEvent extends DispatchEvent with ReadyEventMappable {
   /// The version of the API being used.
   final int version;
@@ -53,5 +53,5 @@ class ReadyEvent extends DispatchEvent with ReadyEventMappable {
 /// {@template resumed_event}
 /// Emitted when
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: 'RESUMED')
 class ResumedEvent extends DispatchEvent with ResumedEventMappable {}

@@ -8,7 +8,7 @@
 part of 'soundboard.dart';
 
 class SoundboardSoundCreateEventMapper
-    extends ClassMapperBase<SoundboardSoundCreateEvent> {
+    extends SubClassMapperBase<SoundboardSoundCreateEvent> {
   SoundboardSoundCreateEventMapper._();
 
   static SoundboardSoundCreateEventMapper? _instance;
@@ -17,7 +17,7 @@ class SoundboardSoundCreateEventMapper
       MapperContainer.globals.use(
         _instance = SoundboardSoundCreateEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SoundboardSoundMapper.ensureInitialized();
     }
     return _instance!;
@@ -41,6 +41,14 @@ class SoundboardSoundCreateEventMapper
     #sound: _f$sound,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_SOUNDBOARD_SOUND_CREATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static SoundboardSoundCreateEvent _instantiate(DecodingData data) {
     return SoundboardSoundCreateEvent(sound: data.dec(_f$sound));
@@ -158,7 +166,7 @@ class _SoundboardSoundCreateEventCopyWithImpl<$R, $Out>
 }
 
 class SoundboardSoundUpdateEventMapper
-    extends ClassMapperBase<SoundboardSoundUpdateEvent> {
+    extends SubClassMapperBase<SoundboardSoundUpdateEvent> {
   SoundboardSoundUpdateEventMapper._();
 
   static SoundboardSoundUpdateEventMapper? _instance;
@@ -167,7 +175,7 @@ class SoundboardSoundUpdateEventMapper
       MapperContainer.globals.use(
         _instance = SoundboardSoundUpdateEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SoundboardSoundMapper.ensureInitialized();
     }
     return _instance!;
@@ -196,6 +204,14 @@ class SoundboardSoundUpdateEventMapper
     #oldSound: _f$oldSound,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_SOUNDBOARD_SOUND_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static SoundboardSoundUpdateEvent _instantiate(DecodingData data) {
     return SoundboardSoundUpdateEvent(
@@ -327,7 +343,7 @@ class _SoundboardSoundUpdateEventCopyWithImpl<$R, $Out>
 }
 
 class SoundboardSoundDeleteEventMapper
-    extends ClassMapperBase<SoundboardSoundDeleteEvent> {
+    extends SubClassMapperBase<SoundboardSoundDeleteEvent> {
   SoundboardSoundDeleteEventMapper._();
 
   static SoundboardSoundDeleteEventMapper? _instance;
@@ -336,7 +352,7 @@ class SoundboardSoundDeleteEventMapper
       MapperContainer.globals.use(
         _instance = SoundboardSoundDeleteEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SoundboardSoundMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
     }
@@ -375,6 +391,14 @@ class SoundboardSoundDeleteEventMapper
     #soundId: _f$soundId,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_SOUNDBOARD_SOUND_DELETE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static SoundboardSoundDeleteEvent _instantiate(DecodingData data) {
     return SoundboardSoundDeleteEvent(
@@ -514,7 +538,7 @@ class _SoundboardSoundDeleteEventCopyWithImpl<$R, $Out>
 }
 
 class SoundboardSoundsUpdateEventMapper
-    extends ClassMapperBase<SoundboardSoundsUpdateEvent> {
+    extends SubClassMapperBase<SoundboardSoundsUpdateEvent> {
   SoundboardSoundsUpdateEventMapper._();
 
   static SoundboardSoundsUpdateEventMapper? _instance;
@@ -523,7 +547,7 @@ class SoundboardSoundsUpdateEventMapper
       MapperContainer.globals.use(
         _instance = SoundboardSoundsUpdateEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       SoundboardSoundMapper.ensureInitialized();
     }
@@ -561,6 +585,14 @@ class SoundboardSoundsUpdateEventMapper
     #oldSounds: _f$oldSounds,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "GUILD_SOUNDBOARD_SOUNDS_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static SoundboardSoundsUpdateEvent _instantiate(DecodingData data) {
     return SoundboardSoundsUpdateEvent(

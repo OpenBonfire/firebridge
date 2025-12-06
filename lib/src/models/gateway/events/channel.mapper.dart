@@ -7,14 +7,14 @@
 
 part of 'channel.dart';
 
-class ChannelCreateEventMapper extends ClassMapperBase<ChannelCreateEvent> {
+class ChannelCreateEventMapper extends SubClassMapperBase<ChannelCreateEvent> {
   ChannelCreateEventMapper._();
 
   static ChannelCreateEventMapper? _instance;
   static ChannelCreateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ChannelCreateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       ChannelMapper.ensureInitialized();
     }
     return _instance!;
@@ -40,6 +40,14 @@ class ChannelCreateEventMapper extends ClassMapperBase<ChannelCreateEvent> {
     #channel: _f$channel,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "CHANNEL_CREATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static ChannelCreateEvent _instantiate(DecodingData data) {
     return ChannelCreateEvent(channel: data.dec(_f$channel));
@@ -148,14 +156,14 @@ class _ChannelCreateEventCopyWithImpl<$R, $Out>
   ) => _ChannelCreateEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class ChannelUpdateEventMapper extends ClassMapperBase<ChannelUpdateEvent> {
+class ChannelUpdateEventMapper extends SubClassMapperBase<ChannelUpdateEvent> {
   ChannelUpdateEventMapper._();
 
   static ChannelUpdateEventMapper? _instance;
   static ChannelUpdateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ChannelUpdateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       ChannelMapper.ensureInitialized();
     }
     return _instance!;
@@ -188,6 +196,14 @@ class ChannelUpdateEventMapper extends ClassMapperBase<ChannelUpdateEvent> {
     #channel: _f$channel,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "CHANNEL_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static ChannelUpdateEvent _instantiate(DecodingData data) {
     return ChannelUpdateEvent(
@@ -309,14 +325,14 @@ class _ChannelUpdateEventCopyWithImpl<$R, $Out>
   ) => _ChannelUpdateEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class ChannelDeleteEventMapper extends ClassMapperBase<ChannelDeleteEvent> {
+class ChannelDeleteEventMapper extends SubClassMapperBase<ChannelDeleteEvent> {
   ChannelDeleteEventMapper._();
 
   static ChannelDeleteEventMapper? _instance;
   static ChannelDeleteEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ChannelDeleteEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       ChannelMapper.ensureInitialized();
     }
     return _instance!;
@@ -342,6 +358,14 @@ class ChannelDeleteEventMapper extends ClassMapperBase<ChannelDeleteEvent> {
     #channel: _f$channel,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "CHANNEL_DELETE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static ChannelDeleteEvent _instantiate(DecodingData data) {
     return ChannelDeleteEvent(channel: data.dec(_f$channel));
@@ -450,14 +474,14 @@ class _ChannelDeleteEventCopyWithImpl<$R, $Out>
   ) => _ChannelDeleteEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class ThreadCreateEventMapper extends ClassMapperBase<ThreadCreateEvent> {
+class ThreadCreateEventMapper extends SubClassMapperBase<ThreadCreateEvent> {
   ThreadCreateEventMapper._();
 
   static ThreadCreateEventMapper? _instance;
   static ThreadCreateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ThreadCreateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       ThreadMapper.ensureInitialized();
     }
     return _instance!;
@@ -483,6 +507,14 @@ class ThreadCreateEventMapper extends ClassMapperBase<ThreadCreateEvent> {
     #thread: _f$thread,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "THREAD_CREATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static ThreadCreateEvent _instantiate(DecodingData data) {
     return ThreadCreateEvent(thread: data.dec(_f$thread));
@@ -591,14 +623,14 @@ class _ThreadCreateEventCopyWithImpl<$R, $Out>
   ) => _ThreadCreateEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class ThreadUpdateEventMapper extends ClassMapperBase<ThreadUpdateEvent> {
+class ThreadUpdateEventMapper extends SubClassMapperBase<ThreadUpdateEvent> {
   ThreadUpdateEventMapper._();
 
   static ThreadUpdateEventMapper? _instance;
   static ThreadUpdateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ThreadUpdateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       ThreadMapper.ensureInitialized();
     }
     return _instance!;
@@ -631,6 +663,14 @@ class ThreadUpdateEventMapper extends ClassMapperBase<ThreadUpdateEvent> {
     #thread: _f$thread,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "THREAD_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static ThreadUpdateEvent _instantiate(DecodingData data) {
     return ThreadUpdateEvent(
@@ -752,14 +792,14 @@ class _ThreadUpdateEventCopyWithImpl<$R, $Out>
   ) => _ThreadUpdateEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class ThreadDeleteEventMapper extends ClassMapperBase<ThreadDeleteEvent> {
+class ThreadDeleteEventMapper extends SubClassMapperBase<ThreadDeleteEvent> {
   ThreadDeleteEventMapper._();
 
   static ThreadDeleteEventMapper? _instance;
   static ThreadDeleteEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ThreadDeleteEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       PartialChannelMapper.ensureInitialized();
       ThreadMapper.ensureInitialized();
     }
@@ -793,6 +833,14 @@ class ThreadDeleteEventMapper extends ClassMapperBase<ThreadDeleteEvent> {
     #deletedThread: _f$deletedThread,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "THREAD_DELETE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static ThreadDeleteEvent _instantiate(DecodingData data) {
     return ThreadDeleteEvent(
@@ -914,14 +962,15 @@ class _ThreadDeleteEventCopyWithImpl<$R, $Out>
   ) => _ThreadDeleteEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class ThreadListSyncEventMapper extends ClassMapperBase<ThreadListSyncEvent> {
+class ThreadListSyncEventMapper
+    extends SubClassMapperBase<ThreadListSyncEvent> {
   ThreadListSyncEventMapper._();
 
   static ThreadListSyncEventMapper? _instance;
   static ThreadListSyncEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ThreadListSyncEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       ThreadMapper.ensureInitialized();
       ThreadMemberMapper.ensureInitialized();
@@ -964,6 +1013,14 @@ class ThreadListSyncEventMapper extends ClassMapperBase<ThreadListSyncEvent> {
     #members: _f$members,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "THREAD_LIST_SYNC";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static ThreadListSyncEvent _instantiate(DecodingData data) {
     return ThreadListSyncEvent(
@@ -1133,7 +1190,7 @@ class _ThreadListSyncEventCopyWithImpl<$R, $Out>
 }
 
 class ThreadMemberUpdateEventMapper
-    extends ClassMapperBase<ThreadMemberUpdateEvent> {
+    extends SubClassMapperBase<ThreadMemberUpdateEvent> {
   ThreadMemberUpdateEventMapper._();
 
   static ThreadMemberUpdateEventMapper? _instance;
@@ -1142,7 +1199,7 @@ class ThreadMemberUpdateEventMapper
       MapperContainer.globals.use(
         _instance = ThreadMemberUpdateEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       ThreadMemberMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
     }
@@ -1176,6 +1233,14 @@ class ThreadMemberUpdateEventMapper
     #guildId: _f$guildId,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "THREAD_MEMBER_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static ThreadMemberUpdateEvent _instantiate(DecodingData data) {
     return ThreadMemberUpdateEvent(
@@ -1298,7 +1363,7 @@ class _ThreadMemberUpdateEventCopyWithImpl<$R, $Out>
 }
 
 class ThreadMembersUpdateEventMapper
-    extends ClassMapperBase<ThreadMembersUpdateEvent> {
+    extends SubClassMapperBase<ThreadMembersUpdateEvent> {
   ThreadMembersUpdateEventMapper._();
 
   static ThreadMembersUpdateEventMapper? _instance;
@@ -1307,7 +1372,7 @@ class ThreadMembersUpdateEventMapper
       MapperContainer.globals.use(
         _instance = ThreadMembersUpdateEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       ThreadMemberMapper.ensureInitialized();
     }
@@ -1366,6 +1431,14 @@ class ThreadMembersUpdateEventMapper
     #removedMemberIds: _f$removedMemberIds,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "THREAD_MEMBERS_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static ThreadMembersUpdateEvent _instantiate(DecodingData data) {
     return ThreadMembersUpdateEvent(
@@ -1539,14 +1612,14 @@ class _ThreadMembersUpdateEventCopyWithImpl<$R, $Out>
 }
 
 class ChannelPinsUpdateEventMapper
-    extends ClassMapperBase<ChannelPinsUpdateEvent> {
+    extends SubClassMapperBase<ChannelPinsUpdateEvent> {
   ChannelPinsUpdateEventMapper._();
 
   static ChannelPinsUpdateEventMapper? _instance;
   static ChannelPinsUpdateEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ChannelPinsUpdateEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -1585,6 +1658,14 @@ class ChannelPinsUpdateEventMapper
     #lastPinTimestamp: _f$lastPinTimestamp,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = "CHANNEL_PINS_UPDATE";
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static ChannelPinsUpdateEvent _instantiate(DecodingData data) {
     return ChannelPinsUpdateEvent(

@@ -8,7 +8,7 @@ part 'stage_instance.mapper.dart';
 /// {@template stage_instance_create_event}
 /// Emitted when a stage instance is created.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "STAGE_INSTANCE_CREATE")
 class StageInstanceCreateEvent extends DispatchEvent
     with StageInstanceCreateEventMappable {
   /// The updated stage instance.
@@ -22,7 +22,7 @@ class StageInstanceCreateEvent extends DispatchEvent
 /// {@template stage_instance_update_event}
 /// Emitted when a stage instance is updated.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "STAGE_INSTANCE_UPDATE")
 class StageInstanceUpdateEvent extends DispatchEvent
     with StageInstanceUpdateEventMappable {
   /// The stage instance as it was cached before the update.
@@ -39,7 +39,7 @@ class StageInstanceUpdateEvent extends DispatchEvent
 /// {@template stage_instance_delete_event}
 /// Emitted when a stage instance is deleted.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "STAGE_INSTANCE_DELETE")
 class StageInstanceDeleteEvent extends DispatchEvent
     with StageInstanceDeleteEventMappable {
   /// The stage instance that was deleted.

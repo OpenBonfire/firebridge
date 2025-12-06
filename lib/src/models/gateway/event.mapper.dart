@@ -275,14 +275,15 @@ abstract class DispatchEventCopyWith<$R, $In extends DispatchEvent, $Out>
   DispatchEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
-class UnknownDispatchEventMapper extends ClassMapperBase<UnknownDispatchEvent> {
+class UnknownDispatchEventMapper
+    extends SubClassMapperBase<UnknownDispatchEvent> {
   UnknownDispatchEventMapper._();
 
   static UnknownDispatchEventMapper? _instance;
   static UnknownDispatchEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = UnknownDispatchEventMapper._());
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       RawDispatchEventMapper.ensureInitialized();
     }
     return _instance!;
@@ -308,6 +309,14 @@ class UnknownDispatchEventMapper extends ClassMapperBase<UnknownDispatchEvent> {
     #raw: _f$raw,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = MappableClass.useAsDefault;
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static UnknownDispatchEvent _instantiate(DecodingData data) {
     return UnknownDispatchEvent(raw: data.dec(_f$raw));

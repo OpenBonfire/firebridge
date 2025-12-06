@@ -9,7 +9,7 @@ part 'auto_moderation.mapper.dart';
 /// {@template auto_moderation_rule_create_event}
 /// Emitted when an auto moderation rule is created.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "AUTO_MODERATION_RULE_CREATE")
 class AutoModerationRuleCreateEvent extends DispatchEvent
     with AutoModerationActionExecutionEventMappable {
   /// The rule that was created.
@@ -23,7 +23,7 @@ class AutoModerationRuleCreateEvent extends DispatchEvent
 /// {@template auto_moderation_rule_update_event}
 /// Emitted when an auto moderation rule is updated.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "AUTO_MODERATION_RULE_UPDATE")
 class AutoModerationRuleUpdateEvent extends DispatchEvent
     with AutoModerationRuleUpdateEventMappable {
   /// The rule as it was cached before it was updated.
@@ -40,7 +40,7 @@ class AutoModerationRuleUpdateEvent extends DispatchEvent
 /// {@template auto_moderation_rule_delete_event}
 /// Emitted when an auto moderation rule is deleted.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "AUTO_MODERATION_RULE_DELETE")
 class AutoModerationRuleDeleteEvent extends DispatchEvent
     with AutoModerationRuleDeleteEventMappable {
   /// The rule that was deleted.
@@ -54,7 +54,7 @@ class AutoModerationRuleDeleteEvent extends DispatchEvent
 /// {@template auto_moderation_action_execution_event}
 /// Emitted when an auto moderation action is taken.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "AUTO_MODERATION_ACTION_EXECUTION")
 class AutoModerationActionExecutionEvent extends DispatchEvent
     with AutoModerationActionExecutionEventMappable {
   /// The ID of the guild the event was triggered in.

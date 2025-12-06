@@ -53,7 +53,7 @@ abstract class DispatchEvent extends GatewayEvent with DispatchEventMappable {
 ///
 /// This either means the event is internal and not documented, or that nyxx has not yet updated to support it.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: MappableClass.useAsDefault)
 class UnknownDispatchEvent extends DispatchEvent
     with UnknownDispatchEventMappable {
   /// The [RawDispatchEvent] that couldn't be parsed.

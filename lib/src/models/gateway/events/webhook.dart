@@ -8,7 +8,7 @@ part 'webhook.mapper.dart';
 /// {@template webhooks_update_event}
 /// Emitted when the webhooks in a channel are updated.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: "WEBHOOKS_UPDATE")
 class WebhooksUpdateEvent extends DispatchEvent
     with WebhooksUpdateEventMappable {
   /// The ID of the guild.
