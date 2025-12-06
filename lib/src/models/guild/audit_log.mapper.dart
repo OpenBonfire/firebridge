@@ -162,6 +162,7 @@ class AuditLogEntryMapper extends ClassMapperBase<AuditLogEntry> {
   static const Field<AuditLogEntry, Snowflake> _f$targetId = Field(
     'targetId',
     _$targetId,
+    key: r'target_id',
   );
   static List<AuditLogChange>? _$changes(AuditLogEntry v) => v.changes;
   static const Field<AuditLogEntry, List<AuditLogChange>> _f$changes = Field(
@@ -172,11 +173,13 @@ class AuditLogEntryMapper extends ClassMapperBase<AuditLogEntry> {
   static const Field<AuditLogEntry, Snowflake> _f$userId = Field(
     'userId',
     _$userId,
+    key: r'user_id',
   );
   static AuditLogEvent _$actionType(AuditLogEntry v) => v.actionType;
   static const Field<AuditLogEntry, AuditLogEvent> _f$actionType = Field(
     'actionType',
     _$actionType,
+    key: r'action_type',
   );
   static AuditLogEntryInfo? _$options(AuditLogEntry v) => v.options;
   static const Field<AuditLogEntry, AuditLogEntryInfo> _f$options = Field(
@@ -391,11 +394,13 @@ class AuditLogChangeMapper extends ClassMapperBase<AuditLogChange> {
   static const Field<AuditLogChange, dynamic> _f$oldValue = Field(
     'oldValue',
     _$oldValue,
+    key: r'old_value',
   );
   static dynamic _$newValue(AuditLogChange v) => v.newValue;
   static const Field<AuditLogChange, dynamic> _f$newValue = Field(
     'newValue',
     _$newValue,
+    key: r'new_value',
   );
   static String _$key(AuditLogChange v) => v.key;
   static const Field<AuditLogChange, String> _f$key = Field('key', _$key);
@@ -520,7 +525,6 @@ class AuditLogEventMapper extends ClassMapperBase<AuditLogEvent> {
   static AuditLogEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = AuditLogEventMapper._());
-      EnumLikeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -528,8 +532,11 @@ class AuditLogEventMapper extends ClassMapperBase<AuditLogEvent> {
   @override
   final String id = 'AuditLogEvent';
 
-  static int _$value(AuditLogEvent v) => v.value;
-  static const Field<AuditLogEvent, int> _f$value = Field('value', _$value);
+  static const Field<AuditLogEvent, dynamic> _f$value = Field(
+    'value',
+    null,
+    mode: FieldMode.param,
+  );
 
   @override
   final MappableFields<AuditLogEvent> fields = const {#value: _f$value};
@@ -599,9 +606,8 @@ extension AuditLogEventValueCopy<$R, $Out>
 }
 
 abstract class AuditLogEventCopyWith<$R, $In extends AuditLogEvent, $Out>
-    implements EnumLikeCopyWith<$R, $In, $Out, int, AuditLogEvent> {
-  @override
-  $R call({int? value});
+    implements ClassCopyWith<$R, $In, $Out> {
+  $R call({dynamic value});
   AuditLogEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -614,11 +620,9 @@ class _AuditLogEventCopyWithImpl<$R, $Out>
   late final ClassMapperBase<AuditLogEvent> $mapper =
       AuditLogEventMapper.ensureInitialized();
   @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
+  $R call({dynamic value}) => $apply(FieldCopyWithData({#value: value}));
   @override
-  AuditLogEvent $make(CopyWithData data) =>
-      AuditLogEvent(data.get(#value, or: $value.value));
+  AuditLogEvent $make(CopyWithData data) => AuditLogEvent(data.get(#value));
 
   @override
   AuditLogEventCopyWith<$R2, AuditLogEvent, $Out2> $chain<$R2, $Out2>(
@@ -634,6 +638,7 @@ class AuditLogEntryInfoMapper extends ClassMapperBase<AuditLogEntryInfo> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = AuditLogEntryInfoMapper._());
       SnowflakeMapper.ensureInitialized();
+      PermissionOverwriteTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -650,19 +655,29 @@ class AuditLogEntryInfoMapper extends ClassMapperBase<AuditLogEntryInfo> {
   static const Field<AuditLogEntryInfo, Snowflake> _f$applicationId = Field(
     'applicationId',
     _$applicationId,
+    key: r'application_id',
   );
   static String? _$autoModerationRuleName(AuditLogEntryInfo v) =>
       v.autoModerationRuleName;
   static const Field<AuditLogEntryInfo, String> _f$autoModerationRuleName =
-      Field('autoModerationRuleName', _$autoModerationRuleName);
+      Field(
+        'autoModerationRuleName',
+        _$autoModerationRuleName,
+        key: r'auto_moderation_rule_name',
+      );
   static String? _$autoModerationTriggerType(AuditLogEntryInfo v) =>
       v.autoModerationTriggerType;
   static const Field<AuditLogEntryInfo, String> _f$autoModerationTriggerType =
-      Field('autoModerationTriggerType', _$autoModerationTriggerType);
+      Field(
+        'autoModerationTriggerType',
+        _$autoModerationTriggerType,
+        key: r'auto_moderation_trigger_type',
+      );
   static Snowflake? _$channelId(AuditLogEntryInfo v) => v.channelId;
   static const Field<AuditLogEntryInfo, Snowflake> _f$channelId = Field(
     'channelId',
     _$channelId,
+    key: r'channel_id',
   );
   static String? _$count(AuditLogEntryInfo v) => v.count;
   static const Field<AuditLogEntryInfo, String> _f$count = Field(
@@ -673,6 +688,7 @@ class AuditLogEntryInfoMapper extends ClassMapperBase<AuditLogEntryInfo> {
   static const Field<AuditLogEntryInfo, String> _f$deleteMemberDays = Field(
     'deleteMemberDays',
     _$deleteMemberDays,
+    key: r'delete_member_days',
   );
   static Snowflake? _$id(AuditLogEntryInfo v) => v.id;
   static const Field<AuditLogEntryInfo, Snowflake> _f$id = Field('id', _$id);
@@ -680,25 +696,33 @@ class AuditLogEntryInfoMapper extends ClassMapperBase<AuditLogEntryInfo> {
   static const Field<AuditLogEntryInfo, String> _f$membersRemoved = Field(
     'membersRemoved',
     _$membersRemoved,
+    key: r'members_removed',
   );
   static Snowflake? _$messageId(AuditLogEntryInfo v) => v.messageId;
   static const Field<AuditLogEntryInfo, Snowflake> _f$messageId = Field(
     'messageId',
     _$messageId,
+    key: r'message_id',
   );
   static String? _$roleName(AuditLogEntryInfo v) => v.roleName;
   static const Field<AuditLogEntryInfo, String> _f$roleName = Field(
     'roleName',
     _$roleName,
+    key: r'role_name',
   );
   static PermissionOverwriteType? _$overwriteType(AuditLogEntryInfo v) =>
       v.overwriteType;
   static const Field<AuditLogEntryInfo, PermissionOverwriteType>
-  _f$overwriteType = Field('overwriteType', _$overwriteType);
+  _f$overwriteType = Field(
+    'overwriteType',
+    _$overwriteType,
+    key: r'overwrite_type',
+  );
   static String? _$integrationType(AuditLogEntryInfo v) => v.integrationType;
   static const Field<AuditLogEntryInfo, String> _f$integrationType = Field(
     'integrationType',
     _$integrationType,
+    key: r'integration_type',
   );
 
   @override

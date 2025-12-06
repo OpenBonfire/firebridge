@@ -14,7 +14,6 @@ class StickerTypeMapper extends ClassMapperBase<StickerType> {
   static StickerTypeMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = StickerTypeMapper._());
-      EnumLikeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -22,8 +21,11 @@ class StickerTypeMapper extends ClassMapperBase<StickerType> {
   @override
   final String id = 'StickerType';
 
-  static int _$value(StickerType v) => v.value;
-  static const Field<StickerType, int> _f$value = Field('value', _$value);
+  static const Field<StickerType, dynamic> _f$value = Field(
+    'value',
+    null,
+    mode: FieldMode.param,
+  );
 
   @override
   final MappableFields<StickerType> fields = const {#value: _f$value};
@@ -91,9 +93,8 @@ extension StickerTypeValueCopy<$R, $Out>
 }
 
 abstract class StickerTypeCopyWith<$R, $In extends StickerType, $Out>
-    implements EnumLikeCopyWith<$R, $In, $Out, int, StickerType> {
-  @override
-  $R call({int? value});
+    implements ClassCopyWith<$R, $In, $Out> {
+  $R call({dynamic value});
   StickerTypeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -106,11 +107,9 @@ class _StickerTypeCopyWithImpl<$R, $Out>
   late final ClassMapperBase<StickerType> $mapper =
       StickerTypeMapper.ensureInitialized();
   @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
+  $R call({dynamic value}) => $apply(FieldCopyWithData({#value: value}));
   @override
-  StickerType $make(CopyWithData data) =>
-      StickerType(data.get(#value, or: $value.value));
+  StickerType $make(CopyWithData data) => StickerType(data.get(#value));
 
   @override
   StickerTypeCopyWith<$R2, StickerType, $Out2> $chain<$R2, $Out2>(
@@ -125,7 +124,6 @@ class StickerFormatTypeMapper extends ClassMapperBase<StickerFormatType> {
   static StickerFormatTypeMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = StickerFormatTypeMapper._());
-      EnumLikeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -133,8 +131,11 @@ class StickerFormatTypeMapper extends ClassMapperBase<StickerFormatType> {
   @override
   final String id = 'StickerFormatType';
 
-  static int _$value(StickerFormatType v) => v.value;
-  static const Field<StickerFormatType, int> _f$value = Field('value', _$value);
+  static const Field<StickerFormatType, dynamic> _f$value = Field(
+    'value',
+    null,
+    mode: FieldMode.param,
+  );
 
   @override
   final MappableFields<StickerFormatType> fields = const {#value: _f$value};
@@ -213,9 +214,8 @@ abstract class StickerFormatTypeCopyWith<
   $In extends StickerFormatType,
   $Out
 >
-    implements EnumLikeCopyWith<$R, $In, $Out, int, StickerFormatType> {
-  @override
-  $R call({int? value});
+    implements ClassCopyWith<$R, $In, $Out> {
+  $R call({dynamic value});
   StickerFormatTypeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -230,11 +230,10 @@ class _StickerFormatTypeCopyWithImpl<$R, $Out>
   late final ClassMapperBase<StickerFormatType> $mapper =
       StickerFormatTypeMapper.ensureInitialized();
   @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
+  $R call({dynamic value}) => $apply(FieldCopyWithData({#value: value}));
   @override
   StickerFormatType $make(CopyWithData data) =>
-      StickerFormatType(data.get(#value, or: $value.value));
+      StickerFormatType(data.get(#value));
 
   @override
   StickerFormatTypeCopyWith<$R2, StickerFormatType, $Out2> $chain<$R2, $Out2>(
@@ -267,6 +266,7 @@ class StickerItemMapper extends ClassMapperBase<StickerItem> {
   static const Field<StickerItem, StickerFormatType> _f$formatType = Field(
     'formatType',
     _$formatType,
+    key: r'format_type',
   );
 
   @override

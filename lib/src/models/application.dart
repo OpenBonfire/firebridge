@@ -14,7 +14,6 @@ import 'package:nyxx/src/models/sku.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/team.dart';
 import 'package:nyxx/src/models/user/user.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/flags.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
@@ -217,24 +216,13 @@ class Application extends PartialApplication {
         );
 }
 
-final class ApplicationIntegrationType
-    extends EnumLike<int, ApplicationIntegrationType> {
-  /// App is installable to servers.
-  static const guildInstall = ApplicationIntegrationType(0);
-
-  /// App is installable to users.
-  static const userInstall = ApplicationIntegrationType(1);
-
-  /// @nodoc
-  const ApplicationIntegrationType(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  ApplicationIntegrationType.parse(int value) : this(value);
-}
+@MappableEnum(mode: ValuesMode.indexed)
+enum ApplicationIntegrationType { guildInstall, userInstall }
 
 /// Flags for an [Application].
-class ApplicationFlags extends Flags<ApplicationFlags> {
+@MappableClass()
+class ApplicationFlags extends Flags<ApplicationFlags>
+    with ApplicationFlagsMappable {
   /// Indicates if an app uses the Auto Moderation API.
   static const applicationAutoModerationRuleCreateBadge =
       Flag<ApplicationFlags>.fromOffset(6);
@@ -358,21 +346,22 @@ class ApplicationRoleConnectionMetadata with ToStringHelper {
 }
 
 /// The type of an [ApplicationRoleConnectionMetadata].
-final class ConnectionMetadataType
-    extends EnumLike<int, ConnectionMetadataType> {
-  static const integerLessThanOrEqual = ConnectionMetadataType(1);
-  static const integerGreaterThanOrEqual = ConnectionMetadataType(2);
-  static const integerEqual = ConnectionMetadataType(3);
-  static const integerNotEqual = ConnectionMetadataType(4);
-  static const dateTimeLessThanOrEqual = ConnectionMetadataType(5);
-  static const dateTimeGreaterThanOrEqual = ConnectionMetadataType(6);
-  static const booleanEqual = ConnectionMetadataType(7);
-  static const booleanNotEqual = ConnectionMetadataType(8);
-
-  /// @nodoc
-  const ConnectionMetadataType(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  ConnectionMetadataType.parse(int value) : this(value);
+@MappableEnum()
+enum ConnectionMetadataType {
+  @MappableValue(1)
+  integerLessThanOrEqual,
+  @MappableValue(2)
+  integerGreaterThanOrEqual,
+  @MappableValue(3)
+  integerEqual,
+  @MappableValue(4)
+  integerNotEqual,
+  @MappableValue(5)
+  dateTimeLessThanOrEqual,
+  @MappableValue(6)
+  dateTimeGreaterThanOrEqual,
+  @MappableValue(7)
+  booleanEqual,
+  @MappableValue(8)
+  booleanNotEqual,
 }

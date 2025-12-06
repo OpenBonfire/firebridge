@@ -7,6 +7,321 @@
 
 part of 'guild.dart';
 
+class VerificationLevelMapper extends EnumMapper<VerificationLevel> {
+  VerificationLevelMapper._();
+
+  static VerificationLevelMapper? _instance;
+  static VerificationLevelMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = VerificationLevelMapper._());
+    }
+    return _instance!;
+  }
+
+  static VerificationLevel fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  VerificationLevel decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return VerificationLevel.none;
+      case 1:
+        return VerificationLevel.low;
+      case 2:
+        return VerificationLevel.medium;
+      case 3:
+        return VerificationLevel.high;
+      case 4:
+        return VerificationLevel.veryHigh;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(VerificationLevel self) {
+    switch (self) {
+      case VerificationLevel.none:
+        return 0;
+      case VerificationLevel.low:
+        return 1;
+      case VerificationLevel.medium:
+        return 2;
+      case VerificationLevel.high:
+        return 3;
+      case VerificationLevel.veryHigh:
+        return 4;
+    }
+  }
+}
+
+extension VerificationLevelMapperExtension on VerificationLevel {
+  dynamic toValue() {
+    VerificationLevelMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<VerificationLevel>(this);
+  }
+}
+
+class MessageNotificationLevelMapper
+    extends EnumMapper<MessageNotificationLevel> {
+  MessageNotificationLevelMapper._();
+
+  static MessageNotificationLevelMapper? _instance;
+  static MessageNotificationLevelMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(
+        _instance = MessageNotificationLevelMapper._(),
+      );
+    }
+    return _instance!;
+  }
+
+  static MessageNotificationLevel fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  MessageNotificationLevel decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return MessageNotificationLevel.allMessages;
+      case 1:
+        return MessageNotificationLevel.onlyMentions;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(MessageNotificationLevel self) {
+    switch (self) {
+      case MessageNotificationLevel.allMessages:
+        return 0;
+      case MessageNotificationLevel.onlyMentions:
+        return 1;
+    }
+  }
+}
+
+extension MessageNotificationLevelMapperExtension on MessageNotificationLevel {
+  dynamic toValue() {
+    MessageNotificationLevelMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<MessageNotificationLevel>(this);
+  }
+}
+
+class ExplicitContentFilterLevelMapper
+    extends EnumMapper<ExplicitContentFilterLevel> {
+  ExplicitContentFilterLevelMapper._();
+
+  static ExplicitContentFilterLevelMapper? _instance;
+  static ExplicitContentFilterLevelMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(
+        _instance = ExplicitContentFilterLevelMapper._(),
+      );
+    }
+    return _instance!;
+  }
+
+  static ExplicitContentFilterLevel fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  ExplicitContentFilterLevel decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return ExplicitContentFilterLevel.disabled;
+      case 1:
+        return ExplicitContentFilterLevel.membersWithoutRoles;
+      case 2:
+        return ExplicitContentFilterLevel.allMembers;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(ExplicitContentFilterLevel self) {
+    switch (self) {
+      case ExplicitContentFilterLevel.disabled:
+        return 0;
+      case ExplicitContentFilterLevel.membersWithoutRoles:
+        return 1;
+      case ExplicitContentFilterLevel.allMembers:
+        return 2;
+    }
+  }
+}
+
+extension ExplicitContentFilterLevelMapperExtension
+    on ExplicitContentFilterLevel {
+  dynamic toValue() {
+    ExplicitContentFilterLevelMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<ExplicitContentFilterLevel>(this);
+  }
+}
+
+class MfaLevelMapper extends EnumMapper<MfaLevel> {
+  MfaLevelMapper._();
+
+  static MfaLevelMapper? _instance;
+  static MfaLevelMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = MfaLevelMapper._());
+    }
+    return _instance!;
+  }
+
+  static MfaLevel fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  MfaLevel decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return MfaLevel.none;
+      case 1:
+        return MfaLevel.elevated;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(MfaLevel self) {
+    switch (self) {
+      case MfaLevel.none:
+        return 0;
+      case MfaLevel.elevated:
+        return 1;
+    }
+  }
+}
+
+extension MfaLevelMapperExtension on MfaLevel {
+  dynamic toValue() {
+    MfaLevelMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<MfaLevel>(this);
+  }
+}
+
+class PremiumTierMapper extends EnumMapper<PremiumTier> {
+  PremiumTierMapper._();
+
+  static PremiumTierMapper? _instance;
+  static PremiumTierMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = PremiumTierMapper._());
+    }
+    return _instance!;
+  }
+
+  static PremiumTier fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  PremiumTier decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return PremiumTier.none;
+      case 1:
+        return PremiumTier.one;
+      case 2:
+        return PremiumTier.two;
+      case 3:
+        return PremiumTier.three;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(PremiumTier self) {
+    switch (self) {
+      case PremiumTier.none:
+        return 0;
+      case PremiumTier.one:
+        return 1;
+      case PremiumTier.two:
+        return 2;
+      case PremiumTier.three:
+        return 3;
+    }
+  }
+}
+
+extension PremiumTierMapperExtension on PremiumTier {
+  dynamic toValue() {
+    PremiumTierMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<PremiumTier>(this);
+  }
+}
+
+class NsfwLevelMapper extends EnumMapper<NsfwLevel> {
+  NsfwLevelMapper._();
+
+  static NsfwLevelMapper? _instance;
+  static NsfwLevelMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = NsfwLevelMapper._());
+    }
+    return _instance!;
+  }
+
+  static NsfwLevel fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  NsfwLevel decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return NsfwLevel.unset;
+      case 1:
+        return NsfwLevel.explicit;
+      case 2:
+        return NsfwLevel.safe;
+      case 3:
+        return NsfwLevel.ageRestricted;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(NsfwLevel self) {
+    switch (self) {
+      case NsfwLevel.unset:
+        return 0;
+      case NsfwLevel.explicit:
+        return 1;
+      case NsfwLevel.safe:
+        return 2;
+      case NsfwLevel.ageRestricted:
+        return 3;
+    }
+  }
+}
+
+extension NsfwLevelMapperExtension on NsfwLevel {
+  dynamic toValue() {
+    NsfwLevelMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<NsfwLevel>(this);
+  }
+}
+
 class PartialGuildMapper extends ClassMapperBase<PartialGuild> {
   PartialGuildMapper._();
 
@@ -137,6 +452,7 @@ class UserGuildMapper extends ClassMapperBase<UserGuild> {
       PartialGuildMapper.ensureInitialized();
       GuildMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
+      GuildFeaturesMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -152,17 +468,20 @@ class UserGuildMapper extends ClassMapperBase<UserGuild> {
   static const Field<UserGuild, String> _f$iconHash = Field(
     'iconHash',
     _$iconHash,
+    key: r'icon_hash',
   );
   static bool? _$isOwnedByCurrentUser(UserGuild v) => v.isOwnedByCurrentUser;
   static const Field<UserGuild, bool> _f$isOwnedByCurrentUser = Field(
     'isOwnedByCurrentUser',
     _$isOwnedByCurrentUser,
+    key: r'is_owned_by_current_user',
   );
   static Permissions? _$currentUserPermissions(UserGuild v) =>
       v.currentUserPermissions;
   static const Field<UserGuild, Permissions> _f$currentUserPermissions = Field(
     'currentUserPermissions',
     _$currentUserPermissions,
+    key: r'current_user_permissions',
   );
   static GuildFeatures _$features(UserGuild v) => v.features;
   static const Field<UserGuild, GuildFeatures> _f$features = Field(
@@ -173,17 +492,20 @@ class UserGuildMapper extends ClassMapperBase<UserGuild> {
   static const Field<UserGuild, int> _f$approximateMemberCount = Field(
     'approximateMemberCount',
     _$approximateMemberCount,
+    key: r'approximate_member_count',
   );
   static int? _$approximatePresenceCount(UserGuild v) =>
       v.approximatePresenceCount;
   static const Field<UserGuild, int> _f$approximatePresenceCount = Field(
     'approximatePresenceCount',
     _$approximatePresenceCount,
+    key: r'approximate_presence_count',
   );
   static String? _$bannerHash(UserGuild v) => v.bannerHash;
   static const Field<UserGuild, String> _f$bannerHash = Field(
     'bannerHash',
     _$bannerHash,
+    key: r'banner_hash',
   );
 
   @override
@@ -274,6 +596,7 @@ abstract class UserGuildCopyWith<$R, $In extends UserGuild, $Out>
     implements PartialGuildCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  GuildFeaturesCopyWith<$R, GuildFeatures, GuildFeatures> get features;
   @override
   $R call({
     Snowflake? id,
@@ -300,6 +623,9 @@ class _UserGuildCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
+  @override
+  GuildFeaturesCopyWith<$R, GuildFeatures, GuildFeatures> get features =>
+      $value.features.copyWith.$chain((v) => call(features: v));
   @override
   $R call({
     Snowflake? id,
@@ -359,6 +685,119 @@ class _UserGuildCopyWithImpl<$R, $Out>
   ) => _UserGuildCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
+class GuildFeaturesMapper extends ClassMapperBase<GuildFeatures> {
+  GuildFeaturesMapper._();
+
+  static GuildFeaturesMapper? _instance;
+  static GuildFeaturesMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = GuildFeaturesMapper._());
+      FlagsMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'GuildFeatures';
+
+  static int _$value(GuildFeatures v) => v.value;
+  static const Field<GuildFeatures, int> _f$value = Field('value', _$value);
+
+  @override
+  final MappableFields<GuildFeatures> fields = const {#value: _f$value};
+
+  static GuildFeatures _instantiate(DecodingData data) {
+    return GuildFeatures(data.dec(_f$value));
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static GuildFeatures fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<GuildFeatures>(map);
+  }
+
+  static GuildFeatures fromJson(String json) {
+    return ensureInitialized().decodeJson<GuildFeatures>(json);
+  }
+}
+
+mixin GuildFeaturesMappable {
+  String toJson() {
+    return GuildFeaturesMapper.ensureInitialized().encodeJson<GuildFeatures>(
+      this as GuildFeatures,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return GuildFeaturesMapper.ensureInitialized().encodeMap<GuildFeatures>(
+      this as GuildFeatures,
+    );
+  }
+
+  GuildFeaturesCopyWith<GuildFeatures, GuildFeatures, GuildFeatures>
+  get copyWith => _GuildFeaturesCopyWithImpl<GuildFeatures, GuildFeatures>(
+    this as GuildFeatures,
+    $identity,
+    $identity,
+  );
+  @override
+  String toString() {
+    return GuildFeaturesMapper.ensureInitialized().stringifyValue(
+      this as GuildFeatures,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return GuildFeaturesMapper.ensureInitialized().equalsValue(
+      this as GuildFeatures,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return GuildFeaturesMapper.ensureInitialized().hashValue(
+      this as GuildFeatures,
+    );
+  }
+}
+
+extension GuildFeaturesValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, GuildFeatures, $Out> {
+  GuildFeaturesCopyWith<$R, GuildFeatures, $Out> get $asGuildFeatures =>
+      $base.as((v, t, t2) => _GuildFeaturesCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class GuildFeaturesCopyWith<$R, $In extends GuildFeatures, $Out>
+    implements FlagsCopyWith<$R, $In, $Out, GuildFeatures> {
+  @override
+  $R call({int? value});
+  GuildFeaturesCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+}
+
+class _GuildFeaturesCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, GuildFeatures, $Out>
+    implements GuildFeaturesCopyWith<$R, GuildFeatures, $Out> {
+  _GuildFeaturesCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<GuildFeatures> $mapper =
+      GuildFeaturesMapper.ensureInitialized();
+  @override
+  $R call({int? value}) =>
+      $apply(FieldCopyWithData({if (value != null) #value: value}));
+  @override
+  GuildFeatures $make(CopyWithData data) =>
+      GuildFeatures(data.get(#value, or: $value.value));
+
+  @override
+  GuildFeaturesCopyWith<$R2, GuildFeatures, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _GuildFeaturesCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
 class GuildMapper extends ClassMapperBase<Guild> {
   GuildMapper._();
 
@@ -368,8 +807,17 @@ class GuildMapper extends ClassMapperBase<Guild> {
       MapperContainer.globals.use(_instance = GuildMapper._());
       UserGuildMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
+      VerificationLevelMapper.ensureInitialized();
+      MessageNotificationLevelMapper.ensureInitialized();
+      ExplicitContentFilterLevelMapper.ensureInitialized();
       RoleMapper.ensureInitialized();
+      GuildFeaturesMapper.ensureInitialized();
+      MfaLevelMapper.ensureInitialized();
+      SystemChannelFlagsMapper.ensureInitialized();
+      PremiumTierMapper.ensureInitialized();
+      NsfwLevelMapper.ensureInitialized();
       EmojiMapper.ensureInitialized();
+      IncidentsDataMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -382,54 +830,71 @@ class GuildMapper extends ClassMapperBase<Guild> {
   static String _$name(Guild v) => v.name;
   static const Field<Guild, String> _f$name = Field('name', _$name);
   static String? _$iconHash(Guild v) => v.iconHash;
-  static const Field<Guild, String> _f$iconHash = Field('iconHash', _$iconHash);
+  static const Field<Guild, String> _f$iconHash = Field(
+    'iconHash',
+    _$iconHash,
+    key: r'icon_hash',
+  );
   static String? _$splashHash(Guild v) => v.splashHash;
   static const Field<Guild, String> _f$splashHash = Field(
     'splashHash',
     _$splashHash,
+    key: r'splash_hash',
   );
   static String? _$discoverySplashHash(Guild v) => v.discoverySplashHash;
   static const Field<Guild, String> _f$discoverySplashHash = Field(
     'discoverySplashHash',
     _$discoverySplashHash,
+    key: r'discovery_splash_hash',
   );
   static bool? _$isOwnedByCurrentUser(Guild v) => v.isOwnedByCurrentUser;
   static const Field<Guild, bool> _f$isOwnedByCurrentUser = Field(
     'isOwnedByCurrentUser',
     _$isOwnedByCurrentUser,
+    key: r'is_owned_by_current_user',
   );
   static Snowflake _$ownerId(Guild v) => v.ownerId;
-  static const Field<Guild, Snowflake> _f$ownerId = Field('ownerId', _$ownerId);
+  static const Field<Guild, Snowflake> _f$ownerId = Field(
+    'ownerId',
+    _$ownerId,
+    key: r'owner_id',
+  );
   static Permissions? _$currentUserPermissions(Guild v) =>
       v.currentUserPermissions;
   static const Field<Guild, Permissions> _f$currentUserPermissions = Field(
     'currentUserPermissions',
     _$currentUserPermissions,
+    key: r'current_user_permissions',
   );
   static Snowflake? _$afkChannelId(Guild v) => v.afkChannelId;
   static const Field<Guild, Snowflake> _f$afkChannelId = Field(
     'afkChannelId',
     _$afkChannelId,
+    key: r'afk_channel_id',
   );
   static Duration _$afkTimeout(Guild v) => v.afkTimeout;
   static const Field<Guild, Duration> _f$afkTimeout = Field(
     'afkTimeout',
     _$afkTimeout,
+    key: r'afk_timeout',
   );
   static bool _$isWidgetEnabled(Guild v) => v.isWidgetEnabled;
   static const Field<Guild, bool> _f$isWidgetEnabled = Field(
     'isWidgetEnabled',
     _$isWidgetEnabled,
+    key: r'is_widget_enabled',
   );
   static Snowflake? _$widgetChannelId(Guild v) => v.widgetChannelId;
   static const Field<Guild, Snowflake> _f$widgetChannelId = Field(
     'widgetChannelId',
     _$widgetChannelId,
+    key: r'widget_channel_id',
   );
   static VerificationLevel _$verificationLevel(Guild v) => v.verificationLevel;
   static const Field<Guild, VerificationLevel> _f$verificationLevel = Field(
     'verificationLevel',
     _$verificationLevel,
+    key: r'verification_level',
   );
   static MessageNotificationLevel _$defaultMessageNotificationLevel(Guild v) =>
       v.defaultMessageNotificationLevel;
@@ -437,6 +902,7 @@ class GuildMapper extends ClassMapperBase<Guild> {
   _f$defaultMessageNotificationLevel = Field(
     'defaultMessageNotificationLevel',
     _$defaultMessageNotificationLevel,
+    key: r'default_message_notification_level',
   );
   static ExplicitContentFilterLevel _$explicitContentFilterLevel(Guild v) =>
       v.explicitContentFilterLevel;
@@ -444,11 +910,13 @@ class GuildMapper extends ClassMapperBase<Guild> {
   _f$explicitContentFilterLevel = Field(
     'explicitContentFilterLevel',
     _$explicitContentFilterLevel,
+    key: r'explicit_content_filter_level',
   );
   static List<Role> _$roleList(Guild v) => v.roleList;
   static const Field<Guild, List<Role>> _f$roleList = Field(
     'roleList',
     _$roleList,
+    key: r'role_list',
   );
   static GuildFeatures _$features(Guild v) => v.features;
   static const Field<Guild, GuildFeatures> _f$features = Field(
@@ -459,42 +927,50 @@ class GuildMapper extends ClassMapperBase<Guild> {
   static const Field<Guild, MfaLevel> _f$mfaLevel = Field(
     'mfaLevel',
     _$mfaLevel,
+    key: r'mfa_level',
   );
   static Snowflake? _$applicationId(Guild v) => v.applicationId;
   static const Field<Guild, Snowflake> _f$applicationId = Field(
     'applicationId',
     _$applicationId,
+    key: r'application_id',
   );
   static Snowflake? _$systemChannelId(Guild v) => v.systemChannelId;
   static const Field<Guild, Snowflake> _f$systemChannelId = Field(
     'systemChannelId',
     _$systemChannelId,
+    key: r'system_channel_id',
   );
   static SystemChannelFlags _$systemChannelFlags(Guild v) =>
       v.systemChannelFlags;
   static const Field<Guild, SystemChannelFlags> _f$systemChannelFlags = Field(
     'systemChannelFlags',
     _$systemChannelFlags,
+    key: r'system_channel_flags',
   );
   static Snowflake? _$rulesChannelId(Guild v) => v.rulesChannelId;
   static const Field<Guild, Snowflake> _f$rulesChannelId = Field(
     'rulesChannelId',
     _$rulesChannelId,
+    key: r'rules_channel_id',
   );
   static int? _$maxPresences(Guild v) => v.maxPresences;
   static const Field<Guild, int> _f$maxPresences = Field(
     'maxPresences',
     _$maxPresences,
+    key: r'max_presences',
   );
   static int? _$maxMembers(Guild v) => v.maxMembers;
   static const Field<Guild, int> _f$maxMembers = Field(
     'maxMembers',
     _$maxMembers,
+    key: r'max_members',
   );
   static String? _$vanityUrlCode(Guild v) => v.vanityUrlCode;
   static const Field<Guild, String> _f$vanityUrlCode = Field(
     'vanityUrlCode',
     _$vanityUrlCode,
+    key: r'vanity_url_code',
   );
   static String? _$description(Guild v) => v.description;
   static const Field<Guild, String> _f$description = Field(
@@ -505,83 +981,99 @@ class GuildMapper extends ClassMapperBase<Guild> {
   static const Field<Guild, String> _f$bannerHash = Field(
     'bannerHash',
     _$bannerHash,
+    key: r'banner_hash',
   );
   static PremiumTier _$premiumTier(Guild v) => v.premiumTier;
   static const Field<Guild, PremiumTier> _f$premiumTier = Field(
     'premiumTier',
     _$premiumTier,
+    key: r'premium_tier',
   );
   static int? _$premiumSubscriptionCount(Guild v) => v.premiumSubscriptionCount;
   static const Field<Guild, int> _f$premiumSubscriptionCount = Field(
     'premiumSubscriptionCount',
     _$premiumSubscriptionCount,
+    key: r'premium_subscription_count',
   );
   static Locale _$preferredLocale(Guild v) => v.preferredLocale;
   static const Field<Guild, Locale> _f$preferredLocale = Field(
     'preferredLocale',
     _$preferredLocale,
+    key: r'preferred_locale',
   );
   static Snowflake? _$publicUpdatesChannelId(Guild v) =>
       v.publicUpdatesChannelId;
   static const Field<Guild, Snowflake> _f$publicUpdatesChannelId = Field(
     'publicUpdatesChannelId',
     _$publicUpdatesChannelId,
+    key: r'public_updates_channel_id',
   );
   static int? _$maxVideoChannelUsers(Guild v) => v.maxVideoChannelUsers;
   static const Field<Guild, int> _f$maxVideoChannelUsers = Field(
     'maxVideoChannelUsers',
     _$maxVideoChannelUsers,
+    key: r'max_video_channel_users',
   );
   static int? _$maxStageChannelUsers(Guild v) => v.maxStageChannelUsers;
   static const Field<Guild, int> _f$maxStageChannelUsers = Field(
     'maxStageChannelUsers',
     _$maxStageChannelUsers,
+    key: r'max_stage_channel_users',
   );
   static int? _$approximateMemberCount(Guild v) => v.approximateMemberCount;
   static const Field<Guild, int> _f$approximateMemberCount = Field(
     'approximateMemberCount',
     _$approximateMemberCount,
+    key: r'approximate_member_count',
   );
   static int? _$approximatePresenceCount(Guild v) => v.approximatePresenceCount;
   static const Field<Guild, int> _f$approximatePresenceCount = Field(
     'approximatePresenceCount',
     _$approximatePresenceCount,
+    key: r'approximate_presence_count',
   );
   static WelcomeScreen? _$welcomeScreen(Guild v) => v.welcomeScreen;
   static const Field<Guild, WelcomeScreen> _f$welcomeScreen = Field(
     'welcomeScreen',
     _$welcomeScreen,
+    key: r'welcome_screen',
   );
   static NsfwLevel _$nsfwLevel(Guild v) => v.nsfwLevel;
   static const Field<Guild, NsfwLevel> _f$nsfwLevel = Field(
     'nsfwLevel',
     _$nsfwLevel,
+    key: r'nsfw_level',
   );
   static bool _$hasPremiumProgressBarEnabled(Guild v) =>
       v.hasPremiumProgressBarEnabled;
   static const Field<Guild, bool> _f$hasPremiumProgressBarEnabled = Field(
     'hasPremiumProgressBarEnabled',
     _$hasPremiumProgressBarEnabled,
+    key: r'has_premium_progress_bar_enabled',
   );
   static List<Emoji> _$emojiList(Guild v) => v.emojiList;
   static const Field<Guild, List<Emoji>> _f$emojiList = Field(
     'emojiList',
     _$emojiList,
+    key: r'emoji_list',
   );
   static List<GuildSticker> _$stickerList(Guild v) => v.stickerList;
   static const Field<Guild, List<GuildSticker>> _f$stickerList = Field(
     'stickerList',
     _$stickerList,
+    key: r'sticker_list',
   );
   static Snowflake? _$safetyAlertsChannelId(Guild v) => v.safetyAlertsChannelId;
   static const Field<Guild, Snowflake> _f$safetyAlertsChannelId = Field(
     'safetyAlertsChannelId',
     _$safetyAlertsChannelId,
+    key: r'safety_alerts_channel_id',
   );
   static IncidentsData? _$incidentsData(Guild v) => v.incidentsData;
   static const Field<Guild, IncidentsData> _f$incidentsData = Field(
     'incidentsData',
     _$incidentsData,
+    key: r'incidents_data',
   );
 
   @override
@@ -731,14 +1223,19 @@ abstract class GuildCopyWith<$R, $In extends Guild, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get afkChannelId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get widgetChannelId;
   ListCopyWith<$R, Role, RoleCopyWith<$R, Role, Role>> get roleList;
+  @override
+  GuildFeaturesCopyWith<$R, GuildFeatures, GuildFeatures> get features;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get applicationId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get systemChannelId;
+  SystemChannelFlagsCopyWith<$R, SystemChannelFlags, SystemChannelFlags>
+  get systemChannelFlags;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get rulesChannelId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get publicUpdatesChannelId;
   ListCopyWith<$R, Emoji, EmojiCopyWith<$R, Emoji, Emoji>> get emojiList;
   ListCopyWith<$R, GuildSticker, ObjectCopyWith<$R, GuildSticker, GuildSticker>>
   get stickerList;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get safetyAlertsChannelId;
+  IncidentsDataCopyWith<$R, IncidentsData, IncidentsData>? get incidentsData;
   @override
   $R call({
     Snowflake? id,
@@ -813,11 +1310,19 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
         (v) => call(roleList: v),
       );
   @override
+  GuildFeaturesCopyWith<$R, GuildFeatures, GuildFeatures> get features =>
+      $value.features.copyWith.$chain((v) => call(features: v));
+  @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get applicationId =>
       $value.applicationId?.copyWith.$chain((v) => call(applicationId: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get systemChannelId =>
       $value.systemChannelId?.copyWith.$chain((v) => call(systemChannelId: v));
+  @override
+  SystemChannelFlagsCopyWith<$R, SystemChannelFlags, SystemChannelFlags>
+  get systemChannelFlags => $value.systemChannelFlags.copyWith.$chain(
+    (v) => call(systemChannelFlags: v),
+  );
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get rulesChannelId =>
       $value.rulesChannelId?.copyWith.$chain((v) => call(rulesChannelId: v));
@@ -845,6 +1350,9 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
       $value.safetyAlertsChannelId?.copyWith.$chain(
         (v) => call(safetyAlertsChannelId: v),
       );
+  @override
+  IncidentsDataCopyWith<$R, IncidentsData, IncidentsData>? get incidentsData =>
+      $value.incidentsData?.copyWith.$chain((v) => call(incidentsData: v));
   @override
   $R call({
     Snowflake? id,
@@ -1042,5 +1550,300 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
   @override
   GuildCopyWith<$R2, Guild, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
       _GuildCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
+class SystemChannelFlagsMapper extends ClassMapperBase<SystemChannelFlags> {
+  SystemChannelFlagsMapper._();
+
+  static SystemChannelFlagsMapper? _instance;
+  static SystemChannelFlagsMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = SystemChannelFlagsMapper._());
+      FlagsMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'SystemChannelFlags';
+
+  static int _$value(SystemChannelFlags v) => v.value;
+  static const Field<SystemChannelFlags, int> _f$value = Field(
+    'value',
+    _$value,
+  );
+
+  @override
+  final MappableFields<SystemChannelFlags> fields = const {#value: _f$value};
+
+  static SystemChannelFlags _instantiate(DecodingData data) {
+    return SystemChannelFlags(data.dec(_f$value));
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static SystemChannelFlags fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<SystemChannelFlags>(map);
+  }
+
+  static SystemChannelFlags fromJson(String json) {
+    return ensureInitialized().decodeJson<SystemChannelFlags>(json);
+  }
+}
+
+mixin SystemChannelFlagsMappable {
+  String toJson() {
+    return SystemChannelFlagsMapper.ensureInitialized()
+        .encodeJson<SystemChannelFlags>(this as SystemChannelFlags);
+  }
+
+  Map<String, dynamic> toMap() {
+    return SystemChannelFlagsMapper.ensureInitialized()
+        .encodeMap<SystemChannelFlags>(this as SystemChannelFlags);
+  }
+
+  SystemChannelFlagsCopyWith<
+    SystemChannelFlags,
+    SystemChannelFlags,
+    SystemChannelFlags
+  >
+  get copyWith =>
+      _SystemChannelFlagsCopyWithImpl<SystemChannelFlags, SystemChannelFlags>(
+        this as SystemChannelFlags,
+        $identity,
+        $identity,
+      );
+  @override
+  String toString() {
+    return SystemChannelFlagsMapper.ensureInitialized().stringifyValue(
+      this as SystemChannelFlags,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return SystemChannelFlagsMapper.ensureInitialized().equalsValue(
+      this as SystemChannelFlags,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return SystemChannelFlagsMapper.ensureInitialized().hashValue(
+      this as SystemChannelFlags,
+    );
+  }
+}
+
+extension SystemChannelFlagsValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, SystemChannelFlags, $Out> {
+  SystemChannelFlagsCopyWith<$R, SystemChannelFlags, $Out>
+  get $asSystemChannelFlags => $base.as(
+    (v, t, t2) => _SystemChannelFlagsCopyWithImpl<$R, $Out>(v, t, t2),
+  );
+}
+
+abstract class SystemChannelFlagsCopyWith<
+  $R,
+  $In extends SystemChannelFlags,
+  $Out
+>
+    implements FlagsCopyWith<$R, $In, $Out, SystemChannelFlags> {
+  @override
+  $R call({int? value});
+  SystemChannelFlagsCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  );
+}
+
+class _SystemChannelFlagsCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, SystemChannelFlags, $Out>
+    implements SystemChannelFlagsCopyWith<$R, SystemChannelFlags, $Out> {
+  _SystemChannelFlagsCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<SystemChannelFlags> $mapper =
+      SystemChannelFlagsMapper.ensureInitialized();
+  @override
+  $R call({int? value}) =>
+      $apply(FieldCopyWithData({if (value != null) #value: value}));
+  @override
+  SystemChannelFlags $make(CopyWithData data) =>
+      SystemChannelFlags(data.get(#value, or: $value.value));
+
+  @override
+  SystemChannelFlagsCopyWith<$R2, SystemChannelFlags, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _SystemChannelFlagsCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
+class IncidentsDataMapper extends ClassMapperBase<IncidentsData> {
+  IncidentsDataMapper._();
+
+  static IncidentsDataMapper? _instance;
+  static IncidentsDataMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = IncidentsDataMapper._());
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'IncidentsData';
+
+  static DateTime? _$invitesDisabledUntil(IncidentsData v) =>
+      v.invitesDisabledUntil;
+  static const Field<IncidentsData, DateTime> _f$invitesDisabledUntil = Field(
+    'invitesDisabledUntil',
+    _$invitesDisabledUntil,
+    key: r'invites_disabled_until',
+  );
+  static DateTime? _$dmsDisabledUntil(IncidentsData v) => v.dmsDisabledUntil;
+  static const Field<IncidentsData, DateTime> _f$dmsDisabledUntil = Field(
+    'dmsDisabledUntil',
+    _$dmsDisabledUntil,
+    key: r'dms_disabled_until',
+  );
+  static DateTime? _$dmSpamDetectedAt(IncidentsData v) => v.dmSpamDetectedAt;
+  static const Field<IncidentsData, DateTime> _f$dmSpamDetectedAt = Field(
+    'dmSpamDetectedAt',
+    _$dmSpamDetectedAt,
+    key: r'dm_spam_detected_at',
+  );
+  static DateTime? _$raidDetectedAt(IncidentsData v) => v.raidDetectedAt;
+  static const Field<IncidentsData, DateTime> _f$raidDetectedAt = Field(
+    'raidDetectedAt',
+    _$raidDetectedAt,
+    key: r'raid_detected_at',
+  );
+
+  @override
+  final MappableFields<IncidentsData> fields = const {
+    #invitesDisabledUntil: _f$invitesDisabledUntil,
+    #dmsDisabledUntil: _f$dmsDisabledUntil,
+    #dmSpamDetectedAt: _f$dmSpamDetectedAt,
+    #raidDetectedAt: _f$raidDetectedAt,
+  };
+
+  static IncidentsData _instantiate(DecodingData data) {
+    return IncidentsData(
+      invitesDisabledUntil: data.dec(_f$invitesDisabledUntil),
+      dmsDisabledUntil: data.dec(_f$dmsDisabledUntil),
+      dmSpamDetectedAt: data.dec(_f$dmSpamDetectedAt),
+      raidDetectedAt: data.dec(_f$raidDetectedAt),
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static IncidentsData fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<IncidentsData>(map);
+  }
+
+  static IncidentsData fromJson(String json) {
+    return ensureInitialized().decodeJson<IncidentsData>(json);
+  }
+}
+
+mixin IncidentsDataMappable {
+  String toJson() {
+    return IncidentsDataMapper.ensureInitialized().encodeJson<IncidentsData>(
+      this as IncidentsData,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return IncidentsDataMapper.ensureInitialized().encodeMap<IncidentsData>(
+      this as IncidentsData,
+    );
+  }
+
+  IncidentsDataCopyWith<IncidentsData, IncidentsData, IncidentsData>
+  get copyWith => _IncidentsDataCopyWithImpl<IncidentsData, IncidentsData>(
+    this as IncidentsData,
+    $identity,
+    $identity,
+  );
+  @override
+  String toString() {
+    return IncidentsDataMapper.ensureInitialized().stringifyValue(
+      this as IncidentsData,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return IncidentsDataMapper.ensureInitialized().equalsValue(
+      this as IncidentsData,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return IncidentsDataMapper.ensureInitialized().hashValue(
+      this as IncidentsData,
+    );
+  }
+}
+
+extension IncidentsDataValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, IncidentsData, $Out> {
+  IncidentsDataCopyWith<$R, IncidentsData, $Out> get $asIncidentsData =>
+      $base.as((v, t, t2) => _IncidentsDataCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class IncidentsDataCopyWith<$R, $In extends IncidentsData, $Out>
+    implements ClassCopyWith<$R, $In, $Out> {
+  $R call({
+    DateTime? invitesDisabledUntil,
+    DateTime? dmsDisabledUntil,
+    DateTime? dmSpamDetectedAt,
+    DateTime? raidDetectedAt,
+  });
+  IncidentsDataCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+}
+
+class _IncidentsDataCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, IncidentsData, $Out>
+    implements IncidentsDataCopyWith<$R, IncidentsData, $Out> {
+  _IncidentsDataCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<IncidentsData> $mapper =
+      IncidentsDataMapper.ensureInitialized();
+  @override
+  $R call({
+    Object? invitesDisabledUntil = $none,
+    Object? dmsDisabledUntil = $none,
+    Object? dmSpamDetectedAt = $none,
+    Object? raidDetectedAt = $none,
+  }) => $apply(
+    FieldCopyWithData({
+      if (invitesDisabledUntil != $none)
+        #invitesDisabledUntil: invitesDisabledUntil,
+      if (dmsDisabledUntil != $none) #dmsDisabledUntil: dmsDisabledUntil,
+      if (dmSpamDetectedAt != $none) #dmSpamDetectedAt: dmSpamDetectedAt,
+      if (raidDetectedAt != $none) #raidDetectedAt: raidDetectedAt,
+    }),
+  );
+  @override
+  IncidentsData $make(CopyWithData data) => IncidentsData(
+    invitesDisabledUntil: data.get(
+      #invitesDisabledUntil,
+      or: $value.invitesDisabledUntil,
+    ),
+    dmsDisabledUntil: data.get(#dmsDisabledUntil, or: $value.dmsDisabledUntil),
+    dmSpamDetectedAt: data.get(#dmSpamDetectedAt, or: $value.dmSpamDetectedAt),
+    raidDetectedAt: data.get(#raidDetectedAt, or: $value.raidDetectedAt),
+  );
+
+  @override
+  IncidentsDataCopyWith<$R2, IncidentsData, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _IncidentsDataCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 

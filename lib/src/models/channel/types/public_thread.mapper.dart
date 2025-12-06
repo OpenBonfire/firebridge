@@ -7,14 +7,14 @@
 
 part of 'public_thread.dart';
 
-class PublicThreadMapper extends ClassMapperBase<PublicThread> {
+class PublicThreadMapper extends SubClassMapperBase<PublicThread> {
   PublicThreadMapper._();
 
   static PublicThreadMapper? _instance;
   static PublicThreadMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = PublicThreadMapper._());
-      TextChannelMapper.ensureInitialized();
+      TextChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       PermissionOverwriteMapper.ensureInitialized();
       ChannelFlagsMapper.ensureInitialized();
@@ -31,60 +31,75 @@ class PublicThreadMapper extends ClassMapperBase<PublicThread> {
   static const Field<PublicThread, List<Snowflake>> _f$appliedTags = Field(
     'appliedTags',
     _$appliedTags,
+    key: r'applied_tags',
   );
   static int _$approximateMemberCount(PublicThread v) =>
       v.approximateMemberCount;
   static const Field<PublicThread, int> _f$approximateMemberCount = Field(
     'approximateMemberCount',
     _$approximateMemberCount,
+    key: r'approximate_member_count',
   );
   static DateTime _$archiveTimestamp(PublicThread v) => v.archiveTimestamp;
   static const Field<PublicThread, DateTime> _f$archiveTimestamp = Field(
     'archiveTimestamp',
     _$archiveTimestamp,
+    key: r'archive_timestamp',
   );
   static Duration _$autoArchiveDuration(PublicThread v) =>
       v.autoArchiveDuration;
   static const Field<PublicThread, Duration> _f$autoArchiveDuration = Field(
     'autoArchiveDuration',
     _$autoArchiveDuration,
+    key: r'auto_archive_duration',
   );
   static DateTime _$createdAt(PublicThread v) => v.createdAt;
   static const Field<PublicThread, DateTime> _f$createdAt = Field(
     'createdAt',
     _$createdAt,
+    key: r'created_at',
   );
   static Snowflake _$guildId(PublicThread v) => v.guildId;
   static const Field<PublicThread, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
+    key: r'guild_id',
   );
   static bool _$isArchived(PublicThread v) => v.isArchived;
   static const Field<PublicThread, bool> _f$isArchived = Field(
     'isArchived',
     _$isArchived,
+    key: r'is_archived',
   );
   static bool _$isLocked(PublicThread v) => v.isLocked;
   static const Field<PublicThread, bool> _f$isLocked = Field(
     'isLocked',
     _$isLocked,
+    key: r'is_locked',
   );
   static bool _$isNsfw(PublicThread v) => v.isNsfw;
-  static const Field<PublicThread, bool> _f$isNsfw = Field('isNsfw', _$isNsfw);
+  static const Field<PublicThread, bool> _f$isNsfw = Field(
+    'isNsfw',
+    _$isNsfw,
+    key: r'is_nsfw',
+  );
   static Snowflake? _$lastMessageId(PublicThread v) => v.lastMessageId;
   static const Field<PublicThread, Snowflake> _f$lastMessageId = Field(
     'lastMessageId',
     _$lastMessageId,
+    key: r'last_message_id',
   );
   static DateTime? _$lastPinTimestamp(PublicThread v) => v.lastPinTimestamp;
   static const Field<PublicThread, DateTime> _f$lastPinTimestamp = Field(
     'lastPinTimestamp',
     _$lastPinTimestamp,
+    key: r'last_pin_timestamp',
   );
   static int _$messageCount(PublicThread v) => v.messageCount;
   static const Field<PublicThread, int> _f$messageCount = Field(
     'messageCount',
     _$messageCount,
+    key: r'message_count',
   );
   static String _$name(PublicThread v) => v.name;
   static const Field<PublicThread, String> _f$name = Field('name', _$name);
@@ -92,11 +107,13 @@ class PublicThreadMapper extends ClassMapperBase<PublicThread> {
   static const Field<PublicThread, Snowflake> _f$ownerId = Field(
     'ownerId',
     _$ownerId,
+    key: r'owner_id',
   );
   static Snowflake? _$parentId(PublicThread v) => v.parentId;
   static const Field<PublicThread, Snowflake> _f$parentId = Field(
     'parentId',
     _$parentId,
+    key: r'parent_id',
   );
   static List<PermissionOverwrite> _$permissionOverwrites(PublicThread v) =>
       v.permissionOverwrites;
@@ -104,6 +121,7 @@ class PublicThreadMapper extends ClassMapperBase<PublicThread> {
   _f$permissionOverwrites = Field(
     'permissionOverwrites',
     _$permissionOverwrites,
+    key: r'permission_overwrites',
   );
   static int _$position(PublicThread v) => v.position;
   static const Field<PublicThread, int> _f$position = Field(
@@ -114,11 +132,13 @@ class PublicThreadMapper extends ClassMapperBase<PublicThread> {
   static const Field<PublicThread, Duration> _f$rateLimitPerUser = Field(
     'rateLimitPerUser',
     _$rateLimitPerUser,
+    key: r'rate_limit_per_user',
   );
   static int _$totalMessagesSent(PublicThread v) => v.totalMessagesSent;
   static const Field<PublicThread, int> _f$totalMessagesSent = Field(
     'totalMessagesSent',
     _$totalMessagesSent,
+    key: r'total_messages_sent',
   );
   static ChannelFlags? _$flags(PublicThread v) => v.flags;
   static const Field<PublicThread, ChannelFlags> _f$flags = Field(
@@ -150,6 +170,14 @@ class PublicThreadMapper extends ClassMapperBase<PublicThread> {
     #totalMessagesSent: _f$totalMessagesSent,
     #flags: _f$flags,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 11;
+  @override
+  late final ClassMapperBase superMapper =
+      TextChannelMapper.ensureInitialized();
 
   static PublicThread _instantiate(DecodingData data) {
     return PublicThread(

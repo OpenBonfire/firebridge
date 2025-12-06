@@ -7,14 +7,14 @@
 
 part of 'dm.dart';
 
-class DmChannelMapper extends ClassMapperBase<DmChannel> {
+class DmChannelMapper extends SubClassMapperBase<DmChannel> {
   DmChannelMapper._();
 
   static DmChannelMapper? _instance;
   static DmChannelMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = DmChannelMapper._());
-      TextChannelMapper.ensureInitialized();
+      TextChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
     }
@@ -35,16 +35,19 @@ class DmChannelMapper extends ClassMapperBase<DmChannel> {
   static const Field<DmChannel, Snowflake> _f$lastMessageId = Field(
     'lastMessageId',
     _$lastMessageId,
+    key: r'last_message_id',
   );
   static DateTime? _$lastPinTimestamp(DmChannel v) => v.lastPinTimestamp;
   static const Field<DmChannel, DateTime> _f$lastPinTimestamp = Field(
     'lastPinTimestamp',
     _$lastPinTimestamp,
+    key: r'last_pin_timestamp',
   );
   static Duration? _$rateLimitPerUser(DmChannel v) => v.rateLimitPerUser;
   static const Field<DmChannel, Duration> _f$rateLimitPerUser = Field(
     'rateLimitPerUser',
     _$rateLimitPerUser,
+    key: r'rate_limit_per_user',
   );
 
   @override
@@ -55,6 +58,14 @@ class DmChannelMapper extends ClassMapperBase<DmChannel> {
     #lastPinTimestamp: _f$lastPinTimestamp,
     #rateLimitPerUser: _f$rateLimitPerUser,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 1;
+  @override
+  late final ClassMapperBase superMapper =
+      TextChannelMapper.ensureInitialized();
 
   static DmChannel _instantiate(DecodingData data) {
     return DmChannel(

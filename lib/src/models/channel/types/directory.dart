@@ -7,7 +7,7 @@ part 'directory.mapper.dart';
 /// {@template directory_channel}
 /// A directory channel.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: 14)
 class DirectoryChannel extends Channel with DirectoryChannelMappable {
   @override
   ChannelType get type => ChannelType.guildDirectory;

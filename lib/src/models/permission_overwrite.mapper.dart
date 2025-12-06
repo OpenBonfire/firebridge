@@ -7,6 +7,55 @@
 
 part of 'permission_overwrite.dart';
 
+class PermissionOverwriteTypeMapper
+    extends EnumMapper<PermissionOverwriteType> {
+  PermissionOverwriteTypeMapper._();
+
+  static PermissionOverwriteTypeMapper? _instance;
+  static PermissionOverwriteTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(
+        _instance = PermissionOverwriteTypeMapper._(),
+      );
+    }
+    return _instance!;
+  }
+
+  static PermissionOverwriteType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  PermissionOverwriteType decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return PermissionOverwriteType.role;
+      case 1:
+        return PermissionOverwriteType.member;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(PermissionOverwriteType self) {
+    switch (self) {
+      case PermissionOverwriteType.role:
+        return 0;
+      case PermissionOverwriteType.member:
+        return 1;
+    }
+  }
+}
+
+extension PermissionOverwriteTypeMapperExtension on PermissionOverwriteType {
+  dynamic toValue() {
+    PermissionOverwriteTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<PermissionOverwriteType>(this);
+  }
+}
+
 class PermissionOverwriteMapper extends ClassMapperBase<PermissionOverwrite> {
   PermissionOverwriteMapper._();
 
@@ -15,6 +64,7 @@ class PermissionOverwriteMapper extends ClassMapperBase<PermissionOverwrite> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = PermissionOverwriteMapper._());
       SnowflakeMapper.ensureInitialized();
+      PermissionOverwriteTypeMapper.ensureInitialized();
     }
     return _instance!;
   }

@@ -1,3 +1,4 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/http/managers/voice_manager.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
@@ -6,13 +7,16 @@ import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/user/user.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
+part 'voice_state.mapper.dart';
+
 /// {@template voice_state}
 /// A user's voice connection state.
 ///
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/voice#voice-state-object
 /// {@endtemplate}
-class VoiceState with ToStringHelper {
+@MappableClass()
+class VoiceState with ToStringHelper, VoiceStateMappable {
   /// The manager for this [VoiceState].
   final VoiceManager manager;
 
@@ -85,10 +89,12 @@ class VoiceState with ToStringHelper {
   Snowflake get cacheKey => Snowflake(Object.hash(guildId, userId));
 
   /// The guild this voice state is in.
-  PartialGuild? get guild => guildId == null ? null : manager.client.guilds[guildId!];
+  PartialGuild? get guild =>
+      guildId == null ? null : manager.client.guilds[guildId!];
 
   /// The channel this voice state is in.
-  PartialChannel? get channel => channelId == null ? null : manager.client.channels[channelId!];
+  PartialChannel? get channel =>
+      channelId == null ? null : manager.client.channels[channelId!];
 
   /// The user this voice state is for.
   PartialUser get user => manager.client.users[userId];

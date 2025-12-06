@@ -11,7 +11,7 @@ part 'guild_media.mapper.dart';
 /// {@template guild_media_channel}
 /// A channel in a guild in which threads can be posted, similarly to a [ForumChannel].
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: 16)
 class GuildMediaChannel extends Channel
     with GuildMediaChannelMappable
     implements GuildChannel, ThreadsOnlyChannel {

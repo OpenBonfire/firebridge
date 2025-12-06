@@ -145,6 +145,7 @@ class MessageMapper extends ClassMapperBase<Message> {
       MessageMapper.ensureInitialized();
       ThreadMapper.ensureInitialized();
       StickerItemMapper.ensureInitialized();
+      ResolvedDataMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -170,13 +171,19 @@ class MessageMapper extends ClassMapperBase<Message> {
   static const Field<Message, DateTime> _f$editedTimestamp = Field(
     'editedTimestamp',
     _$editedTimestamp,
+    key: r'edited_timestamp',
   );
   static bool _$isTts(Message v) => v.isTts;
-  static const Field<Message, bool> _f$isTts = Field('isTts', _$isTts);
+  static const Field<Message, bool> _f$isTts = Field(
+    'isTts',
+    _$isTts,
+    key: r'is_tts',
+  );
   static bool _$mentionsEveryone(Message v) => v.mentionsEveryone;
   static const Field<Message, bool> _f$mentionsEveryone = Field(
     'mentionsEveryone',
     _$mentionsEveryone,
+    key: r'mentions_everyone',
   );
   static List<User> _$mentions(Message v) => v.mentions;
   static const Field<Message, List<User>> _f$mentions = Field(
@@ -187,11 +194,13 @@ class MessageMapper extends ClassMapperBase<Message> {
   static const Field<Message, List<Snowflake>> _f$roleMentionIds = Field(
     'roleMentionIds',
     _$roleMentionIds,
+    key: r'role_mention_ids',
   );
   static List<ChannelMention> _$channelMentions(Message v) => v.channelMentions;
   static const Field<Message, List<ChannelMention>> _f$channelMentions = Field(
     'channelMentions',
     _$channelMentions,
+    key: r'channel_mentions',
   );
   static List<Attachment> _$attachments(Message v) => v.attachments;
   static const Field<Message, List<Attachment>> _f$attachments = Field(
@@ -211,11 +220,16 @@ class MessageMapper extends ClassMapperBase<Message> {
   static dynamic _$nonce(Message v) => v.nonce;
   static const Field<Message, dynamic> _f$nonce = Field('nonce', _$nonce);
   static bool _$isPinned(Message v) => v.isPinned;
-  static const Field<Message, bool> _f$isPinned = Field('isPinned', _$isPinned);
+  static const Field<Message, bool> _f$isPinned = Field(
+    'isPinned',
+    _$isPinned,
+    key: r'is_pinned',
+  );
   static Snowflake? _$webhookId(Message v) => v.webhookId;
   static const Field<Message, Snowflake> _f$webhookId = Field(
     'webhookId',
     _$webhookId,
+    key: r'webhook_id',
   );
   static MessageType _$type(Message v) => v.type;
   static const Field<Message, MessageType> _f$type = Field('type', _$type);
@@ -233,6 +247,7 @@ class MessageMapper extends ClassMapperBase<Message> {
   static const Field<Message, Snowflake> _f$applicationId = Field(
     'applicationId',
     _$applicationId,
+    key: r'application_id',
   );
   static MessageReference? _$reference(Message v) => v.reference;
   static const Field<Message, MessageReference> _f$reference = Field(
@@ -242,18 +257,23 @@ class MessageMapper extends ClassMapperBase<Message> {
   static List<MessageSnapshot>? _$messageSnapshots(Message v) =>
       v.messageSnapshots;
   static const Field<Message, List<MessageSnapshot>> _f$messageSnapshots =
-      Field('messageSnapshots', _$messageSnapshots);
+      Field('messageSnapshots', _$messageSnapshots, key: r'message_snapshots');
   static MessageFlags _$flags(Message v) => v.flags;
   static const Field<Message, MessageFlags> _f$flags = Field('flags', _$flags);
   static Message? _$referencedMessage(Message v) => v.referencedMessage;
   static const Field<Message, Message> _f$referencedMessage = Field(
     'referencedMessage',
     _$referencedMessage,
+    key: r'referenced_message',
   );
   static MessageInteractionMetadata? _$interactionMetadata(Message v) =>
       v.interactionMetadata;
   static const Field<Message, MessageInteractionMetadata>
-  _f$interactionMetadata = Field('interactionMetadata', _$interactionMetadata);
+  _f$interactionMetadata = Field(
+    'interactionMetadata',
+    _$interactionMetadata,
+    key: r'interaction_metadata',
+  );
   static MessageInteraction? _$interaction(Message v) => v.interaction;
   static const Field<Message, MessageInteraction> _f$interaction = Field(
     'interaction',
@@ -271,7 +291,11 @@ class MessageMapper extends ClassMapperBase<Message> {
   static RoleSubscriptionData? _$roleSubscriptionData(Message v) =>
       v.roleSubscriptionData;
   static const Field<Message, RoleSubscriptionData> _f$roleSubscriptionData =
-      Field('roleSubscriptionData', _$roleSubscriptionData);
+      Field(
+        'roleSubscriptionData',
+        _$roleSubscriptionData,
+        key: r'role_subscription_data',
+      );
   static List<StickerItem> _$stickers(Message v) => v.stickers;
   static const Field<Message, List<StickerItem>> _f$stickers = Field(
     'stickers',
@@ -463,6 +487,7 @@ abstract class MessageCopyWith<$R, $In extends Message, $Out>
     StickerItemCopyWith<$R, StickerItem, StickerItem>
   >
   get stickers;
+  ResolvedDataCopyWith<$R, ResolvedData, ResolvedData>? get resolved;
   @override
   $R call({
     Snowflake? id,
@@ -618,6 +643,9 @@ class _MessageCopyWithImpl<$R, $Out>
     (v, t) => v.copyWith.$chain(t),
     (v) => call(stickers: v),
   );
+  @override
+  ResolvedDataCopyWith<$R, ResolvedData, ResolvedData>? get resolved =>
+      $value.resolved?.copyWith.$chain((v) => call(resolved: v));
   @override
   $R call({
     Snowflake? id,

@@ -4,7 +4,6 @@ import 'package:nyxx/src/models/channel/guild_channel.dart';
 import 'package:nyxx/src/models/channel/thread_aggregate.dart';
 import 'package:nyxx/src/models/permission_overwrite.dart';
 import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'forum.mapper.dart';
@@ -12,7 +11,7 @@ part 'forum.mapper.dart';
 /// {@template forum_channel}
 /// A forum channel.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: 15)
 class ForumChannel extends Channel
     with ForumChannelMappable
     implements GuildChannel, ThreadsOnlyChannel {
@@ -142,31 +141,9 @@ class DefaultReaction with ToStringHelper, DefaultReactionMappable {
 }
 
 /// The sorting order in a [ForumChannel].
-@MappableClass()
-final class ForumSort extends EnumLike<int, ForumSort> with ForumSortMappable {
-  static const latestActivity = ForumSort(0);
-  static const creationDate = ForumSort(1);
-
-  /// @nodoc
-  const ForumSort(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  ForumSort.parse(int value) : this(value);
-}
+@MappableEnum(mode: ValuesMode.indexed)
+enum ForumSort { latestActivity, creationDate }
 
 /// The layout in a [ForumChannel].
-@MappableClass()
-final class ForumLayout extends EnumLike<int, ForumLayout>
-    with ForumLayoutMappable {
-  static const notSet = ForumLayout(0);
-  static const listView = ForumLayout(1);
-  static const galleryView = ForumLayout(2);
-
-  /// @nodoc
-  const ForumLayout(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  ForumLayout.parse(int value) : this(value);
-}
+@MappableEnum(mode: ValuesMode.indexed)
+enum ForumLayout { notSet, listView, galleryView }

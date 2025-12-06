@@ -33,11 +33,13 @@ class CommandPermissionsMapper extends ClassMapperBase<CommandPermissions> {
   static const Field<CommandPermissions, Snowflake> _f$applicationId = Field(
     'applicationId',
     _$applicationId,
+    key: r'application_id',
   );
   static Snowflake _$guildId(CommandPermissions v) => v.guildId;
   static const Field<CommandPermissions, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
+    key: r'guild_id',
   );
   static List<CommandPermission> _$permissions(CommandPermissions v) =>
       v.permissions;

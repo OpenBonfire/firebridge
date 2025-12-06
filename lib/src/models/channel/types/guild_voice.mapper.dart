@@ -7,14 +7,14 @@
 
 part of 'guild_voice.dart';
 
-class GuildVoiceChannelMapper extends ClassMapperBase<GuildVoiceChannel> {
+class GuildVoiceChannelMapper extends SubClassMapperBase<GuildVoiceChannel> {
   GuildVoiceChannelMapper._();
 
   static GuildVoiceChannelMapper? _instance;
   static GuildVoiceChannelMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildVoiceChannelMapper._());
-      TextChannelMapper.ensureInitialized();
+      TextChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       PermissionOverwriteMapper.ensureInitialized();
       VideoQualityModeMapper.ensureInitialized();
@@ -36,22 +36,26 @@ class GuildVoiceChannelMapper extends ClassMapperBase<GuildVoiceChannel> {
   static const Field<GuildVoiceChannel, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
+    key: r'guild_id',
   );
   static bool _$isNsfw(GuildVoiceChannel v) => v.isNsfw;
   static const Field<GuildVoiceChannel, bool> _f$isNsfw = Field(
     'isNsfw',
     _$isNsfw,
+    key: r'is_nsfw',
   );
   static Snowflake? _$lastMessageId(GuildVoiceChannel v) => v.lastMessageId;
   static const Field<GuildVoiceChannel, Snowflake> _f$lastMessageId = Field(
     'lastMessageId',
     _$lastMessageId,
+    key: r'last_message_id',
   );
   static DateTime? _$lastPinTimestamp(GuildVoiceChannel v) =>
       v.lastPinTimestamp;
   static const Field<GuildVoiceChannel, DateTime> _f$lastPinTimestamp = Field(
     'lastPinTimestamp',
     _$lastPinTimestamp,
+    key: r'last_pin_timestamp',
   );
   static String _$name(GuildVoiceChannel v) => v.name;
   static const Field<GuildVoiceChannel, String> _f$name = Field('name', _$name);
@@ -59,6 +63,7 @@ class GuildVoiceChannelMapper extends ClassMapperBase<GuildVoiceChannel> {
   static const Field<GuildVoiceChannel, Snowflake> _f$parentId = Field(
     'parentId',
     _$parentId,
+    key: r'parent_id',
   );
   static List<PermissionOverwrite> _$permissionOverwrites(
     GuildVoiceChannel v,
@@ -67,6 +72,7 @@ class GuildVoiceChannelMapper extends ClassMapperBase<GuildVoiceChannel> {
   _f$permissionOverwrites = Field(
     'permissionOverwrites',
     _$permissionOverwrites,
+    key: r'permission_overwrites',
   );
   static int _$position(GuildVoiceChannel v) => v.position;
   static const Field<GuildVoiceChannel, int> _f$position = Field(
@@ -78,21 +84,24 @@ class GuildVoiceChannelMapper extends ClassMapperBase<GuildVoiceChannel> {
   static const Field<GuildVoiceChannel, Duration> _f$rateLimitPerUser = Field(
     'rateLimitPerUser',
     _$rateLimitPerUser,
+    key: r'rate_limit_per_user',
   );
   static String? _$rtcRegion(GuildVoiceChannel v) => v.rtcRegion;
   static const Field<GuildVoiceChannel, String> _f$rtcRegion = Field(
     'rtcRegion',
     _$rtcRegion,
+    key: r'rtc_region',
   );
   static int? _$userLimit(GuildVoiceChannel v) => v.userLimit;
   static const Field<GuildVoiceChannel, int> _f$userLimit = Field(
     'userLimit',
     _$userLimit,
+    key: r'user_limit',
   );
   static VideoQualityMode _$videoQualityMode(GuildVoiceChannel v) =>
       v.videoQualityMode;
   static const Field<GuildVoiceChannel, VideoQualityMode> _f$videoQualityMode =
-      Field('videoQualityMode', _$videoQualityMode);
+      Field('videoQualityMode', _$videoQualityMode, key: r'video_quality_mode');
 
   @override
   final MappableFields<GuildVoiceChannel> fields = const {
@@ -111,6 +120,14 @@ class GuildVoiceChannelMapper extends ClassMapperBase<GuildVoiceChannel> {
     #userLimit: _f$userLimit,
     #videoQualityMode: _f$videoQualityMode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 2;
+  @override
+  late final ClassMapperBase superMapper =
+      TextChannelMapper.ensureInitialized();
 
   static GuildVoiceChannel _instantiate(DecodingData data) {
     return GuildVoiceChannel(

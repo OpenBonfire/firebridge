@@ -158,6 +158,8 @@ class ApplicationCommandMapper extends ClassMapperBase<ApplicationCommand> {
       MapperContainer.globals.use(_instance = ApplicationCommandMapper._());
       PartialApplicationCommandMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
+      ApplicationIntegrationTypeMapper.ensureInitialized();
+      InteractionContextTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -174,11 +176,13 @@ class ApplicationCommandMapper extends ClassMapperBase<ApplicationCommand> {
   static const Field<ApplicationCommand, Snowflake> _f$applicationId = Field(
     'applicationId',
     _$applicationId,
+    key: r'application_id',
   );
   static Snowflake? _$guildId(ApplicationCommand v) => v.guildId;
   static const Field<ApplicationCommand, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
+    key: r'guild_id',
   );
   static String _$name(ApplicationCommand v) => v.name;
   static const Field<ApplicationCommand, String> _f$name = Field(
@@ -188,7 +192,11 @@ class ApplicationCommandMapper extends ClassMapperBase<ApplicationCommand> {
   static Map<Locale, String>? _$nameLocalizations(ApplicationCommand v) =>
       v.nameLocalizations;
   static const Field<ApplicationCommand, Map<Locale, String>>
-  _f$nameLocalizations = Field('nameLocalizations', _$nameLocalizations);
+  _f$nameLocalizations = Field(
+    'nameLocalizations',
+    _$nameLocalizations,
+    key: r'name_localizations',
+  );
   static String _$description(ApplicationCommand v) => v.description;
   static const Field<ApplicationCommand, String> _f$description = Field(
     'description',
@@ -201,6 +209,7 @@ class ApplicationCommandMapper extends ClassMapperBase<ApplicationCommand> {
   _f$descriptionLocalizations = Field(
     'descriptionLocalizations',
     _$descriptionLocalizations,
+    key: r'description_localizations',
   );
   static List<CommandOption>? _$options(ApplicationCommand v) => v.options;
   static const Field<ApplicationCommand, List<CommandOption>> _f$options =
@@ -211,22 +220,29 @@ class ApplicationCommandMapper extends ClassMapperBase<ApplicationCommand> {
   _f$defaultMemberPermissions = Field(
     'defaultMemberPermissions',
     _$defaultMemberPermissions,
+    key: r'default_member_permissions',
   );
   static bool? _$hasDmPermission(ApplicationCommand v) => v.hasDmPermission;
   static const Field<ApplicationCommand, bool> _f$hasDmPermission = Field(
     'hasDmPermission',
     _$hasDmPermission,
+    key: r'has_dm_permission',
   );
   static bool? _$isNsfw(ApplicationCommand v) => v.isNsfw;
   static const Field<ApplicationCommand, bool> _f$isNsfw = Field(
     'isNsfw',
     _$isNsfw,
+    key: r'is_nsfw',
   );
   static List<ApplicationIntegrationType> _$integrationTypes(
     ApplicationCommand v,
   ) => v.integrationTypes;
   static const Field<ApplicationCommand, List<ApplicationIntegrationType>>
-  _f$integrationTypes = Field('integrationTypes', _$integrationTypes);
+  _f$integrationTypes = Field(
+    'integrationTypes',
+    _$integrationTypes,
+    key: r'integration_types',
+  );
   static List<InteractionContextType>? _$contexts(ApplicationCommand v) =>
       v.contexts;
   static const Field<ApplicationCommand, List<InteractionContextType>>

@@ -1,15 +1,18 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/http/managers/guild_manager.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/emoji.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+
+part 'onboarding.mapper.dart';
 
 /// {@template onboarding}
 /// The configuration for a [Guild]'s onboarding process.
 /// {@endtemplate}
-class Onboarding with ToStringHelper {
+@MappableClass()
+class Onboarding with ToStringHelper, OnboardingMappable {
   /// The manager for this [Onboarding].
   final GuildManager manager;
 
@@ -43,13 +46,15 @@ class Onboarding with ToStringHelper {
   PartialGuild get guild => manager.client.guilds[guildId];
 
   /// A list of channels that get opted into automatically.
-  List<PartialChannel> get channels => defaultChannelIds.map((e) => manager.client.channels[e]).toList();
+  List<PartialChannel> get channels =>
+      defaultChannelIds.map((e) => manager.client.channels[e]).toList();
 }
 
 /// {@template onboarding_prompt}
 /// A prompt in an [Onboarding] flow.
 /// {@endtemplate}
-class OnboardingPrompt with ToStringHelper {
+@MappableClass()
+class OnboardingPrompt with ToStringHelper, OnboardingPromptMappable {
   /// The ID of this prompt.
   final Snowflake id;
 
@@ -87,24 +92,15 @@ class OnboardingPrompt with ToStringHelper {
 }
 
 /// The type of an [Onboarding] prompt.
-final class OnboardingPromptType extends EnumLike<int, OnboardingPromptType> {
-  static const multipleChoice = OnboardingPromptType(0);
-  static const dropdown = OnboardingPromptType(1);
-
-  /// @nodoc
-  const OnboardingPromptType(super.value);
-
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  OnboardingPromptType.parse(int value) : this(value);
-}
+@MappableEnum()
+enum OnboardingPromptType { multipleChoice, dropdown }
 
 /// {@template onboarding_prompt_option}
 /// An option in an [OnboardingPrompt].
 /// {@endtemplate}
-class OnboardingPromptOption with ToStringHelper {
-  /// The manager for this [OnboardingPromptOption].
-  final GuildManager manager;
-
+@MappableClass()
+class OnboardingPromptOption
+    with ToStringHelper, OnboardingPromptOptionMappable {
   /// The ID of this option.
   final Snowflake id;
 
@@ -129,7 +125,6 @@ class OnboardingPromptOption with ToStringHelper {
   /// {@macro onboarding_prompt_option}
   /// @nodoc
   OnboardingPromptOption({
-    required this.manager,
     required this.id,
     required this.channelIds,
     required this.roleIds,
@@ -137,9 +132,6 @@ class OnboardingPromptOption with ToStringHelper {
     required this.title,
     required this.description,
   });
-
-  /// The channels the user is granted access to.
-  List<PartialChannel> get channels => channelIds.map((e) => manager.client.channels[e]).toList();
 }
 
 /// The mode under which onboarding constraints operate when creating an
@@ -147,13 +139,5 @@ class OnboardingPromptOption with ToStringHelper {
 ///
 /// These constraints are that there must be at least 7 Default Channels and
 /// at least 5 of them must allow sending messages to the @everyone role.
-final class OnboardingMode extends EnumLike<int, OnboardingMode> {
-  /// Only default channels count towards the constraints.
-  static const defaultMode = OnboardingMode(0);
-
-  /// Both default channels and questions count towards the constraints,
-  static const advanced = OnboardingMode(1);
-
-  /// @nodoc
-  const OnboardingMode(super.value);
-}
+@MappableEnum()
+enum OnboardingMode { defaultMode, advanced }

@@ -7,14 +7,14 @@
 
 part of 'guild_media.dart';
 
-class GuildMediaChannelMapper extends ClassMapperBase<GuildMediaChannel> {
+class GuildMediaChannelMapper extends SubClassMapperBase<GuildMediaChannel> {
   GuildMediaChannelMapper._();
 
   static GuildMediaChannelMapper? _instance;
   static GuildMediaChannelMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildMediaChannelMapper._());
-      ChannelMapper.ensureInitialized();
+      ChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       ChannelFlagsMapper.ensureInitialized();
       ForumTagMapper.ensureInitialized();
@@ -40,17 +40,20 @@ class GuildMediaChannelMapper extends ClassMapperBase<GuildMediaChannel> {
   static const Field<GuildMediaChannel, Duration> _f$rateLimitPerUser = Field(
     'rateLimitPerUser',
     _$rateLimitPerUser,
+    key: r'rate_limit_per_user',
   );
   static Snowflake? _$lastThreadId(GuildMediaChannel v) => v.lastThreadId;
   static const Field<GuildMediaChannel, Snowflake> _f$lastThreadId = Field(
     'lastThreadId',
     _$lastThreadId,
+    key: r'last_thread_id',
   );
   static DateTime? _$lastPinTimestamp(GuildMediaChannel v) =>
       v.lastPinTimestamp;
   static const Field<GuildMediaChannel, DateTime> _f$lastPinTimestamp = Field(
     'lastPinTimestamp',
     _$lastPinTimestamp,
+    key: r'last_pin_timestamp',
   );
   static ChannelFlags _$flags(GuildMediaChannel v) => v.flags;
   static const Field<GuildMediaChannel, ChannelFlags> _f$flags = Field(
@@ -59,16 +62,17 @@ class GuildMediaChannelMapper extends ClassMapperBase<GuildMediaChannel> {
   );
   static List<ForumTag> _$availableTags(GuildMediaChannel v) => v.availableTags;
   static const Field<GuildMediaChannel, List<ForumTag>> _f$availableTags =
-      Field('availableTags', _$availableTags);
+      Field('availableTags', _$availableTags, key: r'available_tags');
   static DefaultReaction? _$defaultReaction(GuildMediaChannel v) =>
       v.defaultReaction;
   static const Field<GuildMediaChannel, DefaultReaction> _f$defaultReaction =
-      Field('defaultReaction', _$defaultReaction);
+      Field('defaultReaction', _$defaultReaction, key: r'default_reaction');
   static ForumSort? _$defaultSortOrder(GuildMediaChannel v) =>
       v.defaultSortOrder;
   static const Field<GuildMediaChannel, ForumSort> _f$defaultSortOrder = Field(
     'defaultSortOrder',
     _$defaultSortOrder,
+    key: r'default_sort_order',
   );
   static Duration _$defaultAutoArchiveDuration(GuildMediaChannel v) =>
       v.defaultAutoArchiveDuration;
@@ -76,6 +80,7 @@ class GuildMediaChannelMapper extends ClassMapperBase<GuildMediaChannel> {
   _f$defaultAutoArchiveDuration = Field(
     'defaultAutoArchiveDuration',
     _$defaultAutoArchiveDuration,
+    key: r'default_auto_archive_duration',
   );
   static Duration? _$defaultThreadRateLimitPerUser(GuildMediaChannel v) =>
       v.defaultThreadRateLimitPerUser;
@@ -83,16 +88,19 @@ class GuildMediaChannelMapper extends ClassMapperBase<GuildMediaChannel> {
   _f$defaultThreadRateLimitPerUser = Field(
     'defaultThreadRateLimitPerUser',
     _$defaultThreadRateLimitPerUser,
+    key: r'default_thread_rate_limit_per_user',
   );
   static Snowflake _$guildId(GuildMediaChannel v) => v.guildId;
   static const Field<GuildMediaChannel, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
+    key: r'guild_id',
   );
   static bool _$isNsfw(GuildMediaChannel v) => v.isNsfw;
   static const Field<GuildMediaChannel, bool> _f$isNsfw = Field(
     'isNsfw',
     _$isNsfw,
+    key: r'is_nsfw',
   );
   static String _$name(GuildMediaChannel v) => v.name;
   static const Field<GuildMediaChannel, String> _f$name = Field('name', _$name);
@@ -100,6 +108,7 @@ class GuildMediaChannelMapper extends ClassMapperBase<GuildMediaChannel> {
   static const Field<GuildMediaChannel, Snowflake> _f$parentId = Field(
     'parentId',
     _$parentId,
+    key: r'parent_id',
   );
   static List<PermissionOverwrite> _$permissionOverwrites(
     GuildMediaChannel v,
@@ -108,6 +117,7 @@ class GuildMediaChannelMapper extends ClassMapperBase<GuildMediaChannel> {
   _f$permissionOverwrites = Field(
     'permissionOverwrites',
     _$permissionOverwrites,
+    key: r'permission_overwrites',
   );
   static int _$position(GuildMediaChannel v) => v.position;
   static const Field<GuildMediaChannel, int> _f$position = Field(
@@ -135,6 +145,13 @@ class GuildMediaChannelMapper extends ClassMapperBase<GuildMediaChannel> {
     #permissionOverwrites: _f$permissionOverwrites,
     #position: _f$position,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 16;
+  @override
+  late final ClassMapperBase superMapper = ChannelMapper.ensureInitialized();
 
   static GuildMediaChannel _instantiate(DecodingData data) {
     return GuildMediaChannel(
@@ -240,7 +257,6 @@ abstract class GuildMediaChannelCopyWith<
   get availableTags;
   DefaultReactionCopyWith<$R, DefaultReaction, DefaultReaction>?
   get defaultReaction;
-  ForumSortCopyWith<$R, ForumSort, ForumSort>? get defaultSortOrder;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
   ListCopyWith<
@@ -302,11 +318,6 @@ class _GuildMediaChannelCopyWithImpl<$R, $Out>
   DefaultReactionCopyWith<$R, DefaultReaction, DefaultReaction>?
   get defaultReaction =>
       $value.defaultReaction?.copyWith.$chain((v) => call(defaultReaction: v));
-  @override
-  ForumSortCopyWith<$R, ForumSort, ForumSort>? get defaultSortOrder => $value
-      .defaultSortOrder
-      ?.copyWith
-      .$chain((v) => call(defaultSortOrder: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
       $value.guildId.copyWith.$chain((v) => call(guildId: v));

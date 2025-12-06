@@ -12,7 +12,7 @@ part 'guild_voice.mapper.dart';
 /// {@template guild_voice_channel}
 /// A [VoiceChannel] in a [Guild].
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: 2)
 class GuildVoiceChannel extends TextChannel
     with GuildVoiceChannelMappable
     implements GuildChannel, VoiceChannel {

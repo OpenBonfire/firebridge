@@ -9,7 +9,7 @@ part 'group_dm.mapper.dart';
 /// {@template group_dm_channel}
 /// A DM channel with multiple recipients.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: 3)
 class GroupDmChannel extends TextChannel with GroupDmChannelMappable {
   /// The name of this channel.
   final String name;

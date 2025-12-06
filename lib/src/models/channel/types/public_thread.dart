@@ -10,7 +10,7 @@ part 'public_thread.mapper.dart';
 /// {@template public_thread}
 /// A public [Thread] channel.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: 11)
 class PublicThread extends TextChannel
     with PublicThreadMappable
     implements Thread {

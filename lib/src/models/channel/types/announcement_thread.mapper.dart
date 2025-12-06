@@ -7,14 +7,14 @@
 
 part of 'announcement_thread.dart';
 
-class AnnouncementThreadMapper extends ClassMapperBase<AnnouncementThread> {
+class AnnouncementThreadMapper extends SubClassMapperBase<AnnouncementThread> {
   AnnouncementThreadMapper._();
 
   static AnnouncementThreadMapper? _instance;
   static AnnouncementThreadMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = AnnouncementThreadMapper._());
-      TextChannelMapper.ensureInitialized();
+      TextChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       PermissionOverwriteMapper.ensureInitialized();
       ChannelFlagsMapper.ensureInitialized();
@@ -29,63 +29,77 @@ class AnnouncementThreadMapper extends ClassMapperBase<AnnouncementThread> {
   static const Field<AnnouncementThread, Snowflake> _f$id = Field('id', _$id);
   static List<Snowflake>? _$appliedTags(AnnouncementThread v) => v.appliedTags;
   static const Field<AnnouncementThread, List<Snowflake>> _f$appliedTags =
-      Field('appliedTags', _$appliedTags);
+      Field('appliedTags', _$appliedTags, key: r'applied_tags');
   static int _$approximateMemberCount(AnnouncementThread v) =>
       v.approximateMemberCount;
   static const Field<AnnouncementThread, int> _f$approximateMemberCount = Field(
     'approximateMemberCount',
     _$approximateMemberCount,
+    key: r'approximate_member_count',
   );
   static DateTime _$archiveTimestamp(AnnouncementThread v) =>
       v.archiveTimestamp;
   static const Field<AnnouncementThread, DateTime> _f$archiveTimestamp = Field(
     'archiveTimestamp',
     _$archiveTimestamp,
+    key: r'archive_timestamp',
   );
   static Duration _$autoArchiveDuration(AnnouncementThread v) =>
       v.autoArchiveDuration;
   static const Field<AnnouncementThread, Duration> _f$autoArchiveDuration =
-      Field('autoArchiveDuration', _$autoArchiveDuration);
+      Field(
+        'autoArchiveDuration',
+        _$autoArchiveDuration,
+        key: r'auto_archive_duration',
+      );
   static DateTime _$createdAt(AnnouncementThread v) => v.createdAt;
   static const Field<AnnouncementThread, DateTime> _f$createdAt = Field(
     'createdAt',
     _$createdAt,
+    key: r'created_at',
   );
   static Snowflake _$guildId(AnnouncementThread v) => v.guildId;
   static const Field<AnnouncementThread, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
+    key: r'guild_id',
   );
   static bool _$isArchived(AnnouncementThread v) => v.isArchived;
   static const Field<AnnouncementThread, bool> _f$isArchived = Field(
     'isArchived',
     _$isArchived,
+    key: r'is_archived',
   );
   static bool _$isLocked(AnnouncementThread v) => v.isLocked;
   static const Field<AnnouncementThread, bool> _f$isLocked = Field(
     'isLocked',
     _$isLocked,
+    key: r'is_locked',
   );
   static bool _$isNsfw(AnnouncementThread v) => v.isNsfw;
   static const Field<AnnouncementThread, bool> _f$isNsfw = Field(
     'isNsfw',
     _$isNsfw,
+    key: r'is_nsfw',
   );
   static Snowflake? _$lastMessageId(AnnouncementThread v) => v.lastMessageId;
   static const Field<AnnouncementThread, Snowflake> _f$lastMessageId = Field(
     'lastMessageId',
     _$lastMessageId,
+    key: r'last_message_id',
   );
   static DateTime? _$lastPinTimestamp(AnnouncementThread v) =>
       v.lastPinTimestamp;
   static const Field<AnnouncementThread, DateTime> _f$lastPinTimestamp = Field(
     'lastPinTimestamp',
     _$lastPinTimestamp,
+    key: r'last_pin_timestamp',
   );
   static int _$messageCount(AnnouncementThread v) => v.messageCount;
   static const Field<AnnouncementThread, int> _f$messageCount = Field(
     'messageCount',
     _$messageCount,
+    key: r'message_count',
   );
   static String _$name(AnnouncementThread v) => v.name;
   static const Field<AnnouncementThread, String> _f$name = Field(
@@ -96,11 +110,13 @@ class AnnouncementThreadMapper extends ClassMapperBase<AnnouncementThread> {
   static const Field<AnnouncementThread, Snowflake> _f$ownerId = Field(
     'ownerId',
     _$ownerId,
+    key: r'owner_id',
   );
   static Snowflake? _$parentId(AnnouncementThread v) => v.parentId;
   static const Field<AnnouncementThread, Snowflake> _f$parentId = Field(
     'parentId',
     _$parentId,
+    key: r'parent_id',
   );
   static List<PermissionOverwrite> _$permissionOverwrites(
     AnnouncementThread v,
@@ -109,6 +125,7 @@ class AnnouncementThreadMapper extends ClassMapperBase<AnnouncementThread> {
   _f$permissionOverwrites = Field(
     'permissionOverwrites',
     _$permissionOverwrites,
+    key: r'permission_overwrites',
   );
   static int _$position(AnnouncementThread v) => v.position;
   static const Field<AnnouncementThread, int> _f$position = Field(
@@ -120,11 +137,13 @@ class AnnouncementThreadMapper extends ClassMapperBase<AnnouncementThread> {
   static const Field<AnnouncementThread, Duration> _f$rateLimitPerUser = Field(
     'rateLimitPerUser',
     _$rateLimitPerUser,
+    key: r'rate_limit_per_user',
   );
   static int _$totalMessagesSent(AnnouncementThread v) => v.totalMessagesSent;
   static const Field<AnnouncementThread, int> _f$totalMessagesSent = Field(
     'totalMessagesSent',
     _$totalMessagesSent,
+    key: r'total_messages_sent',
   );
   static ChannelFlags? _$flags(AnnouncementThread v) => v.flags;
   static const Field<AnnouncementThread, ChannelFlags> _f$flags = Field(
@@ -156,6 +175,14 @@ class AnnouncementThreadMapper extends ClassMapperBase<AnnouncementThread> {
     #totalMessagesSent: _f$totalMessagesSent,
     #flags: _f$flags,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 10;
+  @override
+  late final ClassMapperBase superMapper =
+      TextChannelMapper.ensureInitialized();
 
   static AnnouncementThread _instantiate(DecodingData data) {
     return AnnouncementThread(

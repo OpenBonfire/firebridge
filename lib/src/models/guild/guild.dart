@@ -8,7 +8,6 @@ import 'package:nyxx/src/models/role.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/models/sticker/guild_sticker.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/flags.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
@@ -229,53 +228,21 @@ class Guild extends UserGuild with GuildMappable {
 }
 
 /// The verification level for a guild.
-final class VerificationLevel extends EnumLike<int, VerificationLevel> {
-  static const none = VerificationLevel(0);
-  static const low = VerificationLevel(1);
-  static const medium = VerificationLevel(2);
-  static const high = VerificationLevel(3);
-  static const veryHigh = VerificationLevel(4);
-
-  /// @nodoc
-  const VerificationLevel(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  VerificationLevel.parse(int value) : this(value);
-}
+@MappableEnum(mode: ValuesMode.indexed)
+enum VerificationLevel { none, low, medium, high, veryHigh }
 
 /// The level at which message notifications are sent in a guild.
-final class MessageNotificationLevel
-    extends EnumLike<int, MessageNotificationLevel> {
-  static const allMessages = MessageNotificationLevel(0);
-  static const onlyMentions = MessageNotificationLevel(1);
-
-  /// @nodoc
-  const MessageNotificationLevel(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  MessageNotificationLevel.parse(int value) : this(value);
-}
+@MappableEnum(mode: ValuesMode.indexed)
+enum MessageNotificationLevel { allMessages, onlyMentions }
 
 /// The level of explicit content filtering in a guild.
-final class ExplicitContentFilterLevel
-    extends EnumLike<int, ExplicitContentFilterLevel> {
-  static const disabled = ExplicitContentFilterLevel(0);
-  static const membersWithoutRoles = ExplicitContentFilterLevel(1);
-  static const allMembers = ExplicitContentFilterLevel(2);
-
-  /// @nodoc
-  const ExplicitContentFilterLevel(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  ExplicitContentFilterLevel.parse(int value) : this(value);
-}
+@MappableEnum(mode: ValuesMode.indexed)
+enum ExplicitContentFilterLevel { disabled, membersWithoutRoles, allMembers }
 
 /// Features that can be enabled in certain guilds.
 // Artificial flags for guild features. The values are arbitrary, and are associated with the strings from the API in [GuildManager].
-class GuildFeatures extends Flags<GuildFeatures> {
+@MappableClass()
+class GuildFeatures extends Flags<GuildFeatures> with GuildFeaturesMappable {
   /// The guild has an animated banner.
   static const animatedBanner = Flag<GuildFeatures>.fromOffset(0);
 
@@ -463,19 +430,11 @@ class GuildFeatures extends Flags<GuildFeatures> {
 }
 
 /// The MFA level required for moderators of a guild.
-final class MfaLevel extends EnumLike<int, MfaLevel> {
-  static const none = MfaLevel(0);
-  static const elevated = MfaLevel(1);
-
-  /// @nodoc
-  const MfaLevel(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  MfaLevel.parse(int value) : this(value);
-}
+@MappableEnum(mode: ValuesMode.indexed)
+enum MfaLevel { none, elevated }
 
 /// The configuration of a guild's system channel.
+@MappableClass()
 class SystemChannelFlags extends Flags<SystemChannelFlags> {
   /// Suppress member join notifications.
   static const suppressJoinNotifications =
@@ -529,36 +488,15 @@ class SystemChannelFlags extends Flags<SystemChannelFlags> {
 }
 
 /// The premium tier of a guild.
-final class PremiumTier extends EnumLike<int, PremiumTier> {
-  static const none = PremiumTier(0);
-  static const one = PremiumTier(1);
-  static const two = PremiumTier(2);
-  static const three = PremiumTier(3);
-
-  /// nodoc
-  const PremiumTier(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  PremiumTier.parse(int value) : this(value);
-}
+@MappableEnum(mode: ValuesMode.indexed)
+enum PremiumTier { none, one, two, three }
 
 /// The NSFW level of a guild.
-final class NsfwLevel extends EnumLike<int, NsfwLevel> {
-  static const unset = NsfwLevel(0);
-  static const explicit = NsfwLevel(1);
-  static const safe = NsfwLevel(2);
-  static const ageRestricted = NsfwLevel(3);
+@MappableEnum(mode: ValuesMode.indexed)
+enum NsfwLevel { unset, explicit, safe, ageRestricted }
 
-  /// nodoc
-  const NsfwLevel(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  NsfwLevel.parse(int value) : this(value);
-}
-
-class IncidentsData with ToStringHelper {
+@MappableClass()
+class IncidentsData with ToStringHelper, IncidentsDataMappable {
   /// When [Invite]s get enabled again.
   final DateTime? invitesDisabledUntil;
 

@@ -11,7 +11,7 @@ part 'guild_stage.mapper.dart';
 /// {@template guild_stage_channel}
 /// A stage channel.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: 13)
 class GuildStageChannel extends TextChannel
     with GuildStageChannelMappable
     implements VoiceChannel, GuildChannel {

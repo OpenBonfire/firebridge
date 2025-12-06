@@ -175,21 +175,25 @@ class SoundboardSoundMapper extends ClassMapperBase<SoundboardSound> {
   static const Field<SoundboardSound, String> _f$emojiName = Field(
     'emojiName',
     _$emojiName,
+    key: r'emoji_name',
   );
   static Snowflake? _$emojiId(SoundboardSound v) => v.emojiId;
   static const Field<SoundboardSound, Snowflake> _f$emojiId = Field(
     'emojiId',
     _$emojiId,
+    key: r'emoji_id',
   );
   static Snowflake? _$guildId(SoundboardSound v) => v.guildId;
   static const Field<SoundboardSound, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
+    key: r'guild_id',
   );
   static bool _$isAvailable(SoundboardSound v) => v.isAvailable;
   static const Field<SoundboardSound, bool> _f$isAvailable = Field(
     'isAvailable',
     _$isAvailable,
+    key: r'is_available',
   );
   static User? _$user(SoundboardSound v) => v.user;
   static const Field<SoundboardSound, User> _f$user = Field('user', _$user);

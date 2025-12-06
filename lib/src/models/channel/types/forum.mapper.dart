@@ -7,14 +7,110 @@
 
 part of 'forum.dart';
 
-class ForumChannelMapper extends ClassMapperBase<ForumChannel> {
+class ForumSortMapper extends EnumMapper<ForumSort> {
+  ForumSortMapper._();
+
+  static ForumSortMapper? _instance;
+  static ForumSortMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = ForumSortMapper._());
+    }
+    return _instance!;
+  }
+
+  static ForumSort fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  ForumSort decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return ForumSort.latestActivity;
+      case 1:
+        return ForumSort.creationDate;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(ForumSort self) {
+    switch (self) {
+      case ForumSort.latestActivity:
+        return 0;
+      case ForumSort.creationDate:
+        return 1;
+    }
+  }
+}
+
+extension ForumSortMapperExtension on ForumSort {
+  dynamic toValue() {
+    ForumSortMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<ForumSort>(this);
+  }
+}
+
+class ForumLayoutMapper extends EnumMapper<ForumLayout> {
+  ForumLayoutMapper._();
+
+  static ForumLayoutMapper? _instance;
+  static ForumLayoutMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = ForumLayoutMapper._());
+    }
+    return _instance!;
+  }
+
+  static ForumLayout fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  ForumLayout decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return ForumLayout.notSet;
+      case 1:
+        return ForumLayout.listView;
+      case 2:
+        return ForumLayout.galleryView;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(ForumLayout self) {
+    switch (self) {
+      case ForumLayout.notSet:
+        return 0;
+      case ForumLayout.listView:
+        return 1;
+      case ForumLayout.galleryView:
+        return 2;
+    }
+  }
+}
+
+extension ForumLayoutMapperExtension on ForumLayout {
+  dynamic toValue() {
+    ForumLayoutMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<ForumLayout>(this);
+  }
+}
+
+class ForumChannelMapper extends SubClassMapperBase<ForumChannel> {
   ForumChannelMapper._();
 
   static ForumChannelMapper? _instance;
   static ForumChannelMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ForumChannelMapper._());
-      ChannelMapper.ensureInitialized();
+      ChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       ForumLayoutMapper.ensureInitialized();
       ChannelFlagsMapper.ensureInitialized();
@@ -35,6 +131,7 @@ class ForumChannelMapper extends ClassMapperBase<ForumChannel> {
   static const Field<ForumChannel, ForumLayout> _f$defaultLayout = Field(
     'defaultLayout',
     _$defaultLayout,
+    key: r'default_layout',
   );
   static String? _$topic(ForumChannel v) => v.topic;
   static const Field<ForumChannel, String> _f$topic = Field('topic', _$topic);
@@ -42,16 +139,19 @@ class ForumChannelMapper extends ClassMapperBase<ForumChannel> {
   static const Field<ForumChannel, Duration> _f$rateLimitPerUser = Field(
     'rateLimitPerUser',
     _$rateLimitPerUser,
+    key: r'rate_limit_per_user',
   );
   static Snowflake? _$lastThreadId(ForumChannel v) => v.lastThreadId;
   static const Field<ForumChannel, Snowflake> _f$lastThreadId = Field(
     'lastThreadId',
     _$lastThreadId,
+    key: r'last_thread_id',
   );
   static DateTime? _$lastPinTimestamp(ForumChannel v) => v.lastPinTimestamp;
   static const Field<ForumChannel, DateTime> _f$lastPinTimestamp = Field(
     'lastPinTimestamp',
     _$lastPinTimestamp,
+    key: r'last_pin_timestamp',
   );
   static ChannelFlags _$flags(ForumChannel v) => v.flags;
   static const Field<ForumChannel, ChannelFlags> _f$flags = Field(
@@ -62,39 +162,56 @@ class ForumChannelMapper extends ClassMapperBase<ForumChannel> {
   static const Field<ForumChannel, List<ForumTag>> _f$availableTags = Field(
     'availableTags',
     _$availableTags,
+    key: r'available_tags',
   );
   static DefaultReaction? _$defaultReaction(ForumChannel v) =>
       v.defaultReaction;
   static const Field<ForumChannel, DefaultReaction> _f$defaultReaction = Field(
     'defaultReaction',
     _$defaultReaction,
+    key: r'default_reaction',
   );
   static ForumSort? _$defaultSortOrder(ForumChannel v) => v.defaultSortOrder;
   static const Field<ForumChannel, ForumSort> _f$defaultSortOrder = Field(
     'defaultSortOrder',
     _$defaultSortOrder,
+    key: r'default_sort_order',
   );
   static Duration _$defaultAutoArchiveDuration(ForumChannel v) =>
       v.defaultAutoArchiveDuration;
   static const Field<ForumChannel, Duration> _f$defaultAutoArchiveDuration =
-      Field('defaultAutoArchiveDuration', _$defaultAutoArchiveDuration);
+      Field(
+        'defaultAutoArchiveDuration',
+        _$defaultAutoArchiveDuration,
+        key: r'default_auto_archive_duration',
+      );
   static Duration? _$defaultThreadRateLimitPerUser(ForumChannel v) =>
       v.defaultThreadRateLimitPerUser;
   static const Field<ForumChannel, Duration> _f$defaultThreadRateLimitPerUser =
-      Field('defaultThreadRateLimitPerUser', _$defaultThreadRateLimitPerUser);
+      Field(
+        'defaultThreadRateLimitPerUser',
+        _$defaultThreadRateLimitPerUser,
+        key: r'default_thread_rate_limit_per_user',
+      );
   static Snowflake _$guildId(ForumChannel v) => v.guildId;
   static const Field<ForumChannel, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
+    key: r'guild_id',
   );
   static bool _$isNsfw(ForumChannel v) => v.isNsfw;
-  static const Field<ForumChannel, bool> _f$isNsfw = Field('isNsfw', _$isNsfw);
+  static const Field<ForumChannel, bool> _f$isNsfw = Field(
+    'isNsfw',
+    _$isNsfw,
+    key: r'is_nsfw',
+  );
   static String _$name(ForumChannel v) => v.name;
   static const Field<ForumChannel, String> _f$name = Field('name', _$name);
   static Snowflake? _$parentId(ForumChannel v) => v.parentId;
   static const Field<ForumChannel, Snowflake> _f$parentId = Field(
     'parentId',
     _$parentId,
+    key: r'parent_id',
   );
   static List<PermissionOverwrite> _$permissionOverwrites(ForumChannel v) =>
       v.permissionOverwrites;
@@ -102,6 +219,7 @@ class ForumChannelMapper extends ClassMapperBase<ForumChannel> {
   _f$permissionOverwrites = Field(
     'permissionOverwrites',
     _$permissionOverwrites,
+    key: r'permission_overwrites',
   );
   static int _$position(ForumChannel v) => v.position;
   static const Field<ForumChannel, int> _f$position = Field(
@@ -130,6 +248,13 @@ class ForumChannelMapper extends ClassMapperBase<ForumChannel> {
     #permissionOverwrites: _f$permissionOverwrites,
     #position: _f$position,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 15;
+  @override
+  late final ClassMapperBase superMapper = ChannelMapper.ensureInitialized();
 
   static ForumChannel _instantiate(DecodingData data) {
     return ForumChannel(
@@ -221,14 +346,12 @@ abstract class ForumChannelCopyWith<$R, $In extends ForumChannel, $Out>
         ThreadsOnlyChannelCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  ForumLayoutCopyWith<$R, ForumLayout, ForumLayout>? get defaultLayout;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastThreadId;
   ChannelFlagsCopyWith<$R, ChannelFlags, ChannelFlags> get flags;
   ListCopyWith<$R, ForumTag, ForumTagCopyWith<$R, ForumTag, ForumTag>>
   get availableTags;
   DefaultReactionCopyWith<$R, DefaultReaction, DefaultReaction>?
   get defaultReaction;
-  ForumSortCopyWith<$R, ForumSort, ForumSort>? get defaultSortOrder;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
   ListCopyWith<
@@ -273,9 +396,6 @@ class _ForumChannelCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
-  ForumLayoutCopyWith<$R, ForumLayout, ForumLayout>? get defaultLayout =>
-      $value.defaultLayout?.copyWith.$chain((v) => call(defaultLayout: v));
-  @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastThreadId =>
       $value.lastThreadId?.copyWith.$chain((v) => call(lastThreadId: v));
   @override
@@ -292,11 +412,6 @@ class _ForumChannelCopyWithImpl<$R, $Out>
   DefaultReactionCopyWith<$R, DefaultReaction, DefaultReaction>?
   get defaultReaction =>
       $value.defaultReaction?.copyWith.$chain((v) => call(defaultReaction: v));
-  @override
-  ForumSortCopyWith<$R, ForumSort, ForumSort>? get defaultSortOrder => $value
-      .defaultSortOrder
-      ?.copyWith
-      .$chain((v) => call(defaultSortOrder: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
       $value.guildId.copyWith.$chain((v) => call(guildId: v));
@@ -396,117 +511,6 @@ class _ForumChannelCopyWithImpl<$R, $Out>
   ) => _ForumChannelCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class ForumLayoutMapper extends ClassMapperBase<ForumLayout> {
-  ForumLayoutMapper._();
-
-  static ForumLayoutMapper? _instance;
-  static ForumLayoutMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = ForumLayoutMapper._());
-      EnumLikeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'ForumLayout';
-
-  static int _$value(ForumLayout v) => v.value;
-  static const Field<ForumLayout, int> _f$value = Field('value', _$value);
-
-  @override
-  final MappableFields<ForumLayout> fields = const {#value: _f$value};
-
-  static ForumLayout _instantiate(DecodingData data) {
-    return ForumLayout(data.dec(_f$value));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static ForumLayout fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<ForumLayout>(map);
-  }
-
-  static ForumLayout fromJson(String json) {
-    return ensureInitialized().decodeJson<ForumLayout>(json);
-  }
-}
-
-mixin ForumLayoutMappable {
-  String toJson() {
-    return ForumLayoutMapper.ensureInitialized().encodeJson<ForumLayout>(
-      this as ForumLayout,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return ForumLayoutMapper.ensureInitialized().encodeMap<ForumLayout>(
-      this as ForumLayout,
-    );
-  }
-
-  ForumLayoutCopyWith<ForumLayout, ForumLayout, ForumLayout> get copyWith =>
-      _ForumLayoutCopyWithImpl<ForumLayout, ForumLayout>(
-        this as ForumLayout,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return ForumLayoutMapper.ensureInitialized().stringifyValue(
-      this as ForumLayout,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return ForumLayoutMapper.ensureInitialized().equalsValue(
-      this as ForumLayout,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return ForumLayoutMapper.ensureInitialized().hashValue(this as ForumLayout);
-  }
-}
-
-extension ForumLayoutValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, ForumLayout, $Out> {
-  ForumLayoutCopyWith<$R, ForumLayout, $Out> get $asForumLayout =>
-      $base.as((v, t, t2) => _ForumLayoutCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class ForumLayoutCopyWith<$R, $In extends ForumLayout, $Out>
-    implements EnumLikeCopyWith<$R, $In, $Out, int, ForumLayout> {
-  @override
-  $R call({int? value});
-  ForumLayoutCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
-}
-
-class _ForumLayoutCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, ForumLayout, $Out>
-    implements ForumLayoutCopyWith<$R, ForumLayout, $Out> {
-  _ForumLayoutCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<ForumLayout> $mapper =
-      ForumLayoutMapper.ensureInitialized();
-  @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
-  @override
-  ForumLayout $make(CopyWithData data) =>
-      ForumLayout(data.get(#value, or: $value.value));
-
-  @override
-  ForumLayoutCopyWith<$R2, ForumLayout, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _ForumLayoutCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class ForumTagMapper extends ClassMapperBase<ForumTag> {
   ForumTagMapper._();
 
@@ -530,16 +534,19 @@ class ForumTagMapper extends ClassMapperBase<ForumTag> {
   static const Field<ForumTag, bool> _f$isModerated = Field(
     'isModerated',
     _$isModerated,
+    key: r'is_moderated',
   );
   static Snowflake? _$emojiId(ForumTag v) => v.emojiId;
   static const Field<ForumTag, Snowflake> _f$emojiId = Field(
     'emojiId',
     _$emojiId,
+    key: r'emoji_id',
   );
   static String? _$emojiName(ForumTag v) => v.emojiName;
   static const Field<ForumTag, String> _f$emojiName = Field(
     'emojiName',
     _$emojiName,
+    key: r'emoji_name',
   );
 
   @override
@@ -694,11 +701,13 @@ class DefaultReactionMapper extends ClassMapperBase<DefaultReaction> {
   static const Field<DefaultReaction, Snowflake> _f$emojiId = Field(
     'emojiId',
     _$emojiId,
+    key: r'emoji_id',
   );
   static String? _$emojiName(DefaultReaction v) => v.emojiName;
   static const Field<DefaultReaction, String> _f$emojiName = Field(
     'emojiName',
     _$emojiName,
+    key: r'emoji_name',
   );
 
   @override
@@ -811,115 +820,5 @@ class _DefaultReactionCopyWithImpl<$R, $Out>
   DefaultReactionCopyWith<$R2, DefaultReaction, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   ) => _DefaultReactionCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
-class ForumSortMapper extends ClassMapperBase<ForumSort> {
-  ForumSortMapper._();
-
-  static ForumSortMapper? _instance;
-  static ForumSortMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = ForumSortMapper._());
-      EnumLikeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'ForumSort';
-
-  static int _$value(ForumSort v) => v.value;
-  static const Field<ForumSort, int> _f$value = Field('value', _$value);
-
-  @override
-  final MappableFields<ForumSort> fields = const {#value: _f$value};
-
-  static ForumSort _instantiate(DecodingData data) {
-    return ForumSort(data.dec(_f$value));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static ForumSort fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<ForumSort>(map);
-  }
-
-  static ForumSort fromJson(String json) {
-    return ensureInitialized().decodeJson<ForumSort>(json);
-  }
-}
-
-mixin ForumSortMappable {
-  String toJson() {
-    return ForumSortMapper.ensureInitialized().encodeJson<ForumSort>(
-      this as ForumSort,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return ForumSortMapper.ensureInitialized().encodeMap<ForumSort>(
-      this as ForumSort,
-    );
-  }
-
-  ForumSortCopyWith<ForumSort, ForumSort, ForumSort> get copyWith =>
-      _ForumSortCopyWithImpl<ForumSort, ForumSort>(
-        this as ForumSort,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return ForumSortMapper.ensureInitialized().stringifyValue(
-      this as ForumSort,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return ForumSortMapper.ensureInitialized().equalsValue(
-      this as ForumSort,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return ForumSortMapper.ensureInitialized().hashValue(this as ForumSort);
-  }
-}
-
-extension ForumSortValueCopy<$R, $Out> on ObjectCopyWith<$R, ForumSort, $Out> {
-  ForumSortCopyWith<$R, ForumSort, $Out> get $asForumSort =>
-      $base.as((v, t, t2) => _ForumSortCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class ForumSortCopyWith<$R, $In extends ForumSort, $Out>
-    implements EnumLikeCopyWith<$R, $In, $Out, int, ForumSort> {
-  @override
-  $R call({int? value});
-  ForumSortCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
-}
-
-class _ForumSortCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, ForumSort, $Out>
-    implements ForumSortCopyWith<$R, ForumSort, $Out> {
-  _ForumSortCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<ForumSort> $mapper =
-      ForumSortMapper.ensureInitialized();
-  @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
-  @override
-  ForumSort $make(CopyWithData data) =>
-      ForumSort(data.get(#value, or: $value.value));
-
-  @override
-  ForumSortCopyWith<$R2, ForumSort, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _ForumSortCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 

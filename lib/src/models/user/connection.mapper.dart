@@ -1,0 +1,301 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format off
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
+// ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
+
+part of 'connection.dart';
+
+class ConnectionVisibilityMapper extends EnumMapper<ConnectionVisibility> {
+  ConnectionVisibilityMapper._();
+
+  static ConnectionVisibilityMapper? _instance;
+  static ConnectionVisibilityMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = ConnectionVisibilityMapper._());
+    }
+    return _instance!;
+  }
+
+  static ConnectionVisibility fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  ConnectionVisibility decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return ConnectionVisibility.none;
+      case 1:
+        return ConnectionVisibility.everyone;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(ConnectionVisibility self) {
+    switch (self) {
+      case ConnectionVisibility.none:
+        return 0;
+      case ConnectionVisibility.everyone:
+        return 1;
+    }
+  }
+}
+
+extension ConnectionVisibilityMapperExtension on ConnectionVisibility {
+  dynamic toValue() {
+    ConnectionVisibilityMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<ConnectionVisibility>(this);
+  }
+}
+
+class ConnectionMapper extends ClassMapperBase<Connection> {
+  ConnectionMapper._();
+
+  static ConnectionMapper? _instance;
+  static ConnectionMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = ConnectionMapper._());
+      PartialIntegrationMapper.ensureInitialized();
+      ConnectionVisibilityMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'Connection';
+
+  static String _$id(Connection v) => v.id;
+  static const Field<Connection, String> _f$id = Field('id', _$id);
+  static String _$name(Connection v) => v.name;
+  static const Field<Connection, String> _f$name = Field('name', _$name);
+  static ConnectionType _$type(Connection v) => v.type;
+  static const Field<Connection, ConnectionType> _f$type = Field(
+    'type',
+    _$type,
+  );
+  static bool? _$isRevoked(Connection v) => v.isRevoked;
+  static const Field<Connection, bool> _f$isRevoked = Field(
+    'isRevoked',
+    _$isRevoked,
+    key: r'is_revoked',
+  );
+  static List<PartialIntegration>? _$integrations(Connection v) =>
+      v.integrations;
+  static const Field<Connection, List<PartialIntegration>> _f$integrations =
+      Field('integrations', _$integrations);
+  static bool _$isVerified(Connection v) => v.isVerified;
+  static const Field<Connection, bool> _f$isVerified = Field(
+    'isVerified',
+    _$isVerified,
+    key: r'is_verified',
+  );
+  static bool _$isFriendSyncEnabled(Connection v) => v.isFriendSyncEnabled;
+  static const Field<Connection, bool> _f$isFriendSyncEnabled = Field(
+    'isFriendSyncEnabled',
+    _$isFriendSyncEnabled,
+    key: r'is_friend_sync_enabled',
+  );
+  static bool _$showActivity(Connection v) => v.showActivity;
+  static const Field<Connection, bool> _f$showActivity = Field(
+    'showActivity',
+    _$showActivity,
+    key: r'show_activity',
+  );
+  static bool _$isTwoWayLink(Connection v) => v.isTwoWayLink;
+  static const Field<Connection, bool> _f$isTwoWayLink = Field(
+    'isTwoWayLink',
+    _$isTwoWayLink,
+    key: r'is_two_way_link',
+  );
+  static ConnectionVisibility _$visibility(Connection v) => v.visibility;
+  static const Field<Connection, ConnectionVisibility> _f$visibility = Field(
+    'visibility',
+    _$visibility,
+  );
+
+  @override
+  final MappableFields<Connection> fields = const {
+    #id: _f$id,
+    #name: _f$name,
+    #type: _f$type,
+    #isRevoked: _f$isRevoked,
+    #integrations: _f$integrations,
+    #isVerified: _f$isVerified,
+    #isFriendSyncEnabled: _f$isFriendSyncEnabled,
+    #showActivity: _f$showActivity,
+    #isTwoWayLink: _f$isTwoWayLink,
+    #visibility: _f$visibility,
+  };
+
+  static Connection _instantiate(DecodingData data) {
+    return Connection(
+      id: data.dec(_f$id),
+      name: data.dec(_f$name),
+      type: data.dec(_f$type),
+      isRevoked: data.dec(_f$isRevoked),
+      integrations: data.dec(_f$integrations),
+      isVerified: data.dec(_f$isVerified),
+      isFriendSyncEnabled: data.dec(_f$isFriendSyncEnabled),
+      showActivity: data.dec(_f$showActivity),
+      isTwoWayLink: data.dec(_f$isTwoWayLink),
+      visibility: data.dec(_f$visibility),
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static Connection fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<Connection>(map);
+  }
+
+  static Connection fromJson(String json) {
+    return ensureInitialized().decodeJson<Connection>(json);
+  }
+}
+
+mixin ConnectionMappable {
+  String toJson() {
+    return ConnectionMapper.ensureInitialized().encodeJson<Connection>(
+      this as Connection,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return ConnectionMapper.ensureInitialized().encodeMap<Connection>(
+      this as Connection,
+    );
+  }
+
+  ConnectionCopyWith<Connection, Connection, Connection> get copyWith =>
+      _ConnectionCopyWithImpl<Connection, Connection>(
+        this as Connection,
+        $identity,
+        $identity,
+      );
+  @override
+  String toString() {
+    return ConnectionMapper.ensureInitialized().stringifyValue(
+      this as Connection,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return ConnectionMapper.ensureInitialized().equalsValue(
+      this as Connection,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return ConnectionMapper.ensureInitialized().hashValue(this as Connection);
+  }
+}
+
+extension ConnectionValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, Connection, $Out> {
+  ConnectionCopyWith<$R, Connection, $Out> get $asConnection =>
+      $base.as((v, t, t2) => _ConnectionCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class ConnectionCopyWith<$R, $In extends Connection, $Out>
+    implements ClassCopyWith<$R, $In, $Out> {
+  ListCopyWith<
+    $R,
+    PartialIntegration,
+    PartialIntegrationCopyWith<$R, PartialIntegration, PartialIntegration>
+  >?
+  get integrations;
+  $R call({
+    String? id,
+    String? name,
+    ConnectionType? type,
+    bool? isRevoked,
+    List<PartialIntegration>? integrations,
+    bool? isVerified,
+    bool? isFriendSyncEnabled,
+    bool? showActivity,
+    bool? isTwoWayLink,
+    ConnectionVisibility? visibility,
+  });
+  ConnectionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+}
+
+class _ConnectionCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, Connection, $Out>
+    implements ConnectionCopyWith<$R, Connection, $Out> {
+  _ConnectionCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<Connection> $mapper =
+      ConnectionMapper.ensureInitialized();
+  @override
+  ListCopyWith<
+    $R,
+    PartialIntegration,
+    PartialIntegrationCopyWith<$R, PartialIntegration, PartialIntegration>
+  >?
+  get integrations => $value.integrations != null
+      ? ListCopyWith(
+          $value.integrations!,
+          (v, t) => v.copyWith.$chain(t),
+          (v) => call(integrations: v),
+        )
+      : null;
+  @override
+  $R call({
+    String? id,
+    String? name,
+    ConnectionType? type,
+    Object? isRevoked = $none,
+    Object? integrations = $none,
+    bool? isVerified,
+    bool? isFriendSyncEnabled,
+    bool? showActivity,
+    bool? isTwoWayLink,
+    ConnectionVisibility? visibility,
+  }) => $apply(
+    FieldCopyWithData({
+      if (id != null) #id: id,
+      if (name != null) #name: name,
+      if (type != null) #type: type,
+      if (isRevoked != $none) #isRevoked: isRevoked,
+      if (integrations != $none) #integrations: integrations,
+      if (isVerified != null) #isVerified: isVerified,
+      if (isFriendSyncEnabled != null)
+        #isFriendSyncEnabled: isFriendSyncEnabled,
+      if (showActivity != null) #showActivity: showActivity,
+      if (isTwoWayLink != null) #isTwoWayLink: isTwoWayLink,
+      if (visibility != null) #visibility: visibility,
+    }),
+  );
+  @override
+  Connection $make(CopyWithData data) => Connection(
+    id: data.get(#id, or: $value.id),
+    name: data.get(#name, or: $value.name),
+    type: data.get(#type, or: $value.type),
+    isRevoked: data.get(#isRevoked, or: $value.isRevoked),
+    integrations: data.get(#integrations, or: $value.integrations),
+    isVerified: data.get(#isVerified, or: $value.isVerified),
+    isFriendSyncEnabled: data.get(
+      #isFriendSyncEnabled,
+      or: $value.isFriendSyncEnabled,
+    ),
+    showActivity: data.get(#showActivity, or: $value.showActivity),
+    isTwoWayLink: data.get(#isTwoWayLink, or: $value.isTwoWayLink),
+    visibility: data.get(#visibility, or: $value.visibility),
+  );
+
+  @override
+  ConnectionCopyWith<$R2, Connection, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _ConnectionCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+

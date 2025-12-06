@@ -48,12 +48,20 @@ class ThreadsOnlyChannelMapper extends ClassMapperBase<ThreadsOnlyChannel> {
 mixin ThreadsOnlyChannelMappable {
   String toJson();
   Map<String, dynamic> toMap();
-  ThreadsOnlyChannelCopyWith<ThreadsOnlyChannel, ThreadsOnlyChannel,
-      ThreadsOnlyChannel> get copyWith;
+  ThreadsOnlyChannelCopyWith<
+    ThreadsOnlyChannel,
+    ThreadsOnlyChannel,
+    ThreadsOnlyChannel
+  >
+  get copyWith;
 }
 
-abstract class ThreadsOnlyChannelCopyWith<$R, $In extends ThreadsOnlyChannel,
-    $Out> implements HasThreadsChannelCopyWith<$R, $In, $Out> {
+abstract class ThreadsOnlyChannelCopyWith<
+  $R,
+  $In extends ThreadsOnlyChannel,
+  $Out
+>
+    implements HasThreadsChannelCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   @override
   $R call({Snowflake? id});
@@ -61,3 +69,4 @@ abstract class ThreadsOnlyChannelCopyWith<$R, $In extends ThreadsOnlyChannel,
     Then<$Out2, $R2> t,
   );
 }
+

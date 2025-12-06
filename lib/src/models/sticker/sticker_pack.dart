@@ -12,9 +12,6 @@ part 'sticker_pack.mapper.dart';
 @MappableClass()
 class StickerPack extends SnowflakeEntity<StickerPack>
     with StickerPackMappable {
-  /// Global sticker manager
-  final GlobalStickerManager manager;
-
   /// The stickers in the pack
   final List<GlobalSticker> stickers;
 
@@ -36,7 +33,6 @@ class StickerPack extends SnowflakeEntity<StickerPack>
   /// {@macro sticker_pack}
   StickerPack(
       {required super.id,
-      required this.manager,
       required this.stickers,
       required this.name,
       required this.skuId,

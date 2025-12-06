@@ -12,7 +12,7 @@ part 'guild_text.mapper.dart';
 /// {@template guild_text_channel}
 /// A [TextChannel] in a [Guild].
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: 0)
 class GuildTextChannel extends TextChannel
     with GuildTextChannelMappable
     implements GuildChannel, HasThreadsChannel {

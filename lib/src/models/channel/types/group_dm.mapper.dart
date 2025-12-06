@@ -7,14 +7,14 @@
 
 part of 'group_dm.dart';
 
-class GroupDmChannelMapper extends ClassMapperBase<GroupDmChannel> {
+class GroupDmChannelMapper extends SubClassMapperBase<GroupDmChannel> {
   GroupDmChannelMapper._();
 
   static GroupDmChannelMapper? _instance;
   static GroupDmChannelMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GroupDmChannelMapper._());
-      TextChannelMapper.ensureInitialized();
+      TextChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
     }
@@ -37,36 +37,43 @@ class GroupDmChannelMapper extends ClassMapperBase<GroupDmChannel> {
   static const Field<GroupDmChannel, String> _f$iconHash = Field(
     'iconHash',
     _$iconHash,
+    key: r'icon_hash',
   );
   static Snowflake _$ownerId(GroupDmChannel v) => v.ownerId;
   static const Field<GroupDmChannel, Snowflake> _f$ownerId = Field(
     'ownerId',
     _$ownerId,
+    key: r'owner_id',
   );
   static Snowflake? _$applicationId(GroupDmChannel v) => v.applicationId;
   static const Field<GroupDmChannel, Snowflake> _f$applicationId = Field(
     'applicationId',
     _$applicationId,
+    key: r'application_id',
   );
   static bool _$isManaged(GroupDmChannel v) => v.isManaged;
   static const Field<GroupDmChannel, bool> _f$isManaged = Field(
     'isManaged',
     _$isManaged,
+    key: r'is_managed',
   );
   static Snowflake? _$lastMessageId(GroupDmChannel v) => v.lastMessageId;
   static const Field<GroupDmChannel, Snowflake> _f$lastMessageId = Field(
     'lastMessageId',
     _$lastMessageId,
+    key: r'last_message_id',
   );
   static DateTime? _$lastPinTimestamp(GroupDmChannel v) => v.lastPinTimestamp;
   static const Field<GroupDmChannel, DateTime> _f$lastPinTimestamp = Field(
     'lastPinTimestamp',
     _$lastPinTimestamp,
+    key: r'last_pin_timestamp',
   );
   static Duration? _$rateLimitPerUser(GroupDmChannel v) => v.rateLimitPerUser;
   static const Field<GroupDmChannel, Duration> _f$rateLimitPerUser = Field(
     'rateLimitPerUser',
     _$rateLimitPerUser,
+    key: r'rate_limit_per_user',
   );
 
   @override
@@ -82,6 +89,14 @@ class GroupDmChannelMapper extends ClassMapperBase<GroupDmChannel> {
     #lastPinTimestamp: _f$lastPinTimestamp,
     #rateLimitPerUser: _f$rateLimitPerUser,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 3;
+  @override
+  late final ClassMapperBase superMapper =
+      TextChannelMapper.ensureInitialized();
 
   static GroupDmChannel _instantiate(DecodingData data) {
     return GroupDmChannel(

@@ -7,6 +7,319 @@
 
 part of 'scheduled_event.dart';
 
+class EventStatusMapper extends EnumMapper<EventStatus> {
+  EventStatusMapper._();
+
+  static EventStatusMapper? _instance;
+  static EventStatusMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = EventStatusMapper._());
+    }
+    return _instance!;
+  }
+
+  static EventStatus fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  EventStatus decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return EventStatus.scheduled;
+      case 1:
+        return EventStatus.active;
+      case 2:
+        return EventStatus.completed;
+      case 3:
+        return EventStatus.cancelled;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(EventStatus self) {
+    switch (self) {
+      case EventStatus.scheduled:
+        return 0;
+      case EventStatus.active:
+        return 1;
+      case EventStatus.completed:
+        return 2;
+      case EventStatus.cancelled:
+        return 3;
+    }
+  }
+}
+
+extension EventStatusMapperExtension on EventStatus {
+  dynamic toValue() {
+    EventStatusMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<EventStatus>(this);
+  }
+}
+
+class ScheduledEntityTypeMapper extends EnumMapper<ScheduledEntityType> {
+  ScheduledEntityTypeMapper._();
+
+  static ScheduledEntityTypeMapper? _instance;
+  static ScheduledEntityTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = ScheduledEntityTypeMapper._());
+    }
+    return _instance!;
+  }
+
+  static ScheduledEntityType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  ScheduledEntityType decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return ScheduledEntityType.stageInstance;
+      case 1:
+        return ScheduledEntityType.voice;
+      case 2:
+        return ScheduledEntityType.external;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(ScheduledEntityType self) {
+    switch (self) {
+      case ScheduledEntityType.stageInstance:
+        return 0;
+      case ScheduledEntityType.voice:
+        return 1;
+      case ScheduledEntityType.external:
+        return 2;
+    }
+  }
+}
+
+extension ScheduledEntityTypeMapperExtension on ScheduledEntityType {
+  dynamic toValue() {
+    ScheduledEntityTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<ScheduledEntityType>(this);
+  }
+}
+
+class RecurrenceRuleFrequencyMapper
+    extends EnumMapper<RecurrenceRuleFrequency> {
+  RecurrenceRuleFrequencyMapper._();
+
+  static RecurrenceRuleFrequencyMapper? _instance;
+  static RecurrenceRuleFrequencyMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(
+        _instance = RecurrenceRuleFrequencyMapper._(),
+      );
+    }
+    return _instance!;
+  }
+
+  static RecurrenceRuleFrequency fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  RecurrenceRuleFrequency decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return RecurrenceRuleFrequency.yearly;
+      case 1:
+        return RecurrenceRuleFrequency.monthly;
+      case 2:
+        return RecurrenceRuleFrequency.weekly;
+      case 3:
+        return RecurrenceRuleFrequency.daily;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(RecurrenceRuleFrequency self) {
+    switch (self) {
+      case RecurrenceRuleFrequency.yearly:
+        return 0;
+      case RecurrenceRuleFrequency.monthly:
+        return 1;
+      case RecurrenceRuleFrequency.weekly:
+        return 2;
+      case RecurrenceRuleFrequency.daily:
+        return 3;
+    }
+  }
+}
+
+extension RecurrenceRuleFrequencyMapperExtension on RecurrenceRuleFrequency {
+  dynamic toValue() {
+    RecurrenceRuleFrequencyMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<RecurrenceRuleFrequency>(this);
+  }
+}
+
+class RecurrenceRuleWeekdayMapper extends EnumMapper<RecurrenceRuleWeekday> {
+  RecurrenceRuleWeekdayMapper._();
+
+  static RecurrenceRuleWeekdayMapper? _instance;
+  static RecurrenceRuleWeekdayMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = RecurrenceRuleWeekdayMapper._());
+    }
+    return _instance!;
+  }
+
+  static RecurrenceRuleWeekday fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  RecurrenceRuleWeekday decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return RecurrenceRuleWeekday.monday;
+      case 1:
+        return RecurrenceRuleWeekday.tuesday;
+      case 2:
+        return RecurrenceRuleWeekday.wednesday;
+      case 3:
+        return RecurrenceRuleWeekday.thursday;
+      case 4:
+        return RecurrenceRuleWeekday.friday;
+      case 5:
+        return RecurrenceRuleWeekday.saturday;
+      case 6:
+        return RecurrenceRuleWeekday.sunday;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(RecurrenceRuleWeekday self) {
+    switch (self) {
+      case RecurrenceRuleWeekday.monday:
+        return 0;
+      case RecurrenceRuleWeekday.tuesday:
+        return 1;
+      case RecurrenceRuleWeekday.wednesday:
+        return 2;
+      case RecurrenceRuleWeekday.thursday:
+        return 3;
+      case RecurrenceRuleWeekday.friday:
+        return 4;
+      case RecurrenceRuleWeekday.saturday:
+        return 5;
+      case RecurrenceRuleWeekday.sunday:
+        return 6;
+    }
+  }
+}
+
+extension RecurrenceRuleWeekdayMapperExtension on RecurrenceRuleWeekday {
+  dynamic toValue() {
+    RecurrenceRuleWeekdayMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<RecurrenceRuleWeekday>(this);
+  }
+}
+
+class RecurrenceRuleMonthMapper extends EnumMapper<RecurrenceRuleMonth> {
+  RecurrenceRuleMonthMapper._();
+
+  static RecurrenceRuleMonthMapper? _instance;
+  static RecurrenceRuleMonthMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = RecurrenceRuleMonthMapper._());
+    }
+    return _instance!;
+  }
+
+  static RecurrenceRuleMonth fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  RecurrenceRuleMonth decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return RecurrenceRuleMonth.january;
+      case 1:
+        return RecurrenceRuleMonth.february;
+      case 2:
+        return RecurrenceRuleMonth.march;
+      case 3:
+        return RecurrenceRuleMonth.april;
+      case 4:
+        return RecurrenceRuleMonth.may;
+      case 5:
+        return RecurrenceRuleMonth.june;
+      case 6:
+        return RecurrenceRuleMonth.july;
+      case 7:
+        return RecurrenceRuleMonth.august;
+      case 8:
+        return RecurrenceRuleMonth.september;
+      case 9:
+        return RecurrenceRuleMonth.october;
+      case 10:
+        return RecurrenceRuleMonth.november;
+      case 11:
+        return RecurrenceRuleMonth.december;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(RecurrenceRuleMonth self) {
+    switch (self) {
+      case RecurrenceRuleMonth.january:
+        return 0;
+      case RecurrenceRuleMonth.february:
+        return 1;
+      case RecurrenceRuleMonth.march:
+        return 2;
+      case RecurrenceRuleMonth.april:
+        return 3;
+      case RecurrenceRuleMonth.may:
+        return 4;
+      case RecurrenceRuleMonth.june:
+        return 5;
+      case RecurrenceRuleMonth.july:
+        return 6;
+      case RecurrenceRuleMonth.august:
+        return 7;
+      case RecurrenceRuleMonth.september:
+        return 8;
+      case RecurrenceRuleMonth.october:
+        return 9;
+      case RecurrenceRuleMonth.november:
+        return 10;
+      case RecurrenceRuleMonth.december:
+        return 11;
+    }
+  }
+}
+
+extension RecurrenceRuleMonthMapperExtension on RecurrenceRuleMonth {
+  dynamic toValue() {
+    RecurrenceRuleMonthMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<RecurrenceRuleMonth>(this);
+  }
+}
+
 class PartialScheduledEventMapper
     extends ClassMapperBase<PartialScheduledEvent> {
   PartialScheduledEventMapper._();
@@ -169,16 +482,19 @@ class ScheduledEventMapper extends ClassMapperBase<ScheduledEvent> {
   static const Field<ScheduledEvent, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
+    key: r'guild_id',
   );
   static Snowflake? _$channelId(ScheduledEvent v) => v.channelId;
   static const Field<ScheduledEvent, Snowflake> _f$channelId = Field(
     'channelId',
     _$channelId,
+    key: r'channel_id',
   );
   static Snowflake? _$creatorId(ScheduledEvent v) => v.creatorId;
   static const Field<ScheduledEvent, Snowflake> _f$creatorId = Field(
     'creatorId',
     _$creatorId,
+    key: r'creator_id',
   );
   static String _$name(ScheduledEvent v) => v.name;
   static const Field<ScheduledEvent, String> _f$name = Field('name', _$name);
@@ -192,16 +508,19 @@ class ScheduledEventMapper extends ClassMapperBase<ScheduledEvent> {
   static const Field<ScheduledEvent, DateTime> _f$scheduledStartTime = Field(
     'scheduledStartTime',
     _$scheduledStartTime,
+    key: r'scheduled_start_time',
   );
   static DateTime? _$scheduledEndTime(ScheduledEvent v) => v.scheduledEndTime;
   static const Field<ScheduledEvent, DateTime> _f$scheduledEndTime = Field(
     'scheduledEndTime',
     _$scheduledEndTime,
+    key: r'scheduled_end_time',
   );
   static PrivacyLevel _$privacyLevel(ScheduledEvent v) => v.privacyLevel;
   static const Field<ScheduledEvent, PrivacyLevel> _f$privacyLevel = Field(
     'privacyLevel',
     _$privacyLevel,
+    key: r'privacy_level',
   );
   static EventStatus _$status(ScheduledEvent v) => v.status;
   static const Field<ScheduledEvent, EventStatus> _f$status = Field(
@@ -217,6 +536,7 @@ class ScheduledEventMapper extends ClassMapperBase<ScheduledEvent> {
   static const Field<ScheduledEvent, Snowflake> _f$entityId = Field(
     'entityId',
     _$entityId,
+    key: r'entity_id',
   );
   static EntityMetadata? _$metadata(ScheduledEvent v) => v.metadata;
   static const Field<ScheduledEvent, EntityMetadata> _f$metadata = Field(
@@ -232,16 +552,19 @@ class ScheduledEventMapper extends ClassMapperBase<ScheduledEvent> {
   static const Field<ScheduledEvent, int> _f$userCount = Field(
     'userCount',
     _$userCount,
+    key: r'user_count',
   );
   static String? _$coverImageHash(ScheduledEvent v) => v.coverImageHash;
   static const Field<ScheduledEvent, String> _f$coverImageHash = Field(
     'coverImageHash',
     _$coverImageHash,
+    key: r'cover_image_hash',
   );
   static RecurrenceRule? _$recurrenceRule(ScheduledEvent v) => v.recurrenceRule;
   static const Field<ScheduledEvent, RecurrenceRule> _f$recurrenceRule = Field(
     'recurrenceRule',
     _$recurrenceRule,
+    key: r'recurrence_rule',
   );
 
   @override
@@ -354,10 +677,6 @@ abstract class ScheduledEventCopyWith<$R, $In extends ScheduledEvent, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get creatorId;
-  PrivacyLevelCopyWith<$R, PrivacyLevel, PrivacyLevel> get privacyLevel;
-  EventStatusCopyWith<$R, EventStatus, EventStatus> get status;
-  ScheduledEntityTypeCopyWith<$R, ScheduledEntityType, ScheduledEntityType>
-  get type;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get entityId;
   EntityMetadataCopyWith<$R, EntityMetadata, EntityMetadata>? get metadata;
   UserCopyWith<$R, User, User>? get creator;
@@ -408,15 +727,6 @@ class _ScheduledEventCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get creatorId =>
       $value.creatorId?.copyWith.$chain((v) => call(creatorId: v));
-  @override
-  PrivacyLevelCopyWith<$R, PrivacyLevel, PrivacyLevel> get privacyLevel =>
-      $value.privacyLevel.copyWith.$chain((v) => call(privacyLevel: v));
-  @override
-  EventStatusCopyWith<$R, EventStatus, EventStatus> get status =>
-      $value.status.copyWith.$chain((v) => call(status: v));
-  @override
-  ScheduledEntityTypeCopyWith<$R, ScheduledEntityType, ScheduledEntityType>
-  get type => $value.type.copyWith.$chain((v) => call(type: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get entityId =>
       $value.entityId?.copyWith.$chain((v) => call(entityId: v));
@@ -498,243 +808,6 @@ class _ScheduledEventCopyWithImpl<$R, $Out>
   ScheduledEventCopyWith<$R2, ScheduledEvent, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   ) => _ScheduledEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
-class EventStatusMapper extends ClassMapperBase<EventStatus> {
-  EventStatusMapper._();
-
-  static EventStatusMapper? _instance;
-  static EventStatusMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = EventStatusMapper._());
-      EnumLikeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'EventStatus';
-
-  static int _$value(EventStatus v) => v.value;
-  static const Field<EventStatus, int> _f$value = Field('value', _$value);
-
-  @override
-  final MappableFields<EventStatus> fields = const {#value: _f$value};
-
-  static EventStatus _instantiate(DecodingData data) {
-    return EventStatus(data.dec(_f$value));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static EventStatus fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<EventStatus>(map);
-  }
-
-  static EventStatus fromJson(String json) {
-    return ensureInitialized().decodeJson<EventStatus>(json);
-  }
-}
-
-mixin EventStatusMappable {
-  String toJson() {
-    return EventStatusMapper.ensureInitialized().encodeJson<EventStatus>(
-      this as EventStatus,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return EventStatusMapper.ensureInitialized().encodeMap<EventStatus>(
-      this as EventStatus,
-    );
-  }
-
-  EventStatusCopyWith<EventStatus, EventStatus, EventStatus> get copyWith =>
-      _EventStatusCopyWithImpl<EventStatus, EventStatus>(
-        this as EventStatus,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return EventStatusMapper.ensureInitialized().stringifyValue(
-      this as EventStatus,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return EventStatusMapper.ensureInitialized().equalsValue(
-      this as EventStatus,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return EventStatusMapper.ensureInitialized().hashValue(this as EventStatus);
-  }
-}
-
-extension EventStatusValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, EventStatus, $Out> {
-  EventStatusCopyWith<$R, EventStatus, $Out> get $asEventStatus =>
-      $base.as((v, t, t2) => _EventStatusCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class EventStatusCopyWith<$R, $In extends EventStatus, $Out>
-    implements EnumLikeCopyWith<$R, $In, $Out, int, EventStatus> {
-  @override
-  $R call({int? value});
-  EventStatusCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
-}
-
-class _EventStatusCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, EventStatus, $Out>
-    implements EventStatusCopyWith<$R, EventStatus, $Out> {
-  _EventStatusCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<EventStatus> $mapper =
-      EventStatusMapper.ensureInitialized();
-  @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
-  @override
-  EventStatus $make(CopyWithData data) =>
-      EventStatus(data.get(#value, or: $value.value));
-
-  @override
-  EventStatusCopyWith<$R2, EventStatus, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _EventStatusCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
-class ScheduledEntityTypeMapper extends ClassMapperBase<ScheduledEntityType> {
-  ScheduledEntityTypeMapper._();
-
-  static ScheduledEntityTypeMapper? _instance;
-  static ScheduledEntityTypeMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = ScheduledEntityTypeMapper._());
-      EnumLikeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'ScheduledEntityType';
-
-  static int _$value(ScheduledEntityType v) => v.value;
-  static const Field<ScheduledEntityType, int> _f$value = Field(
-    'value',
-    _$value,
-  );
-
-  @override
-  final MappableFields<ScheduledEntityType> fields = const {#value: _f$value};
-
-  static ScheduledEntityType _instantiate(DecodingData data) {
-    return ScheduledEntityType(data.dec(_f$value));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static ScheduledEntityType fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<ScheduledEntityType>(map);
-  }
-
-  static ScheduledEntityType fromJson(String json) {
-    return ensureInitialized().decodeJson<ScheduledEntityType>(json);
-  }
-}
-
-mixin ScheduledEntityTypeMappable {
-  String toJson() {
-    return ScheduledEntityTypeMapper.ensureInitialized()
-        .encodeJson<ScheduledEntityType>(this as ScheduledEntityType);
-  }
-
-  Map<String, dynamic> toMap() {
-    return ScheduledEntityTypeMapper.ensureInitialized()
-        .encodeMap<ScheduledEntityType>(this as ScheduledEntityType);
-  }
-
-  ScheduledEntityTypeCopyWith<
-    ScheduledEntityType,
-    ScheduledEntityType,
-    ScheduledEntityType
-  >
-  get copyWith =>
-      _ScheduledEntityTypeCopyWithImpl<
-        ScheduledEntityType,
-        ScheduledEntityType
-      >(this as ScheduledEntityType, $identity, $identity);
-  @override
-  String toString() {
-    return ScheduledEntityTypeMapper.ensureInitialized().stringifyValue(
-      this as ScheduledEntityType,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return ScheduledEntityTypeMapper.ensureInitialized().equalsValue(
-      this as ScheduledEntityType,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return ScheduledEntityTypeMapper.ensureInitialized().hashValue(
-      this as ScheduledEntityType,
-    );
-  }
-}
-
-extension ScheduledEntityTypeValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, ScheduledEntityType, $Out> {
-  ScheduledEntityTypeCopyWith<$R, ScheduledEntityType, $Out>
-  get $asScheduledEntityType => $base.as(
-    (v, t, t2) => _ScheduledEntityTypeCopyWithImpl<$R, $Out>(v, t, t2),
-  );
-}
-
-abstract class ScheduledEntityTypeCopyWith<
-  $R,
-  $In extends ScheduledEntityType,
-  $Out
->
-    implements EnumLikeCopyWith<$R, $In, $Out, int, ScheduledEntityType> {
-  @override
-  $R call({int? value});
-  ScheduledEntityTypeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _ScheduledEntityTypeCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, ScheduledEntityType, $Out>
-    implements ScheduledEntityTypeCopyWith<$R, ScheduledEntityType, $Out> {
-  _ScheduledEntityTypeCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<ScheduledEntityType> $mapper =
-      ScheduledEntityTypeMapper.ensureInitialized();
-  @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
-  @override
-  ScheduledEntityType $make(CopyWithData data) =>
-      ScheduledEntityType(data.get(#value, or: $value.value));
-
-  @override
-  ScheduledEntityTypeCopyWith<$R2, ScheduledEntityType, $Out2>
-  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _ScheduledEntityTypeCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class EntityMetadataMapper extends ClassMapperBase<EntityMetadata> {
@@ -889,23 +962,25 @@ class RecurrenceRuleMapper extends ClassMapperBase<RecurrenceRule> {
   static List<RecurrenceRuleWeekday>? _$byWeekday(RecurrenceRule v) =>
       v.byWeekday;
   static const Field<RecurrenceRule, List<RecurrenceRuleWeekday>> _f$byWeekday =
-      Field('byWeekday', _$byWeekday);
+      Field('byWeekday', _$byWeekday, key: r'by_weekday');
   static List<RecurrenceRuleNWeekday>? _$byNWeekday(RecurrenceRule v) =>
       v.byNWeekday;
   static const Field<RecurrenceRule, List<RecurrenceRuleNWeekday>>
-  _f$byNWeekday = Field('byNWeekday', _$byNWeekday);
+  _f$byNWeekday = Field('byNWeekday', _$byNWeekday, key: r'by_nweekday');
   static List<RecurrenceRuleMonth>? _$byMonth(RecurrenceRule v) => v.byMonth;
   static const Field<RecurrenceRule, List<RecurrenceRuleMonth>> _f$byMonth =
-      Field('byMonth', _$byMonth);
+      Field('byMonth', _$byMonth, key: r'by_month');
   static List<int>? _$byMonthDay(RecurrenceRule v) => v.byMonthDay;
   static const Field<RecurrenceRule, List<int>> _f$byMonthDay = Field(
     'byMonthDay',
     _$byMonthDay,
+    key: r'by_month_day',
   );
   static List<int>? _$byYearDay(RecurrenceRule v) => v.byYearDay;
   static const Field<RecurrenceRule, List<int>> _f$byYearDay = Field(
     'byYearDay',
     _$byYearDay,
+    key: r'by_year_day',
   );
   static int? _$count(RecurrenceRule v) => v.count;
   static const Field<RecurrenceRule, int> _f$count = Field('count', _$count);
@@ -1001,20 +1076,10 @@ extension RecurrenceRuleValueCopy<$R, $Out>
 
 abstract class RecurrenceRuleCopyWith<$R, $In extends RecurrenceRule, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  RecurrenceRuleFrequencyCopyWith<
-    $R,
-    RecurrenceRuleFrequency,
-    RecurrenceRuleFrequency
-  >
-  get frequency;
   ListCopyWith<
     $R,
     RecurrenceRuleWeekday,
-    RecurrenceRuleWeekdayCopyWith<
-      $R,
-      RecurrenceRuleWeekday,
-      RecurrenceRuleWeekday
-    >
+    ObjectCopyWith<$R, RecurrenceRuleWeekday, RecurrenceRuleWeekday>
   >?
   get byWeekday;
   ListCopyWith<
@@ -1030,7 +1095,7 @@ abstract class RecurrenceRuleCopyWith<$R, $In extends RecurrenceRule, $Out>
   ListCopyWith<
     $R,
     RecurrenceRuleMonth,
-    RecurrenceRuleMonthCopyWith<$R, RecurrenceRuleMonth, RecurrenceRuleMonth>
+    ObjectCopyWith<$R, RecurrenceRuleMonth, RecurrenceRuleMonth>
   >?
   get byMonth;
   ListCopyWith<$R, int, ObjectCopyWith<$R, int, int>>? get byMonthDay;
@@ -1061,26 +1126,15 @@ class _RecurrenceRuleCopyWithImpl<$R, $Out>
   late final ClassMapperBase<RecurrenceRule> $mapper =
       RecurrenceRuleMapper.ensureInitialized();
   @override
-  RecurrenceRuleFrequencyCopyWith<
-    $R,
-    RecurrenceRuleFrequency,
-    RecurrenceRuleFrequency
-  >
-  get frequency => $value.frequency.copyWith.$chain((v) => call(frequency: v));
-  @override
   ListCopyWith<
     $R,
     RecurrenceRuleWeekday,
-    RecurrenceRuleWeekdayCopyWith<
-      $R,
-      RecurrenceRuleWeekday,
-      RecurrenceRuleWeekday
-    >
+    ObjectCopyWith<$R, RecurrenceRuleWeekday, RecurrenceRuleWeekday>
   >?
   get byWeekday => $value.byWeekday != null
       ? ListCopyWith(
           $value.byWeekday!,
-          (v, t) => v.copyWith.$chain(t),
+          (v, t) => ObjectCopyWith(v, $identity, t),
           (v) => call(byWeekday: v),
         )
       : null;
@@ -1105,12 +1159,12 @@ class _RecurrenceRuleCopyWithImpl<$R, $Out>
   ListCopyWith<
     $R,
     RecurrenceRuleMonth,
-    RecurrenceRuleMonthCopyWith<$R, RecurrenceRuleMonth, RecurrenceRuleMonth>
+    ObjectCopyWith<$R, RecurrenceRuleMonth, RecurrenceRuleMonth>
   >?
   get byMonth => $value.byMonth != null
       ? ListCopyWith(
           $value.byMonth!,
-          (v, t) => v.copyWith.$chain(t),
+          (v, t) => ObjectCopyWith(v, $identity, t),
           (v) => call(byMonth: v),
         )
       : null;
@@ -1176,265 +1230,6 @@ class _RecurrenceRuleCopyWithImpl<$R, $Out>
   RecurrenceRuleCopyWith<$R2, RecurrenceRule, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   ) => _RecurrenceRuleCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
-class RecurrenceRuleFrequencyMapper
-    extends ClassMapperBase<RecurrenceRuleFrequency> {
-  RecurrenceRuleFrequencyMapper._();
-
-  static RecurrenceRuleFrequencyMapper? _instance;
-  static RecurrenceRuleFrequencyMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(
-        _instance = RecurrenceRuleFrequencyMapper._(),
-      );
-      EnumLikeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'RecurrenceRuleFrequency';
-
-  static int _$value(RecurrenceRuleFrequency v) => v.value;
-  static const Field<RecurrenceRuleFrequency, int> _f$value = Field(
-    'value',
-    _$value,
-  );
-
-  @override
-  final MappableFields<RecurrenceRuleFrequency> fields = const {
-    #value: _f$value,
-  };
-
-  static RecurrenceRuleFrequency _instantiate(DecodingData data) {
-    return RecurrenceRuleFrequency(data.dec(_f$value));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static RecurrenceRuleFrequency fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<RecurrenceRuleFrequency>(map);
-  }
-
-  static RecurrenceRuleFrequency fromJson(String json) {
-    return ensureInitialized().decodeJson<RecurrenceRuleFrequency>(json);
-  }
-}
-
-mixin RecurrenceRuleFrequencyMappable {
-  String toJson() {
-    return RecurrenceRuleFrequencyMapper.ensureInitialized()
-        .encodeJson<RecurrenceRuleFrequency>(this as RecurrenceRuleFrequency);
-  }
-
-  Map<String, dynamic> toMap() {
-    return RecurrenceRuleFrequencyMapper.ensureInitialized()
-        .encodeMap<RecurrenceRuleFrequency>(this as RecurrenceRuleFrequency);
-  }
-
-  RecurrenceRuleFrequencyCopyWith<
-    RecurrenceRuleFrequency,
-    RecurrenceRuleFrequency,
-    RecurrenceRuleFrequency
-  >
-  get copyWith =>
-      _RecurrenceRuleFrequencyCopyWithImpl<
-        RecurrenceRuleFrequency,
-        RecurrenceRuleFrequency
-      >(this as RecurrenceRuleFrequency, $identity, $identity);
-  @override
-  String toString() {
-    return RecurrenceRuleFrequencyMapper.ensureInitialized().stringifyValue(
-      this as RecurrenceRuleFrequency,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return RecurrenceRuleFrequencyMapper.ensureInitialized().equalsValue(
-      this as RecurrenceRuleFrequency,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return RecurrenceRuleFrequencyMapper.ensureInitialized().hashValue(
-      this as RecurrenceRuleFrequency,
-    );
-  }
-}
-
-extension RecurrenceRuleFrequencyValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, RecurrenceRuleFrequency, $Out> {
-  RecurrenceRuleFrequencyCopyWith<$R, RecurrenceRuleFrequency, $Out>
-  get $asRecurrenceRuleFrequency => $base.as(
-    (v, t, t2) => _RecurrenceRuleFrequencyCopyWithImpl<$R, $Out>(v, t, t2),
-  );
-}
-
-abstract class RecurrenceRuleFrequencyCopyWith<
-  $R,
-  $In extends RecurrenceRuleFrequency,
-  $Out
->
-    implements EnumLikeCopyWith<$R, $In, $Out, int, RecurrenceRuleFrequency> {
-  @override
-  $R call({int? value});
-  RecurrenceRuleFrequencyCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _RecurrenceRuleFrequencyCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, RecurrenceRuleFrequency, $Out>
-    implements
-        RecurrenceRuleFrequencyCopyWith<$R, RecurrenceRuleFrequency, $Out> {
-  _RecurrenceRuleFrequencyCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<RecurrenceRuleFrequency> $mapper =
-      RecurrenceRuleFrequencyMapper.ensureInitialized();
-  @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
-  @override
-  RecurrenceRuleFrequency $make(CopyWithData data) =>
-      RecurrenceRuleFrequency(data.get(#value, or: $value.value));
-
-  @override
-  RecurrenceRuleFrequencyCopyWith<$R2, RecurrenceRuleFrequency, $Out2>
-  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _RecurrenceRuleFrequencyCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
-class RecurrenceRuleWeekdayMapper
-    extends ClassMapperBase<RecurrenceRuleWeekday> {
-  RecurrenceRuleWeekdayMapper._();
-
-  static RecurrenceRuleWeekdayMapper? _instance;
-  static RecurrenceRuleWeekdayMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = RecurrenceRuleWeekdayMapper._());
-      EnumLikeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'RecurrenceRuleWeekday';
-
-  static int _$value(RecurrenceRuleWeekday v) => v.value;
-  static const Field<RecurrenceRuleWeekday, int> _f$value = Field(
-    'value',
-    _$value,
-  );
-
-  @override
-  final MappableFields<RecurrenceRuleWeekday> fields = const {#value: _f$value};
-
-  static RecurrenceRuleWeekday _instantiate(DecodingData data) {
-    return RecurrenceRuleWeekday(data.dec(_f$value));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static RecurrenceRuleWeekday fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<RecurrenceRuleWeekday>(map);
-  }
-
-  static RecurrenceRuleWeekday fromJson(String json) {
-    return ensureInitialized().decodeJson<RecurrenceRuleWeekday>(json);
-  }
-}
-
-mixin RecurrenceRuleWeekdayMappable {
-  String toJson() {
-    return RecurrenceRuleWeekdayMapper.ensureInitialized()
-        .encodeJson<RecurrenceRuleWeekday>(this as RecurrenceRuleWeekday);
-  }
-
-  Map<String, dynamic> toMap() {
-    return RecurrenceRuleWeekdayMapper.ensureInitialized()
-        .encodeMap<RecurrenceRuleWeekday>(this as RecurrenceRuleWeekday);
-  }
-
-  RecurrenceRuleWeekdayCopyWith<
-    RecurrenceRuleWeekday,
-    RecurrenceRuleWeekday,
-    RecurrenceRuleWeekday
-  >
-  get copyWith =>
-      _RecurrenceRuleWeekdayCopyWithImpl<
-        RecurrenceRuleWeekday,
-        RecurrenceRuleWeekday
-      >(this as RecurrenceRuleWeekday, $identity, $identity);
-  @override
-  String toString() {
-    return RecurrenceRuleWeekdayMapper.ensureInitialized().stringifyValue(
-      this as RecurrenceRuleWeekday,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return RecurrenceRuleWeekdayMapper.ensureInitialized().equalsValue(
-      this as RecurrenceRuleWeekday,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return RecurrenceRuleWeekdayMapper.ensureInitialized().hashValue(
-      this as RecurrenceRuleWeekday,
-    );
-  }
-}
-
-extension RecurrenceRuleWeekdayValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, RecurrenceRuleWeekday, $Out> {
-  RecurrenceRuleWeekdayCopyWith<$R, RecurrenceRuleWeekday, $Out>
-  get $asRecurrenceRuleWeekday => $base.as(
-    (v, t, t2) => _RecurrenceRuleWeekdayCopyWithImpl<$R, $Out>(v, t, t2),
-  );
-}
-
-abstract class RecurrenceRuleWeekdayCopyWith<
-  $R,
-  $In extends RecurrenceRuleWeekday,
-  $Out
->
-    implements EnumLikeCopyWith<$R, $In, $Out, int, RecurrenceRuleWeekday> {
-  @override
-  $R call({int? value});
-  RecurrenceRuleWeekdayCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _RecurrenceRuleWeekdayCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, RecurrenceRuleWeekday, $Out>
-    implements RecurrenceRuleWeekdayCopyWith<$R, RecurrenceRuleWeekday, $Out> {
-  _RecurrenceRuleWeekdayCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<RecurrenceRuleWeekday> $mapper =
-      RecurrenceRuleWeekdayMapper.ensureInitialized();
-  @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
-  @override
-  RecurrenceRuleWeekday $make(CopyWithData data) =>
-      RecurrenceRuleWeekday(data.get(#value, or: $value.value));
-
-  @override
-  RecurrenceRuleWeekdayCopyWith<$R2, RecurrenceRuleWeekday, $Out2>
-  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _RecurrenceRuleWeekdayCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class RecurrenceRuleNWeekdayMapper
@@ -1539,12 +1334,6 @@ abstract class RecurrenceRuleNWeekdayCopyWith<
   $Out
 >
     implements ClassCopyWith<$R, $In, $Out> {
-  RecurrenceRuleWeekdayCopyWith<
-    $R,
-    RecurrenceRuleWeekday,
-    RecurrenceRuleWeekday
-  >
-  get day;
   $R call({int? n, RecurrenceRuleWeekday? day});
   RecurrenceRuleNWeekdayCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -1561,13 +1350,6 @@ class _RecurrenceRuleNWeekdayCopyWithImpl<$R, $Out>
   late final ClassMapperBase<RecurrenceRuleNWeekday> $mapper =
       RecurrenceRuleNWeekdayMapper.ensureInitialized();
   @override
-  RecurrenceRuleWeekdayCopyWith<
-    $R,
-    RecurrenceRuleWeekday,
-    RecurrenceRuleWeekday
-  >
-  get day => $value.day.copyWith.$chain((v) => call(day: v));
-  @override
   $R call({int? n, RecurrenceRuleWeekday? day}) => $apply(
     FieldCopyWithData({if (n != null) #n: n, if (day != null) #day: day}),
   );
@@ -1581,132 +1363,6 @@ class _RecurrenceRuleNWeekdayCopyWithImpl<$R, $Out>
   RecurrenceRuleNWeekdayCopyWith<$R2, RecurrenceRuleNWeekday, $Out2>
   $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
       _RecurrenceRuleNWeekdayCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
-class RecurrenceRuleMonthMapper extends ClassMapperBase<RecurrenceRuleMonth> {
-  RecurrenceRuleMonthMapper._();
-
-  static RecurrenceRuleMonthMapper? _instance;
-  static RecurrenceRuleMonthMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = RecurrenceRuleMonthMapper._());
-      EnumLikeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'RecurrenceRuleMonth';
-
-  static int _$value(RecurrenceRuleMonth v) => v.value;
-  static const Field<RecurrenceRuleMonth, int> _f$value = Field(
-    'value',
-    _$value,
-  );
-
-  @override
-  final MappableFields<RecurrenceRuleMonth> fields = const {#value: _f$value};
-
-  static RecurrenceRuleMonth _instantiate(DecodingData data) {
-    return RecurrenceRuleMonth(data.dec(_f$value));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static RecurrenceRuleMonth fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<RecurrenceRuleMonth>(map);
-  }
-
-  static RecurrenceRuleMonth fromJson(String json) {
-    return ensureInitialized().decodeJson<RecurrenceRuleMonth>(json);
-  }
-}
-
-mixin RecurrenceRuleMonthMappable {
-  String toJson() {
-    return RecurrenceRuleMonthMapper.ensureInitialized()
-        .encodeJson<RecurrenceRuleMonth>(this as RecurrenceRuleMonth);
-  }
-
-  Map<String, dynamic> toMap() {
-    return RecurrenceRuleMonthMapper.ensureInitialized()
-        .encodeMap<RecurrenceRuleMonth>(this as RecurrenceRuleMonth);
-  }
-
-  RecurrenceRuleMonthCopyWith<
-    RecurrenceRuleMonth,
-    RecurrenceRuleMonth,
-    RecurrenceRuleMonth
-  >
-  get copyWith =>
-      _RecurrenceRuleMonthCopyWithImpl<
-        RecurrenceRuleMonth,
-        RecurrenceRuleMonth
-      >(this as RecurrenceRuleMonth, $identity, $identity);
-  @override
-  String toString() {
-    return RecurrenceRuleMonthMapper.ensureInitialized().stringifyValue(
-      this as RecurrenceRuleMonth,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return RecurrenceRuleMonthMapper.ensureInitialized().equalsValue(
-      this as RecurrenceRuleMonth,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return RecurrenceRuleMonthMapper.ensureInitialized().hashValue(
-      this as RecurrenceRuleMonth,
-    );
-  }
-}
-
-extension RecurrenceRuleMonthValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, RecurrenceRuleMonth, $Out> {
-  RecurrenceRuleMonthCopyWith<$R, RecurrenceRuleMonth, $Out>
-  get $asRecurrenceRuleMonth => $base.as(
-    (v, t, t2) => _RecurrenceRuleMonthCopyWithImpl<$R, $Out>(v, t, t2),
-  );
-}
-
-abstract class RecurrenceRuleMonthCopyWith<
-  $R,
-  $In extends RecurrenceRuleMonth,
-  $Out
->
-    implements EnumLikeCopyWith<$R, $In, $Out, int, RecurrenceRuleMonth> {
-  @override
-  $R call({int? value});
-  RecurrenceRuleMonthCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _RecurrenceRuleMonthCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, RecurrenceRuleMonth, $Out>
-    implements RecurrenceRuleMonthCopyWith<$R, RecurrenceRuleMonth, $Out> {
-  _RecurrenceRuleMonthCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<RecurrenceRuleMonth> $mapper =
-      RecurrenceRuleMonthMapper.ensureInitialized();
-  @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
-  @override
-  RecurrenceRuleMonth $make(CopyWithData data) =>
-      RecurrenceRuleMonth(data.get(#value, or: $value.value));
-
-  @override
-  RecurrenceRuleMonthCopyWith<$R2, RecurrenceRuleMonth, $Out2>
-  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _RecurrenceRuleMonthCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class ScheduledEventUserMapper extends ClassMapperBase<ScheduledEventUser> {
@@ -1733,6 +1389,7 @@ class ScheduledEventUserMapper extends ClassMapperBase<ScheduledEventUser> {
   static const Field<ScheduledEventUser, Snowflake> _f$scheduledEventId = Field(
     'scheduledEventId',
     _$scheduledEventId,
+    key: r'scheduled_event_id',
   );
   static User _$user(ScheduledEventUser v) => v.user;
   static const Field<ScheduledEventUser, User> _f$user = Field('user', _$user);

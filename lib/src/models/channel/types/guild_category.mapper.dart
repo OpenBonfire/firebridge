@@ -7,14 +7,14 @@
 
 part of 'guild_category.dart';
 
-class GuildCategoryMapper extends ClassMapperBase<GuildCategory> {
+class GuildCategoryMapper extends SubClassMapperBase<GuildCategory> {
   GuildCategoryMapper._();
 
   static GuildCategoryMapper? _instance;
   static GuildCategoryMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildCategoryMapper._());
-      ChannelMapper.ensureInitialized();
+      ChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       PermissionOverwriteMapper.ensureInitialized();
     }
@@ -30,15 +30,21 @@ class GuildCategoryMapper extends ClassMapperBase<GuildCategory> {
   static const Field<GuildCategory, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
+    key: r'guild_id',
   );
   static bool _$isNsfw(GuildCategory v) => v.isNsfw;
-  static const Field<GuildCategory, bool> _f$isNsfw = Field('isNsfw', _$isNsfw);
+  static const Field<GuildCategory, bool> _f$isNsfw = Field(
+    'isNsfw',
+    _$isNsfw,
+    key: r'is_nsfw',
+  );
   static String _$name(GuildCategory v) => v.name;
   static const Field<GuildCategory, String> _f$name = Field('name', _$name);
   static Snowflake? _$parentId(GuildCategory v) => v.parentId;
   static const Field<GuildCategory, Snowflake> _f$parentId = Field(
     'parentId',
     _$parentId,
+    key: r'parent_id',
   );
   static List<PermissionOverwrite> _$permissionOverwrites(GuildCategory v) =>
       v.permissionOverwrites;
@@ -46,6 +52,7 @@ class GuildCategoryMapper extends ClassMapperBase<GuildCategory> {
   _f$permissionOverwrites = Field(
     'permissionOverwrites',
     _$permissionOverwrites,
+    key: r'permission_overwrites',
   );
   static int _$position(GuildCategory v) => v.position;
   static const Field<GuildCategory, int> _f$position = Field(
@@ -63,6 +70,13 @@ class GuildCategoryMapper extends ClassMapperBase<GuildCategory> {
     #permissionOverwrites: _f$permissionOverwrites,
     #position: _f$position,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 4;
+  @override
+  late final ClassMapperBase superMapper = ChannelMapper.ensureInitialized();
 
   static GuildCategory _instantiate(DecodingData data) {
     return GuildCategory(

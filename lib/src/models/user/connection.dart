@@ -1,12 +1,15 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/guild/integration.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+
+part 'connection.mapper.dart';
 
 /// A link to an account on a service other than Discord.
 ///
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/user#connection-object
-class Connection with ToStringHelper {
+@MappableClass()
+class Connection with ToStringHelper, ConnectionMappable {
   /// The ID of the account on the target service.
   final String id;
 
@@ -105,13 +108,5 @@ enum ConnectionType {
 ///
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/user#connection-object-visibility-types
-final class ConnectionVisibility extends EnumLike<int, ConnectionVisibility> {
-  static const none = ConnectionVisibility(0);
-  static const everyone = ConnectionVisibility(1);
-
-  /// @nodoc
-  const ConnectionVisibility(super.value);
-
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  ConnectionVisibility.parse(int value) : this(value);
-}
+@MappableEnum(mode: ValuesMode.indexed)
+enum ConnectionVisibility { none, everyone }

@@ -81,6 +81,7 @@ class PartialThreadMemberMapper extends ClassMapperBase<PartialThreadMember> {
   static const Field<PartialThreadMember, DateTime> _f$joinTimestamp = Field(
     'joinTimestamp',
     _$joinTimestamp,
+    key: r'join_timestamp',
   );
   static Flags<Never> _$flags(PartialThreadMember v) => v.flags;
   static const Field<PartialThreadMember, Flags<Never>> _f$flags = Field(
@@ -229,6 +230,7 @@ class ThreadMemberMapper extends ClassMapperBase<ThreadMember> {
   static const Field<ThreadMember, DateTime> _f$joinTimestamp = Field(
     'joinTimestamp',
     _$joinTimestamp,
+    key: r'join_timestamp',
   );
   static Flags<Never> _$flags(ThreadMember v) => v.flags;
   static const Field<ThreadMember, Flags<Never>> _f$flags = Field(
@@ -239,11 +241,13 @@ class ThreadMemberMapper extends ClassMapperBase<ThreadMember> {
   static const Field<ThreadMember, Snowflake> _f$threadId = Field(
     'threadId',
     _$threadId,
+    key: r'thread_id',
   );
   static Snowflake _$userId(ThreadMember v) => v.userId;
   static const Field<ThreadMember, Snowflake> _f$userId = Field(
     'userId',
     _$userId,
+    key: r'user_id',
   );
   static Member? _$member(ThreadMember v) => v.member;
   static const Field<ThreadMember, Member> _f$member = Field(

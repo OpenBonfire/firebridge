@@ -2,7 +2,6 @@ import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/models/user/user.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'integration.mapper.dart';
@@ -19,7 +18,8 @@ class PartialIntegration extends ManagedSnowflakeEntity<Integration>
 /// {@template integration}
 /// An integration in a [Guild].
 /// {@endtemplate}
-class Integration extends PartialIntegration {
+@MappableClass()
+class Integration extends PartialIntegration with IntegrationMappable {
   /// The name of this integration.
   final String name;
 
@@ -88,23 +88,14 @@ class Integration extends PartialIntegration {
 }
 
 /// The behavior of an integration when a member's subscription expires.
-final class IntegrationExpireBehavior
-    extends EnumLike<int, IntegrationExpireBehavior> {
-  static const removeRole = IntegrationExpireBehavior(0);
-  static const kick = IntegrationExpireBehavior(1);
-
-  /// @nodoc
-  const IntegrationExpireBehavior(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  IntegrationExpireBehavior.parse(int value) : this(value);
-}
+@MappableEnum(mode: ValuesMode.indexed)
+enum IntegrationExpireBehavior { removeRole, kick }
 
 /// {@template integration_account}
 /// Information about an integration's account.
 /// {@endtemplate}
-class IntegrationAccount with ToStringHelper {
+@MappableClass()
+class IntegrationAccount with ToStringHelper, IntegrationAccountMappable {
   /// The ID of this account.
   final Snowflake id;
 
@@ -119,7 +110,9 @@ class IntegrationAccount with ToStringHelper {
 /// {@template integration_application}
 /// Information about an integration's application.
 /// {@endtemplate}
-class IntegrationApplication with ToStringHelper {
+@MappableClass()
+class IntegrationApplication
+    with ToStringHelper, IntegrationApplicationMappable {
   /// The ID of this application.
   final Snowflake id;
 

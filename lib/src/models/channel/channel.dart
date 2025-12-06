@@ -1,7 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/flags.dart';
 
 part 'channel.mapper.dart';
@@ -29,54 +28,22 @@ abstract class Channel extends PartialChannel with ChannelMappable {
 }
 
 /// The type of a channel.
-@MappableClass()
-final class ChannelType extends EnumLike<int, ChannelType>
-    with ChannelTypeMappable {
+@MappableEnum(mode: ValuesMode.indexed)
+enum ChannelType {
   /// A text channel in a [Guild].
-  static const guildText = ChannelType(0);
-
-  /// A DM channel with a single other recipient.
-  static const dm = ChannelType(1);
-
-  /// A voice channel in a [Guild].
-  static const guildVoice = ChannelType(2);
-
-  /// A DM channel with multiple recipients.
-  static const groupDm = ChannelType(3);
-
-  /// A category in a [Guild].
-  static const guildCategory = ChannelType(4);
-
-  /// An announcement channel in a [Guild].
-  static const guildAnnouncement = ChannelType(5);
-
-  /// A [Thread] in an announcement channel.
-  static const announcementThread = ChannelType(10);
-
-  /// A public thread.
-  static const publicThread = ChannelType(11);
-
-  /// A private thread.
-  static const privateThread = ChannelType(12);
-
-  /// A stage channel in a [Guild].
-  static const guildStageVoice = ChannelType(13);
-
-  /// A [Guild] directory.
-  static const guildDirectory = ChannelType(14);
-
-  /// A forum channel in a [Guild].
-  static const guildForum = ChannelType(15);
-
-  /// A media channel in a [Guild].
-  static const guildMedia = ChannelType(16);
-
-  /// @nodoc
-  const ChannelType(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  ChannelType.parse(int value) : this(value);
+  guildText,
+  dm,
+  guildVoice,
+  groupDm,
+  guildCategory,
+  guildAnnouncement,
+  announcementThread,
+  publicThread,
+  privateThread,
+  guildStageVoice,
+  guildDirectory,
+  guildForum,
+  guildMedia
 }
 
 /// A set of flags applied to channels.

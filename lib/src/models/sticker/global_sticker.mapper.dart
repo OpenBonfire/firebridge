@@ -176,6 +176,7 @@ class GlobalStickerMapper extends ClassMapperBase<GlobalSticker> {
   static const Field<GlobalSticker, StickerFormatType> _f$formatType = Field(
     'formatType',
     _$formatType,
+    key: r'format_type',
   );
   static bool _$available(GlobalSticker v) => v.available;
   static const Field<GlobalSticker, bool> _f$available = Field(
@@ -186,6 +187,7 @@ class GlobalStickerMapper extends ClassMapperBase<GlobalSticker> {
   static const Field<GlobalSticker, Snowflake> _f$packId = Field(
     'packId',
     _$packId,
+    key: r'pack_id',
   );
   static PartialUser? _$user(GlobalSticker v) => v.user;
   static const Field<GlobalSticker, PartialUser> _f$user = Field(
@@ -196,6 +198,7 @@ class GlobalStickerMapper extends ClassMapperBase<GlobalSticker> {
   static const Field<GlobalSticker, int> _f$sortValue = Field(
     'sortValue',
     _$sortValue,
+    key: r'sort_value',
   );
 
   @override

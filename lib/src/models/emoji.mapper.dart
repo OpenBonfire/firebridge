@@ -331,21 +331,25 @@ class ApplicationEmojiMapper extends ClassMapperBase<ApplicationEmoji> {
   static const Field<ApplicationEmoji, bool> _f$requiresColons = Field(
     'requiresColons',
     _$requiresColons,
+    key: r'requires_colons',
   );
   static bool _$isManaged(ApplicationEmoji v) => v.isManaged;
   static const Field<ApplicationEmoji, bool> _f$isManaged = Field(
     'isManaged',
     _$isManaged,
+    key: r'is_managed',
   );
   static bool _$isAnimated(ApplicationEmoji v) => v.isAnimated;
   static const Field<ApplicationEmoji, bool> _f$isAnimated = Field(
     'isAnimated',
     _$isAnimated,
+    key: r'is_animated',
   );
   static bool _$isAvailable(ApplicationEmoji v) => v.isAvailable;
   static const Field<ApplicationEmoji, bool> _f$isAvailable = Field(
     'isAvailable',
     _$isAvailable,
+    key: r'is_available',
   );
 
   @override
@@ -527,6 +531,7 @@ class GuildEmojiMapper extends ClassMapperBase<GuildEmoji> {
   static const Field<GuildEmoji, List<Snowflake>> _f$roleIds = Field(
     'roleIds',
     _$roleIds,
+    key: r'role_ids',
   );
   static User? _$user(GuildEmoji v) => v.user;
   static const Field<GuildEmoji, User> _f$user = Field('user', _$user);
@@ -534,21 +539,25 @@ class GuildEmojiMapper extends ClassMapperBase<GuildEmoji> {
   static const Field<GuildEmoji, bool> _f$requiresColons = Field(
     'requiresColons',
     _$requiresColons,
+    key: r'requires_colons',
   );
   static bool? _$isManaged(GuildEmoji v) => v.isManaged;
   static const Field<GuildEmoji, bool> _f$isManaged = Field(
     'isManaged',
     _$isManaged,
+    key: r'is_managed',
   );
   static bool? _$isAnimated(GuildEmoji v) => v.isAnimated;
   static const Field<GuildEmoji, bool> _f$isAnimated = Field(
     'isAnimated',
     _$isAnimated,
+    key: r'is_animated',
   );
   static bool? _$isAvailable(GuildEmoji v) => v.isAvailable;
   static const Field<GuildEmoji, bool> _f$isAvailable = Field(
     'isAvailable',
     _$isAvailable,
+    key: r'is_available',
   );
 
   @override

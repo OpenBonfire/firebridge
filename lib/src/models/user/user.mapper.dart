@@ -155,30 +155,43 @@ class UserMapper extends ClassMapperBase<User> {
   static const Field<User, String> _f$globalName = Field(
     'globalName',
     _$globalName,
+    key: r'global_name',
   );
   static String? _$avatarHash(User v) => v.avatarHash;
   static const Field<User, String> _f$avatarHash = Field(
     'avatarHash',
     _$avatarHash,
+    key: r'avatar_hash',
   );
   static bool _$isBot(User v) => v.isBot;
-  static const Field<User, bool> _f$isBot = Field('isBot', _$isBot);
+  static const Field<User, bool> _f$isBot = Field(
+    'isBot',
+    _$isBot,
+    key: r'is_bot',
+  );
   static bool _$isSystem(User v) => v.isSystem;
-  static const Field<User, bool> _f$isSystem = Field('isSystem', _$isSystem);
+  static const Field<User, bool> _f$isSystem = Field(
+    'isSystem',
+    _$isSystem,
+    key: r'is_system',
+  );
   static bool _$hasMfaEnabled(User v) => v.hasMfaEnabled;
   static const Field<User, bool> _f$hasMfaEnabled = Field(
     'hasMfaEnabled',
     _$hasMfaEnabled,
+    key: r'has_mfa_enabled',
   );
   static String? _$bannerHash(User v) => v.bannerHash;
   static const Field<User, String> _f$bannerHash = Field(
     'bannerHash',
     _$bannerHash,
+    key: r'banner_hash',
   );
   static DiscordColor? _$accentColor(User v) => v.accentColor;
   static const Field<User, DiscordColor> _f$accentColor = Field(
     'accentColor',
     _$accentColor,
+    key: r'accent_color',
   );
   static Locale? _$locale(User v) => v.locale;
   static const Field<User, Locale> _f$locale = Field('locale', _$locale);
@@ -188,25 +201,33 @@ class UserMapper extends ClassMapperBase<User> {
   static const Field<User, NitroType> _f$nitroType = Field(
     'nitroType',
     _$nitroType,
+    key: r'nitro_type',
   );
   static UserFlags? _$publicFlags(User v) => v.publicFlags;
   static const Field<User, UserFlags> _f$publicFlags = Field(
     'publicFlags',
     _$publicFlags,
+    key: r'public_flags',
   );
   static String? _$avatarDecorationHash(User v) => v.avatarDecorationHash;
   static const Field<User, String> _f$avatarDecorationHash = Field(
     'avatarDecorationHash',
     _$avatarDecorationHash,
+    key: r'avatar_decoration_hash',
   );
   static AvatarDecorationData? _$avatarDecorationData(User v) =>
       v.avatarDecorationData;
   static const Field<User, AvatarDecorationData> _f$avatarDecorationData =
-      Field('avatarDecorationData', _$avatarDecorationData);
+      Field(
+        'avatarDecorationData',
+        _$avatarDecorationData,
+        key: r'avatar_decoration_data',
+      );
   static UserPrimaryGuild? _$primaryGuild(User v) => v.primaryGuild;
   static const Field<User, UserPrimaryGuild> _f$primaryGuild = Field(
     'primaryGuild',
     _$primaryGuild,
+    key: r'primary_guild',
   );
 
   @override

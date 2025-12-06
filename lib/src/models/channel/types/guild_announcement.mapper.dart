@@ -8,7 +8,7 @@
 part of 'guild_announcement.dart';
 
 class GuildAnnouncementChannelMapper
-    extends ClassMapperBase<GuildAnnouncementChannel> {
+    extends SubClassMapperBase<GuildAnnouncementChannel> {
   GuildAnnouncementChannelMapper._();
 
   static GuildAnnouncementChannelMapper? _instance;
@@ -17,7 +17,7 @@ class GuildAnnouncementChannelMapper
       MapperContainer.globals.use(
         _instance = GuildAnnouncementChannelMapper._(),
       );
-      TextChannelMapper.ensureInitialized();
+      TextChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       PermissionOverwriteMapper.ensureInitialized();
     }
@@ -43,6 +43,7 @@ class GuildAnnouncementChannelMapper
   _f$defaultAutoArchiveDuration = Field(
     'defaultAutoArchiveDuration',
     _$defaultAutoArchiveDuration,
+    key: r'default_auto_archive_duration',
   );
   static Duration? _$defaultThreadRateLimitPerUser(
     GuildAnnouncementChannel v,
@@ -51,25 +52,28 @@ class GuildAnnouncementChannelMapper
   _f$defaultThreadRateLimitPerUser = Field(
     'defaultThreadRateLimitPerUser',
     _$defaultThreadRateLimitPerUser,
+    key: r'default_thread_rate_limit_per_user',
   );
   static Snowflake _$guildId(GuildAnnouncementChannel v) => v.guildId;
   static const Field<GuildAnnouncementChannel, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
+    key: r'guild_id',
   );
   static bool _$isNsfw(GuildAnnouncementChannel v) => v.isNsfw;
   static const Field<GuildAnnouncementChannel, bool> _f$isNsfw = Field(
     'isNsfw',
     _$isNsfw,
+    key: r'is_nsfw',
   );
   static Snowflake? _$lastMessageId(GuildAnnouncementChannel v) =>
       v.lastMessageId;
   static const Field<GuildAnnouncementChannel, Snowflake> _f$lastMessageId =
-      Field('lastMessageId', _$lastMessageId);
+      Field('lastMessageId', _$lastMessageId, key: r'last_message_id');
   static DateTime? _$lastPinTimestamp(GuildAnnouncementChannel v) =>
       v.lastPinTimestamp;
   static const Field<GuildAnnouncementChannel, DateTime> _f$lastPinTimestamp =
-      Field('lastPinTimestamp', _$lastPinTimestamp);
+      Field('lastPinTimestamp', _$lastPinTimestamp, key: r'last_pin_timestamp');
   static String _$name(GuildAnnouncementChannel v) => v.name;
   static const Field<GuildAnnouncementChannel, String> _f$name = Field(
     'name',
@@ -79,6 +83,7 @@ class GuildAnnouncementChannelMapper
   static const Field<GuildAnnouncementChannel, Snowflake> _f$parentId = Field(
     'parentId',
     _$parentId,
+    key: r'parent_id',
   );
   static List<PermissionOverwrite> _$permissionOverwrites(
     GuildAnnouncementChannel v,
@@ -87,6 +92,7 @@ class GuildAnnouncementChannelMapper
   _f$permissionOverwrites = Field(
     'permissionOverwrites',
     _$permissionOverwrites,
+    key: r'permission_overwrites',
   );
   static int _$position(GuildAnnouncementChannel v) => v.position;
   static const Field<GuildAnnouncementChannel, int> _f$position = Field(
@@ -96,7 +102,11 @@ class GuildAnnouncementChannelMapper
   static Duration? _$rateLimitPerUser(GuildAnnouncementChannel v) =>
       v.rateLimitPerUser;
   static const Field<GuildAnnouncementChannel, Duration> _f$rateLimitPerUser =
-      Field('rateLimitPerUser', _$rateLimitPerUser);
+      Field(
+        'rateLimitPerUser',
+        _$rateLimitPerUser,
+        key: r'rate_limit_per_user',
+      );
 
   @override
   final MappableFields<GuildAnnouncementChannel> fields = const {
@@ -114,6 +124,14 @@ class GuildAnnouncementChannelMapper
     #position: _f$position,
     #rateLimitPerUser: _f$rateLimitPerUser,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 5;
+  @override
+  late final ClassMapperBase superMapper =
+      TextChannelMapper.ensureInitialized();
 
   static GuildAnnouncementChannel _instantiate(DecodingData data) {
     return GuildAnnouncementChannel(

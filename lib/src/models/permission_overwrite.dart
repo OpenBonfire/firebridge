@@ -1,7 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/permissions.dart';
 import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'permission_overwrite.mapper.dart';
@@ -47,18 +46,5 @@ class PermissionOverwrite with ToStringHelper, PermissionOverwriteMappable {
 }
 
 /// The type of a permission overwrite.
-final class PermissionOverwriteType
-    extends EnumLike<int, PermissionOverwriteType> {
-  /// The overwrite applies to a [Role]'s permissions.
-  static const role = PermissionOverwriteType(0);
-
-  /// The overwrite applies to a [Member]'s permissions.
-  static const member = PermissionOverwriteType(1);
-
-  /// @nodoc
-  const PermissionOverwriteType(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  PermissionOverwriteType.parse(int value) : this(value);
-}
+@MappableEnum(mode: ValuesMode.indexed)
+enum PermissionOverwriteType { role, member }

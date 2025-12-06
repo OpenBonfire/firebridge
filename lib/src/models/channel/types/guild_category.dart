@@ -10,7 +10,7 @@ part 'guild_category.mapper.dart';
 /// {@template guild_category}
 /// A category for organizing other [Channel]s in a [Guild].
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: 4)
 class GuildCategory extends Channel
     with GuildCategoryMappable
     implements GuildChannel {

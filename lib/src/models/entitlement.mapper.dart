@@ -7,6 +7,76 @@
 
 part of 'entitlement.dart';
 
+class EntitlementTypeMapper extends EnumMapper<EntitlementType> {
+  EntitlementTypeMapper._();
+
+  static EntitlementTypeMapper? _instance;
+  static EntitlementTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = EntitlementTypeMapper._());
+    }
+    return _instance!;
+  }
+
+  static EntitlementType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  EntitlementType decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return EntitlementType.purchase;
+      case 1:
+        return EntitlementType.premiumSubscription;
+      case 2:
+        return EntitlementType.developerGift;
+      case 3:
+        return EntitlementType.testModePurchase;
+      case 4:
+        return EntitlementType.freePurchase;
+      case 5:
+        return EntitlementType.userGift;
+      case 6:
+        return EntitlementType.premiumPurchase;
+      case 7:
+        return EntitlementType.applicationSubscription;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(EntitlementType self) {
+    switch (self) {
+      case EntitlementType.purchase:
+        return 0;
+      case EntitlementType.premiumSubscription:
+        return 1;
+      case EntitlementType.developerGift:
+        return 2;
+      case EntitlementType.testModePurchase:
+        return 3;
+      case EntitlementType.freePurchase:
+        return 4;
+      case EntitlementType.userGift:
+        return 5;
+      case EntitlementType.premiumPurchase:
+        return 6;
+      case EntitlementType.applicationSubscription:
+        return 7;
+    }
+  }
+}
+
+extension EntitlementTypeMapperExtension on EntitlementType {
+  dynamic toValue() {
+    EntitlementTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<EntitlementType>(this);
+  }
+}
+
 class PartialEntitlementMapper extends ClassMapperBase<PartialEntitlement> {
   PartialEntitlementMapper._();
 
@@ -158,21 +228,28 @@ class EntitlementMapper extends ClassMapperBase<Entitlement> {
   static Snowflake _$id(Entitlement v) => v.id;
   static const Field<Entitlement, Snowflake> _f$id = Field('id', _$id);
   static Snowflake _$skuId(Entitlement v) => v.skuId;
-  static const Field<Entitlement, Snowflake> _f$skuId = Field('skuId', _$skuId);
+  static const Field<Entitlement, Snowflake> _f$skuId = Field(
+    'skuId',
+    _$skuId,
+    key: r'sku_id',
+  );
   static Snowflake? _$userId(Entitlement v) => v.userId;
   static const Field<Entitlement, Snowflake> _f$userId = Field(
     'userId',
     _$userId,
+    key: r'user_id',
   );
   static Snowflake? _$guildId(Entitlement v) => v.guildId;
   static const Field<Entitlement, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
+    key: r'guild_id',
   );
   static Snowflake _$applicationId(Entitlement v) => v.applicationId;
   static const Field<Entitlement, Snowflake> _f$applicationId = Field(
     'applicationId',
     _$applicationId,
+    key: r'application_id',
   );
   static EntitlementType _$type(Entitlement v) => v.type;
   static const Field<Entitlement, EntitlementType> _f$type = Field(
@@ -183,21 +260,25 @@ class EntitlementMapper extends ClassMapperBase<Entitlement> {
   static const Field<Entitlement, bool> _f$isConsumed = Field(
     'isConsumed',
     _$isConsumed,
+    key: r'is_consumed',
   );
   static bool _$isDeleted(Entitlement v) => v.isDeleted;
   static const Field<Entitlement, bool> _f$isDeleted = Field(
     'isDeleted',
     _$isDeleted,
+    key: r'is_deleted',
   );
   static DateTime? _$startsAt(Entitlement v) => v.startsAt;
   static const Field<Entitlement, DateTime> _f$startsAt = Field(
     'startsAt',
     _$startsAt,
+    key: r'starts_at',
   );
   static DateTime? _$endsAt(Entitlement v) => v.endsAt;
   static const Field<Entitlement, DateTime> _f$endsAt = Field(
     'endsAt',
     _$endsAt,
+    key: r'ends_at',
   );
 
   @override
@@ -295,7 +376,6 @@ abstract class EntitlementCopyWith<$R, $In extends Entitlement, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get userId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get applicationId;
-  EntitlementTypeCopyWith<$R, EntitlementType, EntitlementType> get type;
   @override
   $R call({
     Snowflake? id,
@@ -335,9 +415,6 @@ class _EntitlementCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get applicationId =>
       $value.applicationId.copyWith.$chain((v) => call(applicationId: v));
-  @override
-  EntitlementTypeCopyWith<$R, EntitlementType, EntitlementType> get type =>
-      $value.type.copyWith.$chain((v) => call(type: v));
   @override
   $R call({
     Snowflake? id,
@@ -382,120 +459,5 @@ class _EntitlementCopyWithImpl<$R, $Out>
   EntitlementCopyWith<$R2, Entitlement, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   ) => _EntitlementCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
-class EntitlementTypeMapper extends ClassMapperBase<EntitlementType> {
-  EntitlementTypeMapper._();
-
-  static EntitlementTypeMapper? _instance;
-  static EntitlementTypeMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = EntitlementTypeMapper._());
-      EnumLikeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'EntitlementType';
-
-  static int _$value(EntitlementType v) => v.value;
-  static const Field<EntitlementType, int> _f$value = Field('value', _$value);
-
-  @override
-  final MappableFields<EntitlementType> fields = const {#value: _f$value};
-
-  static EntitlementType _instantiate(DecodingData data) {
-    return EntitlementType(data.dec(_f$value));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static EntitlementType fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<EntitlementType>(map);
-  }
-
-  static EntitlementType fromJson(String json) {
-    return ensureInitialized().decodeJson<EntitlementType>(json);
-  }
-}
-
-mixin EntitlementTypeMappable {
-  String toJson() {
-    return EntitlementTypeMapper.ensureInitialized()
-        .encodeJson<EntitlementType>(this as EntitlementType);
-  }
-
-  Map<String, dynamic> toMap() {
-    return EntitlementTypeMapper.ensureInitialized().encodeMap<EntitlementType>(
-      this as EntitlementType,
-    );
-  }
-
-  EntitlementTypeCopyWith<EntitlementType, EntitlementType, EntitlementType>
-  get copyWith =>
-      _EntitlementTypeCopyWithImpl<EntitlementType, EntitlementType>(
-        this as EntitlementType,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return EntitlementTypeMapper.ensureInitialized().stringifyValue(
-      this as EntitlementType,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return EntitlementTypeMapper.ensureInitialized().equalsValue(
-      this as EntitlementType,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return EntitlementTypeMapper.ensureInitialized().hashValue(
-      this as EntitlementType,
-    );
-  }
-}
-
-extension EntitlementTypeValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, EntitlementType, $Out> {
-  EntitlementTypeCopyWith<$R, EntitlementType, $Out> get $asEntitlementType =>
-      $base.as((v, t, t2) => _EntitlementTypeCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class EntitlementTypeCopyWith<$R, $In extends EntitlementType, $Out>
-    implements EnumLikeCopyWith<$R, $In, $Out, int, EntitlementType> {
-  @override
-  $R call({int? value});
-  EntitlementTypeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _EntitlementTypeCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, EntitlementType, $Out>
-    implements EntitlementTypeCopyWith<$R, EntitlementType, $Out> {
-  _EntitlementTypeCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<EntitlementType> $mapper =
-      EntitlementTypeMapper.ensureInitialized();
-  @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
-  @override
-  EntitlementType $make(CopyWithData data) =>
-      EntitlementType(data.get(#value, or: $value.value));
-
-  @override
-  EntitlementTypeCopyWith<$R2, EntitlementType, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _EntitlementTypeCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 

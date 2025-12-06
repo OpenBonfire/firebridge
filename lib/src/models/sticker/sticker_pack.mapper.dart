@@ -26,11 +26,6 @@ class StickerPackMapper extends ClassMapperBase<StickerPack> {
 
   static Snowflake _$id(StickerPack v) => v.id;
   static const Field<StickerPack, Snowflake> _f$id = Field('id', _$id);
-  static GlobalStickerManager _$manager(StickerPack v) => v.manager;
-  static const Field<StickerPack, GlobalStickerManager> _f$manager = Field(
-    'manager',
-    _$manager,
-  );
   static List<GlobalSticker> _$stickers(StickerPack v) => v.stickers;
   static const Field<StickerPack, List<GlobalSticker>> _f$stickers = Field(
     'stickers',
@@ -39,11 +34,16 @@ class StickerPackMapper extends ClassMapperBase<StickerPack> {
   static String _$name(StickerPack v) => v.name;
   static const Field<StickerPack, String> _f$name = Field('name', _$name);
   static Snowflake _$skuId(StickerPack v) => v.skuId;
-  static const Field<StickerPack, Snowflake> _f$skuId = Field('skuId', _$skuId);
+  static const Field<StickerPack, Snowflake> _f$skuId = Field(
+    'skuId',
+    _$skuId,
+    key: r'sku_id',
+  );
   static Snowflake? _$coverStickerId(StickerPack v) => v.coverStickerId;
   static const Field<StickerPack, Snowflake> _f$coverStickerId = Field(
     'coverStickerId',
     _$coverStickerId,
+    key: r'cover_sticker_id',
   );
   static String _$description(StickerPack v) => v.description;
   static const Field<StickerPack, String> _f$description = Field(
@@ -54,12 +54,12 @@ class StickerPackMapper extends ClassMapperBase<StickerPack> {
   static const Field<StickerPack, Snowflake> _f$bannerAssetId = Field(
     'bannerAssetId',
     _$bannerAssetId,
+    key: r'banner_asset_id',
   );
 
   @override
   final MappableFields<StickerPack> fields = const {
     #id: _f$id,
-    #manager: _f$manager,
     #stickers: _f$stickers,
     #name: _f$name,
     #skuId: _f$skuId,
@@ -71,7 +71,6 @@ class StickerPackMapper extends ClassMapperBase<StickerPack> {
   static StickerPack _instantiate(DecodingData data) {
     return StickerPack(
       id: data.dec(_f$id),
-      manager: data.dec(_f$manager),
       stickers: data.dec(_f$stickers),
       name: data.dec(_f$name),
       skuId: data.dec(_f$skuId),
@@ -155,7 +154,6 @@ abstract class StickerPackCopyWith<$R, $In extends StickerPack, $Out>
   @override
   $R call({
     Snowflake? id,
-    GlobalStickerManager? manager,
     List<GlobalSticker>? stickers,
     String? name,
     Snowflake? skuId,
@@ -200,7 +198,6 @@ class _StickerPackCopyWithImpl<$R, $Out>
   @override
   $R call({
     Snowflake? id,
-    GlobalStickerManager? manager,
     List<GlobalSticker>? stickers,
     String? name,
     Snowflake? skuId,
@@ -210,7 +207,6 @@ class _StickerPackCopyWithImpl<$R, $Out>
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
-      if (manager != null) #manager: manager,
       if (stickers != null) #stickers: stickers,
       if (name != null) #name: name,
       if (skuId != null) #skuId: skuId,
@@ -222,7 +218,6 @@ class _StickerPackCopyWithImpl<$R, $Out>
   @override
   StickerPack $make(CopyWithData data) => StickerPack(
     id: data.get(#id, or: $value.id),
-    manager: data.get(#manager, or: $value.manager),
     stickers: data.get(#stickers, or: $value.stickers),
     name: data.get(#name, or: $value.name),
     skuId: data.get(#skuId, or: $value.skuId),

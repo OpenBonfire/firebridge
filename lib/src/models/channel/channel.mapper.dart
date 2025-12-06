@@ -7,6 +7,96 @@
 
 part of 'channel.dart';
 
+class ChannelTypeMapper extends EnumMapper<ChannelType> {
+  ChannelTypeMapper._();
+
+  static ChannelTypeMapper? _instance;
+  static ChannelTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = ChannelTypeMapper._());
+    }
+    return _instance!;
+  }
+
+  static ChannelType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  ChannelType decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return ChannelType.guildText;
+      case 1:
+        return ChannelType.dm;
+      case 2:
+        return ChannelType.guildVoice;
+      case 3:
+        return ChannelType.groupDm;
+      case 4:
+        return ChannelType.guildCategory;
+      case 5:
+        return ChannelType.guildAnnouncement;
+      case 6:
+        return ChannelType.announcementThread;
+      case 7:
+        return ChannelType.publicThread;
+      case 8:
+        return ChannelType.privateThread;
+      case 9:
+        return ChannelType.guildStageVoice;
+      case 10:
+        return ChannelType.guildDirectory;
+      case 11:
+        return ChannelType.guildForum;
+      case 12:
+        return ChannelType.guildMedia;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(ChannelType self) {
+    switch (self) {
+      case ChannelType.guildText:
+        return 0;
+      case ChannelType.dm:
+        return 1;
+      case ChannelType.guildVoice:
+        return 2;
+      case ChannelType.groupDm:
+        return 3;
+      case ChannelType.guildCategory:
+        return 4;
+      case ChannelType.guildAnnouncement:
+        return 5;
+      case ChannelType.announcementThread:
+        return 6;
+      case ChannelType.publicThread:
+        return 7;
+      case ChannelType.privateThread:
+        return 8;
+      case ChannelType.guildStageVoice:
+        return 9;
+      case ChannelType.guildDirectory:
+        return 10;
+      case ChannelType.guildForum:
+        return 11;
+      case ChannelType.guildMedia:
+        return 12;
+    }
+  }
+}
+
+extension ChannelTypeMapperExtension on ChannelType {
+  dynamic toValue() {
+    ChannelTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<ChannelType>(this);
+  }
+}
+
 class PartialChannelMapper extends ClassMapperBase<PartialChannel> {
   PartialChannelMapper._();
 
@@ -180,117 +270,6 @@ abstract class ChannelCopyWith<$R, $In extends Channel, $Out>
   @override
   $R call({Snowflake? id});
   ChannelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
-}
-
-class ChannelTypeMapper extends ClassMapperBase<ChannelType> {
-  ChannelTypeMapper._();
-
-  static ChannelTypeMapper? _instance;
-  static ChannelTypeMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = ChannelTypeMapper._());
-      EnumLikeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'ChannelType';
-
-  static int _$value(ChannelType v) => v.value;
-  static const Field<ChannelType, int> _f$value = Field('value', _$value);
-
-  @override
-  final MappableFields<ChannelType> fields = const {#value: _f$value};
-
-  static ChannelType _instantiate(DecodingData data) {
-    return ChannelType(data.dec(_f$value));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static ChannelType fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<ChannelType>(map);
-  }
-
-  static ChannelType fromJson(String json) {
-    return ensureInitialized().decodeJson<ChannelType>(json);
-  }
-}
-
-mixin ChannelTypeMappable {
-  String toJson() {
-    return ChannelTypeMapper.ensureInitialized().encodeJson<ChannelType>(
-      this as ChannelType,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return ChannelTypeMapper.ensureInitialized().encodeMap<ChannelType>(
-      this as ChannelType,
-    );
-  }
-
-  ChannelTypeCopyWith<ChannelType, ChannelType, ChannelType> get copyWith =>
-      _ChannelTypeCopyWithImpl<ChannelType, ChannelType>(
-        this as ChannelType,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return ChannelTypeMapper.ensureInitialized().stringifyValue(
-      this as ChannelType,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return ChannelTypeMapper.ensureInitialized().equalsValue(
-      this as ChannelType,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return ChannelTypeMapper.ensureInitialized().hashValue(this as ChannelType);
-  }
-}
-
-extension ChannelTypeValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, ChannelType, $Out> {
-  ChannelTypeCopyWith<$R, ChannelType, $Out> get $asChannelType =>
-      $base.as((v, t, t2) => _ChannelTypeCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class ChannelTypeCopyWith<$R, $In extends ChannelType, $Out>
-    implements EnumLikeCopyWith<$R, $In, $Out, int, ChannelType> {
-  @override
-  $R call({int? value});
-  ChannelTypeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
-}
-
-class _ChannelTypeCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, ChannelType, $Out>
-    implements ChannelTypeCopyWith<$R, ChannelType, $Out> {
-  _ChannelTypeCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<ChannelType> $mapper =
-      ChannelTypeMapper.ensureInitialized();
-  @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
-  @override
-  ChannelType $make(CopyWithData data) =>
-      ChannelType(data.get(#value, or: $value.value));
-
-  @override
-  ChannelTypeCopyWith<$R2, ChannelType, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _ChannelTypeCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class ChannelFlagsMapper extends ClassMapperBase<ChannelFlags> {

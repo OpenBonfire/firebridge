@@ -1,11 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/http/managers/subscription_manager.dart';
-import 'package:nyxx/src/models/entitlement.dart';
 import 'package:nyxx/src/models/sku.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
-import 'package:nyxx/src/models/user/user.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 
 part 'subscription.mapper.dart';
 
@@ -13,15 +9,13 @@ part 'subscription.mapper.dart';
 @MappableClass()
 class PartialSubscription extends ManagedSnowflakeEntity<Subscription>
     with PartialSubscriptionMappable {
-  @override
-  final SubscriptionManager manager;
-
   /// @nodoc
-  PartialSubscription({required this.manager, required super.id});
+  PartialSubscription({required super.id});
 }
 
 /// A subscription to an [Sku].
-class Subscription extends PartialSubscription {
+@MappableClass()
+class Subscription extends PartialSubscription with SubscriptionMappable {
   /// The ID of the user this subscription is for.
   final Snowflake userId;
 
@@ -50,7 +44,6 @@ class Subscription extends PartialSubscription {
 
   /// @nodoc
   Subscription({
-    required super.manager,
     required super.id,
     required this.userId,
     required this.skuIds,
@@ -61,29 +54,8 @@ class Subscription extends PartialSubscription {
     required this.canceledAt,
     required this.countryCode,
   });
-
-  /// The user this subscription is for.
-  PartialUser get user => manager.client.users[userId];
-
-  /// The SKUs this subscription is for.
-  List<PartialSku> get skus => [
-        for (final skuId in skuIds)
-          manager.client.applications[manager.applicationId].skus[skuId],
-      ];
-
-  /// The entitlements this subscription grants.
-  List<PartialEntitlement> get entitlements => [
-        for (final entitlementId in entitlementIds)
-          manager.client.applications[manager.applicationId]
-              .entitlements[entitlementId],
-      ];
 }
 
 /// The status of a [Subscription].
-final class SubscriptionStatus extends EnumLike<int, SubscriptionStatus> {
-  static const active = SubscriptionStatus(0);
-  static const ending = SubscriptionStatus(1);
-  static const inactive = SubscriptionStatus(2);
-
-  const SubscriptionStatus(super.value);
-}
+@MappableEnum()
+enum SubscriptionStatus { active, ending, inactive }

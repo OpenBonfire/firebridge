@@ -1,4 +1,7 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+
+part 'voice_region.mapper.dart';
 
 /// {@template voice_region}
 /// A voice region.
@@ -6,7 +9,8 @@ import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/voice#voice-region-object
 /// {@endtemplate}
-class VoiceRegion with ToStringHelper {
+@MappableClass()
+class VoiceRegion with ToStringHelper, VoiceRegionMappable {
   /// This region's ID.
   final String id;
 

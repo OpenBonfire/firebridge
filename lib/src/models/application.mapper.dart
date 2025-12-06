@@ -7,6 +7,126 @@
 
 part of 'application.dart';
 
+class ApplicationIntegrationTypeMapper
+    extends EnumMapper<ApplicationIntegrationType> {
+  ApplicationIntegrationTypeMapper._();
+
+  static ApplicationIntegrationTypeMapper? _instance;
+  static ApplicationIntegrationTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(
+        _instance = ApplicationIntegrationTypeMapper._(),
+      );
+    }
+    return _instance!;
+  }
+
+  static ApplicationIntegrationType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  ApplicationIntegrationType decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return ApplicationIntegrationType.guildInstall;
+      case 1:
+        return ApplicationIntegrationType.userInstall;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(ApplicationIntegrationType self) {
+    switch (self) {
+      case ApplicationIntegrationType.guildInstall:
+        return 0;
+      case ApplicationIntegrationType.userInstall:
+        return 1;
+    }
+  }
+}
+
+extension ApplicationIntegrationTypeMapperExtension
+    on ApplicationIntegrationType {
+  dynamic toValue() {
+    ApplicationIntegrationTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<ApplicationIntegrationType>(this);
+  }
+}
+
+class ConnectionMetadataTypeMapper extends EnumMapper<ConnectionMetadataType> {
+  ConnectionMetadataTypeMapper._();
+
+  static ConnectionMetadataTypeMapper? _instance;
+  static ConnectionMetadataTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = ConnectionMetadataTypeMapper._());
+    }
+    return _instance!;
+  }
+
+  static ConnectionMetadataType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  ConnectionMetadataType decode(dynamic value) {
+    switch (value) {
+      case 1:
+        return ConnectionMetadataType.integerLessThanOrEqual;
+      case 2:
+        return ConnectionMetadataType.integerGreaterThanOrEqual;
+      case 3:
+        return ConnectionMetadataType.integerEqual;
+      case 4:
+        return ConnectionMetadataType.integerNotEqual;
+      case 5:
+        return ConnectionMetadataType.dateTimeLessThanOrEqual;
+      case 6:
+        return ConnectionMetadataType.dateTimeGreaterThanOrEqual;
+      case 7:
+        return ConnectionMetadataType.booleanEqual;
+      case 8:
+        return ConnectionMetadataType.booleanNotEqual;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(ConnectionMetadataType self) {
+    switch (self) {
+      case ConnectionMetadataType.integerLessThanOrEqual:
+        return 1;
+      case ConnectionMetadataType.integerGreaterThanOrEqual:
+        return 2;
+      case ConnectionMetadataType.integerEqual:
+        return 3;
+      case ConnectionMetadataType.integerNotEqual:
+        return 4;
+      case ConnectionMetadataType.dateTimeLessThanOrEqual:
+        return 5;
+      case ConnectionMetadataType.dateTimeGreaterThanOrEqual:
+        return 6;
+      case ConnectionMetadataType.booleanEqual:
+        return 7;
+      case ConnectionMetadataType.booleanNotEqual:
+        return 8;
+    }
+  }
+}
+
+extension ConnectionMetadataTypeMapperExtension on ConnectionMetadataType {
+  dynamic toValue() {
+    ConnectionMetadataTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<ConnectionMetadataType>(this);
+  }
+}
+
 class PartialApplicationMapper extends ClassMapperBase<PartialApplication> {
   PartialApplicationMapper._();
 
@@ -178,6 +298,7 @@ class ApplicationIntegrationTypeConfigurationMapper
   _f$oauth2InstallParameters = Field(
     'oauth2InstallParameters',
     _$oauth2InstallParameters,
+    key: r'oauth2install_parameters',
   );
 
   @override
@@ -326,5 +447,120 @@ class _ApplicationIntegrationTypeConfigurationCopyWithImpl<$R, $Out>
         $cast,
         t,
       );
+}
+
+class ApplicationFlagsMapper extends ClassMapperBase<ApplicationFlags> {
+  ApplicationFlagsMapper._();
+
+  static ApplicationFlagsMapper? _instance;
+  static ApplicationFlagsMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = ApplicationFlagsMapper._());
+      FlagsMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'ApplicationFlags';
+
+  static int _$value(ApplicationFlags v) => v.value;
+  static const Field<ApplicationFlags, int> _f$value = Field('value', _$value);
+
+  @override
+  final MappableFields<ApplicationFlags> fields = const {#value: _f$value};
+
+  static ApplicationFlags _instantiate(DecodingData data) {
+    return ApplicationFlags(data.dec(_f$value));
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static ApplicationFlags fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<ApplicationFlags>(map);
+  }
+
+  static ApplicationFlags fromJson(String json) {
+    return ensureInitialized().decodeJson<ApplicationFlags>(json);
+  }
+}
+
+mixin ApplicationFlagsMappable {
+  String toJson() {
+    return ApplicationFlagsMapper.ensureInitialized()
+        .encodeJson<ApplicationFlags>(this as ApplicationFlags);
+  }
+
+  Map<String, dynamic> toMap() {
+    return ApplicationFlagsMapper.ensureInitialized()
+        .encodeMap<ApplicationFlags>(this as ApplicationFlags);
+  }
+
+  ApplicationFlagsCopyWith<ApplicationFlags, ApplicationFlags, ApplicationFlags>
+  get copyWith =>
+      _ApplicationFlagsCopyWithImpl<ApplicationFlags, ApplicationFlags>(
+        this as ApplicationFlags,
+        $identity,
+        $identity,
+      );
+  @override
+  String toString() {
+    return ApplicationFlagsMapper.ensureInitialized().stringifyValue(
+      this as ApplicationFlags,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return ApplicationFlagsMapper.ensureInitialized().equalsValue(
+      this as ApplicationFlags,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return ApplicationFlagsMapper.ensureInitialized().hashValue(
+      this as ApplicationFlags,
+    );
+  }
+}
+
+extension ApplicationFlagsValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, ApplicationFlags, $Out> {
+  ApplicationFlagsCopyWith<$R, ApplicationFlags, $Out>
+  get $asApplicationFlags =>
+      $base.as((v, t, t2) => _ApplicationFlagsCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class ApplicationFlagsCopyWith<$R, $In extends ApplicationFlags, $Out>
+    implements FlagsCopyWith<$R, $In, $Out, ApplicationFlags> {
+  @override
+  $R call({int? value});
+  ApplicationFlagsCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  );
+}
+
+class _ApplicationFlagsCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, ApplicationFlags, $Out>
+    implements ApplicationFlagsCopyWith<$R, ApplicationFlags, $Out> {
+  _ApplicationFlagsCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<ApplicationFlags> $mapper =
+      ApplicationFlagsMapper.ensureInitialized();
+  @override
+  $R call({int? value}) =>
+      $apply(FieldCopyWithData({if (value != null) #value: value}));
+  @override
+  ApplicationFlags $make(CopyWithData data) =>
+      ApplicationFlags(data.get(#value, or: $value.value));
+
+  @override
+  ApplicationFlagsCopyWith<$R2, ApplicationFlags, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _ApplicationFlagsCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 

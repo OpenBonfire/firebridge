@@ -7,14 +7,14 @@
 
 part of 'guild_text.dart';
 
-class GuildTextChannelMapper extends ClassMapperBase<GuildTextChannel> {
+class GuildTextChannelMapper extends SubClassMapperBase<GuildTextChannel> {
   GuildTextChannelMapper._();
 
   static GuildTextChannelMapper? _instance;
   static GuildTextChannelMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildTextChannelMapper._());
-      TextChannelMapper.ensureInitialized();
+      TextChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       PermissionOverwriteMapper.ensureInitialized();
     }
@@ -34,33 +34,42 @@ class GuildTextChannelMapper extends ClassMapperBase<GuildTextChannel> {
   static Duration _$defaultAutoArchiveDuration(GuildTextChannel v) =>
       v.defaultAutoArchiveDuration;
   static const Field<GuildTextChannel, Duration> _f$defaultAutoArchiveDuration =
-      Field('defaultAutoArchiveDuration', _$defaultAutoArchiveDuration);
+      Field(
+        'defaultAutoArchiveDuration',
+        _$defaultAutoArchiveDuration,
+        key: r'default_auto_archive_duration',
+      );
   static Duration? _$defaultThreadRateLimitPerUser(GuildTextChannel v) =>
       v.defaultThreadRateLimitPerUser;
   static const Field<GuildTextChannel, Duration>
   _f$defaultThreadRateLimitPerUser = Field(
     'defaultThreadRateLimitPerUser',
     _$defaultThreadRateLimitPerUser,
+    key: r'default_thread_rate_limit_per_user',
   );
   static Snowflake _$guildId(GuildTextChannel v) => v.guildId;
   static const Field<GuildTextChannel, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
+    key: r'guild_id',
   );
   static bool _$isNsfw(GuildTextChannel v) => v.isNsfw;
   static const Field<GuildTextChannel, bool> _f$isNsfw = Field(
     'isNsfw',
     _$isNsfw,
+    key: r'is_nsfw',
   );
   static Snowflake? _$lastMessageId(GuildTextChannel v) => v.lastMessageId;
   static const Field<GuildTextChannel, Snowflake> _f$lastMessageId = Field(
     'lastMessageId',
     _$lastMessageId,
+    key: r'last_message_id',
   );
   static DateTime? _$lastPinTimestamp(GuildTextChannel v) => v.lastPinTimestamp;
   static const Field<GuildTextChannel, DateTime> _f$lastPinTimestamp = Field(
     'lastPinTimestamp',
     _$lastPinTimestamp,
+    key: r'last_pin_timestamp',
   );
   static String _$name(GuildTextChannel v) => v.name;
   static const Field<GuildTextChannel, String> _f$name = Field('name', _$name);
@@ -68,6 +77,7 @@ class GuildTextChannelMapper extends ClassMapperBase<GuildTextChannel> {
   static const Field<GuildTextChannel, Snowflake> _f$parentId = Field(
     'parentId',
     _$parentId,
+    key: r'parent_id',
   );
   static List<PermissionOverwrite> _$permissionOverwrites(GuildTextChannel v) =>
       v.permissionOverwrites;
@@ -75,6 +85,7 @@ class GuildTextChannelMapper extends ClassMapperBase<GuildTextChannel> {
   _f$permissionOverwrites = Field(
     'permissionOverwrites',
     _$permissionOverwrites,
+    key: r'permission_overwrites',
   );
   static int _$position(GuildTextChannel v) => v.position;
   static const Field<GuildTextChannel, int> _f$position = Field(
@@ -85,6 +96,7 @@ class GuildTextChannelMapper extends ClassMapperBase<GuildTextChannel> {
   static const Field<GuildTextChannel, Duration> _f$rateLimitPerUser = Field(
     'rateLimitPerUser',
     _$rateLimitPerUser,
+    key: r'rate_limit_per_user',
   );
 
   @override
@@ -103,6 +115,14 @@ class GuildTextChannelMapper extends ClassMapperBase<GuildTextChannel> {
     #position: _f$position,
     #rateLimitPerUser: _f$rateLimitPerUser,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 0;
+  @override
+  late final ClassMapperBase superMapper =
+      TextChannelMapper.ensureInitialized();
 
   static GuildTextChannel _instantiate(DecodingData data) {
     return GuildTextChannel(

@@ -30,6 +30,7 @@ class ChannelMentionMapper extends ClassMapperBase<ChannelMention> {
   static const Field<ChannelMention, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
+    key: r'guild_id',
   );
   static ChannelType _$type(ChannelMention v) => v.type;
   static const Field<ChannelMention, ChannelType> _f$type = Field(
@@ -121,7 +122,6 @@ abstract class ChannelMentionCopyWith<$R, $In extends ChannelMention, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
-  ChannelTypeCopyWith<$R, ChannelType, ChannelType> get type;
   @override
   $R call({Snowflake? id, Snowflake? guildId, ChannelType? type, String? name});
   ChannelMentionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
@@ -143,9 +143,6 @@ class _ChannelMentionCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
       $value.guildId.copyWith.$chain((v) => call(guildId: v));
-  @override
-  ChannelTypeCopyWith<$R, ChannelType, ChannelType> get type =>
-      $value.type.copyWith.$chain((v) => call(type: v));
   @override
   $R call({
     Snowflake? id,

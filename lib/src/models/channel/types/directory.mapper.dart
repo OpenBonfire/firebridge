@@ -7,14 +7,14 @@
 
 part of 'directory.dart';
 
-class DirectoryChannelMapper extends ClassMapperBase<DirectoryChannel> {
+class DirectoryChannelMapper extends SubClassMapperBase<DirectoryChannel> {
   DirectoryChannelMapper._();
 
   static DirectoryChannelMapper? _instance;
   static DirectoryChannelMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = DirectoryChannelMapper._());
-      ChannelMapper.ensureInitialized();
+      ChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -28,6 +28,13 @@ class DirectoryChannelMapper extends ClassMapperBase<DirectoryChannel> {
 
   @override
   final MappableFields<DirectoryChannel> fields = const {#id: _f$id};
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 14;
+  @override
+  late final ClassMapperBase superMapper = ChannelMapper.ensureInitialized();
 
   static DirectoryChannel _instantiate(DecodingData data) {
     return DirectoryChannel(id: data.dec(_f$id));

@@ -1,10 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/http/managers/sku_manager.dart';
-import 'package:nyxx/src/http/managers/subscription_manager.dart';
-import 'package:nyxx/src/models/application.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/flags.dart';
 
 part 'sku.mapper.dart';
@@ -12,16 +8,8 @@ part 'sku.mapper.dart';
 /// A partial [Sku].
 @MappableClass()
 class PartialSku extends ManagedSnowflakeEntity<Sku> with PartialSkuMappable {
-  @override
-  final SkuManager manager;
-
-  /// A manager for this [Sku]'s [Subscription]s.
-  SubscriptionManager get subscriptions => SubscriptionManager(
-      manager.client.options.subscriptionConfig, manager.client,
-      applicationId: manager.applicationId, skuId: id);
-
   /// @nodoc
-  PartialSku({required this.manager, required super.id});
+  PartialSku({required super.id});
 }
 
 /// {@template sku}
@@ -47,7 +35,6 @@ class Sku extends PartialSku with SkuMappable {
   /// {@macro sku}
   /// @nodoc
   Sku({
-    required super.manager,
     required super.id,
     required this.type,
     required this.applicationId,
@@ -55,33 +42,19 @@ class Sku extends PartialSku with SkuMappable {
     required this.slug,
     required this.flags,
   });
-
-  /// The application this SKU belongs to.
-  PartialApplication get application => PartialApplication(
-      id: applicationId, manager: manager.client.applications);
 }
 
 /// The type of an [Sku].
-@MappableClass()
-final class SkuType extends EnumLike<int, SkuType> with SkuTypeMappable {
-  /// Durable one-time purchase.
-  static const durable = SkuType(2);
-
-  /// Consumable one-time purchase.
-  static const consumable = SkuType(3);
-
-  /// Subscription.
-  static const subscription = SkuType(5);
-
-  /// Subscription group.
-  static const subscriptionGroup = SkuType(6);
-
-  /// @nodoc
-  const SkuType(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  SkuType.parse(int value) : this(value);
+@MappableEnum()
+enum SkuType {
+  @MappableValue(2)
+  durable,
+  @MappableValue(3)
+  consumable,
+  @MappableValue(5)
+  subscription,
+  @MappableValue(6)
+  subscriptionGroup
 }
 
 /// Flags applied to an [Sku].

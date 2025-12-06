@@ -12,7 +12,7 @@ part 'guild_announcement.mapper.dart';
 /// {@template guild_announcement_channel}
 /// An announcement channel in a [Guild].
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: 5)
 class GuildAnnouncementChannel extends TextChannel
     with GuildAnnouncementChannelMappable
     implements GuildChannel, HasThreadsChannel {

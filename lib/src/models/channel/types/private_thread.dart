@@ -9,7 +9,7 @@ part 'private_thread.mapper.dart';
 /// {@template private_thread}
 /// A private [Thread] channel.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorValue: 12)
 class PrivateThread extends TextChannel
     with PrivateThreadMappable
     implements Thread {

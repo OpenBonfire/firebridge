@@ -66,7 +66,6 @@ class VideoQualityModeMapper extends ClassMapperBase<VideoQualityMode> {
   static VideoQualityModeMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = VideoQualityModeMapper._());
-      EnumLikeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -74,8 +73,11 @@ class VideoQualityModeMapper extends ClassMapperBase<VideoQualityMode> {
   @override
   final String id = 'VideoQualityMode';
 
-  static int _$value(VideoQualityMode v) => v.value;
-  static const Field<VideoQualityMode, int> _f$value = Field('value', _$value);
+  static const Field<VideoQualityMode, dynamic> _f$value = Field(
+    'value',
+    null,
+    mode: FieldMode.param,
+  );
 
   @override
   final MappableFields<VideoQualityMode> fields = const {#value: _f$value};
@@ -145,9 +147,8 @@ extension VideoQualityModeValueCopy<$R, $Out>
 }
 
 abstract class VideoQualityModeCopyWith<$R, $In extends VideoQualityMode, $Out>
-    implements EnumLikeCopyWith<$R, $In, $Out, int, VideoQualityMode> {
-  @override
-  $R call({int? value});
+    implements ClassCopyWith<$R, $In, $Out> {
+  $R call({dynamic value});
   VideoQualityModeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -162,11 +163,10 @@ class _VideoQualityModeCopyWithImpl<$R, $Out>
   late final ClassMapperBase<VideoQualityMode> $mapper =
       VideoQualityModeMapper.ensureInitialized();
   @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
+  $R call({dynamic value}) => $apply(FieldCopyWithData({#value: value}));
   @override
   VideoQualityMode $make(CopyWithData data) =>
-      VideoQualityMode(data.get(#value, or: $value.value));
+      VideoQualityMode(data.get(#value));
 
   @override
   VideoQualityModeCopyWith<$R2, VideoQualityMode, $Out2> $chain<$R2, $Out2>(

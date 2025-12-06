@@ -4,7 +4,6 @@ import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/models/user/user.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 
 part 'entitlement.mapper.dart';
 
@@ -66,36 +65,14 @@ class Entitlement extends PartialEntitlement with EntitlementMappable {
 }
 
 /// The type of an [Entitlement].
-@MappableClass()
-final class EntitlementType extends EnumLike<int, EntitlementType>
-    with EntitlementTypeMappable {
-  /// Entitlement was purchased by user.
-  static const EntitlementType purchase = EntitlementType(1);
-
-  /// Entitlement was granted by Discord Nitro subscription.
-  static const EntitlementType premiumSubscription = EntitlementType(2);
-
-  /// Entitlement was gifted by developer.
-  static const EntitlementType developerGift = EntitlementType(3);
-
-  /// Entitlement was purchased by a dev in application test mode.
-  static const EntitlementType testModePurchase = EntitlementType(4);
-
-  /// Entitlement was granted when the SKU was free.
-  static const EntitlementType freePurchase = EntitlementType(5);
-
-  /// Entitlement was gifted by another user.
-  static const EntitlementType userGift = EntitlementType(6);
-
-  /// Entitlement was claimed by user for free as a Nitro Subscriber.
-  static const EntitlementType premiumPurchase = EntitlementType(7);
-
-  /// Entitlement was purchased as an app subscription.
-  static const EntitlementType applicationSubscription = EntitlementType(8);
-
-  const EntitlementType(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  EntitlementType.parse(int value) : this(value);
+@MappableEnum(mode: ValuesMode.indexed)
+enum EntitlementType {
+  purchase,
+  premiumSubscription,
+  developerGift,
+  testModePurchase,
+  freePurchase,
+  userGift,
+  premiumPurchase,
+  applicationSubscription
 }

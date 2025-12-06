@@ -169,13 +169,22 @@ class RoleMapper extends ClassMapperBase<Role> {
   static RoleColors _$colors(Role v) => v.colors;
   static const Field<Role, RoleColors> _f$colors = Field('colors', _$colors);
   static bool _$isHoisted(Role v) => v.isHoisted;
-  static const Field<Role, bool> _f$isHoisted = Field('isHoisted', _$isHoisted);
+  static const Field<Role, bool> _f$isHoisted = Field(
+    'isHoisted',
+    _$isHoisted,
+    key: r'is_hoisted',
+  );
   static String? _$iconHash(Role v) => v.iconHash;
-  static const Field<Role, String> _f$iconHash = Field('iconHash', _$iconHash);
+  static const Field<Role, String> _f$iconHash = Field(
+    'iconHash',
+    _$iconHash,
+    key: r'icon_hash',
+  );
   static String? _$unicodeEmoji(Role v) => v.unicodeEmoji;
   static const Field<Role, String> _f$unicodeEmoji = Field(
     'unicodeEmoji',
     _$unicodeEmoji,
+    key: r'unicode_emoji',
   );
   static int _$position(Role v) => v.position;
   static const Field<Role, int> _f$position = Field('position', _$position);
@@ -188,6 +197,7 @@ class RoleMapper extends ClassMapperBase<Role> {
   static const Field<Role, bool> _f$isMentionable = Field(
     'isMentionable',
     _$isMentionable,
+    key: r'is_mentionable',
   );
   static RoleTags? _$tags(Role v) => v.tags;
   static const Field<Role, RoleTags> _f$tags = Field('tags', _$tags);

@@ -43,81 +43,6 @@ class GuildManager extends Manager<Guild> {
   @override
   PartialGuild operator [](Snowflake id) => PartialGuild(id: id);
 
-  @override
-  Guild parse(Map<String, Object?> raw) {
-    final id = Snowflake.parse(raw['id']!);
-
-    return Guild(
-      id: id,
-      name: raw['name'] as String,
-      iconHash: (raw['icon'] ?? raw['icon_hash']) as String?,
-      splashHash: raw['splash'] as String?,
-      discoverySplashHash: raw['discovery_splash'] as String?,
-      isOwnedByCurrentUser: raw['owner'] as bool?,
-      ownerId: Snowflake.parse(raw['owner_id']!),
-      currentUserPermissions: maybeParse(raw['permissions'],
-          (String permissions) => Permissions(int.parse(permissions))),
-      afkChannelId: maybeParse(raw['afk_channel_id'], Snowflake.parse),
-      afkTimeout: Duration(seconds: raw['afk_timeout'] as int),
-      isWidgetEnabled: raw['widget_enabled'] as bool? ?? false,
-      widgetChannelId: maybeParse(raw['widget_channel_id'], Snowflake.parse),
-      verificationLevel: VerificationLevel(raw['verification_level'] as int),
-      defaultMessageNotificationLevel:
-          MessageNotificationLevel(raw['default_message_notifications'] as int),
-      explicitContentFilterLevel:
-          ExplicitContentFilterLevel(raw['explicit_content_filter'] as int),
-      roleList: parseMany(raw['roles'] as List, RoleMapper.fromMap),
-      features: parseGuildFeatures(raw['features'] as List),
-      mfaLevel: MfaLevel(raw['mfa_level'] as int),
-      applicationId: maybeParse(raw['application_id'], Snowflake.parse),
-      systemChannelId: maybeParse(raw['system_channel_id'], Snowflake.parse),
-      systemChannelFlags:
-          SystemChannelFlags(raw['system_channel_flags'] as int),
-      rulesChannelId: maybeParse(raw['rules_channel_id'], Snowflake.parse),
-      maxPresences: raw['max_presences'] as int?,
-      maxMembers: raw['max_members'] as int?,
-      vanityUrlCode: raw['vanity_url_code'] as String?,
-      description: raw['description'] as String?,
-      bannerHash: raw['banner'] as String?,
-      premiumTier: PremiumTier(raw['premium_tier'] as int),
-      premiumSubscriptionCount: raw['premium_subscription_count'] as int?,
-      preferredLocale: Locale.parse(raw['preferred_locale'] as String),
-      publicUpdatesChannelId:
-          maybeParse(raw['public_updates_channel_id'], Snowflake.parse),
-      maxVideoChannelUsers: raw['max_video_channel_users'] as int?,
-      maxStageChannelUsers: raw['max_stage_video_channel_users'] as int?,
-      approximateMemberCount: raw['approximate_member_count'] as int?,
-      approximatePresenceCount: raw['approximate_presence_count'] as int?,
-      welcomeScreen: maybeParse(raw['welcome_screen'], parseWelcomeScreen),
-      nsfwLevel: NsfwLevel(raw['nsfw_level'] as int),
-      hasPremiumProgressBarEnabled: raw['premium_progress_bar_enabled'] as bool,
-      emojiList: parseMany(raw['emojis'] as List, this[id].emojis.parse),
-      stickerList:
-          parseMany(raw['stickers'] as List? ?? [], this[id].stickers.parse),
-      safetyAlertsChannelId:
-          maybeParse(raw['safety_alerts_channel_id'], Snowflake.parse),
-      incidentsData: maybeParse(raw['incidents_data'], parseIncidentsData),
-    );
-  }
-
-  /// Parse [UserGuild] from [raw].
-  UserGuild parseUserGuild(Map<String, Object?> raw) {
-    final id = Snowflake.parse(raw['id']!);
-    return UserGuild(
-      id: id,
-      manager: this,
-      name: raw['name'] as String,
-      iconHash: raw['icon'] as String?,
-      isOwnedByCurrentUser: raw['owner'] as bool,
-      currentUserPermissions:
-          Permissions(int.parse(raw['permissions'] as String)),
-      features: parseGuildFeatures(raw['features'] as List),
-      approximateMemberCount: raw['approximate_member_count'] as int?,
-      approximatePresenceCount: raw['approximate_presence_count'] as int?,
-      bannerHash: raw['banner'] as String?,
-    );
-  }
-
   static final Map<String, Flag<GuildFeatures>> _nameToGuildFeature = {
     'ANIMATED_BANNER': GuildFeatures.animatedBanner,
     'ANIMATED_ICON': GuildFeatures.animatedIcon,
@@ -160,222 +85,10 @@ class GuildManager extends Manager<Guild> {
 
   /// Parse an [GuildFeatures] from [raw].
   GuildFeatures parseGuildFeatures(List<Object?> raw) {
-    final featureFlags = parseMany(raw, parseGuildFeature);
+    final featureFlags = parseMany(raw, GuildFeaturesMapper.fromMap);
 
     return GuildFeatures(
         featureFlags.fold(0, (value, element) => value | element.value));
-  }
-
-  /// Parse a [Flag]<GuildFeature> from [raw].
-  Flag<GuildFeatures> parseGuildFeature(String raw) {
-    return _nameToGuildFeature[raw] ?? Flag<GuildFeatures>(0);
-  }
-
-  /// Serialize [source] to a [List]<String>.
-  static List<String> serializeGuildFeatures(Flags<GuildFeatures> source) {
-    return source.map(serializeGuildFeature).toList();
-  }
-
-  /// Serialize [source] to a [String].
-  static String serializeGuildFeature(Flag<GuildFeatures> source) {
-    return _guildFeatureToName[source]!;
-  }
-
-  /// Parse a [WelcomeScreen] from [raw].
-  WelcomeScreen parseWelcomeScreen(Map<String, Object?> raw) {
-    return WelcomeScreen(
-      description: raw['description'] as String?,
-      channels:
-          parseMany(raw['welcome_channels'] as List, parseWelcomeScreenChannel),
-    );
-  }
-
-  /// Parse a [WelcomeScreenChannel] from [raw].
-  WelcomeScreenChannel parseWelcomeScreenChannel(Map<String, Object?> raw) {
-    return WelcomeScreenChannel(
-      manager: this,
-      channelId: Snowflake.parse(raw['channel_id']!),
-      description: raw['description'] as String,
-      emojiId: maybeParse(raw['emoji_id'], Snowflake.parse),
-      emojiName: raw['emoji_name'] as String?,
-    );
-  }
-
-  /// Parse a [GuildPreview] from [raw].
-  GuildPreview parseGuildPreview(Map<String, Object?> raw) {
-    final id = Snowflake.parse(raw['id']!);
-
-    return GuildPreview(
-      id: id,
-      manager: this,
-      name: raw['name'] as String,
-      iconHash: raw['icon'] as String?,
-      splashHash: raw['splash'] as String?,
-      discoverySplashHash: raw['discovery_splash'] as String?,
-      emojiList: parseMany(raw['emojis'] as List, this[id].emojis.parse),
-      features: parseGuildFeatures(raw['features'] as List),
-      description: raw['description'] as String?,
-      approximateMemberCount: raw['approximate_member_count'] as int,
-      approximatePresenceCount: raw['approximate_presence_count'] as int,
-      stickerList:
-          parseMany(raw['stickers'] as List? ?? [], this[id].stickers.parse),
-    );
-  }
-
-  /// Parse a [Ban] from [raw].
-  Ban parseBan(Map<String, Object?> raw) {
-    return Ban(
-      reason: raw['reason'] as String,
-      user: client.users.parse(raw['user'] as Map<String, Object?>),
-    );
-  }
-
-  /// Parse a [BulkBanResponse] from [raw].
-  BulkBanResponse parseBulkBanResponse(Map<String, Object?> raw) {
-    return BulkBanResponse(
-      bannedUsers: parseMany(raw['banned_users'] as List, Snowflake.parse),
-      failedUsers: parseMany(raw['failed_users'] as List, Snowflake.parse),
-    );
-  }
-
-  /// Parse a [WidgetSettings] from [raw].
-  WidgetSettings parseWidgetSettings(Map<String, Object?> raw) {
-    return WidgetSettings(
-      manager: this,
-      isEnabled: raw['enabled'] as bool,
-      channelId: maybeParse(raw['channel_id'], Snowflake.parse),
-    );
-  }
-
-  /// Parse a [GuildWidget] from [raw].
-  GuildWidget parseGuildWidget(Map<String, Object?> raw) {
-    return GuildWidget(
-      manager: this,
-      guildId: Snowflake.parse(raw['id']!),
-      name: raw['name'] as String,
-      invite: raw['instant_invite'] as String?,
-      channels: parseMany(
-        raw['channels'] as List,
-        (Map<String, Object?> raw) => PartialChannel(
-            id: Snowflake.parse(raw['id']!), manager: client.channels),
-      ),
-      users: parseMany(
-        raw['members'] as List,
-        (Map<String, Object?> raw) =>
-            PartialUser(id: Snowflake.parse(raw['id']!), manager: client.users),
-      ),
-      presenceCount: raw['presence_count'] as int,
-    );
-  }
-
-  /// Parse an [Onboarding] from [raw].
-  Onboarding parseOnboarding(Map<String, Object?> raw) {
-    final guildId = Snowflake.parse(raw['guild_id']!);
-
-    return Onboarding(
-      manager: this,
-      guildId: guildId,
-      prompts: parseMany(
-          raw['prompts'] as List,
-          (Map<String, Object?> raw) =>
-              parseOnboardingPrompt(raw, guildId: guildId)),
-      defaultChannelIds:
-          parseMany(raw['default_channel_ids'] as List, Snowflake.parse),
-      isEnabled: raw['enabled'] as bool,
-      mode: OnboardingMode(raw['mode'] as int),
-    );
-  }
-
-  /// Parse an [OnboardingPrompt] from [raw].
-  OnboardingPrompt parseOnboardingPrompt(Map<String, Object?> raw,
-      {Snowflake? guildId}) {
-    return OnboardingPrompt(
-      id: Snowflake.parse(raw['id']!),
-      type: OnboardingPromptType(raw['type'] as int),
-      options: parseMany(
-          raw['options'] as List,
-          (Map<String, Object?> raw) =>
-              parseOnboardingPromptOption(raw, guildId: guildId)),
-      title: raw['title'] as String,
-      isSingleSelect: raw['single_select'] as bool,
-      isRequired: raw['required'] as bool,
-      isInOnboarding: raw['in_onboarding'] as bool,
-    );
-  }
-
-  /// Parse an [OnboardingPromptOption] from [raw].
-  OnboardingPromptOption parseOnboardingPromptOption(Map<String, Object?> raw,
-      {Snowflake? guildId}) {
-    Emoji? emoji;
-    final rawEmoji = raw['emoji'] as Map<String, Object?>;
-
-    // Discord passes an "empty" emoji object when unset instead of null
-    if (rawEmoji['id'] != null || rawEmoji['name'] != null) {
-      emoji = client.guilds[guildId ?? Snowflake.zero].emojis
-          .parse(raw['emoji'] as Map<String, Object?>);
-    }
-
-    return OnboardingPromptOption(
-      manager: this,
-      id: Snowflake.parse(raw['id']!),
-      channelIds: parseMany(raw['channel_ids'] as List, Snowflake.parse),
-      roleIds: parseMany(raw['role_ids'] as List, Snowflake.parse),
-      emoji: emoji,
-      title: raw['title'] as String,
-      description: raw['description'] as String?,
-    );
-  }
-
-  /// Parse a [GuildTemplate] from [raw].
-  GuildTemplate parseGuildTemplate(Map<String, Object?> raw) {
-    final sourceGuildId = Snowflake.parse(raw['source_guild_id']!);
-
-    return GuildTemplate(
-      code: raw['code'] as String,
-      manager: this,
-      name: raw['name'] as String,
-      description: raw['description'] as String?,
-      usageCount: raw['usage_count'] as int,
-      creatorId: Snowflake.parse(raw['creator_id']!),
-      creator: client.users.parse(raw['creator'] as Map<String, Object?>),
-      createdAt: DateTime.parse(raw['created_at'] as String),
-      updatedAt: DateTime.parse(raw['updated_at'] as String),
-      sourceGuildId: sourceGuildId,
-      // Add synthetic fields so we can parse the (mostly complete) partial guild as a full guild
-      serializedSourceGuild: parse({
-        'id': sourceGuildId.toString(),
-        'owner_id': Snowflake.zero.toString(),
-        'features': [],
-        'mfa_level': MfaLevel.none.value,
-        'premium_tier': PremiumTier.none.value,
-        'nsfw_level': NsfwLevel.unset.value,
-        'premium_progress_bar_enabled': false,
-        'emojis': [],
-        ...(raw['serialized_source_guild'] as Map<String, Object?>),
-        'roles': [
-          for (final role in ((raw['serialized_source_guild']
-                  as Map<String, Object?>)['roles'] as List)
-              .cast<Map<String, Object?>>())
-            {
-              'position': 0,
-              'flags': 0,
-              ...role,
-            },
-        ],
-      }),
-      isDirty: raw['is_dirty'] as bool?,
-    );
-  }
-
-  /// Parse a [IncidentsData] from [raw].
-  IncidentsData parseIncidentsData(Map<String, Object?> raw) {
-    return IncidentsData(
-      dmSpamDetectedAt: maybeParse(raw['dm_spam_detected_at'], DateTime.parse),
-      dmsDisabledUntil: maybeParse(raw['dms_disabled_until'], DateTime.parse),
-      invitesDisabledUntil:
-          maybeParse(raw['dm_spam_detected_at'], DateTime.parse),
-      raidDetectedAt: maybeParse(raw['raid_detected_at'], DateTime.parse),
-    );
   }
 
   @override
@@ -386,7 +99,8 @@ class GuildManager extends Manager<Guild> {
     });
 
     final response = await client.httpHandler.executeSafe(request);
-    final guild = parse(response.jsonBody as Map<String, Object?>);
+    final guild =
+        GuildMapper.fromMap(response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(guild);
     return guild;
@@ -399,7 +113,8 @@ class GuildManager extends Manager<Guild> {
         BasicRequest(route, method: 'POST', body: jsonEncode(builder.build()));
 
     final response = await client.httpHandler.executeSafe(request);
-    final guild = parse(response.jsonBody as Map<String, Object?>);
+    final guild =
+        GuildMapper.fromMap(response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(guild);
     return guild;
@@ -415,7 +130,8 @@ class GuildManager extends Manager<Guild> {
         body: jsonEncode(builder.build()));
 
     final response = await client.httpHandler.executeSafe(request);
-    final guild = parse(response.jsonBody as Map<String, Object?>);
+    final guild =
+        GuildMapper.fromMap(response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(guild);
     return guild;

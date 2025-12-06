@@ -7,6 +7,60 @@
 
 part of 'sku.dart';
 
+class SkuTypeMapper extends EnumMapper<SkuType> {
+  SkuTypeMapper._();
+
+  static SkuTypeMapper? _instance;
+  static SkuTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = SkuTypeMapper._());
+    }
+    return _instance!;
+  }
+
+  static SkuType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  SkuType decode(dynamic value) {
+    switch (value) {
+      case 2:
+        return SkuType.durable;
+      case 3:
+        return SkuType.consumable;
+      case 5:
+        return SkuType.subscription;
+      case 6:
+        return SkuType.subscriptionGroup;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(SkuType self) {
+    switch (self) {
+      case SkuType.durable:
+        return 2;
+      case SkuType.consumable:
+        return 3;
+      case SkuType.subscription:
+        return 5;
+      case SkuType.subscriptionGroup:
+        return 6;
+    }
+  }
+}
+
+extension SkuTypeMapperExtension on SkuType {
+  dynamic toValue() {
+    SkuTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<SkuType>(this);
+  }
+}
+
 class PartialSkuMapper extends ClassMapperBase<PartialSku> {
   PartialSkuMapper._();
 
@@ -24,22 +78,14 @@ class PartialSkuMapper extends ClassMapperBase<PartialSku> {
   @override
   final String id = 'PartialSku';
 
-  static SkuManager _$manager(PartialSku v) => v.manager;
-  static const Field<PartialSku, SkuManager> _f$manager = Field(
-    'manager',
-    _$manager,
-  );
   static Snowflake _$id(PartialSku v) => v.id;
   static const Field<PartialSku, Snowflake> _f$id = Field('id', _$id);
 
   @override
-  final MappableFields<PartialSku> fields = const {
-    #manager: _f$manager,
-    #id: _f$id,
-  };
+  final MappableFields<PartialSku> fields = const {#id: _f$id};
 
   static PartialSku _instantiate(DecodingData data) {
-    return PartialSku(manager: data.dec(_f$manager), id: data.dec(_f$id));
+    return PartialSku(id: data.dec(_f$id));
   }
 
   @override
@@ -105,7 +151,7 @@ abstract class PartialSkuCopyWith<$R, $In extends PartialSku, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   @override
-  $R call({SkuManager? manager, Snowflake? id});
+  $R call({Snowflake? id});
   PartialSkuCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -121,17 +167,11 @@ class _PartialSkuCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
-  $R call({SkuManager? manager, Snowflake? id}) => $apply(
-    FieldCopyWithData({
-      if (manager != null) #manager: manager,
-      if (id != null) #id: id,
-    }),
-  );
+  $R call({Snowflake? id}) =>
+      $apply(FieldCopyWithData({if (id != null) #id: id}));
   @override
-  PartialSku $make(CopyWithData data) => PartialSku(
-    manager: data.get(#manager, or: $value.manager),
-    id: data.get(#id, or: $value.id),
-  );
+  PartialSku $make(CopyWithData data) =>
+      PartialSku(id: data.get(#id, or: $value.id));
 
   @override
   PartialSkuCopyWith<$R2, PartialSku, $Out2> $chain<$R2, $Out2>(
@@ -157,8 +197,6 @@ class SkuMapper extends ClassMapperBase<Sku> {
   @override
   final String id = 'Sku';
 
-  static SkuManager _$manager(Sku v) => v.manager;
-  static const Field<Sku, SkuManager> _f$manager = Field('manager', _$manager);
   static Snowflake _$id(Sku v) => v.id;
   static const Field<Sku, Snowflake> _f$id = Field('id', _$id);
   static SkuType _$type(Sku v) => v.type;
@@ -167,6 +205,7 @@ class SkuMapper extends ClassMapperBase<Sku> {
   static const Field<Sku, Snowflake> _f$applicationId = Field(
     'applicationId',
     _$applicationId,
+    key: r'application_id',
   );
   static String _$name(Sku v) => v.name;
   static const Field<Sku, String> _f$name = Field('name', _$name);
@@ -177,7 +216,6 @@ class SkuMapper extends ClassMapperBase<Sku> {
 
   @override
   final MappableFields<Sku> fields = const {
-    #manager: _f$manager,
     #id: _f$id,
     #type: _f$type,
     #applicationId: _f$applicationId,
@@ -188,7 +226,6 @@ class SkuMapper extends ClassMapperBase<Sku> {
 
   static Sku _instantiate(DecodingData data) {
     return Sku(
-      manager: data.dec(_f$manager),
       id: data.dec(_f$id),
       type: data.dec(_f$type),
       applicationId: data.dec(_f$applicationId),
@@ -246,12 +283,10 @@ abstract class SkuCopyWith<$R, $In extends Sku, $Out>
     implements PartialSkuCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  SkuTypeCopyWith<$R, SkuType, SkuType> get type;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get applicationId;
   SkuFlagsCopyWith<$R, SkuFlags, SkuFlags> get flags;
   @override
   $R call({
-    SkuManager? manager,
     Snowflake? id,
     SkuType? type,
     Snowflake? applicationId,
@@ -272,9 +307,6 @@ class _SkuCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Sku, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
-  SkuTypeCopyWith<$R, SkuType, SkuType> get type =>
-      $value.type.copyWith.$chain((v) => call(type: v));
-  @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get applicationId =>
       $value.applicationId.copyWith.$chain((v) => call(applicationId: v));
   @override
@@ -282,7 +314,6 @@ class _SkuCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Sku, $Out>
       $value.flags.copyWith.$chain((v) => call(flags: v));
   @override
   $R call({
-    SkuManager? manager,
     Snowflake? id,
     SkuType? type,
     Snowflake? applicationId,
@@ -291,7 +322,6 @@ class _SkuCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Sku, $Out>
     SkuFlags? flags,
   }) => $apply(
     FieldCopyWithData({
-      if (manager != null) #manager: manager,
       if (id != null) #id: id,
       if (type != null) #type: type,
       if (applicationId != null) #applicationId: applicationId,
@@ -302,7 +332,6 @@ class _SkuCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Sku, $Out>
   );
   @override
   Sku $make(CopyWithData data) => Sku(
-    manager: data.get(#manager, or: $value.manager),
     id: data.get(#id, or: $value.id),
     type: data.get(#type, or: $value.type),
     applicationId: data.get(#applicationId, or: $value.applicationId),
@@ -314,113 +343,6 @@ class _SkuCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Sku, $Out>
   @override
   SkuCopyWith<$R2, Sku, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
       _SkuCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
-class SkuTypeMapper extends ClassMapperBase<SkuType> {
-  SkuTypeMapper._();
-
-  static SkuTypeMapper? _instance;
-  static SkuTypeMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = SkuTypeMapper._());
-      EnumLikeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'SkuType';
-
-  static int _$value(SkuType v) => v.value;
-  static const Field<SkuType, int> _f$value = Field('value', _$value);
-
-  @override
-  final MappableFields<SkuType> fields = const {#value: _f$value};
-
-  static SkuType _instantiate(DecodingData data) {
-    return SkuType(data.dec(_f$value));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static SkuType fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<SkuType>(map);
-  }
-
-  static SkuType fromJson(String json) {
-    return ensureInitialized().decodeJson<SkuType>(json);
-  }
-}
-
-mixin SkuTypeMappable {
-  String toJson() {
-    return SkuTypeMapper.ensureInitialized().encodeJson<SkuType>(
-      this as SkuType,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return SkuTypeMapper.ensureInitialized().encodeMap<SkuType>(
-      this as SkuType,
-    );
-  }
-
-  SkuTypeCopyWith<SkuType, SkuType, SkuType> get copyWith =>
-      _SkuTypeCopyWithImpl<SkuType, SkuType>(
-        this as SkuType,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return SkuTypeMapper.ensureInitialized().stringifyValue(this as SkuType);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return SkuTypeMapper.ensureInitialized().equalsValue(
-      this as SkuType,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return SkuTypeMapper.ensureInitialized().hashValue(this as SkuType);
-  }
-}
-
-extension SkuTypeValueCopy<$R, $Out> on ObjectCopyWith<$R, SkuType, $Out> {
-  SkuTypeCopyWith<$R, SkuType, $Out> get $asSkuType =>
-      $base.as((v, t, t2) => _SkuTypeCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class SkuTypeCopyWith<$R, $In extends SkuType, $Out>
-    implements EnumLikeCopyWith<$R, $In, $Out, int, SkuType> {
-  @override
-  $R call({int? value});
-  SkuTypeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
-}
-
-class _SkuTypeCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, SkuType, $Out>
-    implements SkuTypeCopyWith<$R, SkuType, $Out> {
-  _SkuTypeCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<SkuType> $mapper =
-      SkuTypeMapper.ensureInitialized();
-  @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
-  @override
-  SkuType $make(CopyWithData data) =>
-      SkuType(data.get(#value, or: $value.value));
-
-  @override
-  SkuTypeCopyWith<$R2, SkuType, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _SkuTypeCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class SkuFlagsMapper extends ClassMapperBase<SkuFlags> {

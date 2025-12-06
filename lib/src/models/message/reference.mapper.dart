@@ -32,16 +32,19 @@ class MessageReferenceMapper extends ClassMapperBase<MessageReference> {
   static const Field<MessageReference, Snowflake> _f$messageId = Field(
     'messageId',
     _$messageId,
+    key: r'message_id',
   );
   static Snowflake _$channelId(MessageReference v) => v.channelId;
   static const Field<MessageReference, Snowflake> _f$channelId = Field(
     'channelId',
     _$channelId,
+    key: r'channel_id',
   );
   static Snowflake? _$guildId(MessageReference v) => v.guildId;
   static const Field<MessageReference, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
+    key: r'guild_id',
   );
 
   @override
@@ -194,7 +197,6 @@ class MessageReferenceTypeMapper extends ClassMapperBase<MessageReferenceType> {
   static MessageReferenceTypeMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = MessageReferenceTypeMapper._());
-      EnumLikeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -202,10 +204,10 @@ class MessageReferenceTypeMapper extends ClassMapperBase<MessageReferenceType> {
   @override
   final String id = 'MessageReferenceType';
 
-  static int _$value(MessageReferenceType v) => v.value;
-  static const Field<MessageReferenceType, int> _f$value = Field(
+  static const Field<MessageReferenceType, dynamic> _f$value = Field(
     'value',
-    _$value,
+    null,
+    mode: FieldMode.param,
   );
 
   @override
@@ -284,9 +286,8 @@ abstract class MessageReferenceTypeCopyWith<
   $In extends MessageReferenceType,
   $Out
 >
-    implements EnumLikeCopyWith<$R, $In, $Out, int, MessageReferenceType> {
-  @override
-  $R call({int? value});
+    implements ClassCopyWith<$R, $In, $Out> {
+  $R call({dynamic value});
   MessageReferenceTypeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -301,11 +302,10 @@ class _MessageReferenceTypeCopyWithImpl<$R, $Out>
   late final ClassMapperBase<MessageReferenceType> $mapper =
       MessageReferenceTypeMapper.ensureInitialized();
   @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
+  $R call({dynamic value}) => $apply(FieldCopyWithData({#value: value}));
   @override
   MessageReferenceType $make(CopyWithData data) =>
-      MessageReferenceType(data.get(#value, or: $value.value));
+      MessageReferenceType(data.get(#value));
 
   @override
   MessageReferenceTypeCopyWith<$R2, MessageReferenceType, $Out2>

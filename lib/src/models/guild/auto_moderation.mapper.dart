@@ -174,6 +174,7 @@ class AutoModerationRuleMapper extends ClassMapperBase<AutoModerationRule> {
   static const Field<AutoModerationRule, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
+    key: r'guild_id',
   );
   static String _$name(AutoModerationRule v) => v.name;
   static const Field<AutoModerationRule, String> _f$name = Field(
@@ -184,15 +185,17 @@ class AutoModerationRuleMapper extends ClassMapperBase<AutoModerationRule> {
   static const Field<AutoModerationRule, Snowflake> _f$creatorId = Field(
     'creatorId',
     _$creatorId,
+    key: r'creator_id',
   );
   static AutoModerationEventType _$eventType(AutoModerationRule v) =>
       v.eventType;
   static const Field<AutoModerationRule, AutoModerationEventType> _f$eventType =
-      Field('eventType', _$eventType);
+      Field('eventType', _$eventType, key: r'event_type');
   static TriggerType _$triggerType(AutoModerationRule v) => v.triggerType;
   static const Field<AutoModerationRule, TriggerType> _f$triggerType = Field(
     'triggerType',
     _$triggerType,
+    key: r'trigger_type',
   );
   static TriggerMetadata _$metadata(AutoModerationRule v) => v.metadata;
   static const Field<AutoModerationRule, TriggerMetadata> _f$metadata = Field(
@@ -207,15 +210,16 @@ class AutoModerationRuleMapper extends ClassMapperBase<AutoModerationRule> {
   static const Field<AutoModerationRule, bool> _f$isEnabled = Field(
     'isEnabled',
     _$isEnabled,
+    key: r'is_enabled',
   );
   static List<Snowflake> _$exemptRoleIds(AutoModerationRule v) =>
       v.exemptRoleIds;
   static const Field<AutoModerationRule, List<Snowflake>> _f$exemptRoleIds =
-      Field('exemptRoleIds', _$exemptRoleIds);
+      Field('exemptRoleIds', _$exemptRoleIds, key: r'exempt_role_ids');
   static List<Snowflake> _$exemptChannelIds(AutoModerationRule v) =>
       v.exemptChannelIds;
   static const Field<AutoModerationRule, List<Snowflake>> _f$exemptChannelIds =
-      Field('exemptChannelIds', _$exemptChannelIds);
+      Field('exemptChannelIds', _$exemptChannelIds, key: r'exempt_channel_ids');
 
   @override
   final MappableFields<AutoModerationRule> fields = const {
@@ -458,7 +462,6 @@ class TriggerTypeMapper extends ClassMapperBase<TriggerType> {
   static TriggerTypeMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = TriggerTypeMapper._());
-      EnumLikeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -466,8 +469,11 @@ class TriggerTypeMapper extends ClassMapperBase<TriggerType> {
   @override
   final String id = 'TriggerType';
 
-  static int _$value(TriggerType v) => v.value;
-  static const Field<TriggerType, int> _f$value = Field('value', _$value);
+  static const Field<TriggerType, dynamic> _f$value = Field(
+    'value',
+    null,
+    mode: FieldMode.param,
+  );
 
   @override
   final MappableFields<TriggerType> fields = const {#value: _f$value};
@@ -535,9 +541,8 @@ extension TriggerTypeValueCopy<$R, $Out>
 }
 
 abstract class TriggerTypeCopyWith<$R, $In extends TriggerType, $Out>
-    implements EnumLikeCopyWith<$R, $In, $Out, int, TriggerType> {
-  @override
-  $R call({int? value});
+    implements ClassCopyWith<$R, $In, $Out> {
+  $R call({dynamic value});
   TriggerTypeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -550,11 +555,9 @@ class _TriggerTypeCopyWithImpl<$R, $Out>
   late final ClassMapperBase<TriggerType> $mapper =
       TriggerTypeMapper.ensureInitialized();
   @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
+  $R call({dynamic value}) => $apply(FieldCopyWithData({#value: value}));
   @override
-  TriggerType $make(CopyWithData data) =>
-      TriggerType(data.get(#value, or: $value.value));
+  TriggerType $make(CopyWithData data) => TriggerType(data.get(#value));
 
   @override
   TriggerTypeCopyWith<$R2, TriggerType, $Out2> $chain<$R2, $Out2>(
@@ -581,11 +584,13 @@ class TriggerMetadataMapper extends ClassMapperBase<TriggerMetadata> {
   static const Field<TriggerMetadata, List<String>> _f$keywordFilter = Field(
     'keywordFilter',
     _$keywordFilter,
+    key: r'keyword_filter',
   );
   static List<String>? _$regexPatterns(TriggerMetadata v) => v.regexPatterns;
   static const Field<TriggerMetadata, List<String>> _f$regexPatterns = Field(
     'regexPatterns',
     _$regexPatterns,
+    key: r'regex_patterns',
   );
   static List<KeywordPresetType>? _$presets(TriggerMetadata v) => v.presets;
   static const Field<TriggerMetadata, List<KeywordPresetType>> _f$presets =
@@ -594,16 +599,22 @@ class TriggerMetadataMapper extends ClassMapperBase<TriggerMetadata> {
   static const Field<TriggerMetadata, List<String>> _f$allowList = Field(
     'allowList',
     _$allowList,
+    key: r'allow_list',
   );
   static int? _$mentionTotalLimit(TriggerMetadata v) => v.mentionTotalLimit;
   static const Field<TriggerMetadata, int> _f$mentionTotalLimit = Field(
     'mentionTotalLimit',
     _$mentionTotalLimit,
+    key: r'mention_total_limit',
   );
   static bool? _$isMentionRaidProtectionEnabled(TriggerMetadata v) =>
       v.isMentionRaidProtectionEnabled;
   static const Field<TriggerMetadata, bool> _f$isMentionRaidProtectionEnabled =
-      Field('isMentionRaidProtectionEnabled', _$isMentionRaidProtectionEnabled);
+      Field(
+        'isMentionRaidProtectionEnabled',
+        _$isMentionRaidProtectionEnabled,
+        key: r'is_mention_raid_protection_enabled',
+      );
 
   @override
   final MappableFields<TriggerMetadata> fields = const {
@@ -810,7 +821,6 @@ class KeywordPresetTypeMapper extends ClassMapperBase<KeywordPresetType> {
   static KeywordPresetTypeMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = KeywordPresetTypeMapper._());
-      EnumLikeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -818,8 +828,11 @@ class KeywordPresetTypeMapper extends ClassMapperBase<KeywordPresetType> {
   @override
   final String id = 'KeywordPresetType';
 
-  static int _$value(KeywordPresetType v) => v.value;
-  static const Field<KeywordPresetType, int> _f$value = Field('value', _$value);
+  static const Field<KeywordPresetType, dynamic> _f$value = Field(
+    'value',
+    null,
+    mode: FieldMode.param,
+  );
 
   @override
   final MappableFields<KeywordPresetType> fields = const {#value: _f$value};
@@ -898,9 +911,8 @@ abstract class KeywordPresetTypeCopyWith<
   $In extends KeywordPresetType,
   $Out
 >
-    implements EnumLikeCopyWith<$R, $In, $Out, int, KeywordPresetType> {
-  @override
-  $R call({int? value});
+    implements ClassCopyWith<$R, $In, $Out> {
+  $R call({dynamic value});
   KeywordPresetTypeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -915,11 +927,10 @@ class _KeywordPresetTypeCopyWithImpl<$R, $Out>
   late final ClassMapperBase<KeywordPresetType> $mapper =
       KeywordPresetTypeMapper.ensureInitialized();
   @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
+  $R call({dynamic value}) => $apply(FieldCopyWithData({#value: value}));
   @override
   KeywordPresetType $make(CopyWithData data) =>
-      KeywordPresetType(data.get(#value, or: $value.value));
+      KeywordPresetType(data.get(#value));
 
   @override
   KeywordPresetTypeCopyWith<$R2, KeywordPresetType, $Out2> $chain<$R2, $Out2>(
@@ -1085,7 +1096,6 @@ class ActionTypeMapper extends ClassMapperBase<ActionType> {
   static ActionTypeMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ActionTypeMapper._());
-      EnumLikeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -1093,8 +1103,11 @@ class ActionTypeMapper extends ClassMapperBase<ActionType> {
   @override
   final String id = 'ActionType';
 
-  static int _$value(ActionType v) => v.value;
-  static const Field<ActionType, int> _f$value = Field('value', _$value);
+  static const Field<ActionType, dynamic> _f$value = Field(
+    'value',
+    null,
+    mode: FieldMode.param,
+  );
 
   @override
   final MappableFields<ActionType> fields = const {#value: _f$value};
@@ -1162,9 +1175,8 @@ extension ActionTypeValueCopy<$R, $Out>
 }
 
 abstract class ActionTypeCopyWith<$R, $In extends ActionType, $Out>
-    implements EnumLikeCopyWith<$R, $In, $Out, int, ActionType> {
-  @override
-  $R call({int? value});
+    implements ClassCopyWith<$R, $In, $Out> {
+  $R call({dynamic value});
   ActionTypeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -1177,11 +1189,9 @@ class _ActionTypeCopyWithImpl<$R, $Out>
   late final ClassMapperBase<ActionType> $mapper =
       ActionTypeMapper.ensureInitialized();
   @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
+  $R call({dynamic value}) => $apply(FieldCopyWithData({#value: value}));
   @override
-  ActionType $make(CopyWithData data) =>
-      ActionType(data.get(#value, or: $value.value));
+  ActionType $make(CopyWithData data) => ActionType(data.get(#value));
 
   @override
   ActionTypeCopyWith<$R2, ActionType, $Out2> $chain<$R2, $Out2>(
@@ -1213,6 +1223,7 @@ class ActionMetadataMapper extends ClassMapperBase<ActionMetadata> {
   static const Field<ActionMetadata, Snowflake> _f$channelId = Field(
     'channelId',
     _$channelId,
+    key: r'channel_id',
   );
   static Duration? _$duration(ActionMetadata v) => v.duration;
   static const Field<ActionMetadata, Duration> _f$duration = Field(
@@ -1223,6 +1234,7 @@ class ActionMetadataMapper extends ClassMapperBase<ActionMetadata> {
   static const Field<ActionMetadata, String> _f$customMessage = Field(
     'customMessage',
     _$customMessage,
+    key: r'custom_message',
   );
 
   @override

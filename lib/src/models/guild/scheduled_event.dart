@@ -6,7 +6,6 @@ import 'package:nyxx/src/models/guild/member.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/models/user/user.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'scheduled_event.mapper.dart';
@@ -99,37 +98,12 @@ class ScheduledEvent extends PartialScheduledEvent with ScheduledEventMappable {
 }
 
 /// The status of a [ScheduledEvent].
-@MappableClass()
-final class EventStatus extends EnumLike<int, EventStatus>
-    with EventStatusMappable {
-  static const scheduled = EventStatus(1);
-  static const active = EventStatus(2);
-  static const completed = EventStatus(3);
-  static const cancelled = EventStatus(4);
-
-  /// @nodoc
-  const EventStatus(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  EventStatus.parse(int value) : this(value);
-}
+@MappableEnum(mode: ValuesMode.indexed)
+enum EventStatus { scheduled, active, completed, cancelled }
 
 /// The type of the entity associated with a [ScheduledEvent].
-@MappableClass()
-final class ScheduledEntityType extends EnumLike<int, ScheduledEntityType>
-    with ScheduledEntityTypeMappable {
-  static const stageInstance = ScheduledEntityType(1);
-  static const voice = ScheduledEntityType(2);
-  static const external = ScheduledEntityType(3);
-
-  /// @nodoc
-  const ScheduledEntityType(super.value);
-
-  @Deprecated(
-      'The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  ScheduledEntityType.parse(int value) : this(value);
-}
+@MappableEnum(mode: ValuesMode.indexed)
+enum ScheduledEntityType { stageInstance, voice, external }
 
 /// {@template entity_metadata}
 /// Additional metadata associated with a [ScheduledEvent].
@@ -225,40 +199,19 @@ class RecurrenceRule with ToStringHelper, RecurrenceRuleMappable {
 }
 
 /// The frequency with which a [ScheduledEvent] can recur.
-@MappableClass()
-final class RecurrenceRuleFrequency
-    extends EnumLike<int, RecurrenceRuleFrequency>
-    with RecurrenceRuleFrequencyMappable {
-  /// The event recurs at an interval in years.
-  static const yearly = RecurrenceRuleFrequency(0);
-
-  /// The event recurs at an interval in months.
-  static const monthly = RecurrenceRuleFrequency(1);
-
-  /// The event recurs at an interval in weeks.
-  static const weekly = RecurrenceRuleFrequency(2);
-
-  /// The event recurs at an interval in days.
-  static const daily = RecurrenceRuleFrequency(3);
-
-  /// @nodoc
-  const RecurrenceRuleFrequency(super.value);
-}
+@MappableEnum(mode: ValuesMode.indexed)
+enum RecurrenceRuleFrequency { yearly, monthly, weekly, daily }
 
 /// The weekday on which a [ScheduledEvent] recurs.
-@MappableClass()
-final class RecurrenceRuleWeekday extends EnumLike<int, RecurrenceRuleWeekday>
-    with RecurrenceRuleWeekdayMappable {
-  static const monday = RecurrenceRuleWeekday(0);
-  static const tuesday = RecurrenceRuleWeekday(1);
-  static const wednesday = RecurrenceRuleWeekday(2);
-  static const thursday = RecurrenceRuleWeekday(3);
-  static const friday = RecurrenceRuleWeekday(4);
-  static const saturday = RecurrenceRuleWeekday(5);
-  static const sunday = RecurrenceRuleWeekday(6);
-
-  /// @nodoc
-  const RecurrenceRuleWeekday(super.value);
+@MappableEnum(mode: ValuesMode.indexed)
+enum RecurrenceRuleWeekday {
+  monday,
+  tuesday,
+  wednesday,
+  thursday,
+  friday,
+  saturday,
+  sunday
 }
 
 /// The week and weekday on which a [ScheduledEvent] recurs.
@@ -278,22 +231,18 @@ class RecurrenceRuleNWeekday
 }
 
 /// The month on which a [ScheduledEvent] recurs.
-@MappableClass()
-final class RecurrenceRuleMonth extends EnumLike<int, RecurrenceRuleMonth>
-    with RecurrenceRuleMonthMappable {
-  static const january = RecurrenceRuleMonth(0);
-  static const february = RecurrenceRuleMonth(1);
-  static const march = RecurrenceRuleMonth(2);
-  static const april = RecurrenceRuleMonth(3);
-  static const may = RecurrenceRuleMonth(4);
-  static const june = RecurrenceRuleMonth(5);
-  static const july = RecurrenceRuleMonth(6);
-  static const august = RecurrenceRuleMonth(7);
-  static const september = RecurrenceRuleMonth(8);
-  static const october = RecurrenceRuleMonth(9);
-  static const november = RecurrenceRuleMonth(10);
-  static const december = RecurrenceRuleMonth(11);
-
-  /// @nodoc
-  const RecurrenceRuleMonth(super.value);
+@MappableEnum(mode: ValuesMode.indexed)
+enum RecurrenceRuleMonth {
+  january,
+  february,
+  march,
+  april,
+  may,
+  june,
+  july,
+  august,
+  september,
+  october,
+  november,
+  december,
 }

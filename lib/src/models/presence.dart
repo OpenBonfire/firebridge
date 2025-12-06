@@ -1,13 +1,16 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/emoji.dart';
 import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/utils/enum_like.dart';
 import 'package:nyxx/src/utils/flags.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+
+part 'presence.mapper.dart';
 
 /// {@template client_status}
 /// The status of a client on multiple platforms.
 /// {@endtemplate}
-class ClientStatus with ToStringHelper {
+@MappableClass()
+class ClientStatus with ToStringHelper, ClientStatusMappable {
   /// The client's status on a desktop session.
   final UserStatus? desktop;
 
@@ -19,22 +22,13 @@ class ClientStatus with ToStringHelper {
 
   /// {@macro client_status}
   /// @nodoc
-  ClientStatus({required this.desktop, required this.mobile, required this.web});
+  ClientStatus(
+      {required this.desktop, required this.mobile, required this.web});
 }
 
 /// The status of a client.
-final class UserStatus extends EnumLike<String, UserStatus> {
-  static const online = UserStatus('online');
-  static const dnd = UserStatus('dnd');
-  static const idle = UserStatus('idle');
-  static const offline = UserStatus('offline');
-
-  /// @nodoc
-  const UserStatus(super.value);
-
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  UserStatus.parse(String value) : this(value);
-}
+@MappableEnum()
+enum UserStatus { online, dnd, idle, offline }
 
 /// {@template activity}
 /// A Rich Presence activity.
@@ -107,24 +101,14 @@ class Activity with ToStringHelper {
 }
 
 /// The type of an activity.
-final class ActivityType extends EnumLike<int, ActivityType> {
-  static const game = ActivityType(0);
-  static const streaming = ActivityType(1);
-  static const listening = ActivityType(2);
-  static const watching = ActivityType(3);
-  static const custom = ActivityType(4);
-  static const competing = ActivityType(5);
-
-  const ActivityType(super.value);
-
-  @Deprecated('The .parse() constructor is deprecated. Use the unnamed constructor instead.')
-  ActivityType.parse(int value) : this(value);
-}
+@MappableEnum(mode: ValuesMode.indexed)
+enum ActivityType { game, streaming, listening, watching, custom, competing }
 
 /// {@template activity_timestamps}
 /// Information about an [Activity]'s timings.
 /// {@endtemplate}
-class ActivityTimestamps with ToStringHelper {
+@MappableClass()
+class ActivityTimestamps with ToStringHelper, ActivityTimestampsMappable {
   /// The time at which the activity starts.
   final DateTime? start;
 
@@ -139,7 +123,8 @@ class ActivityTimestamps with ToStringHelper {
 /// {@template activity_party}
 /// Information about an [Activity]'s party.
 /// {@endtemplate}
-class ActivityParty with ToStringHelper {
+@MappableClass()
+class ActivityParty with ToStringHelper, ActivityPartyMappable {
   /// The ID of the party.
   final String? id;
 
@@ -151,13 +136,15 @@ class ActivityParty with ToStringHelper {
 
   /// {@macro activity_party}
   /// @nodoc
-  ActivityParty({required this.id, required this.currentSize, required this.maxSize});
+  ActivityParty(
+      {required this.id, required this.currentSize, required this.maxSize});
 }
 
 /// {@template activity_assets}
 /// Information about an [Activity]'s displayed assets.
 /// {@endtemplate}
-class ActivityAssets with ToStringHelper {
+@MappableClass()
+class ActivityAssets with ToStringHelper, ActivityAssetsMappable {
   /// The activity's large image.
   // TODO: Make a proper class for this, or parse it to e.g a Uri
   final String? largeImage;
@@ -185,7 +172,8 @@ class ActivityAssets with ToStringHelper {
 /// {@template activity_secrets}
 /// Information about an [Activity]'s secrets.
 /// {@endtemplate}
-class ActivitySecrets with ToStringHelper {
+@MappableClass()
+class ActivitySecrets with ToStringHelper, ActivitySecretsMappable {
   /// The join secret.
   final String? join;
 
@@ -197,11 +185,13 @@ class ActivitySecrets with ToStringHelper {
 
   /// {@macro activity_secrets}
   /// @nodoc
-  ActivitySecrets({required this.join, required this.spectate, required this.match});
+  ActivitySecrets(
+      {required this.join, required this.spectate, required this.match});
 }
 
 /// Information about the data in an [Activity] instance.
-class ActivityFlags extends Flags<ActivityFlags> {
+@MappableClass()
+class ActivityFlags extends Flags<ActivityFlags> with ActivityFlagsMappable {
   /// The activity is an instanced game session.
   static const instance = Flag<ActivityFlags>.fromOffset(0);
 
@@ -253,7 +243,8 @@ class ActivityFlags extends Flags<ActivityFlags> {
 /// {@template activity_button}
 /// A button displayed in an activity.
 /// {@endtemplate}
-class ActivityButton with ToStringHelper {
+@MappableClass()
+class ActivityButton with ToStringHelper, ActivityButtonMappable {
   /// This button's label.
   final String label;
 

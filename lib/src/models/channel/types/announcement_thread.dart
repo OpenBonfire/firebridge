@@ -7,7 +7,7 @@ import 'package:nyxx/src/models/snowflake.dart';
 
 part 'announcement_thread.mapper.dart';
 
-@MappableClass()
+@MappableClass(discriminatorValue: 10)
 class AnnouncementThread extends TextChannel
     with AnnouncementThreadMappable
     implements Thread {

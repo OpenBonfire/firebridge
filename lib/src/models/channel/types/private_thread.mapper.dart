@@ -7,14 +7,14 @@
 
 part of 'private_thread.dart';
 
-class PrivateThreadMapper extends ClassMapperBase<PrivateThread> {
+class PrivateThreadMapper extends SubClassMapperBase<PrivateThread> {
   PrivateThreadMapper._();
 
   static PrivateThreadMapper? _instance;
   static PrivateThreadMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = PrivateThreadMapper._());
-      TextChannelMapper.ensureInitialized();
+      TextChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       PermissionOverwriteMapper.ensureInitialized();
       ChannelFlagsMapper.ensureInitialized();
@@ -31,65 +31,81 @@ class PrivateThreadMapper extends ClassMapperBase<PrivateThread> {
   static const Field<PrivateThread, bool> _f$isInvitable = Field(
     'isInvitable',
     _$isInvitable,
+    key: r'is_invitable',
   );
   static List<Snowflake>? _$appliedTags(PrivateThread v) => v.appliedTags;
   static const Field<PrivateThread, List<Snowflake>> _f$appliedTags = Field(
     'appliedTags',
     _$appliedTags,
+    key: r'applied_tags',
   );
   static int _$approximateMemberCount(PrivateThread v) =>
       v.approximateMemberCount;
   static const Field<PrivateThread, int> _f$approximateMemberCount = Field(
     'approximateMemberCount',
     _$approximateMemberCount,
+    key: r'approximate_member_count',
   );
   static DateTime _$archiveTimestamp(PrivateThread v) => v.archiveTimestamp;
   static const Field<PrivateThread, DateTime> _f$archiveTimestamp = Field(
     'archiveTimestamp',
     _$archiveTimestamp,
+    key: r'archive_timestamp',
   );
   static Duration _$autoArchiveDuration(PrivateThread v) =>
       v.autoArchiveDuration;
   static const Field<PrivateThread, Duration> _f$autoArchiveDuration = Field(
     'autoArchiveDuration',
     _$autoArchiveDuration,
+    key: r'auto_archive_duration',
   );
   static DateTime _$createdAt(PrivateThread v) => v.createdAt;
   static const Field<PrivateThread, DateTime> _f$createdAt = Field(
     'createdAt',
     _$createdAt,
+    key: r'created_at',
   );
   static Snowflake _$guildId(PrivateThread v) => v.guildId;
   static const Field<PrivateThread, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
+    key: r'guild_id',
   );
   static bool _$isArchived(PrivateThread v) => v.isArchived;
   static const Field<PrivateThread, bool> _f$isArchived = Field(
     'isArchived',
     _$isArchived,
+    key: r'is_archived',
   );
   static bool _$isLocked(PrivateThread v) => v.isLocked;
   static const Field<PrivateThread, bool> _f$isLocked = Field(
     'isLocked',
     _$isLocked,
+    key: r'is_locked',
   );
   static bool _$isNsfw(PrivateThread v) => v.isNsfw;
-  static const Field<PrivateThread, bool> _f$isNsfw = Field('isNsfw', _$isNsfw);
+  static const Field<PrivateThread, bool> _f$isNsfw = Field(
+    'isNsfw',
+    _$isNsfw,
+    key: r'is_nsfw',
+  );
   static Snowflake? _$lastMessageId(PrivateThread v) => v.lastMessageId;
   static const Field<PrivateThread, Snowflake> _f$lastMessageId = Field(
     'lastMessageId',
     _$lastMessageId,
+    key: r'last_message_id',
   );
   static DateTime? _$lastPinTimestamp(PrivateThread v) => v.lastPinTimestamp;
   static const Field<PrivateThread, DateTime> _f$lastPinTimestamp = Field(
     'lastPinTimestamp',
     _$lastPinTimestamp,
+    key: r'last_pin_timestamp',
   );
   static int _$messageCount(PrivateThread v) => v.messageCount;
   static const Field<PrivateThread, int> _f$messageCount = Field(
     'messageCount',
     _$messageCount,
+    key: r'message_count',
   );
   static String _$name(PrivateThread v) => v.name;
   static const Field<PrivateThread, String> _f$name = Field('name', _$name);
@@ -97,11 +113,13 @@ class PrivateThreadMapper extends ClassMapperBase<PrivateThread> {
   static const Field<PrivateThread, Snowflake> _f$ownerId = Field(
     'ownerId',
     _$ownerId,
+    key: r'owner_id',
   );
   static Snowflake? _$parentId(PrivateThread v) => v.parentId;
   static const Field<PrivateThread, Snowflake> _f$parentId = Field(
     'parentId',
     _$parentId,
+    key: r'parent_id',
   );
   static List<PermissionOverwrite> _$permissionOverwrites(PrivateThread v) =>
       v.permissionOverwrites;
@@ -109,6 +127,7 @@ class PrivateThreadMapper extends ClassMapperBase<PrivateThread> {
   _f$permissionOverwrites = Field(
     'permissionOverwrites',
     _$permissionOverwrites,
+    key: r'permission_overwrites',
   );
   static int _$position(PrivateThread v) => v.position;
   static const Field<PrivateThread, int> _f$position = Field(
@@ -119,11 +138,13 @@ class PrivateThreadMapper extends ClassMapperBase<PrivateThread> {
   static const Field<PrivateThread, Duration> _f$rateLimitPerUser = Field(
     'rateLimitPerUser',
     _$rateLimitPerUser,
+    key: r'rate_limit_per_user',
   );
   static int _$totalMessagesSent(PrivateThread v) => v.totalMessagesSent;
   static const Field<PrivateThread, int> _f$totalMessagesSent = Field(
     'totalMessagesSent',
     _$totalMessagesSent,
+    key: r'total_messages_sent',
   );
   static ChannelFlags? _$flags(PrivateThread v) => v.flags;
   static const Field<PrivateThread, ChannelFlags> _f$flags = Field(
@@ -156,6 +177,14 @@ class PrivateThreadMapper extends ClassMapperBase<PrivateThread> {
     #totalMessagesSent: _f$totalMessagesSent,
     #flags: _f$flags,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 12;
+  @override
+  late final ClassMapperBase superMapper =
+      TextChannelMapper.ensureInitialized();
 
   static PrivateThread _instantiate(DecodingData data) {
     return PrivateThread(
