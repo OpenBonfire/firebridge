@@ -366,6 +366,7 @@ class ForumThreadBuilderMapper extends ClassMapperBase<ForumThreadBuilder> {
   static ForumThreadBuilderMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ForumThreadBuilderMapper._());
+      MessageBuilderMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -495,6 +496,7 @@ abstract class ForumThreadBuilderCopyWith<
   $Out
 >
     implements ClassCopyWith<$R, $In, $Out> {
+  MessageBuilderCopyWith<$R, MessageBuilder, MessageBuilder> get message;
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>?
   get appliedTags;
   $R call({
@@ -517,6 +519,9 @@ class _ForumThreadBuilderCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<ForumThreadBuilder> $mapper =
       ForumThreadBuilderMapper.ensureInitialized();
+  @override
+  MessageBuilderCopyWith<$R, MessageBuilder, MessageBuilder> get message =>
+      $value.message.copyWith.$chain((v) => call(message: v));
   @override
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>?
   get appliedTags => $value.appliedTags != null

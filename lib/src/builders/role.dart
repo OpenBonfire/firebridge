@@ -1,3 +1,4 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/builder.dart';
 import 'package:nyxx/src/builders/image.dart';
 import 'package:nyxx/src/builders/sentinels.dart';
@@ -6,7 +7,11 @@ import 'package:nyxx/src/models/permissions.dart';
 import 'package:nyxx/src/models/role.dart';
 import 'package:nyxx/src/utils/flags.dart';
 
-class RoleColorsBuilder extends CreateBuilder<RoleColors> {
+part 'role.mapper.dart';
+
+@MappableClass()
+class RoleColorsBuilder extends CreateBuilder<RoleColors>
+    with RoleColorsBuilderMappable {
   DiscordColor primary;
 
   DiscordColor? secondary;
@@ -18,17 +23,11 @@ class RoleColorsBuilder extends CreateBuilder<RoleColors> {
     this.secondary,
     this.tertiary,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        'primary_color': primary.value,
-        if (secondary != null) 'secondary_color': secondary!.value,
-        if (tertiary != null) 'tertiary_color': tertiary!.value,
-      };
 }
 
 // TODO(lexedia): Remove color.
-class RoleBuilder extends CreateBuilder<Role> {
+@MappableClass()
+class RoleBuilder extends CreateBuilder<Role> with RoleBuilderMappable {
   String? name;
 
   Flags<Permissions>? permissions;
@@ -70,20 +69,11 @@ class RoleBuilder extends CreateBuilder<Role> {
       colors = null;
     }
   }
-
-  @override
-  Map<String, Object?> build() => {
-        if (name != null) 'name': name,
-        if (permissions != null) 'permissions': permissions!.value.toString(),
-        if (isHoisted != null) 'hoist': isHoisted,
-        if (icon != null) 'icon': icon!.buildDataString(),
-        if (unicodeEmoji != null) 'unicode_emoji': unicodeEmoji,
-        if (isMentionable != null) 'mentionable': isMentionable,
-        if (colors != null) 'colors': colors!.build(),
-      };
 }
 
-class RoleUpdateBuilder extends UpdateBuilder<Role> {
+@MappableClass()
+class RoleUpdateBuilder extends UpdateBuilder<Role>
+    with RoleUpdateBuilderMappable {
   String? name;
 
   Flags<Permissions>? permissions;
@@ -125,15 +115,4 @@ class RoleUpdateBuilder extends UpdateBuilder<Role> {
       colors = null;
     }
   }
-
-  @override
-  Map<String, Object?> build() => {
-        if (name != null) 'name': name,
-        if (permissions != null) 'permissions': permissions!.value.toString(),
-        if (isHoisted != null) 'hoist': isHoisted,
-        if (!identical(icon, sentinelImageBuilder)) 'icon': icon?.buildDataString(),
-        if (!identical(unicodeEmoji, sentinelString)) 'unicode_emoji': unicodeEmoji,
-        if (isMentionable != null) 'mentionable': isMentionable,
-        if (colors != null) 'colors': colors!.build(),
-      };
 }

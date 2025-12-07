@@ -4636,6 +4636,7 @@ class InteractionResourceMapper extends ClassMapperBase<InteractionResource> {
   static InteractionResourceMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = InteractionResourceMapper._());
+      InteractionCallbackTypeMapper.ensureInitialized();
       InteractionCallbackActivityInstanceResourceMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
     }

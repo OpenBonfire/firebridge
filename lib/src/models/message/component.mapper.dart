@@ -135,7 +135,7 @@ class ButtonStyleMapper extends EnumMapper<ButtonStyle> {
       case 1:
         return ButtonStyle.primary;
       case 2:
-        return ButtonStyle.seconday;
+        return ButtonStyle.secondary;
       case 3:
         return ButtonStyle.success;
       case 4:
@@ -154,7 +154,7 @@ class ButtonStyleMapper extends EnumMapper<ButtonStyle> {
     switch (self) {
       case ButtonStyle.primary:
         return 1;
-      case ButtonStyle.seconday:
+      case ButtonStyle.secondary:
         return 2;
       case ButtonStyle.success:
         return 3;

@@ -376,8 +376,10 @@ class GuildVoiceChannelBuilder
   }) : super(type: ChannelType.guildVoice);
 }
 
+@MappableClass()
 class GuildStageChannelBuilder
-    extends GuildVoiceOrStageChannelBuilder<GuildStageChannel> {
+    extends GuildVoiceOrStageChannelBuilder<GuildStageChannel>
+    with GuildStageChannelBuilderMappable {
   GuildStageChannelBuilder({
     required super.name,
     super.position,

@@ -147,7 +147,7 @@ enum ButtonStyle {
   @MappableValue(1)
   primary,
   @MappableValue(2)
-  seconday,
+  secondary,
   @MappableValue(3)
   success,
   @MappableValue(4)

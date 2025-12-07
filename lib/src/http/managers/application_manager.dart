@@ -35,7 +35,7 @@ class ApplicationManager {
       ApplicationUpdateBuilder builder) async {
     final route = HttpRoute()..applications(id: '@me');
     final request =
-        BasicRequest(route, method: 'PATCH', body: jsonEncode(builder.build()));
+        BasicRequest(route, method: 'PATCH', body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
     return ApplicationMapper.fromMap(response.jsonBody as Map<String, Object?>);

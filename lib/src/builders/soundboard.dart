@@ -1,11 +1,15 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/builder.dart';
 import 'package:nyxx/src/builders/sentinels.dart';
 import 'package:nyxx/src/builders/sound.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/soundboard/soundboard.dart';
-import 'package:nyxx/src/utils/building_helpers.dart';
 
-class SoundboardSoundBuilder extends CreateBuilder<SoundboardSound> {
+part 'soundboard.mapper.dart';
+
+@MappableClass()
+class SoundboardSoundBuilder extends CreateBuilder<SoundboardSound>
+    with SoundboardSoundBuilderMappable {
   String name;
 
   SoundBuilder sound;
@@ -16,18 +20,17 @@ class SoundboardSoundBuilder extends CreateBuilder<SoundboardSound> {
 
   Snowflake? emojiId;
 
-  SoundboardSoundBuilder({required this.name, required this.sound, this.volume, this.emojiName, this.emojiId});
-
-  @override
-  Map<String, Object?> build() => {
-        'name': name,
-        'sound': sound.buildDataString(),
-        if (volume != null) 'volume': volume,
-        ...makeEmojiMap(emojiId: emojiId, emojiName: emojiName),
-      };
+  SoundboardSoundBuilder(
+      {required this.name,
+      required this.sound,
+      this.volume,
+      this.emojiName,
+      this.emojiId});
 }
 
-class SoundboardSoundUpdateBuilder extends UpdateBuilder<SoundboardSound> {
+@MappableClass()
+class SoundboardSoundUpdateBuilder extends UpdateBuilder<SoundboardSound>
+    with SoundboardSoundUpdateBuilderMappable {
   String name;
 
   double? volume;
@@ -36,12 +39,9 @@ class SoundboardSoundUpdateBuilder extends UpdateBuilder<SoundboardSound> {
 
   Snowflake? emojiId;
 
-  SoundboardSoundUpdateBuilder({required this.name, this.volume = sentinelDouble, this.emojiName = sentinelString, this.emojiId = sentinelSnowflake});
-
-  @override
-  Map<String, Object?> build() => {
-        'name': name,
-        if (volume != sentinelDouble) 'volume': volume,
-        if (!(identical(emojiName, sentinelString) || identical(emojiId, sentinelSnowflake))) ...makeEmojiMap(emojiId: emojiId, emojiName: emojiName),
-      };
+  SoundboardSoundUpdateBuilder(
+      {required this.name,
+      this.volume = sentinelDouble,
+      this.emojiName = sentinelString,
+      this.emojiId = sentinelSnowflake});
 }

@@ -1,8 +1,12 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/builder.dart';
 import 'package:nyxx/src/models/discord_color.dart';
 import 'package:nyxx/src/models/message/embed.dart';
 
-class EmbedBuilder extends CreateBuilder<Embed> {
+part 'embed.mapper.dart';
+
+@MappableClass()
+class EmbedBuilder extends CreateBuilder<Embed> with EmbedBuilderMappable {
   String? title;
 
   String? description;
@@ -35,59 +39,37 @@ class EmbedBuilder extends CreateBuilder<Embed> {
     this.author,
     this.fields,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        if (title != null) 'title': title,
-        if (description != null) 'description': description,
-        if (url != null) 'url': url.toString(),
-        if (timestamp != null) 'timestamp': timestamp!.toIso8601String(),
-        if (color != null) 'color': color!.value,
-        if (footer != null) 'footer': footer!.build(),
-        if (image != null) 'image': image!.build(),
-        if (thumbnail != null) 'thumbnail': thumbnail!.build(),
-        if (author != null) 'author': author!.build(),
-        if (fields != null) 'fields': fields!.map((e) => e.build()).toList(),
-      };
 }
 
-class EmbedFooterBuilder extends CreateBuilder<EmbedFooter> {
+@MappableClass()
+class EmbedFooterBuilder extends CreateBuilder<EmbedFooter>
+    with EmbedFooterBuilderMappable {
   String text;
 
   Uri? iconUrl;
 
   EmbedFooterBuilder({required this.text, this.iconUrl});
-
-  @override
-  Map<String, Object?> build() => {
-        'text': text,
-        if (iconUrl != null) 'icon_url': iconUrl!.toString(),
-      };
 }
 
-class EmbedImageBuilder extends CreateBuilder<EmbedImage> {
+@MappableClass()
+class EmbedImageBuilder extends CreateBuilder<EmbedImage>
+    with EmbedImageBuilderMappable {
   Uri url;
 
   EmbedImageBuilder({required this.url});
-
-  @override
-  Map<String, Object?> build() => {
-        'url': url.toString(),
-      };
 }
 
-class EmbedThumbnailBuilder extends CreateBuilder<EmbedThumbnail> {
+@MappableClass()
+class EmbedThumbnailBuilder extends CreateBuilder<EmbedThumbnail>
+    with EmbedThumbnailBuilderMappable {
   Uri url;
 
   EmbedThumbnailBuilder({required this.url});
-
-  @override
-  Map<String, Object?> build() => {
-        'url': url.toString(),
-      };
 }
 
-class EmbedAuthorBuilder extends CreateBuilder<EmbedAuthor> {
+@MappableClass()
+class EmbedAuthorBuilder extends CreateBuilder<EmbedAuthor>
+    with EmbedAuthorBuilderMappable {
   String name;
 
   Uri? url;
@@ -95,16 +77,11 @@ class EmbedAuthorBuilder extends CreateBuilder<EmbedAuthor> {
   Uri? iconUrl;
 
   EmbedAuthorBuilder({required this.name, this.url, this.iconUrl});
-
-  @override
-  Map<String, Object?> build() => {
-        'name': name,
-        if (url != null) 'url': url!.toString(),
-        if (iconUrl != null) 'icon_url': iconUrl!.toString(),
-      };
 }
 
-class EmbedFieldBuilder extends CreateBuilder<EmbedField> {
+@MappableClass()
+class EmbedFieldBuilder extends CreateBuilder<EmbedField>
+    with EmbedFieldBuilderMappable {
   String name;
 
   String value;
@@ -116,11 +93,4 @@ class EmbedFieldBuilder extends CreateBuilder<EmbedField> {
     required this.value,
     required this.isInline,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        'name': name,
-        'value': value,
-        'inline': isInline,
-      };
 }

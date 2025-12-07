@@ -17,6 +17,7 @@ class GuildBuilderMapper extends ClassMapperBase<GuildBuilder> {
       VerificationLevelMapper.ensureInitialized();
       MessageNotificationLevelMapper.ensureInitialized();
       ExplicitContentFilterLevelMapper.ensureInitialized();
+      RoleBuilderMapper.ensureInitialized();
       GuildChannelBuilderMapper.ensureInitialized();
       GuildChannelMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
@@ -202,7 +203,11 @@ extension GuildBuilderValueCopy<$R, $Out>
 
 abstract class GuildBuilderCopyWith<$R, $In extends GuildBuilder, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  ListCopyWith<$R, RoleBuilder, ObjectCopyWith<$R, RoleBuilder, RoleBuilder>>?
+  ListCopyWith<
+    $R,
+    RoleBuilder,
+    RoleBuilderCopyWith<$R, RoleBuilder, RoleBuilder>
+  >?
   get roles;
   ListCopyWith<
     $R,
@@ -249,11 +254,15 @@ class _GuildBuilderCopyWithImpl<$R, $Out>
   late final ClassMapperBase<GuildBuilder> $mapper =
       GuildBuilderMapper.ensureInitialized();
   @override
-  ListCopyWith<$R, RoleBuilder, ObjectCopyWith<$R, RoleBuilder, RoleBuilder>>?
+  ListCopyWith<
+    $R,
+    RoleBuilder,
+    RoleBuilderCopyWith<$R, RoleBuilder, RoleBuilder>
+  >?
   get roles => $value.roles != null
       ? ListCopyWith(
           $value.roles!,
-          (v, t) => ObjectCopyWith(v, $identity, t),
+          (v, t) => v.copyWith.$chain(t),
           (v) => call(roles: v),
         )
       : null;

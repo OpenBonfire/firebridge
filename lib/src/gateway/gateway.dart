@@ -228,7 +228,7 @@ class Gateway extends GatewayManager with EventParser {
   /// Update the client's presence on all shards.
   void updatePresence(PresenceBuilder builder) {
     for (final shard in shards) {
-      shard.add(Send(opcode: Opcode.presenceUpdate, data: builder.build()));
+      shard.add(Send(opcode: Opcode.presenceUpdate, data: builder.toMap()));
     }
   }
 }

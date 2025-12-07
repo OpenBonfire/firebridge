@@ -1,31 +1,26 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/builder.dart';
 import 'package:nyxx/src/builders/sentinels.dart';
 import 'package:nyxx/src/models/guild/template.dart';
 
-class GuildTemplateBuilder extends CreateBuilder<GuildTemplate> {
+part 'template.mapper.dart';
+
+@MappableClass()
+class GuildTemplateBuilder extends CreateBuilder<GuildTemplate>
+    with GuildTemplateBuilderMappable {
   String name;
 
   String? description;
 
   GuildTemplateBuilder({required this.name, this.description = sentinelString});
-
-  @override
-  Map<String, Object?> build() => {
-        'name': name,
-        if (!identical(description, sentinelString)) 'description': description,
-      };
 }
 
-class GuildTemplateUpdateBuilder extends UpdateBuilder<GuildTemplate> {
+@MappableClass()
+class GuildTemplateUpdateBuilder extends UpdateBuilder<GuildTemplate>
+    with GuildTemplateUpdateBuilderMappable {
   String? name;
 
   String? description;
 
   GuildTemplateUpdateBuilder({this.name, this.description = sentinelString});
-
-  @override
-  Map<String, Object?> build() => {
-        if (name != null) 'name': name,
-        if (!identical(description, sentinelString)) 'description': description,
-      };
 }

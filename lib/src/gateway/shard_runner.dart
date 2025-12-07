@@ -52,7 +52,8 @@ class ShardRunner {
   late Uri gatewayUri = originalGatewayUri;
 
   /// The original URI to use when connecting to the Gateway for the first time or after an invalid session.
-  late final Uri originalGatewayUri = data.originalConnectionUri.replace(queryParameters: {
+  late final Uri originalGatewayUri =
+      data.originalConnectionUri.replace(queryParameters: {
     ...data.originalConnectionUri.queryParameters,
     ...data.apiOptions.gatewayConnectionOptions,
   });
@@ -110,7 +111,8 @@ class ShardRunner {
       } else if (message is StartShard) {
         if (startCompleter.isCompleted) {
           controller.add(ErrorReceived(
-            error: StateError('Received StartShard when shard was already started'),
+            error: StateError(
+                'Received StartShard when shard was already started'),
             stackTrace: StackTrace.current,
           ));
           return;
@@ -138,7 +140,8 @@ class ShardRunner {
           lastHeartbeatAcked = true;
 
           // Open the websocket connection.
-          connection = await ShardConnection.connect(gatewayUri.toString(), this);
+          connection =
+              await ShardConnection.connect(gatewayUri.toString(), this);
           connection!.onSent.listen(controller.add);
 
           // Obtain the heartbeat interval from the HELLO event and start heartbeating.
@@ -171,7 +174,8 @@ class ShardRunner {
               seq = event.seq;
 
               if (event.name == 'READY') {
-                final resumeUri = Uri.parse(event.payload['resume_gateway_url'] as String);
+                final resumeUri =
+                    Uri.parse(event.payload['resume_gateway_url'] as String);
 
                 gatewayUri = resumeUri.replace(queryParameters: {
                   ...resumeUri.queryParameters,
@@ -201,7 +205,8 @@ class ShardRunner {
               heartbeatStopwatch = null;
             } else if (event is HeartbeatEvent) {
               try {
-                await connection!.add(Send(opcode: Opcode.heartbeat, data: seq));
+                await connection!
+                    .add(Send(opcode: Opcode.heartbeat, data: seq));
               } on StateError {
                 // ignore: Connection closed while adding event.
               }
@@ -215,21 +220,30 @@ class ShardRunner {
 
           // Check if we can resume based on close code if the connection was closed by Discord.
           if (connection!.localCloseCode == null) {
-            if (connection!.remoteCloseCode == WebSocketStatus.noStatusReceived || connection!.remoteCloseCode == WebSocketStatus.abnormalClosure) {
-              controller.add(Reconnecting(reason: 'Gateway connection was closed'));
+            if (connection!.remoteCloseCode ==
+                    WebSocketStatus.noStatusReceived ||
+                connection!.remoteCloseCode ==
+                    WebSocketStatus.abnormalClosure) {
+              controller
+                  .add(Reconnecting(reason: 'Gateway connection was closed'));
             } else {
               // https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes
               const newSessionCodes = [4007, 4009];
               const errorCodes = [4004, 4010, 4011, 4012, 4013, 4014];
 
               if (errorCodes.contains(connection!.remoteCloseCode)) {
-                controller.add(Disconnecting(reason: 'Received error close code: ${connection!.remoteCloseCode}'));
+                controller.add(Disconnecting(
+                    reason:
+                        'Received error close code: ${connection!.remoteCloseCode}'));
                 return;
               }
 
-              canResume = !newSessionCodes.contains(connection!.remoteCloseCode);
+              canResume =
+                  !newSessionCodes.contains(connection!.remoteCloseCode);
 
-              controller.add(Reconnecting(reason: 'Connection was closed with code ${connection!.remoteCloseCode}'));
+              controller.add(Reconnecting(
+                  reason:
+                      'Connection was closed with code ${connection!.remoteCloseCode}'));
             }
           }
         } catch (error, stackTrace) {
@@ -296,10 +310,13 @@ class ShardRunner {
           'browser': 'nyxx',
           'device': 'nyxx',
         },
-        if (data.apiOptions.compression == GatewayCompression.payload) 'compress': true,
-        if (data.apiOptions.largeThreshold != null) 'large_threshold': data.apiOptions.largeThreshold,
+        if (data.apiOptions.compression == GatewayCompression.payload)
+          'compress': true,
+        if (data.apiOptions.largeThreshold != null)
+          'large_threshold': data.apiOptions.largeThreshold,
         'shard': [data.id, data.totalShards],
-        if (data.apiOptions.initialPresence != null) 'presence': data.apiOptions.initialPresence!.build(),
+        if (data.apiOptions.initialPresence != null)
+          'presence': data.apiOptions.initialPresence!.toMap(),
         'intents': data.apiOptions.intents.value,
       },
     ));
@@ -340,7 +357,8 @@ class ShardConnection extends Stream<GatewayEvent> implements StreamSink<Send> {
   int? localCloseCode;
 
   /// The code used to close this connection by the remote server, or `null` if this connection is open or was closed by calling [close].
-  int? get remoteCloseCode => localCloseCode == null ? websocket.closeCode : null;
+  int? get remoteCloseCode =>
+      localCloseCode == null ? websocket.closeCode : null;
 
   /// A stream on which [Sent] events are added.
   Stream<Sent> get onSent => _sentController.stream;
@@ -349,7 +367,9 @@ class ShardConnection extends Stream<GatewayEvent> implements StreamSink<Send> {
   /// The predicted number of heartbeats per [rateLimitDuration].
   ///
   /// The [rateLimitCount] is reduced by this value for any non heartbeat event so heartbeats can always be sent immediately.
-  int get rateLimitHeartbeatReservation => (rateLimitDuration.inMicroseconds / runner.heartbeatInterval!.inMicroseconds).ceil();
+  int get rateLimitHeartbeatReservation => (rateLimitDuration.inMicroseconds /
+          runner.heartbeatInterval!.inMicroseconds)
+      .ceil();
 
   /// The number of events sent in the current [rateLimitDuration].
   int _currentRateLimitCount = 0;
@@ -372,29 +392,34 @@ class ShardConnection extends Stream<GatewayEvent> implements StreamSink<Send> {
         _currentRateLimitEnd
           // Don't report an uncaught async error for the future.
           ..future.ignore()
-          ..completeError(StateError('Connection is closed'), StackTrace.current);
+          ..completeError(
+              StateError('Connection is closed'), StackTrace.current);
       }
       _sentController.close();
     });
   }
 
-  static Future<ShardConnection> connect(String gatewayUri, ShardRunner runner) async {
+  static Future<ShardConnection> connect(
+      String gatewayUri, ShardRunner runner) async {
     final connection = await WebSocket.connect(gatewayUri);
 
     final uncompressedStream = switch (runner.data.apiOptions.compression) {
-      GatewayCompression.transport => decompressTransport(connection.cast<List<int>>()),
+      GatewayCompression.transport =>
+        decompressTransport(connection.cast<List<int>>()),
       GatewayCompression.payload => decompressPayloads(connection),
       GatewayCompression.none => connection,
     };
 
     final dataStream = switch (runner.data.apiOptions.payloadFormat) {
       GatewayPayloadFormat.json => parseJson(uncompressedStream),
-      GatewayPayloadFormat.etf => parseEtf(uncompressedStream.cast<List<int>>()),
+      GatewayPayloadFormat.etf =>
+        parseEtf(uncompressedStream.cast<List<int>>()),
     };
 
     final parser = EventParser();
-    final eventStream =
-        dataStream.cast<Map<String, Object?>>().map((event) => parser.parseGatewayEvent(event, heartbeatLatency: runner.heartbeatStopwatch?.elapsed));
+    final eventStream = dataStream.cast<Map<String, Object?>>().map((event) =>
+        parser.parseGatewayEvent(event,
+            heartbeatLatency: runner.heartbeatStopwatch?.elapsed));
 
     return ShardConnection(connection, eventStream.asBroadcastStream(), runner);
   }
@@ -406,7 +431,8 @@ class ShardConnection extends Stream<GatewayEvent> implements StreamSink<Send> {
     void Function()? onDone,
     bool? cancelOnError,
   }) {
-    return events.listen(onData, cancelOnError: cancelOnError, onDone: onDone, onError: onError);
+    return events.listen(onData,
+        cancelOnError: cancelOnError, onDone: onDone, onError: onError);
   }
 
   @override
@@ -421,7 +447,8 @@ class ShardConnection extends Stream<GatewayEvent> implements StreamSink<Send> {
       GatewayPayloadFormat.etf => eterl.pack(payload),
     };
 
-    final rateLimitLimit = event.opcode == Opcode.heartbeat ? 0 : rateLimitHeartbeatReservation;
+    final rateLimitLimit =
+        event.opcode == Opcode.heartbeat ? 0 : rateLimitHeartbeatReservation;
     while (rateLimitCount - _currentRateLimitCount <= rateLimitLimit) {
       try {
         await _currentRateLimitEnd.future;
@@ -441,7 +468,8 @@ class ShardConnection extends Stream<GatewayEvent> implements StreamSink<Send> {
   }
 
   @override
-  void addError(Object error, [StackTrace? stackTrace]) => websocket.addError(error, stackTrace);
+  void addError(Object error, [StackTrace? stackTrace]) =>
+      websocket.addError(error, stackTrace);
 
   @override
   Future<void> addStream(Stream<Send> stream) => stream.forEach(add);
@@ -466,7 +494,9 @@ Stream<dynamic> decompressTransport(Stream<List<int>> raw) {
     filter.process(chunk, 0, chunk.length);
 
     final buffer = <int>[];
-    for (List<int>? decoded = []; decoded != null; decoded = filter.processed()) {
+    for (List<int>? decoded = [];
+        decoded != null;
+        decoded = filter.processed()) {
       buffer.addAll(decoded);
     }
 
@@ -483,9 +513,11 @@ Stream<dynamic> decompressPayloads(Stream<dynamic> raw) => raw.map((message) {
     });
 
 Stream<dynamic> parseJson(Stream<dynamic> raw) => raw.map((message) {
-      final source = message is String ? message : utf8.decode(message as List<int>);
+      final source =
+          message is String ? message : utf8.decode(message as List<int>);
 
       return jsonDecode(source);
     });
 
-Stream<dynamic> parseEtf(Stream<List<int>> raw) => raw.transform(eterl.unpacker());
+Stream<dynamic> parseEtf(Stream<List<int>> raw) =>
+    raw.transform(eterl.unpacker());

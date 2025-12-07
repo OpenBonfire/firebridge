@@ -1,10 +1,16 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/builder.dart';
 import 'package:nyxx/src/builders/image.dart';
 import 'package:nyxx/src/builders/sentinels.dart';
 import 'package:nyxx/src/models/emoji.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 
-class EmojiBuilder implements CreateBuilder<GuildEmoji> {
+part 'emoji.mapper.dart';
+
+@MappableClass()
+class EmojiBuilder
+    with EmojiBuilderMappable
+    implements CreateBuilder<GuildEmoji> {
   /// The name of the emoji.
   String name;
 
@@ -19,16 +25,12 @@ class EmojiBuilder implements CreateBuilder<GuildEmoji> {
     required this.image,
     required this.roles,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        'name': name,
-        'image': image.buildDataString(),
-        'roles': roles.map((s) => s.toString()).toList(),
-      };
 }
 
-class EmojiUpdateBuilder implements UpdateBuilder<GuildEmoji> {
+@MappableClass()
+class EmojiUpdateBuilder
+    with EmojiUpdateBuilderMappable
+    implements UpdateBuilder<GuildEmoji> {
   /// The name of the emoji.
   String? name;
 
@@ -39,15 +41,12 @@ class EmojiUpdateBuilder implements UpdateBuilder<GuildEmoji> {
     this.name,
     this.roles = sentinelList,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        if (name != null) 'name': name,
-        if (!identical(roles, sentinelList)) 'roles': roles?.map((s) => s.toString()).toList(),
-      };
 }
 
-class ApplicationEmojiBuilder implements CreateBuilder<ApplicationEmoji> {
+@MappableClass()
+class ApplicationEmojiBuilder
+    with ApplicationEmojiBuilderMappable
+    implements CreateBuilder<ApplicationEmoji> {
   /// The name of the emoji.
   String name;
 
@@ -58,24 +57,16 @@ class ApplicationEmojiBuilder implements CreateBuilder<ApplicationEmoji> {
     required this.name,
     required this.image,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        'name': name,
-        'image': image.buildDataString(),
-      };
 }
 
-class ApplicationEmojiUpdateBuilder implements UpdateBuilder<ApplicationEmoji> {
+@MappableClass()
+class ApplicationEmojiUpdateBuilder
+    with ApplicationEmojiUpdateBuilderMappable
+    implements UpdateBuilder<ApplicationEmoji> {
   /// The name of the emoji.
   String? name;
 
   ApplicationEmojiUpdateBuilder({
     this.name,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        if (name != null) 'name': name,
-      };
 }

@@ -1,8 +1,13 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/builder.dart';
 import 'package:nyxx/src/models/gateway/events/presence.dart';
 import 'package:nyxx/src/models/presence.dart';
 
-class PresenceBuilder extends CreateBuilder<PresenceUpdateEvent> {
+part 'presence.mapper.dart';
+
+@MappableClass()
+class PresenceBuilder extends CreateBuilder<PresenceUpdateEvent>
+    with PresenceBuilderMappable {
   DateTime? since;
 
   List<ActivityBuilder>? activities;
@@ -11,33 +16,16 @@ class PresenceBuilder extends CreateBuilder<PresenceUpdateEvent> {
 
   bool isAfk;
 
-  PresenceBuilder({this.since, this.activities, required this.status, required this.isAfk});
-
-  @override
-  Map<String, Object?> build() => {
-        'since': since?.millisecondsSinceEpoch,
-        'activities': activities?.map((e) => e.build()).toList(),
-        'status': status.value,
-        'afk': isAfk,
-      };
+  PresenceBuilder(
+      {this.since, this.activities, required this.status, required this.isAfk});
 }
 
-enum CurrentUserStatus {
-  online._('online'),
-  dnd._('dnd'),
-  idle._('idle'),
-  invisible._('invisible'),
-  offline._('offline');
+@MappableEnum()
+enum CurrentUserStatus { online, dnd, idle, invisible, offline }
 
-  final String value;
-
-  const CurrentUserStatus._(this.value);
-
-  @override
-  String toString() => 'CurrentUserStatus($value)';
-}
-
-class ActivityBuilder extends CreateBuilder<Activity> {
+@MappableClass()
+class ActivityBuilder extends CreateBuilder<Activity>
+    with ActivityBuilderMappable {
   String name;
 
   String? state;
@@ -46,13 +34,6 @@ class ActivityBuilder extends CreateBuilder<Activity> {
 
   Uri? url;
 
-  ActivityBuilder({required this.name, required this.type, this.state, this.url});
-
-  @override
-  Map<String, Object?> build() => {
-        'name': name,
-        'type': type.value,
-        if (state != null) 'state': state!,
-        if (url != null) 'url': url!.toString(),
-      };
+  ActivityBuilder(
+      {required this.name, required this.type, this.state, this.url});
 }

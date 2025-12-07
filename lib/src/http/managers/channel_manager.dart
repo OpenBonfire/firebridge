@@ -256,7 +256,7 @@ class ChannelManager extends ReadOnlyManager<Channel> {
     } else {
       request = BasicRequest(route,
           method: 'POST',
-          body: jsonEncode(builder.build()),
+          body: jsonEncode(builder.toMap()),
           auditLogReason: auditLogReason);
     }
 

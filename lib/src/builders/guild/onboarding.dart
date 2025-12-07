@@ -1,9 +1,14 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/builder.dart';
 import 'package:nyxx/src/models/emoji.dart';
 import 'package:nyxx/src/models/guild/onboarding.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 
-class OnboardingUpdateBuilder extends UpdateBuilder<Onboarding> {
+part 'onboarding.mapper.dart';
+
+@MappableClass()
+class OnboardingUpdateBuilder extends UpdateBuilder<Onboarding>
+    with OnboardingUpdateBuilderMappable {
   List<OnboardingPromptBuilder> prompts;
 
   List<Snowflake> defaultChannelIds;
@@ -18,17 +23,11 @@ class OnboardingUpdateBuilder extends UpdateBuilder<Onboarding> {
     required this.isEnabled,
     required this.mode,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        'prompts': prompts.map((prompt) => prompt.build()).toList(),
-        'default_channel_ids': defaultChannelIds.map((channelId) => channelId.toString()).toList(),
-        'enabled': isEnabled,
-        'mode': mode.value,
-      };
 }
 
-class OnboardingPromptBuilder extends CreateBuilder<OnboardingPrompt> {
+@MappableClass()
+class OnboardingPromptBuilder extends CreateBuilder<OnboardingPrompt>
+    with OnboardingPromptBuilderMappable {
   OnboardingPromptType type;
 
   List<OnboardingPromptOptionBuilder> options;
@@ -49,19 +48,12 @@ class OnboardingPromptBuilder extends CreateBuilder<OnboardingPrompt> {
     required this.isRequired,
     required this.isInOnboarding,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        'type': type.value,
-        'options': options.map((option) => option.build()).toList(),
-        'title': title,
-        'single_select': isSingleSelect,
-        'required': isRequired,
-        'in_onboarding': isInOnboarding,
-      };
 }
 
-class OnboardingPromptOptionBuilder extends CreateBuilder<OnboardingPromptOption> {
+@MappableClass()
+class OnboardingPromptOptionBuilder
+    extends CreateBuilder<OnboardingPromptOption>
+    with OnboardingPromptOptionBuilderMappable {
   List<Snowflake> channelIds;
 
   List<Snowflake> roleIds;
@@ -79,17 +71,4 @@ class OnboardingPromptOptionBuilder extends CreateBuilder<OnboardingPromptOption
     required this.title,
     this.description,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        'channel_ids': channelIds.map((id) => id.toString()).toList(),
-        'role_ids': roleIds.map((id) => id.toString()).toList(),
-        if (emoji case final emoji?) 'emoji_name': emoji.name,
-        if (emoji case GuildEmoji emoji) ...{
-          'emoji_id': emoji.id,
-          'emoji_animated': emoji.isAnimated,
-        },
-        'title': title,
-        'description': description,
-      };
 }

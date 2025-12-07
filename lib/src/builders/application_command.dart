@@ -1,3 +1,4 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/builder.dart';
 import 'package:nyxx/src/builders/sentinels.dart';
 import 'package:nyxx/src/models/application.dart';
@@ -9,7 +10,11 @@ import 'package:nyxx/src/models/locale.dart';
 import 'package:nyxx/src/models/permissions.dart';
 import 'package:nyxx/src/utils/flags.dart';
 
-class ApplicationCommandBuilder extends CreateBuilder<ApplicationCommand> {
+part 'application_command.mapper.dart';
+
+@MappableClass()
+class ApplicationCommandBuilder extends CreateBuilder<ApplicationCommand>
+    with ApplicationCommandBuilderMappable {
   String name;
 
   Map<Locale, String>? nameLocalizations;
@@ -87,26 +92,11 @@ class ApplicationCommandBuilder extends CreateBuilder<ApplicationCommand> {
         description = null,
         descriptionLocalizations = null,
         options = null;
-
-  @override
-  Map<String, Object?> build() => {
-        'name': name,
-        if (nameLocalizations != null) 'name_localizations': {for (final MapEntry(:key, :value) in nameLocalizations!.entries) key.identifier: value},
-        if (description != null) 'description': description,
-        if (descriptionLocalizations != null)
-          'description_localizations': {for (final MapEntry(:key, :value) in descriptionLocalizations!.entries) key.identifier: value},
-        if (options != null) 'options': options!.map((e) => e.build()).toList(),
-        if (defaultMemberPermissions != null) 'default_member_permissions': defaultMemberPermissions!.value.toString(),
-        // ignore: deprecated_member_use_from_same_package
-        if (hasDmPermission != null) 'dm_permission': hasDmPermission,
-        'type': type.value,
-        if (isNsfw != null) 'nsfw': isNsfw,
-        if (integrationTypes != null) 'integration_types': integrationTypes!.map((type) => type.value).toList(),
-        if (contexts != null) 'contexts': contexts!.map((type) => type.value).toList(),
-      };
 }
 
-class ApplicationCommandUpdateBuilder extends UpdateBuilder<ApplicationCommand> {
+@MappableClass()
+class ApplicationCommandUpdateBuilder extends UpdateBuilder<ApplicationCommand>
+    with ApplicationCommandUpdateBuilderMappable {
   String? name;
 
   Map<Locale, String>? nameLocalizations;
@@ -179,25 +169,11 @@ class ApplicationCommandUpdateBuilder extends UpdateBuilder<ApplicationCommand> 
   })  : description = null,
         descriptionLocalizations = null,
         options = null;
-
-  @override
-  Map<String, Object?> build() => {
-        if (name != null) 'name': name,
-        if (!identical(nameLocalizations, sentinelMap)) 'name_localizations': nameLocalizations?.map((key, value) => MapEntry(key.toString(), value)),
-        if (description != null) 'description': description,
-        if (!identical(descriptionLocalizations, sentinelMap))
-          'description_localizations': descriptionLocalizations?.map((key, value) => MapEntry(key.toString(), value)),
-        if (options != null) 'options': options!.map((e) => e.build()).toList(),
-        if (!identical(defaultMemberPermissions, sentinelFlags)) 'default_member_permissions': defaultMemberPermissions?.value.toString(),
-        // ignore: deprecated_member_use_from_same_package
-        if (hasDmPermission != null) 'dm_permission': hasDmPermission,
-        if (isNsfw != null) 'nsfw': isNsfw,
-        if (integrationTypes != null) 'integration_types': integrationTypes!.map((type) => type.value).toList(),
-        if (contexts != null) 'contexts': contexts!.map((type) => type.value).toList(),
-      };
 }
 
-class CommandOptionBuilder extends CreateBuilder<CommandOption> {
+@MappableClass()
+class CommandOptionBuilder extends CreateBuilder<CommandOption>
+    with CommandOptionBuilderMappable {
   CommandOptionType type;
 
   String name;
@@ -418,40 +394,17 @@ class CommandOptionBuilder extends CreateBuilder<CommandOption> {
         minLength = null,
         maxLength = null,
         hasAutocomplete = null;
-
-  @override
-  Map<String, Object?> build() => {
-        'type': type.value,
-        'name': name,
-        if (nameLocalizations != null) 'name_localizations': {for (final MapEntry(:key, :value) in nameLocalizations!.entries) key.identifier: value},
-        'description': description,
-        if (descriptionLocalizations != null)
-          'description_localizations': {for (final MapEntry(:key, :value) in descriptionLocalizations!.entries) key.identifier: value},
-        if (isRequired != null) 'required': isRequired,
-        if (choices != null) 'choices': choices!.map((e) => e.build()).toList(),
-        if (options != null) 'options': options!.map((e) => e.build()).toList(),
-        if (channelTypes != null) 'channel_types': channelTypes!.map((e) => e.value).toList(),
-        if (minValue != null) 'min_value': minValue,
-        if (maxValue != null) 'max_value': maxValue,
-        if (minLength != null) 'min_length': minLength,
-        if (maxLength != null) 'max_length': maxLength,
-        if (hasAutocomplete != null) 'autocomplete': hasAutocomplete,
-      };
 }
 
-class CommandOptionChoiceBuilder<T> extends CreateBuilder<CommandOptionChoice> {
+@MappableClass()
+class CommandOptionChoiceBuilder<T> extends CreateBuilder<CommandOptionChoice>
+    with CommandOptionChoiceBuilderMappable {
   String name;
 
   Map<Locale, String>? nameLocalizations;
 
   T value;
 
-  CommandOptionChoiceBuilder({required this.name, this.nameLocalizations, required this.value});
-
-  @override
-  Map<String, Object?> build() => {
-        'name': name,
-        if (nameLocalizations != null) 'name_localizations': {for (final MapEntry(:key, :value) in nameLocalizations!.entries) key.identifier: value},
-        'value': value,
-      };
+  CommandOptionChoiceBuilder(
+      {required this.name, this.nameLocalizations, required this.value});
 }

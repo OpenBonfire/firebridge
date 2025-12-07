@@ -1,3 +1,4 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/builder.dart';
 import 'package:nyxx/src/builders/message/allowed_mentions.dart';
 import 'package:nyxx/src/builders/message/attachment.dart';
@@ -5,13 +6,18 @@ import 'package:nyxx/src/builders/message/component.dart';
 import 'package:nyxx/src/builders/message/embed.dart';
 import 'package:nyxx/src/builders/message/poll.dart';
 import 'package:nyxx/src/builders/sentinels.dart';
+import 'package:nyxx/src/models/message/component.dart';
 import 'package:nyxx/src/models/message/message.dart';
 import 'package:nyxx/src/models/message/reference.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/utils/flags.dart';
 
+part 'message.mapper.dart';
+
 // TODO(abitofevrything): Remove replyId, requireReplyToExist, suppressEmbeds and suppressNotifications.
-class MessageBuilder extends CreateBuilder<Message> {
+@MappableClass()
+class MessageBuilder extends CreateBuilder<Message>
+    with MessageBuilderMappable {
   String? content;
 
   dynamic /* int | String */ nonce;
@@ -57,7 +63,8 @@ class MessageBuilder extends CreateBuilder<Message> {
     this.poll,
   }) {
     if (replyId != null) {
-      assert(referencedMessage == null, 'Cannot set replyId if referencedMessage is non-null');
+      assert(referencedMessage == null,
+          'Cannot set replyId if referencedMessage is non-null');
       referencedMessage = MessageReferenceBuilder(
         type: MessageReferenceType.defaultType,
         messageId: replyId,
@@ -112,7 +119,8 @@ class MessageBuilder extends CreateBuilder<Message> {
   }
 
   @Deprecated('Use flags instead')
-  bool? get suppressNotifications => MessageFlags(flags?.value ?? 0).suppressesNotifications;
+  bool? get suppressNotifications =>
+      MessageFlags(flags?.value ?? 0).suppressesNotifications;
 
   @Deprecated('Use flags instead')
   set suppressNotifications(bool? suppressNotifications) {
@@ -122,25 +130,11 @@ class MessageBuilder extends CreateBuilder<Message> {
       flags = (flags ?? MessageFlags(0)) & ~MessageFlags.suppressNotifications;
     }
   }
-
-  @override
-  Map<String, Object?> build() => {
-        if (content != null) 'content': content,
-        if (nonce != null) 'nonce': nonce,
-        if (tts != null) 'tts': tts,
-        if (embeds != null) 'embeds': embeds!.map((e) => e.build()).toList(),
-        if (allowedMentions != null) 'allowed_mentions': allowedMentions!.build(),
-        if (referencedMessage != null) 'message_reference': referencedMessage!.build(),
-        if (components != null) 'components': components!.map((e) => e.build()).toList(),
-        if (stickerIds != null) 'sticker_ids': stickerIds!.map((e) => e.toString()).toList(),
-        if (attachments != null) 'attachments': attachments!.map((e) => e.build()).toList(),
-        if (flags != null) 'flags': flags!.value,
-        if (enforceNonce != null) 'enforce_nonce': enforceNonce,
-        if (poll != null) 'poll': poll!.build(),
-      };
 }
 
-class MessageUpdateBuilder extends UpdateBuilder<Message> {
+@MappableClass()
+class MessageUpdateBuilder extends UpdateBuilder<Message>
+    with MessageUpdateBuilderMappable {
   String? content;
 
   List<EmbedBuilder>? embeds;
@@ -165,20 +159,11 @@ class MessageUpdateBuilder extends UpdateBuilder<Message> {
     this.attachments = sentinelList,
     this.poll,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        if (!identical(content, sentinelString)) 'content': content,
-        if (!identical(embeds, sentinelList)) 'embeds': embeds!.map((e) => e.build()).toList(),
-        if (allowedMentions != null) 'allowed_mentions': allowedMentions!.build(),
-        if (components != null) 'components': components!.map((e) => e.build()).toList(),
-        if (!identical(attachments, sentinelList)) 'attachments': attachments!.map((e) => e.build()).toList(),
-        if (suppressEmbeds != null) 'flags': (suppressEmbeds == true ? MessageFlags.suppressEmbeds.value : 0),
-        if (poll != null) 'poll': poll!.build(),
-      };
 }
 
-class MessageReferenceBuilder extends CreateBuilder<MessageReference> {
+@MappableClass()
+class MessageReferenceBuilder extends CreateBuilder<MessageReference>
+    with MessageReferenceBuilderMappable {
   MessageReferenceType type;
 
   Snowflake messageId;
@@ -210,13 +195,4 @@ class MessageReferenceBuilder extends CreateBuilder<MessageReference> {
     this.guildId,
     this.failIfInexistent,
   }) : type = MessageReferenceType.forward;
-
-  @override
-  Map<String, Object?> build() => {
-        'type': type.value,
-        'message_id': messageId.toString(),
-        if (channelId != null) 'channel_id': channelId!.toString(),
-        if (guildId != null) 'guild_id': guildId!.toString(),
-        if (failIfInexistent != null) 'fail_if_not_exists': failIfInexistent,
-      };
 }
