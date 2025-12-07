@@ -217,7 +217,11 @@ class Gateway extends GatewayManager with EventParser {
 
   /// Parse a [DispatchEvent] from [raw].
   DispatchEvent parseDispatchEvent(RawDispatchEvent raw) {
-    final event = DispatchEventMapper.fromMap(raw.payload);
+    final event = DispatchEventMapper.fromMap({
+      'type': raw.name,
+      'payload': raw,
+      ...raw.payload,
+    });
     return event;
   }
 

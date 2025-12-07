@@ -292,10 +292,10 @@ class UnknownDispatchEventMapper
   @override
   final String id = 'UnknownDispatchEvent';
 
-  static RawDispatchEvent _$raw(UnknownDispatchEvent v) => v.raw;
-  static const Field<UnknownDispatchEvent, RawDispatchEvent> _f$raw = Field(
-    'raw',
-    _$raw,
+  static RawDispatchEvent _$payload(UnknownDispatchEvent v) => v.payload;
+  static const Field<UnknownDispatchEvent, RawDispatchEvent> _f$payload = Field(
+    'payload',
+    _$payload,
   );
   static Opcode _$opcode(UnknownDispatchEvent v) => v.opcode;
   static const Field<UnknownDispatchEvent, Opcode> _f$opcode = Field(
@@ -306,7 +306,7 @@ class UnknownDispatchEventMapper
 
   @override
   final MappableFields<UnknownDispatchEvent> fields = const {
-    #raw: _f$raw,
+    #payload: _f$payload,
     #opcode: _f$opcode,
   };
 
@@ -319,7 +319,7 @@ class UnknownDispatchEventMapper
       DispatchEventMapper.ensureInitialized();
 
   static UnknownDispatchEvent _instantiate(DecodingData data) {
-    return UnknownDispatchEvent(raw: data.dec(_f$raw));
+    return UnknownDispatchEvent(payload: data.dec(_f$payload));
   }
 
   @override
@@ -392,9 +392,9 @@ abstract class UnknownDispatchEventCopyWith<
   $Out
 >
     implements DispatchEventCopyWith<$R, $In, $Out> {
-  RawDispatchEventCopyWith<$R, RawDispatchEvent, RawDispatchEvent> get raw;
+  RawDispatchEventCopyWith<$R, RawDispatchEvent, RawDispatchEvent> get payload;
   @override
-  $R call({RawDispatchEvent? raw});
+  $R call({RawDispatchEvent? payload});
   UnknownDispatchEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -409,14 +409,14 @@ class _UnknownDispatchEventCopyWithImpl<$R, $Out>
   late final ClassMapperBase<UnknownDispatchEvent> $mapper =
       UnknownDispatchEventMapper.ensureInitialized();
   @override
-  RawDispatchEventCopyWith<$R, RawDispatchEvent, RawDispatchEvent> get raw =>
-      $value.raw.copyWith.$chain((v) => call(raw: v));
+  RawDispatchEventCopyWith<$R, RawDispatchEvent, RawDispatchEvent>
+  get payload => $value.payload.copyWith.$chain((v) => call(payload: v));
   @override
-  $R call({RawDispatchEvent? raw}) =>
-      $apply(FieldCopyWithData({if (raw != null) #raw: raw}));
+  $R call({RawDispatchEvent? payload}) =>
+      $apply(FieldCopyWithData({if (payload != null) #payload: payload}));
   @override
   UnknownDispatchEvent $make(CopyWithData data) =>
-      UnknownDispatchEvent(raw: data.get(#raw, or: $value.raw));
+      UnknownDispatchEvent(payload: data.get(#payload, or: $value.payload));
 
   @override
   UnknownDispatchEventCopyWith<$R2, UnknownDispatchEvent, $Out2>

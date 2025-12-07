@@ -59,11 +59,11 @@ abstract class DispatchEvent extends GatewayEvent with DispatchEventMappable {
 class UnknownDispatchEvent extends DispatchEvent
     with UnknownDispatchEventMappable {
   /// The [RawDispatchEvent] that couldn't be parsed.
-  final RawDispatchEvent raw;
+  final RawDispatchEvent payload;
 
   /// {@macro unknown_dispatch_event}
   /// @nodoc
-  UnknownDispatchEvent({required this.raw});
+  UnknownDispatchEvent({required this.payload});
 }
 
 /// {@template heartbeat_event}
