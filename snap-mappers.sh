@@ -1,0 +1,1 @@
+find . -name "*.mapper.dart" -type f -delete
