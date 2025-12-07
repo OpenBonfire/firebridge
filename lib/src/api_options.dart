@@ -1,18 +1,12 @@
 import 'package:nyxx/src/builders/presence.dart';
 import 'package:nyxx/src/intents.dart';
 import 'package:nyxx/src/utils/flags.dart';
-import 'package:oauth2/oauth2.dart';
 
 /// Options for connecting to the Discord API.
 abstract class ApiOptions {
-  /// The version of nyxx used in [defaultUserAgent].
-  static const nyxxVersion = '6.8.0-dev.1';
-
-  /// The URL to the nyxx repository used in [defaultUserAgent].
-  static const nyxxRepositoryUrl = 'https://github.com/nyxx-discord/nyxx';
-
-  /// The default value for the `User-Agent` header for bots made with nyxx.
-  static const defaultUserAgent = 'DiscordBot ($nyxxRepositoryUrl, $nyxxVersion)';
+  /// The default value for the `User-Agent` header.
+  static const defaultUserAgent =
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36';
 
   /// The host at which the API can be found.
   ///
@@ -23,7 +17,7 @@ abstract class ApiOptions {
   String get baseUri => '/api/v$apiVersion';
 
   /// The version of the API to use.
-  int get apiVersion => 10;
+  int get apiVersion => 9;
 
   /// The value of the `Authorization` header to use when authenticating requests.
   String get authorizationHeader;
@@ -46,25 +40,10 @@ class RestApiOptions extends ApiOptions {
   final String token;
 
   @override
-  String get authorizationHeader => 'Bot $token';
+  String get authorizationHeader => token;
 
   /// Create a new [RestApiOptions].
   RestApiOptions({required this.token, super.userAgent});
-}
-
-/// Options for connecting the the Discord API using credentials from an OAuth2 flow.
-class OAuth2ApiOptions extends ApiOptions implements RestApiOptions {
-  /// The credentials to use when connecting to the API.
-  Credentials credentials;
-
-  @override
-  String get token => credentials.accessToken;
-
-  @override
-  String get authorizationHeader => 'Bearer ${credentials.accessToken}';
-
-  /// Create a new [OAuth2ApiOptions].
-  OAuth2ApiOptions({required this.credentials, super.userAgent});
 }
 
 /// Options for connecting to the Discord API for making HTTP requests and connecting to the Gateway
@@ -99,7 +78,8 @@ class GatewayApiOptions extends RestApiOptions {
   Map<String, String> get gatewayConnectionOptions => {
         'v': apiVersion.toString(),
         'encoding': payloadFormat.value,
-        if (compression == GatewayCompression.transport) 'compress': 'zlib-stream',
+        if (compression == GatewayCompression.transport)
+          'compress': 'zlib-stream',
       };
 
   /// Create a new [GatewayApiOptions].
