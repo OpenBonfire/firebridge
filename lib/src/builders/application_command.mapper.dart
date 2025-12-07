@@ -18,6 +18,7 @@ class ApplicationCommandBuilderMapper
         _instance = ApplicationCommandBuilderMapper._(),
       );
       ApplicationCommandTypeMapper.ensureInitialized();
+      LocaleMapper.ensureInitialized();
       CommandOptionBuilderMapper.ensureInitialized();
       FlagsMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
@@ -401,6 +402,7 @@ class CommandOptionBuilderMapper extends ClassMapperBase<CommandOptionBuilder> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = CommandOptionBuilderMapper._());
       CommandOptionTypeMapper.ensureInitialized();
+      LocaleMapper.ensureInitialized();
       CommandOptionChoiceBuilderMapper.ensureInitialized();
       CommandOptionBuilderMapper.ensureInitialized();
       ChannelTypeMapper.ensureInitialized();
@@ -796,6 +798,7 @@ class CommandOptionChoiceBuilderMapper
       MapperContainer.globals.use(
         _instance = CommandOptionChoiceBuilderMapper._(),
       );
+      LocaleMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -997,6 +1000,7 @@ class ApplicationCommandUpdateBuilderMapper
       MapperContainer.globals.use(
         _instance = ApplicationCommandUpdateBuilderMapper._(),
       );
+      LocaleMapper.ensureInitialized();
       CommandOptionBuilderMapper.ensureInitialized();
       FlagsMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();

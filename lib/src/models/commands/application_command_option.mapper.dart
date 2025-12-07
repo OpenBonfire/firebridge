@@ -97,6 +97,7 @@ class CommandOptionMapper extends ClassMapperBase<CommandOption> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = CommandOptionMapper._());
       CommandOptionTypeMapper.ensureInitialized();
+      LocaleMapper.ensureInitialized();
       CommandOptionChoiceMapper.ensureInitialized();
       CommandOptionMapper.ensureInitialized();
       ChannelTypeMapper.ensureInitialized();
@@ -455,6 +456,7 @@ class CommandOptionChoiceMapper extends ClassMapperBase<CommandOptionChoice> {
   static CommandOptionChoiceMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = CommandOptionChoiceMapper._());
+      LocaleMapper.ensureInitialized();
     }
     return _instance!;
   }

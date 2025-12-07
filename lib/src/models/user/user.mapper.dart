@@ -189,6 +189,7 @@ class UserMapper extends ClassMapperBase<User> {
       PartialUserMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       DiscordColorMapper.ensureInitialized();
+      LocaleMapper.ensureInitialized();
       UserFlagsMapper.ensureInitialized();
       NitroTypeMapper.ensureInitialized();
       UserPrimaryGuildMapper.ensureInitialized();

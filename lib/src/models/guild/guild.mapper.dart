@@ -815,6 +815,7 @@ class GuildMapper extends ClassMapperBase<Guild> {
       MfaLevelMapper.ensureInitialized();
       SystemChannelFlagsMapper.ensureInitialized();
       PremiumTierMapper.ensureInitialized();
+      LocaleMapper.ensureInitialized();
       WelcomeScreenMapper.ensureInitialized();
       NsfwLevelMapper.ensureInitialized();
       EmojiMapper.ensureInitialized();

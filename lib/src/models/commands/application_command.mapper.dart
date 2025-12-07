@@ -209,6 +209,7 @@ class ApplicationCommandMapper extends ClassMapperBase<ApplicationCommand> {
       PartialApplicationCommandMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       ApplicationCommandTypeMapper.ensureInitialized();
+      LocaleMapper.ensureInitialized();
       CommandOptionMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
       InteractionContextTypeMapper.ensureInitialized();

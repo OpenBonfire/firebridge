@@ -376,6 +376,7 @@ class GuildUpdateBuilderMapper extends ClassMapperBase<GuildUpdateBuilder> {
       SnowflakeMapper.ensureInitialized();
       FlagsMapper.ensureInitialized();
       SystemChannelFlagsMapper.ensureInitialized();
+      LocaleMapper.ensureInitialized();
       GuildFeaturesMapper.ensureInitialized();
     }
     return _instance!;

@@ -134,6 +134,7 @@ class InteractionMapper extends ClassMapperBase<Interaction> {
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
+      LocaleMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
       InteractionContextTypeMapper.ensureInitialized();
@@ -624,6 +625,7 @@ class PingInteractionMapper extends ClassMapperBase<PingInteraction> {
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
+      LocaleMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
       InteractionContextTypeMapper.ensureInitialized();
@@ -1053,6 +1055,7 @@ class ApplicationCommandInteractionMapper
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
+      LocaleMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
       InteractionContextTypeMapper.ensureInitialized();
@@ -1996,6 +1999,7 @@ class MessageComponentInteractionMapper
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
+      LocaleMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
       InteractionContextTypeMapper.ensureInitialized();
@@ -2677,6 +2681,7 @@ class ModalSubmitInteractionMapper
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
+      LocaleMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
       InteractionContextTypeMapper.ensureInitialized();
@@ -3310,6 +3315,7 @@ class ApplicationCommandAutocompleteInteractionMapper
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
+      LocaleMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
       InteractionContextTypeMapper.ensureInitialized();
@@ -3812,6 +3818,7 @@ class UnknownInteractionMapper extends ClassMapperBase<UnknownInteraction> {
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
+      LocaleMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
       InteractionContextTypeMapper.ensureInitialized();

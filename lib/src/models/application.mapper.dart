@@ -1309,6 +1309,7 @@ class ApplicationRoleConnectionMetadataMapper
         _instance = ApplicationRoleConnectionMetadataMapper._(),
       );
       ConnectionMetadataTypeMapper.ensureInitialized();
+      LocaleMapper.ensureInitialized();
     }
     return _instance!;
   }
