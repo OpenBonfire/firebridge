@@ -74,10 +74,6 @@ class CommandPermissionsMapper extends ClassMapperBase<CommandPermissions> {
   @override
   final String id = 'CommandPermissions';
 
-  static GuildApplicationCommandManager _$manager(CommandPermissions v) =>
-      v.manager;
-  static const Field<CommandPermissions, GuildApplicationCommandManager>
-  _f$manager = Field('manager', _$manager);
   static Snowflake _$id(CommandPermissions v) => v.id;
   static const Field<CommandPermissions, Snowflake> _f$id = Field('id', _$id);
   static Snowflake _$applicationId(CommandPermissions v) => v.applicationId;
@@ -99,7 +95,6 @@ class CommandPermissionsMapper extends ClassMapperBase<CommandPermissions> {
 
   @override
   final MappableFields<CommandPermissions> fields = const {
-    #manager: _f$manager,
     #id: _f$id,
     #applicationId: _f$applicationId,
     #guildId: _f$guildId,
@@ -108,7 +103,6 @@ class CommandPermissionsMapper extends ClassMapperBase<CommandPermissions> {
 
   static CommandPermissions _instantiate(DecodingData data) {
     return CommandPermissions(
-      manager: data.dec(_f$manager),
       id: data.dec(_f$id),
       applicationId: data.dec(_f$applicationId),
       guildId: data.dec(_f$guildId),
@@ -199,7 +193,6 @@ abstract class CommandPermissionsCopyWith<
   get permissions;
   @override
   $R call({
-    GuildApplicationCommandManager? manager,
     Snowflake? id,
     Snowflake? applicationId,
     Snowflake? guildId,
@@ -240,14 +233,12 @@ class _CommandPermissionsCopyWithImpl<$R, $Out>
   );
   @override
   $R call({
-    GuildApplicationCommandManager? manager,
     Snowflake? id,
     Snowflake? applicationId,
     Snowflake? guildId,
     List<CommandPermission>? permissions,
   }) => $apply(
     FieldCopyWithData({
-      if (manager != null) #manager: manager,
       if (id != null) #id: id,
       if (applicationId != null) #applicationId: applicationId,
       if (guildId != null) #guildId: guildId,
@@ -256,7 +247,6 @@ class _CommandPermissionsCopyWithImpl<$R, $Out>
   );
   @override
   CommandPermissions $make(CopyWithData data) => CommandPermissions(
-    manager: data.get(#manager, or: $value.manager),
     id: data.get(#id, or: $value.id),
     applicationId: data.get(#applicationId, or: $value.applicationId),
     guildId: data.get(#guildId, or: $value.guildId),

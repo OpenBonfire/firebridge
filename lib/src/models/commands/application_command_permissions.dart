@@ -1,8 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/http/managers/application_command_manager.dart';
-import 'package:nyxx/src/models/application.dart';
 import 'package:nyxx/src/models/commands/application_command.dart';
-import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
@@ -16,7 +13,7 @@ part 'application_command_permissions.mapper.dart';
 class CommandPermissions extends SnowflakeEntity<CommandPermissions>
     with CommandPermissionsMappable {
   /// The manager for this [CommandPermissions].
-  final GuildApplicationCommandManager manager;
+  // final GuildApplicationCommandManager manager;
 
   /// The ID of the application these permissions apply to.
   final Snowflake applicationId;
@@ -30,19 +27,11 @@ class CommandPermissions extends SnowflakeEntity<CommandPermissions>
   /// {@macro command_permissions}
   /// @nodoc
   CommandPermissions({
-    required this.manager,
     required super.id,
     required this.applicationId,
     required this.guildId,
     required this.permissions,
   });
-
-  /// The application these permissions apply to.
-  PartialApplication get application =>
-      manager.client.applications[applicationId];
-
-  /// The guild these permissions apply in.
-  PartialGuild get guild => manager.client.guilds[guildId];
 }
 
 /// {@template command_permission}

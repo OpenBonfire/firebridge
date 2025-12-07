@@ -505,8 +505,12 @@ class MessageMapper extends ClassMapperBase<Message> {
   );
   static Poll? _$poll(Message v) => v.poll;
   static const Field<Message, Poll> _f$poll = Field('poll', _$poll);
-  static MessageCall? _$call(Message v) => v.call;
-  static const Field<Message, MessageCall> _f$call = Field('call', _$call);
+  static MessageCall? _$callInfo(Message v) => v.callInfo;
+  static const Field<Message, MessageCall> _f$callInfo = Field(
+    'callInfo',
+    _$callInfo,
+    key: r'call_info',
+  );
 
   @override
   final MappableFields<Message> fields = const {
@@ -543,7 +547,7 @@ class MessageMapper extends ClassMapperBase<Message> {
     #stickers: _f$stickers,
     #resolved: _f$resolved,
     #poll: _f$poll,
-    #call: _f$call,
+    #callInfo: _f$callInfo,
   };
 
   static Message _instantiate(DecodingData data) {
@@ -581,7 +585,7 @@ class MessageMapper extends ClassMapperBase<Message> {
       stickers: data.dec(_f$stickers),
       resolved: data.dec(_f$resolved),
       poll: data.dec(_f$poll),
-      call: data.dec(_f$call),
+      callInfo: data.dec(_f$callInfo),
     );
   }
 
@@ -699,7 +703,7 @@ abstract class MessageCopyWith<$R, $In extends Message, $Out>
   get stickers;
   ResolvedDataCopyWith<$R, ResolvedData, ResolvedData>? get resolved;
   PollCopyWith<$R, Poll, Poll>? get poll;
-  MessageCallCopyWith<$R, MessageCall, MessageCall>? get call;
+  MessageCallCopyWith<$R, MessageCall, MessageCall>? get callInfo;
   @override
   $R call({
     Snowflake? id,
@@ -735,7 +739,7 @@ abstract class MessageCopyWith<$R, $In extends Message, $Out>
     List<StickerItem>? stickers,
     ResolvedData? resolved,
     Poll? poll,
-    MessageCall? call,
+    MessageCall? callInfo,
   });
   MessageCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -883,8 +887,8 @@ class _MessageCopyWithImpl<$R, $Out>
   PollCopyWith<$R, Poll, Poll>? get poll =>
       $value.poll?.copyWith.$chain((v) => call(poll: v));
   @override
-  MessageCallCopyWith<$R, MessageCall, MessageCall>? get call =>
-      $value.call?.copyWith.$chain((v) => call(call: v));
+  MessageCallCopyWith<$R, MessageCall, MessageCall>? get callInfo =>
+      $value.callInfo?.copyWith.$chain((v) => call(callInfo: v));
   @override
   $R call({
     Snowflake? id,
@@ -920,7 +924,7 @@ class _MessageCopyWithImpl<$R, $Out>
     List<StickerItem>? stickers,
     Object? resolved = $none,
     Object? poll = $none,
-    Object? call = $none,
+    Object? callInfo = $none,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
@@ -958,7 +962,7 @@ class _MessageCopyWithImpl<$R, $Out>
       if (stickers != null) #stickers: stickers,
       if (resolved != $none) #resolved: resolved,
       if (poll != $none) #poll: poll,
-      if (call != $none) #call: call,
+      if (callInfo != $none) #callInfo: callInfo,
     }),
   );
   @override
@@ -1005,7 +1009,7 @@ class _MessageCopyWithImpl<$R, $Out>
     stickers: data.get(#stickers, or: $value.stickers),
     resolved: data.get(#resolved, or: $value.resolved),
     poll: data.get(#poll, or: $value.poll),
-    call: data.get(#call, or: $value.call),
+    callInfo: data.get(#callInfo, or: $value.callInfo),
   );
 
   @override

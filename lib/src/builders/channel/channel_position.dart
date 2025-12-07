@@ -1,8 +1,13 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/builder.dart';
 import 'package:nyxx/src/models/channel/guild_channel.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 
-class ChannelPositionBuilder extends UpdateBuilder<GuildChannel> {
+part 'channel_position.mapper.dart';
+
+@MappableClass()
+class ChannelPositionBuilder extends UpdateBuilder<GuildChannel>
+    with ChannelPositionBuilderMappable {
   /// The channel id to update.
   Snowflake channelId;
 

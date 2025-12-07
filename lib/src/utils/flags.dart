@@ -7,7 +7,7 @@ part 'flags.mapper.dart';
 
 /// A set of flags that can be either enabled or disabled.
 @MappableClass()
-class Flags<T extends Flags<T>> extends IterableBase<Flag<T>>
+class Flags<T> extends IterableBase<Flag<T>>
     with ToStringHelper, FlagsMappable<T> {
   /// The integer value encoding the flags as a bitfield.
   final int value;
@@ -46,7 +46,7 @@ class Flags<T extends Flags<T>> extends IterableBase<Flag<T>>
 
 /// A flag within a set of [Flags].
 @MappableClass()
-class Flag<T extends Flags<T>> extends Flags<T> with FlagMappable<T> {
+class Flag<T> extends Flags<T> with FlagMappable<T> {
   /// Create a new [Flag].
   const Flag(super.value);
 
@@ -57,7 +57,7 @@ class Flag<T extends Flags<T>> extends Flags<T> with FlagMappable<T> {
   String toString() => 'Flag<$T>($value)';
 }
 
-class _FlagIterator<T extends Flags<T>> implements Iterator<Flag<T>> {
+class _FlagIterator<T> implements Iterator<Flag<T>> {
   final Flags<T> source;
 
   _FlagIterator(this.source);

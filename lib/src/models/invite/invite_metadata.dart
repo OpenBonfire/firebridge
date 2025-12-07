@@ -1,4 +1,9 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:nyxx/src/models/application.dart';
+import 'package:nyxx/src/models/channel/channel.dart';
+import 'package:nyxx/src/models/guild/guild.dart';
+import 'package:nyxx/src/models/guild/scheduled_event.dart';
+import 'package:nyxx/src/models/user/user.dart';
 
 import 'invite.dart';
 

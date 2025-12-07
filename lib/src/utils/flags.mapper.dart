@@ -15,7 +15,6 @@ class FlagsMapper extends ClassMapperBase<Flags> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = FlagsMapper._());
       FlagMapper.ensureInitialized();
-      FlagsMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -24,9 +23,7 @@ class FlagsMapper extends ClassMapperBase<Flags> {
   final String id = 'Flags';
   @override
   Function get typeFactory =>
-      <T extends Flags>(f) =>
-          <T>[] is List<Flags<T>> ? _typeFactory<T>(f) : f<Flags>();
-  final Function _typeFactory = <T extends Flags<T>>(f) => f<Flags<T>>();
+      <T>(f) => f<Flags<T>>();
 
   static int _$value(Flags v) => v.value;
   static const Field<Flags, int> _f$value = Field('value', _$value);
@@ -34,23 +31,23 @@ class FlagsMapper extends ClassMapperBase<Flags> {
   @override
   final MappableFields<Flags> fields = const {#value: _f$value};
 
-  static Flags<T> _instantiate<T extends Flags<T>>(DecodingData data) {
+  static Flags<T> _instantiate<T>(DecodingData data) {
     return Flags(data.dec(_f$value));
   }
 
   @override
   final Function instantiate = _instantiate;
 
-  static Flags<T> fromMap<T extends Flags<T>>(Map<String, dynamic> map) {
+  static Flags<T> fromMap<T>(Map<String, dynamic> map) {
     return ensureInitialized().decodeMap<Flags<T>>(map);
   }
 
-  static Flags<T> fromJson<T extends Flags<T>>(String json) {
+  static Flags<T> fromJson<T>(String json) {
     return ensureInitialized().decodeJson<Flags<T>>(json);
   }
 }
 
-mixin FlagsMappable<T extends Flags<T>> {
+mixin FlagsMappable<T> {
   String toJson() {
     return FlagsMapper.ensureInitialized().encodeJson<Flags<T>>(
       this as Flags<T>,
@@ -85,19 +82,18 @@ mixin FlagsMappable<T extends Flags<T>> {
   }
 }
 
-extension FlagsValueCopy<$R, $Out, T extends Flags<T>>
-    on ObjectCopyWith<$R, Flags<T>, $Out> {
+extension FlagsValueCopy<$R, $Out, T> on ObjectCopyWith<$R, Flags<T>, $Out> {
   FlagsCopyWith<$R, Flags<T>, $Out, T> get $asFlags =>
       $base.as((v, t, t2) => _FlagsCopyWithImpl<$R, $Out, T>(v, t, t2));
 }
 
-abstract class FlagsCopyWith<$R, $In extends Flags<T>, $Out, T extends Flags<T>>
+abstract class FlagsCopyWith<$R, $In extends Flags<T>, $Out, T>
     implements ClassCopyWith<$R, $In, $Out> {
   $R call({int? value});
   FlagsCopyWith<$R2, $In, $Out2, T> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
-class _FlagsCopyWithImpl<$R, $Out, T extends Flags<T>>
+class _FlagsCopyWithImpl<$R, $Out, T>
     extends ClassCopyWithBase<$R, Flags<T>, $Out>
     implements FlagsCopyWith<$R, Flags<T>, $Out, T> {
   _FlagsCopyWithImpl(super.value, super.then, super.then2);
@@ -125,7 +121,6 @@ class FlagMapper extends ClassMapperBase<Flag> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = FlagMapper._());
       FlagsMapper.ensureInitialized();
-      FlagsMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -134,9 +129,7 @@ class FlagMapper extends ClassMapperBase<Flag> {
   final String id = 'Flag';
   @override
   Function get typeFactory =>
-      <T extends Flags>(f) =>
-          <T>[] is List<Flags<T>> ? _typeFactory<T>(f) : f<Flag>();
-  final Function _typeFactory = <T extends Flags<T>>(f) => f<Flag<T>>();
+      <T>(f) => f<Flag<T>>();
 
   static int _$value(Flag v) => v.value;
   static const Field<Flag, int> _f$value = Field('value', _$value);
@@ -144,23 +137,23 @@ class FlagMapper extends ClassMapperBase<Flag> {
   @override
   final MappableFields<Flag> fields = const {#value: _f$value};
 
-  static Flag<T> _instantiate<T extends Flags<T>>(DecodingData data) {
+  static Flag<T> _instantiate<T>(DecodingData data) {
     return Flag(data.dec(_f$value));
   }
 
   @override
   final Function instantiate = _instantiate;
 
-  static Flag<T> fromMap<T extends Flags<T>>(Map<String, dynamic> map) {
+  static Flag<T> fromMap<T>(Map<String, dynamic> map) {
     return ensureInitialized().decodeMap<Flag<T>>(map);
   }
 
-  static Flag<T> fromJson<T extends Flags<T>>(String json) {
+  static Flag<T> fromJson<T>(String json) {
     return ensureInitialized().decodeJson<Flag<T>>(json);
   }
 }
 
-mixin FlagMappable<T extends Flags<T>> {
+mixin FlagMappable<T> {
   String toJson() {
     return FlagMapper.ensureInitialized().encodeJson<Flag<T>>(this as Flag<T>);
   }
@@ -191,20 +184,19 @@ mixin FlagMappable<T extends Flags<T>> {
   }
 }
 
-extension FlagValueCopy<$R, $Out, T extends Flags<T>>
-    on ObjectCopyWith<$R, Flag<T>, $Out> {
+extension FlagValueCopy<$R, $Out, T> on ObjectCopyWith<$R, Flag<T>, $Out> {
   FlagCopyWith<$R, Flag<T>, $Out, T> get $asFlag =>
       $base.as((v, t, t2) => _FlagCopyWithImpl<$R, $Out, T>(v, t, t2));
 }
 
-abstract class FlagCopyWith<$R, $In extends Flag<T>, $Out, T extends Flags<T>>
+abstract class FlagCopyWith<$R, $In extends Flag<T>, $Out, T>
     implements FlagsCopyWith<$R, $In, $Out, T> {
   @override
   $R call({int? value});
   FlagCopyWith<$R2, $In, $Out2, T> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
-class _FlagCopyWithImpl<$R, $Out, T extends Flags<T>>
+class _FlagCopyWithImpl<$R, $Out, T>
     extends ClassCopyWithBase<$R, Flag<T>, $Out>
     implements FlagCopyWith<$R, Flag<T>, $Out, T> {
   _FlagCopyWithImpl(super.value, super.then, super.then2);

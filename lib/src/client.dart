@@ -105,9 +105,7 @@ abstract class Nyxx {
 
       final client = NyxxRest._(apiOptions, clientOptions);
 
-      return client
-        .._application = await client.applications.fetchCurrentApplication()
-        .._user = await client.users.fetchCurrentUser();
+      return client.._user = await client.users.fetchCurrentUser();
     }, clientOptions.plugins);
   }
 
@@ -169,9 +167,7 @@ abstract class Nyxx {
 
       final client = NyxxGateway._(apiOptions, clientOptions);
 
-      client
-        .._application = await client.applications.fetchCurrentApplication()
-        .._user = await client.users.fetchCurrentUser();
+      client._user = await client.users.fetchCurrentUser();
 
       // We can't use client.gateway as it is not initialized yet
       final gatewayManager = GatewayManager(client);
@@ -197,10 +193,6 @@ class NyxxRest with ManagerMixin implements Nyxx {
 
   @override
   late final HttpHandler httpHandler = HttpHandler(this);
-
-  /// The application associated with this client.
-  PartialApplication get application => _application;
-  late final PartialApplication _application;
 
   /// The user associated with this client.
   PartialUser get user => _user;
@@ -304,12 +296,6 @@ class NyxxGateway with ManagerMixin, EventMixin implements NyxxRest {
 
   @override
   late final HttpHandler httpHandler = HttpHandler(this);
-
-  @override
-  PartialApplication get application => _application;
-
-  @override
-  late final PartialApplication _application;
 
   @override
   PartialUser get user => _user;

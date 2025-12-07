@@ -155,7 +155,8 @@ class Message extends PartialMessage
   final Poll? poll;
 
   /// Information about a call in a DM channel.
-  final MessageCall? call;
+  @MappableValue("call")
+  final MessageCall? callInfo;
 
   /// {@macro message}
   /// @nodoc
@@ -193,7 +194,7 @@ class Message extends PartialMessage
     required this.stickers,
     required this.resolved,
     required this.poll,
-    required this.call,
+    required this.callInfo,
   });
 
   // Cannot provide roleMentions as we do not have access to the guild.

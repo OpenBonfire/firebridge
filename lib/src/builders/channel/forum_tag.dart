@@ -1,9 +1,14 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/builder.dart';
 import 'package:nyxx/src/models/channel/types/forum.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/utils/building_helpers.dart';
 
-class ForumTagBuilder extends CreateBuilder<ForumTag> {
+part 'forum_tag.mapper.dart';
+
+@MappableClass()
+class ForumTagBuilder extends CreateBuilder<ForumTag>
+    with ForumTagBuilderMappable {
   /// The name of the tag. (0-20 characters)
   String name;
 
@@ -16,12 +21,6 @@ class ForumTagBuilder extends CreateBuilder<ForumTag> {
   /// The unicode character of the emoji.
   String? emojiName;
 
-  ForumTagBuilder({required this.name, this.isModerated, this.emojiId, this.emojiName});
-
-  @override
-  Map<String, Object?> build() => {
-        'name': name,
-        if (isModerated != null) 'moderated': isModerated,
-        ...makeEmojiMap(emojiId: emojiId, emojiName: emojiName),
-      };
+  ForumTagBuilder(
+      {required this.name, this.isModerated, this.emojiId, this.emojiName});
 }

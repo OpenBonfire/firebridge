@@ -18,7 +18,8 @@ class NyxxException implements Exception {
 /// An exception thrown when an unexpected event is received on the Gateway.
 class InvalidEventException extends NyxxException {
   /// Create a new [InvalidEventException] with the provided [message].
-  InvalidEventException(String message) : super('Invalid gateway event: $message');
+  InvalidEventException(String message)
+      : super('Invalid gateway event: $message');
 }
 
 /// An exception thrown when a member already exists in a guild.
@@ -30,7 +31,8 @@ class MemberAlreadyExistsException extends NyxxException {
   final Snowflake memberId;
 
   /// Create a new [MemberAlreadyExistsException].
-  MemberAlreadyExistsException(this.guildId, this.memberId) : super('Member $memberId already exists in guild $guildId');
+  MemberAlreadyExistsException(this.guildId, this.memberId)
+      : super('Member $memberId already exists in guild $guildId');
 }
 
 /// An exception thrown when a role is not found in a guild.
@@ -42,7 +44,8 @@ class RoleNotFoundException extends NyxxException {
   final Snowflake roleId;
 
   /// Create a new [RoleNotFoundException].
-  RoleNotFoundException(this.guildId, this.roleId) : super('Role $roleId not found in guild $guildId');
+  RoleNotFoundException(this.guildId, this.roleId)
+      : super('Role $roleId not found in guild $guildId');
 }
 
 /// An exception thrown when a integration is not found in a guild.
@@ -54,7 +57,8 @@ class IntegrationNotFoundException extends NyxxException {
   final Snowflake integrationId;
 
   /// Create a new [IntegrationNotFoundException].
-  IntegrationNotFoundException(this.guildId, this.integrationId) : super('Integration $integrationId not found in guild $guildId');
+  IntegrationNotFoundException(this.guildId, this.integrationId)
+      : super('Integration $integrationId not found in guild $guildId');
 }
 
 /// An exception thrown when an audit log entry is not found in a guild.
@@ -66,7 +70,8 @@ class AuditLogEntryNotFoundException extends NyxxException {
   final Snowflake auditLogEntryId;
 
   /// Create a new [AuditLogEntryNotFoundException].
-  AuditLogEntryNotFoundException(this.guildId, this.auditLogEntryId) : super('Audit log entry $auditLogEntryId not found in guild $guildId');
+  AuditLogEntryNotFoundException(this.guildId, this.auditLogEntryId)
+      : super('Audit log entry $auditLogEntryId not found in guild $guildId');
 }
 
 /// An exception thrown when an entitlement is not found for an application.
@@ -78,7 +83,9 @@ class EntitlementNotFoundException extends NyxxException {
   final Snowflake entitlementId;
 
   /// Create a new [EntitlementNotFoundException].
-  EntitlementNotFoundException(this.applicationId, this.entitlementId) : super('Entitlement $entitlementId not found for application $applicationId');
+  EntitlementNotFoundException(this.applicationId, this.entitlementId)
+      : super(
+            'Entitlement $entitlementId not found for application $applicationId');
 }
 
 /// An exception thrown when an SKU is not found for an application.
@@ -90,7 +97,8 @@ class SkuNotFoundException extends NyxxException {
   final Snowflake skuId;
 
   /// Create a new [SkuNotFoundException].
-  SkuNotFoundException(this.applicationId, this.skuId) : super('SKU $skuId not found for application $applicationId');
+  SkuNotFoundException(this.applicationId, this.skuId)
+      : super('SKU $skuId not found for application $applicationId');
 }
 
 /// An error thrown when a shard disconnects unexpectedly.
@@ -116,13 +124,14 @@ class OutOfRemainingSessionsError extends Error {
   OutOfRemainingSessionsError(this.gatewayBot);
 
   @override
-  String toString() => 'Out of remaining session starts (${gatewayBot.sessionStartLimit.remaining} left)';
+  String toString() =>
+      'Out of remaining session starts (${gatewayBot.sessionStartLimit.remaining} left)';
 }
 
 /// An error thrown when [MessageResponse.acknowledge] is called on an already acknowledged interaction.
 class AlreadyAcknowledgedError extends Error {
   /// The interaction that was acknowledged.
-  final MessageResponse<dynamic> interaction;
+  final dynamic interaction;
 
   /// Create a new [AlreadyAcknowledgedError].
   AlreadyAcknowledgedError(this.interaction);
@@ -162,5 +171,6 @@ class SoundboardSoundNotFoundException extends NyxxException {
   /// The ID of the sound.
   final Snowflake soundId;
 
-  SoundboardSoundNotFoundException(this.soundId) : super('Soundboard sound $soundId not found');
+  SoundboardSoundNotFoundException(this.soundId)
+      : super('Soundboard sound $soundId not found');
 }
