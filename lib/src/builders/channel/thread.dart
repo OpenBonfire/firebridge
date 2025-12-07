@@ -1,3 +1,4 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/builder.dart';
 import 'package:nyxx/src/builders/message/message.dart';
 import 'package:nyxx/src/builders/sentinels.dart';
@@ -6,7 +7,11 @@ import 'package:nyxx/src/models/channel/thread.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/utils/flags.dart';
 
-class ThreadFromMessageBuilder extends CreateBuilder<Thread> {
+part 'thread.mapper.dart';
+
+@MappableClass()
+class ThreadFromMessageBuilder extends CreateBuilder<Thread>
+    with ThreadFromMessageBuilderMappable {
   /// {@template thread_name}
   /// The name of the thread.
   /// {@endtemplate}
@@ -18,17 +23,12 @@ class ThreadFromMessageBuilder extends CreateBuilder<Thread> {
   /// {@macro channel_rate_limit_per_user}
   Duration? rateLimitPerUser;
 
-  ThreadFromMessageBuilder({required this.name, this.autoArchiveDuration, this.rateLimitPerUser});
-
-  @override
-  Map<String, Object?> build() => {
-        'name': name,
-        if (autoArchiveDuration != null) 'auto_archive_duration': autoArchiveDuration!.inMinutes,
-        if (rateLimitPerUser != null) 'rate_limit_per_user': rateLimitPerUser!.inSeconds,
-      };
+  ThreadFromMessageBuilder(
+      {required this.name, this.autoArchiveDuration, this.rateLimitPerUser});
 }
 
-class ThreadBuilder extends CreateBuilder<Thread> {
+@MappableClass()
+class ThreadBuilder extends CreateBuilder<Thread> with ThreadBuilderMappable {
   static const archiveOneHour = Duration(minutes: 60);
   static const archiveOneDay = Duration(minutes: 1440);
   static const archiveThreeDays = Duration(minutes: 4320);
@@ -50,23 +50,28 @@ class ThreadBuilder extends CreateBuilder<Thread> {
   /// {@macro channel_rate_limit_per_user}
   Duration? rateLimitPerUser;
 
-  ThreadBuilder({required this.name, this.autoArchiveDuration, required this.type, this.invitable, this.rateLimitPerUser});
+  ThreadBuilder(
+      {required this.name,
+      this.autoArchiveDuration,
+      required this.type,
+      this.invitable,
+      this.rateLimitPerUser});
 
-  ThreadBuilder.publicThread({required this.name, this.autoArchiveDuration, this.rateLimitPerUser}) : type = ChannelType.publicThread;
+  ThreadBuilder.publicThread(
+      {required this.name, this.autoArchiveDuration, this.rateLimitPerUser})
+      : type = ChannelType.publicThread;
 
-  ThreadBuilder.privateThread({required this.name, this.autoArchiveDuration, this.invitable, this.rateLimitPerUser}) : type = ChannelType.privateThread;
-
-  @override
-  Map<String, Object?> build() => {
-        'name': name,
-        if (autoArchiveDuration != null) 'auto_archive_duration': autoArchiveDuration!.inMinutes,
-        'type': type.value,
-        if (invitable != null) 'invitable': invitable,
-        if (rateLimitPerUser != null) 'rate_limit_per_user': rateLimitPerUser!.inSeconds,
-      };
+  ThreadBuilder.privateThread(
+      {required this.name,
+      this.autoArchiveDuration,
+      this.invitable,
+      this.rateLimitPerUser})
+      : type = ChannelType.privateThread;
 }
 
-class ForumThreadBuilder extends CreateBuilder<Thread> {
+@MappableClass()
+class ForumThreadBuilder extends CreateBuilder<Thread>
+    with ForumThreadBuilderMappable {
   /// {@macro thread_name}
   String name;
 
@@ -84,19 +89,17 @@ class ForumThreadBuilder extends CreateBuilder<Thread> {
   /// {@endtemplate}
   List<Snowflake>? appliedTags;
 
-  ForumThreadBuilder({required this.name, this.autoArchiveDuration, this.rateLimitPerUser, required this.message, this.appliedTags});
-
-  @override
-  Map<String, Object?> build() => {
-        'name': name,
-        if (autoArchiveDuration != null) 'auto_archive_duration': autoArchiveDuration!.inMinutes,
-        if (rateLimitPerUser != null) 'rate_limit_per_user': rateLimitPerUser!.inSeconds,
-        'message': message.build(),
-        if (appliedTags != null) 'applied_tags': appliedTags!.map((e) => e.toString()).toList(),
-      };
+  ForumThreadBuilder(
+      {required this.name,
+      this.autoArchiveDuration,
+      this.rateLimitPerUser,
+      required this.message,
+      this.appliedTags});
 }
 
-class ThreadUpdateBuilder extends UpdateBuilder<Thread> {
+@MappableClass()
+class ThreadUpdateBuilder extends UpdateBuilder<Thread>
+    with ThreadUpdateBuilderMappable {
   /// {@macro thread_name}
   String? name;
 
@@ -131,16 +134,4 @@ class ThreadUpdateBuilder extends UpdateBuilder<Thread> {
     this.flags,
     this.appliedTags,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        if (name != null) 'name': name,
-        if (isArchived != null) 'archived': isArchived,
-        if (autoArchiveDuration != null) 'auto_archive_duration': autoArchiveDuration!.inMinutes,
-        if (isLocked != null) 'locked': isLocked,
-        if (isInvitable != null) 'invitable': isInvitable,
-        if (!identical(rateLimitPerUser, sentinelDuration)) 'rate_limit_per_user': rateLimitPerUser?.inSeconds,
-        if (flags != null) 'flags': flags!.value,
-        if (appliedTags != null) 'applied_tags': appliedTags!.map((e) => e.toString()).toList(),
-      };
 }

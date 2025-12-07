@@ -4138,9 +4138,6 @@ class SubmittedSelectMenuComponentMapper
   @override
   final String id = 'SubmittedSelectMenuComponent';
 
-  static MessageManager _$manager(SubmittedSelectMenuComponent v) => v.manager;
-  static const Field<SubmittedSelectMenuComponent, MessageManager> _f$manager =
-      Field('manager', _$manager);
   static const Field<SubmittedSelectMenuComponent, Snowflake> _f$guildId =
       Field(
         'guildId',
@@ -4169,7 +4166,6 @@ class SubmittedSelectMenuComponentMapper
 
   @override
   final MappableFields<SubmittedSelectMenuComponent> fields = const {
-    #manager: _f$manager,
     #guildId: _f$guildId,
     #type: _f$type,
     #id: _f$id,
@@ -4179,7 +4175,6 @@ class SubmittedSelectMenuComponentMapper
 
   static SubmittedSelectMenuComponent _instantiate(DecodingData data) {
     return SubmittedSelectMenuComponent(
-      manager: data.dec(_f$manager),
       guildId: data.dec(_f$guildId),
       type: data.dec(_f$type),
       id: data.dec(_f$id),
@@ -4264,7 +4259,6 @@ abstract class SubmittedSelectMenuComponentCopyWith<
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get values;
   @override
   $R call({
-    MessageManager? manager,
     Snowflake? guildId,
     MessageComponentType? type,
     int? id,
@@ -4302,7 +4296,6 @@ class _SubmittedSelectMenuComponentCopyWithImpl<$R, $Out>
       );
   @override
   $R call({
-    MessageManager? manager,
     Snowflake? guildId,
     MessageComponentType? type,
     int? id,
@@ -4310,7 +4303,6 @@ class _SubmittedSelectMenuComponentCopyWithImpl<$R, $Out>
     List<String>? values,
   }) => $apply(
     FieldCopyWithData({
-      if (manager != null) #manager: manager,
       #guildId: guildId,
       if (type != null) #type: type,
       if (id != null) #id: id,
@@ -4321,7 +4313,6 @@ class _SubmittedSelectMenuComponentCopyWithImpl<$R, $Out>
   @override
   SubmittedSelectMenuComponent $make(CopyWithData data) =>
       SubmittedSelectMenuComponent(
-        manager: data.get(#manager, or: $value.manager),
         guildId: data.get(#guildId),
         type: data.get(#type, or: $value.type),
         id: data.get(#id, or: $value.id),

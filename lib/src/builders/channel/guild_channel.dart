@@ -1,6 +1,7 @@
 /// @docImport 'package:nyxx/nyxx.dart';
 library;
 
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/builder.dart';
 import 'package:nyxx/src/builders/sentinels.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
@@ -14,10 +15,13 @@ import 'package:nyxx/src/models/channel/types/guild_voice.dart';
 import 'package:nyxx/src/models/channel/voice_channel.dart';
 import 'package:nyxx/src/models/permission_overwrite.dart';
 import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/utils/building_helpers.dart';
 import 'package:nyxx/src/utils/flags.dart';
 
-class GuildChannelBuilder<T extends GuildChannel> extends CreateBuilder<T> {
+part 'guild_channel.mapper.dart';
+
+@MappableClass()
+class GuildChannelBuilder<T extends GuildChannel> extends CreateBuilder<T>
+    with GuildChannelBuilderMappable {
   /// {@template channel_name}
   /// The name of the channel (1-100 characters)
   /// {@endtemplate}
@@ -44,17 +48,11 @@ class GuildChannelBuilder<T extends GuildChannel> extends CreateBuilder<T> {
     this.position,
     this.permissionOverwrites,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        'name': name,
-        'type': type.value,
-        if (position != null) 'position': position,
-        if (permissionOverwrites != null) 'permission_overwrites': permissionOverwrites!.map((e) => e.build()).toList(),
-      };
 }
 
-class GuildChannelUpdateBuilder<T extends GuildChannel> extends UpdateBuilder<T> {
+@MappableClass()
+class GuildChannelUpdateBuilder<T extends GuildChannel> extends UpdateBuilder<T>
+    with GuildChannelUpdateBuilderMappable {
   /// {@macro channel_name}
   String? name;
 
@@ -64,17 +62,13 @@ class GuildChannelUpdateBuilder<T extends GuildChannel> extends UpdateBuilder<T>
   /// {@macro channel_permission_overwrites}
   List<CreateBuilder<PermissionOverwrite>>? permissionOverwrites;
 
-  GuildChannelUpdateBuilder({this.name, this.position = sentinelInteger, this.permissionOverwrites});
-
-  @override
-  Map<String, Object?> build() => {
-        if (name != null) 'name': name,
-        if (!identical(position, sentinelInteger)) 'position': position,
-        if (permissionOverwrites != null) 'permission_overwrites': permissionOverwrites!.map((e) => e.build()).toList(),
-      };
+  GuildChannelUpdateBuilder(
+      {this.name, this.position = sentinelInteger, this.permissionOverwrites});
 }
 
-class GuildTextChannelBuilder extends GuildChannelBuilder<GuildTextChannel> {
+@MappableClass()
+class GuildTextChannelBuilder extends GuildChannelBuilder<GuildTextChannel>
+    with GuildTextChannelBuilderMappable {
   /// {@template channel_topic}
   /// The channel topic (0-4096 characters for [ChannelType.guildForum] and [ChannelType.guildMedia] channels, 0-1024 characters for all others)
   /// {@endtemplate}
@@ -111,19 +105,12 @@ class GuildTextChannelBuilder extends GuildChannelBuilder<GuildTextChannel> {
     this.isNsfw,
     this.defaultAutoArchiveDuration,
   }) : super(type: ChannelType.guildText);
-
-  @override
-  Map<String, Object?> build() => {
-        ...super.build(),
-        if (topic != null) 'topic': topic,
-        if (rateLimitPerUser != null) 'rate_limit_per_user': rateLimitPerUser!.inSeconds,
-        if (parentId != null) 'parent_id': parentId!.toString(),
-        if (isNsfw != null) 'nsfw': isNsfw,
-        if (defaultAutoArchiveDuration != null) 'default_auto_archive_duration': defaultAutoArchiveDuration!.inMinutes,
-      };
 }
 
-class GuildTextChannelUpdateBuilder extends GuildChannelUpdateBuilder<GuildTextChannel> {
+@MappableClass()
+class GuildTextChannelUpdateBuilder
+    extends GuildChannelUpdateBuilder<GuildTextChannel>
+    with GuildTextChannelUpdateBuilderMappable {
   /// {@macro channel_type}
   ChannelType? type;
 
@@ -160,21 +147,12 @@ class GuildTextChannelUpdateBuilder extends GuildChannelUpdateBuilder<GuildTextC
     this.defaultAutoArchiveDuration = sentinelDuration,
     this.defaultThreadRateLimitPerUser,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        ...super.build(),
-        if (type != null) 'type': type!.value,
-        if (!identical(topic, sentinelString)) 'topic': topic,
-        if (isNsfw != null) 'nsfw': isNsfw,
-        if (!identical(rateLimitPerUser, sentinelDuration)) 'rate_limit_per_user': rateLimitPerUser?.inSeconds,
-        if (!identical(parentId, sentinelSnowflake)) 'parent_id': parentId?.toString(),
-        if (!identical(defaultAutoArchiveDuration, sentinelDuration)) 'default_auto_archive_duration': defaultAutoArchiveDuration?.inMinutes,
-        if (defaultThreadRateLimitPerUser != null) 'default_thread_rate_limit_per_user': defaultThreadRateLimitPerUser!.inSeconds,
-      };
 }
 
-class GuildAnnouncementChannelBuilder extends GuildChannelBuilder<GuildAnnouncementChannel> {
+@MappableClass()
+class GuildAnnouncementChannelBuilder
+    extends GuildChannelBuilder<GuildAnnouncementChannel>
+    with GuildAnnouncementChannelBuilderMappable {
   /// {@macro channel_topic}
   String? topic;
 
@@ -196,18 +174,12 @@ class GuildAnnouncementChannelBuilder extends GuildChannelBuilder<GuildAnnouncem
     this.isNsfw,
     this.defaultAutoArchiveDuration,
   }) : super(type: ChannelType.guildAnnouncement);
-
-  @override
-  Map<String, Object?> build() => {
-        ...super.build(),
-        if (topic != null) 'topic': topic,
-        if (parentId != null) 'parent_id': parentId!.toString(),
-        if (isNsfw != null) 'nsfw': isNsfw,
-        if (defaultAutoArchiveDuration != null) 'default_auto_archive_duration': defaultAutoArchiveDuration!.inMinutes,
-      };
 }
 
-class GuildAnnouncementChannelUpdateBuilder extends GuildChannelUpdateBuilder<GuildAnnouncementChannel> {
+@MappableClass()
+class GuildAnnouncementChannelUpdateBuilder
+    extends GuildChannelUpdateBuilder<GuildAnnouncementChannel>
+    with GuildAnnouncementChannelUpdateBuilderMappable {
   /// {@macro channel_type}
   ChannelType? type;
 
@@ -233,19 +205,11 @@ class GuildAnnouncementChannelUpdateBuilder extends GuildChannelUpdateBuilder<Gu
     this.parentId = sentinelSnowflake,
     this.defaultAutoArchiveDuration = sentinelDuration,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        ...super.build(),
-        if (type != null) 'type': type!.value,
-        if (!identical(topic, sentinelString)) 'topic': topic,
-        if (isNsfw != null) 'nsfw': isNsfw,
-        if (!identical(parentId, sentinelSnowflake)) 'parent_id': parentId?.toString(),
-        if (!identical(defaultAutoArchiveDuration, sentinelDuration)) 'default_auto_archive_duration': defaultAutoArchiveDuration?.inMinutes,
-      };
 }
 
-class ForumChannelBuilder extends GuildChannelBuilder<ForumChannel> {
+@MappableClass()
+class ForumChannelBuilder extends GuildChannelBuilder<ForumChannel>
+    with ForumChannelBuilderMappable {
   /// {@macro channel_topic}
   String? topic;
 
@@ -290,23 +254,11 @@ class ForumChannelBuilder extends GuildChannelBuilder<ForumChannel> {
     this.tags,
     this.defaultSortOrder,
   }) : super(type: ChannelType.guildForum);
-
-  @override
-  Map<String, Object?> build() => {
-        ...super.build(),
-        if (topic != null) 'topic': topic,
-        if (rateLimitPerUser != null) 'rate_limit_per_user': rateLimitPerUser!.inSeconds,
-        if (parentId != null) 'parent_id': parentId!.toString(),
-        if (isNsfw != null) 'nsfw': isNsfw,
-        if (defaultAutoArchiveDuration != null) 'default_auto_archive_duration': defaultAutoArchiveDuration!.inMinutes,
-        if (!identical(defaultReaction, sentinelDefaultReaction))
-          'default_reaction_emoji': defaultReaction == null ? null : makeEmojiMap(emojiId: defaultReaction!.emojiId, emojiName: defaultReaction!.emojiName),
-        if (tags != null) 'available_tags': tags!.map((e) => e.build()).toList(),
-        if (defaultSortOrder != null) 'default_sort_order': defaultSortOrder!.value,
-      };
 }
 
-class ForumChannelUpdateBuilder extends GuildChannelUpdateBuilder<ForumChannel> {
+@MappableClass()
+class ForumChannelUpdateBuilder extends GuildChannelUpdateBuilder<ForumChannel>
+    with ForumChannelUpdateBuilderMappable {
   /// {@macro channel_type}
   String? topic;
 
@@ -359,26 +311,11 @@ class ForumChannelUpdateBuilder extends GuildChannelUpdateBuilder<ForumChannel> 
     this.defaultSortOrder,
     this.defaultLayout,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        ...super.build(),
-        if (topic != null) 'topic': topic,
-        if (isNsfw != null) 'nsfw': isNsfw,
-        if (!identical(rateLimitPerUser, sentinelDuration)) 'rate_limit_per_user': rateLimitPerUser?.inSeconds,
-        if (!identical(parentId, sentinelSnowflake)) 'parent_id': parentId?.toString(),
-        if (!identical(defaultAutoArchiveDuration, sentinelDuration)) 'default_auto_archive_duration': defaultAutoArchiveDuration?.inMinutes,
-        if (flags != null) 'flags': flags!.value,
-        if (tags != null) 'available_tags': tags!.map((e) => e.build()).toList(),
-        if (!identical(defaultReaction, sentinelDefaultReaction))
-          'default_reaction_emoji': defaultReaction == null ? null : makeEmojiMap(emojiId: defaultReaction!.emojiId, emojiName: defaultReaction!.emojiName),
-        if (defaultThreadRateLimitPerUser != null) 'default_thread_rate_limit_per_user': defaultThreadRateLimitPerUser!.inSeconds,
-        if (defaultSortOrder != null) 'default_sort_order': defaultSortOrder!.value,
-        if (defaultLayout != null) 'default_forum_layout': defaultLayout!.value,
-      };
 }
 
-abstract class _GuildVoiceOrStageChannelBuilder<T extends GuildChannel> extends GuildChannelBuilder<T> {
+@MappableClass()
+abstract class _GuildVoiceOrStageChannelBuilder<T extends GuildChannel>
+    extends GuildChannelBuilder<T> {
   /// {@template channel_bitrate}
   /// The bitrate (in bits) of the voice or stage channel; min 8000.
   /// {@endtemplate}
@@ -419,20 +356,11 @@ abstract class _GuildVoiceOrStageChannelBuilder<T extends GuildChannel> extends 
     this.rtcRegion,
     this.videoQualityMode,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        ...super.build(),
-        if (isNsfw != null) 'nsfw': isNsfw,
-        if (bitRate != null) 'bitrate': bitRate,
-        if (userLimit != null) 'user_limit': userLimit,
-        if (parentId != null) 'parent_id': parentId?.toString(),
-        if (rtcRegion != null) 'rtc_region': rtcRegion,
-        if (videoQualityMode != null) 'video_quality_mode': videoQualityMode!.value,
-      };
 }
 
-class GuildVoiceChannelBuilder extends _GuildVoiceOrStageChannelBuilder<GuildVoiceChannel> {
+@MappableClass()
+class GuildVoiceChannelBuilder
+    extends _GuildVoiceOrStageChannelBuilder<GuildVoiceChannel> {
   GuildVoiceChannelBuilder({
     required super.name,
     super.position,
@@ -446,7 +374,8 @@ class GuildVoiceChannelBuilder extends _GuildVoiceOrStageChannelBuilder<GuildVoi
   }) : super(type: ChannelType.guildVoice);
 }
 
-class GuildStageChannelBuilder extends _GuildVoiceOrStageChannelBuilder<GuildStageChannel> {
+class GuildStageChannelBuilder
+    extends _GuildVoiceOrStageChannelBuilder<GuildStageChannel> {
   GuildStageChannelBuilder({
     required super.name,
     super.position,
@@ -460,7 +389,10 @@ class GuildStageChannelBuilder extends _GuildVoiceOrStageChannelBuilder<GuildSta
   }) : super(type: ChannelType.guildStageVoice);
 }
 
-class _GuildVoiceOrStageChannelUpdateBuilder<T extends GuildChannel> extends GuildChannelUpdateBuilder<T> {
+@MappableClass()
+class GuildVoiceOrStageChannelUpdateBuilder<T extends GuildChannel>
+    extends GuildChannelUpdateBuilder<T>
+    with GuildVoiceOrStageChannelUpdateBuilderMappable {
   /// {@macro channel_nsfw}
   bool? isNsfw;
 
@@ -479,7 +411,7 @@ class _GuildVoiceOrStageChannelUpdateBuilder<T extends GuildChannel> extends Gui
   /// {@macro video_quality_mode}
   VideoQualityMode? videoQualityMode;
 
-  _GuildVoiceOrStageChannelUpdateBuilder({
+  GuildVoiceOrStageChannelUpdateBuilder({
     super.name,
     super.position,
     super.permissionOverwrites,
@@ -490,20 +422,12 @@ class _GuildVoiceOrStageChannelUpdateBuilder<T extends GuildChannel> extends Gui
     this.rtcRegion = sentinelString,
     this.videoQualityMode,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        ...super.build(),
-        if (isNsfw != null) 'nsfw': isNsfw,
-        if (bitRate != null) 'bitrate': bitRate,
-        if (userLimit != null) 'user_limit': userLimit,
-        if (!identical(parentId, sentinelSnowflake)) 'parent_id': parentId?.toString(),
-        if (!identical(rtcRegion, sentinelString)) 'rtc_region': rtcRegion,
-        if (videoQualityMode != null) 'video_quality_mode': videoQualityMode!.value,
-      };
 }
 
-class GuildVoiceChannelUpdateBuilder extends _GuildVoiceOrStageChannelUpdateBuilder<GuildVoiceChannel> {
+@MappableClass()
+class GuildVoiceChannelUpdateBuilder
+    extends GuildVoiceOrStageChannelUpdateBuilder<GuildVoiceChannel>
+    with GuildVoiceChannelUpdateBuilderMappable {
   GuildVoiceChannelUpdateBuilder({
     super.name,
     super.position,
@@ -517,7 +441,10 @@ class GuildVoiceChannelUpdateBuilder extends _GuildVoiceOrStageChannelUpdateBuil
   });
 }
 
-class GuildStageChannelUpdateBuilder extends _GuildVoiceOrStageChannelUpdateBuilder<GuildStageChannel> {
+@MappableClass()
+class GuildStageChannelUpdateBuilder
+    extends GuildVoiceOrStageChannelUpdateBuilder<GuildStageChannel>
+    with GuildStageChannelUpdateBuilderMappable {
   GuildStageChannelUpdateBuilder({
     super.name,
     super.position,
@@ -531,7 +458,9 @@ class GuildStageChannelUpdateBuilder extends _GuildVoiceOrStageChannelUpdateBuil
   });
 }
 
-class GuildCategoryBuilder extends GuildChannelBuilder<GuildCategory> {
+@MappableClass()
+class GuildCategoryBuilder extends GuildChannelBuilder<GuildCategory>
+    with GuildCategoryBuilderMappable {
   GuildCategoryBuilder({
     required super.name,
     super.position,
@@ -539,6 +468,10 @@ class GuildCategoryBuilder extends GuildChannelBuilder<GuildCategory> {
   }) : super(type: ChannelType.guildCategory);
 }
 
-class GuildCategoryUpdateBuilder extends GuildChannelUpdateBuilder<GuildCategory> {
-  GuildCategoryUpdateBuilder({super.name, super.position, super.permissionOverwrites});
+@MappableClass()
+class GuildCategoryUpdateBuilder
+    extends GuildChannelUpdateBuilder<GuildCategory>
+    with GuildCategoryUpdateBuilderMappable {
+  GuildCategoryUpdateBuilder(
+      {super.name, super.position, super.permissionOverwrites});
 }

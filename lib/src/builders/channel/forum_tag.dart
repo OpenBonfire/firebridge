@@ -2,7 +2,6 @@ import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/builder.dart';
 import 'package:nyxx/src/models/channel/types/forum.dart';
 import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/utils/building_helpers.dart';
 
 part 'forum_tag.mapper.dart';
 

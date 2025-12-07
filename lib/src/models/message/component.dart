@@ -2,12 +2,10 @@
 library;
 
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/http/managers/message_manager.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/discord_color.dart';
 import 'package:nyxx/src/models/emoji.dart';
 import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/models/user/user.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'component.mapper.dart';
@@ -600,8 +598,6 @@ class SubmittedLabelComponent extends SubmittedComponent
 @MappableClass()
 class SubmittedSelectMenuComponent extends SubmittedComponent
     with SubmittedSelectMenuComponentMappable {
-  final MessageManager manager;
-
   @override
   final MessageComponentType type;
 
@@ -613,33 +609,12 @@ class SubmittedSelectMenuComponent extends SubmittedComponent
 
   /// @nodoc
   SubmittedSelectMenuComponent({
-    required this.manager,
     Snowflake? guildId,
     required this.type,
     required super.id,
     required this.customId,
     required this.values,
   });
-
-  /// The selected users.
-  ///
-  /// Will be `null` if `type` is not [MessageComponentType.userSelect].
-  List<PartialUser>? get users => type != MessageComponentType.userSelect
-      ? null
-      : [
-          for (final id in values) manager.client.users[Snowflake.parse(id)],
-        ];
-
-  /// The selected channels.
-  ///
-  /// Will be `null` if `type` is not [MessageComponentType.channelSelect].
-  List<PartialChannel>? get channels =>
-      type != MessageComponentType.channelSelect
-          ? null
-          : [
-              for (final id in values)
-                manager.client.channels[Snowflake.parse(id)],
-            ];
 }
 
 /// A [TextDisplayComponent] received in an [Interaction].

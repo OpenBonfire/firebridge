@@ -1,9 +1,12 @@
-import 'dart:convert';
-
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/builder.dart';
 import 'package:nyxx/src/models/channel/types/group_dm.dart';
 
-class GroupDmUpdateBuilder extends UpdateBuilder<GroupDmChannel> {
+part 'group_dm.mapper.dart';
+
+@MappableClass()
+class GroupDmUpdateBuilder extends UpdateBuilder<GroupDmChannel>
+    with GroupDmUpdateBuilderMappable {
   /// The name of the group DM, if changed.
   String? name;
 
@@ -11,24 +14,14 @@ class GroupDmUpdateBuilder extends UpdateBuilder<GroupDmChannel> {
   List<int>? icon;
 
   GroupDmUpdateBuilder({this.name, this.icon});
-
-  @override
-  Map<String, Object?> build() => {
-        if (name != null) 'name': name,
-        if (icon != null) 'icon': base64Encode(icon!),
-      };
 }
 
-class DmRecipientBuilder extends CreateBuilder<DmRecipientBuilder> {
+@MappableClass()
+class DmRecipientBuilder extends CreateBuilder<DmRecipientBuilder>
+    with DmRecipientBuilderMappable {
   String accessToken;
 
   String nick;
 
   DmRecipientBuilder({required this.accessToken, required this.nick});
-
-  @override
-  Map<String, Object?> build() => {
-        'access_token': accessToken,
-        'nick': nick,
-      };
 }
