@@ -10,7 +10,7 @@ void main() {
     );
 
     expect(
-      builder.build(),
+      builder.toMap(),
       equals({
         'name': 'test',
         'auto_archive_duration': 1,
@@ -29,7 +29,7 @@ void main() {
     );
 
     expect(
-      builder.build(),
+      builder.toMap(),
       equals({
         'name': 'test',
         'auto_archive_duration': 1,
@@ -50,7 +50,7 @@ void main() {
     );
 
     expect(
-      builder.build(),
+      builder.toMap(),
       equals({
         'name': 'test',
         'message': {},
@@ -74,7 +74,7 @@ void main() {
     );
 
     expect(
-      builder.build(),
+      builder.toMap(),
       equals({
         'name': 'test',
         'archived': true,

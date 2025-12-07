@@ -73,7 +73,7 @@ class ApplicationEmojiManager extends EmojiManager {
       ..applications(id: applicationId.toString())
       ..emojis();
     final request =
-        BasicRequest(route, method: 'POST', body: jsonEncode(builder.build()));
+        BasicRequest(route, method: 'POST', body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
     final emoji = ApplicationEmojiMapper.fromMap(
@@ -90,7 +90,7 @@ class ApplicationEmojiManager extends EmojiManager {
       ..applications(id: applicationId.toString())
       ..emojis(id: id.toString());
     final request =
-        BasicRequest(route, method: 'PATCH', body: jsonEncode(builder.build()));
+        BasicRequest(route, method: 'PATCH', body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
     final emoji = ApplicationEmojiMapper.fromMap(
@@ -179,7 +179,7 @@ class GuildEmojiManager extends EmojiManager {
       ..emojis();
     final request = BasicRequest(route,
         method: 'POST',
-        body: jsonEncode(builder.build()),
+        body: jsonEncode(builder.toMap()),
         auditLogReason: auditLogReason);
 
     final response = await client.httpHandler.executeSafe(request);
@@ -200,7 +200,7 @@ class GuildEmojiManager extends EmojiManager {
       ..emojis(id: id.toString());
     final request = BasicRequest(route,
         method: 'PATCH',
-        body: jsonEncode(builder.build()),
+        body: jsonEncode(builder.toMap()),
         auditLogReason: auditLogReason);
 
     final response = await client.httpHandler.executeSafe(request);

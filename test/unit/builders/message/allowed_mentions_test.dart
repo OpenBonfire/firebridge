@@ -12,7 +12,7 @@ void main() {
       );
 
       expect(
-        builder.build(),
+        builder.toMap(),
         equals({
           'parse': ['a', 'b', 'c'],
           'replied_user': false,
@@ -41,7 +41,8 @@ void main() {
     });
 
     test('operator |', () {
-      final a = AllowedMentions.users([Snowflake(1), Snowflake(2), Snowflake(3)]);
+      final a =
+          AllowedMentions.users([Snowflake(1), Snowflake(2), Snowflake(3)]);
       final b = AllowedMentions(
         repliedUser: true,
         users: [Snowflake(1)],
@@ -58,7 +59,8 @@ void main() {
     });
 
     test('operator &', () {
-      final a = AllowedMentions.users([Snowflake(1), Snowflake(2), Snowflake(3)]);
+      final a =
+          AllowedMentions.users([Snowflake(1), Snowflake(2), Snowflake(3)]);
       final b = AllowedMentions(
         repliedUser: true,
         users: [Snowflake(1)],

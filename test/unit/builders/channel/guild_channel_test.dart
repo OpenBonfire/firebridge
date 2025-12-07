@@ -17,7 +17,7 @@ void main() {
     );
 
     expect(
-      builder.build(),
+      builder.toMap(),
       equals({
         'name': 'test',
         'position': 10,
@@ -46,7 +46,7 @@ void main() {
     );
 
     expect(
-      builder.build(),
+      builder.toMap(),
       equals({
         'name': 'test',
         'position': 10,
@@ -79,7 +79,7 @@ void main() {
     );
 
     expect(
-      builder.build(),
+      builder.toMap(),
       equals({
         'name': 'test',
         'position': 10,
@@ -113,7 +113,7 @@ void main() {
     );
 
     expect(
-      builder.build(),
+      builder.toMap(),
       equals({
         'name': 'test',
         'position': 10,

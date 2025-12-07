@@ -75,7 +75,7 @@ class GuildSoundboardManager extends SoundboardManager {
     final request = BasicRequest(route,
         method: 'POST',
         auditLogReason: auditLogReason,
-        body: jsonEncode(builder.build()));
+        body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
 
@@ -98,7 +98,7 @@ class GuildSoundboardManager extends SoundboardManager {
     final request = BasicRequest(route,
         method: 'PATCH',
         auditLogReason: auditLogReason,
-        body: jsonEncode(builder.build()));
+        body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
 

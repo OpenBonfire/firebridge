@@ -102,8 +102,8 @@ class ChannelManager extends ReadOnlyManager<Channel> {
     final route = HttpRoute()
       ..channels(id: id.toString())
       ..permissions(id: builder.id.toString());
-    final request = BasicRequest(route,
-        method: 'PUT', body: jsonEncode(builder.build(includeId: false)));
+    final request =
+        BasicRequest(route, method: 'PUT', body: jsonEncode(builder.toMap()));
 
     await client.httpHandler.executeSafe(request);
   }
@@ -143,7 +143,7 @@ class ChannelManager extends ReadOnlyManager<Channel> {
     final request = BasicRequest(route,
         method: 'POST',
         auditLogReason: auditLogReason,
-        body: jsonEncode(builder.build()));
+        body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
     final invite =
@@ -192,7 +192,7 @@ class ChannelManager extends ReadOnlyManager<Channel> {
       ..threads();
     final request = BasicRequest(route,
         method: 'POST',
-        body: jsonEncode(builder.build()),
+        body: jsonEncode(builder.toMap()),
         auditLogReason: auditLogReason);
 
     final response = await client.httpHandler.executeSafe(request);
@@ -211,7 +211,7 @@ class ChannelManager extends ReadOnlyManager<Channel> {
       ..threads();
     final request = BasicRequest(route,
         method: 'POST',
-        body: jsonEncode(builder.build()),
+        body: jsonEncode(builder.toMap()),
         auditLogReason: auditLogReason);
 
     final response = await client.httpHandler.executeSafe(request);
@@ -232,7 +232,7 @@ class ChannelManager extends ReadOnlyManager<Channel> {
     final HttpRequest request;
     if (builder.message.attachments?.isNotEmpty == true) {
       final attachments = builder.message.attachments!;
-      final payload = builder.build();
+      final payload = builder.toMap();
 
       final files = <MultipartFile>[];
       for (int i = 0; i < attachments.length; i++) {
@@ -435,7 +435,7 @@ class ChannelManager extends ReadOnlyManager<Channel> {
       route,
       method: 'POST',
       body:
-          jsonEncode({'channel_id': channelId.toString(), ...builder.build()}),
+          jsonEncode({'channel_id': channelId.toString(), ...builder.toMap()}),
       auditLogReason: auditLogReason,
     );
 
@@ -468,7 +468,7 @@ class ChannelManager extends ReadOnlyManager<Channel> {
     final request = BasicRequest(
       route,
       method: 'PATCH',
-      body: jsonEncode(builder.build()),
+      body: jsonEncode(builder.toMap()),
       auditLogReason: auditLogReason,
     );
 
@@ -498,7 +498,7 @@ class ChannelManager extends ReadOnlyManager<Channel> {
       ..channels(id: channelId.toString())
       ..recipients(id: userId.toString());
     final request =
-        BasicRequest(route, method: 'PUT', body: jsonEncode(builder.build()));
+        BasicRequest(route, method: 'PUT', body: jsonEncode(builder.toMap()));
 
     await client.httpHandler.executeSafe(request);
   }

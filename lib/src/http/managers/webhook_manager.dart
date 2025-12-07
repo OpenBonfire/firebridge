@@ -55,7 +55,7 @@ class WebhookManager extends Manager<Webhook> {
       ..webhooks();
     final request = BasicRequest(route,
         method: 'POST',
-        body: jsonEncode(builder.build()),
+        body: jsonEncode(builder.toMap()),
         auditLogReason: auditLogReason);
 
     final response = await client.httpHandler.executeSafe(request);
@@ -75,7 +75,7 @@ class WebhookManager extends Manager<Webhook> {
     }
     final request = BasicRequest(route,
         method: 'PATCH',
-        body: jsonEncode(builder.build()),
+        body: jsonEncode(builder.toMap()),
         authenticated: token == null,
         auditLogReason: auditLogReason);
 
@@ -162,7 +162,7 @@ class WebhookManager extends Manager<Webhook> {
         builder.attachments?.isNotEmpty == true) {
       final attachments = builder.attachments!;
       final payload = {
-        ...builder.build(),
+        ...builder.toMap(),
         if (threadName != null) 'thread_name': threadName,
         if (appliedTags != null)
           'applied_tags': appliedTags.map((e) => e.toString()),
@@ -194,7 +194,7 @@ class WebhookManager extends Manager<Webhook> {
         route,
         method: 'POST',
         body: jsonEncode({
-          ...builder.build(),
+          ...builder.toMap(),
           if (threadName != null) 'thread_name': threadName,
           if (appliedTags != null)
             'applied_tags': appliedTags.map((e) => e.toString()),
@@ -259,7 +259,7 @@ class WebhookManager extends Manager<Webhook> {
     if (!identical(builder.attachments, sentinelList) &&
         builder.attachments?.isNotEmpty == true) {
       final attachments = builder.attachments!;
-      final payload = builder.build();
+      final payload = builder.toMap();
 
       final files = <MultipartFile>[];
       for (int i = 0; i < attachments.length; i++) {
@@ -284,7 +284,7 @@ class WebhookManager extends Manager<Webhook> {
       request = BasicRequest(
         route,
         method: 'PATCH',
-        body: jsonEncode(builder.build()),
+        body: jsonEncode(builder.toMap()),
         queryParameters: queryParameters,
         authenticated: false,
       );

@@ -28,7 +28,7 @@ class GuildStickerManager extends Manager<GuildSticker> {
       ..stickers();
     final request = FormDataRequest(route,
         method: 'POST',
-        formParams: builder.build().cast<String, String>(),
+        formParams: builder.toMap().cast<String, String>(),
         files: [MultipartFile.fromBytes('file', builder.file.buildRawData())],
         auditLogReason: auditLogReason);
 
@@ -90,7 +90,7 @@ class GuildStickerManager extends Manager<GuildSticker> {
       ..stickers(id: id.toString());
 
     final request = BasicRequest(route,
-        body: jsonEncode(builder.build()),
+        body: jsonEncode(builder.toMap()),
         method: 'PATCH',
         auditLogReason: auditLogReason);
     final response = await client.httpHandler.executeSafe(request);

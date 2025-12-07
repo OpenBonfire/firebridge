@@ -57,7 +57,7 @@ class RoleManager extends Manager<Role> {
     final request = BasicRequest(route,
         method: 'POST',
         auditLogReason: auditLogReason,
-        body: jsonEncode(builder.build()));
+        body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
     final role = RoleMapper.fromMap(response.jsonBody as Map<String, Object?>);
@@ -75,7 +75,7 @@ class RoleManager extends Manager<Role> {
     final request = BasicRequest(route,
         method: 'PATCH',
         auditLogReason: auditLogReason,
-        body: jsonEncode(builder.build()));
+        body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
     final role = RoleMapper.fromMap(response.jsonBody as Map<String, Object?>);

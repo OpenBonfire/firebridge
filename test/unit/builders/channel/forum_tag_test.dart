@@ -5,7 +5,7 @@ void main() {
   test('ForumTagBuilder', () {
     final builder = ForumTagBuilder(name: 'test');
 
-    expect(builder.build(), equals({'name': 'test'}));
+    expect(builder.toMap(), equals({'name': 'test'}));
 
     final builder2 = ForumTagBuilder(
       name: 'test',

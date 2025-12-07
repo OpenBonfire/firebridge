@@ -37,7 +37,7 @@ class MessageManager extends Manager<Message> {
     if (!identical(builder.attachments, sentinelList) &&
         builder.attachments?.isNotEmpty == true) {
       final attachments = builder.attachments!;
-      final payload = builder.build();
+      final payload = builder.toMap();
 
       final files = <MultipartFile>[];
       for (int i = 0; i < attachments.length; i++) {
@@ -58,7 +58,7 @@ class MessageManager extends Manager<Message> {
       );
     } else {
       request = BasicRequest(route,
-          method: 'POST', body: jsonEncode(builder.build()));
+          method: 'POST', body: jsonEncode(builder.toMap()));
     }
 
     final response = await client.httpHandler.executeSafe(request);
@@ -94,7 +94,7 @@ class MessageManager extends Manager<Message> {
     if (!identical(builder.attachments, sentinelList) &&
         builder.attachments?.isNotEmpty == true) {
       final attachments = builder.attachments!;
-      final payload = builder.build();
+      final payload = builder.toMap();
 
       final files = <MultipartFile>[];
       for (int i = 0; i < attachments.length; i++) {
@@ -115,7 +115,7 @@ class MessageManager extends Manager<Message> {
       );
     } else {
       request = BasicRequest(route,
-          method: 'PATCH', body: jsonEncode(builder.build()));
+          method: 'PATCH', body: jsonEncode(builder.toMap()));
     }
 
     final response = await client.httpHandler.executeSafe(request);

@@ -56,7 +56,7 @@ class UserManager extends ReadOnlyManager<User> {
     final request = BasicRequest(
       route,
       method: 'PATCH',
-      body: jsonEncode(builder.build()),
+      body: jsonEncode(builder.toMap()),
     );
 
     final response = await client.httpHandler.executeSafe(request);
@@ -196,7 +196,7 @@ class UserManager extends ReadOnlyManager<User> {
       ..applications(id: applicationId.toString())
       ..roleConnection();
     final request =
-        BasicRequest(route, method: 'PUT', body: jsonEncode(builder.build()));
+        BasicRequest(route, method: 'PUT', body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
     return ApplicationRoleConnectionMapper.fromMap(

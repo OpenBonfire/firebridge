@@ -3,10 +3,11 @@ import 'package:test/test.dart';
 
 void main() {
   test('PermissionOverwriteBuilder', () {
-    final builder = PermissionOverwriteBuilder(id: Snowflake.zero, type: PermissionOverwriteType.member);
+    final builder = PermissionOverwriteBuilder(
+        id: Snowflake.zero, type: PermissionOverwriteType.member);
 
     expect(
-      builder.build(),
+      builder.toMap(),
       equals({'id': '0', 'type': 1}),
     );
 

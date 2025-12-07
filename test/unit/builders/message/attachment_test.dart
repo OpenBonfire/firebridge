@@ -12,7 +12,7 @@ void main() {
     );
 
     expect(
-      builder.build(),
+      builder.toMap(),
       equals({
         'filename': 'foo.dart',
         'description': 'A test description',

@@ -70,7 +70,7 @@ class EntitlementManager extends ReadOnlyManager<Entitlement> {
       ..applications(id: applicationId.toString())
       ..entitlements();
     final request =
-        BasicRequest(route, method: 'POST', body: jsonEncode(builder.build()));
+        BasicRequest(route, method: 'POST', body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
     final entitlement =

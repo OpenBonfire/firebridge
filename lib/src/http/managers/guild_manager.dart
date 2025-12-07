@@ -55,7 +55,7 @@ class GuildManager extends Manager<Guild> {
   Future<Guild> create(GuildBuilder builder) async {
     final route = HttpRoute()..guilds();
     final request =
-        BasicRequest(route, method: 'POST', body: jsonEncode(builder.build()));
+        BasicRequest(route, method: 'POST', body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
     final guild =
@@ -72,7 +72,7 @@ class GuildManager extends Manager<Guild> {
     final request = BasicRequest(route,
         method: 'PATCH',
         auditLogReason: auditLogReason,
-        body: jsonEncode(builder.build()));
+        body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
     final guild =
@@ -132,7 +132,7 @@ class GuildManager extends Manager<Guild> {
     final request = BasicRequest(route,
         method: 'POST',
         auditLogReason: auditLogReason,
-        body: jsonEncode(builder.build()));
+        body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
     final channel =
@@ -151,7 +151,7 @@ class GuildManager extends Manager<Guild> {
       ..channels();
     final request = BasicRequest(route,
         method: 'PATCH',
-        body: jsonEncode(positions.map((e) => e.build()).toList()));
+        body: jsonEncode(positions.map((e) => e.toMap()).toList()));
 
     await client.httpHandler.executeSafe(request);
   }
@@ -365,7 +365,7 @@ class GuildManager extends Manager<Guild> {
     final request = BasicRequest(route,
         method: 'PATCH',
         auditLogReason: auditLogReason,
-        body: jsonEncode(builder.build()));
+        body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
     return WidgetSettingsMapper.fromMap(
@@ -432,7 +432,7 @@ class GuildManager extends Manager<Guild> {
     final request = BasicRequest(route,
         method: 'PATCH',
         auditLogReason: auditLogReason,
-        body: jsonEncode(builder.build()));
+        body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
     return WelcomeScreenMapper.fromMap(
@@ -459,7 +459,7 @@ class GuildManager extends Manager<Guild> {
       ..onboarding();
     final request = BasicRequest(route,
         method: 'PUT',
-        body: jsonEncode(builder.build()),
+        body: jsonEncode(builder.toMap()),
         auditLogReason: auditLogReason);
 
     final response = await client.httpHandler.executeSafe(request);
@@ -473,7 +473,7 @@ class GuildManager extends Manager<Guild> {
       ..guilds(id: id.toString())
       ..voiceStates(id: '@me');
     final request =
-        BasicRequest(route, method: 'PATCH', body: jsonEncode(builder.build()));
+        BasicRequest(route, method: 'PATCH', body: jsonEncode(builder.toMap()));
 
     await client.httpHandler.executeSafe(request);
   }
@@ -485,7 +485,7 @@ class GuildManager extends Manager<Guild> {
       ..guilds(id: id.toString())
       ..voiceStates(id: userId.toString());
     final request =
-        BasicRequest(route, method: 'PATCH', body: jsonEncode(builder.build()));
+        BasicRequest(route, method: 'PATCH', body: jsonEncode(builder.toMap()));
 
     await client.httpHandler.executeSafe(request);
   }
@@ -546,7 +546,7 @@ class GuildManager extends Manager<Guild> {
       ..guilds(id: id.toString())
       ..templates();
     final request =
-        BasicRequest(route, method: 'POST', body: jsonEncode(builder.build()));
+        BasicRequest(route, method: 'POST', body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
     final template =
@@ -578,7 +578,7 @@ class GuildManager extends Manager<Guild> {
       ..guilds(id: id.toString())
       ..templates(code: code);
     final request =
-        BasicRequest(route, method: 'PATCH', body: jsonEncode(builder.build()));
+        BasicRequest(route, method: 'PATCH', body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
     final template =
@@ -614,7 +614,7 @@ class GuildManager extends Manager<Guild> {
     final request = BasicRequest(
       route,
       method: 'PUT',
-      body: jsonEncode(builder.build()),
+      body: jsonEncode(builder.toMap()),
     );
 
     final response = await client.httpHandler.executeSafe(request);

@@ -34,7 +34,7 @@ class InteractionManager {
         case MessageBuilder(:final attachments?) ||
             MessageUpdateBuilder(:final attachments?)
         when !identical(attachments, sentinelList) && attachments.isNotEmpty) {
-      final payload = builder.build();
+      final payload = builder.toMap();
 
       final files = <MultipartFile>[];
       for (int i = 0; i < attachments.length; i++) {
@@ -62,7 +62,7 @@ class InteractionManager {
       request = BasicRequest(
         route,
         method: 'POST',
-        body: jsonEncode(builder.build()),
+        body: jsonEncode(builder.toMap()),
         applyGlobalRateLimit: false,
         queryParameters: withResponse != null
             ? {'with_response': withResponse.toString()}

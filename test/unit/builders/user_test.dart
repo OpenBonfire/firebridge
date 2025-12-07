@@ -4,9 +4,10 @@ import 'package:test/test.dart';
 void main() {
   group('UserUpdateBuilder', () {
     test('build', () {
-      final builder = UserUpdateBuilder(username: 'foo', avatar: ImageBuilder.png([]));
+      final builder =
+          UserUpdateBuilder(username: 'foo', avatar: ImageBuilder.png([]));
       expect(
-        builder.build(),
+        builder.toMap(),
         equals({
           'username': 'foo',
           'avatar': 'data:image/png;base64,',

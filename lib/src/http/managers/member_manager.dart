@@ -59,7 +59,7 @@ class MemberManager extends Manager<Member> {
       ..guilds(id: guildId.toString())
       ..members(id: builder.userId.toString());
     final request =
-        BasicRequest(route, method: 'PUT', body: jsonEncode(builder.build()));
+        BasicRequest(route, method: 'PUT', body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
     if (response.statusCode == 204) {
@@ -83,7 +83,7 @@ class MemberManager extends Manager<Member> {
     final request = BasicRequest(route,
         method: 'PATCH',
         auditLogReason: auditLogReason,
-        body: jsonEncode(builder.build()));
+        body: jsonEncode(builder.toMap()));
 
     final response = await client.httpHandler.executeSafe(request);
     final member = MemberMapper.fromMap(
@@ -133,7 +133,7 @@ class MemberManager extends Manager<Member> {
       ..members(id: '@me');
     final request = BasicRequest(route,
         method: 'PATCH',
-        body: jsonEncode(builder.build()),
+        body: jsonEncode(builder.toMap()),
         auditLogReason: auditLogReason);
 
     final response = await client.httpHandler.executeSafe(request);
