@@ -14,7 +14,7 @@ part 'invite.mapper.dart';
 /// If the invite is to a [Channel], this will be a [GroupDmChannel].
 /// {@endtemplate}
 @MappableClass()
-class Invite with ToStringHelper {
+class Invite with ToStringHelper, InviteMappable {
   /// The type of this invite.
   final InviteType type;
 

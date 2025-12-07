@@ -11,7 +11,7 @@ part 'auto_moderation.mapper.dart';
 /// {@endtemplate}
 @MappableClass(discriminatorValue: "AUTO_MODERATION_RULE_CREATE")
 class AutoModerationRuleCreateEvent extends DispatchEvent
-    with AutoModerationActionExecutionEventMappable {
+    with AutoModerationRuleCreateEventMappable {
   /// The rule that was created.
   final AutoModerationRule rule;
 

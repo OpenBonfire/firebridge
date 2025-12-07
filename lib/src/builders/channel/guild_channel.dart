@@ -314,8 +314,9 @@ class ForumChannelUpdateBuilder extends GuildChannelUpdateBuilder<ForumChannel>
 }
 
 @MappableClass()
-abstract class _GuildVoiceOrStageChannelBuilder<T extends GuildChannel>
-    extends GuildChannelBuilder<T> {
+abstract class GuildVoiceOrStageChannelBuilder<T extends GuildChannel>
+    extends GuildChannelBuilder<T>
+    with GuildVoiceOrStageChannelBuilderMappable {
   /// {@template channel_bitrate}
   /// The bitrate (in bits) of the voice or stage channel; min 8000.
   /// {@endtemplate}
@@ -344,7 +345,7 @@ abstract class _GuildVoiceOrStageChannelBuilder<T extends GuildChannel>
   /// {@endtemplate}
   VideoQualityMode? videoQualityMode;
 
-  _GuildVoiceOrStageChannelBuilder({
+  GuildVoiceOrStageChannelBuilder({
     required super.name,
     required super.type,
     super.position,
@@ -360,7 +361,8 @@ abstract class _GuildVoiceOrStageChannelBuilder<T extends GuildChannel>
 
 @MappableClass()
 class GuildVoiceChannelBuilder
-    extends _GuildVoiceOrStageChannelBuilder<GuildVoiceChannel> {
+    extends GuildVoiceOrStageChannelBuilder<GuildVoiceChannel>
+    with GuildVoiceChannelBuilderMappable {
   GuildVoiceChannelBuilder({
     required super.name,
     super.position,
@@ -375,7 +377,7 @@ class GuildVoiceChannelBuilder
 }
 
 class GuildStageChannelBuilder
-    extends _GuildVoiceOrStageChannelBuilder<GuildStageChannel> {
+    extends GuildVoiceOrStageChannelBuilder<GuildStageChannel> {
   GuildStageChannelBuilder({
     required super.name,
     super.position,

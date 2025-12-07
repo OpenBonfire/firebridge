@@ -40,7 +40,7 @@ class ChannelUpdateEvent extends DispatchEvent with ChannelUpdateEventMappable {
 /// Emitted when a channel is deleted.
 /// {@endtemplate}
 @MappableClass(discriminatorValue: "CHANNEL_DELETE")
-class ChannelDeleteEvent extends DispatchEvent with ChannelUpdateEventMappable {
+class ChannelDeleteEvent extends DispatchEvent with ChannelDeleteEventMappable {
   /// The channel which was deleted.
   final Channel channel;
 

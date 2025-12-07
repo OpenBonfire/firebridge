@@ -4129,7 +4129,6 @@ class SubmittedSelectMenuComponentMapper
         _instance = SubmittedSelectMenuComponentMapper._(),
       );
       SubmittedComponentMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
       MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
@@ -4138,14 +4137,6 @@ class SubmittedSelectMenuComponentMapper
   @override
   final String id = 'SubmittedSelectMenuComponent';
 
-  static const Field<SubmittedSelectMenuComponent, Snowflake> _f$guildId =
-      Field(
-        'guildId',
-        null,
-        key: r'guild_id',
-        mode: FieldMode.param,
-        opt: true,
-      );
   static MessageComponentType _$type(SubmittedSelectMenuComponent v) => v.type;
   static const Field<SubmittedSelectMenuComponent, MessageComponentType>
   _f$type = Field('type', _$type);
@@ -4166,7 +4157,6 @@ class SubmittedSelectMenuComponentMapper
 
   @override
   final MappableFields<SubmittedSelectMenuComponent> fields = const {
-    #guildId: _f$guildId,
     #type: _f$type,
     #id: _f$id,
     #customId: _f$customId,
@@ -4175,7 +4165,6 @@ class SubmittedSelectMenuComponentMapper
 
   static SubmittedSelectMenuComponent _instantiate(DecodingData data) {
     return SubmittedSelectMenuComponent(
-      guildId: data.dec(_f$guildId),
       type: data.dec(_f$type),
       id: data.dec(_f$id),
       customId: data.dec(_f$customId),
@@ -4259,7 +4248,6 @@ abstract class SubmittedSelectMenuComponentCopyWith<
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get values;
   @override
   $R call({
-    Snowflake? guildId,
     MessageComponentType? type,
     int? id,
     String? customId,
@@ -4296,14 +4284,12 @@ class _SubmittedSelectMenuComponentCopyWithImpl<$R, $Out>
       );
   @override
   $R call({
-    Snowflake? guildId,
     MessageComponentType? type,
     int? id,
     String? customId,
     List<String>? values,
   }) => $apply(
     FieldCopyWithData({
-      #guildId: guildId,
       if (type != null) #type: type,
       if (id != null) #id: id,
       if (customId != null) #customId: customId,
@@ -4313,7 +4299,6 @@ class _SubmittedSelectMenuComponentCopyWithImpl<$R, $Out>
   @override
   SubmittedSelectMenuComponent $make(CopyWithData data) =>
       SubmittedSelectMenuComponent(
-        guildId: data.get(#guildId),
         type: data.get(#type, or: $value.type),
         id: data.get(#id, or: $value.id),
         customId: data.get(#customId, or: $value.customId),

@@ -200,7 +200,7 @@ class TriggerMetadataBuilder extends CreateBuilder<TriggerMetadata>
 
 @MappableClass()
 class ActionMetadataBuilder extends CreateBuilder<ActionMetadata>
-    with ActionMetadataMappable {
+    with ActionMetadataBuilderMappable {
   /// The ID of the channel to send the alert message to.
   final Snowflake? channelId;
 

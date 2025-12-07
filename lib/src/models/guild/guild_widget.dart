@@ -12,7 +12,7 @@ part 'guild_widget.mapper.dart';
 /// A [Guild]'s widget.
 /// {@endtemplate}
 @MappableClass()
-class GuildWidget with ToStringHelper {
+class GuildWidget with ToStringHelper, GuildWidgetMappable {
   /// The manager for this [GuildWidget].
   final GuildManager manager;
 
@@ -54,7 +54,7 @@ class GuildWidget with ToStringHelper {
 /// The settings for a [Guild]'s widget.
 /// {@endtemplate}
 @MappableClass()
-class WidgetSettings with ToStringHelper {
+class WidgetSettings with ToStringHelper, WidgetSettingsMappable {
   /// The manager for this [WidgetSettings].
   final GuildManager manager;
 

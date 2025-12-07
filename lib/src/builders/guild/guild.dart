@@ -1,15 +1,19 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/builders/builder.dart';
 import 'package:nyxx/src/builders/channel/guild_channel.dart';
 import 'package:nyxx/src/builders/image.dart';
 import 'package:nyxx/src/builders/role.dart';
 import 'package:nyxx/src/builders/sentinels.dart';
-import 'package:nyxx/src/http/managers/guild_manager.dart';
+import 'package:nyxx/src/models/channel/guild_channel.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/locale.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/utils/flags.dart';
 
-class GuildBuilder extends CreateBuilder<Guild> {
+part 'guild.mapper.dart';
+
+@MappableClass()
+class GuildBuilder extends CreateBuilder<Guild> with GuildBuilderMappable {
   /// {@template guild_name}
   /// The name of the guild. (2-100 characters)
   /// {@endtemplate}
@@ -76,24 +80,11 @@ class GuildBuilder extends CreateBuilder<Guild> {
     this.systemChannelId,
     this.systemChannelFlags,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        'name': name,
-        if (icon != null) 'icon': icon!.buildDataString(),
-        if (verificationLevel != null) 'verification_level': verificationLevel!.value,
-        if (defaultMessageNotificationLevel != null) 'default_message_notifications': defaultMessageNotificationLevel!.value,
-        if (explicitContentFilterLevel != null) 'explicit_content_filter': explicitContentFilterLevel!.value,
-        if (roles != null) 'roles': roles!.map((b) => b.build()).toList(),
-        if (channels != null) 'channels': channels!.map((b) => b.build()).toList(),
-        if (afkChannelId != null) 'afk_channel_id': afkChannelId!.toString(),
-        if (afkTimeout != null) 'afk_timeout': afkTimeout!.inSeconds,
-        if (systemChannelId != null) 'system_channel_id': systemChannelId!.toString(),
-        if (systemChannelFlags != null) 'system_channel_flags': systemChannelFlags!.value,
-      };
 }
 
-class GuildUpdateBuilder extends UpdateBuilder<Guild> {
+@MappableClass()
+class GuildUpdateBuilder extends UpdateBuilder<Guild>
+    with GuildUpdateBuilderMappable {
   /// {@macro guild_name}
   String? name;
 
@@ -175,33 +166,11 @@ class GuildUpdateBuilder extends UpdateBuilder<Guild> {
     this.premiumProgressBarEnabled,
     this.safetyAlertsChannelId = sentinelSnowflake,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        if (name != null) 'name': name,
-        if (verificationLevel != null) 'verification_level': verificationLevel!.value,
-        if (defaultMessageNotificationLevel != null) 'default_message_notifications': defaultMessageNotificationLevel!.value,
-        if (explicitContentFilterLevel != null) 'explicit_content_filter': explicitContentFilterLevel!.value,
-        if (!identical(afkChannelId, sentinelSnowflake)) 'afk_channel_id': afkChannelId?.toString(),
-        if (afkTimeout != null) 'afk_timeout': afkTimeout!.inSeconds,
-        if (!identical(icon, sentinelImageBuilder)) 'icon': icon?.buildDataString(),
-        if (newOwnerId != null) 'owner_id': newOwnerId!.toString(),
-        if (!identical(splash, sentinelImageBuilder)) 'splash': splash?.buildDataString(),
-        if (!identical(discoverySplash, sentinelImageBuilder)) 'discovery_splash': discoverySplash?.buildDataString(),
-        if (!identical(banner, sentinelImageBuilder)) 'banner': banner?.buildDataString(),
-        if (!identical(systemChannelId, sentinelSnowflake)) 'system_channel_id': systemChannelId?.toString(),
-        if (systemChannelFlags != null) 'system_channel_flags': systemChannelFlags!.value,
-        if (!identical(rulesChannelId, sentinelSnowflake)) 'rules_channel_id': rulesChannelId?.toString(),
-        if (!identical(publicUpdatesChannelId, sentinelSnowflake)) 'public_updates_channel_id': publicUpdatesChannelId?.toString(),
-        if (preferredLocale != null) 'preferred_locale': preferredLocale!.identifier,
-        if (features != null) 'features': GuildManager.serializeGuildFeatures(features!),
-        if (!identical(description, sentinelString)) 'description': description,
-        if (premiumProgressBarEnabled != null) 'premium_progress_bar_enabled': premiumProgressBarEnabled,
-        if (!identical(safetyAlertsChannelId, sentinelSnowflake)) 'safety_alerts_channel_id': safetyAlertsChannelId?.toString(),
-      };
 }
 
-class GuildIncidentsUpdateBuilder extends UpdateBuilder<IncidentsData> {
+@MappableClass()
+class GuildIncidentsUpdateBuilder extends UpdateBuilder<IncidentsData>
+    with GuildIncidentsUpdateBuilderMappable {
   /// When invites will be enabled again
   DateTime? invitesDisabledUntil;
 
@@ -212,10 +181,4 @@ class GuildIncidentsUpdateBuilder extends UpdateBuilder<IncidentsData> {
     this.invitesDisabledUntil = sentinelDateTime,
     this.dmsDisabledUntil = sentinelDateTime,
   });
-
-  @override
-  Map<String, Object?> build() => {
-        if (!identical(invitesDisabledUntil, sentinelDateTime)) 'invites_disabled_until': invitesDisabledUntil?.toIso8601String(),
-        if (!identical(dmsDisabledUntil, sentinelDateTime)) 'dms_disabled_until': dmsDisabledUntil?.toIso8601String(),
-      };
 }

@@ -17,6 +17,7 @@ class GuildChannelBuilderMapper extends ClassMapperBase<GuildChannelBuilder> {
       GuildTextChannelBuilderMapper.ensureInitialized();
       GuildAnnouncementChannelBuilderMapper.ensureInitialized();
       ForumChannelBuilderMapper.ensureInitialized();
+      GuildVoiceOrStageChannelBuilderMapper.ensureInitialized();
       GuildCategoryBuilderMapper.ensureInitialized();
       ChannelTypeMapper.ensureInitialized();
       PermissionOverwriteMapper.ensureInitialized();
@@ -2461,6 +2462,184 @@ class _ForumChannelUpdateBuilderCopyWithImpl<$R, $Out>
       _ForumChannelUpdateBuilderCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
+class GuildVoiceOrStageChannelBuilderMapper
+    extends ClassMapperBase<GuildVoiceOrStageChannelBuilder> {
+  GuildVoiceOrStageChannelBuilderMapper._();
+
+  static GuildVoiceOrStageChannelBuilderMapper? _instance;
+  static GuildVoiceOrStageChannelBuilderMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(
+        _instance = GuildVoiceOrStageChannelBuilderMapper._(),
+      );
+      GuildChannelBuilderMapper.ensureInitialized();
+      GuildVoiceChannelBuilderMapper.ensureInitialized();
+      ChannelTypeMapper.ensureInitialized();
+      PermissionOverwriteMapper.ensureInitialized();
+      SnowflakeMapper.ensureInitialized();
+      VideoQualityModeMapper.ensureInitialized();
+      GuildChannelMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'GuildVoiceOrStageChannelBuilder';
+  @override
+  Function get typeFactory =>
+      <T extends GuildChannel>(f) => f<GuildVoiceOrStageChannelBuilder<T>>();
+
+  static String _$name(GuildVoiceOrStageChannelBuilder v) => v.name;
+  static const Field<GuildVoiceOrStageChannelBuilder, String> _f$name = Field(
+    'name',
+    _$name,
+  );
+  static ChannelType _$type(GuildVoiceOrStageChannelBuilder v) => v.type;
+  static const Field<GuildVoiceOrStageChannelBuilder, ChannelType> _f$type =
+      Field('type', _$type);
+  static int? _$position(GuildVoiceOrStageChannelBuilder v) => v.position;
+  static const Field<GuildVoiceOrStageChannelBuilder, int> _f$position = Field(
+    'position',
+    _$position,
+    opt: true,
+  );
+  static List<CreateBuilder<PermissionOverwrite>>? _$permissionOverwrites(
+    GuildVoiceOrStageChannelBuilder v,
+  ) => v.permissionOverwrites;
+  static const Field<
+    GuildVoiceOrStageChannelBuilder,
+    List<CreateBuilder<PermissionOverwrite>>
+  >
+  _f$permissionOverwrites = Field(
+    'permissionOverwrites',
+    _$permissionOverwrites,
+    key: r'permission_overwrites',
+    opt: true,
+  );
+  static int? _$bitRate(GuildVoiceOrStageChannelBuilder v) => v.bitRate;
+  static const Field<GuildVoiceOrStageChannelBuilder, int> _f$bitRate = Field(
+    'bitRate',
+    _$bitRate,
+    key: r'bit_rate',
+    opt: true,
+  );
+  static int? _$userLimit(GuildVoiceOrStageChannelBuilder v) => v.userLimit;
+  static const Field<GuildVoiceOrStageChannelBuilder, int> _f$userLimit = Field(
+    'userLimit',
+    _$userLimit,
+    key: r'user_limit',
+    opt: true,
+  );
+  static Snowflake? _$parentId(GuildVoiceOrStageChannelBuilder v) => v.parentId;
+  static const Field<GuildVoiceOrStageChannelBuilder, Snowflake> _f$parentId =
+      Field('parentId', _$parentId, key: r'parent_id', opt: true);
+  static bool? _$isNsfw(GuildVoiceOrStageChannelBuilder v) => v.isNsfw;
+  static const Field<GuildVoiceOrStageChannelBuilder, bool> _f$isNsfw = Field(
+    'isNsfw',
+    _$isNsfw,
+    key: r'is_nsfw',
+    opt: true,
+  );
+  static String? _$rtcRegion(GuildVoiceOrStageChannelBuilder v) => v.rtcRegion;
+  static const Field<GuildVoiceOrStageChannelBuilder, String> _f$rtcRegion =
+      Field('rtcRegion', _$rtcRegion, key: r'rtc_region', opt: true);
+  static VideoQualityMode? _$videoQualityMode(
+    GuildVoiceOrStageChannelBuilder v,
+  ) => v.videoQualityMode;
+  static const Field<GuildVoiceOrStageChannelBuilder, VideoQualityMode>
+  _f$videoQualityMode = Field(
+    'videoQualityMode',
+    _$videoQualityMode,
+    key: r'video_quality_mode',
+    opt: true,
+  );
+
+  @override
+  final MappableFields<GuildVoiceOrStageChannelBuilder> fields = const {
+    #name: _f$name,
+    #type: _f$type,
+    #position: _f$position,
+    #permissionOverwrites: _f$permissionOverwrites,
+    #bitRate: _f$bitRate,
+    #userLimit: _f$userLimit,
+    #parentId: _f$parentId,
+    #isNsfw: _f$isNsfw,
+    #rtcRegion: _f$rtcRegion,
+    #videoQualityMode: _f$videoQualityMode,
+  };
+
+  static GuildVoiceOrStageChannelBuilder<T>
+  _instantiate<T extends GuildChannel>(DecodingData data) {
+    throw MapperException.missingConstructor('GuildVoiceOrStageChannelBuilder');
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static GuildVoiceOrStageChannelBuilder<T> fromMap<T extends GuildChannel>(
+    Map<String, dynamic> map,
+  ) {
+    return ensureInitialized().decodeMap<GuildVoiceOrStageChannelBuilder<T>>(
+      map,
+    );
+  }
+
+  static GuildVoiceOrStageChannelBuilder<T> fromJson<T extends GuildChannel>(
+    String json,
+  ) {
+    return ensureInitialized().decodeJson<GuildVoiceOrStageChannelBuilder<T>>(
+      json,
+    );
+  }
+}
+
+mixin GuildVoiceOrStageChannelBuilderMappable<T extends GuildChannel> {
+  String toJson();
+  Map<String, dynamic> toMap();
+  GuildVoiceOrStageChannelBuilderCopyWith<
+    GuildVoiceOrStageChannelBuilder<T>,
+    GuildVoiceOrStageChannelBuilder<T>,
+    GuildVoiceOrStageChannelBuilder<T>,
+    T
+  >
+  get copyWith;
+}
+
+abstract class GuildVoiceOrStageChannelBuilderCopyWith<
+  $R,
+  $In extends GuildVoiceOrStageChannelBuilder<T>,
+  $Out,
+  T extends GuildChannel
+>
+    implements GuildChannelBuilderCopyWith<$R, $In, $Out, T> {
+  @override
+  ListCopyWith<
+    $R,
+    CreateBuilder<PermissionOverwrite>,
+    ObjectCopyWith<
+      $R,
+      CreateBuilder<PermissionOverwrite>,
+      CreateBuilder<PermissionOverwrite>
+    >?
+  >?
+  get permissionOverwrites;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
+  @override
+  $R call({
+    String? name,
+    int? position,
+    List<CreateBuilder<PermissionOverwrite>>? permissionOverwrites,
+    int? bitRate,
+    int? userLimit,
+    Snowflake? parentId,
+    bool? isNsfw,
+    String? rtcRegion,
+    VideoQualityMode? videoQualityMode,
+  });
+  GuildVoiceOrStageChannelBuilderCopyWith<$R2, $In, $Out2, T>
+  $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+}
+
 class GuildVoiceChannelBuilderMapper
     extends ClassMapperBase<GuildVoiceChannelBuilder> {
   GuildVoiceChannelBuilderMapper._();
@@ -2471,6 +2650,7 @@ class GuildVoiceChannelBuilderMapper
       MapperContainer.globals.use(
         _instance = GuildVoiceChannelBuilderMapper._(),
       );
+      GuildVoiceOrStageChannelBuilderMapper.ensureInitialized();
       PermissionOverwriteMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       VideoQualityModeMapper.ensureInitialized();
@@ -2549,6 +2729,12 @@ class GuildVoiceChannelBuilderMapper
     key: r'video_quality_mode',
     opt: true,
   );
+  static ChannelType _$type(GuildVoiceChannelBuilder v) => v.type;
+  static const Field<GuildVoiceChannelBuilder, ChannelType> _f$type = Field(
+    'type',
+    _$type,
+    mode: FieldMode.member,
+  );
 
   @override
   final MappableFields<GuildVoiceChannelBuilder> fields = const {
@@ -2561,6 +2747,7 @@ class GuildVoiceChannelBuilderMapper
     #isNsfw: _f$isNsfw,
     #rtcRegion: _f$rtcRegion,
     #videoQualityMode: _f$videoQualityMode,
+    #type: _f$type,
   };
 
   static GuildVoiceChannelBuilder _instantiate(DecodingData data) {
@@ -2646,7 +2833,14 @@ abstract class GuildVoiceChannelBuilderCopyWith<
   $In extends GuildVoiceChannelBuilder,
   $Out
 >
-    implements ClassCopyWith<$R, $In, $Out> {
+    implements
+        GuildVoiceOrStageChannelBuilderCopyWith<
+          $R,
+          $In,
+          $Out,
+          GuildVoiceChannel
+        > {
+  @override
   ListCopyWith<
     $R,
     CreateBuilder<PermissionOverwrite>,
@@ -2657,7 +2851,9 @@ abstract class GuildVoiceChannelBuilderCopyWith<
     >
   >?
   get permissionOverwrites;
+  @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
+  @override
   $R call({
     String? name,
     int? position,

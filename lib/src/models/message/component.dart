@@ -609,7 +609,6 @@ class SubmittedSelectMenuComponent extends SubmittedComponent
 
   /// @nodoc
   SubmittedSelectMenuComponent({
-    Snowflake? guildId,
     required this.type,
     required super.id,
     required this.customId,
