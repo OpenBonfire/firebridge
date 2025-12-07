@@ -219,14 +219,14 @@ class _PartialChannelCopyWithImpl<$R, $Out>
   ) => _PartialChannelCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class ChannelMapper extends ClassMapperBase<Channel> {
+class ChannelMapper extends SubClassMapperBase<Channel> {
   ChannelMapper._();
 
   static ChannelMapper? _instance;
   static ChannelMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ChannelMapper._());
-      PartialChannelMapper.ensureInitialized();
+      PartialChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -240,6 +240,14 @@ class ChannelMapper extends ClassMapperBase<Channel> {
 
   @override
   final MappableFields<Channel> fields = const {#id: _f$id};
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'Channel';
+  @override
+  late final ClassMapperBase superMapper =
+      PartialChannelMapper.ensureInitialized();
 
   static Channel _instantiate(DecodingData data) {
     throw MapperException.missingConstructor('Channel');

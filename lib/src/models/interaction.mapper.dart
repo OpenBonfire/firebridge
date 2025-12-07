@@ -131,6 +131,7 @@ class InteractionMapper extends ClassMapperBase<Interaction> {
       SnowflakeMapper.ensureInitialized();
       InteractionTypeMapper.ensureInitialized();
       PartialChannelMapper.ensureInitialized();
+      MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
@@ -289,6 +290,7 @@ abstract class InteractionCopyWith<$R, $In extends Interaction<T>, $Out, T>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   PartialChannelCopyWith<$R, PartialChannel, PartialChannel>? get channel;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
+  MemberCopyWith<$R, Member, Member>? get member;
   UserCopyWith<$R, User, User>? get user;
   MessageCopyWith<$R, Message, Message>? get message;
   ListCopyWith<
@@ -338,6 +340,7 @@ class ResolvedDataMapper extends ClassMapperBase<ResolvedData> {
       MapperContainer.globals.use(_instance = ResolvedDataMapper._());
       SnowflakeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
+      MemberMapper.ensureInitialized();
       RoleMapper.ensureInitialized();
       PartialChannelMapper.ensureInitialized();
       PartialMessageMapper.ensureInitialized();
@@ -461,7 +464,7 @@ extension ResolvedDataValueCopy<$R, $Out>
 abstract class ResolvedDataCopyWith<$R, $In extends ResolvedData, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   MapCopyWith<$R, Snowflake, User, UserCopyWith<$R, User, User>>? get users;
-  MapCopyWith<$R, Snowflake, Member, ObjectCopyWith<$R, Member, Member>>?
+  MapCopyWith<$R, Snowflake, Member, MemberCopyWith<$R, Member, Member>>?
   get members;
   MapCopyWith<$R, Snowflake, Role, RoleCopyWith<$R, Role, Role>>? get roles;
   MapCopyWith<
@@ -514,11 +517,11 @@ class _ResolvedDataCopyWithImpl<$R, $Out>
         )
       : null;
   @override
-  MapCopyWith<$R, Snowflake, Member, ObjectCopyWith<$R, Member, Member>>?
+  MapCopyWith<$R, Snowflake, Member, MemberCopyWith<$R, Member, Member>>?
   get members => $value.members != null
       ? MapCopyWith(
           $value.members!,
-          (v, t) => ObjectCopyWith(v, $identity, t),
+          (v, t) => v.copyWith.$chain(t),
           (v) => call(members: v),
         )
       : null;
@@ -618,6 +621,7 @@ class PingInteractionMapper extends ClassMapperBase<PingInteraction> {
       SnowflakeMapper.ensureInitialized();
       InteractionTypeMapper.ensureInitialized();
       PartialChannelMapper.ensureInitialized();
+      MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
@@ -849,6 +853,8 @@ abstract class PingInteractionCopyWith<$R, $In extends PingInteraction, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
   @override
+  MemberCopyWith<$R, Member, Member>? get member;
+  @override
   UserCopyWith<$R, User, User>? get user;
   @override
   MessageCopyWith<$R, Message, Message>? get message;
@@ -916,6 +922,9 @@ class _PingInteractionCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId =>
       $value.channelId?.copyWith.$chain((v) => call(channelId: v));
+  @override
+  MemberCopyWith<$R, Member, Member>? get member =>
+      $value.member?.copyWith.$chain((v) => call(member: v));
   @override
   UserCopyWith<$R, User, User>? get user =>
       $value.user?.copyWith.$chain((v) => call(user: v));
@@ -1041,6 +1050,7 @@ class ApplicationCommandInteractionMapper
       InteractionTypeMapper.ensureInitialized();
       ApplicationCommandInteractionDataMapper.ensureInitialized();
       PartialChannelMapper.ensureInitialized();
+      MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
@@ -1298,6 +1308,8 @@ abstract class ApplicationCommandInteractionCopyWith<
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
   @override
+  MemberCopyWith<$R, Member, Member>? get member;
+  @override
   UserCopyWith<$R, User, User>? get user;
   @override
   MessageCopyWith<$R, Message, Message>? get message;
@@ -1383,6 +1395,9 @@ class _ApplicationCommandInteractionCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId =>
       $value.channelId?.copyWith.$chain((v) => call(channelId: v));
+  @override
+  MemberCopyWith<$R, Member, Member>? get member =>
+      $value.member?.copyWith.$chain((v) => call(member: v));
   @override
   UserCopyWith<$R, User, User>? get user =>
       $value.user?.copyWith.$chain((v) => call(user: v));
@@ -1978,6 +1993,7 @@ class MessageComponentInteractionMapper
       InteractionTypeMapper.ensureInitialized();
       MessageComponentInteractionDataMapper.ensureInitialized();
       PartialChannelMapper.ensureInitialized();
+      MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
@@ -2232,6 +2248,8 @@ abstract class MessageComponentInteractionCopyWith<
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
   @override
+  MemberCopyWith<$R, Member, Member>? get member;
+  @override
   UserCopyWith<$R, User, User>? get user;
   @override
   MessageCopyWith<$R, Message, Message>? get message;
@@ -2318,6 +2336,9 @@ class _MessageComponentInteractionCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId =>
       $value.channelId?.copyWith.$chain((v) => call(channelId: v));
+  @override
+  MemberCopyWith<$R, Member, Member>? get member =>
+      $value.member?.copyWith.$chain((v) => call(member: v));
   @override
   UserCopyWith<$R, User, User>? get user =>
       $value.user?.copyWith.$chain((v) => call(user: v));
@@ -2653,6 +2674,7 @@ class ModalSubmitInteractionMapper
       InteractionTypeMapper.ensureInitialized();
       ModalSubmitInteractionDataMapper.ensureInitialized();
       PartialChannelMapper.ensureInitialized();
+      MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
@@ -2902,6 +2924,8 @@ abstract class ModalSubmitInteractionCopyWith<
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
   @override
+  MemberCopyWith<$R, Member, Member>? get member;
+  @override
   UserCopyWith<$R, User, User>? get user;
   @override
   MessageCopyWith<$R, Message, Message>? get message;
@@ -2980,6 +3004,9 @@ class _ModalSubmitInteractionCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId =>
       $value.channelId?.copyWith.$chain((v) => call(channelId: v));
+  @override
+  MemberCopyWith<$R, Member, Member>? get member =>
+      $value.member?.copyWith.$chain((v) => call(member: v));
   @override
   UserCopyWith<$R, User, User>? get user =>
       $value.user?.copyWith.$chain((v) => call(user: v));
@@ -3280,6 +3307,7 @@ class ApplicationCommandAutocompleteInteractionMapper
       InteractionTypeMapper.ensureInitialized();
       ApplicationCommandInteractionDataMapper.ensureInitialized();
       PartialChannelMapper.ensureInitialized();
+      MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
@@ -3558,6 +3586,8 @@ abstract class ApplicationCommandAutocompleteInteractionCopyWith<
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
   @override
+  MemberCopyWith<$R, Member, Member>? get member;
+  @override
   UserCopyWith<$R, User, User>? get user;
   @override
   MessageCopyWith<$R, Message, Message>? get message;
@@ -3643,6 +3673,9 @@ class _ApplicationCommandAutocompleteInteractionCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId =>
       $value.channelId?.copyWith.$chain((v) => call(channelId: v));
+  @override
+  MemberCopyWith<$R, Member, Member>? get member =>
+      $value.member?.copyWith.$chain((v) => call(member: v));
   @override
   UserCopyWith<$R, User, User>? get user =>
       $value.user?.copyWith.$chain((v) => call(user: v));
@@ -3776,6 +3809,7 @@ class UnknownInteractionMapper extends ClassMapperBase<UnknownInteraction> {
       SnowflakeMapper.ensureInitialized();
       InteractionTypeMapper.ensureInitialized();
       PartialChannelMapper.ensureInitialized();
+      MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
@@ -4018,6 +4052,8 @@ abstract class UnknownInteractionCopyWith<
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
   @override
+  MemberCopyWith<$R, Member, Member>? get member;
+  @override
   UserCopyWith<$R, User, User>? get user;
   @override
   MessageCopyWith<$R, Message, Message>? get message;
@@ -4085,6 +4121,9 @@ class _UnknownInteractionCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId =>
       $value.channelId?.copyWith.$chain((v) => call(channelId: v));
+  @override
+  MemberCopyWith<$R, Member, Member>? get member =>
+      $value.member?.copyWith.$chain((v) => call(member: v));
   @override
   UserCopyWith<$R, User, User>? get user =>
       $value.user?.copyWith.$chain((v) => call(user: v));

@@ -16,7 +16,9 @@ class PartialGuildSticker extends WritableSnowflakeEntity<GuildSticker>
 /// {@template guild_sticker}
 /// A sticker that can be sent in messages. Represent stickers added to guild
 /// {@endtemplate}
-class GuildSticker extends PartialGuildSticker with Sticker {
+@MappableClass()
+class GuildSticker extends PartialGuildSticker
+    with Sticker, GuildStickerMappable {
   /// Name of the sticker
   @override
   final String name;

@@ -53,14 +53,14 @@ extension VideoQualityModeMapperExtension on VideoQualityMode {
   }
 }
 
-class VoiceChannelMapper extends ClassMapperBase<VoiceChannel> {
+class VoiceChannelMapper extends SubClassMapperBase<VoiceChannel> {
   VoiceChannelMapper._();
 
   static VoiceChannelMapper? _instance;
   static VoiceChannelMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = VoiceChannelMapper._());
-      ChannelMapper.ensureInitialized();
+      ChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -74,6 +74,13 @@ class VoiceChannelMapper extends ClassMapperBase<VoiceChannel> {
 
   @override
   final MappableFields<VoiceChannel> fields = const {#id: _f$id};
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'VoiceChannel';
+  @override
+  late final ClassMapperBase superMapper = ChannelMapper.ensureInitialized();
 
   static VoiceChannel _instantiate(DecodingData data) {
     throw MapperException.missingConstructor('VoiceChannel');

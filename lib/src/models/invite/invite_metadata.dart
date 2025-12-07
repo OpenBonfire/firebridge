@@ -1,6 +1,11 @@
+import 'package:dart_mappable/dart_mappable.dart';
+
 import 'invite.dart';
 
-class InviteWithMetadata extends Invite {
+part 'invite_metadata.mapper.dart';
+
+@MappableClass()
+class InviteWithMetadata extends Invite with InviteWithMetadataMappable {
   /// The number of times this invite has been used.
   final int uses;
 

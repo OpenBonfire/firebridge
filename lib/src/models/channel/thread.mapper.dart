@@ -219,6 +219,7 @@ class ThreadMemberMapper extends ClassMapperBase<ThreadMember> {
       PartialThreadMemberMapper.ensureInitialized();
       FlagsMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
+      MemberMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -340,6 +341,7 @@ abstract class ThreadMemberCopyWith<$R, $In extends ThreadMember, $Out>
   FlagsCopyWith<$R, Flags<Never>, Flags<Never>, Never> get flags;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get threadId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get userId;
+  MemberCopyWith<$R, Member, Member>? get member;
   @override
   $R call({
     DateTime? joinTimestamp,
@@ -368,6 +370,9 @@ class _ThreadMemberCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get userId =>
       $value.userId.copyWith.$chain((v) => call(userId: v));
+  @override
+  MemberCopyWith<$R, Member, Member>? get member =>
+      $value.member?.copyWith.$chain((v) => call(member: v));
   @override
   $R call({
     DateTime? joinTimestamp,

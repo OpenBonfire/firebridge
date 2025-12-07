@@ -6,21 +6,15 @@ import 'package:nyxx/src/builders/user.dart';
 import 'package:nyxx/src/http/managers/manager.dart';
 import 'package:nyxx/src/http/request.dart';
 import 'package:nyxx/src/http/route.dart';
-import 'package:nyxx/src/models/application.dart';
 import 'package:nyxx/src/models/channel/types/dm.dart';
 import 'package:nyxx/src/models/channel/types/group_dm.dart';
-import 'package:nyxx/src/models/discord_color.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
-import 'package:nyxx/src/models/guild/integration.dart';
 import 'package:nyxx/src/models/guild/member.dart';
-import 'package:nyxx/src/models/locale.dart';
 import 'package:nyxx/src/models/oauth2.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/user/application_role_connection.dart';
-import 'package:nyxx/src/models/user/avatar_decoration_data.dart';
 import 'package:nyxx/src/models/user/connection.dart';
 import 'package:nyxx/src/models/user/user.dart';
-import 'package:nyxx/src/models/user/primary_guild.dart';
 import 'package:nyxx/src/utils/cache_helpers.dart';
 import 'package:nyxx/src/utils/parsing_helpers.dart';
 
@@ -89,10 +83,8 @@ class UserManager extends ReadOnlyManager<User> {
     });
 
     final response = await client.httpHandler.executeSafe(request);
-    return parseMany(
-      response.jsonBody as List,
-      (Map<String, Object?> raw) => client.guilds.parseUserGuild(raw),
-    );
+    return parseMany(response.jsonBody as List,
+        (Map<String, Object?> raw) => UserGuildMapper.fromMap(raw));
   }
 
   /// Fetch the current user's member for a guild.
@@ -105,8 +97,8 @@ class UserManager extends ReadOnlyManager<User> {
 
     final response = await client.httpHandler.executeSafe(request);
     final member = MemberMapper.fromMap(
-        response.jsonBody as Map<String, Object?>,
-        userId: client.user.id);
+      response.jsonBody as Map<String, Object?>,
+    );
 
     client.updateCacheWith(member);
     return member;
@@ -132,8 +124,8 @@ class UserManager extends ReadOnlyManager<User> {
         body: jsonEncode({'recipient_id': recipientId.toString()}));
 
     final response = await client.httpHandler.executeSafe(request);
-    final channel = client.channels
-        .parse(response.jsonBody as Map<String, Object?>) as DmChannel;
+    final channel =
+        DmChannelMapper.fromMap(response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(channel);
     return channel;
@@ -157,8 +149,8 @@ class UserManager extends ReadOnlyManager<User> {
     );
 
     final response = await client.httpHandler.executeSafe(request);
-    final channel = client.channels
-        .parse(response.jsonBody as Map<String, Object?>) as GroupDmChannel;
+    final channel =
+        GroupDmChannelMapper.fromMap(response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(channel);
     return channel;
@@ -176,7 +168,8 @@ class UserManager extends ReadOnlyManager<User> {
 
     return List.generate(
       rawObjects.length,
-      (index) => parseConnection(rawObjects[index] as Map<String, Object?>),
+      (index) =>
+          ConnectionMapper.fromMap(rawObjects[index] as Map<String, Object?>),
     );
   }
 
@@ -190,7 +183,7 @@ class UserManager extends ReadOnlyManager<User> {
     final request = BasicRequest(route);
 
     final response = await client.httpHandler.executeSafe(request);
-    return parseApplicationRoleConnection(
+    return ApplicationRoleConnectionMapper.fromMap(
         response.jsonBody as Map<String, Object?>);
   }
 
@@ -206,7 +199,7 @@ class UserManager extends ReadOnlyManager<User> {
         BasicRequest(route, method: 'PUT', body: jsonEncode(builder.build()));
 
     final response = await client.httpHandler.executeSafe(request);
-    return parseApplicationRoleConnection(
+    return ApplicationRoleConnectionMapper.fromMap(
         response.jsonBody as Map<String, Object?>);
   }
 
@@ -217,13 +210,6 @@ class UserManager extends ReadOnlyManager<User> {
     final request = BasicRequest(route);
     final response = await client.httpHandler.executeSafe(request);
     final body = response.jsonBody as Map<String, Object?>;
-    return OAuth2Information(
-        application: PartialApplication(
-            manager: client.applications,
-            id: Snowflake.parse(
-                (body['application'] as Map<String, Object?>)['id']!)),
-        scopes: (body['scopes'] as List).cast(),
-        expiresOn: DateTime.parse(body['expires'] as String),
-        user: maybeParse(body['user'], client.users.parse));
+    return OAuth2InformationMapper.fromMap(body);
   }
 }

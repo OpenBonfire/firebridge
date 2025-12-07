@@ -1,11 +1,15 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/user/user.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
+part 'ban.mapper.dart';
+
 /// {@template ban}
 /// A ban in a [Guild].
 /// {@endtemplate}
-class Ban with ToStringHelper {
+@MappableClass()
+class Ban with ToStringHelper, BanMappable {
   /// The reason for the ban.
   final String? reason;
 
@@ -17,7 +21,8 @@ class Ban with ToStringHelper {
   Ban({required this.reason, required this.user});
 }
 
-class BulkBanResponse with ToStringHelper {
+@MappableClass()
+class BulkBanResponse with ToStringHelper, BulkBanResponseMappable {
   /// A list of user IDs, that were succesfully banned.
   final List<Snowflake> bannedUsers;
 

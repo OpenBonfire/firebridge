@@ -285,7 +285,8 @@ enum MessageType {
 ///
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#message-object-message-flags
-class MessageFlags extends Flags<MessageFlags> {
+@MappableClass()
+class MessageFlags extends Flags<MessageFlags> with MessageFlagsMappable {
   /// This message has been published to subscribed channels (via Channel Following).
   static const crossposted = Flag<MessageFlags>.fromOffset(0);
 
@@ -375,7 +376,8 @@ class MessageFlags extends Flags<MessageFlags> {
 /// {@template message_interaction}
 /// Information about an interaction associated with a message.
 /// {@endtemplate}
-class MessageInteraction with ToStringHelper {
+@MappableClass()
+class MessageInteraction with ToStringHelper, MessageInteractionMappable {
   /// The ID of the interaction.
   final Snowflake id;
 
@@ -405,7 +407,9 @@ class MessageInteraction with ToStringHelper {
 /// {@template message_interaction_metadata}
 /// Metadata about the interaction, including the source of the interaction and relevant server and user IDs.
 /// {@endtemplate}
-class MessageInteractionMetadata with ToStringHelper {
+@MappableClass()
+class MessageInteractionMetadata
+    with ToStringHelper, MessageInteractionMetadataMappable {
   /// The ID of the interaction.
   final Snowflake id;
 
@@ -451,7 +455,8 @@ class MessageInteractionMetadata with ToStringHelper {
 // object. Since this object would then be useless as it cannot contain any
 // useful data using existing nyxx types, we instead forward the field of the
 // nested object into this type.
-class MessageSnapshot with ToStringHelper {
+@MappableClass()
+class MessageSnapshot with ToStringHelper, MessageSnapshotMappable {
   /// The time when this message was sent.
   final DateTime timestamp;
 
@@ -510,10 +515,8 @@ class MessageSnapshot with ToStringHelper {
 }
 
 /// Information about a call in a private channel.
-class MessageCall with ToStringHelper {
-  /// The manager for this [MessageCall].
-  final MessageManager manager;
-
+@MappableClass()
+class MessageCall with ToStringHelper, MessageCallMappable {
   /// The IDs of the users in the call.
   final List<Snowflake> participantIds;
 
@@ -522,16 +525,9 @@ class MessageCall with ToStringHelper {
 
   /// @nodoc
   MessageCall({
-    required this.manager,
     required this.participantIds,
     required this.endedAt,
   });
-
-  /// The users in the call.
-  List<PartialUser> get participants => [
-        for (final participantId in participantIds)
-          manager.client.users[participantId],
-      ];
 }
 
 /// {@template message_pin}
@@ -543,7 +539,8 @@ class MessageCall with ToStringHelper {
 /// External references:
 /// * https://discord.dev/resources/message#message-pin-object
 /// {@endtemplate}
-class MessagePin with ToStringHelper {
+@MappableClass()
+class MessagePin with ToStringHelper, MessagePinMappable {
   /// The time the message was pinned.
   final DateTime pinnedAt;
 
@@ -558,7 +555,8 @@ class MessagePin with ToStringHelper {
 /// {@template pin_list}
 /// A list of [MessagePin]s.
 /// {@endtemplate}
-class PinList {
+@MappableClass()
+class PinList with PinListMappable {
   /// The pins this channel has.
   final List<MessagePin> items;
 

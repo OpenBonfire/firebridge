@@ -2,11 +2,14 @@ import 'package:nyxx/src/errors.dart';
 import 'package:nyxx/src/http/managers/manager.dart';
 import 'package:nyxx/src/http/request.dart';
 import 'package:nyxx/src/http/route.dart';
+import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/commands/application_command.dart';
 import 'package:nyxx/src/models/guild/audit_log.dart';
 import 'package:nyxx/src/models/guild/auto_moderation.dart';
 import 'package:nyxx/src/models/guild/scheduled_event.dart';
 import 'package:nyxx/src/models/snowflake.dart';
+import 'package:nyxx/src/models/user/user.dart';
+import 'package:nyxx/src/models/webhook.dart';
 import 'package:nyxx/src/utils/cache_helpers.dart';
 import 'package:nyxx/src/utils/parsing_helpers.dart';
 
@@ -43,7 +46,7 @@ class AuditLogManager extends ReadOnlyManager<AuditLogEntry> {
       ..auditLogs();
     final request = BasicRequest(route, queryParameters: {
       if (userId != null) 'user_id': userId.toString(),
-      if (type != null) 'action_type': type.value.toString(),
+      if (type != null) 'action_type': type.toValue().toString(),
       if (before != null) 'before': before.toString(),
       if (after != null) 'after': after.toString(),
       if (limit != null) 'limit': limit.toString(),
@@ -73,15 +76,15 @@ class AuditLogManager extends ReadOnlyManager<AuditLogEntry> {
     scheduledEvents.forEach(client.updateCacheWith);
 
     final threads = parseMany(
-        responseBody['threads'] as List<Object?>, client.channels.parse);
+        responseBody['threads'] as List<Object?>, ChannelMapper.fromMap);
     threads.forEach(client.updateCacheWith);
 
     final users =
-        parseMany(responseBody['users'] as List<Object?>, client.users.parse);
+        parseMany(responseBody['users'] as List<Object?>, UserMapper.fromMap);
     users.forEach(client.updateCacheWith);
 
     final webhooks = parseMany(
-        responseBody['webhooks'] as List<Object?>, client.webhooks.parse);
+        responseBody['webhooks'] as List<Object?>, WebhookMapper.fromMap);
     webhooks.forEach(client.updateCacheWith);
 
     entries.forEach(client.updateCacheWith);

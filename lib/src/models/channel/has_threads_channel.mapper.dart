@@ -7,14 +7,14 @@
 
 part of 'has_threads_channel.dart';
 
-class HasThreadsChannelMapper extends ClassMapperBase<HasThreadsChannel> {
+class HasThreadsChannelMapper extends SubClassMapperBase<HasThreadsChannel> {
   HasThreadsChannelMapper._();
 
   static HasThreadsChannelMapper? _instance;
   static HasThreadsChannelMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = HasThreadsChannelMapper._());
-      GuildChannelMapper.ensureInitialized();
+      GuildChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -28,6 +28,14 @@ class HasThreadsChannelMapper extends ClassMapperBase<HasThreadsChannel> {
 
   @override
   final MappableFields<HasThreadsChannel> fields = const {#id: _f$id};
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'HasThreadsChannel';
+  @override
+  late final ClassMapperBase superMapper =
+      GuildChannelMapper.ensureInitialized();
 
   static HasThreadsChannel _instantiate(DecodingData data) {
     throw MapperException.missingConstructor('HasThreadsChannel');

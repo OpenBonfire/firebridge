@@ -6,14 +6,10 @@ import 'package:nyxx/src/http/managers/manager.dart';
 import 'package:nyxx/src/http/request.dart';
 import 'package:nyxx/src/http/response.dart';
 import 'package:nyxx/src/http/route.dart';
-import 'package:nyxx/src/models/application.dart';
-import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/commands/application_command.dart';
 import 'package:nyxx/src/models/commands/application_command_option.dart';
 import 'package:nyxx/src/models/commands/application_command_permissions.dart';
-import 'package:nyxx/src/models/interaction.dart';
 import 'package:nyxx/src/models/locale.dart';
-import 'package:nyxx/src/models/permissions.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/utils/cache_helpers.dart';
 import 'package:nyxx/src/utils/parsing_helpers.dart';
@@ -34,70 +30,6 @@ abstract class ApplicationCommandManager extends Manager<ApplicationCommand> {
   @override
   PartialApplicationCommand operator [](Snowflake id) =>
       PartialApplicationCommand(id: id);
-
-  @override
-  ApplicationCommand parse(Map<String, Object?> raw) {
-    return ApplicationCommand(
-      id: Snowflake.parse(raw['id']!),
-      type: ApplicationCommandType(raw['type'] as int? ?? 1),
-      applicationId: Snowflake.parse(raw['application_id']!),
-      guildId: maybeParse(raw['guild_id'], Snowflake.parse),
-      name: raw['name'] as String,
-      nameLocalizations: maybeParse(
-        raw['name_localizations'],
-        (Map<String, Object?> raw) => raw.map(
-          (key, value) => MapEntry(Locale.parse(key), value as String),
-        ),
-      ),
-      description: raw['description'] as String,
-      descriptionLocalizations: maybeParse(
-        raw['description_localizations'],
-        (Map<String, Object?> raw) => raw.map(
-          (key, value) => MapEntry(Locale.parse(key), value as String),
-        ),
-      ),
-      options: maybeParseMany(raw['options'], parseApplicationCommandOption),
-      defaultMemberPermissions: maybeParse(raw['default_member_permissions'],
-          (String raw) => Permissions(int.parse(raw))),
-      hasDmPermission: raw['dm_permission'] as bool?,
-      isNsfw: raw['nsfw'] as bool?,
-      integrationTypes: maybeParseMany(
-              raw['integration_types'], ApplicationIntegrationType.new) ??
-          [ApplicationIntegrationType.guildInstall],
-      contexts: maybeParseMany(raw['contexts'], InteractionContextType.new),
-      version: Snowflake.parse(raw['version']!),
-    );
-  }
-
-  /// Parse a [CommandOption] from [raw].
-  CommandOption parseApplicationCommandOption(Map<String, Object?> raw) {
-    return CommandOption(
-      type: CommandOptionType(raw['type'] as int),
-      name: raw['name'] as String,
-      nameLocalizations: maybeParse(
-        raw['name_localizations'],
-        (Map<String, Object?> raw) => raw.map(
-          (key, value) => MapEntry(Locale.parse(key), value as String),
-        ),
-      ),
-      description: raw['description'] as String,
-      descriptionLocalizations: maybeParse(
-        raw['description_localizations'],
-        (Map<String, Object?> raw) => raw.map(
-          (key, value) => MapEntry(Locale.parse(key), value as String),
-        ),
-      ),
-      isRequired: raw['required'] as bool?,
-      choices: maybeParseMany(raw['choices'], parseOptionChoice),
-      options: maybeParseMany(raw['options'], parseApplicationCommandOption),
-      channelTypes: maybeParseMany(raw['channel_types'], ChannelType.new),
-      minValue: raw['min_value'] as num?,
-      maxValue: raw['max_value'] as num?,
-      minLength: raw['min_length'] as int?,
-      maxLength: raw['max_length'] as int?,
-      hasAutocomplete: raw['autocomplete'] as bool?,
-    );
-  }
 
   /// Parse a [CommandOptionChoice] from [raw].
   CommandOptionChoice parseOptionChoice(Map<String, Object?> raw) {
@@ -125,7 +57,8 @@ abstract class ApplicationCommandManager extends Manager<ApplicationCommand> {
     });
 
     final response = await client.httpHandler.executeSafe(request);
-    final commands = parseMany(response.jsonBody as List, parse);
+    final commands =
+        parseMany(response.jsonBody as List, ApplicationCommandMapper.fromMap);
 
     commands.forEach(client.updateCacheWith);
     return commands;
@@ -140,7 +73,8 @@ abstract class ApplicationCommandManager extends Manager<ApplicationCommand> {
     final request = BasicRequest(route);
 
     final response = await client.httpHandler.executeSafe(request);
-    final command = parse(response.jsonBody as Map<String, Object?>);
+    final command = ApplicationCommandMapper.fromMap(
+        response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(command);
     return command;
@@ -156,7 +90,8 @@ abstract class ApplicationCommandManager extends Manager<ApplicationCommand> {
         BasicRequest(route, method: 'POST', body: jsonEncode(builder.build()));
 
     final response = await client.httpHandler.executeSafe(request);
-    final command = parse(response.jsonBody as Map<String, Object?>);
+    final command = ApplicationCommandMapper.fromMap(
+        response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(command);
     return command;
@@ -173,7 +108,8 @@ abstract class ApplicationCommandManager extends Manager<ApplicationCommand> {
         BasicRequest(route, method: 'PATCH', body: jsonEncode(builder.build()));
 
     final response = await client.httpHandler.executeSafe(request);
-    final command = parse(response.jsonBody as Map<String, Object?>);
+    final command = ApplicationCommandMapper.fromMap(
+        response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(command);
     return command;
@@ -203,7 +139,8 @@ abstract class ApplicationCommandManager extends Manager<ApplicationCommand> {
         body: jsonEncode([for (final builder in builders) builder.build()]));
 
     final response = await client.httpHandler.executeSafe(request);
-    final commands = parseMany(response.jsonBody as List, parse);
+    final commands =
+        parseMany(response.jsonBody as List, ApplicationCommandMapper.fromMap);
 
     cache.clear();
     commands.forEach(client.updateCacheWith);
@@ -233,27 +170,6 @@ class GuildApplicationCommandManager extends ApplicationCommandManager {
             .getCache('$guildId.commandPermissions', permissionsConfig),
         super(identifier: '$guildId.commands');
 
-  /// Parse a [CommandPermissions] from [raw].
-  CommandPermissions parseCommandPermissions(Map<String, Object?> raw) {
-    return CommandPermissions(
-      manager: this,
-      id: Snowflake.parse(raw['id']!),
-      applicationId: Snowflake.parse(raw['application_id']!),
-      guildId: Snowflake.parse(raw['guild_id']!),
-      permissions:
-          parseMany(raw['permissions'] as List, parseCommandPermission),
-    );
-  }
-
-  /// Parse a [CommandPermission] from [raw].
-  CommandPermission parseCommandPermission(Map<String, Object?> raw) {
-    return CommandPermission(
-      id: Snowflake.parse(raw['id']!),
-      type: CommandPermissionType(raw['type'] as int),
-      hasPermission: raw['permission'] as bool,
-    );
-  }
-
   /// List all the [CommandPermissions] in this guild.
   Future<List<CommandPermissions>> listPermissions() async {
     final route = HttpRoute()
@@ -265,7 +181,7 @@ class GuildApplicationCommandManager extends ApplicationCommandManager {
 
     final response = await client.httpHandler.executeSafe(request);
     final permissions =
-        parseMany(response.jsonBody as List, parseCommandPermissions);
+        parseMany(response.jsonBody as List, CommandPermissionsMapper.fromMap);
 
     permissions.forEach(client.updateCacheWith);
     return permissions;
@@ -282,8 +198,8 @@ class GuildApplicationCommandManager extends ApplicationCommandManager {
 
     try {
       final response = await client.httpHandler.executeSafe(request);
-      final permissions =
-          parseCommandPermissions(response.jsonBody as Map<String, Object?>);
+      final permissions = CommandPermissionsMapper.fromMap(
+          response.jsonBody as Map<String, Object?>);
 
       client.updateCacheWith(permissions);
       return permissions;

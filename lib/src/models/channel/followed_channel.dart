@@ -1,13 +1,17 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/http/managers/channel_manager.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/webhook.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
+part 'followed_channel.mapper.dart';
+
 /// {@template followed_channel}
 /// Information about a channel which has been followed.
 /// {@endtemplate}
-class FollowedChannel with ToStringHelper {
+@MappableClass()
+class FollowedChannel with ToStringHelper, FollowedChannelMappable {
   /// The manager for this [FollowedChannel].
   final ChannelManager manager;
 
@@ -19,7 +23,10 @@ class FollowedChannel with ToStringHelper {
 
   /// {@macro followed_channel}
   /// @nodoc
-  FollowedChannel({required this.manager, required this.channelId, required this.webhookId});
+  FollowedChannel(
+      {required this.manager,
+      required this.channelId,
+      required this.webhookId});
 
   /// The followed channel.
   PartialChannel get channel => manager.client.channels[channelId];

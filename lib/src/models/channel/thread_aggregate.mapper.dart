@@ -7,14 +7,14 @@
 
 part of 'thread_aggregate.dart';
 
-class ThreadsOnlyChannelMapper extends ClassMapperBase<ThreadsOnlyChannel> {
+class ThreadsOnlyChannelMapper extends SubClassMapperBase<ThreadsOnlyChannel> {
   ThreadsOnlyChannelMapper._();
 
   static ThreadsOnlyChannelMapper? _instance;
   static ThreadsOnlyChannelMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ThreadsOnlyChannelMapper._());
-      HasThreadsChannelMapper.ensureInitialized();
+      HasThreadsChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -28,6 +28,14 @@ class ThreadsOnlyChannelMapper extends ClassMapperBase<ThreadsOnlyChannel> {
 
   @override
   final MappableFields<ThreadsOnlyChannel> fields = const {#id: _f$id};
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'ThreadsOnlyChannel';
+  @override
+  late final ClassMapperBase superMapper =
+      HasThreadsChannelMapper.ensureInitialized();
 
   static ThreadsOnlyChannel _instantiate(DecodingData data) {
     throw MapperException.missingConstructor('ThreadsOnlyChannel');

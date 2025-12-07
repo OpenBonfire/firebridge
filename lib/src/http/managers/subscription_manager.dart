@@ -10,28 +10,12 @@ class SubscriptionManager extends ReadOnlyManager<Subscription> {
   final Snowflake applicationId;
   final Snowflake skuId;
 
-  SubscriptionManager(super.config, super.client, {required this.applicationId, required this.skuId})
+  SubscriptionManager(super.config, super.client,
+      {required this.applicationId, required this.skuId})
       : super(identifier: '$applicationId.$skuId.subscriptions');
 
   @override
-  PartialSubscription operator [](Snowflake id) => PartialSubscription(manager: this, id: id);
-
-  @override
-  Subscription parse(Map<String, Object?> raw) {
-    return Subscription(
-      manager: this,
-      id: Snowflake.parse(raw['id']!),
-      userId: Snowflake.parse(raw['user_id']!),
-      skuIds: parseMany(raw['sku_ids'] as List, Snowflake.parse),
-      entitlementIds: parseMany(raw['entitlement_ids'] as List, Snowflake.parse),
-      currentPeriodStart: DateTime.parse(raw['current_period_start'] as String),
-      currentPeriodEnd: DateTime.parse(raw['current_period_end'] as String),
-      status: SubscriptionStatus(raw['status'] as int),
-      canceledAt: maybeParse(raw['canceled_at'], DateTime.parse),
-      countryCode: raw['country'] as String?,
-    );
-  }
-
+  PartialSubscription operator [](Snowflake id) => PartialSubscription(id: id);
   @override
   Future<Subscription> fetch(Snowflake id) async {
     final route = HttpRoute()
@@ -40,13 +24,18 @@ class SubscriptionManager extends ReadOnlyManager<Subscription> {
     final request = BasicRequest(route);
 
     final response = await client.httpHandler.executeSafe(request);
-    final subscription = parse(response.jsonBody as Map<String, Object?>);
+    final subscription =
+        SubscriptionMapper.fromMap(response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(subscription);
     return subscription;
   }
 
-  Future<List<Subscription>> list({Snowflake? before, Snowflake? after, int? limit, Snowflake? userId}) async {
+  Future<List<Subscription>> list(
+      {Snowflake? before,
+      Snowflake? after,
+      int? limit,
+      Snowflake? userId}) async {
     final route = HttpRoute()
       ..skus(id: skuId.toString())
       ..subscriptions();
@@ -58,7 +47,8 @@ class SubscriptionManager extends ReadOnlyManager<Subscription> {
     });
 
     final response = await client.httpHandler.executeSafe(request);
-    final subscriptions = parseMany(response.jsonBody as List, parse);
+    final subscriptions =
+        parseMany(response.jsonBody as List, SubscriptionMapper.fromMap);
 
     subscriptions.forEach(client.updateCacheWith);
     return subscriptions;

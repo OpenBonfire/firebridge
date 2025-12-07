@@ -243,6 +243,7 @@ class TypingStartEventMapper extends SubClassMapperBase<TypingStartEvent> {
       MapperContainer.globals.use(_instance = TypingStartEventMapper._());
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
+      MemberMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -378,6 +379,7 @@ abstract class TypingStartEventCopyWith<$R, $In extends TypingStartEvent, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get channelId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get userId;
+  MemberCopyWith<$R, Member, Member>? get member;
   @override
   $R call({
     Snowflake? channelId,
@@ -408,6 +410,9 @@ class _TypingStartEventCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get userId =>
       $value.userId.copyWith.$chain((v) => call(userId: v));
+  @override
+  MemberCopyWith<$R, Member, Member>? get member =>
+      $value.member?.copyWith.$chain((v) => call(member: v));
   @override
   $R call({
     Snowflake? channelId,

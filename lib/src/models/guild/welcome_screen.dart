@@ -1,12 +1,16 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/http/managers/guild_manager.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
+part 'welcome_screen.mapper.dart';
+
 /// {@template welcome_screen}
 /// The configuration for the welcome screen in a guild.
 /// {@endtemplate}
-class WelcomeScreen with ToStringHelper {
+@MappableClass()
+class WelcomeScreen with ToStringHelper, WelcomeScreenMappable {
   /// The description shown in this welcome screen.
   final String? description;
 
@@ -21,7 +25,8 @@ class WelcomeScreen with ToStringHelper {
 /// {@template welcome_screen_channel}
 /// A channel shown in a [WelcomeScreen].
 /// {@endtemplate}
-class WelcomeScreenChannel with ToStringHelper {
+@MappableClass()
+class WelcomeScreenChannel with ToStringHelper, WelcomeScreenChannelMappable {
   /// The manager for this [WelcomeScreenChannel].
   final GuildManager manager;
 

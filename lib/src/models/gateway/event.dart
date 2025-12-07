@@ -17,6 +17,8 @@ abstract class GatewayEvent with ToStringHelper {
   GatewayEvent({required this.opcode});
 }
 
+// TODO: we need to use the type switch here
+
 /// {@template raw_dispatch_event}
 /// An unparsed dispatch event.
 /// {@endtemplate}

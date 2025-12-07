@@ -10,23 +10,11 @@ import 'package:nyxx/src/utils/cache_helpers.dart';
 class SkuManager extends ReadOnlyManager<Sku> {
   final Snowflake applicationId;
 
-  SkuManager(super.config, super.client, {required this.applicationId}) : super(identifier: '$applicationId.skus');
+  SkuManager(super.config, super.client, {required this.applicationId})
+      : super(identifier: '$applicationId.skus');
 
   @override
-  PartialSku operator [](Snowflake id) => PartialSku(manager: this, id: id);
-
-  @override
-  Sku parse(Map<String, Object?> raw) {
-    return Sku(
-      manager: this,
-      id: Snowflake.parse(raw['id']!),
-      type: SkuType(raw['type'] as int),
-      applicationId: Snowflake.parse(raw['application_id']!),
-      name: raw['name'] as String,
-      slug: raw['slug'] as String,
-      flags: SkuFlags(raw['flags'] as int),
-    );
-  }
+  PartialSku operator [](Snowflake id) => PartialSku(id: id);
 
   Future<List<Sku>> list() async {
     final route = HttpRoute()
@@ -35,7 +23,7 @@ class SkuManager extends ReadOnlyManager<Sku> {
     final request = BasicRequest(route);
 
     final response = await client.httpHandler.executeSafe(request);
-    final skus = parseMany(response.jsonBody as List, parse);
+    final skus = parseMany(response.jsonBody as List, SkuMapper.fromMap);
 
     skus.forEach(client.updateCacheWith);
     return skus;

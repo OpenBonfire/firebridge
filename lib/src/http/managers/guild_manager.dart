@@ -13,10 +13,8 @@ import 'package:nyxx/src/builders/voice.dart';
 import 'package:nyxx/src/http/managers/manager.dart';
 import 'package:nyxx/src/http/request.dart';
 import 'package:nyxx/src/http/route.dart';
-import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/channel/guild_channel.dart';
 import 'package:nyxx/src/models/channel/thread_list.dart';
-import 'package:nyxx/src/models/emoji.dart';
 import 'package:nyxx/src/models/guild/ban.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/guild/guild_preview.dart';
@@ -25,14 +23,9 @@ import 'package:nyxx/src/models/guild/onboarding.dart';
 import 'package:nyxx/src/models/guild/template.dart';
 import 'package:nyxx/src/models/guild/welcome_screen.dart';
 import 'package:nyxx/src/models/invite/invite.dart';
-import 'package:nyxx/src/models/locale.dart';
-import 'package:nyxx/src/models/permissions.dart';
-import 'package:nyxx/src/models/role.dart';
 import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/models/user/user.dart';
 import 'package:nyxx/src/models/voice/voice_region.dart';
 import 'package:nyxx/src/utils/cache_helpers.dart';
-import 'package:nyxx/src/utils/flags.dart';
 import 'package:nyxx/src/utils/parsing_helpers.dart';
 
 /// A manager for [Guild]s.
@@ -42,54 +35,6 @@ class GuildManager extends Manager<Guild> {
 
   @override
   PartialGuild operator [](Snowflake id) => PartialGuild(id: id);
-
-  static final Map<String, Flag<GuildFeatures>> _nameToGuildFeature = {
-    'ANIMATED_BANNER': GuildFeatures.animatedBanner,
-    'ANIMATED_ICON': GuildFeatures.animatedIcon,
-    'APPLICATION_COMMAND_PERMISSIONS_V2':
-        GuildFeatures.applicationCommandPermissionsV2,
-    'AUTO_MODERATION': GuildFeatures.autoModeration,
-    'BANNER': GuildFeatures.banner,
-    'COMMUNITY': GuildFeatures.community,
-    'CREATOR_MONETIZABLE_PROVISIONAL':
-        GuildFeatures.creatorMonetizableProvisional,
-    'CREATOR_STORE_PAGE': GuildFeatures.creatorStorePage,
-    'DEVELOPER_SUPPORT_SERVER': GuildFeatures.developerSupportServer,
-    'DISCOVERABLE': GuildFeatures.discoverable,
-    'FEATURABLE': GuildFeatures.featurable,
-    'INVITES_DISABLED': GuildFeatures.invitesDisabled,
-    'INVITE_SPLASH': GuildFeatures.inviteSplash,
-    'MEMBER_VERIFICATION_GATE_ENABLED':
-        GuildFeatures.memberVerificationGateEnabled,
-    'MORE_STICKERS': GuildFeatures.moreStickers,
-    'NEWS': GuildFeatures.news,
-    'PARTNERED': GuildFeatures.partnered,
-    'PREVIEW_ENABLED': GuildFeatures.previewEnabled,
-    'RAID_ALERTS_DISABLED': GuildFeatures.raidAlertsDisabled,
-    'ROLE_ICONS': GuildFeatures.roleIcons,
-    'ROLE_SUBSCRIPTIONS_AVAILABLE_FOR_PURCHASE':
-        GuildFeatures.roleSubscriptionsAvailableForPurchase,
-    'ROLE_SUBSCRIPTIONS_ENABLED': GuildFeatures.roleSubscriptionsEnabled,
-    'TICKETED_EVENTS_ENABLED': GuildFeatures.ticketedEventsEnabled,
-    'VANITY_URL': GuildFeatures.vanityUrl,
-    'VERIFIED': GuildFeatures.verified,
-    'VIP_REGIONS': GuildFeatures.vipRegions,
-    'WELCOME_SCREEN_ENABLED': GuildFeatures.welcomeScreenEnabled,
-    'GUESTS_ENABLED': GuildFeatures.guestsEnabled,
-    'ENHANCED_ROLE_COLORS': GuildFeatures.enhancedRoleColors,
-  };
-
-  static final Map<Flag<GuildFeatures>, String> _guildFeatureToName = {
-    for (final entry in _nameToGuildFeature.entries) entry.value: entry.key,
-  };
-
-  /// Parse an [GuildFeatures] from [raw].
-  GuildFeatures parseGuildFeatures(List<Object?> raw) {
-    final featureFlags = parseMany(raw, GuildFeaturesMapper.fromMap);
-
-    return GuildFeatures(
-        featureFlags.fold(0, (value, element) => value | element.value));
-  }
 
   @override
   Future<Guild> fetch(Snowflake id, {bool? withCounts}) async {
@@ -155,7 +100,7 @@ class GuildManager extends Manager<Guild> {
 
     final response = await client.httpHandler.executeSafe(request);
     final preview =
-        parseGuildPreview(response.jsonBody as Map<String, Object?>);
+        GuildPreviewMapper.fromMap(response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(preview);
     return preview;
@@ -169,8 +114,9 @@ class GuildManager extends Manager<Guild> {
     final request = BasicRequest(route);
 
     final response = await client.httpHandler.executeSafe(request);
-    final channels = parseMany(response.jsonBody as List, client.channels.parse)
-        .cast<GuildChannel>();
+    final channels =
+        parseMany(response.jsonBody as List, GuildChannelMapper.fromMap)
+            .cast<GuildChannel>();
 
     channels.forEach(client.updateCacheWith);
     return channels;
@@ -190,7 +136,8 @@ class GuildManager extends Manager<Guild> {
 
     final response = await client.httpHandler.executeSafe(request);
     final channel =
-        client.channels.parse(response.jsonBody as Map<String, Object?>) as T;
+        GuildChannelMapper.fromMap(response.jsonBody as Map<String, Object?>)
+            as T;
 
     client.updateCacheWith(channel);
     return channel;
@@ -218,9 +165,9 @@ class GuildManager extends Manager<Guild> {
     final request = BasicRequest(route);
 
     final response = await client.httpHandler.executeSafe(request);
-    final list = client.channels.parseThreadList(
-        response.jsonBody as Map<String, Object?>,
-        guildId: id);
+    final list = ThreadListMapper.fromMap(
+      response.jsonBody as Map<String, Object?>,
+    );
 
     client.updateCacheWith(list);
     return list;
@@ -239,7 +186,7 @@ class GuildManager extends Manager<Guild> {
     });
 
     final response = await client.httpHandler.executeSafe(request);
-    final bans = parseMany(response.jsonBody as List, parseBan);
+    final bans = parseMany(response.jsonBody as List, BanMapper.fromMap);
 
     bans.forEach(client.updateCacheWith);
     return bans;
@@ -253,7 +200,7 @@ class GuildManager extends Manager<Guild> {
     final request = BasicRequest(route);
 
     final response = await client.httpHandler.executeSafe(request);
-    final ban = parseBan(response.jsonBody as Map<String, Object?>);
+    final ban = BanMapper.fromMap(response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(ban);
     return ban;
@@ -295,7 +242,8 @@ class GuildManager extends Manager<Guild> {
       }),
     );
     final response = await client.httpHandler.executeSafe(request);
-    return parseBulkBanResponse(response.jsonBody as Map<String, Object?>);
+    return BulkBanResponseMapper.fromMap(
+        response.jsonBody as Map<String, Object?>);
   }
 
   /// Delete a ban in a guild.
@@ -320,11 +268,11 @@ class GuildManager extends Manager<Guild> {
       route,
       method: 'POST',
       auditLogReason: auditLogReason,
-      body: jsonEncode({'level': level.value}),
+      body: jsonEncode({'level': level.toValue()}),
     );
 
     final response = await client.httpHandler.executeSafe(request);
-    return MfaLevel(
+    return MfaLevelMapper.fromValue(
         (response.jsonBody as Map<String, Object?>)['level'] as int);
   }
 
@@ -379,7 +327,7 @@ class GuildManager extends Manager<Guild> {
     final request = BasicRequest(route);
 
     final response = await client.httpHandler.executeSafe(request);
-    return parseMany(response.jsonBody as List, client.voice.parseVoiceRegion);
+    return parseMany(response.jsonBody as List, VoiceRegionMapper.fromMap);
   }
 
   /// List the invites in a guild.
@@ -390,7 +338,7 @@ class GuildManager extends Manager<Guild> {
     final request = BasicRequest(route);
 
     final response = await client.httpHandler.executeSafe(request);
-    final invites = parseMany(response.jsonBody as List, client.invites.parse);
+    final invites = parseMany(response.jsonBody as List, InviteMapper.fromMap);
 
     invites.forEach(client.updateCacheWith);
     return invites;
@@ -404,7 +352,7 @@ class GuildManager extends Manager<Guild> {
     final request = BasicRequest(route);
 
     final response = await client.httpHandler.executeSafe(request);
-    return parseWidgetSettings(response.jsonBody as Map<String, Object?>);
+    return WidgetSettingsMapper.fromMap(response.jsonBody);
   }
 
   /// Update a guild's widget settings.
@@ -420,7 +368,8 @@ class GuildManager extends Manager<Guild> {
         body: jsonEncode(builder.build()));
 
     final response = await client.httpHandler.executeSafe(request);
-    return parseWidgetSettings(response.jsonBody as Map<String, Object?>);
+    return WidgetSettingsMapper.fromMap(
+        response.jsonBody as Map<String, Object?>);
   }
 
   /// Fetch a guild's widget.
@@ -431,7 +380,7 @@ class GuildManager extends Manager<Guild> {
     final request = BasicRequest(route);
 
     final response = await client.httpHandler.executeSafe(request);
-    return parseGuildWidget(response.jsonBody as Map<String, Object?>);
+    return GuildWidgetMapper.fromMap(response.jsonBody as Map<String, Object?>);
   }
 
   /// Fetch a guild's vanity invite code.
@@ -454,7 +403,7 @@ class GuildManager extends Manager<Guild> {
     final request = BasicRequest(
       route,
       authenticated: false,
-      queryParameters: {if (style != null) 'style': style.value},
+      queryParameters: {if (style != null) 'style': style.toValue()},
     );
 
     final response = await client.httpHandler.executeSafe(request);
@@ -469,7 +418,8 @@ class GuildManager extends Manager<Guild> {
     final request = BasicRequest(route);
 
     final response = await client.httpHandler.executeSafe(request);
-    return parseWelcomeScreen(response.jsonBody as Map<String, Object?>);
+    return WelcomeScreenMapper.fromMap(
+        response.jsonBody as Map<String, Object?>);
   }
 
   /// Update a guild's welcome screen.
@@ -485,7 +435,8 @@ class GuildManager extends Manager<Guild> {
         body: jsonEncode(builder.build()));
 
     final response = await client.httpHandler.executeSafe(request);
-    return parseWelcomeScreen(response.jsonBody as Map<String, Object?>);
+    return WelcomeScreenMapper.fromMap(
+        response.jsonBody as Map<String, Object?>);
   }
 
   /// Fetch a guild's onboarding.
@@ -496,7 +447,7 @@ class GuildManager extends Manager<Guild> {
     final request = BasicRequest(route);
 
     final response = await client.httpHandler.executeSafe(request);
-    return parseOnboarding(response.jsonBody as Map<String, Object?>);
+    return OnboardingMapper.fromMap(response.jsonBody as Map<String, Object?>);
   }
 
   /// Update a guild's onboarding.
@@ -512,7 +463,7 @@ class GuildManager extends Manager<Guild> {
         auditLogReason: auditLogReason);
 
     final response = await client.httpHandler.executeSafe(request);
-    return parseOnboarding(response.jsonBody as Map<String, Object?>);
+    return OnboardingMapper.fromMap(response.jsonBody as Map<String, Object?>);
   }
 
   /// Update the current user's voice state in a guild.
@@ -548,7 +499,7 @@ class GuildManager extends Manager<Guild> {
 
     final response = await client.httpHandler.executeSafe(request);
     final template =
-        parseGuildTemplate(response.jsonBody as Map<String, Object?>);
+        GuildTemplateMapper.fromMap(response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(template);
     return template;
@@ -566,7 +517,8 @@ class GuildManager extends Manager<Guild> {
             {'name': name, if (icon != null) 'icon': icon.buildDataString()}));
 
     final response = await client.httpHandler.executeSafe(request);
-    final guild = parse(response.jsonBody as Map<String, Object?>);
+    final guild =
+        GuildMapper.fromMap(response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(guild);
     return guild;
@@ -580,8 +532,8 @@ class GuildManager extends Manager<Guild> {
     final request = BasicRequest(route);
 
     final response = await client.httpHandler.executeSafe(request);
-    final templates =
-        parseMany(response.jsonBody as List<Object?>, parseGuildTemplate);
+    final templates = parseMany(
+        response.jsonBody as List<Object?>, GuildTemplateMapper.fromMap);
 
     templates.forEach(client.updateCacheWith);
     return templates;
@@ -598,7 +550,7 @@ class GuildManager extends Manager<Guild> {
 
     final response = await client.httpHandler.executeSafe(request);
     final template =
-        parseGuildTemplate(response.jsonBody as Map<String, Object?>);
+        GuildTemplateMapper.fromMap(response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(template);
     return template;
@@ -613,7 +565,7 @@ class GuildManager extends Manager<Guild> {
 
     final response = await client.httpHandler.executeSafe(request);
     final template =
-        parseGuildTemplate(response.jsonBody as Map<String, Object?>);
+        GuildTemplateMapper.fromMap(response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(template);
     return template;
@@ -630,7 +582,7 @@ class GuildManager extends Manager<Guild> {
 
     final response = await client.httpHandler.executeSafe(request);
     final template =
-        parseGuildTemplate(response.jsonBody as Map<String, Object?>);
+        GuildTemplateMapper.fromMap(response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(template);
     return template;
@@ -645,7 +597,7 @@ class GuildManager extends Manager<Guild> {
 
     final response = await client.httpHandler.executeSafe(request);
     final template =
-        parseGuildTemplate(response.jsonBody as Map<String, Object?>);
+        GuildTemplateMapper.fromMap(response.jsonBody as Map<String, Object?>);
 
     // Templates aren't cached, so we don't need to remove it from any cache, but it still contains a nested user object we can cache.
     client.updateCacheWith(template);
@@ -667,6 +619,7 @@ class GuildManager extends Manager<Guild> {
 
     final response = await client.httpHandler.executeSafe(request);
 
-    return parseIncidentsData(response.jsonBody as Map<String, Object?>);
+    return IncidentsDataMapper.fromMap(
+        response.jsonBody as Map<String, Object?>);
   }
 }

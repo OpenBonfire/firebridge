@@ -13,52 +13,11 @@ class IntegrationManager extends ReadOnlyManager<Integration> {
   final Snowflake guildId;
 
   /// Create a new [IntegrationManager].
-  IntegrationManager(super.config, super.client, {required this.guildId}) : super(identifier: '$guildId.integrations');
+  IntegrationManager(super.config, super.client, {required this.guildId})
+      : super(identifier: '$guildId.integrations');
 
   @override
-  PartialIntegration operator [](Snowflake id) => PartialIntegration(id: id, manager: this);
-
-  @override
-  Integration parse(Map<String, Object?> raw) {
-    return Integration(
-      id: Snowflake.parse(raw['id']!),
-      manager: this,
-      name: raw['name'] as String,
-      type: raw['type'] as String,
-      isEnabled: raw['enabled'] as bool,
-      isSyncing: raw['syncing'] as bool?,
-      roleId: maybeParse(raw['role_id'], Snowflake.parse),
-      enableEmoticons: raw['enable_emoticons'] as bool?,
-      expireBehavior: maybeParse(raw['expire_behavior'], IntegrationExpireBehavior.new),
-      expireGracePeriod: maybeParse(raw['expire_grace_period'], (int value) => Duration(days: value)),
-      user: maybeParse(raw['user'], client.users.parse),
-      account: parseIntegrationAccount(raw['account'] as Map<String, Object?>),
-      syncedAt: maybeParse(raw['synced_at'], DateTime.parse),
-      subscriberCount: raw['subscriber_count'] as int?,
-      isRevoked: raw['revoked'] as bool?,
-      application: maybeParse(raw['application'], parseIntegrationApplication),
-      scopes: maybeParseMany(raw['scopes']),
-    );
-  }
-
-  /// Parse an [IntegrationAccount] from [raw].
-  IntegrationAccount parseIntegrationAccount(Map<String, Object?> raw) {
-    return IntegrationAccount(
-      id: Snowflake.parse(raw['id']!),
-      name: raw['name'] as String,
-    );
-  }
-
-  /// Parse an [IntegrationApplication] from [raw].
-  IntegrationApplication parseIntegrationApplication(Map<String, Object?> raw) {
-    return IntegrationApplication(
-      id: Snowflake.parse(raw['id']!),
-      name: raw['name'] as String,
-      iconHash: raw['icon'] as String?,
-      description: raw['description'] as String,
-      bot: maybeParse(raw['bot'], client.users.parse),
-    );
-  }
+  PartialIntegration operator [](Snowflake id) => PartialIntegration(id: id);
 
   @override
   Future<Integration> fetch(Snowflake id) async {
@@ -78,7 +37,8 @@ class IntegrationManager extends ReadOnlyManager<Integration> {
     final request = BasicRequest(route);
 
     final response = await client.httpHandler.executeSafe(request);
-    final integrations = parseMany(response.jsonBody as List, parse);
+    final integrations =
+        parseMany(response.jsonBody as List, IntegrationMapper.fromMap);
 
     integrations.forEach(client.updateCacheWith);
     return integrations;
@@ -89,7 +49,8 @@ class IntegrationManager extends ReadOnlyManager<Integration> {
     final route = HttpRoute()
       ..guilds(id: guildId.toString())
       ..integrations(id: id.toString());
-    final request = BasicRequest(route, method: 'DELETE', auditLogReason: auditLogReason);
+    final request =
+        BasicRequest(route, method: 'DELETE', auditLogReason: auditLogReason);
 
     await client.httpHandler.executeSafe(request);
 

@@ -145,23 +145,12 @@ class PartialApplicationMapper extends ClassMapperBase<PartialApplication> {
 
   static Snowflake _$id(PartialApplication v) => v.id;
   static const Field<PartialApplication, Snowflake> _f$id = Field('id', _$id);
-  static ApplicationManager _$manager(PartialApplication v) => v.manager;
-  static const Field<PartialApplication, ApplicationManager> _f$manager = Field(
-    'manager',
-    _$manager,
-  );
 
   @override
-  final MappableFields<PartialApplication> fields = const {
-    #id: _f$id,
-    #manager: _f$manager,
-  };
+  final MappableFields<PartialApplication> fields = const {#id: _f$id};
 
   static PartialApplication _instantiate(DecodingData data) {
-    return PartialApplication(
-      id: data.dec(_f$id),
-      manager: data.dec(_f$manager),
-    );
+    return PartialApplication(id: data.dec(_f$id));
   }
 
   @override
@@ -236,7 +225,7 @@ abstract class PartialApplicationCopyWith<
 >
     implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  $R call({Snowflake? id, ApplicationManager? manager});
+  $R call({Snowflake? id});
   PartialApplicationCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -254,17 +243,11 @@ class _PartialApplicationCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
-  $R call({Snowflake? id, ApplicationManager? manager}) => $apply(
-    FieldCopyWithData({
-      if (id != null) #id: id,
-      if (manager != null) #manager: manager,
-    }),
-  );
+  $R call({Snowflake? id}) =>
+      $apply(FieldCopyWithData({if (id != null) #id: id}));
   @override
-  PartialApplication $make(CopyWithData data) => PartialApplication(
-    id: data.get(#id, or: $value.id),
-    manager: data.get(#manager, or: $value.manager),
-  );
+  PartialApplication $make(CopyWithData data) =>
+      PartialApplication(id: data.get(#id, or: $value.id));
 
   @override
   PartialApplicationCopyWith<$R2, PartialApplication, $Out2> $chain<$R2, $Out2>(
@@ -639,11 +622,6 @@ class ApplicationMapper extends ClassMapperBase<Application> {
 
   static Snowflake _$id(Application v) => v.id;
   static const Field<Application, Snowflake> _f$id = Field('id', _$id);
-  static ApplicationManager _$manager(Application v) => v.manager;
-  static const Field<Application, ApplicationManager> _f$manager = Field(
-    'manager',
-    _$manager,
-  );
   static String _$name(Application v) => v.name;
   static const Field<Application, String> _f$name = Field('name', _$name);
   static String? _$iconHash(Application v) => v.iconHash;
@@ -800,7 +778,6 @@ class ApplicationMapper extends ClassMapperBase<Application> {
   @override
   final MappableFields<Application> fields = const {
     #id: _f$id,
-    #manager: _f$manager,
     #name: _f$name,
     #iconHash: _f$iconHash,
     #description: _f$description,
@@ -833,7 +810,6 @@ class ApplicationMapper extends ClassMapperBase<Application> {
   static Application _instantiate(DecodingData data) {
     return Application(
       id: data.dec(_f$id),
-      manager: data.dec(_f$manager),
       name: data.dec(_f$name),
       iconHash: data.dec(_f$iconHash),
       description: data.dec(_f$description),
@@ -958,7 +934,6 @@ abstract class ApplicationCopyWith<$R, $In extends Application, $Out>
   @override
   $R call({
     Snowflake? id,
-    ApplicationManager? manager,
     String? name,
     String? iconHash,
     String? description,
@@ -1080,7 +1055,6 @@ class _ApplicationCopyWithImpl<$R, $Out>
   @override
   $R call({
     Snowflake? id,
-    ApplicationManager? manager,
     String? name,
     Object? iconHash = $none,
     String? description,
@@ -1111,7 +1085,6 @@ class _ApplicationCopyWithImpl<$R, $Out>
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
-      if (manager != null) #manager: manager,
       if (name != null) #name: name,
       if (iconHash != $none) #iconHash: iconHash,
       if (description != null) #description: description,
@@ -1151,7 +1124,6 @@ class _ApplicationCopyWithImpl<$R, $Out>
   @override
   Application $make(CopyWithData data) => Application(
     id: data.get(#id, or: $value.id),
-    manager: data.get(#manager, or: $value.manager),
     name: data.get(#name, or: $value.name),
     iconHash: data.get(#iconHash, or: $value.iconHash),
     description: data.get(#description, or: $value.description),

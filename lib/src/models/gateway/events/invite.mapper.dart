@@ -15,6 +15,7 @@ class InviteCreateEventMapper extends SubClassMapperBase<InviteCreateEvent> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = InviteCreateEventMapper._());
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
+      InviteWithMetadataMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -123,6 +124,8 @@ abstract class InviteCreateEventCopyWith<
   $Out
 >
     implements DispatchEventCopyWith<$R, $In, $Out> {
+  InviteWithMetadataCopyWith<$R, InviteWithMetadata, InviteWithMetadata>
+  get invite;
   @override
   $R call({InviteWithMetadata? invite});
   InviteCreateEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
@@ -138,6 +141,9 @@ class _InviteCreateEventCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<InviteCreateEvent> $mapper =
       InviteCreateEventMapper.ensureInitialized();
+  @override
+  InviteWithMetadataCopyWith<$R, InviteWithMetadata, InviteWithMetadata>
+  get invite => $value.invite.copyWith.$chain((v) => call(invite: v));
   @override
   $R call({InviteWithMetadata? invite}) =>
       $apply(FieldCopyWithData({if (invite != null) #invite: invite}));

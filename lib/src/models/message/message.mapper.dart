@@ -331,13 +331,18 @@ class MessageMapper extends ClassMapperBase<Message> {
       MessageTypeMapper.ensureInitialized();
       PartialApplicationMapper.ensureInitialized();
       MessageReferenceMapper.ensureInitialized();
+      MessageSnapshotMapper.ensureInitialized();
+      MessageFlagsMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
+      MessageInteractionMetadataMapper.ensureInitialized();
+      MessageInteractionMapper.ensureInitialized();
       ThreadMapper.ensureInitialized();
       MessageComponentMapper.ensureInitialized();
       RoleSubscriptionDataMapper.ensureInitialized();
       StickerItemMapper.ensureInitialized();
       ResolvedDataMapper.ensureInitialized();
       PollMapper.ensureInitialized();
+      MessageCallMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -636,7 +641,9 @@ extension MessageValueCopy<$R, $Out> on ObjectCopyWith<$R, Message, $Out> {
 }
 
 abstract class MessageCopyWith<$R, $In extends Message, $Out>
-    implements PartialMessageCopyWith<$R, $In, $Out> {
+    implements
+        PartialMessageCopyWith<$R, $In, $Out>,
+        MessageSnapshotCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   ListCopyWith<$R, User, UserCopyWith<$R, User, User>> get mentions;
@@ -662,10 +669,19 @@ abstract class MessageCopyWith<$R, $In extends Message, $Out>
   ListCopyWith<
     $R,
     MessageSnapshot,
-    ObjectCopyWith<$R, MessageSnapshot, MessageSnapshot>
+    MessageSnapshotCopyWith<$R, MessageSnapshot, MessageSnapshot>
   >?
   get messageSnapshots;
+  MessageFlagsCopyWith<$R, MessageFlags, MessageFlags> get flags;
   MessageCopyWith<$R, Message, Message>? get referencedMessage;
+  MessageInteractionMetadataCopyWith<
+    $R,
+    MessageInteractionMetadata,
+    MessageInteractionMetadata
+  >?
+  get interactionMetadata;
+  MessageInteractionCopyWith<$R, MessageInteraction, MessageInteraction>?
+  get interaction;
   ThreadCopyWith<$R, Thread, Thread>? get thread;
   ListCopyWith<
     $R,
@@ -683,6 +699,7 @@ abstract class MessageCopyWith<$R, $In extends Message, $Out>
   get stickers;
   ResolvedDataCopyWith<$R, ResolvedData, ResolvedData>? get resolved;
   PollCopyWith<$R, Poll, Poll>? get poll;
+  MessageCallCopyWith<$R, MessageCall, MessageCall>? get call;
   @override
   $R call({
     Snowflake? id,
@@ -797,20 +814,36 @@ class _MessageCopyWithImpl<$R, $Out>
   ListCopyWith<
     $R,
     MessageSnapshot,
-    ObjectCopyWith<$R, MessageSnapshot, MessageSnapshot>
+    MessageSnapshotCopyWith<$R, MessageSnapshot, MessageSnapshot>
   >?
   get messageSnapshots => $value.messageSnapshots != null
       ? ListCopyWith(
           $value.messageSnapshots!,
-          (v, t) => ObjectCopyWith(v, $identity, t),
+          (v, t) => v.copyWith.$chain(t),
           (v) => call(messageSnapshots: v),
         )
       : null;
+  @override
+  MessageFlagsCopyWith<$R, MessageFlags, MessageFlags> get flags =>
+      $value.flags.copyWith.$chain((v) => call(flags: v));
   @override
   MessageCopyWith<$R, Message, Message>? get referencedMessage => $value
       .referencedMessage
       ?.copyWith
       .$chain((v) => call(referencedMessage: v));
+  @override
+  MessageInteractionMetadataCopyWith<
+    $R,
+    MessageInteractionMetadata,
+    MessageInteractionMetadata
+  >?
+  get interactionMetadata => $value.interactionMetadata?.copyWith.$chain(
+    (v) => call(interactionMetadata: v),
+  );
+  @override
+  MessageInteractionCopyWith<$R, MessageInteraction, MessageInteraction>?
+  get interaction =>
+      $value.interaction?.copyWith.$chain((v) => call(interaction: v));
   @override
   ThreadCopyWith<$R, Thread, Thread>? get thread =>
       $value.thread?.copyWith.$chain((v) => call(thread: v));
@@ -849,6 +882,9 @@ class _MessageCopyWithImpl<$R, $Out>
   @override
   PollCopyWith<$R, Poll, Poll>? get poll =>
       $value.poll?.copyWith.$chain((v) => call(poll: v));
+  @override
+  MessageCallCopyWith<$R, MessageCall, MessageCall>? get call =>
+      $value.call?.copyWith.$chain((v) => call(call: v));
   @override
   $R call({
     Snowflake? id,
@@ -975,5 +1011,1344 @@ class _MessageCopyWithImpl<$R, $Out>
   @override
   MessageCopyWith<$R2, Message, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
       _MessageCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
+class MessageSnapshotMapper extends ClassMapperBase<MessageSnapshot> {
+  MessageSnapshotMapper._();
+
+  static MessageSnapshotMapper? _instance;
+  static MessageSnapshotMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = MessageSnapshotMapper._());
+      MessageMapper.ensureInitialized();
+      MessageTypeMapper.ensureInitialized();
+      AttachmentMapper.ensureInitialized();
+      EmbedMapper.ensureInitialized();
+      MessageFlagsMapper.ensureInitialized();
+      UserMapper.ensureInitialized();
+      SnowflakeMapper.ensureInitialized();
+      StickerItemMapper.ensureInitialized();
+      MessageComponentMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'MessageSnapshot';
+
+  static DateTime _$timestamp(MessageSnapshot v) => v.timestamp;
+  static const Field<MessageSnapshot, DateTime> _f$timestamp = Field(
+    'timestamp',
+    _$timestamp,
+  );
+  static DateTime? _$editedTimestamp(MessageSnapshot v) => v.editedTimestamp;
+  static const Field<MessageSnapshot, DateTime> _f$editedTimestamp = Field(
+    'editedTimestamp',
+    _$editedTimestamp,
+    key: r'edited_timestamp',
+  );
+  static MessageType _$type(MessageSnapshot v) => v.type;
+  static const Field<MessageSnapshot, MessageType> _f$type = Field(
+    'type',
+    _$type,
+  );
+  static String _$content(MessageSnapshot v) => v.content;
+  static const Field<MessageSnapshot, String> _f$content = Field(
+    'content',
+    _$content,
+  );
+  static List<Attachment> _$attachments(MessageSnapshot v) => v.attachments;
+  static const Field<MessageSnapshot, List<Attachment>> _f$attachments = Field(
+    'attachments',
+    _$attachments,
+  );
+  static List<Embed> _$embeds(MessageSnapshot v) => v.embeds;
+  static const Field<MessageSnapshot, List<Embed>> _f$embeds = Field(
+    'embeds',
+    _$embeds,
+  );
+  static MessageFlags _$flags(MessageSnapshot v) => v.flags;
+  static const Field<MessageSnapshot, MessageFlags> _f$flags = Field(
+    'flags',
+    _$flags,
+  );
+  static List<User> _$mentions(MessageSnapshot v) => v.mentions;
+  static const Field<MessageSnapshot, List<User>> _f$mentions = Field(
+    'mentions',
+    _$mentions,
+  );
+  static List<Snowflake> _$roleMentionIds(MessageSnapshot v) =>
+      v.roleMentionIds;
+  static const Field<MessageSnapshot, List<Snowflake>> _f$roleMentionIds =
+      Field('roleMentionIds', _$roleMentionIds, key: r'role_mention_ids');
+  static List<StickerItem> _$stickers(MessageSnapshot v) => v.stickers;
+  static const Field<MessageSnapshot, List<StickerItem>> _f$stickers = Field(
+    'stickers',
+    _$stickers,
+  );
+  static List<MessageComponent>? _$components(MessageSnapshot v) =>
+      v.components;
+  static const Field<MessageSnapshot, List<MessageComponent>> _f$components =
+      Field('components', _$components);
+
+  @override
+  final MappableFields<MessageSnapshot> fields = const {
+    #timestamp: _f$timestamp,
+    #editedTimestamp: _f$editedTimestamp,
+    #type: _f$type,
+    #content: _f$content,
+    #attachments: _f$attachments,
+    #embeds: _f$embeds,
+    #flags: _f$flags,
+    #mentions: _f$mentions,
+    #roleMentionIds: _f$roleMentionIds,
+    #stickers: _f$stickers,
+    #components: _f$components,
+  };
+
+  static MessageSnapshot _instantiate(DecodingData data) {
+    return MessageSnapshot(
+      timestamp: data.dec(_f$timestamp),
+      editedTimestamp: data.dec(_f$editedTimestamp),
+      type: data.dec(_f$type),
+      content: data.dec(_f$content),
+      attachments: data.dec(_f$attachments),
+      embeds: data.dec(_f$embeds),
+      flags: data.dec(_f$flags),
+      mentions: data.dec(_f$mentions),
+      roleMentionIds: data.dec(_f$roleMentionIds),
+      stickers: data.dec(_f$stickers),
+      components: data.dec(_f$components),
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static MessageSnapshot fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<MessageSnapshot>(map);
+  }
+
+  static MessageSnapshot fromJson(String json) {
+    return ensureInitialized().decodeJson<MessageSnapshot>(json);
+  }
+}
+
+mixin MessageSnapshotMappable {
+  String toJson() {
+    return MessageSnapshotMapper.ensureInitialized()
+        .encodeJson<MessageSnapshot>(this as MessageSnapshot);
+  }
+
+  Map<String, dynamic> toMap() {
+    return MessageSnapshotMapper.ensureInitialized().encodeMap<MessageSnapshot>(
+      this as MessageSnapshot,
+    );
+  }
+
+  MessageSnapshotCopyWith<MessageSnapshot, MessageSnapshot, MessageSnapshot>
+  get copyWith =>
+      _MessageSnapshotCopyWithImpl<MessageSnapshot, MessageSnapshot>(
+        this as MessageSnapshot,
+        $identity,
+        $identity,
+      );
+  @override
+  String toString() {
+    return MessageSnapshotMapper.ensureInitialized().stringifyValue(
+      this as MessageSnapshot,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return MessageSnapshotMapper.ensureInitialized().equalsValue(
+      this as MessageSnapshot,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return MessageSnapshotMapper.ensureInitialized().hashValue(
+      this as MessageSnapshot,
+    );
+  }
+}
+
+extension MessageSnapshotValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, MessageSnapshot, $Out> {
+  MessageSnapshotCopyWith<$R, MessageSnapshot, $Out> get $asMessageSnapshot =>
+      $base.as((v, t, t2) => _MessageSnapshotCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class MessageSnapshotCopyWith<$R, $In extends MessageSnapshot, $Out>
+    implements ClassCopyWith<$R, $In, $Out> {
+  ListCopyWith<$R, Attachment, AttachmentCopyWith<$R, Attachment, Attachment>>
+  get attachments;
+  ListCopyWith<$R, Embed, EmbedCopyWith<$R, Embed, Embed>> get embeds;
+  MessageFlagsCopyWith<$R, MessageFlags, MessageFlags> get flags;
+  ListCopyWith<$R, User, UserCopyWith<$R, User, User>> get mentions;
+  ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
+  get roleMentionIds;
+  ListCopyWith<
+    $R,
+    StickerItem,
+    StickerItemCopyWith<$R, StickerItem, StickerItem>
+  >
+  get stickers;
+  ListCopyWith<
+    $R,
+    MessageComponent,
+    ObjectCopyWith<$R, MessageComponent, MessageComponent>?
+  >?
+  get components;
+  $R call({
+    DateTime? timestamp,
+    DateTime? editedTimestamp,
+    MessageType? type,
+    String? content,
+    List<Attachment>? attachments,
+    List<Embed>? embeds,
+    MessageFlags? flags,
+    List<User>? mentions,
+    List<Snowflake>? roleMentionIds,
+    List<StickerItem>? stickers,
+    List<MessageComponent>? components,
+  });
+  MessageSnapshotCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  );
+}
+
+class _MessageSnapshotCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, MessageSnapshot, $Out>
+    implements MessageSnapshotCopyWith<$R, MessageSnapshot, $Out> {
+  _MessageSnapshotCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<MessageSnapshot> $mapper =
+      MessageSnapshotMapper.ensureInitialized();
+  @override
+  ListCopyWith<$R, Attachment, AttachmentCopyWith<$R, Attachment, Attachment>>
+  get attachments => ListCopyWith(
+    $value.attachments,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(attachments: v),
+  );
+  @override
+  ListCopyWith<$R, Embed, EmbedCopyWith<$R, Embed, Embed>> get embeds =>
+      ListCopyWith(
+        $value.embeds,
+        (v, t) => v.copyWith.$chain(t),
+        (v) => call(embeds: v),
+      );
+  @override
+  MessageFlagsCopyWith<$R, MessageFlags, MessageFlags> get flags =>
+      $value.flags.copyWith.$chain((v) => call(flags: v));
+  @override
+  ListCopyWith<$R, User, UserCopyWith<$R, User, User>> get mentions =>
+      ListCopyWith(
+        $value.mentions,
+        (v, t) => v.copyWith.$chain(t),
+        (v) => call(mentions: v),
+      );
+  @override
+  ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
+  get roleMentionIds => ListCopyWith(
+    $value.roleMentionIds,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(roleMentionIds: v),
+  );
+  @override
+  ListCopyWith<
+    $R,
+    StickerItem,
+    StickerItemCopyWith<$R, StickerItem, StickerItem>
+  >
+  get stickers => ListCopyWith(
+    $value.stickers,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(stickers: v),
+  );
+  @override
+  ListCopyWith<
+    $R,
+    MessageComponent,
+    ObjectCopyWith<$R, MessageComponent, MessageComponent>?
+  >?
+  get components => $value.components != null
+      ? ListCopyWith(
+          $value.components!,
+          (v, t) => ObjectCopyWith(v, $identity, t),
+          (v) => call(components: v),
+        )
+      : null;
+  @override
+  $R call({
+    DateTime? timestamp,
+    Object? editedTimestamp = $none,
+    MessageType? type,
+    String? content,
+    List<Attachment>? attachments,
+    List<Embed>? embeds,
+    MessageFlags? flags,
+    List<User>? mentions,
+    List<Snowflake>? roleMentionIds,
+    List<StickerItem>? stickers,
+    Object? components = $none,
+  }) => $apply(
+    FieldCopyWithData({
+      if (timestamp != null) #timestamp: timestamp,
+      if (editedTimestamp != $none) #editedTimestamp: editedTimestamp,
+      if (type != null) #type: type,
+      if (content != null) #content: content,
+      if (attachments != null) #attachments: attachments,
+      if (embeds != null) #embeds: embeds,
+      if (flags != null) #flags: flags,
+      if (mentions != null) #mentions: mentions,
+      if (roleMentionIds != null) #roleMentionIds: roleMentionIds,
+      if (stickers != null) #stickers: stickers,
+      if (components != $none) #components: components,
+    }),
+  );
+  @override
+  MessageSnapshot $make(CopyWithData data) => MessageSnapshot(
+    timestamp: data.get(#timestamp, or: $value.timestamp),
+    editedTimestamp: data.get(#editedTimestamp, or: $value.editedTimestamp),
+    type: data.get(#type, or: $value.type),
+    content: data.get(#content, or: $value.content),
+    attachments: data.get(#attachments, or: $value.attachments),
+    embeds: data.get(#embeds, or: $value.embeds),
+    flags: data.get(#flags, or: $value.flags),
+    mentions: data.get(#mentions, or: $value.mentions),
+    roleMentionIds: data.get(#roleMentionIds, or: $value.roleMentionIds),
+    stickers: data.get(#stickers, or: $value.stickers),
+    components: data.get(#components, or: $value.components),
+  );
+
+  @override
+  MessageSnapshotCopyWith<$R2, MessageSnapshot, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _MessageSnapshotCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
+class MessageFlagsMapper extends ClassMapperBase<MessageFlags> {
+  MessageFlagsMapper._();
+
+  static MessageFlagsMapper? _instance;
+  static MessageFlagsMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = MessageFlagsMapper._());
+      FlagsMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'MessageFlags';
+
+  static int _$value(MessageFlags v) => v.value;
+  static const Field<MessageFlags, int> _f$value = Field('value', _$value);
+
+  @override
+  final MappableFields<MessageFlags> fields = const {#value: _f$value};
+
+  static MessageFlags _instantiate(DecodingData data) {
+    return MessageFlags(data.dec(_f$value));
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static MessageFlags fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<MessageFlags>(map);
+  }
+
+  static MessageFlags fromJson(String json) {
+    return ensureInitialized().decodeJson<MessageFlags>(json);
+  }
+}
+
+mixin MessageFlagsMappable {
+  String toJson() {
+    return MessageFlagsMapper.ensureInitialized().encodeJson<MessageFlags>(
+      this as MessageFlags,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return MessageFlagsMapper.ensureInitialized().encodeMap<MessageFlags>(
+      this as MessageFlags,
+    );
+  }
+
+  MessageFlagsCopyWith<MessageFlags, MessageFlags, MessageFlags> get copyWith =>
+      _MessageFlagsCopyWithImpl<MessageFlags, MessageFlags>(
+        this as MessageFlags,
+        $identity,
+        $identity,
+      );
+  @override
+  String toString() {
+    return MessageFlagsMapper.ensureInitialized().stringifyValue(
+      this as MessageFlags,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return MessageFlagsMapper.ensureInitialized().equalsValue(
+      this as MessageFlags,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return MessageFlagsMapper.ensureInitialized().hashValue(
+      this as MessageFlags,
+    );
+  }
+}
+
+extension MessageFlagsValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, MessageFlags, $Out> {
+  MessageFlagsCopyWith<$R, MessageFlags, $Out> get $asMessageFlags =>
+      $base.as((v, t, t2) => _MessageFlagsCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class MessageFlagsCopyWith<$R, $In extends MessageFlags, $Out>
+    implements FlagsCopyWith<$R, $In, $Out, MessageFlags> {
+  @override
+  $R call({int? value});
+  MessageFlagsCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+}
+
+class _MessageFlagsCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, MessageFlags, $Out>
+    implements MessageFlagsCopyWith<$R, MessageFlags, $Out> {
+  _MessageFlagsCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<MessageFlags> $mapper =
+      MessageFlagsMapper.ensureInitialized();
+  @override
+  $R call({int? value}) =>
+      $apply(FieldCopyWithData({if (value != null) #value: value}));
+  @override
+  MessageFlags $make(CopyWithData data) =>
+      MessageFlags(data.get(#value, or: $value.value));
+
+  @override
+  MessageFlagsCopyWith<$R2, MessageFlags, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _MessageFlagsCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
+class MessageInteractionMetadataMapper
+    extends ClassMapperBase<MessageInteractionMetadata> {
+  MessageInteractionMetadataMapper._();
+
+  static MessageInteractionMetadataMapper? _instance;
+  static MessageInteractionMetadataMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(
+        _instance = MessageInteractionMetadataMapper._(),
+      );
+      SnowflakeMapper.ensureInitialized();
+      InteractionTypeMapper.ensureInitialized();
+      UserMapper.ensureInitialized();
+      ApplicationIntegrationTypeMapper.ensureInitialized();
+      MessageInteractionMetadataMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'MessageInteractionMetadata';
+
+  static Snowflake _$id(MessageInteractionMetadata v) => v.id;
+  static const Field<MessageInteractionMetadata, Snowflake> _f$id = Field(
+    'id',
+    _$id,
+  );
+  static InteractionType _$type(MessageInteractionMetadata v) => v.type;
+  static const Field<MessageInteractionMetadata, InteractionType> _f$type =
+      Field('type', _$type);
+  static User _$user(MessageInteractionMetadata v) => v.user;
+  static const Field<MessageInteractionMetadata, User> _f$user = Field(
+    'user',
+    _$user,
+  );
+  static Map<ApplicationIntegrationType, Snowflake>
+  _$authorizingIntegrationOwners(MessageInteractionMetadata v) =>
+      v.authorizingIntegrationOwners;
+  static const Field<
+    MessageInteractionMetadata,
+    Map<ApplicationIntegrationType, Snowflake>
+  >
+  _f$authorizingIntegrationOwners = Field(
+    'authorizingIntegrationOwners',
+    _$authorizingIntegrationOwners,
+    key: r'authorizing_integration_owners',
+  );
+  static Snowflake? _$originalResponseMessageId(MessageInteractionMetadata v) =>
+      v.originalResponseMessageId;
+  static const Field<MessageInteractionMetadata, Snowflake>
+  _f$originalResponseMessageId = Field(
+    'originalResponseMessageId',
+    _$originalResponseMessageId,
+    key: r'original_response_message_id',
+  );
+  static Snowflake? _$interactedMessageId(MessageInteractionMetadata v) =>
+      v.interactedMessageId;
+  static const Field<MessageInteractionMetadata, Snowflake>
+  _f$interactedMessageId = Field(
+    'interactedMessageId',
+    _$interactedMessageId,
+    key: r'interacted_message_id',
+  );
+  static MessageInteractionMetadata? _$triggeringInteractionMetadata(
+    MessageInteractionMetadata v,
+  ) => v.triggeringInteractionMetadata;
+  static const Field<MessageInteractionMetadata, MessageInteractionMetadata>
+  _f$triggeringInteractionMetadata = Field(
+    'triggeringInteractionMetadata',
+    _$triggeringInteractionMetadata,
+    key: r'triggering_interaction_metadata',
+  );
+
+  @override
+  final MappableFields<MessageInteractionMetadata> fields = const {
+    #id: _f$id,
+    #type: _f$type,
+    #user: _f$user,
+    #authorizingIntegrationOwners: _f$authorizingIntegrationOwners,
+    #originalResponseMessageId: _f$originalResponseMessageId,
+    #interactedMessageId: _f$interactedMessageId,
+    #triggeringInteractionMetadata: _f$triggeringInteractionMetadata,
+  };
+
+  static MessageInteractionMetadata _instantiate(DecodingData data) {
+    return MessageInteractionMetadata(
+      id: data.dec(_f$id),
+      type: data.dec(_f$type),
+      user: data.dec(_f$user),
+      authorizingIntegrationOwners: data.dec(_f$authorizingIntegrationOwners),
+      originalResponseMessageId: data.dec(_f$originalResponseMessageId),
+      interactedMessageId: data.dec(_f$interactedMessageId),
+      triggeringInteractionMetadata: data.dec(_f$triggeringInteractionMetadata),
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static MessageInteractionMetadata fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<MessageInteractionMetadata>(map);
+  }
+
+  static MessageInteractionMetadata fromJson(String json) {
+    return ensureInitialized().decodeJson<MessageInteractionMetadata>(json);
+  }
+}
+
+mixin MessageInteractionMetadataMappable {
+  String toJson() {
+    return MessageInteractionMetadataMapper.ensureInitialized()
+        .encodeJson<MessageInteractionMetadata>(
+          this as MessageInteractionMetadata,
+        );
+  }
+
+  Map<String, dynamic> toMap() {
+    return MessageInteractionMetadataMapper.ensureInitialized()
+        .encodeMap<MessageInteractionMetadata>(
+          this as MessageInteractionMetadata,
+        );
+  }
+
+  MessageInteractionMetadataCopyWith<
+    MessageInteractionMetadata,
+    MessageInteractionMetadata,
+    MessageInteractionMetadata
+  >
+  get copyWith =>
+      _MessageInteractionMetadataCopyWithImpl<
+        MessageInteractionMetadata,
+        MessageInteractionMetadata
+      >(this as MessageInteractionMetadata, $identity, $identity);
+  @override
+  String toString() {
+    return MessageInteractionMetadataMapper.ensureInitialized().stringifyValue(
+      this as MessageInteractionMetadata,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return MessageInteractionMetadataMapper.ensureInitialized().equalsValue(
+      this as MessageInteractionMetadata,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return MessageInteractionMetadataMapper.ensureInitialized().hashValue(
+      this as MessageInteractionMetadata,
+    );
+  }
+}
+
+extension MessageInteractionMetadataValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, MessageInteractionMetadata, $Out> {
+  MessageInteractionMetadataCopyWith<$R, MessageInteractionMetadata, $Out>
+  get $asMessageInteractionMetadata => $base.as(
+    (v, t, t2) => _MessageInteractionMetadataCopyWithImpl<$R, $Out>(v, t, t2),
+  );
+}
+
+abstract class MessageInteractionMetadataCopyWith<
+  $R,
+  $In extends MessageInteractionMetadata,
+  $Out
+>
+    implements ClassCopyWith<$R, $In, $Out> {
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  UserCopyWith<$R, User, User> get user;
+  MapCopyWith<
+    $R,
+    ApplicationIntegrationType,
+    Snowflake,
+    SnowflakeCopyWith<$R, Snowflake, Snowflake>
+  >
+  get authorizingIntegrationOwners;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get originalResponseMessageId;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get interactedMessageId;
+  MessageInteractionMetadataCopyWith<
+    $R,
+    MessageInteractionMetadata,
+    MessageInteractionMetadata
+  >?
+  get triggeringInteractionMetadata;
+  $R call({
+    Snowflake? id,
+    InteractionType? type,
+    User? user,
+    Map<ApplicationIntegrationType, Snowflake>? authorizingIntegrationOwners,
+    Snowflake? originalResponseMessageId,
+    Snowflake? interactedMessageId,
+    MessageInteractionMetadata? triggeringInteractionMetadata,
+  });
+  MessageInteractionMetadataCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  );
+}
+
+class _MessageInteractionMetadataCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, MessageInteractionMetadata, $Out>
+    implements
+        MessageInteractionMetadataCopyWith<
+          $R,
+          MessageInteractionMetadata,
+          $Out
+        > {
+  _MessageInteractionMetadataCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<MessageInteractionMetadata> $mapper =
+      MessageInteractionMetadataMapper.ensureInitialized();
+  @override
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
+      $value.id.copyWith.$chain((v) => call(id: v));
+  @override
+  UserCopyWith<$R, User, User> get user =>
+      $value.user.copyWith.$chain((v) => call(user: v));
+  @override
+  MapCopyWith<
+    $R,
+    ApplicationIntegrationType,
+    Snowflake,
+    SnowflakeCopyWith<$R, Snowflake, Snowflake>
+  >
+  get authorizingIntegrationOwners => MapCopyWith(
+    $value.authorizingIntegrationOwners,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(authorizingIntegrationOwners: v),
+  );
+  @override
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get originalResponseMessageId =>
+      $value.originalResponseMessageId?.copyWith.$chain(
+        (v) => call(originalResponseMessageId: v),
+      );
+  @override
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get interactedMessageId => $value
+      .interactedMessageId
+      ?.copyWith
+      .$chain((v) => call(interactedMessageId: v));
+  @override
+  MessageInteractionMetadataCopyWith<
+    $R,
+    MessageInteractionMetadata,
+    MessageInteractionMetadata
+  >?
+  get triggeringInteractionMetadata => $value
+      .triggeringInteractionMetadata
+      ?.copyWith
+      .$chain((v) => call(triggeringInteractionMetadata: v));
+  @override
+  $R call({
+    Snowflake? id,
+    InteractionType? type,
+    User? user,
+    Map<ApplicationIntegrationType, Snowflake>? authorizingIntegrationOwners,
+    Object? originalResponseMessageId = $none,
+    Object? interactedMessageId = $none,
+    Object? triggeringInteractionMetadata = $none,
+  }) => $apply(
+    FieldCopyWithData({
+      if (id != null) #id: id,
+      if (type != null) #type: type,
+      if (user != null) #user: user,
+      if (authorizingIntegrationOwners != null)
+        #authorizingIntegrationOwners: authorizingIntegrationOwners,
+      if (originalResponseMessageId != $none)
+        #originalResponseMessageId: originalResponseMessageId,
+      if (interactedMessageId != $none)
+        #interactedMessageId: interactedMessageId,
+      if (triggeringInteractionMetadata != $none)
+        #triggeringInteractionMetadata: triggeringInteractionMetadata,
+    }),
+  );
+  @override
+  MessageInteractionMetadata $make(CopyWithData data) =>
+      MessageInteractionMetadata(
+        id: data.get(#id, or: $value.id),
+        type: data.get(#type, or: $value.type),
+        user: data.get(#user, or: $value.user),
+        authorizingIntegrationOwners: data.get(
+          #authorizingIntegrationOwners,
+          or: $value.authorizingIntegrationOwners,
+        ),
+        originalResponseMessageId: data.get(
+          #originalResponseMessageId,
+          or: $value.originalResponseMessageId,
+        ),
+        interactedMessageId: data.get(
+          #interactedMessageId,
+          or: $value.interactedMessageId,
+        ),
+        triggeringInteractionMetadata: data.get(
+          #triggeringInteractionMetadata,
+          or: $value.triggeringInteractionMetadata,
+        ),
+      );
+
+  @override
+  MessageInteractionMetadataCopyWith<$R2, MessageInteractionMetadata, $Out2>
+  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
+      _MessageInteractionMetadataCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
+class MessageInteractionMapper extends ClassMapperBase<MessageInteraction> {
+  MessageInteractionMapper._();
+
+  static MessageInteractionMapper? _instance;
+  static MessageInteractionMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = MessageInteractionMapper._());
+      SnowflakeMapper.ensureInitialized();
+      InteractionTypeMapper.ensureInitialized();
+      UserMapper.ensureInitialized();
+      PartialMemberMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'MessageInteraction';
+
+  static Snowflake _$id(MessageInteraction v) => v.id;
+  static const Field<MessageInteraction, Snowflake> _f$id = Field('id', _$id);
+  static InteractionType _$type(MessageInteraction v) => v.type;
+  static const Field<MessageInteraction, InteractionType> _f$type = Field(
+    'type',
+    _$type,
+  );
+  static String _$name(MessageInteraction v) => v.name;
+  static const Field<MessageInteraction, String> _f$name = Field(
+    'name',
+    _$name,
+  );
+  static User _$user(MessageInteraction v) => v.user;
+  static const Field<MessageInteraction, User> _f$user = Field('user', _$user);
+  static PartialMember? _$member(MessageInteraction v) => v.member;
+  static const Field<MessageInteraction, PartialMember> _f$member = Field(
+    'member',
+    _$member,
+  );
+
+  @override
+  final MappableFields<MessageInteraction> fields = const {
+    #id: _f$id,
+    #type: _f$type,
+    #name: _f$name,
+    #user: _f$user,
+    #member: _f$member,
+  };
+
+  static MessageInteraction _instantiate(DecodingData data) {
+    return MessageInteraction(
+      id: data.dec(_f$id),
+      type: data.dec(_f$type),
+      name: data.dec(_f$name),
+      user: data.dec(_f$user),
+      member: data.dec(_f$member),
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static MessageInteraction fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<MessageInteraction>(map);
+  }
+
+  static MessageInteraction fromJson(String json) {
+    return ensureInitialized().decodeJson<MessageInteraction>(json);
+  }
+}
+
+mixin MessageInteractionMappable {
+  String toJson() {
+    return MessageInteractionMapper.ensureInitialized()
+        .encodeJson<MessageInteraction>(this as MessageInteraction);
+  }
+
+  Map<String, dynamic> toMap() {
+    return MessageInteractionMapper.ensureInitialized()
+        .encodeMap<MessageInteraction>(this as MessageInteraction);
+  }
+
+  MessageInteractionCopyWith<
+    MessageInteraction,
+    MessageInteraction,
+    MessageInteraction
+  >
+  get copyWith =>
+      _MessageInteractionCopyWithImpl<MessageInteraction, MessageInteraction>(
+        this as MessageInteraction,
+        $identity,
+        $identity,
+      );
+  @override
+  String toString() {
+    return MessageInteractionMapper.ensureInitialized().stringifyValue(
+      this as MessageInteraction,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return MessageInteractionMapper.ensureInitialized().equalsValue(
+      this as MessageInteraction,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return MessageInteractionMapper.ensureInitialized().hashValue(
+      this as MessageInteraction,
+    );
+  }
+}
+
+extension MessageInteractionValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, MessageInteraction, $Out> {
+  MessageInteractionCopyWith<$R, MessageInteraction, $Out>
+  get $asMessageInteraction => $base.as(
+    (v, t, t2) => _MessageInteractionCopyWithImpl<$R, $Out>(v, t, t2),
+  );
+}
+
+abstract class MessageInteractionCopyWith<
+  $R,
+  $In extends MessageInteraction,
+  $Out
+>
+    implements ClassCopyWith<$R, $In, $Out> {
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  UserCopyWith<$R, User, User> get user;
+  PartialMemberCopyWith<$R, PartialMember, PartialMember>? get member;
+  $R call({
+    Snowflake? id,
+    InteractionType? type,
+    String? name,
+    User? user,
+    PartialMember? member,
+  });
+  MessageInteractionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  );
+}
+
+class _MessageInteractionCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, MessageInteraction, $Out>
+    implements MessageInteractionCopyWith<$R, MessageInteraction, $Out> {
+  _MessageInteractionCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<MessageInteraction> $mapper =
+      MessageInteractionMapper.ensureInitialized();
+  @override
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
+      $value.id.copyWith.$chain((v) => call(id: v));
+  @override
+  UserCopyWith<$R, User, User> get user =>
+      $value.user.copyWith.$chain((v) => call(user: v));
+  @override
+  PartialMemberCopyWith<$R, PartialMember, PartialMember>? get member =>
+      $value.member?.copyWith.$chain((v) => call(member: v));
+  @override
+  $R call({
+    Snowflake? id,
+    InteractionType? type,
+    String? name,
+    User? user,
+    Object? member = $none,
+  }) => $apply(
+    FieldCopyWithData({
+      if (id != null) #id: id,
+      if (type != null) #type: type,
+      if (name != null) #name: name,
+      if (user != null) #user: user,
+      if (member != $none) #member: member,
+    }),
+  );
+  @override
+  MessageInteraction $make(CopyWithData data) => MessageInteraction(
+    id: data.get(#id, or: $value.id),
+    type: data.get(#type, or: $value.type),
+    name: data.get(#name, or: $value.name),
+    user: data.get(#user, or: $value.user),
+    member: data.get(#member, or: $value.member),
+  );
+
+  @override
+  MessageInteractionCopyWith<$R2, MessageInteraction, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _MessageInteractionCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
+class MessageCallMapper extends ClassMapperBase<MessageCall> {
+  MessageCallMapper._();
+
+  static MessageCallMapper? _instance;
+  static MessageCallMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = MessageCallMapper._());
+      SnowflakeMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'MessageCall';
+
+  static List<Snowflake> _$participantIds(MessageCall v) => v.participantIds;
+  static const Field<MessageCall, List<Snowflake>> _f$participantIds = Field(
+    'participantIds',
+    _$participantIds,
+    key: r'participant_ids',
+  );
+  static DateTime? _$endedAt(MessageCall v) => v.endedAt;
+  static const Field<MessageCall, DateTime> _f$endedAt = Field(
+    'endedAt',
+    _$endedAt,
+    key: r'ended_at',
+  );
+
+  @override
+  final MappableFields<MessageCall> fields = const {
+    #participantIds: _f$participantIds,
+    #endedAt: _f$endedAt,
+  };
+
+  static MessageCall _instantiate(DecodingData data) {
+    return MessageCall(
+      participantIds: data.dec(_f$participantIds),
+      endedAt: data.dec(_f$endedAt),
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static MessageCall fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<MessageCall>(map);
+  }
+
+  static MessageCall fromJson(String json) {
+    return ensureInitialized().decodeJson<MessageCall>(json);
+  }
+}
+
+mixin MessageCallMappable {
+  String toJson() {
+    return MessageCallMapper.ensureInitialized().encodeJson<MessageCall>(
+      this as MessageCall,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return MessageCallMapper.ensureInitialized().encodeMap<MessageCall>(
+      this as MessageCall,
+    );
+  }
+
+  MessageCallCopyWith<MessageCall, MessageCall, MessageCall> get copyWith =>
+      _MessageCallCopyWithImpl<MessageCall, MessageCall>(
+        this as MessageCall,
+        $identity,
+        $identity,
+      );
+  @override
+  String toString() {
+    return MessageCallMapper.ensureInitialized().stringifyValue(
+      this as MessageCall,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return MessageCallMapper.ensureInitialized().equalsValue(
+      this as MessageCall,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return MessageCallMapper.ensureInitialized().hashValue(this as MessageCall);
+  }
+}
+
+extension MessageCallValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, MessageCall, $Out> {
+  MessageCallCopyWith<$R, MessageCall, $Out> get $asMessageCall =>
+      $base.as((v, t, t2) => _MessageCallCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class MessageCallCopyWith<$R, $In extends MessageCall, $Out>
+    implements ClassCopyWith<$R, $In, $Out> {
+  ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
+  get participantIds;
+  $R call({List<Snowflake>? participantIds, DateTime? endedAt});
+  MessageCallCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+}
+
+class _MessageCallCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, MessageCall, $Out>
+    implements MessageCallCopyWith<$R, MessageCall, $Out> {
+  _MessageCallCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<MessageCall> $mapper =
+      MessageCallMapper.ensureInitialized();
+  @override
+  ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
+  get participantIds => ListCopyWith(
+    $value.participantIds,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(participantIds: v),
+  );
+  @override
+  $R call({List<Snowflake>? participantIds, Object? endedAt = $none}) => $apply(
+    FieldCopyWithData({
+      if (participantIds != null) #participantIds: participantIds,
+      if (endedAt != $none) #endedAt: endedAt,
+    }),
+  );
+  @override
+  MessageCall $make(CopyWithData data) => MessageCall(
+    participantIds: data.get(#participantIds, or: $value.participantIds),
+    endedAt: data.get(#endedAt, or: $value.endedAt),
+  );
+
+  @override
+  MessageCallCopyWith<$R2, MessageCall, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _MessageCallCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
+class MessagePinMapper extends ClassMapperBase<MessagePin> {
+  MessagePinMapper._();
+
+  static MessagePinMapper? _instance;
+  static MessagePinMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = MessagePinMapper._());
+      MessageMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'MessagePin';
+
+  static DateTime _$pinnedAt(MessagePin v) => v.pinnedAt;
+  static const Field<MessagePin, DateTime> _f$pinnedAt = Field(
+    'pinnedAt',
+    _$pinnedAt,
+    key: r'pinned_at',
+  );
+  static Message _$message(MessagePin v) => v.message;
+  static const Field<MessagePin, Message> _f$message = Field(
+    'message',
+    _$message,
+  );
+
+  @override
+  final MappableFields<MessagePin> fields = const {
+    #pinnedAt: _f$pinnedAt,
+    #message: _f$message,
+  };
+
+  static MessagePin _instantiate(DecodingData data) {
+    return MessagePin(
+      pinnedAt: data.dec(_f$pinnedAt),
+      message: data.dec(_f$message),
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static MessagePin fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<MessagePin>(map);
+  }
+
+  static MessagePin fromJson(String json) {
+    return ensureInitialized().decodeJson<MessagePin>(json);
+  }
+}
+
+mixin MessagePinMappable {
+  String toJson() {
+    return MessagePinMapper.ensureInitialized().encodeJson<MessagePin>(
+      this as MessagePin,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return MessagePinMapper.ensureInitialized().encodeMap<MessagePin>(
+      this as MessagePin,
+    );
+  }
+
+  MessagePinCopyWith<MessagePin, MessagePin, MessagePin> get copyWith =>
+      _MessagePinCopyWithImpl<MessagePin, MessagePin>(
+        this as MessagePin,
+        $identity,
+        $identity,
+      );
+  @override
+  String toString() {
+    return MessagePinMapper.ensureInitialized().stringifyValue(
+      this as MessagePin,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return MessagePinMapper.ensureInitialized().equalsValue(
+      this as MessagePin,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return MessagePinMapper.ensureInitialized().hashValue(this as MessagePin);
+  }
+}
+
+extension MessagePinValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, MessagePin, $Out> {
+  MessagePinCopyWith<$R, MessagePin, $Out> get $asMessagePin =>
+      $base.as((v, t, t2) => _MessagePinCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class MessagePinCopyWith<$R, $In extends MessagePin, $Out>
+    implements ClassCopyWith<$R, $In, $Out> {
+  MessageCopyWith<$R, Message, Message> get message;
+  $R call({DateTime? pinnedAt, Message? message});
+  MessagePinCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+}
+
+class _MessagePinCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, MessagePin, $Out>
+    implements MessagePinCopyWith<$R, MessagePin, $Out> {
+  _MessagePinCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<MessagePin> $mapper =
+      MessagePinMapper.ensureInitialized();
+  @override
+  MessageCopyWith<$R, Message, Message> get message =>
+      $value.message.copyWith.$chain((v) => call(message: v));
+  @override
+  $R call({DateTime? pinnedAt, Message? message}) => $apply(
+    FieldCopyWithData({
+      if (pinnedAt != null) #pinnedAt: pinnedAt,
+      if (message != null) #message: message,
+    }),
+  );
+  @override
+  MessagePin $make(CopyWithData data) => MessagePin(
+    pinnedAt: data.get(#pinnedAt, or: $value.pinnedAt),
+    message: data.get(#message, or: $value.message),
+  );
+
+  @override
+  MessagePinCopyWith<$R2, MessagePin, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _MessagePinCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
+class PinListMapper extends ClassMapperBase<PinList> {
+  PinListMapper._();
+
+  static PinListMapper? _instance;
+  static PinListMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = PinListMapper._());
+      MessagePinMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'PinList';
+
+  static List<MessagePin> _$items(PinList v) => v.items;
+  static const Field<PinList, List<MessagePin>> _f$items = Field(
+    'items',
+    _$items,
+  );
+  static bool _$hasMore(PinList v) => v.hasMore;
+  static const Field<PinList, bool> _f$hasMore = Field(
+    'hasMore',
+    _$hasMore,
+    key: r'has_more',
+  );
+
+  @override
+  final MappableFields<PinList> fields = const {
+    #items: _f$items,
+    #hasMore: _f$hasMore,
+  };
+
+  static PinList _instantiate(DecodingData data) {
+    return PinList(items: data.dec(_f$items), hasMore: data.dec(_f$hasMore));
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static PinList fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<PinList>(map);
+  }
+
+  static PinList fromJson(String json) {
+    return ensureInitialized().decodeJson<PinList>(json);
+  }
+}
+
+mixin PinListMappable {
+  String toJson() {
+    return PinListMapper.ensureInitialized().encodeJson<PinList>(
+      this as PinList,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return PinListMapper.ensureInitialized().encodeMap<PinList>(
+      this as PinList,
+    );
+  }
+
+  PinListCopyWith<PinList, PinList, PinList> get copyWith =>
+      _PinListCopyWithImpl<PinList, PinList>(
+        this as PinList,
+        $identity,
+        $identity,
+      );
+  @override
+  String toString() {
+    return PinListMapper.ensureInitialized().stringifyValue(this as PinList);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return PinListMapper.ensureInitialized().equalsValue(
+      this as PinList,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return PinListMapper.ensureInitialized().hashValue(this as PinList);
+  }
+}
+
+extension PinListValueCopy<$R, $Out> on ObjectCopyWith<$R, PinList, $Out> {
+  PinListCopyWith<$R, PinList, $Out> get $asPinList =>
+      $base.as((v, t, t2) => _PinListCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class PinListCopyWith<$R, $In extends PinList, $Out>
+    implements ClassCopyWith<$R, $In, $Out> {
+  ListCopyWith<$R, MessagePin, MessagePinCopyWith<$R, MessagePin, MessagePin>>
+  get items;
+  $R call({List<MessagePin>? items, bool? hasMore});
+  PinListCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+}
+
+class _PinListCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, PinList, $Out>
+    implements PinListCopyWith<$R, PinList, $Out> {
+  _PinListCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<PinList> $mapper =
+      PinListMapper.ensureInitialized();
+  @override
+  ListCopyWith<$R, MessagePin, MessagePinCopyWith<$R, MessagePin, MessagePin>>
+  get items => ListCopyWith(
+    $value.items,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(items: v),
+  );
+  @override
+  $R call({List<MessagePin>? items, bool? hasMore}) => $apply(
+    FieldCopyWithData({
+      if (items != null) #items: items,
+      if (hasMore != null) #hasMore: hasMore,
+    }),
+  );
+  @override
+  PinList $make(CopyWithData data) => PinList(
+    items: data.get(#items, or: $value.items),
+    hasMore: data.get(#hasMore, or: $value.hasMore),
+  );
+
+  @override
+  PinListCopyWith<$R2, PinList, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
+      _PinListCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 

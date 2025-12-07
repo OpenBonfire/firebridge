@@ -1,11 +1,16 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/emoji.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
+import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/sticker/guild_sticker.dart';
+
+part 'guild_preview.mapper.dart';
 
 /// {@template guild_preview}
 /// A preview of a [Guild].
 /// {@endtemplate}
-class GuildPreview extends PartialGuild {
+@MappableClass()
+class GuildPreview extends PartialGuild with GuildPreviewMappable {
   /// The name of the guild.
   final String name;
 

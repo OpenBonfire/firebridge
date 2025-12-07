@@ -1,13 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/http/managers/application_manager.dart';
-import 'package:nyxx/src/http/managers/emoji_manager.dart';
-import 'package:nyxx/src/http/managers/entitlement_manager.dart';
-import 'package:nyxx/src/http/managers/sku_manager.dart';
-import 'package:nyxx/src/models/emoji.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/locale.dart';
 import 'package:nyxx/src/models/permissions.dart';
-import 'package:nyxx/src/models/sku.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/team.dart';
 import 'package:nyxx/src/models/user/user.dart';
@@ -24,41 +18,9 @@ class PartialApplication with ToStringHelper, PartialApplicationMappable {
   /// The ID of this application.
   final Snowflake id;
 
-  /// The manager for this application.
-  final ApplicationManager manager;
-
-  /// An [EntitlementManager] for this application's [Entitlement]s.
-  EntitlementManager get entitlements => EntitlementManager(
-      manager.client.options.entitlementConfig, manager.client,
-      applicationId: id);
-
-  /// An [ApplicationEmojiManager] for this application's [Emoji]s.
-  ApplicationEmojiManager get emojis => ApplicationEmojiManager(
-      manager.client.options.emojiCacheConfig, manager.client,
-      applicationId: id);
-
-  /// An [SkuManager] for this application's [Sku]s.
-  SkuManager get skus =>
-      SkuManager(manager.client.options.skuConfig, manager.client,
-          applicationId: id);
-
   /// Create a new [PartialApplication].
   /// @nodoc
-  PartialApplication({required this.id, required this.manager});
-
-  /// Fetch this application's role connection metadata.
-  Future<List<ApplicationRoleConnectionMetadata>>
-      fetchRoleConnectionMetadata() =>
-          manager.fetchApplicationRoleConnectionMetadata(id);
-
-  /// Update and fetch this application's role connection metadata.
-  Future<List<ApplicationRoleConnectionMetadata>>
-      updateRoleConnectionMetadata() =>
-          manager.updateApplicationRoleConnectionMetadata(id);
-
-  /// List this application's SKUs.
-  @Deprecated('Use skus.list() instead')
-  Future<List<Sku>> listSkus() => manager.listSkus(id);
+  PartialApplication({required this.id});
 }
 
 @MappableClass()
@@ -165,7 +127,6 @@ class Application extends PartialApplication with ApplicationMappable {
   /// @nodoc
   Application({
     required super.id,
-    required super.manager,
     required this.name,
     required this.iconHash,
     required this.description,

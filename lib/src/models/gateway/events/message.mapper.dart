@@ -883,6 +883,7 @@ class MessageReactionAddEventMapper
       );
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
+      MemberMapper.ensureInitialized();
       EmojiMapper.ensureInitialized();
     }
     return _instance!;
@@ -1042,6 +1043,7 @@ abstract class MessageReactionAddEventCopyWith<
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get channelId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get messageId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
+  MemberCopyWith<$R, Member, Member>? get member;
   EmojiCopyWith<$R, Emoji, Emoji> get emoji;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get messageAuthorId;
   @override
@@ -1080,6 +1082,9 @@ class _MessageReactionAddEventCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
       $value.guildId?.copyWith.$chain((v) => call(guildId: v));
+  @override
+  MemberCopyWith<$R, Member, Member>? get member =>
+      $value.member?.copyWith.$chain((v) => call(member: v));
   @override
   EmojiCopyWith<$R, Emoji, Emoji> get emoji =>
       $value.emoji.copyWith.$chain((v) => call(emoji: v));

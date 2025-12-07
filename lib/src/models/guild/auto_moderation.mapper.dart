@@ -670,6 +670,7 @@ class TriggerMetadataMapper extends ClassMapperBase<TriggerMetadata> {
   static TriggerMetadataMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = TriggerMetadataMapper._());
+      TriggerMetadataBuilderMapper.ensureInitialized();
       KeywordPresetTypeMapper.ensureInitialized();
     }
     return _instance!;
@@ -798,7 +799,7 @@ extension TriggerMetadataValueCopy<$R, $Out>
 }
 
 abstract class TriggerMetadataCopyWith<$R, $In extends TriggerMetadata, $Out>
-    implements ClassCopyWith<$R, $In, $Out> {
+    implements TriggerMetadataBuilderCopyWith<$R, $In, $Out> {
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
   get keywordFilter;
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
@@ -810,6 +811,7 @@ abstract class TriggerMetadataCopyWith<$R, $In extends TriggerMetadata, $Out>
   >?
   get presets;
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>? get allowList;
+  @override
   $R call({
     List<String>? keywordFilter,
     List<String>? regexPatterns,

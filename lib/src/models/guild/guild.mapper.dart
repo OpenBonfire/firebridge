@@ -815,8 +815,10 @@ class GuildMapper extends ClassMapperBase<Guild> {
       MfaLevelMapper.ensureInitialized();
       SystemChannelFlagsMapper.ensureInitialized();
       PremiumTierMapper.ensureInitialized();
+      WelcomeScreenMapper.ensureInitialized();
       NsfwLevelMapper.ensureInitialized();
       EmojiMapper.ensureInitialized();
+      GuildStickerMapper.ensureInitialized();
       IncidentsDataMapper.ensureInitialized();
     }
     return _instance!;
@@ -1231,8 +1233,13 @@ abstract class GuildCopyWith<$R, $In extends Guild, $Out>
   get systemChannelFlags;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get rulesChannelId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get publicUpdatesChannelId;
+  WelcomeScreenCopyWith<$R, WelcomeScreen, WelcomeScreen>? get welcomeScreen;
   ListCopyWith<$R, Emoji, EmojiCopyWith<$R, Emoji, Emoji>> get emojiList;
-  ListCopyWith<$R, GuildSticker, ObjectCopyWith<$R, GuildSticker, GuildSticker>>
+  ListCopyWith<
+    $R,
+    GuildSticker,
+    GuildStickerCopyWith<$R, GuildSticker, GuildSticker>
+  >
   get stickerList;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get safetyAlertsChannelId;
   IncidentsDataCopyWith<$R, IncidentsData, IncidentsData>? get incidentsData;
@@ -1332,6 +1339,9 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
         (v) => call(publicUpdatesChannelId: v),
       );
   @override
+  WelcomeScreenCopyWith<$R, WelcomeScreen, WelcomeScreen>? get welcomeScreen =>
+      $value.welcomeScreen?.copyWith.$chain((v) => call(welcomeScreen: v));
+  @override
   ListCopyWith<$R, Emoji, EmojiCopyWith<$R, Emoji, Emoji>> get emojiList =>
       ListCopyWith(
         $value.emojiList,
@@ -1339,10 +1349,14 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
         (v) => call(emojiList: v),
       );
   @override
-  ListCopyWith<$R, GuildSticker, ObjectCopyWith<$R, GuildSticker, GuildSticker>>
+  ListCopyWith<
+    $R,
+    GuildSticker,
+    GuildStickerCopyWith<$R, GuildSticker, GuildSticker>
+  >
   get stickerList => ListCopyWith(
     $value.stickerList,
-    (v, t) => ObjectCopyWith(v, $identity, t),
+    (v, t) => v.copyWith.$chain(t),
     (v) => call(stickerList: v),
   );
   @override

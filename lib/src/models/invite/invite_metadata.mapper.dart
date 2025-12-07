@@ -1,0 +1,414 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format off
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
+// ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
+
+part of 'invite_metadata.dart';
+
+class InviteWithMetadataMapper extends ClassMapperBase<InviteWithMetadata> {
+  InviteWithMetadataMapper._();
+
+  static InviteWithMetadataMapper? _instance;
+  static InviteWithMetadataMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = InviteWithMetadataMapper._());
+      InviteMapper.ensureInitialized();
+      InviteTypeMapper.ensureInitialized();
+      PartialGuildMapper.ensureInitialized();
+      PartialChannelMapper.ensureInitialized();
+      UserMapper.ensureInitialized();
+      TargetTypeMapper.ensureInitialized();
+      PartialApplicationMapper.ensureInitialized();
+      ScheduledEventMapper.ensureInitialized();
+      GuildInviteFlagsMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'InviteWithMetadata';
+
+  static InviteType _$type(InviteWithMetadata v) => v.type;
+  static const Field<InviteWithMetadata, InviteType> _f$type = Field(
+    'type',
+    _$type,
+  );
+  static String _$code(InviteWithMetadata v) => v.code;
+  static const Field<InviteWithMetadata, String> _f$code = Field(
+    'code',
+    _$code,
+  );
+  static PartialGuild? _$guild(InviteWithMetadata v) => v.guild;
+  static const Field<InviteWithMetadata, PartialGuild> _f$guild = Field(
+    'guild',
+    _$guild,
+  );
+  static PartialChannel _$channel(InviteWithMetadata v) => v.channel;
+  static const Field<InviteWithMetadata, PartialChannel> _f$channel = Field(
+    'channel',
+    _$channel,
+  );
+  static User? _$inviter(InviteWithMetadata v) => v.inviter;
+  static const Field<InviteWithMetadata, User> _f$inviter = Field(
+    'inviter',
+    _$inviter,
+  );
+  static TargetType? _$targetType(InviteWithMetadata v) => v.targetType;
+  static const Field<InviteWithMetadata, TargetType> _f$targetType = Field(
+    'targetType',
+    _$targetType,
+    key: r'target_type',
+  );
+  static User? _$targetUser(InviteWithMetadata v) => v.targetUser;
+  static const Field<InviteWithMetadata, User> _f$targetUser = Field(
+    'targetUser',
+    _$targetUser,
+    key: r'target_user',
+  );
+  static PartialApplication? _$targetApplication(InviteWithMetadata v) =>
+      v.targetApplication;
+  static const Field<InviteWithMetadata, PartialApplication>
+  _f$targetApplication = Field(
+    'targetApplication',
+    _$targetApplication,
+    key: r'target_application',
+  );
+  static int? _$approximateMemberCount(InviteWithMetadata v) =>
+      v.approximateMemberCount;
+  static const Field<InviteWithMetadata, int> _f$approximateMemberCount = Field(
+    'approximateMemberCount',
+    _$approximateMemberCount,
+    key: r'approximate_member_count',
+  );
+  static int? _$approximatePresenceCount(InviteWithMetadata v) =>
+      v.approximatePresenceCount;
+  static const Field<InviteWithMetadata, int> _f$approximatePresenceCount =
+      Field(
+        'approximatePresenceCount',
+        _$approximatePresenceCount,
+        key: r'approximate_presence_count',
+      );
+  static DateTime? _$expiresAt(InviteWithMetadata v) => v.expiresAt;
+  static const Field<InviteWithMetadata, DateTime> _f$expiresAt = Field(
+    'expiresAt',
+    _$expiresAt,
+    key: r'expires_at',
+  );
+  static ScheduledEvent? _$guildScheduledEvent(InviteWithMetadata v) =>
+      v.guildScheduledEvent;
+  static const Field<InviteWithMetadata, ScheduledEvent>
+  _f$guildScheduledEvent = Field(
+    'guildScheduledEvent',
+    _$guildScheduledEvent,
+    key: r'guild_scheduled_event',
+  );
+  static GuildInviteFlags? _$flags(InviteWithMetadata v) => v.flags;
+  static const Field<InviteWithMetadata, GuildInviteFlags> _f$flags = Field(
+    'flags',
+    _$flags,
+  );
+  static int _$uses(InviteWithMetadata v) => v.uses;
+  static const Field<InviteWithMetadata, int> _f$uses = Field('uses', _$uses);
+  static int _$maxUses(InviteWithMetadata v) => v.maxUses;
+  static const Field<InviteWithMetadata, int> _f$maxUses = Field(
+    'maxUses',
+    _$maxUses,
+    key: r'max_uses',
+  );
+  static Duration _$maxAge(InviteWithMetadata v) => v.maxAge;
+  static const Field<InviteWithMetadata, Duration> _f$maxAge = Field(
+    'maxAge',
+    _$maxAge,
+    key: r'max_age',
+  );
+  static bool _$isTemporary(InviteWithMetadata v) => v.isTemporary;
+  static const Field<InviteWithMetadata, bool> _f$isTemporary = Field(
+    'isTemporary',
+    _$isTemporary,
+    key: r'is_temporary',
+  );
+  static DateTime _$createdAt(InviteWithMetadata v) => v.createdAt;
+  static const Field<InviteWithMetadata, DateTime> _f$createdAt = Field(
+    'createdAt',
+    _$createdAt,
+    key: r'created_at',
+  );
+
+  @override
+  final MappableFields<InviteWithMetadata> fields = const {
+    #type: _f$type,
+    #code: _f$code,
+    #guild: _f$guild,
+    #channel: _f$channel,
+    #inviter: _f$inviter,
+    #targetType: _f$targetType,
+    #targetUser: _f$targetUser,
+    #targetApplication: _f$targetApplication,
+    #approximateMemberCount: _f$approximateMemberCount,
+    #approximatePresenceCount: _f$approximatePresenceCount,
+    #expiresAt: _f$expiresAt,
+    #guildScheduledEvent: _f$guildScheduledEvent,
+    #flags: _f$flags,
+    #uses: _f$uses,
+    #maxUses: _f$maxUses,
+    #maxAge: _f$maxAge,
+    #isTemporary: _f$isTemporary,
+    #createdAt: _f$createdAt,
+  };
+
+  static InviteWithMetadata _instantiate(DecodingData data) {
+    return InviteWithMetadata(
+      type: data.dec(_f$type),
+      code: data.dec(_f$code),
+      guild: data.dec(_f$guild),
+      channel: data.dec(_f$channel),
+      inviter: data.dec(_f$inviter),
+      targetType: data.dec(_f$targetType),
+      targetUser: data.dec(_f$targetUser),
+      targetApplication: data.dec(_f$targetApplication),
+      approximateMemberCount: data.dec(_f$approximateMemberCount),
+      approximatePresenceCount: data.dec(_f$approximatePresenceCount),
+      expiresAt: data.dec(_f$expiresAt),
+      guildScheduledEvent: data.dec(_f$guildScheduledEvent),
+      flags: data.dec(_f$flags),
+      uses: data.dec(_f$uses),
+      maxUses: data.dec(_f$maxUses),
+      maxAge: data.dec(_f$maxAge),
+      isTemporary: data.dec(_f$isTemporary),
+      createdAt: data.dec(_f$createdAt),
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static InviteWithMetadata fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<InviteWithMetadata>(map);
+  }
+
+  static InviteWithMetadata fromJson(String json) {
+    return ensureInitialized().decodeJson<InviteWithMetadata>(json);
+  }
+}
+
+mixin InviteWithMetadataMappable {
+  String toJson() {
+    return InviteWithMetadataMapper.ensureInitialized()
+        .encodeJson<InviteWithMetadata>(this as InviteWithMetadata);
+  }
+
+  Map<String, dynamic> toMap() {
+    return InviteWithMetadataMapper.ensureInitialized()
+        .encodeMap<InviteWithMetadata>(this as InviteWithMetadata);
+  }
+
+  InviteWithMetadataCopyWith<
+    InviteWithMetadata,
+    InviteWithMetadata,
+    InviteWithMetadata
+  >
+  get copyWith =>
+      _InviteWithMetadataCopyWithImpl<InviteWithMetadata, InviteWithMetadata>(
+        this as InviteWithMetadata,
+        $identity,
+        $identity,
+      );
+  @override
+  String toString() {
+    return InviteWithMetadataMapper.ensureInitialized().stringifyValue(
+      this as InviteWithMetadata,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return InviteWithMetadataMapper.ensureInitialized().equalsValue(
+      this as InviteWithMetadata,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return InviteWithMetadataMapper.ensureInitialized().hashValue(
+      this as InviteWithMetadata,
+    );
+  }
+}
+
+extension InviteWithMetadataValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, InviteWithMetadata, $Out> {
+  InviteWithMetadataCopyWith<$R, InviteWithMetadata, $Out>
+  get $asInviteWithMetadata => $base.as(
+    (v, t, t2) => _InviteWithMetadataCopyWithImpl<$R, $Out>(v, t, t2),
+  );
+}
+
+abstract class InviteWithMetadataCopyWith<
+  $R,
+  $In extends InviteWithMetadata,
+  $Out
+>
+    implements InviteCopyWith<$R, $In, $Out> {
+  @override
+  PartialGuildCopyWith<$R, PartialGuild, PartialGuild>? get guild;
+  @override
+  PartialChannelCopyWith<$R, PartialChannel, PartialChannel> get channel;
+  @override
+  UserCopyWith<$R, User, User>? get inviter;
+  @override
+  UserCopyWith<$R, User, User>? get targetUser;
+  @override
+  PartialApplicationCopyWith<$R, PartialApplication, PartialApplication>?
+  get targetApplication;
+  @override
+  ScheduledEventCopyWith<$R, ScheduledEvent, ScheduledEvent>?
+  get guildScheduledEvent;
+  @override
+  GuildInviteFlagsCopyWith<$R, GuildInviteFlags, GuildInviteFlags>? get flags;
+  @override
+  $R call({
+    InviteType? type,
+    String? code,
+    PartialGuild? guild,
+    PartialChannel? channel,
+    User? inviter,
+    TargetType? targetType,
+    User? targetUser,
+    PartialApplication? targetApplication,
+    int? approximateMemberCount,
+    int? approximatePresenceCount,
+    DateTime? expiresAt,
+    ScheduledEvent? guildScheduledEvent,
+    GuildInviteFlags? flags,
+    int? uses,
+    int? maxUses,
+    Duration? maxAge,
+    bool? isTemporary,
+    DateTime? createdAt,
+  });
+  InviteWithMetadataCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  );
+}
+
+class _InviteWithMetadataCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, InviteWithMetadata, $Out>
+    implements InviteWithMetadataCopyWith<$R, InviteWithMetadata, $Out> {
+  _InviteWithMetadataCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<InviteWithMetadata> $mapper =
+      InviteWithMetadataMapper.ensureInitialized();
+  @override
+  PartialGuildCopyWith<$R, PartialGuild, PartialGuild>? get guild =>
+      $value.guild?.copyWith.$chain((v) => call(guild: v));
+  @override
+  PartialChannelCopyWith<$R, PartialChannel, PartialChannel> get channel =>
+      $value.channel.copyWith.$chain((v) => call(channel: v));
+  @override
+  UserCopyWith<$R, User, User>? get inviter =>
+      $value.inviter?.copyWith.$chain((v) => call(inviter: v));
+  @override
+  UserCopyWith<$R, User, User>? get targetUser =>
+      $value.targetUser?.copyWith.$chain((v) => call(targetUser: v));
+  @override
+  PartialApplicationCopyWith<$R, PartialApplication, PartialApplication>?
+  get targetApplication => $value.targetApplication?.copyWith.$chain(
+    (v) => call(targetApplication: v),
+  );
+  @override
+  ScheduledEventCopyWith<$R, ScheduledEvent, ScheduledEvent>?
+  get guildScheduledEvent => $value.guildScheduledEvent?.copyWith.$chain(
+    (v) => call(guildScheduledEvent: v),
+  );
+  @override
+  GuildInviteFlagsCopyWith<$R, GuildInviteFlags, GuildInviteFlags>? get flags =>
+      $value.flags?.copyWith.$chain((v) => call(flags: v));
+  @override
+  $R call({
+    InviteType? type,
+    String? code,
+    Object? guild = $none,
+    PartialChannel? channel,
+    Object? inviter = $none,
+    Object? targetType = $none,
+    Object? targetUser = $none,
+    Object? targetApplication = $none,
+    Object? approximateMemberCount = $none,
+    Object? approximatePresenceCount = $none,
+    Object? expiresAt = $none,
+    Object? guildScheduledEvent = $none,
+    Object? flags = $none,
+    int? uses,
+    int? maxUses,
+    Duration? maxAge,
+    bool? isTemporary,
+    DateTime? createdAt,
+  }) => $apply(
+    FieldCopyWithData({
+      if (type != null) #type: type,
+      if (code != null) #code: code,
+      if (guild != $none) #guild: guild,
+      if (channel != null) #channel: channel,
+      if (inviter != $none) #inviter: inviter,
+      if (targetType != $none) #targetType: targetType,
+      if (targetUser != $none) #targetUser: targetUser,
+      if (targetApplication != $none) #targetApplication: targetApplication,
+      if (approximateMemberCount != $none)
+        #approximateMemberCount: approximateMemberCount,
+      if (approximatePresenceCount != $none)
+        #approximatePresenceCount: approximatePresenceCount,
+      if (expiresAt != $none) #expiresAt: expiresAt,
+      if (guildScheduledEvent != $none)
+        #guildScheduledEvent: guildScheduledEvent,
+      if (flags != $none) #flags: flags,
+      if (uses != null) #uses: uses,
+      if (maxUses != null) #maxUses: maxUses,
+      if (maxAge != null) #maxAge: maxAge,
+      if (isTemporary != null) #isTemporary: isTemporary,
+      if (createdAt != null) #createdAt: createdAt,
+    }),
+  );
+  @override
+  InviteWithMetadata $make(CopyWithData data) => InviteWithMetadata(
+    type: data.get(#type, or: $value.type),
+    code: data.get(#code, or: $value.code),
+    guild: data.get(#guild, or: $value.guild),
+    channel: data.get(#channel, or: $value.channel),
+    inviter: data.get(#inviter, or: $value.inviter),
+    targetType: data.get(#targetType, or: $value.targetType),
+    targetUser: data.get(#targetUser, or: $value.targetUser),
+    targetApplication: data.get(
+      #targetApplication,
+      or: $value.targetApplication,
+    ),
+    approximateMemberCount: data.get(
+      #approximateMemberCount,
+      or: $value.approximateMemberCount,
+    ),
+    approximatePresenceCount: data.get(
+      #approximatePresenceCount,
+      or: $value.approximatePresenceCount,
+    ),
+    expiresAt: data.get(#expiresAt, or: $value.expiresAt),
+    guildScheduledEvent: data.get(
+      #guildScheduledEvent,
+      or: $value.guildScheduledEvent,
+    ),
+    flags: data.get(#flags, or: $value.flags),
+    uses: data.get(#uses, or: $value.uses),
+    maxUses: data.get(#maxUses, or: $value.maxUses),
+    maxAge: data.get(#maxAge, or: $value.maxAge),
+    isTemporary: data.get(#isTemporary, or: $value.isTemporary),
+    createdAt: data.get(#createdAt, or: $value.createdAt),
+  );
+
+  @override
+  InviteWithMetadataCopyWith<$R2, InviteWithMetadata, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _InviteWithMetadataCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+

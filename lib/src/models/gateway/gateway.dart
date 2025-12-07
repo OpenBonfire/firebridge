@@ -1,9 +1,13 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+
+part 'gateway.mapper.dart';
 
 /// {@template gateway_configuration}
 /// Information about how to connect to the Gateway.
 /// {@endtemplate}
-class GatewayConfiguration with ToStringHelper {
+@MappableClass()
+class GatewayConfiguration with ToStringHelper, GatewayConfigurationMappable {
   /// The URL to connect to.
   final Uri url;
 
@@ -15,7 +19,8 @@ class GatewayConfiguration with ToStringHelper {
 /// {@template gateway_bot}
 /// Information about how to connect to the Gateway, with client-specific information.
 /// {@endtemplate}
-class GatewayBot extends GatewayConfiguration {
+@MappableClass()
+class GatewayBot extends GatewayConfiguration with GatewayBotMappable {
   /// The recommended number of shards to use.
   final int shards;
 
@@ -34,7 +39,8 @@ class GatewayBot extends GatewayConfiguration {
 /// {@template session_start_limit}
 /// Information about a client's session start limits.
 /// {@endtemplate}
-class SessionStartLimit with ToStringHelper {
+@MappableClass()
+class SessionStartLimit with ToStringHelper, SessionStartLimitMappable {
   /// The total number of sessions that can be opened.
   final int total;
 

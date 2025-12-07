@@ -172,6 +172,7 @@ class GuildCreateEventMapper extends SubClassMapperBase<GuildCreateEvent> {
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       GuildMapper.ensureInitialized();
       VoiceStateMapper.ensureInitialized();
+      MemberMapper.ensureInitialized();
       GuildChannelMapper.ensureInitialized();
       ThreadMapper.ensureInitialized();
       PresenceUpdateEventMapper.ensureInitialized();
@@ -358,7 +359,7 @@ abstract class GuildCreateEventCopyWith<$R, $In extends GuildCreateEvent, $Out>
   GuildCopyWith<$R, Guild, Guild> get guild;
   ListCopyWith<$R, VoiceState, VoiceStateCopyWith<$R, VoiceState, VoiceState>>
   get voiceStates;
-  ListCopyWith<$R, Member, ObjectCopyWith<$R, Member, Member>> get members;
+  ListCopyWith<$R, Member, MemberCopyWith<$R, Member, Member>> get members;
   ListCopyWith<
     $R,
     GuildChannel,
@@ -422,10 +423,10 @@ class _GuildCreateEventCopyWithImpl<$R, $Out>
     (v) => call(voiceStates: v),
   );
   @override
-  ListCopyWith<$R, Member, ObjectCopyWith<$R, Member, Member>> get members =>
+  ListCopyWith<$R, Member, MemberCopyWith<$R, Member, Member>> get members =>
       ListCopyWith(
         $value.members,
-        (v, t) => ObjectCopyWith(v, $identity, t),
+        (v, t) => v.copyWith.$chain(t),
         (v) => call(members: v),
       );
   @override
@@ -1548,6 +1549,7 @@ class GuildStickersUpdateEventMapper
       );
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
+      GuildStickerMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -1665,7 +1667,11 @@ abstract class GuildStickersUpdateEventCopyWith<
 >
     implements DispatchEventCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
-  ListCopyWith<$R, GuildSticker, ObjectCopyWith<$R, GuildSticker, GuildSticker>>
+  ListCopyWith<
+    $R,
+    GuildSticker,
+    GuildStickerCopyWith<$R, GuildSticker, GuildSticker>
+  >
   get stickers;
   @override
   $R call({Snowflake? guildId, List<GuildSticker>? stickers});
@@ -1687,10 +1693,14 @@ class _GuildStickersUpdateEventCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
       $value.guildId.copyWith.$chain((v) => call(guildId: v));
   @override
-  ListCopyWith<$R, GuildSticker, ObjectCopyWith<$R, GuildSticker, GuildSticker>>
+  ListCopyWith<
+    $R,
+    GuildSticker,
+    GuildStickerCopyWith<$R, GuildSticker, GuildSticker>
+  >
   get stickers => ListCopyWith(
     $value.stickers,
-    (v, t) => ObjectCopyWith(v, $identity, t),
+    (v, t) => v.copyWith.$chain(t),
     (v) => call(stickers: v),
   );
   @override
@@ -1885,6 +1895,7 @@ class GuildMemberAddEventMapper
       MapperContainer.globals.use(_instance = GuildMemberAddEventMapper._());
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
+      MemberMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -2003,6 +2014,7 @@ abstract class GuildMemberAddEventCopyWith<
 >
     implements DispatchEventCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
+  MemberCopyWith<$R, Member, Member> get member;
   @override
   $R call({Snowflake? guildId, Member? member});
   GuildMemberAddEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
@@ -2021,6 +2033,9 @@ class _GuildMemberAddEventCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
       $value.guildId.copyWith.$chain((v) => call(guildId: v));
+  @override
+  MemberCopyWith<$R, Member, Member> get member =>
+      $value.member.copyWith.$chain((v) => call(member: v));
   @override
   $R call({Snowflake? guildId, Member? member}) => $apply(
     FieldCopyWithData({
@@ -2051,6 +2066,7 @@ class GuildMemberRemoveEventMapper
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
+      MemberMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -2178,6 +2194,7 @@ abstract class GuildMemberRemoveEventCopyWith<
     implements DispatchEventCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
   UserCopyWith<$R, User, User> get user;
+  MemberCopyWith<$R, Member, Member>? get removedMember;
   @override
   $R call({Snowflake? guildId, User? user, Member? removedMember});
   GuildMemberRemoveEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
@@ -2200,6 +2217,9 @@ class _GuildMemberRemoveEventCopyWithImpl<$R, $Out>
   @override
   UserCopyWith<$R, User, User> get user =>
       $value.user.copyWith.$chain((v) => call(user: v));
+  @override
+  MemberCopyWith<$R, Member, Member>? get removedMember =>
+      $value.removedMember?.copyWith.$chain((v) => call(removedMember: v));
   @override
   $R call({Snowflake? guildId, User? user, Object? removedMember = $none}) =>
       $apply(
@@ -2231,6 +2251,7 @@ class GuildMemberUpdateEventMapper
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildMemberUpdateEventMapper._());
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
+      MemberMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -2357,6 +2378,8 @@ abstract class GuildMemberUpdateEventCopyWith<
   $Out
 >
     implements DispatchEventCopyWith<$R, $In, $Out> {
+  MemberCopyWith<$R, Member, Member>? get oldMember;
+  MemberCopyWith<$R, Member, Member> get member;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
   @override
   $R call({Member? oldMember, Member? member, Snowflake? guildId});
@@ -2374,6 +2397,12 @@ class _GuildMemberUpdateEventCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<GuildMemberUpdateEvent> $mapper =
       GuildMemberUpdateEventMapper.ensureInitialized();
+  @override
+  MemberCopyWith<$R, Member, Member>? get oldMember =>
+      $value.oldMember?.copyWith.$chain((v) => call(oldMember: v));
+  @override
+  MemberCopyWith<$R, Member, Member> get member =>
+      $value.member.copyWith.$chain((v) => call(member: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
       $value.guildId.copyWith.$chain((v) => call(guildId: v));
@@ -2409,6 +2438,7 @@ class GuildMembersChunkEventMapper
       MapperContainer.globals.use(_instance = GuildMembersChunkEventMapper._());
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
+      MemberMapper.ensureInitialized();
       PresenceUpdateEventMapper.ensureInitialized();
     }
     return _instance!;
@@ -2562,7 +2592,7 @@ abstract class GuildMembersChunkEventCopyWith<
 >
     implements DispatchEventCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
-  ListCopyWith<$R, Member, ObjectCopyWith<$R, Member, Member>> get members;
+  ListCopyWith<$R, Member, MemberCopyWith<$R, Member, Member>> get members;
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>?
   get notFound;
   ListCopyWith<
@@ -2599,10 +2629,10 @@ class _GuildMembersChunkEventCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
       $value.guildId.copyWith.$chain((v) => call(guildId: v));
   @override
-  ListCopyWith<$R, Member, ObjectCopyWith<$R, Member, Member>> get members =>
+  ListCopyWith<$R, Member, MemberCopyWith<$R, Member, Member>> get members =>
       ListCopyWith(
         $value.members,
-        (v, t) => ObjectCopyWith(v, $identity, t),
+        (v, t) => v.copyWith.$chain(t),
         (v) => call(members: v),
       );
   @override

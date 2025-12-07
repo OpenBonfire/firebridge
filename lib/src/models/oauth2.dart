@@ -1,7 +1,11 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/application.dart';
 import 'package:nyxx/src/models/user/user.dart';
 
-class OAuth2Information {
+part 'oauth2.mapper.dart';
+
+@MappableClass()
+class OAuth2Information with OAuth2InformationMappable {
   /// The current application.
   final PartialApplication application;
 
@@ -15,5 +19,9 @@ class OAuth2Information {
   final User? user;
 
   /// @nodoc
-  OAuth2Information({required this.application, required this.scopes, required this.expiresOn, this.user});
+  OAuth2Information(
+      {required this.application,
+      required this.scopes,
+      required this.expiresOn,
+      this.user});
 }

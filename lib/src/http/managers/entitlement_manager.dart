@@ -16,27 +16,11 @@ class EntitlementManager extends ReadOnlyManager<Entitlement> {
   final Snowflake applicationId;
 
   /// Create a new [EntitlementManager].
-  EntitlementManager(super.config, super.client, {required this.applicationId}) : super(identifier: '$applicationId.entitlements');
+  EntitlementManager(super.config, super.client, {required this.applicationId})
+      : super(identifier: '$applicationId.entitlements');
 
   @override
-  PartialEntitlement operator [](Snowflake id) => PartialEntitlement(manager: this, id: id);
-
-  @override
-  Entitlement parse(Map<String, Object?> raw) {
-    return Entitlement(
-      manager: this,
-      id: Snowflake.parse(raw['id']!),
-      skuId: Snowflake.parse(raw['sku_id']!),
-      userId: maybeParse(raw['user_id'], Snowflake.parse),
-      guildId: maybeParse(raw['guild_id'], Snowflake.parse),
-      applicationId: Snowflake.parse(raw['application_id']!),
-      type: EntitlementType(raw['type'] as int),
-      isConsumed: raw['consumed'] as bool? ?? false,
-      isDeleted: raw['deleted'] as bool? ?? false,
-      startsAt: maybeParse(raw['starts_at'], DateTime.parse),
-      endsAt: maybeParse(raw['ends_at'], DateTime.parse),
-    );
-  }
+  PartialEntitlement operator [](Snowflake id) => PartialEntitlement(id: id);
 
   /// List all the entitlements for this application.
   Future<List<Entitlement>> list({
@@ -62,7 +46,8 @@ class EntitlementManager extends ReadOnlyManager<Entitlement> {
     });
 
     final response = await client.httpHandler.executeSafe(request);
-    final entitlements = parseMany(response.jsonBody as List<Object?>, parse);
+    final entitlements = parseMany(
+        response.jsonBody as List<Object?>, EntitlementMapper.fromMap);
 
     entitlements.forEach(client.updateCacheWith);
     return entitlements;
@@ -79,14 +64,17 @@ class EntitlementManager extends ReadOnlyManager<Entitlement> {
   }
 
   /// Create a test entitlement that never expires.
-  Future<Entitlement> createTestEntitlement(TestEntitlementBuilder builder) async {
+  Future<Entitlement> createTestEntitlement(
+      TestEntitlementBuilder builder) async {
     final route = HttpRoute()
       ..applications(id: applicationId.toString())
       ..entitlements();
-    final request = BasicRequest(route, method: 'POST', body: jsonEncode(builder.build()));
+    final request =
+        BasicRequest(route, method: 'POST', body: jsonEncode(builder.build()));
 
     final response = await client.httpHandler.executeSafe(request);
-    final entitlement = parse(response.jsonBody as Map<String, Object?>);
+    final entitlement =
+        EntitlementMapper.fromMap(response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(entitlement);
     return entitlement;

@@ -1,3 +1,4 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/http/managers/guild_manager.dart';
 import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
@@ -5,9 +6,12 @@ import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/user/user.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 
+part 'guild_widget.mapper.dart';
+
 /// {@template guild_widget}
 /// A [Guild]'s widget.
 /// {@endtemplate}
+@MappableClass()
 class GuildWidget with ToStringHelper {
   /// The manager for this [GuildWidget].
   final GuildManager manager;
@@ -49,6 +53,7 @@ class GuildWidget with ToStringHelper {
 /// {@template widget_settings}
 /// The settings for a [Guild]'s widget.
 /// {@endtemplate}
+@MappableClass()
 class WidgetSettings with ToStringHelper {
   /// The manager for this [WidgetSettings].
   final GuildManager manager;
@@ -68,22 +73,11 @@ class WidgetSettings with ToStringHelper {
   });
 
   /// The channel the widget should send users to.
-  PartialChannel? get channel => channelId == null ? null : manager.client.channels[channelId!];
+  PartialChannel? get channel =>
+      channelId == null ? null : manager.client.channels[channelId!];
 }
+
+@MappableEnum()
 
 /// The style of a guild widget image.
-enum WidgetImageStyle {
-  shield._('shield'),
-  banner1._('banner1'),
-  banner2._('banner2'),
-  banner3._('banner3'),
-  banner4._('banner4');
-
-  /// The value of this style.
-  final String value;
-
-  const WidgetImageStyle._(this.value);
-
-  @override
-  String toString() => 'WidgetImageStyle($value)';
-}
+enum WidgetImageStyle { shield, banner1, banner2, banner3, banner4 }

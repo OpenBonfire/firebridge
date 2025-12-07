@@ -7,14 +7,14 @@
 
 part of 'guild_channel.dart';
 
-class GuildChannelMapper extends ClassMapperBase<GuildChannel> {
+class GuildChannelMapper extends SubClassMapperBase<GuildChannel> {
   GuildChannelMapper._();
 
   static GuildChannelMapper? _instance;
   static GuildChannelMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildChannelMapper._());
-      ChannelMapper.ensureInitialized();
+      ChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -28,6 +28,13 @@ class GuildChannelMapper extends ClassMapperBase<GuildChannel> {
 
   @override
   final MappableFields<GuildChannel> fields = const {#id: _f$id};
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'GuildChannel';
+  @override
+  late final ClassMapperBase superMapper = ChannelMapper.ensureInitialized();
 
   static GuildChannel _instantiate(DecodingData data) {
     throw MapperException.missingConstructor('GuildChannel');

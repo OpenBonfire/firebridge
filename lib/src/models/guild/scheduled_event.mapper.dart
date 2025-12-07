@@ -1374,6 +1374,7 @@ class ScheduledEventUserMapper extends ClassMapperBase<ScheduledEventUser> {
       MapperContainer.globals.use(_instance = ScheduledEventUserMapper._());
       SnowflakeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
+      MemberMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -1489,6 +1490,7 @@ abstract class ScheduledEventUserCopyWith<
     implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get scheduledEventId;
   UserCopyWith<$R, User, User> get user;
+  MemberCopyWith<$R, Member, Member>? get member;
   $R call({
     ScheduledEventManager? manager,
     Snowflake? scheduledEventId,
@@ -1514,6 +1516,9 @@ class _ScheduledEventUserCopyWithImpl<$R, $Out>
   @override
   UserCopyWith<$R, User, User> get user =>
       $value.user.copyWith.$chain((v) => call(user: v));
+  @override
+  MemberCopyWith<$R, Member, Member>? get member =>
+      $value.member?.copyWith.$chain((v) => call(member: v));
   @override
   $R call({
     ScheduledEventManager? manager,

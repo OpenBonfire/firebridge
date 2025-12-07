@@ -59,7 +59,7 @@ class AutoModerationManager extends Manager<AutoModerationRule> {
       ..rules();
     final request = BasicRequest(route,
         method: 'POST',
-        body: jsonEncode(builder.build()),
+        body: jsonEncode(builder.toMap()),
         auditLogReason: auditLogReason);
 
     final response = await client.httpHandler.executeSafe(request);
@@ -80,7 +80,7 @@ class AutoModerationManager extends Manager<AutoModerationRule> {
       ..rules(id: id.toString());
     final request = BasicRequest(route,
         method: 'PATCH',
-        body: jsonEncode(builder.build()),
+        body: jsonEncode(builder.toMap()),
         auditLogReason: auditLogReason);
 
     final response = await client.httpHandler.executeSafe(request);

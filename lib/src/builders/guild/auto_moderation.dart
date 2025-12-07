@@ -3,7 +3,11 @@ import 'package:nyxx/src/builders/builder.dart';
 import 'package:nyxx/src/models/guild/auto_moderation.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 
-class AutoModerationRuleBuilder extends CreateBuilder<AutoModerationRule> {
+part 'auto_moderation.mapper.dart';
+
+@MappableClass()
+class AutoModerationRuleBuilder extends CreateBuilder<AutoModerationRule>
+    with AutoModerationRuleBuilderMappable {
   /// {@template auto_moderation_rule_name}
   /// The rule name.
   /// {@endtemplate}
@@ -126,25 +130,11 @@ class AutoModerationRuleBuilder extends CreateBuilder<AutoModerationRule> {
           regexPatterns: regexPatterns,
           allowList: allowList,
         );
-
-  @override
-  Map<String, Object?> build() => {
-        'name': name,
-        'event_type': eventType.value,
-        'trigger_type': triggerType.value,
-        if (metadata != null) 'trigger_metadata': metadata!.build(),
-        'actions': actions.map((a) => a.build()).toList(),
-        if (isEnabled != null) 'enabled': isEnabled,
-        if (exemptRoleIds != null)
-          'exempt_roles': exemptRoleIds!.map((id) => id.toString()).toList(),
-        if (exemptChannelIds != null)
-          'exempt_channels':
-              exemptChannelIds!.map((id) => id.toString()).toList(),
-      };
 }
 
-class AutoModerationRuleUpdateBuilder
-    extends UpdateBuilder<AutoModerationRule> {
+@MappableClass()
+class AutoModerationRuleUpdateBuilder extends UpdateBuilder<AutoModerationRule>
+    with AutoModerationRuleUpdateBuilderMappable {
   /// {@macro auto_moderation_rule_name}
   String? name;
 
@@ -177,7 +167,9 @@ class AutoModerationRuleUpdateBuilder
   });
 }
 
-class TriggerMetadataBuilder extends CreateBuilder<TriggerMetadata> {
+@MappableClass()
+class TriggerMetadataBuilder extends CreateBuilder<TriggerMetadata>
+    with TriggerMetadataBuilderMappable {
   /// A list of words that trigger the rule.
   final List<String>? keywordFilter;
 
@@ -223,4 +215,30 @@ class ActionMetadataBuilder extends CreateBuilder<ActionMetadata>
     this.duration,
     this.customMessage,
   });
+}
+
+@MappableClass()
+class AutoModerationActionBuilder extends CreateBuilder<AutoModerationAction>
+    with AutoModerationActionBuilderMappable {
+  /// The type of action to perform.
+  final ActionType type;
+
+  /// Metadata needed to perform the action.
+  final ActionMetadataBuilder? metadata;
+
+  AutoModerationActionBuilder({required this.type, this.metadata});
+
+  AutoModerationActionBuilder.blockMessage({String? customMessage})
+      : type = ActionType.blockMessage,
+        metadata = customMessage == null
+            ? null
+            : ActionMetadataBuilder(customMessage: customMessage);
+
+  AutoModerationActionBuilder.sendAlertMessage({required Snowflake channelId})
+      : type = ActionType.sendAlertMessage,
+        metadata = ActionMetadataBuilder(channelId: channelId);
+
+  AutoModerationActionBuilder.timeout({required Duration duration})
+      : type = ActionType.timeout,
+        metadata = ActionMetadataBuilder(duration: duration);
 }

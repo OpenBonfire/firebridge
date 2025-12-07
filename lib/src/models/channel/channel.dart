@@ -17,7 +17,7 @@ class PartialChannel extends ManagedSnowflakeEntity<Channel>
 /// {@template channel}
 /// A channel of any type.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorKey: "type")
 abstract class Channel extends PartialChannel with ChannelMappable {
   /// The type of this channel.
   ChannelType get type;

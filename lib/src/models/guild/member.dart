@@ -20,7 +20,8 @@ class PartialMember extends WritableSnowflakeEntity<Member>
 /// {@template member}
 /// The representation of a [User] in a [Guild].
 /// {@endtemplate}
-class Member extends PartialMember {
+@MappableClass()
+class Member extends PartialMember with MemberMappable {
   /// The [User] this member represents.
   final User? user;
 
@@ -91,7 +92,8 @@ class Member extends PartialMember {
 }
 
 /// Flags that can be applied to a [Member].
-class MemberFlags extends Flags<MemberFlags> {
+@MappableClass()
+class MemberFlags extends Flags<MemberFlags> with MemberFlagsMappable {
   /// This member has left and rejoined the guild.
   static const didRejoin = Flag<MemberFlags>.fromOffset(0);
 

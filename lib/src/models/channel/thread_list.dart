@@ -1,10 +1,14 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/models/channel/thread.dart';
 import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+
+part 'thread_list.mapper.dart';
 
 /// {@template thread_list}
 /// A list of threads and thread members.
 /// {@endtemplate}
-class ThreadList with ToStringHelper {
+@MappableClass()
+class ThreadList with ToStringHelper, ThreadListMappable {
   /// A list of threads.
   final List<Thread> threads;
 
