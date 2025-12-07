@@ -418,6 +418,9 @@ class GuildInviteFlagsMapper extends ClassMapperBase<GuildInviteFlags> {
   @override
   final MappableFields<GuildInviteFlags> fields = const {#value: _f$value};
 
+  @override
+  final MappingHook superHook = const FlagsHook();
+
   static GuildInviteFlags _instantiate(DecodingData data) {
     return GuildInviteFlags(data.dec(_f$value));
   }

@@ -1358,6 +1358,9 @@ class MessageFlagsMapper extends ClassMapperBase<MessageFlags> {
   @override
   final MappableFields<MessageFlags> fields = const {#value: _f$value};
 
+  @override
+  final MappingHook superHook = const FlagsHook();
+
   static MessageFlags _instantiate(DecodingData data) {
     return MessageFlags(data.dec(_f$value));
   }

@@ -873,6 +873,9 @@ class ActivityFlagsMapper extends ClassMapperBase<ActivityFlags> {
   @override
   final MappableFields<ActivityFlags> fields = const {#value: _f$value};
 
+  @override
+  final MappingHook superHook = const FlagsHook();
+
   static ActivityFlags _instantiate(DecodingData data) {
     return ActivityFlags(data.dec(_f$value));
   }

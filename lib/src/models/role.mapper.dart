@@ -754,6 +754,9 @@ class RoleFlagsMapper extends ClassMapperBase<RoleFlags> {
   @override
   final MappableFields<RoleFlags> fields = const {#value: _f$value};
 
+  @override
+  final MappingHook superHook = const FlagsHook();
+
   static RoleFlags _instantiate(DecodingData data) {
     return RoleFlags(data.dec(_f$value));
   }

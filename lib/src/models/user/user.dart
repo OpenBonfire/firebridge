@@ -68,8 +68,8 @@ class User extends PartialUser
   /// The [UserFlags] on the user's account.
   final UserFlags? flags;
 
-  /// The [NitroType] on the user's account.
-  final NitroType nitroType;
+  // /// The [NitroType] on the user's account.
+  // final NitroType nitroType;
 
   /// The public [UserFlags] on the user's account.
   final UserFlags? publicFlags;
@@ -98,7 +98,7 @@ class User extends PartialUser
     required this.accentColor,
     required this.locale,
     required this.flags,
-    required this.nitroType,
+    // required this.nitroType,
     required this.publicFlags,
     required this.avatarDecorationHash,
     required this.avatarDecorationData,

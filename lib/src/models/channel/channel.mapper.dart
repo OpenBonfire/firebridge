@@ -301,6 +301,9 @@ class ChannelFlagsMapper extends ClassMapperBase<ChannelFlags> {
   @override
   final MappableFields<ChannelFlags> fields = const {#value: _f$value};
 
+  @override
+  final MappingHook superHook = const FlagsHook();
+
   static ChannelFlags _instantiate(DecodingData data) {
     return ChannelFlags(data.dec(_f$value));
   }

@@ -191,7 +191,6 @@ class UserMapper extends ClassMapperBase<User> {
       DiscordColorMapper.ensureInitialized();
       LocaleMapper.ensureInitialized();
       UserFlagsMapper.ensureInitialized();
-      NitroTypeMapper.ensureInitialized();
       UserPrimaryGuildMapper.ensureInitialized();
     }
     return _instance!;
@@ -251,12 +250,6 @@ class UserMapper extends ClassMapperBase<User> {
   static const Field<User, Locale> _f$locale = Field('locale', _$locale);
   static UserFlags? _$flags(User v) => v.flags;
   static const Field<User, UserFlags> _f$flags = Field('flags', _$flags);
-  static NitroType _$nitroType(User v) => v.nitroType;
-  static const Field<User, NitroType> _f$nitroType = Field(
-    'nitroType',
-    _$nitroType,
-    key: r'nitro_type',
-  );
   static UserFlags? _$publicFlags(User v) => v.publicFlags;
   static const Field<User, UserFlags> _f$publicFlags = Field(
     'publicFlags',
@@ -298,7 +291,6 @@ class UserMapper extends ClassMapperBase<User> {
     #accentColor: _f$accentColor,
     #locale: _f$locale,
     #flags: _f$flags,
-    #nitroType: _f$nitroType,
     #publicFlags: _f$publicFlags,
     #avatarDecorationHash: _f$avatarDecorationHash,
     #avatarDecorationData: _f$avatarDecorationData,
@@ -319,7 +311,6 @@ class UserMapper extends ClassMapperBase<User> {
       accentColor: data.dec(_f$accentColor),
       locale: data.dec(_f$locale),
       flags: data.dec(_f$flags),
-      nitroType: data.dec(_f$nitroType),
       publicFlags: data.dec(_f$publicFlags),
       avatarDecorationHash: data.dec(_f$avatarDecorationHash),
       avatarDecorationData: data.dec(_f$avatarDecorationData),
@@ -394,7 +385,6 @@ abstract class UserCopyWith<$R, $In extends User, $Out>
     DiscordColor? accentColor,
     Locale? locale,
     UserFlags? flags,
-    NitroType? nitroType,
     UserFlags? publicFlags,
     String? avatarDecorationHash,
     AvatarDecorationData? avatarDecorationData,
@@ -439,7 +429,6 @@ class _UserCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, User, $Out>
     Object? accentColor = $none,
     Object? locale = $none,
     Object? flags = $none,
-    NitroType? nitroType,
     Object? publicFlags = $none,
     Object? avatarDecorationHash = $none,
     Object? avatarDecorationData = $none,
@@ -458,7 +447,6 @@ class _UserCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, User, $Out>
       if (accentColor != $none) #accentColor: accentColor,
       if (locale != $none) #locale: locale,
       if (flags != $none) #flags: flags,
-      if (nitroType != null) #nitroType: nitroType,
       if (publicFlags != $none) #publicFlags: publicFlags,
       if (avatarDecorationHash != $none)
         #avatarDecorationHash: avatarDecorationHash,
@@ -481,7 +469,6 @@ class _UserCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, User, $Out>
     accentColor: data.get(#accentColor, or: $value.accentColor),
     locale: data.get(#locale, or: $value.locale),
     flags: data.get(#flags, or: $value.flags),
-    nitroType: data.get(#nitroType, or: $value.nitroType),
     publicFlags: data.get(#publicFlags, or: $value.publicFlags),
     avatarDecorationHash: data.get(
       #avatarDecorationHash,
@@ -519,6 +506,9 @@ class UserFlagsMapper extends ClassMapperBase<UserFlags> {
 
   @override
   final MappableFields<UserFlags> fields = const {#value: _f$value};
+
+  @override
+  final MappingHook superHook = const FlagsHook();
 
   static UserFlags _instantiate(DecodingData data) {
     return UserFlags(data.dec(_f$value));

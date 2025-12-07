@@ -461,6 +461,9 @@ class MemberFlagsMapper extends ClassMapperBase<MemberFlags> {
   @override
   final MappableFields<MemberFlags> fields = const {#value: _f$value};
 
+  @override
+  final MappingHook superHook = const FlagsHook();
+
   static MemberFlags _instantiate(DecodingData data) {
     return MemberFlags(data.dec(_f$value));
   }

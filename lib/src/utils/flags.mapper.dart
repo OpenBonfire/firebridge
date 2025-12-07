@@ -31,6 +31,8 @@ class FlagsMapper extends ClassMapperBase<Flags> {
   @override
   final MappableFields<Flags> fields = const {#value: _f$value};
 
+  @override
+  final MappingHook hook = const FlagsHook();
   static Flags<T> _instantiate<T>(DecodingData data) {
     return Flags(data.dec(_f$value));
   }
@@ -136,6 +138,9 @@ class FlagMapper extends ClassMapperBase<Flag> {
 
   @override
   final MappableFields<Flag> fields = const {#value: _f$value};
+
+  @override
+  final MappingHook superHook = const FlagsHook();
 
   static Flag<T> _instantiate<T>(DecodingData data) {
     return Flag(data.dec(_f$value));

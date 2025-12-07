@@ -366,6 +366,9 @@ class SkuFlagsMapper extends ClassMapperBase<SkuFlags> {
   @override
   final MappableFields<SkuFlags> fields = const {#value: _f$value};
 
+  @override
+  final MappingHook superHook = const FlagsHook();
+
   static SkuFlags _instantiate(DecodingData data) {
     return SkuFlags(data.dec(_f$value));
   }

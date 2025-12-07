@@ -6,7 +6,7 @@ import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
 part 'flags.mapper.dart';
 
 /// A set of flags that can be either enabled or disabled.
-@MappableClass()
+@MappableClass(hook: FlagsHook())
 class Flags<T> extends IterableBase<Flag<T>>
     with ToStringHelper, FlagsMappable<T> {
   /// The integer value encoding the flags as a bitfield.
@@ -83,4 +83,24 @@ class _FlagIterator<T> implements Iterator<Flag<T>> {
 
   @override
   Flag<T> get current => Flag<T>.fromOffset(offset!);
+}
+
+class FlagsHook extends MappingHook {
+  const FlagsHook();
+
+  @override
+  Object? beforeDecode(Object? value) {
+    if (value is int) {
+      return {'value': value};
+    }
+    return value;
+  }
+
+  @override
+  Object? beforeEncode(Object? value) {
+    if (value is Flags) {
+      return value.value;
+    }
+    return value;
+  }
 }

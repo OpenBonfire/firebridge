@@ -706,6 +706,9 @@ class GuildFeaturesMapper extends ClassMapperBase<GuildFeatures> {
   @override
   final MappableFields<GuildFeatures> fields = const {#value: _f$value};
 
+  @override
+  final MappingHook superHook = const FlagsHook();
+
   static GuildFeatures _instantiate(DecodingData data) {
     return GuildFeatures(data.dec(_f$value));
   }
@@ -1590,6 +1593,9 @@ class SystemChannelFlagsMapper extends ClassMapperBase<SystemChannelFlags> {
 
   @override
   final MappableFields<SystemChannelFlags> fields = const {#value: _f$value};
+
+  @override
+  final MappingHook superHook = const FlagsHook();
 
   static SystemChannelFlags _instantiate(DecodingData data) {
     return SystemChannelFlags(data.dec(_f$value));

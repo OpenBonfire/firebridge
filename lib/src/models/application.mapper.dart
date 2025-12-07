@@ -1204,6 +1204,9 @@ class ApplicationFlagsMapper extends ClassMapperBase<ApplicationFlags> {
   @override
   final MappableFields<ApplicationFlags> fields = const {#value: _f$value};
 
+  @override
+  final MappingHook superHook = const FlagsHook();
+
   static ApplicationFlags _instantiate(DecodingData data) {
     return ApplicationFlags(data.dec(_f$value));
   }
