@@ -17,7 +17,7 @@ part 'snowflake.mapper.dart';
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/reference#snowflakes
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(hook: SnowflakeHook())
 class Snowflake with SnowflakeMappable implements Comparable<Snowflake> {
   /// A [DateTime] representing the start of the Discord epoch.
   ///
@@ -159,4 +159,24 @@ class Snowflake with SnowflakeMappable implements Comparable<Snowflake> {
 
   @override
   String toString() => value.toString();
+}
+
+class SnowflakeHook extends MappingHook {
+  const SnowflakeHook();
+
+  @override
+  Object? beforeDecode(Object? value) {
+    if (value is String || value is int) {
+      return {'value': Snowflake.parse(value!).value};
+    }
+    return value;
+  }
+
+  @override
+  Object? beforeEncode(Object? value) {
+    if (value is Snowflake) {
+      return value.value.toString();
+    }
+    return value;
+  }
 }

@@ -27,6 +27,8 @@ class SnowflakeMapper extends ClassMapperBase<Snowflake> {
   @override
   final MappableFields<Snowflake> fields = const {#value: _f$value};
 
+  @override
+  final MappingHook hook = const SnowflakeHook();
   static Snowflake _instantiate(DecodingData data) {
     return Snowflake(data.dec(_f$value));
   }

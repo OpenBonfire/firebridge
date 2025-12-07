@@ -48,13 +48,13 @@ class User extends PartialUser
   final String? avatarHash;
 
   /// Whether the user is a bot.
-  final bool isBot;
+  final bool? bot;
 
   /// Whether the user is a system user.
-  final bool isSystem;
+  final bool? system;
 
   /// Whether the user has two factor authentication enabled.
-  final bool hasMfaEnabled;
+  final bool mfaEnabled;
 
   /// The user's banner hash, if they have a banner.
   final String? bannerHash;
@@ -91,9 +91,9 @@ class User extends PartialUser
     required this.discriminator,
     required this.globalName,
     required this.avatarHash,
-    required this.isBot,
-    required this.isSystem,
-    required this.hasMfaEnabled,
+    this.bot,
+    this.system,
+    required this.mfaEnabled,
     required this.bannerHash,
     required this.accentColor,
     required this.locale,

@@ -44,8 +44,6 @@ class UserManager extends ReadOnlyManager<User> {
     final request = BasicRequest(route);
 
     final response = await client.httpHandler.executeSafe(request);
-    print("body");
-    print(response.jsonBody.runtimeType);
     final user = UserMapper.fromMap(response.jsonBody as Map<String, Object?>);
 
     client.updateCacheWith(user);

@@ -220,23 +220,19 @@ class UserMapper extends ClassMapperBase<User> {
     _$avatarHash,
     key: r'avatar_hash',
   );
-  static bool _$isBot(User v) => v.isBot;
-  static const Field<User, bool> _f$isBot = Field(
-    'isBot',
-    _$isBot,
-    key: r'is_bot',
+  static bool? _$bot(User v) => v.bot;
+  static const Field<User, bool> _f$bot = Field('bot', _$bot, opt: true);
+  static bool? _$system(User v) => v.system;
+  static const Field<User, bool> _f$system = Field(
+    'system',
+    _$system,
+    opt: true,
   );
-  static bool _$isSystem(User v) => v.isSystem;
-  static const Field<User, bool> _f$isSystem = Field(
-    'isSystem',
-    _$isSystem,
-    key: r'is_system',
-  );
-  static bool _$hasMfaEnabled(User v) => v.hasMfaEnabled;
-  static const Field<User, bool> _f$hasMfaEnabled = Field(
-    'hasMfaEnabled',
-    _$hasMfaEnabled,
-    key: r'has_mfa_enabled',
+  static bool _$mfaEnabled(User v) => v.mfaEnabled;
+  static const Field<User, bool> _f$mfaEnabled = Field(
+    'mfaEnabled',
+    _$mfaEnabled,
+    key: r'mfa_enabled',
   );
   static String? _$bannerHash(User v) => v.bannerHash;
   static const Field<User, String> _f$bannerHash = Field(
@@ -294,9 +290,9 @@ class UserMapper extends ClassMapperBase<User> {
     #discriminator: _f$discriminator,
     #globalName: _f$globalName,
     #avatarHash: _f$avatarHash,
-    #isBot: _f$isBot,
-    #isSystem: _f$isSystem,
-    #hasMfaEnabled: _f$hasMfaEnabled,
+    #bot: _f$bot,
+    #system: _f$system,
+    #mfaEnabled: _f$mfaEnabled,
     #bannerHash: _f$bannerHash,
     #accentColor: _f$accentColor,
     #locale: _f$locale,
@@ -315,9 +311,9 @@ class UserMapper extends ClassMapperBase<User> {
       discriminator: data.dec(_f$discriminator),
       globalName: data.dec(_f$globalName),
       avatarHash: data.dec(_f$avatarHash),
-      isBot: data.dec(_f$isBot),
-      isSystem: data.dec(_f$isSystem),
-      hasMfaEnabled: data.dec(_f$hasMfaEnabled),
+      bot: data.dec(_f$bot),
+      system: data.dec(_f$system),
+      mfaEnabled: data.dec(_f$mfaEnabled),
       bannerHash: data.dec(_f$bannerHash),
       accentColor: data.dec(_f$accentColor),
       locale: data.dec(_f$locale),
@@ -390,9 +386,9 @@ abstract class UserCopyWith<$R, $In extends User, $Out>
     String? discriminator,
     String? globalName,
     String? avatarHash,
-    bool? isBot,
-    bool? isSystem,
-    bool? hasMfaEnabled,
+    bool? bot,
+    bool? system,
+    bool? mfaEnabled,
     String? bannerHash,
     DiscordColor? accentColor,
     Locale? locale,
@@ -435,9 +431,9 @@ class _UserCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, User, $Out>
     String? discriminator,
     Object? globalName = $none,
     Object? avatarHash = $none,
-    bool? isBot,
-    bool? isSystem,
-    bool? hasMfaEnabled,
+    Object? bot = $none,
+    Object? system = $none,
+    bool? mfaEnabled,
     Object? bannerHash = $none,
     Object? accentColor = $none,
     Object? locale = $none,
@@ -454,9 +450,9 @@ class _UserCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, User, $Out>
       if (discriminator != null) #discriminator: discriminator,
       if (globalName != $none) #globalName: globalName,
       if (avatarHash != $none) #avatarHash: avatarHash,
-      if (isBot != null) #isBot: isBot,
-      if (isSystem != null) #isSystem: isSystem,
-      if (hasMfaEnabled != null) #hasMfaEnabled: hasMfaEnabled,
+      if (bot != $none) #bot: bot,
+      if (system != $none) #system: system,
+      if (mfaEnabled != null) #mfaEnabled: mfaEnabled,
       if (bannerHash != $none) #bannerHash: bannerHash,
       if (accentColor != $none) #accentColor: accentColor,
       if (locale != $none) #locale: locale,
@@ -477,9 +473,9 @@ class _UserCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, User, $Out>
     discriminator: data.get(#discriminator, or: $value.discriminator),
     globalName: data.get(#globalName, or: $value.globalName),
     avatarHash: data.get(#avatarHash, or: $value.avatarHash),
-    isBot: data.get(#isBot, or: $value.isBot),
-    isSystem: data.get(#isSystem, or: $value.isSystem),
-    hasMfaEnabled: data.get(#hasMfaEnabled, or: $value.hasMfaEnabled),
+    bot: data.get(#bot, or: $value.bot),
+    system: data.get(#system, or: $value.system),
+    mfaEnabled: data.get(#mfaEnabled, or: $value.mfaEnabled),
     bannerHash: data.get(#bannerHash, or: $value.bannerHash),
     accentColor: data.get(#accentColor, or: $value.accentColor),
     locale: data.get(#locale, or: $value.locale),
