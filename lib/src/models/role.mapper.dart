@@ -136,6 +136,7 @@ class RoleMapper extends ClassMapperBase<Role> {
       SnowflakeMapper.ensureInitialized();
       DiscordColorMapper.ensureInitialized();
       RoleColorsMapper.ensureInitialized();
+      PermissionsMapper.ensureInitialized();
       RoleTagsMapper.ensureInitialized();
       RoleFlagsMapper.ensureInitialized();
     }
@@ -272,6 +273,7 @@ abstract class RoleCopyWith<$R, $In extends Role, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   DiscordColorCopyWith<$R, DiscordColor, DiscordColor> get color;
   RoleColorsCopyWith<$R, RoleColors, RoleColors> get colors;
+  PermissionsCopyWith<$R, Permissions, Permissions> get permissions;
   RoleTagsCopyWith<$R, RoleTags, RoleTags>? get tags;
   RoleFlagsCopyWith<$R, RoleFlags, RoleFlags> get flags;
   @override
@@ -307,6 +309,9 @@ class _RoleCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Role, $Out>
   @override
   RoleColorsCopyWith<$R, RoleColors, RoleColors> get colors =>
       $value.colors.copyWith.$chain((v) => call(colors: v));
+  @override
+  PermissionsCopyWith<$R, Permissions, Permissions> get permissions =>
+      $value.permissions.copyWith.$chain((v) => call(permissions: v));
   @override
   RoleTagsCopyWith<$R, RoleTags, RoleTags>? get tags =>
       $value.tags?.copyWith.$chain((v) => call(tags: v));

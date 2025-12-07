@@ -456,6 +456,7 @@ class InstallationParametersMapper
   static InstallationParametersMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = InstallationParametersMapper._());
+      PermissionsMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -556,6 +557,7 @@ abstract class InstallationParametersCopyWith<
 >
     implements ClassCopyWith<$R, $In, $Out> {
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get scopes;
+  PermissionsCopyWith<$R, Permissions, Permissions> get permissions;
   $R call({List<String>? scopes, Permissions? permissions});
   InstallationParametersCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -578,6 +580,9 @@ class _InstallationParametersCopyWithImpl<$R, $Out>
         (v, t) => ObjectCopyWith(v, $identity, t),
         (v) => call(scopes: v),
       );
+  @override
+  PermissionsCopyWith<$R, Permissions, Permissions> get permissions =>
+      $value.permissions.copyWith.$chain((v) => call(permissions: v));
   @override
   $R call({List<String>? scopes, Permissions? permissions}) => $apply(
     FieldCopyWithData({

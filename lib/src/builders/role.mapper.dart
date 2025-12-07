@@ -189,6 +189,7 @@ class RoleBuilderMapper extends ClassMapperBase<RoleBuilder> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = RoleBuilderMapper._());
       FlagsMapper.ensureInitialized();
+      PermissionsMapper.ensureInitialized();
       DiscordColorMapper.ensureInitialized();
       RoleColorsBuilderMapper.ensureInitialized();
     }
@@ -419,6 +420,7 @@ class RoleUpdateBuilderMapper extends ClassMapperBase<RoleUpdateBuilder> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = RoleUpdateBuilderMapper._());
       FlagsMapper.ensureInitialized();
+      PermissionsMapper.ensureInitialized();
       DiscordColorMapper.ensureInitialized();
       RoleColorsBuilderMapper.ensureInitialized();
     }

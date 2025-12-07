@@ -211,6 +211,7 @@ class ApplicationCommandMapper extends ClassMapperBase<ApplicationCommand> {
       ApplicationCommandTypeMapper.ensureInitialized();
       LocaleMapper.ensureInitialized();
       CommandOptionMapper.ensureInitialized();
+      PermissionsMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
       InteractionContextTypeMapper.ensureInitialized();
     }
@@ -430,6 +431,8 @@ abstract class ApplicationCommandCopyWith<
     CommandOptionCopyWith<$R, CommandOption, CommandOption>
   >?
   get options;
+  PermissionsCopyWith<$R, Permissions, Permissions>?
+  get defaultMemberPermissions;
   ListCopyWith<
     $R,
     ApplicationIntegrationType,
@@ -514,6 +517,10 @@ class _ApplicationCommandCopyWithImpl<$R, $Out>
           (v) => call(options: v),
         )
       : null;
+  @override
+  PermissionsCopyWith<$R, Permissions, Permissions>?
+  get defaultMemberPermissions => $value.defaultMemberPermissions?.copyWith
+      .$chain((v) => call(defaultMemberPermissions: v));
   @override
   ListCopyWith<
     $R,

@@ -134,6 +134,7 @@ class InteractionMapper extends ClassMapperBase<Interaction> {
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
+      PermissionsMapper.ensureInitialized();
       LocaleMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
@@ -294,6 +295,7 @@ abstract class InteractionCopyWith<$R, $In extends Interaction<T>, $Out, T>
   MemberCopyWith<$R, Member, Member>? get member;
   UserCopyWith<$R, User, User>? get user;
   MessageCopyWith<$R, Message, Message>? get message;
+  PermissionsCopyWith<$R, Permissions, Permissions> get appPermissions;
   ListCopyWith<
     $R,
     Entitlement,
@@ -625,6 +627,7 @@ class PingInteractionMapper extends ClassMapperBase<PingInteraction> {
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
+      PermissionsMapper.ensureInitialized();
       LocaleMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
@@ -861,6 +864,8 @@ abstract class PingInteractionCopyWith<$R, $In extends PingInteraction, $Out>
   @override
   MessageCopyWith<$R, Message, Message>? get message;
   @override
+  PermissionsCopyWith<$R, Permissions, Permissions> get appPermissions;
+  @override
   ListCopyWith<
     $R,
     Entitlement,
@@ -933,6 +938,9 @@ class _PingInteractionCopyWithImpl<$R, $Out>
   @override
   MessageCopyWith<$R, Message, Message>? get message =>
       $value.message?.copyWith.$chain((v) => call(message: v));
+  @override
+  PermissionsCopyWith<$R, Permissions, Permissions> get appPermissions =>
+      $value.appPermissions.copyWith.$chain((v) => call(appPermissions: v));
   @override
   ListCopyWith<
     $R,
@@ -1055,6 +1063,7 @@ class ApplicationCommandInteractionMapper
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
+      PermissionsMapper.ensureInitialized();
       LocaleMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
@@ -1317,6 +1326,8 @@ abstract class ApplicationCommandInteractionCopyWith<
   @override
   MessageCopyWith<$R, Message, Message>? get message;
   @override
+  PermissionsCopyWith<$R, Permissions, Permissions> get appPermissions;
+  @override
   ListCopyWith<
     $R,
     Entitlement,
@@ -1407,6 +1418,9 @@ class _ApplicationCommandInteractionCopyWithImpl<$R, $Out>
   @override
   MessageCopyWith<$R, Message, Message>? get message =>
       $value.message?.copyWith.$chain((v) => call(message: v));
+  @override
+  PermissionsCopyWith<$R, Permissions, Permissions> get appPermissions =>
+      $value.appPermissions.copyWith.$chain((v) => call(appPermissions: v));
   @override
   ListCopyWith<
     $R,
@@ -1999,6 +2013,7 @@ class MessageComponentInteractionMapper
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
+      PermissionsMapper.ensureInitialized();
       LocaleMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
@@ -2258,6 +2273,8 @@ abstract class MessageComponentInteractionCopyWith<
   @override
   MessageCopyWith<$R, Message, Message>? get message;
   @override
+  PermissionsCopyWith<$R, Permissions, Permissions> get appPermissions;
+  @override
   ListCopyWith<
     $R,
     Entitlement,
@@ -2349,6 +2366,9 @@ class _MessageComponentInteractionCopyWithImpl<$R, $Out>
   @override
   MessageCopyWith<$R, Message, Message>? get message =>
       $value.message?.copyWith.$chain((v) => call(message: v));
+  @override
+  PermissionsCopyWith<$R, Permissions, Permissions> get appPermissions =>
+      $value.appPermissions.copyWith.$chain((v) => call(appPermissions: v));
   @override
   ListCopyWith<
     $R,
@@ -2681,6 +2701,7 @@ class ModalSubmitInteractionMapper
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
+      PermissionsMapper.ensureInitialized();
       LocaleMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
@@ -2935,6 +2956,8 @@ abstract class ModalSubmitInteractionCopyWith<
   @override
   MessageCopyWith<$R, Message, Message>? get message;
   @override
+  PermissionsCopyWith<$R, Permissions, Permissions> get appPermissions;
+  @override
   ListCopyWith<
     $R,
     Entitlement,
@@ -3018,6 +3041,9 @@ class _ModalSubmitInteractionCopyWithImpl<$R, $Out>
   @override
   MessageCopyWith<$R, Message, Message>? get message =>
       $value.message?.copyWith.$chain((v) => call(message: v));
+  @override
+  PermissionsCopyWith<$R, Permissions, Permissions> get appPermissions =>
+      $value.appPermissions.copyWith.$chain((v) => call(appPermissions: v));
   @override
   ListCopyWith<
     $R,
@@ -3315,6 +3341,7 @@ class ApplicationCommandAutocompleteInteractionMapper
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
+      PermissionsMapper.ensureInitialized();
       LocaleMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
@@ -3598,6 +3625,8 @@ abstract class ApplicationCommandAutocompleteInteractionCopyWith<
   @override
   MessageCopyWith<$R, Message, Message>? get message;
   @override
+  PermissionsCopyWith<$R, Permissions, Permissions> get appPermissions;
+  @override
   ListCopyWith<
     $R,
     Entitlement,
@@ -3688,6 +3717,9 @@ class _ApplicationCommandAutocompleteInteractionCopyWithImpl<$R, $Out>
   @override
   MessageCopyWith<$R, Message, Message>? get message =>
       $value.message?.copyWith.$chain((v) => call(message: v));
+  @override
+  PermissionsCopyWith<$R, Permissions, Permissions> get appPermissions =>
+      $value.appPermissions.copyWith.$chain((v) => call(appPermissions: v));
   @override
   ListCopyWith<
     $R,
@@ -3818,6 +3850,7 @@ class UnknownInteractionMapper extends ClassMapperBase<UnknownInteraction> {
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
+      PermissionsMapper.ensureInitialized();
       LocaleMapper.ensureInitialized();
       EntitlementMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
@@ -4065,6 +4098,8 @@ abstract class UnknownInteractionCopyWith<
   @override
   MessageCopyWith<$R, Message, Message>? get message;
   @override
+  PermissionsCopyWith<$R, Permissions, Permissions> get appPermissions;
+  @override
   ListCopyWith<
     $R,
     Entitlement,
@@ -4137,6 +4172,9 @@ class _UnknownInteractionCopyWithImpl<$R, $Out>
   @override
   MessageCopyWith<$R, Message, Message>? get message =>
       $value.message?.copyWith.$chain((v) => call(message: v));
+  @override
+  PermissionsCopyWith<$R, Permissions, Permissions> get appPermissions =>
+      $value.appPermissions.copyWith.$chain((v) => call(appPermissions: v));
   @override
   ListCopyWith<
     $R,

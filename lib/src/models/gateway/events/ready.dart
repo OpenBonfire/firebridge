@@ -1,5 +1,4 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/models/application.dart';
 import 'package:nyxx/src/models/gateway/event.dart';
 import 'package:nyxx/src/models/gateway/opcode.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
@@ -13,6 +12,7 @@ part 'ready.mapper.dart';
 @MappableClass(discriminatorValue: 'READY')
 class ReadyEvent extends DispatchEvent with ReadyEventMappable {
   /// The version of the API being used.
+  @MappableField(key: "v")
   final int version;
 
   /// The current client's user.
@@ -25,16 +25,13 @@ class ReadyEvent extends DispatchEvent with ReadyEventMappable {
   final String sessionId;
 
   /// The URL to use when resuming the Gateway session.
-  final Uri gatewayResumeUrl;
+  final Uri resumeGatewayUrl;
 
   /// The ID of the shard.
   final int? shardId;
 
   /// The total number of shards.
   final int? totalShards;
-
-  /// The client's application.
-  final PartialApplication application;
 
   /// {@macro ready_event}
   /// @nodoc
@@ -43,10 +40,9 @@ class ReadyEvent extends DispatchEvent with ReadyEventMappable {
     required this.user,
     required this.guilds,
     required this.sessionId,
-    required this.gatewayResumeUrl,
+    required this.resumeGatewayUrl,
     required this.shardId,
     required this.totalShards,
-    required this.application,
   });
 }
 

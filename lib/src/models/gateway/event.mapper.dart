@@ -219,14 +219,14 @@ class _RawDispatchEventCopyWithImpl<$R, $Out>
   ) => _RawDispatchEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class DispatchEventMapper extends ClassMapperBase<DispatchEvent> {
+class DispatchEventMapper extends SubClassMapperBase<DispatchEvent> {
   DispatchEventMapper._();
 
   static DispatchEventMapper? _instance;
   static DispatchEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = DispatchEventMapper._());
-      GatewayEventMapper.ensureInitialized();
+      GatewayEventMapper.ensureInitialized().addSubMapper(_instance!);
       UnknownDispatchEventMapper.ensureInitialized();
     }
     return _instance!;
@@ -245,8 +245,20 @@ class DispatchEventMapper extends ClassMapperBase<DispatchEvent> {
   @override
   final MappableFields<DispatchEvent> fields = const {#opcode: _f$opcode};
 
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'DispatchEvent';
+  @override
+  late final ClassMapperBase superMapper =
+      GatewayEventMapper.ensureInitialized();
+
   static DispatchEvent _instantiate(DecodingData data) {
-    throw MapperException.missingConstructor('DispatchEvent');
+    throw MapperException.missingSubclass(
+      'DispatchEvent',
+      'type',
+      '${data.value['type']}',
+    );
   }
 
   @override

@@ -9,7 +9,11 @@ void main() async {
     options: GatewayClientOptions(plugins: [logging, cliIntegration]),
   );
 
-  await for (final MessageCreateEvent(:message) in client.onMessageCreate) {
-    print('${message.id} sent by ${message.author.id}: ${message.content}!');
-  }
+  // await for (final MessageCreateEvent(:message) in client.onMessageCreate) {
+  //   print('${message.id} sent by ${message.author.id}: ${message.content}!');
+  // }
+
+  client.onEvent.listen((event) {
+    // print("event");
+  });
 }

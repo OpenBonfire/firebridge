@@ -21,6 +21,7 @@ class ApplicationCommandBuilderMapper
       LocaleMapper.ensureInitialized();
       CommandOptionBuilderMapper.ensureInitialized();
       FlagsMapper.ensureInitialized();
+      PermissionsMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
       InteractionContextTypeMapper.ensureInitialized();
     }
@@ -1003,6 +1004,7 @@ class ApplicationCommandUpdateBuilderMapper
       LocaleMapper.ensureInitialized();
       CommandOptionBuilderMapper.ensureInitialized();
       FlagsMapper.ensureInitialized();
+      PermissionsMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
       InteractionContextTypeMapper.ensureInitialized();
     }

@@ -452,6 +452,7 @@ class UserGuildMapper extends ClassMapperBase<UserGuild> {
       PartialGuildMapper.ensureInitialized();
       GuildMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
+      PermissionsMapper.ensureInitialized();
       GuildFeaturesMapper.ensureInitialized();
     }
     return _instance!;
@@ -596,6 +597,7 @@ abstract class UserGuildCopyWith<$R, $In extends UserGuild, $Out>
     implements PartialGuildCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  PermissionsCopyWith<$R, Permissions, Permissions>? get currentUserPermissions;
   GuildFeaturesCopyWith<$R, GuildFeatures, GuildFeatures> get features;
   @override
   $R call({
@@ -623,6 +625,11 @@ class _UserGuildCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
+  @override
+  PermissionsCopyWith<$R, Permissions, Permissions>?
+  get currentUserPermissions => $value.currentUserPermissions?.copyWith.$chain(
+    (v) => call(currentUserPermissions: v),
+  );
   @override
   GuildFeaturesCopyWith<$R, GuildFeatures, GuildFeatures> get features =>
       $value.features.copyWith.$chain((v) => call(features: v));
@@ -810,6 +817,7 @@ class GuildMapper extends ClassMapperBase<Guild> {
       MapperContainer.globals.use(_instance = GuildMapper._());
       UserGuildMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
+      PermissionsMapper.ensureInitialized();
       VerificationLevelMapper.ensureInitialized();
       MessageNotificationLevelMapper.ensureInitialized();
       ExplicitContentFilterLevelMapper.ensureInitialized();
@@ -1226,6 +1234,8 @@ abstract class GuildCopyWith<$R, $In extends Guild, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get ownerId;
+  @override
+  PermissionsCopyWith<$R, Permissions, Permissions>? get currentUserPermissions;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get afkChannelId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get widgetChannelId;
   ListCopyWith<$R, Role, RoleCopyWith<$R, Role, Role>> get roleList;
@@ -1307,6 +1317,11 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get ownerId =>
       $value.ownerId.copyWith.$chain((v) => call(ownerId: v));
+  @override
+  PermissionsCopyWith<$R, Permissions, Permissions>?
+  get currentUserPermissions => $value.currentUserPermissions?.copyWith.$chain(
+    (v) => call(currentUserPermissions: v),
+  );
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get afkChannelId =>
       $value.afkChannelId?.copyWith.$chain((v) => call(afkChannelId: v));

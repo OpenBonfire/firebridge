@@ -217,11 +217,16 @@ class Gateway extends GatewayManager with EventParser {
 
   /// Parse a [DispatchEvent] from [raw].
   DispatchEvent parseDispatchEvent(RawDispatchEvent raw) {
+    // if (raw.name == "READY") {
+    //   print("ready");
+    //   print(raw.payload.keys.toList());
+    // }
     final event = DispatchEventMapper.fromMap({
       'type': raw.name,
       'payload': raw,
       ...raw.payload,
     });
+
     return event;
   }
 

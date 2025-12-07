@@ -138,6 +138,7 @@ class MemberMapper extends ClassMapperBase<Member> {
       SnowflakeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MemberFlagsMapper.ensureInitialized();
+      PermissionsMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -321,6 +322,7 @@ abstract class MemberCopyWith<$R, $In extends Member, $Out>
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
   get roleIds;
   MemberFlagsCopyWith<$R, MemberFlags, MemberFlags> get flags;
+  PermissionsCopyWith<$R, Permissions, Permissions>? get permissions;
   @override
   $R call({
     Snowflake? id,
@@ -365,6 +367,9 @@ class _MemberCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Member, $Out>
   @override
   MemberFlagsCopyWith<$R, MemberFlags, MemberFlags> get flags =>
       $value.flags.copyWith.$chain((v) => call(flags: v));
+  @override
+  PermissionsCopyWith<$R, Permissions, Permissions>? get permissions =>
+      $value.permissions?.copyWith.$chain((v) => call(permissions: v));
   @override
   $R call({
     Snowflake? id,

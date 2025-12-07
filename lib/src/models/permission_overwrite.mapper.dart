@@ -65,6 +65,7 @@ class PermissionOverwriteMapper extends ClassMapperBase<PermissionOverwrite> {
       MapperContainer.globals.use(_instance = PermissionOverwriteMapper._());
       SnowflakeMapper.ensureInitialized();
       PermissionOverwriteTypeMapper.ensureInitialized();
+      PermissionsMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -176,6 +177,8 @@ abstract class PermissionOverwriteCopyWith<
 >
     implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  PermissionsCopyWith<$R, Permissions, Permissions> get allow;
+  PermissionsCopyWith<$R, Permissions, Permissions> get deny;
   $R call({
     Snowflake? id,
     PermissionOverwriteType? type,
@@ -198,6 +201,12 @@ class _PermissionOverwriteCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
+  @override
+  PermissionsCopyWith<$R, Permissions, Permissions> get allow =>
+      $value.allow.copyWith.$chain((v) => call(allow: v));
+  @override
+  PermissionsCopyWith<$R, Permissions, Permissions> get deny =>
+      $value.deny.copyWith.$chain((v) => call(deny: v));
   @override
   $R call({
     Snowflake? id,

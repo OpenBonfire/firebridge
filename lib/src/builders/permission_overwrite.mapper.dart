@@ -20,6 +20,7 @@ class PermissionOverwriteBuilderMapper
       SnowflakeMapper.ensureInitialized();
       PermissionOverwriteTypeMapper.ensureInitialized();
       FlagsMapper.ensureInitialized();
+      PermissionsMapper.ensureInitialized();
     }
     return _instance!;
   }

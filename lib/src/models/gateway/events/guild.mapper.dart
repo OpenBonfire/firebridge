@@ -8,7 +8,7 @@
 part of 'guild.dart';
 
 class UnavailableGuildCreateEventMapper
-    extends ClassMapperBase<UnavailableGuildCreateEvent> {
+    extends SubClassMapperBase<UnavailableGuildCreateEvent> {
   UnavailableGuildCreateEventMapper._();
 
   static UnavailableGuildCreateEventMapper? _instance;
@@ -17,7 +17,7 @@ class UnavailableGuildCreateEventMapper
       MapperContainer.globals.use(
         _instance = UnavailableGuildCreateEventMapper._(),
       );
-      DispatchEventMapper.ensureInitialized();
+      DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       GuildCreateEventMapper.ensureInitialized();
       PartialGuildMapper.ensureInitialized();
     }
@@ -42,6 +42,14 @@ class UnavailableGuildCreateEventMapper
     #guild: _f$guild,
     #opcode: _f$opcode,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'UnavailableGuildCreateEvent';
+  @override
+  late final ClassMapperBase superMapper =
+      DispatchEventMapper.ensureInitialized();
 
   static UnavailableGuildCreateEvent _instantiate(DecodingData data) {
     return UnavailableGuildCreateEvent(guild: data.dec(_f$guild));

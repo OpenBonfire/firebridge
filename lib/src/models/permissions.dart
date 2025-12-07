@@ -1,10 +1,14 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:nyxx/src/utils/flags.dart';
+
+part 'permissions.mapper.dart';
 
 /// A set of permissions.
 ///
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/topics/permissions
-class Permissions extends Flags<Permissions> {
+@MappableClass()
+class Permissions extends Flags<Permissions> with PermissionsMappable {
   /// Allows creation of instant invites.
   static const createInstantInvite = Flag<Permissions>.fromOffset(0);
 
@@ -133,7 +137,8 @@ class Permissions extends Flags<Permissions> {
   static const moderateMembers = Flag<Permissions>.fromOffset(40);
 
   /// Allows for viewing role subscription insights.
-  static const viewCreatorMonetizationAnalytics = Flag<Permissions>.fromOffset(41);
+  static const viewCreatorMonetizationAnalytics =
+      Flag<Permissions>.fromOffset(41);
 
   /// Allows for using soundboard in a voice channel.
   static const useSoundboard = Flag<Permissions>.fromOffset(42);
@@ -292,7 +297,8 @@ class Permissions extends Flags<Permissions> {
   bool get canModerateMembers => has(moderateMembers);
 
   /// Whether this set of permissions has the [viewCreatorMonetizationAnalytics] permission.
-  bool get canViewCreatorMonetizationAnalytics => has(viewCreatorMonetizationAnalytics);
+  bool get canViewCreatorMonetizationAnalytics =>
+      has(viewCreatorMonetizationAnalytics);
 
   /// Whether this set of permissions has the [useSoundboard] permission.
   bool get canUseSoundboard => has(useSoundboard);

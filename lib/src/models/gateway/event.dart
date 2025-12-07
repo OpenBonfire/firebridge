@@ -43,7 +43,7 @@ class RawDispatchEvent extends GatewayEvent with RawDispatchEventMappable {
 /// {@template dispatch_event}
 /// The base class for all events sent by dispatch.
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(discriminatorKey: "type")
 abstract class DispatchEvent extends GatewayEvent with DispatchEventMappable {
   /// {@macro dispatch_event}
   /// @nodoc
