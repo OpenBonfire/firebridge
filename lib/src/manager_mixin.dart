@@ -1,6 +1,5 @@
 import 'package:nyxx/src/client.dart';
 import 'package:nyxx/src/client_options.dart';
-import 'package:nyxx/src/http/managers/application_command_manager.dart';
 import 'package:nyxx/src/http/managers/channel_manager.dart';
 import 'package:nyxx/src/http/managers/interaction_manager.dart';
 import 'package:nyxx/src/http/managers/invite_manager.dart';

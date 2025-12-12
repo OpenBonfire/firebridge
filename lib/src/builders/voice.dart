@@ -17,7 +17,8 @@ class VoiceStateUpdateBuilder extends UpdateBuilder<VoiceState>
 }
 
 @MappableClass()
-class CurrentUserVoiceStateUpdateBuilder extends VoiceStateUpdateBuilder {
+class CurrentUserVoiceStateUpdateBuilder extends VoiceStateUpdateBuilder
+    with CurrentUserVoiceStateUpdateBuilderMappable {
   DateTime? requestToSpeakTimeStamp;
 
   CurrentUserVoiceStateUpdateBuilder(

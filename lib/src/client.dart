@@ -14,13 +14,11 @@ import 'package:nyxx/src/http/managers/gateway_manager.dart';
 import 'package:nyxx/src/intents.dart';
 import 'package:nyxx/src/manager_mixin.dart';
 import 'package:nyxx/src/api_options.dart';
-import 'package:nyxx/src/models/application.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
 import 'package:nyxx/src/models/snowflake.dart';
 import 'package:nyxx/src/models/user/user.dart';
 import 'package:nyxx/src/plugin/plugin.dart';
 import 'package:nyxx/src/utils/flags.dart';
-import 'package:oauth2/oauth2.dart';
 import 'package:runtime_type/runtime_type.dart';
 
 /// A helper function to nest and execute calls to plugin connect methods.

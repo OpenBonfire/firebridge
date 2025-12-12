@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-
 import 'package:logging/logging.dart';
 import 'package:nyxx/src/api_options.dart';
 import 'package:nyxx/src/builders/presence.dart';

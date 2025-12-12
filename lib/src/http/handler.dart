@@ -3,7 +3,6 @@ import 'dart:collection';
 
 import 'package:http/http.dart' hide MultipartRequest;
 import 'package:logging/logging.dart';
-import 'package:nyxx/src/api_options.dart';
 import 'package:nyxx/src/client.dart';
 import 'package:nyxx/src/errors.dart';
 import 'package:nyxx/src/http/bucket.dart';
