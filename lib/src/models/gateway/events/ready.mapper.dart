@@ -20,6 +20,13 @@ class ReadyEventMapper extends SubClassMapperBase<ReadyEvent> {
       ReadStateMapper.ensureInitialized();
       PresenceUpdateEventMapper.ensureInitialized();
       DmChannelMapper.ensureInitialized();
+      UserGuildSettingsMapper.ensureInitialized();
+      SessionMapper.ensureInitialized();
+      UserSettingsMapper.ensureInitialized();
+      RelationshipMapper.ensureInitialized();
+      AuthMapper.ensureInitialized();
+      SnowflakeMapper.ensureInitialized();
+      NotificationSettingsMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -98,6 +105,78 @@ class ReadyEventMapper extends SubClassMapperBase<ReadyEvent> {
     _$privateChannels,
     key: r'private_channels',
   );
+  static List<UserGuildSettings> _$userGuildSettings(ReadyEvent v) =>
+      v.userGuildSettings;
+  static const Field<ReadyEvent, List<UserGuildSettings>> _f$userGuildSettings =
+      Field(
+        'userGuildSettings',
+        _$userGuildSettings,
+        key: r'user_guild_settings',
+      );
+  static List<Session> _$sessions(ReadyEvent v) => v.sessions;
+  static const Field<ReadyEvent, List<Session>> _f$sessions = Field(
+    'sessions',
+    _$sessions,
+  );
+  static UserSettings _$userSettings(ReadyEvent v) => v.userSettings;
+  static const Field<ReadyEvent, UserSettings> _f$userSettings = Field(
+    'userSettings',
+    _$userSettings,
+    key: r'user_settings',
+  );
+  static List<Relationship> _$relationships(ReadyEvent v) => v.relationships;
+  static const Field<ReadyEvent, List<Relationship>> _f$relationships = Field(
+    'relationships',
+    _$relationships,
+  );
+  static Auth _$auth(ReadyEvent v) => v.auth;
+  static const Field<ReadyEvent, Auth> _f$auth = Field('auth', _$auth);
+  static dynamic _$pendingPayments(ReadyEvent v) => v.pendingPayments;
+  static const Field<ReadyEvent, dynamic> _f$pendingPayments = Field(
+    'pendingPayments',
+    _$pendingPayments,
+    key: r'pending_payments',
+  );
+  static String _$analyticsToken(ReadyEvent v) => v.analyticsToken;
+  static const Field<ReadyEvent, String> _f$analyticsToken = Field(
+    'analyticsToken',
+    _$analyticsToken,
+    key: r'analytics_token',
+  );
+  static List<String> _$geoOrderedRtcRegions(ReadyEvent v) =>
+      v.geoOrderedRtcRegions;
+  static const Field<ReadyEvent, List<String>> _f$geoOrderedRtcRegions = Field(
+    'geoOrderedRtcRegions',
+    _$geoOrderedRtcRegions,
+    key: r'geo_ordered_rtc_regions',
+  );
+  static int _$apiCodeVersion(ReadyEvent v) => v.apiCodeVersion;
+  static const Field<ReadyEvent, int> _f$apiCodeVersion = Field(
+    'apiCodeVersion',
+    _$apiCodeVersion,
+    key: r'api_code_version',
+  );
+  static String _$authSessionIdHash(ReadyEvent v) => v.authSessionIdHash;
+  static const Field<ReadyEvent, String> _f$authSessionIdHash = Field(
+    'authSessionIdHash',
+    _$authSessionIdHash,
+    key: r'auth_session_id_hash',
+  );
+  static List<Snowflake> _$broadcasterUserIds(ReadyEvent v) =>
+      v.broadcasterUserIds;
+  static const Field<ReadyEvent, List<Snowflake>> _f$broadcasterUserIds = Field(
+    'broadcasterUserIds',
+    _$broadcasterUserIds,
+    key: r'broadcaster_user_ids',
+  );
+  static NotificationSettings _$notificationSettings(ReadyEvent v) =>
+      v.notificationSettings;
+  static const Field<ReadyEvent, NotificationSettings> _f$notificationSettings =
+      Field(
+        'notificationSettings',
+        _$notificationSettings,
+        key: r'notification_settings',
+      );
   static Opcode _$opcode(ReadyEvent v) => v.opcode;
   static const Field<ReadyEvent, Opcode> _f$opcode = Field(
     'opcode',
@@ -120,6 +199,18 @@ class ReadyEventMapper extends SubClassMapperBase<ReadyEvent> {
     #presences: _f$presences,
     #userSettingsProto: _f$userSettingsProto,
     #privateChannels: _f$privateChannels,
+    #userGuildSettings: _f$userGuildSettings,
+    #sessions: _f$sessions,
+    #userSettings: _f$userSettings,
+    #relationships: _f$relationships,
+    #auth: _f$auth,
+    #pendingPayments: _f$pendingPayments,
+    #analyticsToken: _f$analyticsToken,
+    #geoOrderedRtcRegions: _f$geoOrderedRtcRegions,
+    #apiCodeVersion: _f$apiCodeVersion,
+    #authSessionIdHash: _f$authSessionIdHash,
+    #broadcasterUserIds: _f$broadcasterUserIds,
+    #notificationSettings: _f$notificationSettings,
     #opcode: _f$opcode,
   };
 
@@ -146,6 +237,18 @@ class ReadyEventMapper extends SubClassMapperBase<ReadyEvent> {
       presences: data.dec(_f$presences),
       userSettingsProto: data.dec(_f$userSettingsProto),
       privateChannels: data.dec(_f$privateChannels),
+      userGuildSettings: data.dec(_f$userGuildSettings),
+      sessions: data.dec(_f$sessions),
+      userSettings: data.dec(_f$userSettings),
+      relationships: data.dec(_f$relationships),
+      auth: data.dec(_f$auth),
+      pendingPayments: data.dec(_f$pendingPayments),
+      analyticsToken: data.dec(_f$analyticsToken),
+      geoOrderedRtcRegions: data.dec(_f$geoOrderedRtcRegions),
+      apiCodeVersion: data.dec(_f$apiCodeVersion),
+      authSessionIdHash: data.dec(_f$authSessionIdHash),
+      broadcasterUserIds: data.dec(_f$broadcasterUserIds),
+      notificationSettings: data.dec(_f$notificationSettings),
     );
   }
 
@@ -226,6 +329,27 @@ abstract class ReadyEventCopyWith<$R, $In extends ReadyEvent, $Out>
   get presences;
   ListCopyWith<$R, DmChannel, DmChannelCopyWith<$R, DmChannel, DmChannel>>
   get privateChannels;
+  ListCopyWith<
+    $R,
+    UserGuildSettings,
+    UserGuildSettingsCopyWith<$R, UserGuildSettings, UserGuildSettings>
+  >
+  get userGuildSettings;
+  ListCopyWith<$R, Session, SessionCopyWith<$R, Session, Session>> get sessions;
+  UserSettingsCopyWith<$R, UserSettings, UserSettings> get userSettings;
+  ListCopyWith<
+    $R,
+    Relationship,
+    RelationshipCopyWith<$R, Relationship, Relationship>
+  >
+  get relationships;
+  AuthCopyWith<$R, Auth, Auth> get auth;
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>
+  get geoOrderedRtcRegions;
+  ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
+  get broadcasterUserIds;
+  NotificationSettingsCopyWith<$R, NotificationSettings, NotificationSettings>
+  get notificationSettings;
   @override
   $R call({
     int? version,
@@ -241,6 +365,18 @@ abstract class ReadyEventCopyWith<$R, $In extends ReadyEvent, $Out>
     List<PresenceUpdateEvent>? presences,
     String? userSettingsProto,
     List<DmChannel>? privateChannels,
+    List<UserGuildSettings>? userGuildSettings,
+    List<Session>? sessions,
+    UserSettings? userSettings,
+    List<Relationship>? relationships,
+    Auth? auth,
+    dynamic pendingPayments,
+    String? analyticsToken,
+    List<String>? geoOrderedRtcRegions,
+    int? apiCodeVersion,
+    String? authSessionIdHash,
+    List<Snowflake>? broadcasterUserIds,
+    NotificationSettings? notificationSettings,
   });
   ReadyEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -293,6 +429,60 @@ class _ReadyEventCopyWithImpl<$R, $Out>
     (v) => call(privateChannels: v),
   );
   @override
+  ListCopyWith<
+    $R,
+    UserGuildSettings,
+    UserGuildSettingsCopyWith<$R, UserGuildSettings, UserGuildSettings>
+  >
+  get userGuildSettings => ListCopyWith(
+    $value.userGuildSettings,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(userGuildSettings: v),
+  );
+  @override
+  ListCopyWith<$R, Session, SessionCopyWith<$R, Session, Session>>
+  get sessions => ListCopyWith(
+    $value.sessions,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(sessions: v),
+  );
+  @override
+  UserSettingsCopyWith<$R, UserSettings, UserSettings> get userSettings =>
+      $value.userSettings.copyWith.$chain((v) => call(userSettings: v));
+  @override
+  ListCopyWith<
+    $R,
+    Relationship,
+    RelationshipCopyWith<$R, Relationship, Relationship>
+  >
+  get relationships => ListCopyWith(
+    $value.relationships,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(relationships: v),
+  );
+  @override
+  AuthCopyWith<$R, Auth, Auth> get auth =>
+      $value.auth.copyWith.$chain((v) => call(auth: v));
+  @override
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>
+  get geoOrderedRtcRegions => ListCopyWith(
+    $value.geoOrderedRtcRegions,
+    (v, t) => ObjectCopyWith(v, $identity, t),
+    (v) => call(geoOrderedRtcRegions: v),
+  );
+  @override
+  ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
+  get broadcasterUserIds => ListCopyWith(
+    $value.broadcasterUserIds,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(broadcasterUserIds: v),
+  );
+  @override
+  NotificationSettingsCopyWith<$R, NotificationSettings, NotificationSettings>
+  get notificationSettings => $value.notificationSettings.copyWith.$chain(
+    (v) => call(notificationSettings: v),
+  );
+  @override
   $R call({
     int? version,
     User? user,
@@ -307,6 +497,18 @@ class _ReadyEventCopyWithImpl<$R, $Out>
     List<PresenceUpdateEvent>? presences,
     String? userSettingsProto,
     List<DmChannel>? privateChannels,
+    List<UserGuildSettings>? userGuildSettings,
+    List<Session>? sessions,
+    UserSettings? userSettings,
+    List<Relationship>? relationships,
+    Auth? auth,
+    Object? pendingPayments = $none,
+    String? analyticsToken,
+    List<String>? geoOrderedRtcRegions,
+    int? apiCodeVersion,
+    String? authSessionIdHash,
+    List<Snowflake>? broadcasterUserIds,
+    NotificationSettings? notificationSettings,
   }) => $apply(
     FieldCopyWithData({
       if (version != null) #version: version,
@@ -323,6 +525,20 @@ class _ReadyEventCopyWithImpl<$R, $Out>
       if (presences != null) #presences: presences,
       if (userSettingsProto != null) #userSettingsProto: userSettingsProto,
       if (privateChannels != null) #privateChannels: privateChannels,
+      if (userGuildSettings != null) #userGuildSettings: userGuildSettings,
+      if (sessions != null) #sessions: sessions,
+      if (userSettings != null) #userSettings: userSettings,
+      if (relationships != null) #relationships: relationships,
+      if (auth != null) #auth: auth,
+      if (pendingPayments != $none) #pendingPayments: pendingPayments,
+      if (analyticsToken != null) #analyticsToken: analyticsToken,
+      if (geoOrderedRtcRegions != null)
+        #geoOrderedRtcRegions: geoOrderedRtcRegions,
+      if (apiCodeVersion != null) #apiCodeVersion: apiCodeVersion,
+      if (authSessionIdHash != null) #authSessionIdHash: authSessionIdHash,
+      if (broadcasterUserIds != null) #broadcasterUserIds: broadcasterUserIds,
+      if (notificationSettings != null)
+        #notificationSettings: notificationSettings,
     }),
   );
   @override
@@ -346,6 +562,33 @@ class _ReadyEventCopyWithImpl<$R, $Out>
       or: $value.userSettingsProto,
     ),
     privateChannels: data.get(#privateChannels, or: $value.privateChannels),
+    userGuildSettings: data.get(
+      #userGuildSettings,
+      or: $value.userGuildSettings,
+    ),
+    sessions: data.get(#sessions, or: $value.sessions),
+    userSettings: data.get(#userSettings, or: $value.userSettings),
+    relationships: data.get(#relationships, or: $value.relationships),
+    auth: data.get(#auth, or: $value.auth),
+    pendingPayments: data.get(#pendingPayments, or: $value.pendingPayments),
+    analyticsToken: data.get(#analyticsToken, or: $value.analyticsToken),
+    geoOrderedRtcRegions: data.get(
+      #geoOrderedRtcRegions,
+      or: $value.geoOrderedRtcRegions,
+    ),
+    apiCodeVersion: data.get(#apiCodeVersion, or: $value.apiCodeVersion),
+    authSessionIdHash: data.get(
+      #authSessionIdHash,
+      or: $value.authSessionIdHash,
+    ),
+    broadcasterUserIds: data.get(
+      #broadcasterUserIds,
+      or: $value.broadcasterUserIds,
+    ),
+    notificationSettings: data.get(
+      #notificationSettings,
+      or: $value.notificationSettings,
+    ),
   );
 
   @override

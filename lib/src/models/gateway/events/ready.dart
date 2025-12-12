@@ -1,11 +1,17 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/models/channel/channel.dart';
 import 'package:nyxx/src/models/channel/types/dm.dart';
 import 'package:nyxx/src/models/gateway/event.dart';
 import 'package:nyxx/src/models/gateway/events/presence.dart';
 import 'package:nyxx/src/models/gateway/opcode.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
+import 'package:nyxx/src/models/guild/user_guild_settings.dart';
+import 'package:nyxx/src/models/notifications/notification_settings.dart';
+import 'package:nyxx/src/models/snowflake.dart';
+import 'package:nyxx/src/models/user/auth.dart';
+import 'package:nyxx/src/models/user/relationship.dart';
+import 'package:nyxx/src/models/user/session.dart';
 import 'package:nyxx/src/models/user/settings/read_state.dart';
+import 'package:nyxx/src/models/user/settings/user_settings.dart';
 import 'package:nyxx/src/models/user/user.dart';
 
 part 'ready.mapper.dart';
@@ -46,24 +52,56 @@ class ReadyEvent extends DispatchEvent with ReadyEventMappable {
 
   final String userSettingsProto;
   final List<DmChannel> privateChannels;
+  final List<UserGuildSettings> userGuildSettings;
+
+  final List<Session> sessions;
+
+  final UserSettings userSettings;
+
+  final List<Relationship> relationships;
+  final Auth auth;
+
+  // payment is kinda a big object,
+  // and not something I really intend on supporting
+  final dynamic pendingPayments;
+
+  final String analyticsToken;
+
+  final List<String> geoOrderedRtcRegions;
+  final int apiCodeVersion;
+
+  final String authSessionIdHash;
+  final List<Snowflake> broadcasterUserIds;
+  final NotificationSettings notificationSettings;
 
   /// {@macro ready_event}
   /// @nodoc
-  ReadyEvent({
-    required this.version,
-    required this.user,
-    required this.guilds,
-    required this.sessionId,
-    required this.resumeGatewayUrl,
-    required this.shardId,
-    required this.totalShards,
-    required this.readState,
-    required this.sessionType,
-    required this.staticClientSessionId,
-    required this.presences,
-    required this.userSettingsProto,
-    required this.privateChannels,
-  });
+  ReadyEvent(
+      {required this.version,
+      required this.user,
+      required this.guilds,
+      required this.sessionId,
+      required this.resumeGatewayUrl,
+      required this.shardId,
+      required this.totalShards,
+      required this.readState,
+      required this.sessionType,
+      required this.staticClientSessionId,
+      required this.presences,
+      required this.userSettingsProto,
+      required this.privateChannels,
+      required this.userGuildSettings,
+      required this.sessions,
+      required this.userSettings,
+      required this.relationships,
+      required this.auth,
+      required this.pendingPayments,
+      required this.analyticsToken,
+      required this.geoOrderedRtcRegions,
+      required this.apiCodeVersion,
+      required this.authSessionIdHash,
+      required this.broadcasterUserIds,
+      required this.notificationSettings});
 }
 
 /// {@template resumed_event}

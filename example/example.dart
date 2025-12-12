@@ -1,5 +1,6 @@
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx/src/models/common_hooks.dart';
+import 'package:nyxx/src/models/guild/user_guild_settings.dart';
 
 void main() async {
   initNyxxMappers();
@@ -14,6 +15,10 @@ void main() async {
   // }
 
   client.onEvent.listen((event) {
-    // print("event");
+    // print(event.runtimeType);
+    // if (event is ReadyEvent) {
+    //   print(event.userGuildSettings.first.flags
+    //       .has(UserGuildSettingsFlags.optInChannelsOn));
+    // }
   });
 }
