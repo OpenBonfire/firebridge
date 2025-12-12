@@ -26,10 +26,10 @@ class DmChannelMapper extends SubClassMapperBase<DmChannel> {
 
   static Snowflake _$id(DmChannel v) => v.id;
   static const Field<DmChannel, Snowflake> _f$id = Field('id', _$id);
-  static User _$recipient(DmChannel v) => v.recipient;
-  static const Field<DmChannel, User> _f$recipient = Field(
-    'recipient',
-    _$recipient,
+  static List<User> _$recipients(DmChannel v) => v.recipients;
+  static const Field<DmChannel, List<User>> _f$recipients = Field(
+    'recipients',
+    _$recipients,
   );
   static Snowflake? _$lastMessageId(DmChannel v) => v.lastMessageId;
   static const Field<DmChannel, Snowflake> _f$lastMessageId = Field(
@@ -53,7 +53,7 @@ class DmChannelMapper extends SubClassMapperBase<DmChannel> {
   @override
   final MappableFields<DmChannel> fields = const {
     #id: _f$id,
-    #recipient: _f$recipient,
+    #recipients: _f$recipients,
     #lastMessageId: _f$lastMessageId,
     #lastPinTimestamp: _f$lastPinTimestamp,
     #rateLimitPerUser: _f$rateLimitPerUser,
@@ -70,7 +70,7 @@ class DmChannelMapper extends SubClassMapperBase<DmChannel> {
   static DmChannel _instantiate(DecodingData data) {
     return DmChannel(
       id: data.dec(_f$id),
-      recipient: data.dec(_f$recipient),
+      recipients: data.dec(_f$recipients),
       lastMessageId: data.dec(_f$lastMessageId),
       lastPinTimestamp: data.dec(_f$lastPinTimestamp),
       rateLimitPerUser: data.dec(_f$rateLimitPerUser),
@@ -138,12 +138,12 @@ abstract class DmChannelCopyWith<$R, $In extends DmChannel, $Out>
     implements TextChannelCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  UserCopyWith<$R, User, User> get recipient;
+  ListCopyWith<$R, User, UserCopyWith<$R, User, User>> get recipients;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId;
   @override
   $R call({
     Snowflake? id,
-    User? recipient,
+    List<User>? recipients,
     Snowflake? lastMessageId,
     DateTime? lastPinTimestamp,
     Duration? rateLimitPerUser,
@@ -163,22 +163,26 @@ class _DmChannelCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
-  UserCopyWith<$R, User, User> get recipient =>
-      $value.recipient.copyWith.$chain((v) => call(recipient: v));
+  ListCopyWith<$R, User, UserCopyWith<$R, User, User>> get recipients =>
+      ListCopyWith(
+        $value.recipients,
+        (v, t) => v.copyWith.$chain(t),
+        (v) => call(recipients: v),
+      );
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId =>
       $value.lastMessageId?.copyWith.$chain((v) => call(lastMessageId: v));
   @override
   $R call({
     Snowflake? id,
-    User? recipient,
+    List<User>? recipients,
     Object? lastMessageId = $none,
     Object? lastPinTimestamp = $none,
     Object? rateLimitPerUser = $none,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
-      if (recipient != null) #recipient: recipient,
+      if (recipients != null) #recipients: recipients,
       if (lastMessageId != $none) #lastMessageId: lastMessageId,
       if (lastPinTimestamp != $none) #lastPinTimestamp: lastPinTimestamp,
       if (rateLimitPerUser != $none) #rateLimitPerUser: rateLimitPerUser,
@@ -187,7 +191,7 @@ class _DmChannelCopyWithImpl<$R, $Out>
   @override
   DmChannel $make(CopyWithData data) => DmChannel(
     id: data.get(#id, or: $value.id),
-    recipient: data.get(#recipient, or: $value.recipient),
+    recipients: data.get(#recipients, or: $value.recipients),
     lastMessageId: data.get(#lastMessageId, or: $value.lastMessageId),
     lastPinTimestamp: data.get(#lastPinTimestamp, or: $value.lastPinTimestamp),
     rateLimitPerUser: data.get(#rateLimitPerUser, or: $value.rateLimitPerUser),

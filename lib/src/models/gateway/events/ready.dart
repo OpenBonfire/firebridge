@@ -1,7 +1,11 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:nyxx/src/models/channel/channel.dart';
+import 'package:nyxx/src/models/channel/types/dm.dart';
 import 'package:nyxx/src/models/gateway/event.dart';
+import 'package:nyxx/src/models/gateway/events/presence.dart';
 import 'package:nyxx/src/models/gateway/opcode.dart';
 import 'package:nyxx/src/models/guild/guild.dart';
+import 'package:nyxx/src/models/user/settings/read_state.dart';
 import 'package:nyxx/src/models/user/user.dart';
 
 part 'ready.mapper.dart';
@@ -33,6 +37,16 @@ class ReadyEvent extends DispatchEvent with ReadyEventMappable {
   /// The total number of shards.
   final int? totalShards;
 
+  final List<ReadState> readState;
+
+  final String sessionType;
+  final String staticClientSessionId;
+
+  final List<PresenceUpdateEvent> presences;
+
+  final String userSettingsProto;
+  final List<DmChannel> privateChannels;
+
   /// {@macro ready_event}
   /// @nodoc
   ReadyEvent({
@@ -43,6 +57,12 @@ class ReadyEvent extends DispatchEvent with ReadyEventMappable {
     required this.resumeGatewayUrl,
     required this.shardId,
     required this.totalShards,
+    required this.readState,
+    required this.sessionType,
+    required this.staticClientSessionId,
+    required this.presences,
+    required this.userSettingsProto,
+    required this.privateChannels,
   });
 }
 

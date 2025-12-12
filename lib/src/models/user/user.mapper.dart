@@ -191,6 +191,7 @@ class UserMapper extends ClassMapperBase<User> {
       DiscordColorMapper.ensureInitialized();
       LocaleMapper.ensureInitialized();
       UserFlagsMapper.ensureInitialized();
+      AvatarDecorationDataMapper.ensureInitialized();
       UserPrimaryGuildMapper.ensureInitialized();
     }
     return _instance!;
@@ -228,11 +229,13 @@ class UserMapper extends ClassMapperBase<User> {
     _$system,
     opt: true,
   );
-  static bool _$mfaEnabled(User v) => v.mfaEnabled;
+  static bool? _$mfaEnabled(User v) => v.mfaEnabled;
   static const Field<User, bool> _f$mfaEnabled = Field(
     'mfaEnabled',
     _$mfaEnabled,
     key: r'mfa_enabled',
+    opt: true,
+    def: false,
   );
   static String? _$bannerHash(User v) => v.bannerHash;
   static const Field<User, String> _f$bannerHash = Field(
@@ -369,6 +372,8 @@ abstract class UserCopyWith<$R, $In extends User, $Out>
   DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get accentColor;
   UserFlagsCopyWith<$R, UserFlags, UserFlags>? get flags;
   UserFlagsCopyWith<$R, UserFlags, UserFlags>? get publicFlags;
+  AvatarDecorationDataCopyWith<$R, AvatarDecorationData, AvatarDecorationData>?
+  get avatarDecorationData;
   UserPrimaryGuildCopyWith<$R, UserPrimaryGuild, UserPrimaryGuild>?
   get primaryGuild;
   @override
@@ -412,6 +417,11 @@ class _UserCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, User, $Out>
   UserFlagsCopyWith<$R, UserFlags, UserFlags>? get publicFlags =>
       $value.publicFlags?.copyWith.$chain((v) => call(publicFlags: v));
   @override
+  AvatarDecorationDataCopyWith<$R, AvatarDecorationData, AvatarDecorationData>?
+  get avatarDecorationData => $value.avatarDecorationData?.copyWith.$chain(
+    (v) => call(avatarDecorationData: v),
+  );
+  @override
   UserPrimaryGuildCopyWith<$R, UserPrimaryGuild, UserPrimaryGuild>?
   get primaryGuild =>
       $value.primaryGuild?.copyWith.$chain((v) => call(primaryGuild: v));
@@ -424,7 +434,7 @@ class _UserCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, User, $Out>
     Object? avatarHash = $none,
     Object? bot = $none,
     Object? system = $none,
-    bool? mfaEnabled,
+    Object? mfaEnabled = $none,
     Object? bannerHash = $none,
     Object? accentColor = $none,
     Object? locale = $none,
@@ -442,7 +452,7 @@ class _UserCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, User, $Out>
       if (avatarHash != $none) #avatarHash: avatarHash,
       if (bot != $none) #bot: bot,
       if (system != $none) #system: system,
-      if (mfaEnabled != null) #mfaEnabled: mfaEnabled,
+      if (mfaEnabled != $none) #mfaEnabled: mfaEnabled,
       if (bannerHash != $none) #bannerHash: bannerHash,
       if (accentColor != $none) #accentColor: accentColor,
       if (locale != $none) #locale: locale,

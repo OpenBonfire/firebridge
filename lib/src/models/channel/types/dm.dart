@@ -12,7 +12,7 @@ part 'dm.mapper.dart';
 @MappableClass(discriminatorValue: 1)
 class DmChannel extends TextChannel with DmChannelMappable {
   /// The recipient of this channel.
-  final User recipient;
+  final List<User> recipients;
 
   @override
   final Snowflake? lastMessageId;
@@ -30,7 +30,7 @@ class DmChannel extends TextChannel with DmChannelMappable {
   /// @nodoc
   DmChannel({
     required super.id,
-    required this.recipient,
+    required this.recipients,
     required this.lastMessageId,
     required this.lastPinTimestamp,
     required this.rateLimitPerUser,

@@ -265,6 +265,324 @@ class _ClientStatusCopyWithImpl<$R, $Out>
   ) => _ClientStatusCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
+class ActivityMapper extends ClassMapperBase<Activity> {
+  ActivityMapper._();
+
+  static ActivityMapper? _instance;
+  static ActivityMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = ActivityMapper._());
+      ActivityTypeMapper.ensureInitialized();
+      ActivityTimestampsMapper.ensureInitialized();
+      SnowflakeMapper.ensureInitialized();
+      EmojiMapper.ensureInitialized();
+      ActivityPartyMapper.ensureInitialized();
+      ActivityAssetsMapper.ensureInitialized();
+      ActivitySecretsMapper.ensureInitialized();
+      ActivityFlagsMapper.ensureInitialized();
+      ActivityButtonMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'Activity';
+
+  static String _$name(Activity v) => v.name;
+  static const Field<Activity, String> _f$name = Field('name', _$name);
+  static ActivityType _$type(Activity v) => v.type;
+  static const Field<Activity, ActivityType> _f$type = Field('type', _$type);
+  static Uri? _$url(Activity v) => v.url;
+  static const Field<Activity, Uri> _f$url = Field('url', _$url);
+  static DateTime? _$createdAt(Activity v) => v.createdAt;
+  static const Field<Activity, DateTime> _f$createdAt = Field(
+    'createdAt',
+    _$createdAt,
+    key: r'created_at',
+  );
+  static ActivityTimestamps? _$timestamps(Activity v) => v.timestamps;
+  static const Field<Activity, ActivityTimestamps> _f$timestamps = Field(
+    'timestamps',
+    _$timestamps,
+  );
+  static Snowflake? _$applicationId(Activity v) => v.applicationId;
+  static const Field<Activity, Snowflake> _f$applicationId = Field(
+    'applicationId',
+    _$applicationId,
+    key: r'application_id',
+  );
+  static String? _$details(Activity v) => v.details;
+  static const Field<Activity, String> _f$details = Field('details', _$details);
+  static String? _$state(Activity v) => v.state;
+  static const Field<Activity, String> _f$state = Field('state', _$state);
+  static Emoji? _$emoji(Activity v) => v.emoji;
+  static const Field<Activity, Emoji> _f$emoji = Field('emoji', _$emoji);
+  static ActivityParty? _$party(Activity v) => v.party;
+  static const Field<Activity, ActivityParty> _f$party = Field(
+    'party',
+    _$party,
+  );
+  static ActivityAssets? _$assets(Activity v) => v.assets;
+  static const Field<Activity, ActivityAssets> _f$assets = Field(
+    'assets',
+    _$assets,
+  );
+  static ActivitySecrets? _$secrets(Activity v) => v.secrets;
+  static const Field<Activity, ActivitySecrets> _f$secrets = Field(
+    'secrets',
+    _$secrets,
+  );
+  static bool? _$isInstance(Activity v) => v.isInstance;
+  static const Field<Activity, bool> _f$isInstance = Field(
+    'isInstance',
+    _$isInstance,
+    key: r'is_instance',
+  );
+  static ActivityFlags? _$flags(Activity v) => v.flags;
+  static const Field<Activity, ActivityFlags> _f$flags = Field(
+    'flags',
+    _$flags,
+  );
+  static List<ActivityButton>? _$buttons(Activity v) => v.buttons;
+  static const Field<Activity, List<ActivityButton>> _f$buttons = Field(
+    'buttons',
+    _$buttons,
+  );
+
+  @override
+  final MappableFields<Activity> fields = const {
+    #name: _f$name,
+    #type: _f$type,
+    #url: _f$url,
+    #createdAt: _f$createdAt,
+    #timestamps: _f$timestamps,
+    #applicationId: _f$applicationId,
+    #details: _f$details,
+    #state: _f$state,
+    #emoji: _f$emoji,
+    #party: _f$party,
+    #assets: _f$assets,
+    #secrets: _f$secrets,
+    #isInstance: _f$isInstance,
+    #flags: _f$flags,
+    #buttons: _f$buttons,
+  };
+
+  static Activity _instantiate(DecodingData data) {
+    return Activity(
+      name: data.dec(_f$name),
+      type: data.dec(_f$type),
+      url: data.dec(_f$url),
+      createdAt: data.dec(_f$createdAt),
+      timestamps: data.dec(_f$timestamps),
+      applicationId: data.dec(_f$applicationId),
+      details: data.dec(_f$details),
+      state: data.dec(_f$state),
+      emoji: data.dec(_f$emoji),
+      party: data.dec(_f$party),
+      assets: data.dec(_f$assets),
+      secrets: data.dec(_f$secrets),
+      isInstance: data.dec(_f$isInstance),
+      flags: data.dec(_f$flags),
+      buttons: data.dec(_f$buttons),
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static Activity fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<Activity>(map);
+  }
+
+  static Activity fromJson(String json) {
+    return ensureInitialized().decodeJson<Activity>(json);
+  }
+}
+
+mixin ActivityMappable {
+  String toJson() {
+    return ActivityMapper.ensureInitialized().encodeJson<Activity>(
+      this as Activity,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return ActivityMapper.ensureInitialized().encodeMap<Activity>(
+      this as Activity,
+    );
+  }
+
+  ActivityCopyWith<Activity, Activity, Activity> get copyWith =>
+      _ActivityCopyWithImpl<Activity, Activity>(
+        this as Activity,
+        $identity,
+        $identity,
+      );
+  @override
+  String toString() {
+    return ActivityMapper.ensureInitialized().stringifyValue(this as Activity);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return ActivityMapper.ensureInitialized().equalsValue(
+      this as Activity,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return ActivityMapper.ensureInitialized().hashValue(this as Activity);
+  }
+}
+
+extension ActivityValueCopy<$R, $Out> on ObjectCopyWith<$R, Activity, $Out> {
+  ActivityCopyWith<$R, Activity, $Out> get $asActivity =>
+      $base.as((v, t, t2) => _ActivityCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class ActivityCopyWith<$R, $In extends Activity, $Out>
+    implements ClassCopyWith<$R, $In, $Out> {
+  ActivityTimestampsCopyWith<$R, ActivityTimestamps, ActivityTimestamps>?
+  get timestamps;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get applicationId;
+  EmojiCopyWith<$R, Emoji, Emoji>? get emoji;
+  ActivityPartyCopyWith<$R, ActivityParty, ActivityParty>? get party;
+  ActivityAssetsCopyWith<$R, ActivityAssets, ActivityAssets>? get assets;
+  ActivitySecretsCopyWith<$R, ActivitySecrets, ActivitySecrets>? get secrets;
+  ActivityFlagsCopyWith<$R, ActivityFlags, ActivityFlags>? get flags;
+  ListCopyWith<
+    $R,
+    ActivityButton,
+    ActivityButtonCopyWith<$R, ActivityButton, ActivityButton>
+  >?
+  get buttons;
+  $R call({
+    String? name,
+    ActivityType? type,
+    Uri? url,
+    DateTime? createdAt,
+    ActivityTimestamps? timestamps,
+    Snowflake? applicationId,
+    String? details,
+    String? state,
+    Emoji? emoji,
+    ActivityParty? party,
+    ActivityAssets? assets,
+    ActivitySecrets? secrets,
+    bool? isInstance,
+    ActivityFlags? flags,
+    List<ActivityButton>? buttons,
+  });
+  ActivityCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+}
+
+class _ActivityCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, Activity, $Out>
+    implements ActivityCopyWith<$R, Activity, $Out> {
+  _ActivityCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<Activity> $mapper =
+      ActivityMapper.ensureInitialized();
+  @override
+  ActivityTimestampsCopyWith<$R, ActivityTimestamps, ActivityTimestamps>?
+  get timestamps =>
+      $value.timestamps?.copyWith.$chain((v) => call(timestamps: v));
+  @override
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get applicationId =>
+      $value.applicationId?.copyWith.$chain((v) => call(applicationId: v));
+  @override
+  EmojiCopyWith<$R, Emoji, Emoji>? get emoji =>
+      $value.emoji?.copyWith.$chain((v) => call(emoji: v));
+  @override
+  ActivityPartyCopyWith<$R, ActivityParty, ActivityParty>? get party =>
+      $value.party?.copyWith.$chain((v) => call(party: v));
+  @override
+  ActivityAssetsCopyWith<$R, ActivityAssets, ActivityAssets>? get assets =>
+      $value.assets?.copyWith.$chain((v) => call(assets: v));
+  @override
+  ActivitySecretsCopyWith<$R, ActivitySecrets, ActivitySecrets>? get secrets =>
+      $value.secrets?.copyWith.$chain((v) => call(secrets: v));
+  @override
+  ActivityFlagsCopyWith<$R, ActivityFlags, ActivityFlags>? get flags =>
+      $value.flags?.copyWith.$chain((v) => call(flags: v));
+  @override
+  ListCopyWith<
+    $R,
+    ActivityButton,
+    ActivityButtonCopyWith<$R, ActivityButton, ActivityButton>
+  >?
+  get buttons => $value.buttons != null
+      ? ListCopyWith(
+          $value.buttons!,
+          (v, t) => v.copyWith.$chain(t),
+          (v) => call(buttons: v),
+        )
+      : null;
+  @override
+  $R call({
+    String? name,
+    ActivityType? type,
+    Object? url = $none,
+    Object? createdAt = $none,
+    Object? timestamps = $none,
+    Object? applicationId = $none,
+    Object? details = $none,
+    Object? state = $none,
+    Object? emoji = $none,
+    Object? party = $none,
+    Object? assets = $none,
+    Object? secrets = $none,
+    Object? isInstance = $none,
+    Object? flags = $none,
+    Object? buttons = $none,
+  }) => $apply(
+    FieldCopyWithData({
+      if (name != null) #name: name,
+      if (type != null) #type: type,
+      if (url != $none) #url: url,
+      if (createdAt != $none) #createdAt: createdAt,
+      if (timestamps != $none) #timestamps: timestamps,
+      if (applicationId != $none) #applicationId: applicationId,
+      if (details != $none) #details: details,
+      if (state != $none) #state: state,
+      if (emoji != $none) #emoji: emoji,
+      if (party != $none) #party: party,
+      if (assets != $none) #assets: assets,
+      if (secrets != $none) #secrets: secrets,
+      if (isInstance != $none) #isInstance: isInstance,
+      if (flags != $none) #flags: flags,
+      if (buttons != $none) #buttons: buttons,
+    }),
+  );
+  @override
+  Activity $make(CopyWithData data) => Activity(
+    name: data.get(#name, or: $value.name),
+    type: data.get(#type, or: $value.type),
+    url: data.get(#url, or: $value.url),
+    createdAt: data.get(#createdAt, or: $value.createdAt),
+    timestamps: data.get(#timestamps, or: $value.timestamps),
+    applicationId: data.get(#applicationId, or: $value.applicationId),
+    details: data.get(#details, or: $value.details),
+    state: data.get(#state, or: $value.state),
+    emoji: data.get(#emoji, or: $value.emoji),
+    party: data.get(#party, or: $value.party),
+    assets: data.get(#assets, or: $value.assets),
+    secrets: data.get(#secrets, or: $value.secrets),
+    isInstance: data.get(#isInstance, or: $value.isInstance),
+    flags: data.get(#flags, or: $value.flags),
+    buttons: data.get(#buttons, or: $value.buttons),
+  );
+
+  @override
+  ActivityCopyWith<$R2, Activity, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _ActivityCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
 class ActivityTimestampsMapper extends ClassMapperBase<ActivityTimestamps> {
   ActivityTimestampsMapper._();
 

@@ -139,6 +139,7 @@ class MemberMapper extends ClassMapperBase<Member> {
       UserMapper.ensureInitialized();
       MemberFlagsMapper.ensureInitialized();
       PermissionsMapper.ensureInitialized();
+      AvatarDecorationDataMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -323,6 +324,8 @@ abstract class MemberCopyWith<$R, $In extends Member, $Out>
   get roleIds;
   MemberFlagsCopyWith<$R, MemberFlags, MemberFlags> get flags;
   PermissionsCopyWith<$R, Permissions, Permissions>? get permissions;
+  AvatarDecorationDataCopyWith<$R, AvatarDecorationData, AvatarDecorationData>?
+  get avatarDecorationData;
   @override
   $R call({
     Snowflake? id,
@@ -370,6 +373,11 @@ class _MemberCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Member, $Out>
   @override
   PermissionsCopyWith<$R, Permissions, Permissions>? get permissions =>
       $value.permissions?.copyWith.$chain((v) => call(permissions: v));
+  @override
+  AvatarDecorationDataCopyWith<$R, AvatarDecorationData, AvatarDecorationData>?
+  get avatarDecorationData => $value.avatarDecorationData?.copyWith.$chain(
+    (v) => call(avatarDecorationData: v),
+  );
   @override
   $R call({
     Snowflake? id,

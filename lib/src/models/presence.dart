@@ -33,7 +33,8 @@ enum UserStatus { online, dnd, idle, offline }
 /// {@template activity}
 /// A Rich Presence activity.
 /// {@endtemplate}
-class Activity with ToStringHelper {
+@MappableClass()
+class Activity with ToStringHelper, ActivityMappable {
   /// The name of this activity.
   final String name;
 

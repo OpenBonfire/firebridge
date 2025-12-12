@@ -54,7 +54,7 @@ class User extends PartialUser
   final bool? system;
 
   /// Whether the user has two factor authentication enabled.
-  final bool mfaEnabled;
+  final bool? mfaEnabled;
 
   /// The user's banner hash, if they have a banner.
   final String? bannerHash;
@@ -93,7 +93,7 @@ class User extends PartialUser
     required this.avatarHash,
     this.bot,
     this.system,
-    required this.mfaEnabled,
+    this.mfaEnabled = false,
     required this.bannerHash,
     required this.accentColor,
     required this.locale,

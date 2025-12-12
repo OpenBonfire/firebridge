@@ -19,6 +19,7 @@ class PresenceUpdateEventMapper
       PartialUserMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       UserStatusMapper.ensureInitialized();
+      ActivityMapper.ensureInitialized();
       ClientStatusMapper.ensureInitialized();
     }
     return _instance!;
@@ -161,7 +162,7 @@ abstract class PresenceUpdateEventCopyWith<
     implements DispatchEventCopyWith<$R, $In, $Out> {
   PartialUserCopyWith<$R, PartialUser, PartialUser>? get user;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
-  ListCopyWith<$R, Activity, ObjectCopyWith<$R, Activity, Activity>>?
+  ListCopyWith<$R, Activity, ActivityCopyWith<$R, Activity, Activity>>?
   get activities;
   ClientStatusCopyWith<$R, ClientStatus, ClientStatus>? get clientStatus;
   @override
@@ -192,11 +193,11 @@ class _PresenceUpdateEventCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
       $value.guildId?.copyWith.$chain((v) => call(guildId: v));
   @override
-  ListCopyWith<$R, Activity, ObjectCopyWith<$R, Activity, Activity>>?
+  ListCopyWith<$R, Activity, ActivityCopyWith<$R, Activity, Activity>>?
   get activities => $value.activities != null
       ? ListCopyWith(
           $value.activities!,
-          (v, t) => ObjectCopyWith(v, $identity, t),
+          (v, t) => v.copyWith.$chain(t),
           (v) => call(activities: v),
         )
       : null;

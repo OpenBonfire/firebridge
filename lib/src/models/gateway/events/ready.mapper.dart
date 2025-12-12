@@ -17,6 +17,9 @@ class ReadyEventMapper extends SubClassMapperBase<ReadyEvent> {
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       UserMapper.ensureInitialized();
       PartialGuildMapper.ensureInitialized();
+      ReadStateMapper.ensureInitialized();
+      PresenceUpdateEventMapper.ensureInitialized();
+      DmChannelMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -61,6 +64,40 @@ class ReadyEventMapper extends SubClassMapperBase<ReadyEvent> {
     _$totalShards,
     key: r'total_shards',
   );
+  static List<ReadState> _$readState(ReadyEvent v) => v.readState;
+  static const Field<ReadyEvent, List<ReadState>> _f$readState = Field(
+    'readState',
+    _$readState,
+    key: r'read_state',
+  );
+  static String _$sessionType(ReadyEvent v) => v.sessionType;
+  static const Field<ReadyEvent, String> _f$sessionType = Field(
+    'sessionType',
+    _$sessionType,
+    key: r'session_type',
+  );
+  static String _$staticClientSessionId(ReadyEvent v) =>
+      v.staticClientSessionId;
+  static const Field<ReadyEvent, String> _f$staticClientSessionId = Field(
+    'staticClientSessionId',
+    _$staticClientSessionId,
+    key: r'static_client_session_id',
+  );
+  static List<PresenceUpdateEvent> _$presences(ReadyEvent v) => v.presences;
+  static const Field<ReadyEvent, List<PresenceUpdateEvent>> _f$presences =
+      Field('presences', _$presences);
+  static String _$userSettingsProto(ReadyEvent v) => v.userSettingsProto;
+  static const Field<ReadyEvent, String> _f$userSettingsProto = Field(
+    'userSettingsProto',
+    _$userSettingsProto,
+    key: r'user_settings_proto',
+  );
+  static List<DmChannel> _$privateChannels(ReadyEvent v) => v.privateChannels;
+  static const Field<ReadyEvent, List<DmChannel>> _f$privateChannels = Field(
+    'privateChannels',
+    _$privateChannels,
+    key: r'private_channels',
+  );
   static Opcode _$opcode(ReadyEvent v) => v.opcode;
   static const Field<ReadyEvent, Opcode> _f$opcode = Field(
     'opcode',
@@ -77,6 +114,12 @@ class ReadyEventMapper extends SubClassMapperBase<ReadyEvent> {
     #resumeGatewayUrl: _f$resumeGatewayUrl,
     #shardId: _f$shardId,
     #totalShards: _f$totalShards,
+    #readState: _f$readState,
+    #sessionType: _f$sessionType,
+    #staticClientSessionId: _f$staticClientSessionId,
+    #presences: _f$presences,
+    #userSettingsProto: _f$userSettingsProto,
+    #privateChannels: _f$privateChannels,
     #opcode: _f$opcode,
   };
 
@@ -97,6 +140,12 @@ class ReadyEventMapper extends SubClassMapperBase<ReadyEvent> {
       resumeGatewayUrl: data.dec(_f$resumeGatewayUrl),
       shardId: data.dec(_f$shardId),
       totalShards: data.dec(_f$totalShards),
+      readState: data.dec(_f$readState),
+      sessionType: data.dec(_f$sessionType),
+      staticClientSessionId: data.dec(_f$staticClientSessionId),
+      presences: data.dec(_f$presences),
+      userSettingsProto: data.dec(_f$userSettingsProto),
+      privateChannels: data.dec(_f$privateChannels),
     );
   }
 
@@ -167,6 +216,16 @@ abstract class ReadyEventCopyWith<$R, $In extends ReadyEvent, $Out>
     PartialGuildCopyWith<$R, PartialGuild, PartialGuild>
   >
   get guilds;
+  ListCopyWith<$R, ReadState, ReadStateCopyWith<$R, ReadState, ReadState>>
+  get readState;
+  ListCopyWith<
+    $R,
+    PresenceUpdateEvent,
+    PresenceUpdateEventCopyWith<$R, PresenceUpdateEvent, PresenceUpdateEvent>
+  >
+  get presences;
+  ListCopyWith<$R, DmChannel, DmChannelCopyWith<$R, DmChannel, DmChannel>>
+  get privateChannels;
   @override
   $R call({
     int? version,
@@ -176,6 +235,12 @@ abstract class ReadyEventCopyWith<$R, $In extends ReadyEvent, $Out>
     Uri? resumeGatewayUrl,
     int? shardId,
     int? totalShards,
+    List<ReadState>? readState,
+    String? sessionType,
+    String? staticClientSessionId,
+    List<PresenceUpdateEvent>? presences,
+    String? userSettingsProto,
+    List<DmChannel>? privateChannels,
   });
   ReadyEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -203,6 +268,31 @@ class _ReadyEventCopyWithImpl<$R, $Out>
     (v) => call(guilds: v),
   );
   @override
+  ListCopyWith<$R, ReadState, ReadStateCopyWith<$R, ReadState, ReadState>>
+  get readState => ListCopyWith(
+    $value.readState,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(readState: v),
+  );
+  @override
+  ListCopyWith<
+    $R,
+    PresenceUpdateEvent,
+    PresenceUpdateEventCopyWith<$R, PresenceUpdateEvent, PresenceUpdateEvent>
+  >
+  get presences => ListCopyWith(
+    $value.presences,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(presences: v),
+  );
+  @override
+  ListCopyWith<$R, DmChannel, DmChannelCopyWith<$R, DmChannel, DmChannel>>
+  get privateChannels => ListCopyWith(
+    $value.privateChannels,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(privateChannels: v),
+  );
+  @override
   $R call({
     int? version,
     User? user,
@@ -211,6 +301,12 @@ class _ReadyEventCopyWithImpl<$R, $Out>
     Uri? resumeGatewayUrl,
     Object? shardId = $none,
     Object? totalShards = $none,
+    List<ReadState>? readState,
+    String? sessionType,
+    String? staticClientSessionId,
+    List<PresenceUpdateEvent>? presences,
+    String? userSettingsProto,
+    List<DmChannel>? privateChannels,
   }) => $apply(
     FieldCopyWithData({
       if (version != null) #version: version,
@@ -220,6 +316,13 @@ class _ReadyEventCopyWithImpl<$R, $Out>
       if (resumeGatewayUrl != null) #resumeGatewayUrl: resumeGatewayUrl,
       if (shardId != $none) #shardId: shardId,
       if (totalShards != $none) #totalShards: totalShards,
+      if (readState != null) #readState: readState,
+      if (sessionType != null) #sessionType: sessionType,
+      if (staticClientSessionId != null)
+        #staticClientSessionId: staticClientSessionId,
+      if (presences != null) #presences: presences,
+      if (userSettingsProto != null) #userSettingsProto: userSettingsProto,
+      if (privateChannels != null) #privateChannels: privateChannels,
     }),
   );
   @override
@@ -231,6 +334,18 @@ class _ReadyEventCopyWithImpl<$R, $Out>
     resumeGatewayUrl: data.get(#resumeGatewayUrl, or: $value.resumeGatewayUrl),
     shardId: data.get(#shardId, or: $value.shardId),
     totalShards: data.get(#totalShards, or: $value.totalShards),
+    readState: data.get(#readState, or: $value.readState),
+    sessionType: data.get(#sessionType, or: $value.sessionType),
+    staticClientSessionId: data.get(
+      #staticClientSessionId,
+      or: $value.staticClientSessionId,
+    ),
+    presences: data.get(#presences, or: $value.presences),
+    userSettingsProto: data.get(
+      #userSettingsProto,
+      or: $value.userSettingsProto,
+    ),
+    privateChannels: data.get(#privateChannels, or: $value.privateChannels),
   );
 
   @override

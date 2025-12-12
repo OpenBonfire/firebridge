@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:logging/logging.dart';
 import 'package:nyxx/src/api_options.dart';
@@ -219,7 +220,7 @@ class Gateway extends GatewayManager with EventParser {
   DispatchEvent parseDispatchEvent(RawDispatchEvent raw) {
     // if (raw.name == "READY") {
     //   print("ready");
-    //   print(raw.payload.keys.toList());
+    //   print(jsonEncode(raw.payload));
     // }
     final event = DispatchEventMapper.fromMap({
       'type': raw.name,

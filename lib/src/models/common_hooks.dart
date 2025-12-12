@@ -45,7 +45,12 @@ class DateTimeMapper extends SimpleMapper<DateTime> {
   const DateTimeMapper();
 
   @override
-  DateTime decode(Object value) => DateTime.parse(value as String);
+  DateTime decode(Object value) {
+    if (value is int) {
+      return DateTime.fromMillisecondsSinceEpoch(value, isUtc: true);
+    }
+    return DateTime.parse(value as String);
+  }
 
   @override
   String encode(DateTime self) => self.toIso8601String();
