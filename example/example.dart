@@ -1,6 +1,5 @@
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx/src/models/common_hooks.dart';
-import 'package:nyxx/src/models/guild/user_guild_settings.dart';
 
 void main() async {
   initNyxxMappers();
