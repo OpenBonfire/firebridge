@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:isolate';
 
+import 'package:firebridge/src/builders/guild/guild_subscriptions_bulk.dart';
 import 'package:logging/logging.dart';
 import 'package:firebridge/src/api_options.dart';
 import 'package:firebridge/src/builders/voice.dart';
@@ -175,6 +176,11 @@ class Shard extends Stream<ShardMessage> implements StreamSink<GatewayMessage> {
       'guild_id': guildId.toString(),
       ...builder.toMap(),
     }));
+  }
+
+  void updateGuildSubscriptionsBulk(
+      Snowflake guildId, GuildSubscriptionsBulkBuilder builder) {
+    add(Send(opcode: Opcode.guildSubscriptionsBulk, data: builder.toMap()));
   }
 
   @override
