@@ -23,7 +23,7 @@ abstract class VoiceChannel with VoiceChannelMappable implements Channel {
   String? get rtcRegion;
 
   /// The [VideoQualityMode] for cameras in this channel.
-  VideoQualityMode get videoQualityMode;
+  VideoQualityMode? get videoQualityMode;
 }
 
 /// The quality mode of cameras in a [VoiceChannel].

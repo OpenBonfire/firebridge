@@ -7,14 +7,14 @@
 
 part of 'thread.dart';
 
-class ThreadMapper extends ClassMapperBase<Thread> {
+class ThreadMapper extends SubClassMapperBase<Thread> {
   ThreadMapper._();
 
   static ThreadMapper? _instance;
   static ThreadMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ThreadMapper._());
-      TextChannelMapper.ensureInitialized();
+      TextChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -28,6 +28,14 @@ class ThreadMapper extends ClassMapperBase<Thread> {
 
   @override
   final MappableFields<Thread> fields = const {#id: _f$id};
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'Thread';
+  @override
+  late final ClassMapperBase superMapper =
+      TextChannelMapper.ensureInitialized();
 
   static Thread _instantiate(DecodingData data) {
     throw MapperException.missingConstructor('Thread');

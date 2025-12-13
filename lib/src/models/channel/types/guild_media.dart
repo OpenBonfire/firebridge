@@ -40,16 +40,16 @@ class GuildMediaChannel extends Channel
   final ForumSort? defaultSortOrder;
 
   @override
-  final Duration defaultAutoArchiveDuration;
+  final Duration? defaultAutoArchiveDuration;
 
   @override
   final Duration? defaultThreadRateLimitPerUser;
 
   @override
-  final Snowflake guildId;
+  final Snowflake? guildId;
 
   @override
-  final bool isNsfw;
+  final bool nsfw;
 
   @override
   final String name;
@@ -78,10 +78,10 @@ class GuildMediaChannel extends Channel
     required this.availableTags,
     required this.defaultReaction,
     required this.defaultSortOrder,
-    required this.defaultAutoArchiveDuration,
+    this.defaultAutoArchiveDuration,
     required this.defaultThreadRateLimitPerUser,
     required this.guildId,
-    required this.isNsfw,
+    this.nsfw = false,
     required this.name,
     required this.parentId,
     required this.permissionOverwrites,

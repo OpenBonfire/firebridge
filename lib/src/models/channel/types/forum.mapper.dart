@@ -177,13 +177,14 @@ class ForumChannelMapper extends SubClassMapperBase<ForumChannel> {
     _$defaultSortOrder,
     key: r'default_sort_order',
   );
-  static Duration _$defaultAutoArchiveDuration(ForumChannel v) =>
+  static Duration? _$defaultAutoArchiveDuration(ForumChannel v) =>
       v.defaultAutoArchiveDuration;
   static const Field<ForumChannel, Duration> _f$defaultAutoArchiveDuration =
       Field(
         'defaultAutoArchiveDuration',
         _$defaultAutoArchiveDuration,
         key: r'default_auto_archive_duration',
+        opt: true,
       );
   static Duration? _$defaultThreadRateLimitPerUser(ForumChannel v) =>
       v.defaultThreadRateLimitPerUser;
@@ -193,17 +194,19 @@ class ForumChannelMapper extends SubClassMapperBase<ForumChannel> {
         _$defaultThreadRateLimitPerUser,
         key: r'default_thread_rate_limit_per_user',
       );
-  static Snowflake _$guildId(ForumChannel v) => v.guildId;
+  static Snowflake? _$guildId(ForumChannel v) => v.guildId;
   static const Field<ForumChannel, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
     key: r'guild_id',
+    opt: true,
   );
-  static bool _$isNsfw(ForumChannel v) => v.isNsfw;
-  static const Field<ForumChannel, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool _$nsfw(ForumChannel v) => v.nsfw;
+  static const Field<ForumChannel, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
+    opt: true,
+    def: false,
   );
   static String _$name(ForumChannel v) => v.name;
   static const Field<ForumChannel, String> _f$name = Field('name', _$name);
@@ -242,7 +245,7 @@ class ForumChannelMapper extends SubClassMapperBase<ForumChannel> {
     #defaultAutoArchiveDuration: _f$defaultAutoArchiveDuration,
     #defaultThreadRateLimitPerUser: _f$defaultThreadRateLimitPerUser,
     #guildId: _f$guildId,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #name: _f$name,
     #parentId: _f$parentId,
     #permissionOverwrites: _f$permissionOverwrites,
@@ -271,7 +274,7 @@ class ForumChannelMapper extends SubClassMapperBase<ForumChannel> {
       defaultAutoArchiveDuration: data.dec(_f$defaultAutoArchiveDuration),
       defaultThreadRateLimitPerUser: data.dec(_f$defaultThreadRateLimitPerUser),
       guildId: data.dec(_f$guildId),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       name: data.dec(_f$name),
       parentId: data.dec(_f$parentId),
       permissionOverwrites: data.dec(_f$permissionOverwrites),
@@ -352,7 +355,7 @@ abstract class ForumChannelCopyWith<$R, $In extends ForumChannel, $Out>
   get availableTags;
   DefaultReactionCopyWith<$R, DefaultReaction, DefaultReaction>?
   get defaultReaction;
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
   ListCopyWith<
     $R,
@@ -375,7 +378,7 @@ abstract class ForumChannelCopyWith<$R, $In extends ForumChannel, $Out>
     Duration? defaultAutoArchiveDuration,
     Duration? defaultThreadRateLimitPerUser,
     Snowflake? guildId,
-    bool? isNsfw,
+    bool? nsfw,
     String? name,
     Snowflake? parentId,
     List<PermissionOverwrite>? permissionOverwrites,
@@ -413,8 +416,8 @@ class _ForumChannelCopyWithImpl<$R, $Out>
   get defaultReaction =>
       $value.defaultReaction?.copyWith.$chain((v) => call(defaultReaction: v));
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
-      $value.guildId.copyWith.$chain((v) => call(guildId: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
+      $value.guildId?.copyWith.$chain((v) => call(guildId: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId =>
       $value.parentId?.copyWith.$chain((v) => call(parentId: v));
@@ -441,10 +444,10 @@ class _ForumChannelCopyWithImpl<$R, $Out>
     List<ForumTag>? availableTags,
     Object? defaultReaction = $none,
     Object? defaultSortOrder = $none,
-    Duration? defaultAutoArchiveDuration,
+    Object? defaultAutoArchiveDuration = $none,
     Object? defaultThreadRateLimitPerUser = $none,
-    Snowflake? guildId,
-    bool? isNsfw,
+    Object? guildId = $none,
+    bool? nsfw,
     String? name,
     Object? parentId = $none,
     List<PermissionOverwrite>? permissionOverwrites,
@@ -461,12 +464,12 @@ class _ForumChannelCopyWithImpl<$R, $Out>
       if (availableTags != null) #availableTags: availableTags,
       if (defaultReaction != $none) #defaultReaction: defaultReaction,
       if (defaultSortOrder != $none) #defaultSortOrder: defaultSortOrder,
-      if (defaultAutoArchiveDuration != null)
+      if (defaultAutoArchiveDuration != $none)
         #defaultAutoArchiveDuration: defaultAutoArchiveDuration,
       if (defaultThreadRateLimitPerUser != $none)
         #defaultThreadRateLimitPerUser: defaultThreadRateLimitPerUser,
-      if (guildId != null) #guildId: guildId,
-      if (isNsfw != null) #isNsfw: isNsfw,
+      if (guildId != $none) #guildId: guildId,
+      if (nsfw != null) #nsfw: nsfw,
       if (name != null) #name: name,
       if (parentId != $none) #parentId: parentId,
       if (permissionOverwrites != null)
@@ -495,7 +498,7 @@ class _ForumChannelCopyWithImpl<$R, $Out>
       or: $value.defaultThreadRateLimitPerUser,
     ),
     guildId: data.get(#guildId, or: $value.guildId),
-    isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+    nsfw: data.get(#nsfw, or: $value.nsfw),
     name: data.get(#name, or: $value.name),
     parentId: data.get(#parentId, or: $value.parentId),
     permissionOverwrites: data.get(
@@ -530,11 +533,10 @@ class ForumTagMapper extends ClassMapperBase<ForumTag> {
   static const Field<ForumTag, Snowflake> _f$id = Field('id', _$id);
   static String _$name(ForumTag v) => v.name;
   static const Field<ForumTag, String> _f$name = Field('name', _$name);
-  static bool _$isModerated(ForumTag v) => v.isModerated;
-  static const Field<ForumTag, bool> _f$isModerated = Field(
-    'isModerated',
-    _$isModerated,
-    key: r'is_moderated',
+  static bool _$moderated(ForumTag v) => v.moderated;
+  static const Field<ForumTag, bool> _f$moderated = Field(
+    'moderated',
+    _$moderated,
   );
   static Snowflake? _$emojiId(ForumTag v) => v.emojiId;
   static const Field<ForumTag, Snowflake> _f$emojiId = Field(
@@ -553,7 +555,7 @@ class ForumTagMapper extends ClassMapperBase<ForumTag> {
   final MappableFields<ForumTag> fields = const {
     #id: _f$id,
     #name: _f$name,
-    #isModerated: _f$isModerated,
+    #moderated: _f$moderated,
     #emojiId: _f$emojiId,
     #emojiName: _f$emojiName,
   };
@@ -562,7 +564,7 @@ class ForumTagMapper extends ClassMapperBase<ForumTag> {
     return ForumTag(
       id: data.dec(_f$id),
       name: data.dec(_f$name),
-      isModerated: data.dec(_f$isModerated),
+      moderated: data.dec(_f$moderated),
       emojiId: data.dec(_f$emojiId),
       emojiName: data.dec(_f$emojiName),
     );
@@ -630,7 +632,7 @@ abstract class ForumTagCopyWith<$R, $In extends ForumTag, $Out>
   $R call({
     Snowflake? id,
     String? name,
-    bool? isModerated,
+    bool? moderated,
     Snowflake? emojiId,
     String? emojiName,
   });
@@ -655,14 +657,14 @@ class _ForumTagCopyWithImpl<$R, $Out>
   $R call({
     Snowflake? id,
     String? name,
-    bool? isModerated,
+    bool? moderated,
     Object? emojiId = $none,
     Object? emojiName = $none,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
       if (name != null) #name: name,
-      if (isModerated != null) #isModerated: isModerated,
+      if (moderated != null) #moderated: moderated,
       if (emojiId != $none) #emojiId: emojiId,
       if (emojiName != $none) #emojiName: emojiName,
     }),
@@ -671,7 +673,7 @@ class _ForumTagCopyWithImpl<$R, $Out>
   ForumTag $make(CopyWithData data) => ForumTag(
     id: data.get(#id, or: $value.id),
     name: data.get(#name, or: $value.name),
-    isModerated: data.get(#isModerated, or: $value.isModerated),
+    moderated: data.get(#moderated, or: $value.moderated),
     emojiId: data.get(#emojiId, or: $value.emojiId),
     emojiName: data.get(#emojiName, or: $value.emojiName),
   );

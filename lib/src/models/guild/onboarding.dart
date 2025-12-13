@@ -1,6 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/http/managers/guild_manager.dart';
-import 'package:firebridge/src/models/channel/channel.dart';
 import 'package:firebridge/src/models/emoji.dart';
 import 'package:firebridge/src/models/guild/guild.dart';
 import 'package:firebridge/src/models/snowflake.dart';
@@ -44,10 +43,6 @@ class Onboarding with ToStringHelper, OnboardingMappable {
 
   /// The guild this onboarding is for.
   PartialGuild get guild => manager.client.guilds[guildId];
-
-  /// A list of channels that get opted into automatically.
-  List<PartialChannel> get channels =>
-      defaultChannelIds.map((e) => manager.client.channels[e]).toList();
 }
 
 /// {@template onboarding_prompt}

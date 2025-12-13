@@ -1,7 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/http/managers/audit_log_manager.dart';
 import 'package:firebridge/src/models/application.dart';
-import 'package:firebridge/src/models/channel/channel.dart';
 import 'package:firebridge/src/models/permission_overwrite.dart';
 import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
@@ -274,8 +273,4 @@ class AuditLogEntryInfo with ToStringHelper, AuditLogEntryInfoMappable {
   PartialApplication? get application => applicationId == null
       ? null
       : manager.client.applications[applicationId!];
-
-  /// The channel in which entities were targeted.
-  PartialChannel? get channel =>
-      channelId == null ? null : manager.client.channels[channelId!];
 }

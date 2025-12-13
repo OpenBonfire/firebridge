@@ -26,14 +26,6 @@ abstract class ReadOnlyManager<T extends ManagedSnowflakeEntity<T>> {
   ///
   /// {@macro ensure_cache_updated}
   Future<T> fetch(Snowflake id);
-
-  /// Return a partial instance of the entity with ID [id] containing no data.
-  ///
-  /// This allows performing API operations without fetching an instance from the API.
-  ///
-  /// Because this method doesn't perform any API checks, there might be no real entity with the
-  /// correct [id]. In this case, the object returned may not work with the API correctly.
-  ManagedSnowflakeEntity<T> operator [](Snowflake id);
 }
 
 /// Provides the means to interact with the API for a given entity type.

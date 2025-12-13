@@ -37,13 +37,14 @@ class GuildAnnouncementChannelMapper
     'topic',
     _$topic,
   );
-  static Duration _$defaultAutoArchiveDuration(GuildAnnouncementChannel v) =>
+  static Duration? _$defaultAutoArchiveDuration(GuildAnnouncementChannel v) =>
       v.defaultAutoArchiveDuration;
   static const Field<GuildAnnouncementChannel, Duration>
   _f$defaultAutoArchiveDuration = Field(
     'defaultAutoArchiveDuration',
     _$defaultAutoArchiveDuration,
     key: r'default_auto_archive_duration',
+    opt: true,
   );
   static Duration? _$defaultThreadRateLimitPerUser(
     GuildAnnouncementChannel v,
@@ -54,17 +55,18 @@ class GuildAnnouncementChannelMapper
     _$defaultThreadRateLimitPerUser,
     key: r'default_thread_rate_limit_per_user',
   );
-  static Snowflake _$guildId(GuildAnnouncementChannel v) => v.guildId;
+  static Snowflake? _$guildId(GuildAnnouncementChannel v) => v.guildId;
   static const Field<GuildAnnouncementChannel, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
     key: r'guild_id',
   );
-  static bool _$isNsfw(GuildAnnouncementChannel v) => v.isNsfw;
-  static const Field<GuildAnnouncementChannel, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool _$nsfw(GuildAnnouncementChannel v) => v.nsfw;
+  static const Field<GuildAnnouncementChannel, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
+    opt: true,
+    def: false,
   );
   static Snowflake? _$lastMessageId(GuildAnnouncementChannel v) =>
       v.lastMessageId;
@@ -115,7 +117,7 @@ class GuildAnnouncementChannelMapper
     #defaultAutoArchiveDuration: _f$defaultAutoArchiveDuration,
     #defaultThreadRateLimitPerUser: _f$defaultThreadRateLimitPerUser,
     #guildId: _f$guildId,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #lastMessageId: _f$lastMessageId,
     #lastPinTimestamp: _f$lastPinTimestamp,
     #name: _f$name,
@@ -140,7 +142,7 @@ class GuildAnnouncementChannelMapper
       defaultAutoArchiveDuration: data.dec(_f$defaultAutoArchiveDuration),
       defaultThreadRateLimitPerUser: data.dec(_f$defaultThreadRateLimitPerUser),
       guildId: data.dec(_f$guildId),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       lastMessageId: data.dec(_f$lastMessageId),
       lastPinTimestamp: data.dec(_f$lastPinTimestamp),
       name: data.dec(_f$name),
@@ -226,7 +228,7 @@ abstract class GuildAnnouncementChannelCopyWith<
         HasThreadsChannelCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
   ListCopyWith<
@@ -242,7 +244,7 @@ abstract class GuildAnnouncementChannelCopyWith<
     Duration? defaultAutoArchiveDuration,
     Duration? defaultThreadRateLimitPerUser,
     Snowflake? guildId,
-    bool? isNsfw,
+    bool? nsfw,
     Snowflake? lastMessageId,
     DateTime? lastPinTimestamp,
     String? name,
@@ -269,8 +271,8 @@ class _GuildAnnouncementChannelCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
-      $value.guildId.copyWith.$chain((v) => call(guildId: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
+      $value.guildId?.copyWith.$chain((v) => call(guildId: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId =>
       $value.lastMessageId?.copyWith.$chain((v) => call(lastMessageId: v));
@@ -292,10 +294,10 @@ class _GuildAnnouncementChannelCopyWithImpl<$R, $Out>
   $R call({
     Snowflake? id,
     Object? topic = $none,
-    Duration? defaultAutoArchiveDuration,
+    Object? defaultAutoArchiveDuration = $none,
     Object? defaultThreadRateLimitPerUser = $none,
-    Snowflake? guildId,
-    bool? isNsfw,
+    Object? guildId = $none,
+    bool? nsfw,
     Object? lastMessageId = $none,
     Object? lastPinTimestamp = $none,
     String? name,
@@ -307,12 +309,12 @@ class _GuildAnnouncementChannelCopyWithImpl<$R, $Out>
     FieldCopyWithData({
       if (id != null) #id: id,
       if (topic != $none) #topic: topic,
-      if (defaultAutoArchiveDuration != null)
+      if (defaultAutoArchiveDuration != $none)
         #defaultAutoArchiveDuration: defaultAutoArchiveDuration,
       if (defaultThreadRateLimitPerUser != $none)
         #defaultThreadRateLimitPerUser: defaultThreadRateLimitPerUser,
-      if (guildId != null) #guildId: guildId,
-      if (isNsfw != null) #isNsfw: isNsfw,
+      if (guildId != $none) #guildId: guildId,
+      if (nsfw != null) #nsfw: nsfw,
       if (lastMessageId != $none) #lastMessageId: lastMessageId,
       if (lastPinTimestamp != $none) #lastPinTimestamp: lastPinTimestamp,
       if (name != null) #name: name,
@@ -336,7 +338,7 @@ class _GuildAnnouncementChannelCopyWithImpl<$R, $Out>
       or: $value.defaultThreadRateLimitPerUser,
     ),
     guildId: data.get(#guildId, or: $value.guildId),
-    isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+    nsfw: data.get(#nsfw, or: $value.nsfw),
     lastMessageId: data.get(#lastMessageId, or: $value.lastMessageId),
     lastPinTimestamp: data.get(#lastPinTimestamp, or: $value.lastPinTimestamp),
     name: data.get(#name, or: $value.name),

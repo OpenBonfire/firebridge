@@ -30,7 +30,7 @@ class PublicThread extends TextChannel
   final DateTime createdAt;
 
   @override
-  final Snowflake guildId;
+  final Snowflake? guildId;
 
   @override
   final bool isArchived;
@@ -39,7 +39,7 @@ class PublicThread extends TextChannel
   final bool isLocked;
 
   @override
-  final bool isNsfw;
+  final bool nsfw;
 
   @override
   final Snowflake? lastMessageId;
@@ -89,7 +89,7 @@ class PublicThread extends TextChannel
     required this.guildId,
     required this.isArchived,
     required this.isLocked,
-    required this.isNsfw,
+    this.nsfw = false,
     required this.lastMessageId,
     required this.lastPinTimestamp,
     required this.messageCount,

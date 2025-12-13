@@ -32,7 +32,7 @@ class ApplicationCommandBuilder extends CreateBuilder<ApplicationCommand>
 
   ApplicationCommandType type;
 
-  bool? isNsfw;
+  bool? nsfw;
 
   /// Installation context(s) where the command is available, only for globally-scoped commands. Defaults to [ApplicationIntegrationType.guildInstall].
   List<ApplicationIntegrationType>? integrationTypes;
@@ -49,7 +49,7 @@ class ApplicationCommandBuilder extends CreateBuilder<ApplicationCommand>
     this.options,
     this.defaultMemberPermissions,
     this.hasDmPermission,
-    this.isNsfw,
+    this.nsfw,
     this.integrationTypes,
     this.contexts,
   });
@@ -62,7 +62,7 @@ class ApplicationCommandBuilder extends CreateBuilder<ApplicationCommand>
     required List<CommandOptionBuilder> this.options,
     this.defaultMemberPermissions,
     this.hasDmPermission,
-    this.isNsfw,
+    this.nsfw,
     this.integrationTypes,
     this.contexts,
   }) : type = ApplicationCommandType.chatInput;
@@ -72,7 +72,7 @@ class ApplicationCommandBuilder extends CreateBuilder<ApplicationCommand>
     this.nameLocalizations,
     this.defaultMemberPermissions,
     this.hasDmPermission,
-    this.isNsfw,
+    this.nsfw,
     this.integrationTypes,
     this.contexts,
   })  : type = ApplicationCommandType.message,
@@ -85,7 +85,7 @@ class ApplicationCommandBuilder extends CreateBuilder<ApplicationCommand>
     this.nameLocalizations,
     this.defaultMemberPermissions,
     this.hasDmPermission,
-    this.isNsfw,
+    this.nsfw,
     this.integrationTypes,
     this.contexts,
   })  : type = ApplicationCommandType.user,
@@ -112,7 +112,7 @@ class ApplicationCommandUpdateBuilder extends UpdateBuilder<ApplicationCommand>
   @Deprecated('Use `contexts`')
   bool? hasDmPermission;
 
-  bool? isNsfw;
+  bool? nsfw;
 
   /// Installation context(s) where the command is available, only for globally-scoped commands. Defaults to [ApplicationIntegrationType.guildInstall].
   List<ApplicationIntegrationType>? integrationTypes;
@@ -128,7 +128,7 @@ class ApplicationCommandUpdateBuilder extends UpdateBuilder<ApplicationCommand>
     this.options,
     this.defaultMemberPermissions = sentinelFlags,
     this.hasDmPermission,
-    this.isNsfw,
+    this.nsfw,
     this.integrationTypes,
     this.contexts,
   });
@@ -141,7 +141,7 @@ class ApplicationCommandUpdateBuilder extends UpdateBuilder<ApplicationCommand>
     this.options,
     this.defaultMemberPermissions,
     this.hasDmPermission,
-    this.isNsfw,
+    this.nsfw,
     this.integrationTypes,
     this.contexts,
   });
@@ -151,7 +151,7 @@ class ApplicationCommandUpdateBuilder extends UpdateBuilder<ApplicationCommand>
     this.nameLocalizations,
     this.defaultMemberPermissions,
     this.hasDmPermission,
-    this.isNsfw,
+    this.nsfw,
     this.integrationTypes,
     this.contexts,
   })  : description = null,
@@ -163,7 +163,7 @@ class ApplicationCommandUpdateBuilder extends UpdateBuilder<ApplicationCommand>
     this.nameLocalizations,
     this.defaultMemberPermissions,
     this.hasDmPermission,
-    this.isNsfw,
+    this.nsfw,
     this.integrationTypes,
     this.contexts,
   })  : description = null,

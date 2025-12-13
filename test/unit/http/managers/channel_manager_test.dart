@@ -31,7 +31,7 @@ void checkGuildText(Channel channel) {
   expect(channel.defaultAutoArchiveDuration, equals(Duration(minutes: 60)));
   expect(channel.defaultThreadRateLimitPerUser, isNull);
   expect(channel.guildId, equals(Snowflake(41771983423143937)));
-  expect(channel.isNsfw, isTrue);
+  expect(channel.nsfw, isTrue);
   expect(channel.lastMessageId, equals(Snowflake(155117677105512449)));
   expect(channel.lastPinTimestamp, isNull);
   expect(channel.name, equals('general'));
@@ -65,7 +65,7 @@ void checkGuildAnnouncement(Channel channel) {
   expect(channel.defaultAutoArchiveDuration, equals(Duration(minutes: 60)));
   expect(channel.defaultThreadRateLimitPerUser, isNull);
   expect(channel.guildId, equals(Snowflake(41771983423143937)));
-  expect(channel.isNsfw, isTrue);
+  expect(channel.nsfw, isTrue);
   expect(channel.lastMessageId, equals(Snowflake(155117677105512449)));
   expect(channel.lastPinTimestamp, isNull);
   expect(channel.name, equals('important-news'));
@@ -99,7 +99,7 @@ void checkGuildVoice(Channel channel) {
   expect(channel.id, equals(Snowflake(155101607195836416)));
   expect(channel.bitrate, equals(64000));
   expect(channel.guildId, equals(Snowflake(41771983423143937)));
-  expect(channel.isNsfw, isFalse);
+  expect(channel.nsfw, isFalse);
   expect(channel.lastMessageId, equals(Snowflake(174629835082649376)));
   expect(channel.lastPinTimestamp, isNull);
   expect(channel.name, equals('ROCKET CHEESE'));
@@ -196,7 +196,7 @@ void checkCategory(Channel channel) {
 
   expect(channel.id, equals(Snowflake(399942396007890945)));
   expect(channel.guildId, equals(Snowflake(290926798629997250)));
-  expect(channel.isNsfw, isFalse);
+  expect(channel.nsfw, isFalse);
   expect(channel.name, equals('Test'));
   expect(channel.parentId, isNull);
   expect(channel.permissionOverwrites, equals([]));
@@ -238,7 +238,7 @@ void checkThread(Channel channel) {
   expect(channel.guildId, equals(Snowflake(41771983423143937)));
   expect(channel.isArchived, isFalse);
   expect(channel.isLocked, isFalse);
-  expect(channel.isNsfw, isFalse);
+  expect(channel.nsfw, isFalse);
   expect(channel.lastMessageId, equals(Snowflake(155117677105512449)));
   expect(channel.lastPinTimestamp, isNull);
   expect(channel.messageCount, equals(1));
@@ -290,7 +290,7 @@ void checkAnnouncementThread(Channel channel) {
   expect(channel.guildId, equals(Snowflake(1033681997136146462)));
   expect(channel.isArchived, isFalse);
   expect(channel.isLocked, isFalse);
-  expect(channel.isNsfw, isFalse);
+  expect(channel.nsfw, isFalse);
   expect(channel.lastMessageId, equals(Snowflake(1093553605472170094)));
   expect(channel.lastPinTimestamp, isNull);
   expect(channel.messageCount, equals(1));
@@ -352,7 +352,7 @@ void checkPrivateThread(Channel channel) {
   expect(channel.guildId, equals(Snowflake(1033681997136146462)));
   expect(channel.isArchived, isFalse);
   expect(channel.isLocked, isFalse);
-  expect(channel.isNsfw, isFalse);
+  expect(channel.nsfw, isFalse);
   expect(channel.lastMessageId, equals(Snowflake(1093556580290670633)));
   expect(channel.lastPinTimestamp, isNull);
   expect(channel.messageCount, equals(2));

@@ -8,15 +8,12 @@ part 'guild_channel.mapper.dart';
 
 /// A channel in a [Guild].
 @MappableClass()
-abstract class GuildChannel with GuildChannelMappable implements Channel {
-  @override
-  Snowflake get id;
-
+abstract class GuildChannel extends Channel with GuildChannelMappable {
   /// @nodoc
-  GuildChannel({required Snowflake id});
+  GuildChannel({required super.id});
 
   /// The ID of the [Guild] this channel is in.
-  Snowflake get guildId;
+  Snowflake? get guildId;
 
   /// The positing on this channel in the guild's channel list.
   int get position;
@@ -28,7 +25,7 @@ abstract class GuildChannel with GuildChannelMappable implements Channel {
   String get name;
 
   /// Whether this channel is marked as NSFW.
-  bool get isNsfw;
+  bool get nsfw;
 
   /// The ID of this channel's parent.
   ///

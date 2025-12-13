@@ -88,7 +88,7 @@ class GuildTextChannelBuilder extends GuildChannelBuilder<GuildTextChannel>
   /// {@template channel_nsfw}
   /// Whether the channel is nsfw.
   /// {@endtemplate}
-  bool? isNsfw;
+  bool? nsfw;
 
   /// {@template channel_default_auto_archive_duration}
   /// Default duration, copied onto newly created threads, in minutes, threads will stop showing in the channel list after the specified period of inactivity.
@@ -102,7 +102,7 @@ class GuildTextChannelBuilder extends GuildChannelBuilder<GuildTextChannel>
     this.topic,
     this.rateLimitPerUser,
     this.parentId,
-    this.isNsfw,
+    this.nsfw,
     this.defaultAutoArchiveDuration,
   }) : super(type: ChannelType.guildText);
 }
@@ -118,7 +118,7 @@ class GuildTextChannelUpdateBuilder
   String? topic;
 
   /// {@macro channel_nsfw}
-  bool? isNsfw;
+  bool? nsfw;
 
   /// {@macro channel_rate_limit_per_user}
   Duration? rateLimitPerUser;
@@ -141,7 +141,7 @@ class GuildTextChannelUpdateBuilder
     super.permissionOverwrites,
     this.type,
     this.topic = sentinelString,
-    this.isNsfw,
+    this.nsfw,
     this.rateLimitPerUser = sentinelDuration,
     this.parentId = sentinelSnowflake,
     this.defaultAutoArchiveDuration = sentinelDuration,
@@ -160,7 +160,7 @@ class GuildAnnouncementChannelBuilder
   Snowflake? parentId;
 
   /// {@macro channel_nsfw}
-  bool? isNsfw;
+  bool? nsfw;
 
   /// {@macro channel_default_auto_archive_duration}
   Duration? defaultAutoArchiveDuration;
@@ -171,7 +171,7 @@ class GuildAnnouncementChannelBuilder
     super.permissionOverwrites,
     this.topic,
     this.parentId,
-    this.isNsfw,
+    this.nsfw,
     this.defaultAutoArchiveDuration,
   }) : super(type: ChannelType.guildAnnouncement);
 }
@@ -187,7 +187,7 @@ class GuildAnnouncementChannelUpdateBuilder
   String? topic;
 
   /// {@macro channel_nsfw}
-  bool? isNsfw;
+  bool? nsfw;
 
   /// {@macro channel_parent_id}
   Snowflake? parentId;
@@ -201,7 +201,7 @@ class GuildAnnouncementChannelUpdateBuilder
     super.permissionOverwrites,
     this.type,
     this.topic = sentinelString,
-    this.isNsfw,
+    this.nsfw,
     this.parentId = sentinelSnowflake,
     this.defaultAutoArchiveDuration = sentinelDuration,
   });
@@ -220,7 +220,7 @@ class ForumChannelBuilder extends GuildChannelBuilder<ForumChannel>
   Snowflake? parentId;
 
   /// {@macro channel_nsfw}
-  bool? isNsfw;
+  bool? nsfw;
 
   /// {@macro channel_default_auto_archive_duration}
   Duration? defaultAutoArchiveDuration;
@@ -248,7 +248,7 @@ class ForumChannelBuilder extends GuildChannelBuilder<ForumChannel>
     this.topic,
     this.rateLimitPerUser,
     this.parentId,
-    this.isNsfw,
+    this.nsfw,
     this.defaultAutoArchiveDuration,
     this.defaultReaction,
     this.tags,
@@ -263,7 +263,7 @@ class ForumChannelUpdateBuilder extends GuildChannelUpdateBuilder<ForumChannel>
   String? topic;
 
   /// {@macro channel_nsfw}
-  bool? isNsfw;
+  bool? nsfw;
 
   /// {@macro channel_rate_limit_per_user}
   Duration? rateLimitPerUser;
@@ -300,7 +300,7 @@ class ForumChannelUpdateBuilder extends GuildChannelUpdateBuilder<ForumChannel>
     super.position,
     super.permissionOverwrites,
     this.topic,
-    this.isNsfw,
+    this.nsfw,
     this.rateLimitPerUser = sentinelDuration,
     this.parentId = sentinelSnowflake,
     this.defaultAutoArchiveDuration = sentinelDuration,
@@ -333,7 +333,7 @@ abstract class GuildVoiceOrStageChannelBuilder<T extends GuildChannel>
   Snowflake? parentId;
 
   /// {@macro channel_nsfw}
-  bool? isNsfw;
+  bool? nsfw;
 
   /// {@template rtc_region}
   /// Channel voice region id, automatic when set to null.
@@ -353,7 +353,7 @@ abstract class GuildVoiceOrStageChannelBuilder<T extends GuildChannel>
     this.bitRate,
     this.userLimit,
     this.parentId,
-    this.isNsfw,
+    this.nsfw,
     this.rtcRegion,
     this.videoQualityMode,
   });
@@ -370,7 +370,7 @@ class GuildVoiceChannelBuilder
     super.bitRate,
     super.userLimit,
     super.parentId,
-    super.isNsfw,
+    super.nsfw,
     super.rtcRegion,
     super.videoQualityMode,
   }) : super(type: ChannelType.guildVoice);
@@ -387,7 +387,7 @@ class GuildStageChannelBuilder
     super.bitRate,
     super.userLimit,
     super.parentId,
-    super.isNsfw,
+    super.nsfw,
     super.rtcRegion,
     super.videoQualityMode,
   }) : super(type: ChannelType.guildStageVoice);
@@ -398,7 +398,7 @@ class GuildVoiceOrStageChannelUpdateBuilder<T extends GuildChannel>
     extends GuildChannelUpdateBuilder<T>
     with GuildVoiceOrStageChannelUpdateBuilderMappable {
   /// {@macro channel_nsfw}
-  bool? isNsfw;
+  bool? nsfw;
 
   /// {@macro channel_bitrate}
   int? bitRate;
@@ -419,7 +419,7 @@ class GuildVoiceOrStageChannelUpdateBuilder<T extends GuildChannel>
     super.name,
     super.position,
     super.permissionOverwrites,
-    this.isNsfw,
+    this.nsfw,
     this.bitRate,
     this.userLimit,
     this.parentId = sentinelSnowflake,
@@ -436,7 +436,7 @@ class GuildVoiceChannelUpdateBuilder
     super.name,
     super.position,
     super.permissionOverwrites,
-    super.isNsfw,
+    super.nsfw,
     super.bitRate,
     super.userLimit,
     super.parentId = sentinelSnowflake,
@@ -453,7 +453,7 @@ class GuildStageChannelUpdateBuilder
     super.name,
     super.position,
     super.permissionOverwrites,
-    super.isNsfw,
+    super.nsfw,
     super.bitRate,
     super.userLimit,
     super.parentId = sentinelSnowflake,

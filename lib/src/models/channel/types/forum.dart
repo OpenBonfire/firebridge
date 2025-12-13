@@ -43,16 +43,16 @@ class ForumChannel extends Channel
   final ForumSort? defaultSortOrder;
 
   @override
-  final Duration defaultAutoArchiveDuration;
+  final Duration? defaultAutoArchiveDuration;
 
   @override
   final Duration? defaultThreadRateLimitPerUser;
 
   @override
-  final Snowflake guildId;
+  final Snowflake? guildId;
 
   @override
-  final bool isNsfw;
+  final bool nsfw;
 
   @override
   final String name;
@@ -82,10 +82,10 @@ class ForumChannel extends Channel
     required this.availableTags,
     required this.defaultReaction,
     required this.defaultSortOrder,
-    required this.defaultAutoArchiveDuration,
+    this.defaultAutoArchiveDuration,
     required this.defaultThreadRateLimitPerUser,
-    required this.guildId,
-    required this.isNsfw,
+    this.guildId,
+    this.nsfw = false,
     required this.name,
     required this.parentId,
     required this.permissionOverwrites,
@@ -105,7 +105,7 @@ class ForumTag with ToStringHelper, ForumTagMappable {
   final String name;
 
   /// Whether this tag is moderated.
-  final bool isModerated;
+  final bool moderated;
 
   /// The ID of the emoji for this tag.
   final Snowflake? emojiId;
@@ -118,7 +118,7 @@ class ForumTag with ToStringHelper, ForumTagMappable {
   ForumTag({
     required this.id,
     required this.name,
-    required this.isModerated,
+    required this.moderated,
     required this.emojiId,
     required this.emojiName,
   });

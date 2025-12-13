@@ -71,10 +71,6 @@ class WidgetSettings with ToStringHelper, WidgetSettingsMappable {
     required this.isEnabled,
     required this.channelId,
   });
-
-  /// The channel the widget should send users to.
-  PartialChannel? get channel =>
-      channelId == null ? null : manager.client.channels[channelId!];
 }
 
 @MappableEnum()

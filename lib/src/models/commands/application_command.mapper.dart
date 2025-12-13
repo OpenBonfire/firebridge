@@ -282,11 +282,12 @@ class ApplicationCommandMapper extends ClassMapperBase<ApplicationCommand> {
     _$hasDmPermission,
     key: r'has_dm_permission',
   );
-  static bool? _$isNsfw(ApplicationCommand v) => v.isNsfw;
-  static const Field<ApplicationCommand, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool? _$nsfw(ApplicationCommand v) => v.nsfw;
+  static const Field<ApplicationCommand, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
+    opt: true,
+    def: false,
   );
   static List<ApplicationIntegrationType> _$integrationTypes(
     ApplicationCommand v,
@@ -320,7 +321,7 @@ class ApplicationCommandMapper extends ClassMapperBase<ApplicationCommand> {
     #options: _f$options,
     #defaultMemberPermissions: _f$defaultMemberPermissions,
     #hasDmPermission: _f$hasDmPermission,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #integrationTypes: _f$integrationTypes,
     #contexts: _f$contexts,
     #version: _f$version,
@@ -339,7 +340,7 @@ class ApplicationCommandMapper extends ClassMapperBase<ApplicationCommand> {
       options: data.dec(_f$options),
       defaultMemberPermissions: data.dec(_f$defaultMemberPermissions),
       hasDmPermission: data.dec(_f$hasDmPermission),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       integrationTypes: data.dec(_f$integrationTypes),
       contexts: data.dec(_f$contexts),
       version: data.dec(_f$version),
@@ -459,7 +460,7 @@ abstract class ApplicationCommandCopyWith<
     List<CommandOption>? options,
     Permissions? defaultMemberPermissions,
     bool? hasDmPermission,
-    bool? isNsfw,
+    bool? nsfw,
     List<ApplicationIntegrationType>? integrationTypes,
     List<InteractionContextType>? contexts,
     Snowflake? version,
@@ -561,7 +562,7 @@ class _ApplicationCommandCopyWithImpl<$R, $Out>
     Object? options = $none,
     Object? defaultMemberPermissions = $none,
     Object? hasDmPermission = $none,
-    Object? isNsfw = $none,
+    Object? nsfw = $none,
     List<ApplicationIntegrationType>? integrationTypes,
     Object? contexts = $none,
     Snowflake? version,
@@ -580,7 +581,7 @@ class _ApplicationCommandCopyWithImpl<$R, $Out>
       if (defaultMemberPermissions != $none)
         #defaultMemberPermissions: defaultMemberPermissions,
       if (hasDmPermission != $none) #hasDmPermission: hasDmPermission,
-      if (isNsfw != $none) #isNsfw: isNsfw,
+      if (nsfw != $none) #nsfw: nsfw,
       if (integrationTypes != null) #integrationTypes: integrationTypes,
       if (contexts != $none) #contexts: contexts,
       if (version != null) #version: version,
@@ -608,7 +609,7 @@ class _ApplicationCommandCopyWithImpl<$R, $Out>
       or: $value.defaultMemberPermissions,
     ),
     hasDmPermission: data.get(#hasDmPermission, or: $value.hasDmPermission),
-    isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+    nsfw: data.get(#nsfw, or: $value.nsfw),
     integrationTypes: data.get(#integrationTypes, or: $value.integrationTypes),
     contexts: data.get(#contexts, or: $value.contexts),
     version: data.get(#version, or: $value.version),

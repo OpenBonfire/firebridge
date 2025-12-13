@@ -19,10 +19,10 @@ class GuildStageChannel extends TextChannel
   final int bitrate;
 
   @override
-  final Snowflake guildId;
+  final Snowflake? guildId;
 
   @override
-  final bool isNsfw;
+  final bool nsfw;
 
   @override
   final Snowflake? lastMessageId;
@@ -52,7 +52,7 @@ class GuildStageChannel extends TextChannel
   final int? userLimit;
 
   @override
-  final VideoQualityMode videoQualityMode;
+  final VideoQualityMode? videoQualityMode;
 
   @override
   ChannelType get type => ChannelType.guildStageVoice;
@@ -63,7 +63,7 @@ class GuildStageChannel extends TextChannel
     required super.id,
     required this.bitrate,
     required this.guildId,
-    required this.isNsfw,
+    this.nsfw = false,
     required this.lastMessageId,
     required this.lastPinTimestamp,
     required this.name,
@@ -73,6 +73,6 @@ class GuildStageChannel extends TextChannel
     required this.rateLimitPerUser,
     required this.rtcRegion,
     required this.userLimit,
-    required this.videoQualityMode,
+    this.videoQualityMode,
   });
 }

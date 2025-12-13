@@ -60,6 +60,7 @@ mixin GuildChannelMappable {
 
 abstract class GuildChannelCopyWith<$R, $In extends GuildChannel, $Out>
     implements ChannelCopyWith<$R, $In, $Out> {
+  @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   @override
   $R call({Snowflake? id});

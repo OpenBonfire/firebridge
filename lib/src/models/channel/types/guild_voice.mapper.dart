@@ -32,17 +32,19 @@ class GuildVoiceChannelMapper extends SubClassMapperBase<GuildVoiceChannel> {
     'bitrate',
     _$bitrate,
   );
-  static Snowflake _$guildId(GuildVoiceChannel v) => v.guildId;
+  static Snowflake? _$guildId(GuildVoiceChannel v) => v.guildId;
   static const Field<GuildVoiceChannel, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
     key: r'guild_id',
+    opt: true,
   );
-  static bool _$isNsfw(GuildVoiceChannel v) => v.isNsfw;
-  static const Field<GuildVoiceChannel, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool _$nsfw(GuildVoiceChannel v) => v.nsfw;
+  static const Field<GuildVoiceChannel, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
+    opt: true,
+    def: false,
   );
   static Snowflake? _$lastMessageId(GuildVoiceChannel v) => v.lastMessageId;
   static const Field<GuildVoiceChannel, Snowflake> _f$lastMessageId = Field(
@@ -98,17 +100,22 @@ class GuildVoiceChannelMapper extends SubClassMapperBase<GuildVoiceChannel> {
     _$userLimit,
     key: r'user_limit',
   );
-  static VideoQualityMode _$videoQualityMode(GuildVoiceChannel v) =>
+  static VideoQualityMode? _$videoQualityMode(GuildVoiceChannel v) =>
       v.videoQualityMode;
   static const Field<GuildVoiceChannel, VideoQualityMode> _f$videoQualityMode =
-      Field('videoQualityMode', _$videoQualityMode, key: r'video_quality_mode');
+      Field(
+        'videoQualityMode',
+        _$videoQualityMode,
+        key: r'video_quality_mode',
+        opt: true,
+      );
 
   @override
   final MappableFields<GuildVoiceChannel> fields = const {
     #id: _f$id,
     #bitrate: _f$bitrate,
     #guildId: _f$guildId,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #lastMessageId: _f$lastMessageId,
     #lastPinTimestamp: _f$lastPinTimestamp,
     #name: _f$name,
@@ -134,7 +141,7 @@ class GuildVoiceChannelMapper extends SubClassMapperBase<GuildVoiceChannel> {
       id: data.dec(_f$id),
       bitrate: data.dec(_f$bitrate),
       guildId: data.dec(_f$guildId),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       lastMessageId: data.dec(_f$lastMessageId),
       lastPinTimestamp: data.dec(_f$lastPinTimestamp),
       name: data.dec(_f$name),
@@ -224,7 +231,7 @@ abstract class GuildVoiceChannelCopyWith<
         VoiceChannelCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
   ListCopyWith<
@@ -238,7 +245,7 @@ abstract class GuildVoiceChannelCopyWith<
     Snowflake? id,
     int? bitrate,
     Snowflake? guildId,
-    bool? isNsfw,
+    bool? nsfw,
     Snowflake? lastMessageId,
     DateTime? lastPinTimestamp,
     String? name,
@@ -267,8 +274,8 @@ class _GuildVoiceChannelCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
-      $value.guildId.copyWith.$chain((v) => call(guildId: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
+      $value.guildId?.copyWith.$chain((v) => call(guildId: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId =>
       $value.lastMessageId?.copyWith.$chain((v) => call(lastMessageId: v));
@@ -290,8 +297,8 @@ class _GuildVoiceChannelCopyWithImpl<$R, $Out>
   $R call({
     Snowflake? id,
     int? bitrate,
-    Snowflake? guildId,
-    bool? isNsfw,
+    Object? guildId = $none,
+    bool? nsfw,
     Object? lastMessageId = $none,
     Object? lastPinTimestamp = $none,
     String? name,
@@ -301,13 +308,13 @@ class _GuildVoiceChannelCopyWithImpl<$R, $Out>
     Object? rateLimitPerUser = $none,
     Object? rtcRegion = $none,
     Object? userLimit = $none,
-    VideoQualityMode? videoQualityMode,
+    Object? videoQualityMode = $none,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
       if (bitrate != null) #bitrate: bitrate,
-      if (guildId != null) #guildId: guildId,
-      if (isNsfw != null) #isNsfw: isNsfw,
+      if (guildId != $none) #guildId: guildId,
+      if (nsfw != null) #nsfw: nsfw,
       if (lastMessageId != $none) #lastMessageId: lastMessageId,
       if (lastPinTimestamp != $none) #lastPinTimestamp: lastPinTimestamp,
       if (name != null) #name: name,
@@ -318,7 +325,7 @@ class _GuildVoiceChannelCopyWithImpl<$R, $Out>
       if (rateLimitPerUser != $none) #rateLimitPerUser: rateLimitPerUser,
       if (rtcRegion != $none) #rtcRegion: rtcRegion,
       if (userLimit != $none) #userLimit: userLimit,
-      if (videoQualityMode != null) #videoQualityMode: videoQualityMode,
+      if (videoQualityMode != $none) #videoQualityMode: videoQualityMode,
     }),
   );
   @override
@@ -326,7 +333,7 @@ class _GuildVoiceChannelCopyWithImpl<$R, $Out>
     id: data.get(#id, or: $value.id),
     bitrate: data.get(#bitrate, or: $value.bitrate),
     guildId: data.get(#guildId, or: $value.guildId),
-    isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+    nsfw: data.get(#nsfw, or: $value.nsfw),
     lastMessageId: data.get(#lastMessageId, or: $value.lastMessageId),
     lastPinTimestamp: data.get(#lastPinTimestamp, or: $value.lastPinTimestamp),
     name: data.get(#name, or: $value.name),

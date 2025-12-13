@@ -531,11 +531,10 @@ class GuildTextChannelBuilderMapper
     key: r'parent_id',
     opt: true,
   );
-  static bool? _$isNsfw(GuildTextChannelBuilder v) => v.isNsfw;
-  static const Field<GuildTextChannelBuilder, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool? _$nsfw(GuildTextChannelBuilder v) => v.nsfw;
+  static const Field<GuildTextChannelBuilder, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
     opt: true,
   );
   static Duration? _$defaultAutoArchiveDuration(GuildTextChannelBuilder v) =>
@@ -562,7 +561,7 @@ class GuildTextChannelBuilderMapper
     #topic: _f$topic,
     #rateLimitPerUser: _f$rateLimitPerUser,
     #parentId: _f$parentId,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #defaultAutoArchiveDuration: _f$defaultAutoArchiveDuration,
     #type: _f$type,
   };
@@ -575,7 +574,7 @@ class GuildTextChannelBuilderMapper
       topic: data.dec(_f$topic),
       rateLimitPerUser: data.dec(_f$rateLimitPerUser),
       parentId: data.dec(_f$parentId),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       defaultAutoArchiveDuration: data.dec(_f$defaultAutoArchiveDuration),
     );
   }
@@ -670,7 +669,7 @@ abstract class GuildTextChannelBuilderCopyWith<
     String? topic,
     Duration? rateLimitPerUser,
     Snowflake? parentId,
-    bool? isNsfw,
+    bool? nsfw,
     Duration? defaultAutoArchiveDuration,
   });
   GuildTextChannelBuilderCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
@@ -715,7 +714,7 @@ class _GuildTextChannelBuilderCopyWithImpl<$R, $Out>
     Object? topic = $none,
     Object? rateLimitPerUser = $none,
     Object? parentId = $none,
-    Object? isNsfw = $none,
+    Object? nsfw = $none,
     Object? defaultAutoArchiveDuration = $none,
   }) => $apply(
     FieldCopyWithData({
@@ -726,7 +725,7 @@ class _GuildTextChannelBuilderCopyWithImpl<$R, $Out>
       if (topic != $none) #topic: topic,
       if (rateLimitPerUser != $none) #rateLimitPerUser: rateLimitPerUser,
       if (parentId != $none) #parentId: parentId,
-      if (isNsfw != $none) #isNsfw: isNsfw,
+      if (nsfw != $none) #nsfw: nsfw,
       if (defaultAutoArchiveDuration != $none)
         #defaultAutoArchiveDuration: defaultAutoArchiveDuration,
     }),
@@ -742,7 +741,7 @@ class _GuildTextChannelBuilderCopyWithImpl<$R, $Out>
     topic: data.get(#topic, or: $value.topic),
     rateLimitPerUser: data.get(#rateLimitPerUser, or: $value.rateLimitPerUser),
     parentId: data.get(#parentId, or: $value.parentId),
-    isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+    nsfw: data.get(#nsfw, or: $value.nsfw),
     defaultAutoArchiveDuration: data.get(
       #defaultAutoArchiveDuration,
       or: $value.defaultAutoArchiveDuration,
@@ -812,11 +811,10 @@ class GuildTextChannelUpdateBuilderMapper
     opt: true,
     def: sentinelString,
   );
-  static bool? _$isNsfw(GuildTextChannelUpdateBuilder v) => v.isNsfw;
-  static const Field<GuildTextChannelUpdateBuilder, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool? _$nsfw(GuildTextChannelUpdateBuilder v) => v.nsfw;
+  static const Field<GuildTextChannelUpdateBuilder, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
     opt: true,
   );
   static Duration? _$rateLimitPerUser(GuildTextChannelUpdateBuilder v) =>
@@ -867,7 +865,7 @@ class GuildTextChannelUpdateBuilderMapper
     #permissionOverwrites: _f$permissionOverwrites,
     #type: _f$type,
     #topic: _f$topic,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #rateLimitPerUser: _f$rateLimitPerUser,
     #parentId: _f$parentId,
     #defaultAutoArchiveDuration: _f$defaultAutoArchiveDuration,
@@ -881,7 +879,7 @@ class GuildTextChannelUpdateBuilderMapper
       permissionOverwrites: data.dec(_f$permissionOverwrites),
       type: data.dec(_f$type),
       topic: data.dec(_f$topic),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       rateLimitPerUser: data.dec(_f$rateLimitPerUser),
       parentId: data.dec(_f$parentId),
       defaultAutoArchiveDuration: data.dec(_f$defaultAutoArchiveDuration),
@@ -983,7 +981,7 @@ abstract class GuildTextChannelUpdateBuilderCopyWith<
     List<CreateBuilder<PermissionOverwrite>>? permissionOverwrites,
     ChannelType? type,
     String? topic,
-    bool? isNsfw,
+    bool? nsfw,
     Duration? rateLimitPerUser,
     Snowflake? parentId,
     Duration? defaultAutoArchiveDuration,
@@ -1038,7 +1036,7 @@ class _GuildTextChannelUpdateBuilderCopyWithImpl<$R, $Out>
     Object? permissionOverwrites = $none,
     Object? type = $none,
     Object? topic = $none,
-    Object? isNsfw = $none,
+    Object? nsfw = $none,
     Object? rateLimitPerUser = $none,
     Object? parentId = $none,
     Object? defaultAutoArchiveDuration = $none,
@@ -1051,7 +1049,7 @@ class _GuildTextChannelUpdateBuilderCopyWithImpl<$R, $Out>
         #permissionOverwrites: permissionOverwrites,
       if (type != $none) #type: type,
       if (topic != $none) #topic: topic,
-      if (isNsfw != $none) #isNsfw: isNsfw,
+      if (nsfw != $none) #nsfw: nsfw,
       if (rateLimitPerUser != $none) #rateLimitPerUser: rateLimitPerUser,
       if (parentId != $none) #parentId: parentId,
       if (defaultAutoArchiveDuration != $none)
@@ -1071,7 +1069,7 @@ class _GuildTextChannelUpdateBuilderCopyWithImpl<$R, $Out>
         ),
         type: data.get(#type, or: $value.type),
         topic: data.get(#topic, or: $value.topic),
-        isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+        nsfw: data.get(#nsfw, or: $value.nsfw),
         rateLimitPerUser: data.get(
           #rateLimitPerUser,
           or: $value.rateLimitPerUser,
@@ -1150,11 +1148,10 @@ class GuildAnnouncementChannelBuilderMapper
   static Snowflake? _$parentId(GuildAnnouncementChannelBuilder v) => v.parentId;
   static const Field<GuildAnnouncementChannelBuilder, Snowflake> _f$parentId =
       Field('parentId', _$parentId, key: r'parent_id', opt: true);
-  static bool? _$isNsfw(GuildAnnouncementChannelBuilder v) => v.isNsfw;
-  static const Field<GuildAnnouncementChannelBuilder, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool? _$nsfw(GuildAnnouncementChannelBuilder v) => v.nsfw;
+  static const Field<GuildAnnouncementChannelBuilder, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
     opt: true,
   );
   static Duration? _$defaultAutoArchiveDuration(
@@ -1178,7 +1175,7 @@ class GuildAnnouncementChannelBuilderMapper
     #permissionOverwrites: _f$permissionOverwrites,
     #topic: _f$topic,
     #parentId: _f$parentId,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #defaultAutoArchiveDuration: _f$defaultAutoArchiveDuration,
     #type: _f$type,
   };
@@ -1190,7 +1187,7 @@ class GuildAnnouncementChannelBuilderMapper
       permissionOverwrites: data.dec(_f$permissionOverwrites),
       topic: data.dec(_f$topic),
       parentId: data.dec(_f$parentId),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       defaultAutoArchiveDuration: data.dec(_f$defaultAutoArchiveDuration),
     );
   }
@@ -1293,7 +1290,7 @@ abstract class GuildAnnouncementChannelBuilderCopyWith<
     List<CreateBuilder<PermissionOverwrite>>? permissionOverwrites,
     String? topic,
     Snowflake? parentId,
-    bool? isNsfw,
+    bool? nsfw,
     Duration? defaultAutoArchiveDuration,
   });
   GuildAnnouncementChannelBuilderCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
@@ -1345,7 +1342,7 @@ class _GuildAnnouncementChannelBuilderCopyWithImpl<$R, $Out>
     Object? permissionOverwrites = $none,
     Object? topic = $none,
     Object? parentId = $none,
-    Object? isNsfw = $none,
+    Object? nsfw = $none,
     Object? defaultAutoArchiveDuration = $none,
   }) => $apply(
     FieldCopyWithData({
@@ -1355,7 +1352,7 @@ class _GuildAnnouncementChannelBuilderCopyWithImpl<$R, $Out>
         #permissionOverwrites: permissionOverwrites,
       if (topic != $none) #topic: topic,
       if (parentId != $none) #parentId: parentId,
-      if (isNsfw != $none) #isNsfw: isNsfw,
+      if (nsfw != $none) #nsfw: nsfw,
       if (defaultAutoArchiveDuration != $none)
         #defaultAutoArchiveDuration: defaultAutoArchiveDuration,
     }),
@@ -1371,7 +1368,7 @@ class _GuildAnnouncementChannelBuilderCopyWithImpl<$R, $Out>
         ),
         topic: data.get(#topic, or: $value.topic),
         parentId: data.get(#parentId, or: $value.parentId),
-        isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+        nsfw: data.get(#nsfw, or: $value.nsfw),
         defaultAutoArchiveDuration: data.get(
           #defaultAutoArchiveDuration,
           or: $value.defaultAutoArchiveDuration,
@@ -1438,9 +1435,9 @@ class GuildAnnouncementChannelUpdateBuilderMapper
   static String? _$topic(GuildAnnouncementChannelUpdateBuilder v) => v.topic;
   static const Field<GuildAnnouncementChannelUpdateBuilder, String> _f$topic =
       Field('topic', _$topic, opt: true, def: sentinelString);
-  static bool? _$isNsfw(GuildAnnouncementChannelUpdateBuilder v) => v.isNsfw;
-  static const Field<GuildAnnouncementChannelUpdateBuilder, bool> _f$isNsfw =
-      Field('isNsfw', _$isNsfw, key: r'is_nsfw', opt: true);
+  static bool? _$nsfw(GuildAnnouncementChannelUpdateBuilder v) => v.nsfw;
+  static const Field<GuildAnnouncementChannelUpdateBuilder, bool> _f$nsfw =
+      Field('nsfw', _$nsfw, opt: true);
   static Snowflake? _$parentId(GuildAnnouncementChannelUpdateBuilder v) =>
       v.parentId;
   static const Field<GuildAnnouncementChannelUpdateBuilder, Snowflake>
@@ -1470,7 +1467,7 @@ class GuildAnnouncementChannelUpdateBuilderMapper
     #permissionOverwrites: _f$permissionOverwrites,
     #type: _f$type,
     #topic: _f$topic,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #parentId: _f$parentId,
     #defaultAutoArchiveDuration: _f$defaultAutoArchiveDuration,
   };
@@ -1482,7 +1479,7 @@ class GuildAnnouncementChannelUpdateBuilderMapper
       permissionOverwrites: data.dec(_f$permissionOverwrites),
       type: data.dec(_f$type),
       topic: data.dec(_f$topic),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       parentId: data.dec(_f$parentId),
       defaultAutoArchiveDuration: data.dec(_f$defaultAutoArchiveDuration),
     );
@@ -1593,7 +1590,7 @@ abstract class GuildAnnouncementChannelUpdateBuilderCopyWith<
     List<CreateBuilder<PermissionOverwrite>>? permissionOverwrites,
     ChannelType? type,
     String? topic,
-    bool? isNsfw,
+    bool? nsfw,
     Snowflake? parentId,
     Duration? defaultAutoArchiveDuration,
   });
@@ -1645,7 +1642,7 @@ class _GuildAnnouncementChannelUpdateBuilderCopyWithImpl<$R, $Out>
     Object? permissionOverwrites = $none,
     Object? type = $none,
     Object? topic = $none,
-    Object? isNsfw = $none,
+    Object? nsfw = $none,
     Object? parentId = $none,
     Object? defaultAutoArchiveDuration = $none,
   }) => $apply(
@@ -1656,7 +1653,7 @@ class _GuildAnnouncementChannelUpdateBuilderCopyWithImpl<$R, $Out>
         #permissionOverwrites: permissionOverwrites,
       if (type != $none) #type: type,
       if (topic != $none) #topic: topic,
-      if (isNsfw != $none) #isNsfw: isNsfw,
+      if (nsfw != $none) #nsfw: nsfw,
       if (parentId != $none) #parentId: parentId,
       if (defaultAutoArchiveDuration != $none)
         #defaultAutoArchiveDuration: defaultAutoArchiveDuration,
@@ -1673,7 +1670,7 @@ class _GuildAnnouncementChannelUpdateBuilderCopyWithImpl<$R, $Out>
         ),
         type: data.get(#type, or: $value.type),
         topic: data.get(#topic, or: $value.topic),
-        isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+        nsfw: data.get(#nsfw, or: $value.nsfw),
         parentId: data.get(#parentId, or: $value.parentId),
         defaultAutoArchiveDuration: data.get(
           #defaultAutoArchiveDuration,
@@ -1760,11 +1757,10 @@ class ForumChannelBuilderMapper extends ClassMapperBase<ForumChannelBuilder> {
     key: r'parent_id',
     opt: true,
   );
-  static bool? _$isNsfw(ForumChannelBuilder v) => v.isNsfw;
-  static const Field<ForumChannelBuilder, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool? _$nsfw(ForumChannelBuilder v) => v.nsfw;
+  static const Field<ForumChannelBuilder, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
     opt: true,
   );
   static Duration? _$defaultAutoArchiveDuration(ForumChannelBuilder v) =>
@@ -1812,7 +1808,7 @@ class ForumChannelBuilderMapper extends ClassMapperBase<ForumChannelBuilder> {
     #topic: _f$topic,
     #rateLimitPerUser: _f$rateLimitPerUser,
     #parentId: _f$parentId,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #defaultAutoArchiveDuration: _f$defaultAutoArchiveDuration,
     #defaultReaction: _f$defaultReaction,
     #tags: _f$tags,
@@ -1828,7 +1824,7 @@ class ForumChannelBuilderMapper extends ClassMapperBase<ForumChannelBuilder> {
       topic: data.dec(_f$topic),
       rateLimitPerUser: data.dec(_f$rateLimitPerUser),
       parentId: data.dec(_f$parentId),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       defaultAutoArchiveDuration: data.dec(_f$defaultAutoArchiveDuration),
       defaultReaction: data.dec(_f$defaultReaction),
       tags: data.dec(_f$tags),
@@ -1934,7 +1930,7 @@ abstract class ForumChannelBuilderCopyWith<
     String? topic,
     Duration? rateLimitPerUser,
     Snowflake? parentId,
-    bool? isNsfw,
+    bool? nsfw,
     Duration? defaultAutoArchiveDuration,
     DefaultReaction? defaultReaction,
     List<CreateBuilder<ForumTag>>? tags,
@@ -1998,7 +1994,7 @@ class _ForumChannelBuilderCopyWithImpl<$R, $Out>
     Object? topic = $none,
     Object? rateLimitPerUser = $none,
     Object? parentId = $none,
-    Object? isNsfw = $none,
+    Object? nsfw = $none,
     Object? defaultAutoArchiveDuration = $none,
     Object? defaultReaction = $none,
     Object? tags = $none,
@@ -2012,7 +2008,7 @@ class _ForumChannelBuilderCopyWithImpl<$R, $Out>
       if (topic != $none) #topic: topic,
       if (rateLimitPerUser != $none) #rateLimitPerUser: rateLimitPerUser,
       if (parentId != $none) #parentId: parentId,
-      if (isNsfw != $none) #isNsfw: isNsfw,
+      if (nsfw != $none) #nsfw: nsfw,
       if (defaultAutoArchiveDuration != $none)
         #defaultAutoArchiveDuration: defaultAutoArchiveDuration,
       if (defaultReaction != $none) #defaultReaction: defaultReaction,
@@ -2031,7 +2027,7 @@ class _ForumChannelBuilderCopyWithImpl<$R, $Out>
     topic: data.get(#topic, or: $value.topic),
     rateLimitPerUser: data.get(#rateLimitPerUser, or: $value.rateLimitPerUser),
     parentId: data.get(#parentId, or: $value.parentId),
-    isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+    nsfw: data.get(#nsfw, or: $value.nsfw),
     defaultAutoArchiveDuration: data.get(
       #defaultAutoArchiveDuration,
       or: $value.defaultAutoArchiveDuration,
@@ -2105,11 +2101,10 @@ class ForumChannelUpdateBuilderMapper
     _$topic,
     opt: true,
   );
-  static bool? _$isNsfw(ForumChannelUpdateBuilder v) => v.isNsfw;
-  static const Field<ForumChannelUpdateBuilder, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool? _$nsfw(ForumChannelUpdateBuilder v) => v.nsfw;
+  static const Field<ForumChannelUpdateBuilder, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
     opt: true,
   );
   static Duration? _$rateLimitPerUser(ForumChannelUpdateBuilder v) =>
@@ -2192,7 +2187,7 @@ class ForumChannelUpdateBuilderMapper
     #position: _f$position,
     #permissionOverwrites: _f$permissionOverwrites,
     #topic: _f$topic,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #rateLimitPerUser: _f$rateLimitPerUser,
     #parentId: _f$parentId,
     #defaultAutoArchiveDuration: _f$defaultAutoArchiveDuration,
@@ -2210,7 +2205,7 @@ class ForumChannelUpdateBuilderMapper
       position: data.dec(_f$position),
       permissionOverwrites: data.dec(_f$permissionOverwrites),
       topic: data.dec(_f$topic),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       rateLimitPerUser: data.dec(_f$rateLimitPerUser),
       parentId: data.dec(_f$parentId),
       defaultAutoArchiveDuration: data.dec(_f$defaultAutoArchiveDuration),
@@ -2325,7 +2320,7 @@ abstract class ForumChannelUpdateBuilderCopyWith<
     int? position,
     List<CreateBuilder<PermissionOverwrite>>? permissionOverwrites,
     String? topic,
-    bool? isNsfw,
+    bool? nsfw,
     Duration? rateLimitPerUser,
     Snowflake? parentId,
     Duration? defaultAutoArchiveDuration,
@@ -2396,7 +2391,7 @@ class _ForumChannelUpdateBuilderCopyWithImpl<$R, $Out>
     Object? position = $none,
     Object? permissionOverwrites = $none,
     Object? topic = $none,
-    Object? isNsfw = $none,
+    Object? nsfw = $none,
     Object? rateLimitPerUser = $none,
     Object? parentId = $none,
     Object? defaultAutoArchiveDuration = $none,
@@ -2413,7 +2408,7 @@ class _ForumChannelUpdateBuilderCopyWithImpl<$R, $Out>
       if (permissionOverwrites != $none)
         #permissionOverwrites: permissionOverwrites,
       if (topic != $none) #topic: topic,
-      if (isNsfw != $none) #isNsfw: isNsfw,
+      if (nsfw != $none) #nsfw: nsfw,
       if (rateLimitPerUser != $none) #rateLimitPerUser: rateLimitPerUser,
       if (parentId != $none) #parentId: parentId,
       if (defaultAutoArchiveDuration != $none)
@@ -2438,7 +2433,7 @@ class _ForumChannelUpdateBuilderCopyWithImpl<$R, $Out>
       or: $value.permissionOverwrites,
     ),
     topic: data.get(#topic, or: $value.topic),
-    isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+    nsfw: data.get(#nsfw, or: $value.nsfw),
     rateLimitPerUser: data.get(#rateLimitPerUser, or: $value.rateLimitPerUser),
     parentId: data.get(#parentId, or: $value.parentId),
     defaultAutoArchiveDuration: data.get(
@@ -2534,11 +2529,10 @@ class GuildVoiceOrStageChannelBuilderMapper
   static Snowflake? _$parentId(GuildVoiceOrStageChannelBuilder v) => v.parentId;
   static const Field<GuildVoiceOrStageChannelBuilder, Snowflake> _f$parentId =
       Field('parentId', _$parentId, key: r'parent_id', opt: true);
-  static bool? _$isNsfw(GuildVoiceOrStageChannelBuilder v) => v.isNsfw;
-  static const Field<GuildVoiceOrStageChannelBuilder, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool? _$nsfw(GuildVoiceOrStageChannelBuilder v) => v.nsfw;
+  static const Field<GuildVoiceOrStageChannelBuilder, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
     opt: true,
   );
   static String? _$rtcRegion(GuildVoiceOrStageChannelBuilder v) => v.rtcRegion;
@@ -2564,7 +2558,7 @@ class GuildVoiceOrStageChannelBuilderMapper
     #bitRate: _f$bitRate,
     #userLimit: _f$userLimit,
     #parentId: _f$parentId,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #rtcRegion: _f$rtcRegion,
     #videoQualityMode: _f$videoQualityMode,
   };
@@ -2633,7 +2627,7 @@ abstract class GuildVoiceOrStageChannelBuilderCopyWith<
     int? bitRate,
     int? userLimit,
     Snowflake? parentId,
-    bool? isNsfw,
+    bool? nsfw,
     String? rtcRegion,
     VideoQualityMode? videoQualityMode,
   });
@@ -2707,11 +2701,10 @@ class GuildVoiceChannelBuilderMapper
     key: r'parent_id',
     opt: true,
   );
-  static bool? _$isNsfw(GuildVoiceChannelBuilder v) => v.isNsfw;
-  static const Field<GuildVoiceChannelBuilder, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool? _$nsfw(GuildVoiceChannelBuilder v) => v.nsfw;
+  static const Field<GuildVoiceChannelBuilder, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
     opt: true,
   );
   static String? _$rtcRegion(GuildVoiceChannelBuilder v) => v.rtcRegion;
@@ -2745,7 +2738,7 @@ class GuildVoiceChannelBuilderMapper
     #bitRate: _f$bitRate,
     #userLimit: _f$userLimit,
     #parentId: _f$parentId,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #rtcRegion: _f$rtcRegion,
     #videoQualityMode: _f$videoQualityMode,
     #type: _f$type,
@@ -2759,7 +2752,7 @@ class GuildVoiceChannelBuilderMapper
       bitRate: data.dec(_f$bitRate),
       userLimit: data.dec(_f$userLimit),
       parentId: data.dec(_f$parentId),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       rtcRegion: data.dec(_f$rtcRegion),
       videoQualityMode: data.dec(_f$videoQualityMode),
     );
@@ -2862,7 +2855,7 @@ abstract class GuildVoiceChannelBuilderCopyWith<
     int? bitRate,
     int? userLimit,
     Snowflake? parentId,
-    bool? isNsfw,
+    bool? nsfw,
     String? rtcRegion,
     VideoQualityMode? videoQualityMode,
   });
@@ -2908,7 +2901,7 @@ class _GuildVoiceChannelBuilderCopyWithImpl<$R, $Out>
     Object? bitRate = $none,
     Object? userLimit = $none,
     Object? parentId = $none,
-    Object? isNsfw = $none,
+    Object? nsfw = $none,
     Object? rtcRegion = $none,
     Object? videoQualityMode = $none,
   }) => $apply(
@@ -2920,7 +2913,7 @@ class _GuildVoiceChannelBuilderCopyWithImpl<$R, $Out>
       if (bitRate != $none) #bitRate: bitRate,
       if (userLimit != $none) #userLimit: userLimit,
       if (parentId != $none) #parentId: parentId,
-      if (isNsfw != $none) #isNsfw: isNsfw,
+      if (nsfw != $none) #nsfw: nsfw,
       if (rtcRegion != $none) #rtcRegion: rtcRegion,
       if (videoQualityMode != $none) #videoQualityMode: videoQualityMode,
     }),
@@ -2936,7 +2929,7 @@ class _GuildVoiceChannelBuilderCopyWithImpl<$R, $Out>
     bitRate: data.get(#bitRate, or: $value.bitRate),
     userLimit: data.get(#userLimit, or: $value.userLimit),
     parentId: data.get(#parentId, or: $value.parentId),
-    isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+    nsfw: data.get(#nsfw, or: $value.nsfw),
     rtcRegion: data.get(#rtcRegion, or: $value.rtcRegion),
     videoQualityMode: data.get(#videoQualityMode, or: $value.videoQualityMode),
   );
@@ -3013,11 +3006,10 @@ class GuildStageChannelBuilderMapper
     key: r'parent_id',
     opt: true,
   );
-  static bool? _$isNsfw(GuildStageChannelBuilder v) => v.isNsfw;
-  static const Field<GuildStageChannelBuilder, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool? _$nsfw(GuildStageChannelBuilder v) => v.nsfw;
+  static const Field<GuildStageChannelBuilder, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
     opt: true,
   );
   static String? _$rtcRegion(GuildStageChannelBuilder v) => v.rtcRegion;
@@ -3051,7 +3043,7 @@ class GuildStageChannelBuilderMapper
     #bitRate: _f$bitRate,
     #userLimit: _f$userLimit,
     #parentId: _f$parentId,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #rtcRegion: _f$rtcRegion,
     #videoQualityMode: _f$videoQualityMode,
     #type: _f$type,
@@ -3065,7 +3057,7 @@ class GuildStageChannelBuilderMapper
       bitRate: data.dec(_f$bitRate),
       userLimit: data.dec(_f$userLimit),
       parentId: data.dec(_f$parentId),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       rtcRegion: data.dec(_f$rtcRegion),
       videoQualityMode: data.dec(_f$videoQualityMode),
     );
@@ -3168,7 +3160,7 @@ abstract class GuildStageChannelBuilderCopyWith<
     int? bitRate,
     int? userLimit,
     Snowflake? parentId,
-    bool? isNsfw,
+    bool? nsfw,
     String? rtcRegion,
     VideoQualityMode? videoQualityMode,
   });
@@ -3214,7 +3206,7 @@ class _GuildStageChannelBuilderCopyWithImpl<$R, $Out>
     Object? bitRate = $none,
     Object? userLimit = $none,
     Object? parentId = $none,
-    Object? isNsfw = $none,
+    Object? nsfw = $none,
     Object? rtcRegion = $none,
     Object? videoQualityMode = $none,
   }) => $apply(
@@ -3226,7 +3218,7 @@ class _GuildStageChannelBuilderCopyWithImpl<$R, $Out>
       if (bitRate != $none) #bitRate: bitRate,
       if (userLimit != $none) #userLimit: userLimit,
       if (parentId != $none) #parentId: parentId,
-      if (isNsfw != $none) #isNsfw: isNsfw,
+      if (nsfw != $none) #nsfw: nsfw,
       if (rtcRegion != $none) #rtcRegion: rtcRegion,
       if (videoQualityMode != $none) #videoQualityMode: videoQualityMode,
     }),
@@ -3242,7 +3234,7 @@ class _GuildStageChannelBuilderCopyWithImpl<$R, $Out>
     bitRate: data.get(#bitRate, or: $value.bitRate),
     userLimit: data.get(#userLimit, or: $value.userLimit),
     parentId: data.get(#parentId, or: $value.parentId),
-    isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+    nsfw: data.get(#nsfw, or: $value.nsfw),
     rtcRegion: data.get(#rtcRegion, or: $value.rtcRegion),
     videoQualityMode: data.get(#videoQualityMode, or: $value.videoQualityMode),
   );
@@ -3300,9 +3292,9 @@ class GuildVoiceOrStageChannelUpdateBuilderMapper
     key: r'permission_overwrites',
     opt: true,
   );
-  static bool? _$isNsfw(GuildVoiceOrStageChannelUpdateBuilder v) => v.isNsfw;
-  static const Field<GuildVoiceOrStageChannelUpdateBuilder, bool> _f$isNsfw =
-      Field('isNsfw', _$isNsfw, key: r'is_nsfw', opt: true);
+  static bool? _$nsfw(GuildVoiceOrStageChannelUpdateBuilder v) => v.nsfw;
+  static const Field<GuildVoiceOrStageChannelUpdateBuilder, bool> _f$nsfw =
+      Field('nsfw', _$nsfw, opt: true);
   static int? _$bitRate(GuildVoiceOrStageChannelUpdateBuilder v) => v.bitRate;
   static const Field<GuildVoiceOrStageChannelUpdateBuilder, int> _f$bitRate =
       Field('bitRate', _$bitRate, key: r'bit_rate', opt: true);
@@ -3346,7 +3338,7 @@ class GuildVoiceOrStageChannelUpdateBuilderMapper
     #name: _f$name,
     #position: _f$position,
     #permissionOverwrites: _f$permissionOverwrites,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #bitRate: _f$bitRate,
     #userLimit: _f$userLimit,
     #parentId: _f$parentId,
@@ -3360,7 +3352,7 @@ class GuildVoiceOrStageChannelUpdateBuilderMapper
       name: data.dec(_f$name),
       position: data.dec(_f$position),
       permissionOverwrites: data.dec(_f$permissionOverwrites),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       bitRate: data.dec(_f$bitRate),
       userLimit: data.dec(_f$userLimit),
       parentId: data.dec(_f$parentId),
@@ -3477,7 +3469,7 @@ abstract class GuildVoiceOrStageChannelUpdateBuilderCopyWith<
     String? name,
     int? position,
     List<CreateBuilder<PermissionOverwrite>>? permissionOverwrites,
-    bool? isNsfw,
+    bool? nsfw,
     int? bitRate,
     int? userLimit,
     Snowflake? parentId,
@@ -3536,7 +3528,7 @@ class _GuildVoiceOrStageChannelUpdateBuilderCopyWithImpl<
     Object? name = $none,
     Object? position = $none,
     Object? permissionOverwrites = $none,
-    Object? isNsfw = $none,
+    Object? nsfw = $none,
     Object? bitRate = $none,
     Object? userLimit = $none,
     Object? parentId = $none,
@@ -3548,7 +3540,7 @@ class _GuildVoiceOrStageChannelUpdateBuilderCopyWithImpl<
       if (position != $none) #position: position,
       if (permissionOverwrites != $none)
         #permissionOverwrites: permissionOverwrites,
-      if (isNsfw != $none) #isNsfw: isNsfw,
+      if (nsfw != $none) #nsfw: nsfw,
       if (bitRate != $none) #bitRate: bitRate,
       if (userLimit != $none) #userLimit: userLimit,
       if (parentId != $none) #parentId: parentId,
@@ -3565,7 +3557,7 @@ class _GuildVoiceOrStageChannelUpdateBuilderCopyWithImpl<
           #permissionOverwrites,
           or: $value.permissionOverwrites,
         ),
-        isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+        nsfw: data.get(#nsfw, or: $value.nsfw),
         bitRate: data.get(#bitRate, or: $value.bitRate),
         userLimit: data.get(#userLimit, or: $value.userLimit),
         parentId: data.get(#parentId, or: $value.parentId),
@@ -3638,11 +3630,10 @@ class GuildVoiceChannelUpdateBuilderMapper
     key: r'permission_overwrites',
     opt: true,
   );
-  static bool? _$isNsfw(GuildVoiceChannelUpdateBuilder v) => v.isNsfw;
-  static const Field<GuildVoiceChannelUpdateBuilder, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool? _$nsfw(GuildVoiceChannelUpdateBuilder v) => v.nsfw;
+  static const Field<GuildVoiceChannelUpdateBuilder, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
     opt: true,
   );
   static int? _$bitRate(GuildVoiceChannelUpdateBuilder v) => v.bitRate;
@@ -3693,7 +3684,7 @@ class GuildVoiceChannelUpdateBuilderMapper
     #name: _f$name,
     #position: _f$position,
     #permissionOverwrites: _f$permissionOverwrites,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #bitRate: _f$bitRate,
     #userLimit: _f$userLimit,
     #parentId: _f$parentId,
@@ -3706,7 +3697,7 @@ class GuildVoiceChannelUpdateBuilderMapper
       name: data.dec(_f$name),
       position: data.dec(_f$position),
       permissionOverwrites: data.dec(_f$permissionOverwrites),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       bitRate: data.dec(_f$bitRate),
       userLimit: data.dec(_f$userLimit),
       parentId: data.dec(_f$parentId),
@@ -3817,7 +3808,7 @@ abstract class GuildVoiceChannelUpdateBuilderCopyWith<
     String? name,
     int? position,
     List<CreateBuilder<PermissionOverwrite>>? permissionOverwrites,
-    bool? isNsfw,
+    bool? nsfw,
     int? bitRate,
     int? userLimit,
     Snowflake? parentId,
@@ -3871,7 +3862,7 @@ class _GuildVoiceChannelUpdateBuilderCopyWithImpl<$R, $Out>
     Object? name = $none,
     Object? position = $none,
     Object? permissionOverwrites = $none,
-    Object? isNsfw = $none,
+    Object? nsfw = $none,
     Object? bitRate = $none,
     Object? userLimit = $none,
     Object? parentId = $none,
@@ -3883,7 +3874,7 @@ class _GuildVoiceChannelUpdateBuilderCopyWithImpl<$R, $Out>
       if (position != $none) #position: position,
       if (permissionOverwrites != $none)
         #permissionOverwrites: permissionOverwrites,
-      if (isNsfw != $none) #isNsfw: isNsfw,
+      if (nsfw != $none) #nsfw: nsfw,
       if (bitRate != $none) #bitRate: bitRate,
       if (userLimit != $none) #userLimit: userLimit,
       if (parentId != $none) #parentId: parentId,
@@ -3900,7 +3891,7 @@ class _GuildVoiceChannelUpdateBuilderCopyWithImpl<$R, $Out>
           #permissionOverwrites,
           or: $value.permissionOverwrites,
         ),
-        isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+        nsfw: data.get(#nsfw, or: $value.nsfw),
         bitRate: data.get(#bitRate, or: $value.bitRate),
         userLimit: data.get(#userLimit, or: $value.userLimit),
         parentId: data.get(#parentId, or: $value.parentId),
@@ -3968,11 +3959,10 @@ class GuildStageChannelUpdateBuilderMapper
     key: r'permission_overwrites',
     opt: true,
   );
-  static bool? _$isNsfw(GuildStageChannelUpdateBuilder v) => v.isNsfw;
-  static const Field<GuildStageChannelUpdateBuilder, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool? _$nsfw(GuildStageChannelUpdateBuilder v) => v.nsfw;
+  static const Field<GuildStageChannelUpdateBuilder, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
     opt: true,
   );
   static int? _$bitRate(GuildStageChannelUpdateBuilder v) => v.bitRate;
@@ -4023,7 +4013,7 @@ class GuildStageChannelUpdateBuilderMapper
     #name: _f$name,
     #position: _f$position,
     #permissionOverwrites: _f$permissionOverwrites,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #bitRate: _f$bitRate,
     #userLimit: _f$userLimit,
     #parentId: _f$parentId,
@@ -4036,7 +4026,7 @@ class GuildStageChannelUpdateBuilderMapper
       name: data.dec(_f$name),
       position: data.dec(_f$position),
       permissionOverwrites: data.dec(_f$permissionOverwrites),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       bitRate: data.dec(_f$bitRate),
       userLimit: data.dec(_f$userLimit),
       parentId: data.dec(_f$parentId),
@@ -4147,7 +4137,7 @@ abstract class GuildStageChannelUpdateBuilderCopyWith<
     String? name,
     int? position,
     List<CreateBuilder<PermissionOverwrite>>? permissionOverwrites,
-    bool? isNsfw,
+    bool? nsfw,
     int? bitRate,
     int? userLimit,
     Snowflake? parentId,
@@ -4201,7 +4191,7 @@ class _GuildStageChannelUpdateBuilderCopyWithImpl<$R, $Out>
     Object? name = $none,
     Object? position = $none,
     Object? permissionOverwrites = $none,
-    Object? isNsfw = $none,
+    Object? nsfw = $none,
     Object? bitRate = $none,
     Object? userLimit = $none,
     Object? parentId = $none,
@@ -4213,7 +4203,7 @@ class _GuildStageChannelUpdateBuilderCopyWithImpl<$R, $Out>
       if (position != $none) #position: position,
       if (permissionOverwrites != $none)
         #permissionOverwrites: permissionOverwrites,
-      if (isNsfw != $none) #isNsfw: isNsfw,
+      if (nsfw != $none) #nsfw: nsfw,
       if (bitRate != $none) #bitRate: bitRate,
       if (userLimit != $none) #userLimit: userLimit,
       if (parentId != $none) #parentId: parentId,
@@ -4230,7 +4220,7 @@ class _GuildStageChannelUpdateBuilderCopyWithImpl<$R, $Out>
           #permissionOverwrites,
           or: $value.permissionOverwrites,
         ),
-        isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+        nsfw: data.get(#nsfw, or: $value.nsfw),
         bitRate: data.get(#bitRate, or: $value.bitRate),
         userLimit: data.get(#userLimit, or: $value.userLimit),
         parentId: data.get(#parentId, or: $value.parentId),

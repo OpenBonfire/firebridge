@@ -38,19 +38,19 @@ class ChannelTypeMapper extends EnumMapper<ChannelType> {
         return ChannelType.guildCategory;
       case 5:
         return ChannelType.guildAnnouncement;
-      case 6:
-        return ChannelType.announcementThread;
-      case 7:
-        return ChannelType.publicThread;
-      case 8:
-        return ChannelType.privateThread;
-      case 9:
-        return ChannelType.guildStageVoice;
       case 10:
-        return ChannelType.guildDirectory;
+        return ChannelType.announcementThread;
       case 11:
-        return ChannelType.guildForum;
+        return ChannelType.publicThread;
       case 12:
+        return ChannelType.privateThread;
+      case 13:
+        return ChannelType.guildStageVoice;
+      case 14:
+        return ChannelType.guildDirectory;
+      case 15:
+        return ChannelType.guildForum;
+      case 16:
         return ChannelType.guildMedia;
       default:
         throw MapperException.unknownEnumValue(value);
@@ -73,19 +73,19 @@ class ChannelTypeMapper extends EnumMapper<ChannelType> {
       case ChannelType.guildAnnouncement:
         return 5;
       case ChannelType.announcementThread:
-        return 6;
-      case ChannelType.publicThread:
-        return 7;
-      case ChannelType.privateThread:
-        return 8;
-      case ChannelType.guildStageVoice:
-        return 9;
-      case ChannelType.guildDirectory:
         return 10;
-      case ChannelType.guildForum:
+      case ChannelType.publicThread:
         return 11;
-      case ChannelType.guildMedia:
+      case ChannelType.privateThread:
         return 12;
+      case ChannelType.guildStageVoice:
+        return 13;
+      case ChannelType.guildDirectory:
+        return 14;
+      case ChannelType.guildForum:
+        return 15;
+      case ChannelType.guildMedia:
+        return 16;
     }
   }
 }

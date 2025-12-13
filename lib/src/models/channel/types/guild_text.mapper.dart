@@ -24,6 +24,8 @@ class GuildTextChannelMapper extends SubClassMapperBase<GuildTextChannel> {
   @override
   final String id = 'GuildTextChannel';
 
+  static String _$name(GuildTextChannel v) => v.name;
+  static const Field<GuildTextChannel, String> _f$name = Field('name', _$name);
   static Snowflake _$id(GuildTextChannel v) => v.id;
   static const Field<GuildTextChannel, Snowflake> _f$id = Field('id', _$id);
   static String? _$topic(GuildTextChannel v) => v.topic;
@@ -31,13 +33,14 @@ class GuildTextChannelMapper extends SubClassMapperBase<GuildTextChannel> {
     'topic',
     _$topic,
   );
-  static Duration _$defaultAutoArchiveDuration(GuildTextChannel v) =>
+  static Duration? _$defaultAutoArchiveDuration(GuildTextChannel v) =>
       v.defaultAutoArchiveDuration;
   static const Field<GuildTextChannel, Duration> _f$defaultAutoArchiveDuration =
       Field(
         'defaultAutoArchiveDuration',
         _$defaultAutoArchiveDuration,
         key: r'default_auto_archive_duration',
+        opt: true,
       );
   static Duration? _$defaultThreadRateLimitPerUser(GuildTextChannel v) =>
       v.defaultThreadRateLimitPerUser;
@@ -47,17 +50,18 @@ class GuildTextChannelMapper extends SubClassMapperBase<GuildTextChannel> {
     _$defaultThreadRateLimitPerUser,
     key: r'default_thread_rate_limit_per_user',
   );
-  static Snowflake _$guildId(GuildTextChannel v) => v.guildId;
+  static Snowflake? _$guildId(GuildTextChannel v) => v.guildId;
   static const Field<GuildTextChannel, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
     key: r'guild_id',
   );
-  static bool _$isNsfw(GuildTextChannel v) => v.isNsfw;
-  static const Field<GuildTextChannel, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool _$nsfw(GuildTextChannel v) => v.nsfw;
+  static const Field<GuildTextChannel, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
+    opt: true,
+    def: false,
   );
   static Snowflake? _$lastMessageId(GuildTextChannel v) => v.lastMessageId;
   static const Field<GuildTextChannel, Snowflake> _f$lastMessageId = Field(
@@ -71,8 +75,6 @@ class GuildTextChannelMapper extends SubClassMapperBase<GuildTextChannel> {
     _$lastPinTimestamp,
     key: r'last_pin_timestamp',
   );
-  static String _$name(GuildTextChannel v) => v.name;
-  static const Field<GuildTextChannel, String> _f$name = Field('name', _$name);
   static Snowflake? _$parentId(GuildTextChannel v) => v.parentId;
   static const Field<GuildTextChannel, Snowflake> _f$parentId = Field(
     'parentId',
@@ -101,15 +103,15 @@ class GuildTextChannelMapper extends SubClassMapperBase<GuildTextChannel> {
 
   @override
   final MappableFields<GuildTextChannel> fields = const {
+    #name: _f$name,
     #id: _f$id,
     #topic: _f$topic,
     #defaultAutoArchiveDuration: _f$defaultAutoArchiveDuration,
     #defaultThreadRateLimitPerUser: _f$defaultThreadRateLimitPerUser,
     #guildId: _f$guildId,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #lastMessageId: _f$lastMessageId,
     #lastPinTimestamp: _f$lastPinTimestamp,
-    #name: _f$name,
     #parentId: _f$parentId,
     #permissionOverwrites: _f$permissionOverwrites,
     #position: _f$position,
@@ -126,15 +128,15 @@ class GuildTextChannelMapper extends SubClassMapperBase<GuildTextChannel> {
 
   static GuildTextChannel _instantiate(DecodingData data) {
     return GuildTextChannel(
+      name: data.dec(_f$name),
       id: data.dec(_f$id),
       topic: data.dec(_f$topic),
       defaultAutoArchiveDuration: data.dec(_f$defaultAutoArchiveDuration),
       defaultThreadRateLimitPerUser: data.dec(_f$defaultThreadRateLimitPerUser),
       guildId: data.dec(_f$guildId),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       lastMessageId: data.dec(_f$lastMessageId),
       lastPinTimestamp: data.dec(_f$lastPinTimestamp),
-      name: data.dec(_f$name),
       parentId: data.dec(_f$parentId),
       permissionOverwrites: data.dec(_f$permissionOverwrites),
       position: data.dec(_f$position),
@@ -209,7 +211,7 @@ abstract class GuildTextChannelCopyWith<$R, $In extends GuildTextChannel, $Out>
         HasThreadsChannelCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
   ListCopyWith<
@@ -220,15 +222,15 @@ abstract class GuildTextChannelCopyWith<$R, $In extends GuildTextChannel, $Out>
   get permissionOverwrites;
   @override
   $R call({
+    String? name,
     Snowflake? id,
     String? topic,
     Duration? defaultAutoArchiveDuration,
     Duration? defaultThreadRateLimitPerUser,
     Snowflake? guildId,
-    bool? isNsfw,
+    bool? nsfw,
     Snowflake? lastMessageId,
     DateTime? lastPinTimestamp,
-    String? name,
     Snowflake? parentId,
     List<PermissionOverwrite>? permissionOverwrites,
     int? position,
@@ -251,8 +253,8 @@ class _GuildTextChannelCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
-      $value.guildId.copyWith.$chain((v) => call(guildId: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
+      $value.guildId?.copyWith.$chain((v) => call(guildId: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId =>
       $value.lastMessageId?.copyWith.$chain((v) => call(lastMessageId: v));
@@ -272,32 +274,32 @@ class _GuildTextChannelCopyWithImpl<$R, $Out>
   );
   @override
   $R call({
+    String? name,
     Snowflake? id,
     Object? topic = $none,
-    Duration? defaultAutoArchiveDuration,
+    Object? defaultAutoArchiveDuration = $none,
     Object? defaultThreadRateLimitPerUser = $none,
-    Snowflake? guildId,
-    bool? isNsfw,
+    Object? guildId = $none,
+    bool? nsfw,
     Object? lastMessageId = $none,
     Object? lastPinTimestamp = $none,
-    String? name,
     Object? parentId = $none,
     List<PermissionOverwrite>? permissionOverwrites,
     int? position,
     Object? rateLimitPerUser = $none,
   }) => $apply(
     FieldCopyWithData({
+      if (name != null) #name: name,
       if (id != null) #id: id,
       if (topic != $none) #topic: topic,
-      if (defaultAutoArchiveDuration != null)
+      if (defaultAutoArchiveDuration != $none)
         #defaultAutoArchiveDuration: defaultAutoArchiveDuration,
       if (defaultThreadRateLimitPerUser != $none)
         #defaultThreadRateLimitPerUser: defaultThreadRateLimitPerUser,
-      if (guildId != null) #guildId: guildId,
-      if (isNsfw != null) #isNsfw: isNsfw,
+      if (guildId != $none) #guildId: guildId,
+      if (nsfw != null) #nsfw: nsfw,
       if (lastMessageId != $none) #lastMessageId: lastMessageId,
       if (lastPinTimestamp != $none) #lastPinTimestamp: lastPinTimestamp,
-      if (name != null) #name: name,
       if (parentId != $none) #parentId: parentId,
       if (permissionOverwrites != null)
         #permissionOverwrites: permissionOverwrites,
@@ -307,6 +309,7 @@ class _GuildTextChannelCopyWithImpl<$R, $Out>
   );
   @override
   GuildTextChannel $make(CopyWithData data) => GuildTextChannel(
+    name: data.get(#name, or: $value.name),
     id: data.get(#id, or: $value.id),
     topic: data.get(#topic, or: $value.topic),
     defaultAutoArchiveDuration: data.get(
@@ -318,10 +321,9 @@ class _GuildTextChannelCopyWithImpl<$R, $Out>
       or: $value.defaultThreadRateLimitPerUser,
     ),
     guildId: data.get(#guildId, or: $value.guildId),
-    isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+    nsfw: data.get(#nsfw, or: $value.nsfw),
     lastMessageId: data.get(#lastMessageId, or: $value.lastMessageId),
     lastPinTimestamp: data.get(#lastPinTimestamp, or: $value.lastPinTimestamp),
-    name: data.get(#name, or: $value.name),
     parentId: data.get(#parentId, or: $value.parentId),
     permissionOverwrites: data.get(
       #permissionOverwrites,

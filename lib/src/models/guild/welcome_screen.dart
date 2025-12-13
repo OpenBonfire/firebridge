@@ -1,6 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/http/managers/guild_manager.dart';
-import 'package:firebridge/src/models/channel/channel.dart';
 import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
@@ -51,7 +50,4 @@ class WelcomeScreenChannel with ToStringHelper, WelcomeScreenChannelMappable {
     required this.emojiId,
     required this.emojiName,
   });
-
-  /// The channel this welcome screen channel represents.
-  PartialChannel get channel => manager.client.channels[channelId];
 }

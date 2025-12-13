@@ -16,29 +16,29 @@ part 'guild_text.mapper.dart';
 class GuildTextChannel extends TextChannel
     with GuildTextChannelMappable
     implements GuildChannel, HasThreadsChannel {
+  @override
+  final String name;
+
   /// The topic of this channel.
   final String? topic;
 
   @override
-  final Duration defaultAutoArchiveDuration;
+  final Duration? defaultAutoArchiveDuration;
 
   @override
   final Duration? defaultThreadRateLimitPerUser;
 
   @override
-  final Snowflake guildId;
+  final Snowflake? guildId;
 
   @override
-  final bool isNsfw;
+  final bool nsfw;
 
   @override
   final Snowflake? lastMessageId;
 
   @override
   final DateTime? lastPinTimestamp;
-
-  @override
-  final String name;
 
   @override
   final Snowflake? parentId;
@@ -58,15 +58,15 @@ class GuildTextChannel extends TextChannel
   /// {@macro guild_text_channel}
   /// @nodoc
   GuildTextChannel({
+    required this.name,
     required super.id,
     required this.topic,
-    required this.defaultAutoArchiveDuration,
+    this.defaultAutoArchiveDuration,
     required this.defaultThreadRateLimitPerUser,
     required this.guildId,
-    required this.isNsfw,
+    this.nsfw = false,
     required this.lastMessageId,
     required this.lastPinTimestamp,
-    required this.name,
     required this.parentId,
     required this.permissionOverwrites,
     required this.position,

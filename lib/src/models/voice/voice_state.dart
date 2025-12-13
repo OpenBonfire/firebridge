@@ -1,6 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/http/managers/voice_manager.dart';
-import 'package:firebridge/src/models/channel/channel.dart';
 import 'package:firebridge/src/models/guild/guild.dart';
 import 'package:firebridge/src/models/guild/member.dart';
 import 'package:firebridge/src/models/snowflake.dart';
@@ -91,10 +90,6 @@ class VoiceState with ToStringHelper, VoiceStateMappable {
   /// The guild this voice state is in.
   PartialGuild? get guild =>
       guildId == null ? null : manager.client.guilds[guildId!];
-
-  /// The channel this voice state is in.
-  PartialChannel? get channel =>
-      channelId == null ? null : manager.client.channels[channelId!];
 
   /// The user this voice state is for.
   PartialUser get user => manager.client.users[userId];

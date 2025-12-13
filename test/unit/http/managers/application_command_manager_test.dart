@@ -33,7 +33,7 @@ void checkCommand(ApplicationCommand command) {
   expect(command.options, isNull);
   // ignore: deprecated_member_use_from_same_package
   expect(command.hasDmPermission, isTrue);
-  expect(command.isNsfw, isFalse);
+  expect(command.nsfw, isFalse);
   expect(
       command.integrationTypes,
       equals([

@@ -88,11 +88,10 @@ class ApplicationCommandBuilderMapper
         key: r'has_dm_permission',
         opt: true,
       );
-  static bool? _$isNsfw(ApplicationCommandBuilder v) => v.isNsfw;
-  static const Field<ApplicationCommandBuilder, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool? _$nsfw(ApplicationCommandBuilder v) => v.nsfw;
+  static const Field<ApplicationCommandBuilder, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
     opt: true,
   );
   static List<ApplicationIntegrationType>? _$integrationTypes(
@@ -124,7 +123,7 @@ class ApplicationCommandBuilderMapper
     #options: _f$options,
     #defaultMemberPermissions: _f$defaultMemberPermissions,
     #hasDmPermission: _f$hasDmPermission,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #integrationTypes: _f$integrationTypes,
     #contexts: _f$contexts,
   };
@@ -139,7 +138,7 @@ class ApplicationCommandBuilderMapper
       options: data.dec(_f$options),
       defaultMemberPermissions: data.dec(_f$defaultMemberPermissions),
       hasDmPermission: data.dec(_f$hasDmPermission),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       integrationTypes: data.dec(_f$integrationTypes),
       contexts: data.dec(_f$contexts),
     );
@@ -252,7 +251,7 @@ abstract class ApplicationCommandBuilderCopyWith<
     List<CommandOptionBuilder>? options,
     Flags<Permissions>? defaultMemberPermissions,
     bool? hasDmPermission,
-    bool? isNsfw,
+    bool? nsfw,
     List<ApplicationIntegrationType>? integrationTypes,
     List<InteractionContextType>? contexts,
   });
@@ -341,7 +340,7 @@ class _ApplicationCommandBuilderCopyWithImpl<$R, $Out>
     Object? options = $none,
     Object? defaultMemberPermissions = $none,
     Object? hasDmPermission = $none,
-    Object? isNsfw = $none,
+    Object? nsfw = $none,
     Object? integrationTypes = $none,
     Object? contexts = $none,
   }) => $apply(
@@ -356,7 +355,7 @@ class _ApplicationCommandBuilderCopyWithImpl<$R, $Out>
       if (defaultMemberPermissions != $none)
         #defaultMemberPermissions: defaultMemberPermissions,
       if (hasDmPermission != $none) #hasDmPermission: hasDmPermission,
-      if (isNsfw != $none) #isNsfw: isNsfw,
+      if (nsfw != $none) #nsfw: nsfw,
       if (integrationTypes != $none) #integrationTypes: integrationTypes,
       if (contexts != $none) #contexts: contexts,
     }),
@@ -381,7 +380,7 @@ class _ApplicationCommandBuilderCopyWithImpl<$R, $Out>
           or: $value.defaultMemberPermissions,
         ),
         hasDmPermission: data.get(#hasDmPermission, or: $value.hasDmPermission),
-        isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+        nsfw: data.get(#nsfw, or: $value.nsfw),
         integrationTypes: data.get(
           #integrationTypes,
           or: $value.integrationTypes,
@@ -1074,11 +1073,10 @@ class ApplicationCommandUpdateBuilderMapper
         key: r'has_dm_permission',
         opt: true,
       );
-  static bool? _$isNsfw(ApplicationCommandUpdateBuilder v) => v.isNsfw;
-  static const Field<ApplicationCommandUpdateBuilder, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool? _$nsfw(ApplicationCommandUpdateBuilder v) => v.nsfw;
+  static const Field<ApplicationCommandUpdateBuilder, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
     opt: true,
   );
   static List<ApplicationIntegrationType>? _$integrationTypes(
@@ -1112,7 +1110,7 @@ class ApplicationCommandUpdateBuilderMapper
     #options: _f$options,
     #defaultMemberPermissions: _f$defaultMemberPermissions,
     #hasDmPermission: _f$hasDmPermission,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #integrationTypes: _f$integrationTypes,
     #contexts: _f$contexts,
   };
@@ -1126,7 +1124,7 @@ class ApplicationCommandUpdateBuilderMapper
       options: data.dec(_f$options),
       defaultMemberPermissions: data.dec(_f$defaultMemberPermissions),
       hasDmPermission: data.dec(_f$hasDmPermission),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       integrationTypes: data.dec(_f$integrationTypes),
       contexts: data.dec(_f$contexts),
     );
@@ -1242,7 +1240,7 @@ abstract class ApplicationCommandUpdateBuilderCopyWith<
     List<CommandOptionBuilder>? options,
     Flags<Permissions>? defaultMemberPermissions,
     bool? hasDmPermission,
-    bool? isNsfw,
+    bool? nsfw,
     List<ApplicationIntegrationType>? integrationTypes,
     List<InteractionContextType>? contexts,
   });
@@ -1338,7 +1336,7 @@ class _ApplicationCommandUpdateBuilderCopyWithImpl<$R, $Out>
     Object? options = $none,
     Object? defaultMemberPermissions = $none,
     Object? hasDmPermission = $none,
-    Object? isNsfw = $none,
+    Object? nsfw = $none,
     Object? integrationTypes = $none,
     Object? contexts = $none,
   }) => $apply(
@@ -1352,7 +1350,7 @@ class _ApplicationCommandUpdateBuilderCopyWithImpl<$R, $Out>
       if (defaultMemberPermissions != $none)
         #defaultMemberPermissions: defaultMemberPermissions,
       if (hasDmPermission != $none) #hasDmPermission: hasDmPermission,
-      if (isNsfw != $none) #isNsfw: isNsfw,
+      if (nsfw != $none) #nsfw: nsfw,
       if (integrationTypes != $none) #integrationTypes: integrationTypes,
       if (contexts != $none) #contexts: contexts,
     }),
@@ -1376,7 +1374,7 @@ class _ApplicationCommandUpdateBuilderCopyWithImpl<$R, $Out>
           or: $value.defaultMemberPermissions,
         ),
         hasDmPermission: data.get(#hasDmPermission, or: $value.hasDmPermission),
-        isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+        nsfw: data.get(#nsfw, or: $value.nsfw),
         integrationTypes: data.get(
           #integrationTypes,
           or: $value.integrationTypes,

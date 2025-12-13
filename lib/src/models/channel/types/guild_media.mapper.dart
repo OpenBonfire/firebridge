@@ -74,13 +74,14 @@ class GuildMediaChannelMapper extends SubClassMapperBase<GuildMediaChannel> {
     _$defaultSortOrder,
     key: r'default_sort_order',
   );
-  static Duration _$defaultAutoArchiveDuration(GuildMediaChannel v) =>
+  static Duration? _$defaultAutoArchiveDuration(GuildMediaChannel v) =>
       v.defaultAutoArchiveDuration;
   static const Field<GuildMediaChannel, Duration>
   _f$defaultAutoArchiveDuration = Field(
     'defaultAutoArchiveDuration',
     _$defaultAutoArchiveDuration,
     key: r'default_auto_archive_duration',
+    opt: true,
   );
   static Duration? _$defaultThreadRateLimitPerUser(GuildMediaChannel v) =>
       v.defaultThreadRateLimitPerUser;
@@ -90,17 +91,18 @@ class GuildMediaChannelMapper extends SubClassMapperBase<GuildMediaChannel> {
     _$defaultThreadRateLimitPerUser,
     key: r'default_thread_rate_limit_per_user',
   );
-  static Snowflake _$guildId(GuildMediaChannel v) => v.guildId;
+  static Snowflake? _$guildId(GuildMediaChannel v) => v.guildId;
   static const Field<GuildMediaChannel, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
     key: r'guild_id',
   );
-  static bool _$isNsfw(GuildMediaChannel v) => v.isNsfw;
-  static const Field<GuildMediaChannel, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool _$nsfw(GuildMediaChannel v) => v.nsfw;
+  static const Field<GuildMediaChannel, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
+    opt: true,
+    def: false,
   );
   static String _$name(GuildMediaChannel v) => v.name;
   static const Field<GuildMediaChannel, String> _f$name = Field('name', _$name);
@@ -139,7 +141,7 @@ class GuildMediaChannelMapper extends SubClassMapperBase<GuildMediaChannel> {
     #defaultAutoArchiveDuration: _f$defaultAutoArchiveDuration,
     #defaultThreadRateLimitPerUser: _f$defaultThreadRateLimitPerUser,
     #guildId: _f$guildId,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #name: _f$name,
     #parentId: _f$parentId,
     #permissionOverwrites: _f$permissionOverwrites,
@@ -167,7 +169,7 @@ class GuildMediaChannelMapper extends SubClassMapperBase<GuildMediaChannel> {
       defaultAutoArchiveDuration: data.dec(_f$defaultAutoArchiveDuration),
       defaultThreadRateLimitPerUser: data.dec(_f$defaultThreadRateLimitPerUser),
       guildId: data.dec(_f$guildId),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       name: data.dec(_f$name),
       parentId: data.dec(_f$parentId),
       permissionOverwrites: data.dec(_f$permissionOverwrites),
@@ -257,7 +259,7 @@ abstract class GuildMediaChannelCopyWith<
   get availableTags;
   DefaultReactionCopyWith<$R, DefaultReaction, DefaultReaction>?
   get defaultReaction;
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
   ListCopyWith<
     $R,
@@ -279,7 +281,7 @@ abstract class GuildMediaChannelCopyWith<
     Duration? defaultAutoArchiveDuration,
     Duration? defaultThreadRateLimitPerUser,
     Snowflake? guildId,
-    bool? isNsfw,
+    bool? nsfw,
     String? name,
     Snowflake? parentId,
     List<PermissionOverwrite>? permissionOverwrites,
@@ -319,8 +321,8 @@ class _GuildMediaChannelCopyWithImpl<$R, $Out>
   get defaultReaction =>
       $value.defaultReaction?.copyWith.$chain((v) => call(defaultReaction: v));
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
-      $value.guildId.copyWith.$chain((v) => call(guildId: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
+      $value.guildId?.copyWith.$chain((v) => call(guildId: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId =>
       $value.parentId?.copyWith.$chain((v) => call(parentId: v));
@@ -346,10 +348,10 @@ class _GuildMediaChannelCopyWithImpl<$R, $Out>
     List<ForumTag>? availableTags,
     Object? defaultReaction = $none,
     Object? defaultSortOrder = $none,
-    Duration? defaultAutoArchiveDuration,
+    Object? defaultAutoArchiveDuration = $none,
     Object? defaultThreadRateLimitPerUser = $none,
-    Snowflake? guildId,
-    bool? isNsfw,
+    Object? guildId = $none,
+    bool? nsfw,
     String? name,
     Object? parentId = $none,
     List<PermissionOverwrite>? permissionOverwrites,
@@ -365,12 +367,12 @@ class _GuildMediaChannelCopyWithImpl<$R, $Out>
       if (availableTags != null) #availableTags: availableTags,
       if (defaultReaction != $none) #defaultReaction: defaultReaction,
       if (defaultSortOrder != $none) #defaultSortOrder: defaultSortOrder,
-      if (defaultAutoArchiveDuration != null)
+      if (defaultAutoArchiveDuration != $none)
         #defaultAutoArchiveDuration: defaultAutoArchiveDuration,
       if (defaultThreadRateLimitPerUser != $none)
         #defaultThreadRateLimitPerUser: defaultThreadRateLimitPerUser,
-      if (guildId != null) #guildId: guildId,
-      if (isNsfw != null) #isNsfw: isNsfw,
+      if (guildId != $none) #guildId: guildId,
+      if (nsfw != null) #nsfw: nsfw,
       if (name != null) #name: name,
       if (parentId != $none) #parentId: parentId,
       if (permissionOverwrites != null)
@@ -398,7 +400,7 @@ class _GuildMediaChannelCopyWithImpl<$R, $Out>
       or: $value.defaultThreadRateLimitPerUser,
     ),
     guildId: data.get(#guildId, or: $value.guildId),
-    isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+    nsfw: data.get(#nsfw, or: $value.nsfw),
     name: data.get(#name, or: $value.name),
     parentId: data.get(#parentId, or: $value.parentId),
     permissionOverwrites: data.get(

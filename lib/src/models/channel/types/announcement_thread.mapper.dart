@@ -76,11 +76,12 @@ class AnnouncementThreadMapper extends SubClassMapperBase<AnnouncementThread> {
     _$isLocked,
     key: r'is_locked',
   );
-  static bool _$isNsfw(AnnouncementThread v) => v.isNsfw;
-  static const Field<AnnouncementThread, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool _$nsfw(AnnouncementThread v) => v.nsfw;
+  static const Field<AnnouncementThread, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
+    opt: true,
+    def: false,
   );
   static Snowflake? _$lastMessageId(AnnouncementThread v) => v.lastMessageId;
   static const Field<AnnouncementThread, Snowflake> _f$lastMessageId = Field(
@@ -162,7 +163,7 @@ class AnnouncementThreadMapper extends SubClassMapperBase<AnnouncementThread> {
     #guildId: _f$guildId,
     #isArchived: _f$isArchived,
     #isLocked: _f$isLocked,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #lastMessageId: _f$lastMessageId,
     #lastPinTimestamp: _f$lastPinTimestamp,
     #messageCount: _f$messageCount,
@@ -195,7 +196,7 @@ class AnnouncementThreadMapper extends SubClassMapperBase<AnnouncementThread> {
       guildId: data.dec(_f$guildId),
       isArchived: data.dec(_f$isArchived),
       isLocked: data.dec(_f$isLocked),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       lastMessageId: data.dec(_f$lastMessageId),
       lastPinTimestamp: data.dec(_f$lastPinTimestamp),
       messageCount: data.dec(_f$messageCount),
@@ -309,7 +310,7 @@ abstract class AnnouncementThreadCopyWith<
     Snowflake? guildId,
     bool? isArchived,
     bool? isLocked,
-    bool? isNsfw,
+    bool? nsfw,
     Snowflake? lastMessageId,
     DateTime? lastPinTimestamp,
     int? messageCount,
@@ -384,7 +385,7 @@ class _AnnouncementThreadCopyWithImpl<$R, $Out>
     Snowflake? guildId,
     bool? isArchived,
     bool? isLocked,
-    bool? isNsfw,
+    bool? nsfw,
     Object? lastMessageId = $none,
     Object? lastPinTimestamp = $none,
     int? messageCount,
@@ -409,7 +410,7 @@ class _AnnouncementThreadCopyWithImpl<$R, $Out>
       if (guildId != null) #guildId: guildId,
       if (isArchived != null) #isArchived: isArchived,
       if (isLocked != null) #isLocked: isLocked,
-      if (isNsfw != null) #isNsfw: isNsfw,
+      if (nsfw != null) #nsfw: nsfw,
       if (lastMessageId != $none) #lastMessageId: lastMessageId,
       if (lastPinTimestamp != $none) #lastPinTimestamp: lastPinTimestamp,
       if (messageCount != null) #messageCount: messageCount,
@@ -441,7 +442,7 @@ class _AnnouncementThreadCopyWithImpl<$R, $Out>
     guildId: data.get(#guildId, or: $value.guildId),
     isArchived: data.get(#isArchived, or: $value.isArchived),
     isLocked: data.get(#isLocked, or: $value.isLocked),
-    isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+    nsfw: data.get(#nsfw, or: $value.nsfw),
     lastMessageId: data.get(#lastMessageId, or: $value.lastMessageId),
     lastPinTimestamp: data.get(#lastPinTimestamp, or: $value.lastPinTimestamp),
     messageCount: data.get(#messageCount, or: $value.messageCount),

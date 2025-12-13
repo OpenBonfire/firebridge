@@ -25,7 +25,7 @@ abstract class HasThreadsChannel
   /// External references:
   /// * [ThreadBuilder.archiveOneHour], [ThreadBuilder.archiveOneDay], [ThreadBuilder.archiveThreeDays] and [ThreadBuilder.archiveOneWeek], the values this
   /// field can take.
-  Duration get defaultAutoArchiveDuration;
+  Duration? get defaultAutoArchiveDuration;
 
   /// The default [Thread.rateLimitPerUser] for [Thread]s created in this channel.
   Duration? get defaultThreadRateLimitPerUser;

@@ -1,4 +1,8 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:firebridge/src/models/channel/types/forum.dart';
+import 'package:firebridge/src/models/channel/types/guild_category.dart';
+import 'package:firebridge/src/models/channel/types/guild_media.dart';
+import 'package:firebridge/src/models/channel/types/guild_text.dart';
 import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:firebridge/src/utils/flags.dart';
@@ -17,7 +21,15 @@ class PartialChannel extends ManagedSnowflakeEntity<Channel>
 /// {@template channel}
 /// A channel of any type.
 /// {@endtemplate}
-@MappableClass(discriminatorKey: "type")
+@MappableClass(
+  discriminatorKey: "type",
+//  includeSubClasses: [
+//   GuildTextChannel,
+//   ForumChannel,
+//   GuildMediaChannel,
+//   GuildCategory
+// ]
+)
 abstract class Channel extends PartialChannel with ChannelMappable {
   /// The type of this channel.
   ChannelType get type;
@@ -31,18 +43,31 @@ abstract class Channel extends PartialChannel with ChannelMappable {
 @MappableEnum(mode: ValuesMode.indexed)
 enum ChannelType {
   /// A text channel in a [Guild].
+  @MappableValue(0)
   guildText,
+  @MappableValue(1)
   dm,
+  @MappableValue(2)
   guildVoice,
+  @MappableValue(3)
   groupDm,
+  @MappableValue(4)
   guildCategory,
+  @MappableValue(5)
   guildAnnouncement,
+  @MappableValue(10)
   announcementThread,
+  @MappableValue(11)
   publicThread,
+  @MappableValue(12)
   privateThread,
+  @MappableValue(13)
   guildStageVoice,
+  @MappableValue(14)
   guildDirectory,
+  @MappableValue(15)
   guildForum,
+  @MappableValue(16)
   guildMedia
 }
 

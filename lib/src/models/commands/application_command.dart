@@ -59,7 +59,7 @@ class ApplicationCommand extends PartialApplicationCommand
   final bool? hasDmPermission;
 
   /// Whether this command is NSFW.
-  final bool? isNsfw;
+  final bool? nsfw;
 
   /// Installation context(s) where the command is available, only for globally-scoped commands. Defaults to [InteractionContextType.guild].
   final List<ApplicationIntegrationType> integrationTypes;
@@ -84,7 +84,7 @@ class ApplicationCommand extends PartialApplicationCommand
     required this.options,
     required this.defaultMemberPermissions,
     required this.hasDmPermission,
-    required this.isNsfw,
+    this.nsfw = false,
     required this.integrationTypes,
     required this.contexts,
     required this.version,

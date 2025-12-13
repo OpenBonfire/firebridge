@@ -26,17 +26,19 @@ class GuildCategoryMapper extends SubClassMapperBase<GuildCategory> {
 
   static Snowflake _$id(GuildCategory v) => v.id;
   static const Field<GuildCategory, Snowflake> _f$id = Field('id', _$id);
-  static Snowflake _$guildId(GuildCategory v) => v.guildId;
+  static Snowflake? _$guildId(GuildCategory v) => v.guildId;
   static const Field<GuildCategory, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
     key: r'guild_id',
+    opt: true,
   );
-  static bool _$isNsfw(GuildCategory v) => v.isNsfw;
-  static const Field<GuildCategory, bool> _f$isNsfw = Field(
-    'isNsfw',
-    _$isNsfw,
-    key: r'is_nsfw',
+  static bool _$nsfw(GuildCategory v) => v.nsfw;
+  static const Field<GuildCategory, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
+    opt: true,
+    def: false,
   );
   static String _$name(GuildCategory v) => v.name;
   static const Field<GuildCategory, String> _f$name = Field('name', _$name);
@@ -64,7 +66,7 @@ class GuildCategoryMapper extends SubClassMapperBase<GuildCategory> {
   final MappableFields<GuildCategory> fields = const {
     #id: _f$id,
     #guildId: _f$guildId,
-    #isNsfw: _f$isNsfw,
+    #nsfw: _f$nsfw,
     #name: _f$name,
     #parentId: _f$parentId,
     #permissionOverwrites: _f$permissionOverwrites,
@@ -82,7 +84,7 @@ class GuildCategoryMapper extends SubClassMapperBase<GuildCategory> {
     return GuildCategory(
       id: data.dec(_f$id),
       guildId: data.dec(_f$guildId),
-      isNsfw: data.dec(_f$isNsfw),
+      nsfw: data.dec(_f$nsfw),
       name: data.dec(_f$name),
       parentId: data.dec(_f$parentId),
       permissionOverwrites: data.dec(_f$permissionOverwrites),
@@ -156,7 +158,7 @@ abstract class GuildCategoryCopyWith<$R, $In extends GuildCategory, $Out>
         GuildChannelCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
   ListCopyWith<
     $R,
@@ -168,7 +170,7 @@ abstract class GuildCategoryCopyWith<$R, $In extends GuildCategory, $Out>
   $R call({
     Snowflake? id,
     Snowflake? guildId,
-    bool? isNsfw,
+    bool? nsfw,
     String? name,
     Snowflake? parentId,
     List<PermissionOverwrite>? permissionOverwrites,
@@ -189,8 +191,8 @@ class _GuildCategoryCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
-      $value.guildId.copyWith.$chain((v) => call(guildId: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
+      $value.guildId?.copyWith.$chain((v) => call(guildId: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId =>
       $value.parentId?.copyWith.$chain((v) => call(parentId: v));
@@ -208,8 +210,8 @@ class _GuildCategoryCopyWithImpl<$R, $Out>
   @override
   $R call({
     Snowflake? id,
-    Snowflake? guildId,
-    bool? isNsfw,
+    Object? guildId = $none,
+    bool? nsfw,
     String? name,
     Object? parentId = $none,
     List<PermissionOverwrite>? permissionOverwrites,
@@ -217,8 +219,8 @@ class _GuildCategoryCopyWithImpl<$R, $Out>
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
-      if (guildId != null) #guildId: guildId,
-      if (isNsfw != null) #isNsfw: isNsfw,
+      if (guildId != $none) #guildId: guildId,
+      if (nsfw != null) #nsfw: nsfw,
       if (name != null) #name: name,
       if (parentId != $none) #parentId: parentId,
       if (permissionOverwrites != null)
@@ -230,7 +232,7 @@ class _GuildCategoryCopyWithImpl<$R, $Out>
   GuildCategory $make(CopyWithData data) => GuildCategory(
     id: data.get(#id, or: $value.id),
     guildId: data.get(#guildId, or: $value.guildId),
-    isNsfw: data.get(#isNsfw, or: $value.isNsfw),
+    nsfw: data.get(#nsfw, or: $value.nsfw),
     name: data.get(#name, or: $value.name),
     parentId: data.get(#parentId, or: $value.parentId),
     permissionOverwrites: data.get(

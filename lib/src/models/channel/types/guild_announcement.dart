@@ -20,16 +20,16 @@ class GuildAnnouncementChannel extends TextChannel
   final String? topic;
 
   @override
-  final Duration defaultAutoArchiveDuration;
+  final Duration? defaultAutoArchiveDuration;
 
   @override
   final Duration? defaultThreadRateLimitPerUser;
 
   @override
-  final Snowflake guildId;
+  final Snowflake? guildId;
 
   @override
-  final bool isNsfw;
+  final bool nsfw;
 
   @override
   final Snowflake? lastMessageId;
@@ -60,10 +60,10 @@ class GuildAnnouncementChannel extends TextChannel
   GuildAnnouncementChannel({
     required super.id,
     required this.topic,
-    required this.defaultAutoArchiveDuration,
+    this.defaultAutoArchiveDuration,
     required this.defaultThreadRateLimitPerUser,
     required this.guildId,
-    required this.isNsfw,
+    this.nsfw = false,
     required this.lastMessageId,
     required this.lastPinTimestamp,
     required this.name,
