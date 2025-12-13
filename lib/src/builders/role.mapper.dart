@@ -14,7 +14,6 @@ class RoleColorsBuilderMapper extends ClassMapperBase<RoleColorsBuilder> {
   static RoleColorsBuilderMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = RoleColorsBuilderMapper._());
-      DiscordColorMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -126,9 +125,6 @@ abstract class RoleColorsBuilderCopyWith<
   $Out
 >
     implements ClassCopyWith<$R, $In, $Out> {
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor> get primary;
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get secondary;
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get tertiary;
   $R call({
     DiscordColor? primary,
     DiscordColor? secondary,
@@ -147,15 +143,6 @@ class _RoleColorsBuilderCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<RoleColorsBuilder> $mapper =
       RoleColorsBuilderMapper.ensureInitialized();
-  @override
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor> get primary =>
-      $value.primary.copyWith.$chain((v) => call(primary: v));
-  @override
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get secondary =>
-      $value.secondary?.copyWith.$chain((v) => call(secondary: v));
-  @override
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get tertiary =>
-      $value.tertiary?.copyWith.$chain((v) => call(tertiary: v));
   @override
   $R call({
     DiscordColor? primary,
@@ -190,7 +177,6 @@ class RoleBuilderMapper extends ClassMapperBase<RoleBuilder> {
       MapperContainer.globals.use(_instance = RoleBuilderMapper._());
       FlagsMapper.ensureInitialized();
       PermissionsMapper.ensureInitialized();
-      DiscordColorMapper.ensureInitialized();
       RoleColorsBuilderMapper.ensureInitialized();
     }
     return _instance!;
@@ -217,11 +203,10 @@ class RoleBuilderMapper extends ClassMapperBase<RoleBuilder> {
     _$color,
     opt: true,
   );
-  static bool? _$isHoisted(RoleBuilder v) => v.isHoisted;
-  static const Field<RoleBuilder, bool> _f$isHoisted = Field(
-    'isHoisted',
-    _$isHoisted,
-    key: r'is_hoisted',
+  static bool? _$hoist(RoleBuilder v) => v.hoist;
+  static const Field<RoleBuilder, bool> _f$hoist = Field(
+    'hoist',
+    _$hoist,
     opt: true,
   );
   static ImageBuilder? _$icon(RoleBuilder v) => v.icon;
@@ -237,11 +222,10 @@ class RoleBuilderMapper extends ClassMapperBase<RoleBuilder> {
     key: r'unicode_emoji',
     opt: true,
   );
-  static bool? _$isMentionable(RoleBuilder v) => v.isMentionable;
-  static const Field<RoleBuilder, bool> _f$isMentionable = Field(
-    'isMentionable',
-    _$isMentionable,
-    key: r'is_mentionable',
+  static bool? _$mentionable(RoleBuilder v) => v.mentionable;
+  static const Field<RoleBuilder, bool> _f$mentionable = Field(
+    'mentionable',
+    _$mentionable,
     opt: true,
   );
   static RoleColorsBuilder? _$colors(RoleBuilder v) => v.colors;
@@ -256,10 +240,10 @@ class RoleBuilderMapper extends ClassMapperBase<RoleBuilder> {
     #name: _f$name,
     #permissions: _f$permissions,
     #color: _f$color,
-    #isHoisted: _f$isHoisted,
+    #hoist: _f$hoist,
     #icon: _f$icon,
     #unicodeEmoji: _f$unicodeEmoji,
-    #isMentionable: _f$isMentionable,
+    #mentionable: _f$mentionable,
     #colors: _f$colors,
   };
 
@@ -268,10 +252,10 @@ class RoleBuilderMapper extends ClassMapperBase<RoleBuilder> {
       name: data.dec(_f$name),
       permissions: data.dec(_f$permissions),
       color: data.dec(_f$color),
-      isHoisted: data.dec(_f$isHoisted),
+      hoist: data.dec(_f$hoist),
       icon: data.dec(_f$icon),
       unicodeEmoji: data.dec(_f$unicodeEmoji),
-      isMentionable: data.dec(_f$isMentionable),
+      mentionable: data.dec(_f$mentionable),
       colors: data.dec(_f$colors),
     );
   }
@@ -338,17 +322,16 @@ abstract class RoleBuilderCopyWith<$R, $In extends RoleBuilder, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   FlagsCopyWith<$R, Flags<Permissions>, Flags<Permissions>, Permissions>?
   get permissions;
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get color;
   RoleColorsBuilderCopyWith<$R, RoleColorsBuilder, RoleColorsBuilder>?
   get colors;
   $R call({
     String? name,
     Flags<Permissions>? permissions,
     DiscordColor? color,
-    bool? isHoisted,
+    bool? hoist,
     ImageBuilder? icon,
     String? unicodeEmoji,
-    bool? isMentionable,
+    bool? mentionable,
     RoleColorsBuilder? colors,
   });
   RoleBuilderCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
@@ -367,9 +350,6 @@ class _RoleBuilderCopyWithImpl<$R, $Out>
   get permissions =>
       $value.permissions?.copyWith.$chain((v) => call(permissions: v));
   @override
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get color =>
-      $value.color?.copyWith.$chain((v) => call(color: v));
-  @override
   RoleColorsBuilderCopyWith<$R, RoleColorsBuilder, RoleColorsBuilder>?
   get colors => $value.colors?.copyWith.$chain((v) => call(colors: v));
   @override
@@ -377,20 +357,20 @@ class _RoleBuilderCopyWithImpl<$R, $Out>
     Object? name = $none,
     Object? permissions = $none,
     Object? color = $none,
-    Object? isHoisted = $none,
+    Object? hoist = $none,
     Object? icon = $none,
     Object? unicodeEmoji = $none,
-    Object? isMentionable = $none,
+    Object? mentionable = $none,
     Object? colors = $none,
   }) => $apply(
     FieldCopyWithData({
       if (name != $none) #name: name,
       if (permissions != $none) #permissions: permissions,
       if (color != $none) #color: color,
-      if (isHoisted != $none) #isHoisted: isHoisted,
+      if (hoist != $none) #hoist: hoist,
       if (icon != $none) #icon: icon,
       if (unicodeEmoji != $none) #unicodeEmoji: unicodeEmoji,
-      if (isMentionable != $none) #isMentionable: isMentionable,
+      if (mentionable != $none) #mentionable: mentionable,
       if (colors != $none) #colors: colors,
     }),
   );
@@ -399,10 +379,10 @@ class _RoleBuilderCopyWithImpl<$R, $Out>
     name: data.get(#name, or: $value.name),
     permissions: data.get(#permissions, or: $value.permissions),
     color: data.get(#color, or: $value.color),
-    isHoisted: data.get(#isHoisted, or: $value.isHoisted),
+    hoist: data.get(#hoist, or: $value.hoist),
     icon: data.get(#icon, or: $value.icon),
     unicodeEmoji: data.get(#unicodeEmoji, or: $value.unicodeEmoji),
-    isMentionable: data.get(#isMentionable, or: $value.isMentionable),
+    mentionable: data.get(#mentionable, or: $value.mentionable),
     colors: data.get(#colors, or: $value.colors),
   );
 
@@ -421,7 +401,6 @@ class RoleUpdateBuilderMapper extends ClassMapperBase<RoleUpdateBuilder> {
       MapperContainer.globals.use(_instance = RoleUpdateBuilderMapper._());
       FlagsMapper.ensureInitialized();
       PermissionsMapper.ensureInitialized();
-      DiscordColorMapper.ensureInitialized();
       RoleColorsBuilderMapper.ensureInitialized();
     }
     return _instance!;
@@ -446,11 +425,10 @@ class RoleUpdateBuilderMapper extends ClassMapperBase<RoleUpdateBuilder> {
     _$color,
     opt: true,
   );
-  static bool? _$isHoisted(RoleUpdateBuilder v) => v.isHoisted;
-  static const Field<RoleUpdateBuilder, bool> _f$isHoisted = Field(
-    'isHoisted',
-    _$isHoisted,
-    key: r'is_hoisted',
+  static bool? _$hoist(RoleUpdateBuilder v) => v.hoist;
+  static const Field<RoleUpdateBuilder, bool> _f$hoist = Field(
+    'hoist',
+    _$hoist,
     opt: true,
   );
   static ImageBuilder? _$icon(RoleUpdateBuilder v) => v.icon;
@@ -468,11 +446,10 @@ class RoleUpdateBuilderMapper extends ClassMapperBase<RoleUpdateBuilder> {
     opt: true,
     def: sentinelString,
   );
-  static bool? _$isMentionable(RoleUpdateBuilder v) => v.isMentionable;
-  static const Field<RoleUpdateBuilder, bool> _f$isMentionable = Field(
-    'isMentionable',
-    _$isMentionable,
-    key: r'is_mentionable',
+  static bool? _$mentionable(RoleUpdateBuilder v) => v.mentionable;
+  static const Field<RoleUpdateBuilder, bool> _f$mentionable = Field(
+    'mentionable',
+    _$mentionable,
     opt: true,
   );
   static RoleColorsBuilder? _$colors(RoleUpdateBuilder v) => v.colors;
@@ -487,10 +464,10 @@ class RoleUpdateBuilderMapper extends ClassMapperBase<RoleUpdateBuilder> {
     #name: _f$name,
     #permissions: _f$permissions,
     #color: _f$color,
-    #isHoisted: _f$isHoisted,
+    #hoist: _f$hoist,
     #icon: _f$icon,
     #unicodeEmoji: _f$unicodeEmoji,
-    #isMentionable: _f$isMentionable,
+    #mentionable: _f$mentionable,
     #colors: _f$colors,
   };
 
@@ -499,10 +476,10 @@ class RoleUpdateBuilderMapper extends ClassMapperBase<RoleUpdateBuilder> {
       name: data.dec(_f$name),
       permissions: data.dec(_f$permissions),
       color: data.dec(_f$color),
-      isHoisted: data.dec(_f$isHoisted),
+      hoist: data.dec(_f$hoist),
       icon: data.dec(_f$icon),
       unicodeEmoji: data.dec(_f$unicodeEmoji),
-      isMentionable: data.dec(_f$isMentionable),
+      mentionable: data.dec(_f$mentionable),
       colors: data.dec(_f$colors),
     );
   }
@@ -580,17 +557,16 @@ abstract class RoleUpdateBuilderCopyWith<
     implements ClassCopyWith<$R, $In, $Out> {
   FlagsCopyWith<$R, Flags<Permissions>, Flags<Permissions>, Permissions>?
   get permissions;
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get color;
   RoleColorsBuilderCopyWith<$R, RoleColorsBuilder, RoleColorsBuilder>?
   get colors;
   $R call({
     String? name,
     Flags<Permissions>? permissions,
     DiscordColor? color,
-    bool? isHoisted,
+    bool? hoist,
     ImageBuilder? icon,
     String? unicodeEmoji,
-    bool? isMentionable,
+    bool? mentionable,
     RoleColorsBuilder? colors,
   });
   RoleUpdateBuilderCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
@@ -611,9 +587,6 @@ class _RoleUpdateBuilderCopyWithImpl<$R, $Out>
   get permissions =>
       $value.permissions?.copyWith.$chain((v) => call(permissions: v));
   @override
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get color =>
-      $value.color?.copyWith.$chain((v) => call(color: v));
-  @override
   RoleColorsBuilderCopyWith<$R, RoleColorsBuilder, RoleColorsBuilder>?
   get colors => $value.colors?.copyWith.$chain((v) => call(colors: v));
   @override
@@ -621,20 +594,20 @@ class _RoleUpdateBuilderCopyWithImpl<$R, $Out>
     Object? name = $none,
     Object? permissions = $none,
     Object? color = $none,
-    Object? isHoisted = $none,
+    Object? hoist = $none,
     Object? icon = $none,
     Object? unicodeEmoji = $none,
-    Object? isMentionable = $none,
+    Object? mentionable = $none,
     Object? colors = $none,
   }) => $apply(
     FieldCopyWithData({
       if (name != $none) #name: name,
       if (permissions != $none) #permissions: permissions,
       if (color != $none) #color: color,
-      if (isHoisted != $none) #isHoisted: isHoisted,
+      if (hoist != $none) #hoist: hoist,
       if (icon != $none) #icon: icon,
       if (unicodeEmoji != $none) #unicodeEmoji: unicodeEmoji,
-      if (isMentionable != $none) #isMentionable: isMentionable,
+      if (mentionable != $none) #mentionable: mentionable,
       if (colors != $none) #colors: colors,
     }),
   );
@@ -643,10 +616,10 @@ class _RoleUpdateBuilderCopyWithImpl<$R, $Out>
     name: data.get(#name, or: $value.name),
     permissions: data.get(#permissions, or: $value.permissions),
     color: data.get(#color, or: $value.color),
-    isHoisted: data.get(#isHoisted, or: $value.isHoisted),
+    hoist: data.get(#hoist, or: $value.hoist),
     icon: data.get(#icon, or: $value.icon),
     unicodeEmoji: data.get(#unicodeEmoji, or: $value.unicodeEmoji),
-    isMentionable: data.get(#isMentionable, or: $value.isMentionable),
+    mentionable: data.get(#mentionable, or: $value.mentionable),
     colors: data.get(#colors, or: $value.colors),
   );
 

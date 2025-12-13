@@ -453,7 +453,6 @@ class UserGuildMapper extends ClassMapperBase<UserGuild> {
       GuildMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       PermissionsMapper.ensureInitialized();
-      GuildFeaturesMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -484,11 +483,6 @@ class UserGuildMapper extends ClassMapperBase<UserGuild> {
     _$currentUserPermissions,
     key: r'current_user_permissions',
   );
-  static GuildFeatures _$features(UserGuild v) => v.features;
-  static const Field<UserGuild, GuildFeatures> _f$features = Field(
-    'features',
-    _$features,
-  );
   static int? _$approximateMemberCount(UserGuild v) => v.approximateMemberCount;
   static const Field<UserGuild, int> _f$approximateMemberCount = Field(
     'approximateMemberCount',
@@ -516,7 +510,6 @@ class UserGuildMapper extends ClassMapperBase<UserGuild> {
     #iconHash: _f$iconHash,
     #isOwnedByCurrentUser: _f$isOwnedByCurrentUser,
     #currentUserPermissions: _f$currentUserPermissions,
-    #features: _f$features,
     #approximateMemberCount: _f$approximateMemberCount,
     #approximatePresenceCount: _f$approximatePresenceCount,
     #bannerHash: _f$bannerHash,
@@ -529,7 +522,6 @@ class UserGuildMapper extends ClassMapperBase<UserGuild> {
       iconHash: data.dec(_f$iconHash),
       isOwnedByCurrentUser: data.dec(_f$isOwnedByCurrentUser),
       currentUserPermissions: data.dec(_f$currentUserPermissions),
-      features: data.dec(_f$features),
       approximateMemberCount: data.dec(_f$approximateMemberCount),
       approximatePresenceCount: data.dec(_f$approximatePresenceCount),
       bannerHash: data.dec(_f$bannerHash),
@@ -598,7 +590,6 @@ abstract class UserGuildCopyWith<$R, $In extends UserGuild, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   PermissionsCopyWith<$R, Permissions, Permissions>? get currentUserPermissions;
-  GuildFeaturesCopyWith<$R, GuildFeatures, GuildFeatures> get features;
   @override
   $R call({
     Snowflake? id,
@@ -606,7 +597,6 @@ abstract class UserGuildCopyWith<$R, $In extends UserGuild, $Out>
     String? iconHash,
     bool? isOwnedByCurrentUser,
     Permissions? currentUserPermissions,
-    GuildFeatures? features,
     int? approximateMemberCount,
     int? approximatePresenceCount,
     String? bannerHash,
@@ -631,16 +621,12 @@ class _UserGuildCopyWithImpl<$R, $Out>
     (v) => call(currentUserPermissions: v),
   );
   @override
-  GuildFeaturesCopyWith<$R, GuildFeatures, GuildFeatures> get features =>
-      $value.features.copyWith.$chain((v) => call(features: v));
-  @override
   $R call({
     Snowflake? id,
     String? name,
     Object? iconHash = $none,
     Object? isOwnedByCurrentUser = $none,
     Object? currentUserPermissions = $none,
-    GuildFeatures? features,
     Object? approximateMemberCount = $none,
     Object? approximatePresenceCount = $none,
     Object? bannerHash = $none,
@@ -653,7 +639,6 @@ class _UserGuildCopyWithImpl<$R, $Out>
         #isOwnedByCurrentUser: isOwnedByCurrentUser,
       if (currentUserPermissions != $none)
         #currentUserPermissions: currentUserPermissions,
-      if (features != null) #features: features,
       if (approximateMemberCount != $none)
         #approximateMemberCount: approximateMemberCount,
       if (approximatePresenceCount != $none)
@@ -674,7 +659,6 @@ class _UserGuildCopyWithImpl<$R, $Out>
       #currentUserPermissions,
       or: $value.currentUserPermissions,
     ),
-    features: data.get(#features, or: $value.features),
     approximateMemberCount: data.get(
       #approximateMemberCount,
       or: $value.approximateMemberCount,
@@ -692,122 +676,6 @@ class _UserGuildCopyWithImpl<$R, $Out>
   ) => _UserGuildCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class GuildFeaturesMapper extends ClassMapperBase<GuildFeatures> {
-  GuildFeaturesMapper._();
-
-  static GuildFeaturesMapper? _instance;
-  static GuildFeaturesMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = GuildFeaturesMapper._());
-      FlagsMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'GuildFeatures';
-
-  static int _$value(GuildFeatures v) => v.value;
-  static const Field<GuildFeatures, int> _f$value = Field('value', _$value);
-
-  @override
-  final MappableFields<GuildFeatures> fields = const {#value: _f$value};
-
-  @override
-  final MappingHook superHook = const FlagsHook();
-
-  static GuildFeatures _instantiate(DecodingData data) {
-    return GuildFeatures(data.dec(_f$value));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static GuildFeatures fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<GuildFeatures>(map);
-  }
-
-  static GuildFeatures fromJson(String json) {
-    return ensureInitialized().decodeJson<GuildFeatures>(json);
-  }
-}
-
-mixin GuildFeaturesMappable {
-  String toJson() {
-    return GuildFeaturesMapper.ensureInitialized().encodeJson<GuildFeatures>(
-      this as GuildFeatures,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return GuildFeaturesMapper.ensureInitialized().encodeMap<GuildFeatures>(
-      this as GuildFeatures,
-    );
-  }
-
-  GuildFeaturesCopyWith<GuildFeatures, GuildFeatures, GuildFeatures>
-  get copyWith => _GuildFeaturesCopyWithImpl<GuildFeatures, GuildFeatures>(
-    this as GuildFeatures,
-    $identity,
-    $identity,
-  );
-  @override
-  String toString() {
-    return GuildFeaturesMapper.ensureInitialized().stringifyValue(
-      this as GuildFeatures,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return GuildFeaturesMapper.ensureInitialized().equalsValue(
-      this as GuildFeatures,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return GuildFeaturesMapper.ensureInitialized().hashValue(
-      this as GuildFeatures,
-    );
-  }
-}
-
-extension GuildFeaturesValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, GuildFeatures, $Out> {
-  GuildFeaturesCopyWith<$R, GuildFeatures, $Out> get $asGuildFeatures =>
-      $base.as((v, t, t2) => _GuildFeaturesCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class GuildFeaturesCopyWith<$R, $In extends GuildFeatures, $Out>
-    implements FlagsCopyWith<$R, $In, $Out, GuildFeatures> {
-  @override
-  $R call({int? value});
-  GuildFeaturesCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
-}
-
-class _GuildFeaturesCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, GuildFeatures, $Out>
-    implements GuildFeaturesCopyWith<$R, GuildFeatures, $Out> {
-  _GuildFeaturesCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<GuildFeatures> $mapper =
-      GuildFeaturesMapper.ensureInitialized();
-  @override
-  $R call({int? value}) =>
-      $apply(FieldCopyWithData({if (value != null) #value: value}));
-  @override
-  GuildFeatures $make(CopyWithData data) =>
-      GuildFeatures(data.get(#value, or: $value.value));
-
-  @override
-  GuildFeaturesCopyWith<$R2, GuildFeatures, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _GuildFeaturesCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class GuildMapper extends ClassMapperBase<Guild> {
   GuildMapper._();
 
@@ -822,16 +690,15 @@ class GuildMapper extends ClassMapperBase<Guild> {
       MessageNotificationLevelMapper.ensureInitialized();
       ExplicitContentFilterLevelMapper.ensureInitialized();
       RoleMapper.ensureInitialized();
-      GuildFeaturesMapper.ensureInitialized();
       MfaLevelMapper.ensureInitialized();
       SystemChannelFlagsMapper.ensureInitialized();
       PremiumTierMapper.ensureInitialized();
       LocaleMapper.ensureInitialized();
       WelcomeScreenMapper.ensureInitialized();
       NsfwLevelMapper.ensureInitialized();
-      EmojiMapper.ensureInitialized();
       GuildStickerMapper.ensureInitialized();
       IncidentsDataMapper.ensureInitialized();
+      ChannelMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -892,11 +759,12 @@ class GuildMapper extends ClassMapperBase<Guild> {
     _$afkTimeout,
     key: r'afk_timeout',
   );
-  static bool _$isWidgetEnabled(Guild v) => v.isWidgetEnabled;
-  static const Field<Guild, bool> _f$isWidgetEnabled = Field(
-    'isWidgetEnabled',
-    _$isWidgetEnabled,
-    key: r'is_widget_enabled',
+  static bool? _$widgetEnabled(Guild v) => v.widgetEnabled;
+  static const Field<Guild, bool> _f$widgetEnabled = Field(
+    'widgetEnabled',
+    _$widgetEnabled,
+    key: r'widget_enabled',
+    opt: true,
   );
   static Snowflake? _$widgetChannelId(Guild v) => v.widgetChannelId;
   static const Field<Guild, Snowflake> _f$widgetChannelId = Field(
@@ -910,33 +778,24 @@ class GuildMapper extends ClassMapperBase<Guild> {
     _$verificationLevel,
     key: r'verification_level',
   );
-  static MessageNotificationLevel _$defaultMessageNotificationLevel(Guild v) =>
-      v.defaultMessageNotificationLevel;
+  static MessageNotificationLevel _$defaultMessageNotifications(Guild v) =>
+      v.defaultMessageNotifications;
   static const Field<Guild, MessageNotificationLevel>
-  _f$defaultMessageNotificationLevel = Field(
-    'defaultMessageNotificationLevel',
-    _$defaultMessageNotificationLevel,
-    key: r'default_message_notification_level',
+  _f$defaultMessageNotifications = Field(
+    'defaultMessageNotifications',
+    _$defaultMessageNotifications,
+    key: r'default_message_notifications',
   );
-  static ExplicitContentFilterLevel _$explicitContentFilterLevel(Guild v) =>
-      v.explicitContentFilterLevel;
+  static ExplicitContentFilterLevel _$explicitContentFilter(Guild v) =>
+      v.explicitContentFilter;
   static const Field<Guild, ExplicitContentFilterLevel>
-  _f$explicitContentFilterLevel = Field(
-    'explicitContentFilterLevel',
-    _$explicitContentFilterLevel,
-    key: r'explicit_content_filter_level',
+  _f$explicitContentFilter = Field(
+    'explicitContentFilter',
+    _$explicitContentFilter,
+    key: r'explicit_content_filter',
   );
-  static List<Role> _$roleList(Guild v) => v.roleList;
-  static const Field<Guild, List<Role>> _f$roleList = Field(
-    'roleList',
-    _$roleList,
-    key: r'role_list',
-  );
-  static GuildFeatures _$features(Guild v) => v.features;
-  static const Field<Guild, GuildFeatures> _f$features = Field(
-    'features',
-    _$features,
-  );
+  static List<Role> _$roles(Guild v) => v.roles;
+  static const Field<Guild, List<Role>> _f$roles = Field('roles', _$roles);
   static MfaLevel _$mfaLevel(Guild v) => v.mfaLevel;
   static const Field<Guild, MfaLevel> _f$mfaLevel = Field(
     'mfaLevel',
@@ -1058,24 +917,17 @@ class GuildMapper extends ClassMapperBase<Guild> {
     _$nsfwLevel,
     key: r'nsfw_level',
   );
-  static bool _$hasPremiumProgressBarEnabled(Guild v) =>
-      v.hasPremiumProgressBarEnabled;
-  static const Field<Guild, bool> _f$hasPremiumProgressBarEnabled = Field(
-    'hasPremiumProgressBarEnabled',
-    _$hasPremiumProgressBarEnabled,
-    key: r'has_premium_progress_bar_enabled',
+  static bool _$premiumProgressBarEnabled(Guild v) =>
+      v.premiumProgressBarEnabled;
+  static const Field<Guild, bool> _f$premiumProgressBarEnabled = Field(
+    'premiumProgressBarEnabled',
+    _$premiumProgressBarEnabled,
+    key: r'premium_progress_bar_enabled',
   );
-  static List<Emoji> _$emojiList(Guild v) => v.emojiList;
-  static const Field<Guild, List<Emoji>> _f$emojiList = Field(
-    'emojiList',
-    _$emojiList,
-    key: r'emoji_list',
-  );
-  static List<GuildSticker> _$stickerList(Guild v) => v.stickerList;
-  static const Field<Guild, List<GuildSticker>> _f$stickerList = Field(
-    'stickerList',
-    _$stickerList,
-    key: r'sticker_list',
+  static List<GuildSticker> _$stickers(Guild v) => v.stickers;
+  static const Field<Guild, List<GuildSticker>> _f$stickers = Field(
+    'stickers',
+    _$stickers,
   );
   static Snowflake? _$safetyAlertsChannelId(Guild v) => v.safetyAlertsChannelId;
   static const Field<Guild, Snowflake> _f$safetyAlertsChannelId = Field(
@@ -1088,6 +940,11 @@ class GuildMapper extends ClassMapperBase<Guild> {
     'incidentsData',
     _$incidentsData,
     key: r'incidents_data',
+  );
+  static List<Channel> _$channels(Guild v) => v.channels;
+  static const Field<Guild, List<Channel>> _f$channels = Field(
+    'channels',
+    _$channels,
   );
 
   @override
@@ -1102,13 +959,12 @@ class GuildMapper extends ClassMapperBase<Guild> {
     #currentUserPermissions: _f$currentUserPermissions,
     #afkChannelId: _f$afkChannelId,
     #afkTimeout: _f$afkTimeout,
-    #isWidgetEnabled: _f$isWidgetEnabled,
+    #widgetEnabled: _f$widgetEnabled,
     #widgetChannelId: _f$widgetChannelId,
     #verificationLevel: _f$verificationLevel,
-    #defaultMessageNotificationLevel: _f$defaultMessageNotificationLevel,
-    #explicitContentFilterLevel: _f$explicitContentFilterLevel,
-    #roleList: _f$roleList,
-    #features: _f$features,
+    #defaultMessageNotifications: _f$defaultMessageNotifications,
+    #explicitContentFilter: _f$explicitContentFilter,
+    #roles: _f$roles,
     #mfaLevel: _f$mfaLevel,
     #applicationId: _f$applicationId,
     #systemChannelId: _f$systemChannelId,
@@ -1129,11 +985,11 @@ class GuildMapper extends ClassMapperBase<Guild> {
     #approximatePresenceCount: _f$approximatePresenceCount,
     #welcomeScreen: _f$welcomeScreen,
     #nsfwLevel: _f$nsfwLevel,
-    #hasPremiumProgressBarEnabled: _f$hasPremiumProgressBarEnabled,
-    #emojiList: _f$emojiList,
-    #stickerList: _f$stickerList,
+    #premiumProgressBarEnabled: _f$premiumProgressBarEnabled,
+    #stickers: _f$stickers,
     #safetyAlertsChannelId: _f$safetyAlertsChannelId,
     #incidentsData: _f$incidentsData,
+    #channels: _f$channels,
   };
 
   static Guild _instantiate(DecodingData data) {
@@ -1148,15 +1004,12 @@ class GuildMapper extends ClassMapperBase<Guild> {
       currentUserPermissions: data.dec(_f$currentUserPermissions),
       afkChannelId: data.dec(_f$afkChannelId),
       afkTimeout: data.dec(_f$afkTimeout),
-      isWidgetEnabled: data.dec(_f$isWidgetEnabled),
+      widgetEnabled: data.dec(_f$widgetEnabled),
       widgetChannelId: data.dec(_f$widgetChannelId),
       verificationLevel: data.dec(_f$verificationLevel),
-      defaultMessageNotificationLevel: data.dec(
-        _f$defaultMessageNotificationLevel,
-      ),
-      explicitContentFilterLevel: data.dec(_f$explicitContentFilterLevel),
-      roleList: data.dec(_f$roleList),
-      features: data.dec(_f$features),
+      defaultMessageNotifications: data.dec(_f$defaultMessageNotifications),
+      explicitContentFilter: data.dec(_f$explicitContentFilter),
+      roles: data.dec(_f$roles),
       mfaLevel: data.dec(_f$mfaLevel),
       applicationId: data.dec(_f$applicationId),
       systemChannelId: data.dec(_f$systemChannelId),
@@ -1177,11 +1030,11 @@ class GuildMapper extends ClassMapperBase<Guild> {
       approximatePresenceCount: data.dec(_f$approximatePresenceCount),
       welcomeScreen: data.dec(_f$welcomeScreen),
       nsfwLevel: data.dec(_f$nsfwLevel),
-      hasPremiumProgressBarEnabled: data.dec(_f$hasPremiumProgressBarEnabled),
-      emojiList: data.dec(_f$emojiList),
-      stickerList: data.dec(_f$stickerList),
+      premiumProgressBarEnabled: data.dec(_f$premiumProgressBarEnabled),
+      stickers: data.dec(_f$stickers),
       safetyAlertsChannelId: data.dec(_f$safetyAlertsChannelId),
       incidentsData: data.dec(_f$incidentsData),
+      channels: data.dec(_f$channels),
     );
   }
 
@@ -1238,9 +1091,7 @@ abstract class GuildCopyWith<$R, $In extends Guild, $Out>
   PermissionsCopyWith<$R, Permissions, Permissions>? get currentUserPermissions;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get afkChannelId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get widgetChannelId;
-  ListCopyWith<$R, Role, RoleCopyWith<$R, Role, Role>> get roleList;
-  @override
-  GuildFeaturesCopyWith<$R, GuildFeatures, GuildFeatures> get features;
+  ListCopyWith<$R, Role, RoleCopyWith<$R, Role, Role>> get roles;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get applicationId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get systemChannelId;
   SystemChannelFlagsCopyWith<$R, SystemChannelFlags, SystemChannelFlags>
@@ -1248,15 +1099,15 @@ abstract class GuildCopyWith<$R, $In extends Guild, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get rulesChannelId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get publicUpdatesChannelId;
   WelcomeScreenCopyWith<$R, WelcomeScreen, WelcomeScreen>? get welcomeScreen;
-  ListCopyWith<$R, Emoji, EmojiCopyWith<$R, Emoji, Emoji>> get emojiList;
   ListCopyWith<
     $R,
     GuildSticker,
     GuildStickerCopyWith<$R, GuildSticker, GuildSticker>
   >
-  get stickerList;
+  get stickers;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get safetyAlertsChannelId;
   IncidentsDataCopyWith<$R, IncidentsData, IncidentsData>? get incidentsData;
+  ListCopyWith<$R, Channel, ChannelCopyWith<$R, Channel, Channel>> get channels;
   @override
   $R call({
     Snowflake? id,
@@ -1269,13 +1120,12 @@ abstract class GuildCopyWith<$R, $In extends Guild, $Out>
     Permissions? currentUserPermissions,
     Snowflake? afkChannelId,
     Duration? afkTimeout,
-    bool? isWidgetEnabled,
+    bool? widgetEnabled,
     Snowflake? widgetChannelId,
     VerificationLevel? verificationLevel,
-    MessageNotificationLevel? defaultMessageNotificationLevel,
-    ExplicitContentFilterLevel? explicitContentFilterLevel,
-    List<Role>? roleList,
-    GuildFeatures? features,
+    MessageNotificationLevel? defaultMessageNotifications,
+    ExplicitContentFilterLevel? explicitContentFilter,
+    List<Role>? roles,
     MfaLevel? mfaLevel,
     Snowflake? applicationId,
     Snowflake? systemChannelId,
@@ -1296,11 +1146,11 @@ abstract class GuildCopyWith<$R, $In extends Guild, $Out>
     int? approximatePresenceCount,
     WelcomeScreen? welcomeScreen,
     NsfwLevel? nsfwLevel,
-    bool? hasPremiumProgressBarEnabled,
-    List<Emoji>? emojiList,
-    List<GuildSticker>? stickerList,
+    bool? premiumProgressBarEnabled,
+    List<GuildSticker>? stickers,
     Snowflake? safetyAlertsChannelId,
     IncidentsData? incidentsData,
+    List<Channel>? channels,
   });
   GuildCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -1329,15 +1179,12 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get widgetChannelId =>
       $value.widgetChannelId?.copyWith.$chain((v) => call(widgetChannelId: v));
   @override
-  ListCopyWith<$R, Role, RoleCopyWith<$R, Role, Role>> get roleList =>
+  ListCopyWith<$R, Role, RoleCopyWith<$R, Role, Role>> get roles =>
       ListCopyWith(
-        $value.roleList,
+        $value.roles,
         (v, t) => v.copyWith.$chain(t),
-        (v) => call(roleList: v),
+        (v) => call(roles: v),
       );
-  @override
-  GuildFeaturesCopyWith<$R, GuildFeatures, GuildFeatures> get features =>
-      $value.features.copyWith.$chain((v) => call(features: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get applicationId =>
       $value.applicationId?.copyWith.$chain((v) => call(applicationId: v));
@@ -1361,22 +1208,15 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
   WelcomeScreenCopyWith<$R, WelcomeScreen, WelcomeScreen>? get welcomeScreen =>
       $value.welcomeScreen?.copyWith.$chain((v) => call(welcomeScreen: v));
   @override
-  ListCopyWith<$R, Emoji, EmojiCopyWith<$R, Emoji, Emoji>> get emojiList =>
-      ListCopyWith(
-        $value.emojiList,
-        (v, t) => v.copyWith.$chain(t),
-        (v) => call(emojiList: v),
-      );
-  @override
   ListCopyWith<
     $R,
     GuildSticker,
     GuildStickerCopyWith<$R, GuildSticker, GuildSticker>
   >
-  get stickerList => ListCopyWith(
-    $value.stickerList,
+  get stickers => ListCopyWith(
+    $value.stickers,
     (v, t) => v.copyWith.$chain(t),
-    (v) => call(stickerList: v),
+    (v) => call(stickers: v),
   );
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get safetyAlertsChannelId =>
@@ -1386,6 +1226,13 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
   @override
   IncidentsDataCopyWith<$R, IncidentsData, IncidentsData>? get incidentsData =>
       $value.incidentsData?.copyWith.$chain((v) => call(incidentsData: v));
+  @override
+  ListCopyWith<$R, Channel, ChannelCopyWith<$R, Channel, Channel>>
+  get channels => ListCopyWith(
+    $value.channels,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(channels: v),
+  );
   @override
   $R call({
     Snowflake? id,
@@ -1398,13 +1245,12 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
     Object? currentUserPermissions = $none,
     Object? afkChannelId = $none,
     Duration? afkTimeout,
-    bool? isWidgetEnabled,
+    Object? widgetEnabled = $none,
     Object? widgetChannelId = $none,
     VerificationLevel? verificationLevel,
-    MessageNotificationLevel? defaultMessageNotificationLevel,
-    ExplicitContentFilterLevel? explicitContentFilterLevel,
-    List<Role>? roleList,
-    GuildFeatures? features,
+    MessageNotificationLevel? defaultMessageNotifications,
+    ExplicitContentFilterLevel? explicitContentFilter,
+    List<Role>? roles,
     MfaLevel? mfaLevel,
     Object? applicationId = $none,
     Object? systemChannelId = $none,
@@ -1425,11 +1271,11 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
     Object? approximatePresenceCount = $none,
     Object? welcomeScreen = $none,
     NsfwLevel? nsfwLevel,
-    bool? hasPremiumProgressBarEnabled,
-    List<Emoji>? emojiList,
-    List<GuildSticker>? stickerList,
+    bool? premiumProgressBarEnabled,
+    List<GuildSticker>? stickers,
     Object? safetyAlertsChannelId = $none,
     Object? incidentsData = $none,
+    List<Channel>? channels,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
@@ -1445,15 +1291,14 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
         #currentUserPermissions: currentUserPermissions,
       if (afkChannelId != $none) #afkChannelId: afkChannelId,
       if (afkTimeout != null) #afkTimeout: afkTimeout,
-      if (isWidgetEnabled != null) #isWidgetEnabled: isWidgetEnabled,
+      if (widgetEnabled != $none) #widgetEnabled: widgetEnabled,
       if (widgetChannelId != $none) #widgetChannelId: widgetChannelId,
       if (verificationLevel != null) #verificationLevel: verificationLevel,
-      if (defaultMessageNotificationLevel != null)
-        #defaultMessageNotificationLevel: defaultMessageNotificationLevel,
-      if (explicitContentFilterLevel != null)
-        #explicitContentFilterLevel: explicitContentFilterLevel,
-      if (roleList != null) #roleList: roleList,
-      if (features != null) #features: features,
+      if (defaultMessageNotifications != null)
+        #defaultMessageNotifications: defaultMessageNotifications,
+      if (explicitContentFilter != null)
+        #explicitContentFilter: explicitContentFilter,
+      if (roles != null) #roles: roles,
       if (mfaLevel != null) #mfaLevel: mfaLevel,
       if (applicationId != $none) #applicationId: applicationId,
       if (systemChannelId != $none) #systemChannelId: systemChannelId,
@@ -1480,13 +1325,13 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
         #approximatePresenceCount: approximatePresenceCount,
       if (welcomeScreen != $none) #welcomeScreen: welcomeScreen,
       if (nsfwLevel != null) #nsfwLevel: nsfwLevel,
-      if (hasPremiumProgressBarEnabled != null)
-        #hasPremiumProgressBarEnabled: hasPremiumProgressBarEnabled,
-      if (emojiList != null) #emojiList: emojiList,
-      if (stickerList != null) #stickerList: stickerList,
+      if (premiumProgressBarEnabled != null)
+        #premiumProgressBarEnabled: premiumProgressBarEnabled,
+      if (stickers != null) #stickers: stickers,
       if (safetyAlertsChannelId != $none)
         #safetyAlertsChannelId: safetyAlertsChannelId,
       if (incidentsData != $none) #incidentsData: incidentsData,
+      if (channels != null) #channels: channels,
     }),
   );
   @override
@@ -1510,22 +1355,21 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
     ),
     afkChannelId: data.get(#afkChannelId, or: $value.afkChannelId),
     afkTimeout: data.get(#afkTimeout, or: $value.afkTimeout),
-    isWidgetEnabled: data.get(#isWidgetEnabled, or: $value.isWidgetEnabled),
+    widgetEnabled: data.get(#widgetEnabled, or: $value.widgetEnabled),
     widgetChannelId: data.get(#widgetChannelId, or: $value.widgetChannelId),
     verificationLevel: data.get(
       #verificationLevel,
       or: $value.verificationLevel,
     ),
-    defaultMessageNotificationLevel: data.get(
-      #defaultMessageNotificationLevel,
-      or: $value.defaultMessageNotificationLevel,
+    defaultMessageNotifications: data.get(
+      #defaultMessageNotifications,
+      or: $value.defaultMessageNotifications,
     ),
-    explicitContentFilterLevel: data.get(
-      #explicitContentFilterLevel,
-      or: $value.explicitContentFilterLevel,
+    explicitContentFilter: data.get(
+      #explicitContentFilter,
+      or: $value.explicitContentFilter,
     ),
-    roleList: data.get(#roleList, or: $value.roleList),
-    features: data.get(#features, or: $value.features),
+    roles: data.get(#roles, or: $value.roles),
     mfaLevel: data.get(#mfaLevel, or: $value.mfaLevel),
     applicationId: data.get(#applicationId, or: $value.applicationId),
     systemChannelId: data.get(#systemChannelId, or: $value.systemChannelId),
@@ -1567,17 +1411,17 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
     ),
     welcomeScreen: data.get(#welcomeScreen, or: $value.welcomeScreen),
     nsfwLevel: data.get(#nsfwLevel, or: $value.nsfwLevel),
-    hasPremiumProgressBarEnabled: data.get(
-      #hasPremiumProgressBarEnabled,
-      or: $value.hasPremiumProgressBarEnabled,
+    premiumProgressBarEnabled: data.get(
+      #premiumProgressBarEnabled,
+      or: $value.premiumProgressBarEnabled,
     ),
-    emojiList: data.get(#emojiList, or: $value.emojiList),
-    stickerList: data.get(#stickerList, or: $value.stickerList),
+    stickers: data.get(#stickers, or: $value.stickers),
     safetyAlertsChannelId: data.get(
       #safetyAlertsChannelId,
       or: $value.safetyAlertsChannelId,
     ),
     incidentsData: data.get(#incidentsData, or: $value.incidentsData),
+    channels: data.get(#channels, or: $value.channels),
   );
 
   @override
@@ -1881,5 +1725,121 @@ class _IncidentsDataCopyWithImpl<$R, $Out>
   IncidentsDataCopyWith<$R2, IncidentsData, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   ) => _IncidentsDataCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
+class GuildFeaturesMapper extends ClassMapperBase<GuildFeatures> {
+  GuildFeaturesMapper._();
+
+  static GuildFeaturesMapper? _instance;
+  static GuildFeaturesMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = GuildFeaturesMapper._());
+      FlagsMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'GuildFeatures';
+
+  static int _$value(GuildFeatures v) => v.value;
+  static const Field<GuildFeatures, int> _f$value = Field('value', _$value);
+
+  @override
+  final MappableFields<GuildFeatures> fields = const {#value: _f$value};
+
+  @override
+  final MappingHook superHook = const FlagsHook();
+
+  static GuildFeatures _instantiate(DecodingData data) {
+    return GuildFeatures(data.dec(_f$value));
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static GuildFeatures fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<GuildFeatures>(map);
+  }
+
+  static GuildFeatures fromJson(String json) {
+    return ensureInitialized().decodeJson<GuildFeatures>(json);
+  }
+}
+
+mixin GuildFeaturesMappable {
+  String toJson() {
+    return GuildFeaturesMapper.ensureInitialized().encodeJson<GuildFeatures>(
+      this as GuildFeatures,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return GuildFeaturesMapper.ensureInitialized().encodeMap<GuildFeatures>(
+      this as GuildFeatures,
+    );
+  }
+
+  GuildFeaturesCopyWith<GuildFeatures, GuildFeatures, GuildFeatures>
+  get copyWith => _GuildFeaturesCopyWithImpl<GuildFeatures, GuildFeatures>(
+    this as GuildFeatures,
+    $identity,
+    $identity,
+  );
+  @override
+  String toString() {
+    return GuildFeaturesMapper.ensureInitialized().stringifyValue(
+      this as GuildFeatures,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return GuildFeaturesMapper.ensureInitialized().equalsValue(
+      this as GuildFeatures,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return GuildFeaturesMapper.ensureInitialized().hashValue(
+      this as GuildFeatures,
+    );
+  }
+}
+
+extension GuildFeaturesValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, GuildFeatures, $Out> {
+  GuildFeaturesCopyWith<$R, GuildFeatures, $Out> get $asGuildFeatures =>
+      $base.as((v, t, t2) => _GuildFeaturesCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class GuildFeaturesCopyWith<$R, $In extends GuildFeatures, $Out>
+    implements FlagsCopyWith<$R, $In, $Out, GuildFeatures> {
+  @override
+  $R call({int? value});
+  GuildFeaturesCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+}
+
+class _GuildFeaturesCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, GuildFeatures, $Out>
+    implements GuildFeaturesCopyWith<$R, GuildFeatures, $Out> {
+  _GuildFeaturesCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<GuildFeatures> $mapper =
+      GuildFeaturesMapper.ensureInitialized();
+  @override
+  $R call({int? value}) =>
+      $apply(FieldCopyWithData({if (value != null) #value: value}));
+  @override
+  GuildFeatures $make(CopyWithData data) =>
+      GuildFeatures(data.get(#value, or: $value.value));
+
+  @override
+  GuildFeaturesCopyWith<$R2, GuildFeatures, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _GuildFeaturesCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 

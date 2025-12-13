@@ -14,7 +14,6 @@ class EmbedBuilderMapper extends ClassMapperBase<EmbedBuilder> {
   static EmbedBuilderMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = EmbedBuilderMapper._());
-      DiscordColorMapper.ensureInitialized();
       EmbedFooterBuilderMapper.ensureInitialized();
       EmbedImageBuilderMapper.ensureInitialized();
       EmbedThumbnailBuilderMapper.ensureInitialized();
@@ -175,7 +174,6 @@ extension EmbedBuilderValueCopy<$R, $Out>
 
 abstract class EmbedBuilderCopyWith<$R, $In extends EmbedBuilder, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get color;
   EmbedFooterBuilderCopyWith<$R, EmbedFooterBuilder, EmbedFooterBuilder>?
   get footer;
   EmbedImageBuilderCopyWith<$R, EmbedImageBuilder, EmbedImageBuilder>?
@@ -217,9 +215,6 @@ class _EmbedBuilderCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<EmbedBuilder> $mapper =
       EmbedBuilderMapper.ensureInitialized();
-  @override
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get color =>
-      $value.color?.copyWith.$chain((v) => call(color: v));
   @override
   EmbedFooterBuilderCopyWith<$R, EmbedFooterBuilder, EmbedFooterBuilder>?
   get footer => $value.footer?.copyWith.$chain((v) => call(footer: v));

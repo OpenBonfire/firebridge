@@ -188,7 +188,6 @@ class UserMapper extends ClassMapperBase<User> {
       MapperContainer.globals.use(_instance = UserMapper._());
       PartialUserMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
-      DiscordColorMapper.ensureInitialized();
       LocaleMapper.ensureInitialized();
       UserFlagsMapper.ensureInitialized();
       AvatarDecorationDataMapper.ensureInitialized();
@@ -369,7 +368,6 @@ abstract class UserCopyWith<$R, $In extends User, $Out>
     implements PartialUserCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get accentColor;
   UserFlagsCopyWith<$R, UserFlags, UserFlags>? get flags;
   UserFlagsCopyWith<$R, UserFlags, UserFlags>? get publicFlags;
   AvatarDecorationDataCopyWith<$R, AvatarDecorationData, AvatarDecorationData>?
@@ -407,9 +405,6 @@ class _UserCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, User, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get accentColor =>
-      $value.accentColor?.copyWith.$chain((v) => call(accentColor: v));
   @override
   UserFlagsCopyWith<$R, UserFlags, UserFlags>? get flags =>
       $value.flags?.copyWith.$chain((v) => call(flags: v));

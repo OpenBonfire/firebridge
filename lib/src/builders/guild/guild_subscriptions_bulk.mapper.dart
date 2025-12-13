@@ -17,6 +17,7 @@ class GuildSubscriptionsBulkBuilderMapper
       MapperContainer.globals.use(
         _instance = GuildSubscriptionsBulkBuilderMapper._(),
       );
+      GuildSubscriptionMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -28,11 +29,7 @@ class GuildSubscriptionsBulkBuilderMapper
     GuildSubscriptionsBulkBuilder v,
   ) => v.subscriptions;
   static const Field<GuildSubscriptionsBulkBuilder, List<GuildSubscription>>
-  _f$subscriptions = Field(
-    'subscriptions',
-    _$subscriptions,
-    mode: FieldMode.member,
-  );
+  _f$subscriptions = Field('subscriptions', _$subscriptions);
 
   @override
   final MappableFields<GuildSubscriptionsBulkBuilder> fields = const {
@@ -40,7 +37,9 @@ class GuildSubscriptionsBulkBuilderMapper
   };
 
   static GuildSubscriptionsBulkBuilder _instantiate(DecodingData data) {
-    return GuildSubscriptionsBulkBuilder();
+    return GuildSubscriptionsBulkBuilder(
+      subscriptions: data.dec(_f$subscriptions),
+    );
   }
 
   @override
@@ -117,7 +116,13 @@ abstract class GuildSubscriptionsBulkBuilderCopyWith<
   $Out
 >
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call();
+  ListCopyWith<
+    $R,
+    GuildSubscription,
+    GuildSubscriptionCopyWith<$R, GuildSubscription, GuildSubscription>
+  >?
+  get subscriptions;
+  $R call({List<GuildSubscription>? subscriptions});
   GuildSubscriptionsBulkBuilderCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -141,10 +146,29 @@ class _GuildSubscriptionsBulkBuilderCopyWithImpl<$R, $Out>
   late final ClassMapperBase<GuildSubscriptionsBulkBuilder> $mapper =
       GuildSubscriptionsBulkBuilderMapper.ensureInitialized();
   @override
-  $R call() => $apply(FieldCopyWithData({}));
+  ListCopyWith<
+    $R,
+    GuildSubscription,
+    GuildSubscriptionCopyWith<$R, GuildSubscription, GuildSubscription>
+  >?
+  get subscriptions => $value.subscriptions != null
+      ? ListCopyWith(
+          $value.subscriptions!,
+          (v, t) => v.copyWith.$chain(t),
+          (v) => call(subscriptions: v),
+        )
+      : null;
+  @override
+  $R call({Object? subscriptions = $none}) => $apply(
+    FieldCopyWithData({
+      if (subscriptions != $none) #subscriptions: subscriptions,
+    }),
+  );
   @override
   GuildSubscriptionsBulkBuilder $make(CopyWithData data) =>
-      GuildSubscriptionsBulkBuilder();
+      GuildSubscriptionsBulkBuilder(
+        subscriptions: data.get(#subscriptions, or: $value.subscriptions),
+      );
 
   @override
   GuildSubscriptionsBulkBuilderCopyWith<

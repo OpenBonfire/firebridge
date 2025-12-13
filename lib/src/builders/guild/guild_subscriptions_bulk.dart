@@ -8,5 +8,7 @@ part 'guild_subscriptions_bulk.mapper.dart';
 class GuildSubscriptionsBulkBuilder
     extends CreateBuilder<GuildSubscriptionsBulkEvent>
     with GuildSubscriptionsBulkBuilderMappable {
-  List<GuildSubscription>? subscriptions;
+  final List<GuildSubscription>? subscriptions;
+
+  const GuildSubscriptionsBulkBuilder({required this.subscriptions});
 }

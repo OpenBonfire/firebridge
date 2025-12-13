@@ -7,7 +7,7 @@ part 'permissions.mapper.dart';
 ///
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/topics/permissions
-@MappableClass()
+@MappableClass(hook: FlagsHook())
 class Permissions extends Flags<Permissions> with PermissionsMappable {
   /// Allows creation of instant invites.
   static const createInstantInvite = Flag<Permissions>.fromOffset(0);

@@ -38,7 +38,7 @@ class Role extends PartialRole
   final DiscordColor color;
 
   /// Whether this role is displayed separately from others in the member list.
-  final bool isHoisted;
+  final bool hoist;
 
   /// The hash string of this role's icon.
   final String? iconHash;
@@ -53,7 +53,7 @@ class Role extends PartialRole
   final Permissions permissions;
 
   /// Whether this role is mentionable.
-  final bool isMentionable;
+  final bool mentionable;
 
   /// The tags associated with this role.
   final RoleTags? tags;
@@ -71,12 +71,12 @@ class Role extends PartialRole
     required this.name,
     required this.color,
     required this.colors,
-    required this.isHoisted,
+    required this.hoist,
     required this.iconHash,
     required this.unicodeEmoji,
     required this.position,
     required this.permissions,
-    required this.isMentionable,
+    required this.mentionable,
     required this.tags,
     required this.flags,
   });
@@ -94,26 +94,22 @@ class RoleTags with ToStringHelper, RoleTagsMappable {
   final Snowflake? integrationId;
 
   /// Whether this is the guild's Booster role.
-  final bool isPremiumSubscriber;
+  final bool? premiumSubscriber;
 
   /// The ID of this role's subscription sku and listing.
   final Snowflake? subscriptionListingId;
 
   /// Whether this role is available for purchase.
-  final bool isAvailableForPurchase;
-
-  /// Whether this role is a guild's linked role
-  final bool isLinkedRole;
+  final bool? availableForPurchase;
 
   /// {@macro role_tags}
   /// @nodoc
   RoleTags({
     required this.botId,
     required this.integrationId,
-    required this.isPremiumSubscriber,
+    this.premiumSubscriber,
     required this.subscriptionListingId,
-    required this.isAvailableForPurchase,
-    required this.isLinkedRole,
+    this.availableForPurchase,
   });
 }
 
@@ -134,21 +130,21 @@ class RoleFlags extends Flags<RoleFlags> with RoleFlagsMappable {
 @MappableClass()
 class RoleColors with RoleColorsMappable {
   /// The primary color for the role.
-  final DiscordColor primary;
+  final DiscordColor primaryColor;
 
   /// The secondary color for the role.
   /// This will make the role a gradient between the other provided colors.
-  final DiscordColor? secondary;
+  final DiscordColor? secondaryColor;
 
   /// The tertiary color for the role.
   /// This will turn the gradient into a holographic style.
-  final DiscordColor? tertiary;
+  final DiscordColor? tertiaryColor;
 
   /// Create a new [RoleColors].
   /// @nodoc
   const RoleColors({
-    required this.primary,
-    required this.secondary,
-    required this.tertiary,
+    required this.primaryColor,
+    this.secondaryColor,
+    this.tertiaryColor,
   });
 }

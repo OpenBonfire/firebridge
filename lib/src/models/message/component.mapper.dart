@@ -3247,7 +3247,6 @@ class ContainerComponentMapper extends ClassMapperBase<ContainerComponent> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ContainerComponentMapper._());
       MessageComponentMapper.ensureInitialized();
-      DiscordColorMapper.ensureInitialized();
       MessageComponentMapper.ensureInitialized();
     }
     return _instance!;
@@ -3363,7 +3362,6 @@ abstract class ContainerComponentCopyWith<
   $Out
 >
     implements MessageComponentCopyWith<$R, $In, $Out> {
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get accentColor;
   ListCopyWith<
     $R,
     MessageComponent,
@@ -3390,9 +3388,6 @@ class _ContainerComponentCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<ContainerComponent> $mapper =
       ContainerComponentMapper.ensureInitialized();
-  @override
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get accentColor =>
-      $value.accentColor?.copyWith.$chain((v) => call(accentColor: v));
   @override
   ListCopyWith<
     $R,

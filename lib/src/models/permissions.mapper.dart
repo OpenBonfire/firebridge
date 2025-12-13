@@ -29,6 +29,8 @@ class PermissionsMapper extends ClassMapperBase<Permissions> {
   final MappableFields<Permissions> fields = const {#value: _f$value};
 
   @override
+  final MappingHook hook = const FlagsHook();
+  @override
   final MappingHook superHook = const FlagsHook();
 
   static Permissions _instantiate(DecodingData data) {

@@ -16,7 +16,7 @@ class ReadyEventMapper extends SubClassMapperBase<ReadyEvent> {
       MapperContainer.globals.use(_instance = ReadyEventMapper._());
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       UserMapper.ensureInitialized();
-      PartialGuildMapper.ensureInitialized();
+      GuildMapper.ensureInitialized();
       ReadStateMapper.ensureInitialized();
       PresenceUpdateEventMapper.ensureInitialized();
       DmChannelMapper.ensureInitialized();
@@ -42,8 +42,8 @@ class ReadyEventMapper extends SubClassMapperBase<ReadyEvent> {
   );
   static User _$user(ReadyEvent v) => v.user;
   static const Field<ReadyEvent, User> _f$user = Field('user', _$user);
-  static List<PartialGuild> _$guilds(ReadyEvent v) => v.guilds;
-  static const Field<ReadyEvent, List<PartialGuild>> _f$guilds = Field(
+  static List<Guild> _$guilds(ReadyEvent v) => v.guilds;
+  static const Field<ReadyEvent, List<Guild>> _f$guilds = Field(
     'guilds',
     _$guilds,
   );
@@ -313,12 +313,7 @@ extension ReadyEventValueCopy<$R, $Out>
 abstract class ReadyEventCopyWith<$R, $In extends ReadyEvent, $Out>
     implements DispatchEventCopyWith<$R, $In, $Out> {
   UserCopyWith<$R, User, User> get user;
-  ListCopyWith<
-    $R,
-    PartialGuild,
-    PartialGuildCopyWith<$R, PartialGuild, PartialGuild>
-  >
-  get guilds;
+  ListCopyWith<$R, Guild, GuildCopyWith<$R, Guild, Guild>> get guilds;
   ListCopyWith<$R, ReadState, ReadStateCopyWith<$R, ReadState, ReadState>>
   get readState;
   ListCopyWith<
@@ -354,7 +349,7 @@ abstract class ReadyEventCopyWith<$R, $In extends ReadyEvent, $Out>
   $R call({
     int? version,
     User? user,
-    List<PartialGuild>? guilds,
+    List<Guild>? guilds,
     String? sessionId,
     Uri? resumeGatewayUrl,
     int? shardId,
@@ -393,16 +388,12 @@ class _ReadyEventCopyWithImpl<$R, $Out>
   UserCopyWith<$R, User, User> get user =>
       $value.user.copyWith.$chain((v) => call(user: v));
   @override
-  ListCopyWith<
-    $R,
-    PartialGuild,
-    PartialGuildCopyWith<$R, PartialGuild, PartialGuild>
-  >
-  get guilds => ListCopyWith(
-    $value.guilds,
-    (v, t) => v.copyWith.$chain(t),
-    (v) => call(guilds: v),
-  );
+  ListCopyWith<$R, Guild, GuildCopyWith<$R, Guild, Guild>> get guilds =>
+      ListCopyWith(
+        $value.guilds,
+        (v, t) => v.copyWith.$chain(t),
+        (v) => call(guilds: v),
+      );
   @override
   ListCopyWith<$R, ReadState, ReadStateCopyWith<$R, ReadState, ReadState>>
   get readState => ListCopyWith(
@@ -486,7 +477,7 @@ class _ReadyEventCopyWithImpl<$R, $Out>
   $R call({
     int? version,
     User? user,
-    List<PartialGuild>? guilds,
+    List<Guild>? guilds,
     String? sessionId,
     Uri? resumeGatewayUrl,
     Object? shardId = $none,

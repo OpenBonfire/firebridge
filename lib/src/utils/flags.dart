@@ -92,6 +92,8 @@ class FlagsHook extends MappingHook {
   Object? beforeDecode(Object? value) {
     if (value is int) {
       return {'value': value};
+    } else if (value is String) {
+      return {'value': int.parse(value)};
     }
     return value;
   }

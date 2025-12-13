@@ -32,13 +32,13 @@ class RoleBuilder extends CreateBuilder<Role> with RoleBuilderMappable {
 
   Flags<Permissions>? permissions;
 
-  bool? isHoisted;
+  bool? hoist;
 
   ImageBuilder? icon;
 
   String? unicodeEmoji;
 
-  bool? isMentionable;
+  bool? mentionable;
 
   RoleColorsBuilder? colors;
 
@@ -46,10 +46,10 @@ class RoleBuilder extends CreateBuilder<Role> with RoleBuilderMappable {
     this.name,
     this.permissions,
     @Deprecated('Use `colors.primary` instead') DiscordColor? color,
-    this.isHoisted,
+    this.hoist,
     this.icon,
     this.unicodeEmoji,
-    this.isMentionable,
+    this.mentionable,
     this.colors,
   }) {
     if (color != null) {
@@ -78,13 +78,13 @@ class RoleUpdateBuilder extends UpdateBuilder<Role>
 
   Flags<Permissions>? permissions;
 
-  bool? isHoisted;
+  bool? hoist;
 
   ImageBuilder? icon;
 
   String? unicodeEmoji;
 
-  bool? isMentionable;
+  bool? mentionable;
 
   RoleColorsBuilder? colors;
 
@@ -92,10 +92,10 @@ class RoleUpdateBuilder extends UpdateBuilder<Role>
     this.name,
     this.permissions,
     @Deprecated('Use `colors.primary` instead.') DiscordColor? color,
-    this.isHoisted,
+    this.hoist,
     this.icon = sentinelImageBuilder,
     this.unicodeEmoji = sentinelString,
-    this.isMentionable,
+    this.mentionable,
     this.colors,
   }) {
     if (color != null) {

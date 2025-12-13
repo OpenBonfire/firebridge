@@ -1,11 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
-part 'discord_color.mapper.dart';
-
 /// A 24-bit RGB color.
-
-@MappableClass()
-class DiscordColor with DiscordColorMappable {
+class DiscordColor {
   /// The 24 bit encoding of this color.
   final int value;
 
@@ -87,4 +83,18 @@ class DiscordColor with DiscordColorMappable {
 
   @override
   int get hashCode => value.hashCode;
+}
+
+class DiscordColorMapper extends SimpleMapper<DiscordColor> {
+  const DiscordColorMapper();
+
+  @override
+  DiscordColor decode(Object value) => DiscordColor(value as int);
+
+  @override
+  int encode(DiscordColor self) => self.value;
+
+  static void ensureInitialized() {
+    MapperContainer.globals.use(const DiscordColorMapper());
+  }
 }

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebridge/src/builders/guild/guild_subscriptions_bulk.dart';
 import 'package:firebridge/src/models/gateway/events/guild.dart';
 import 'package:firebridge/src/models/guild/member.dart';
 import 'package:logging/logging.dart';
@@ -282,6 +283,13 @@ class Gateway extends GatewayManager with EventParser {
   void updatePresence(PresenceBuilder builder) {
     for (final shard in shards) {
       shard.add(Send(opcode: Opcode.presenceUpdate, data: builder.toMap()));
+    }
+  }
+
+  void updateGuildSubscriptionsBulk(GuildSubscriptionsBulkBuilder builder) {
+    for (final shard in shards) {
+      shard.add(
+          Send(opcode: Opcode.guildSubscriptionsBulk, data: builder.toMap()));
     }
   }
 }

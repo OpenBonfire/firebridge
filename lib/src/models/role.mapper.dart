@@ -134,7 +134,6 @@ class RoleMapper extends ClassMapperBase<Role> {
       MapperContainer.globals.use(_instance = RoleMapper._());
       PartialRoleMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
-      DiscordColorMapper.ensureInitialized();
       RoleColorsMapper.ensureInitialized();
       PermissionsMapper.ensureInitialized();
       RoleTagsMapper.ensureInitialized();
@@ -154,12 +153,8 @@ class RoleMapper extends ClassMapperBase<Role> {
   static const Field<Role, DiscordColor> _f$color = Field('color', _$color);
   static RoleColors _$colors(Role v) => v.colors;
   static const Field<Role, RoleColors> _f$colors = Field('colors', _$colors);
-  static bool _$isHoisted(Role v) => v.isHoisted;
-  static const Field<Role, bool> _f$isHoisted = Field(
-    'isHoisted',
-    _$isHoisted,
-    key: r'is_hoisted',
-  );
+  static bool _$hoist(Role v) => v.hoist;
+  static const Field<Role, bool> _f$hoist = Field('hoist', _$hoist);
   static String? _$iconHash(Role v) => v.iconHash;
   static const Field<Role, String> _f$iconHash = Field(
     'iconHash',
@@ -179,11 +174,10 @@ class RoleMapper extends ClassMapperBase<Role> {
     'permissions',
     _$permissions,
   );
-  static bool _$isMentionable(Role v) => v.isMentionable;
-  static const Field<Role, bool> _f$isMentionable = Field(
-    'isMentionable',
-    _$isMentionable,
-    key: r'is_mentionable',
+  static bool _$mentionable(Role v) => v.mentionable;
+  static const Field<Role, bool> _f$mentionable = Field(
+    'mentionable',
+    _$mentionable,
   );
   static RoleTags? _$tags(Role v) => v.tags;
   static const Field<Role, RoleTags> _f$tags = Field('tags', _$tags);
@@ -196,12 +190,12 @@ class RoleMapper extends ClassMapperBase<Role> {
     #name: _f$name,
     #color: _f$color,
     #colors: _f$colors,
-    #isHoisted: _f$isHoisted,
+    #hoist: _f$hoist,
     #iconHash: _f$iconHash,
     #unicodeEmoji: _f$unicodeEmoji,
     #position: _f$position,
     #permissions: _f$permissions,
-    #isMentionable: _f$isMentionable,
+    #mentionable: _f$mentionable,
     #tags: _f$tags,
     #flags: _f$flags,
   };
@@ -212,12 +206,12 @@ class RoleMapper extends ClassMapperBase<Role> {
       name: data.dec(_f$name),
       color: data.dec(_f$color),
       colors: data.dec(_f$colors),
-      isHoisted: data.dec(_f$isHoisted),
+      hoist: data.dec(_f$hoist),
       iconHash: data.dec(_f$iconHash),
       unicodeEmoji: data.dec(_f$unicodeEmoji),
       position: data.dec(_f$position),
       permissions: data.dec(_f$permissions),
-      isMentionable: data.dec(_f$isMentionable),
+      mentionable: data.dec(_f$mentionable),
       tags: data.dec(_f$tags),
       flags: data.dec(_f$flags),
     );
@@ -271,7 +265,6 @@ abstract class RoleCopyWith<$R, $In extends Role, $Out>
     implements PartialRoleCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor> get color;
   RoleColorsCopyWith<$R, RoleColors, RoleColors> get colors;
   PermissionsCopyWith<$R, Permissions, Permissions> get permissions;
   RoleTagsCopyWith<$R, RoleTags, RoleTags>? get tags;
@@ -282,12 +275,12 @@ abstract class RoleCopyWith<$R, $In extends Role, $Out>
     String? name,
     DiscordColor? color,
     RoleColors? colors,
-    bool? isHoisted,
+    bool? hoist,
     String? iconHash,
     String? unicodeEmoji,
     int? position,
     Permissions? permissions,
-    bool? isMentionable,
+    bool? mentionable,
     RoleTags? tags,
     RoleFlags? flags,
   });
@@ -303,9 +296,6 @@ class _RoleCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Role, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor> get color =>
-      $value.color.copyWith.$chain((v) => call(color: v));
   @override
   RoleColorsCopyWith<$R, RoleColors, RoleColors> get colors =>
       $value.colors.copyWith.$chain((v) => call(colors: v));
@@ -324,12 +314,12 @@ class _RoleCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Role, $Out>
     String? name,
     DiscordColor? color,
     RoleColors? colors,
-    bool? isHoisted,
+    bool? hoist,
     Object? iconHash = $none,
     Object? unicodeEmoji = $none,
     int? position,
     Permissions? permissions,
-    bool? isMentionable,
+    bool? mentionable,
     Object? tags = $none,
     RoleFlags? flags,
   }) => $apply(
@@ -338,12 +328,12 @@ class _RoleCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Role, $Out>
       if (name != null) #name: name,
       if (color != null) #color: color,
       if (colors != null) #colors: colors,
-      if (isHoisted != null) #isHoisted: isHoisted,
+      if (hoist != null) #hoist: hoist,
       if (iconHash != $none) #iconHash: iconHash,
       if (unicodeEmoji != $none) #unicodeEmoji: unicodeEmoji,
       if (position != null) #position: position,
       if (permissions != null) #permissions: permissions,
-      if (isMentionable != null) #isMentionable: isMentionable,
+      if (mentionable != null) #mentionable: mentionable,
       if (tags != $none) #tags: tags,
       if (flags != null) #flags: flags,
     }),
@@ -354,12 +344,12 @@ class _RoleCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Role, $Out>
     name: data.get(#name, or: $value.name),
     color: data.get(#color, or: $value.color),
     colors: data.get(#colors, or: $value.colors),
-    isHoisted: data.get(#isHoisted, or: $value.isHoisted),
+    hoist: data.get(#hoist, or: $value.hoist),
     iconHash: data.get(#iconHash, or: $value.iconHash),
     unicodeEmoji: data.get(#unicodeEmoji, or: $value.unicodeEmoji),
     position: data.get(#position, or: $value.position),
     permissions: data.get(#permissions, or: $value.permissions),
-    isMentionable: data.get(#isMentionable, or: $value.isMentionable),
+    mentionable: data.get(#mentionable, or: $value.mentionable),
     tags: data.get(#tags, or: $value.tags),
     flags: data.get(#flags, or: $value.flags),
   );
@@ -376,7 +366,6 @@ class RoleColorsMapper extends ClassMapperBase<RoleColors> {
   static RoleColorsMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = RoleColorsMapper._());
-      DiscordColorMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -384,34 +373,39 @@ class RoleColorsMapper extends ClassMapperBase<RoleColors> {
   @override
   final String id = 'RoleColors';
 
-  static DiscordColor _$primary(RoleColors v) => v.primary;
-  static const Field<RoleColors, DiscordColor> _f$primary = Field(
-    'primary',
-    _$primary,
+  static DiscordColor _$primaryColor(RoleColors v) => v.primaryColor;
+  static const Field<RoleColors, DiscordColor> _f$primaryColor = Field(
+    'primaryColor',
+    _$primaryColor,
+    key: r'primary_color',
   );
-  static DiscordColor? _$secondary(RoleColors v) => v.secondary;
-  static const Field<RoleColors, DiscordColor> _f$secondary = Field(
-    'secondary',
-    _$secondary,
+  static DiscordColor? _$secondaryColor(RoleColors v) => v.secondaryColor;
+  static const Field<RoleColors, DiscordColor> _f$secondaryColor = Field(
+    'secondaryColor',
+    _$secondaryColor,
+    key: r'secondary_color',
+    opt: true,
   );
-  static DiscordColor? _$tertiary(RoleColors v) => v.tertiary;
-  static const Field<RoleColors, DiscordColor> _f$tertiary = Field(
-    'tertiary',
-    _$tertiary,
+  static DiscordColor? _$tertiaryColor(RoleColors v) => v.tertiaryColor;
+  static const Field<RoleColors, DiscordColor> _f$tertiaryColor = Field(
+    'tertiaryColor',
+    _$tertiaryColor,
+    key: r'tertiary_color',
+    opt: true,
   );
 
   @override
   final MappableFields<RoleColors> fields = const {
-    #primary: _f$primary,
-    #secondary: _f$secondary,
-    #tertiary: _f$tertiary,
+    #primaryColor: _f$primaryColor,
+    #secondaryColor: _f$secondaryColor,
+    #tertiaryColor: _f$tertiaryColor,
   };
 
   static RoleColors _instantiate(DecodingData data) {
     return RoleColors(
-      primary: data.dec(_f$primary),
-      secondary: data.dec(_f$secondary),
-      tertiary: data.dec(_f$tertiary),
+      primaryColor: data.dec(_f$primaryColor),
+      secondaryColor: data.dec(_f$secondaryColor),
+      tertiaryColor: data.dec(_f$tertiaryColor),
     );
   }
 
@@ -475,13 +469,10 @@ extension RoleColorsValueCopy<$R, $Out>
 
 abstract class RoleColorsCopyWith<$R, $In extends RoleColors, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor> get primary;
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get secondary;
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get tertiary;
   $R call({
-    DiscordColor? primary,
-    DiscordColor? secondary,
-    DiscordColor? tertiary,
+    DiscordColor? primaryColor,
+    DiscordColor? secondaryColor,
+    DiscordColor? tertiaryColor,
   });
   RoleColorsCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -495,31 +486,22 @@ class _RoleColorsCopyWithImpl<$R, $Out>
   late final ClassMapperBase<RoleColors> $mapper =
       RoleColorsMapper.ensureInitialized();
   @override
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor> get primary =>
-      $value.primary.copyWith.$chain((v) => call(primary: v));
-  @override
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get secondary =>
-      $value.secondary?.copyWith.$chain((v) => call(secondary: v));
-  @override
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get tertiary =>
-      $value.tertiary?.copyWith.$chain((v) => call(tertiary: v));
-  @override
   $R call({
-    DiscordColor? primary,
-    Object? secondary = $none,
-    Object? tertiary = $none,
+    DiscordColor? primaryColor,
+    Object? secondaryColor = $none,
+    Object? tertiaryColor = $none,
   }) => $apply(
     FieldCopyWithData({
-      if (primary != null) #primary: primary,
-      if (secondary != $none) #secondary: secondary,
-      if (tertiary != $none) #tertiary: tertiary,
+      if (primaryColor != null) #primaryColor: primaryColor,
+      if (secondaryColor != $none) #secondaryColor: secondaryColor,
+      if (tertiaryColor != $none) #tertiaryColor: tertiaryColor,
     }),
   );
   @override
   RoleColors $make(CopyWithData data) => RoleColors(
-    primary: data.get(#primary, or: $value.primary),
-    secondary: data.get(#secondary, or: $value.secondary),
-    tertiary: data.get(#tertiary, or: $value.tertiary),
+    primaryColor: data.get(#primaryColor, or: $value.primaryColor),
+    secondaryColor: data.get(#secondaryColor, or: $value.secondaryColor),
+    tertiaryColor: data.get(#tertiaryColor, or: $value.tertiaryColor),
   );
 
   @override
@@ -555,11 +537,12 @@ class RoleTagsMapper extends ClassMapperBase<RoleTags> {
     _$integrationId,
     key: r'integration_id',
   );
-  static bool _$isPremiumSubscriber(RoleTags v) => v.isPremiumSubscriber;
-  static const Field<RoleTags, bool> _f$isPremiumSubscriber = Field(
-    'isPremiumSubscriber',
-    _$isPremiumSubscriber,
-    key: r'is_premium_subscriber',
+  static bool? _$premiumSubscriber(RoleTags v) => v.premiumSubscriber;
+  static const Field<RoleTags, bool> _f$premiumSubscriber = Field(
+    'premiumSubscriber',
+    _$premiumSubscriber,
+    key: r'premium_subscriber',
+    opt: true,
   );
   static Snowflake? _$subscriptionListingId(RoleTags v) =>
       v.subscriptionListingId;
@@ -568,37 +551,30 @@ class RoleTagsMapper extends ClassMapperBase<RoleTags> {
     _$subscriptionListingId,
     key: r'subscription_listing_id',
   );
-  static bool _$isAvailableForPurchase(RoleTags v) => v.isAvailableForPurchase;
-  static const Field<RoleTags, bool> _f$isAvailableForPurchase = Field(
-    'isAvailableForPurchase',
-    _$isAvailableForPurchase,
-    key: r'is_available_for_purchase',
-  );
-  static bool _$isLinkedRole(RoleTags v) => v.isLinkedRole;
-  static const Field<RoleTags, bool> _f$isLinkedRole = Field(
-    'isLinkedRole',
-    _$isLinkedRole,
-    key: r'is_linked_role',
+  static bool? _$availableForPurchase(RoleTags v) => v.availableForPurchase;
+  static const Field<RoleTags, bool> _f$availableForPurchase = Field(
+    'availableForPurchase',
+    _$availableForPurchase,
+    key: r'available_for_purchase',
+    opt: true,
   );
 
   @override
   final MappableFields<RoleTags> fields = const {
     #botId: _f$botId,
     #integrationId: _f$integrationId,
-    #isPremiumSubscriber: _f$isPremiumSubscriber,
+    #premiumSubscriber: _f$premiumSubscriber,
     #subscriptionListingId: _f$subscriptionListingId,
-    #isAvailableForPurchase: _f$isAvailableForPurchase,
-    #isLinkedRole: _f$isLinkedRole,
+    #availableForPurchase: _f$availableForPurchase,
   };
 
   static RoleTags _instantiate(DecodingData data) {
     return RoleTags(
       botId: data.dec(_f$botId),
       integrationId: data.dec(_f$integrationId),
-      isPremiumSubscriber: data.dec(_f$isPremiumSubscriber),
+      premiumSubscriber: data.dec(_f$premiumSubscriber),
       subscriptionListingId: data.dec(_f$subscriptionListingId),
-      isAvailableForPurchase: data.dec(_f$isAvailableForPurchase),
-      isLinkedRole: data.dec(_f$isLinkedRole),
+      availableForPurchase: data.dec(_f$availableForPurchase),
     );
   }
 
@@ -665,10 +641,9 @@ abstract class RoleTagsCopyWith<$R, $In extends RoleTags, $Out>
   $R call({
     Snowflake? botId,
     Snowflake? integrationId,
-    bool? isPremiumSubscriber,
+    bool? premiumSubscriber,
     Snowflake? subscriptionListingId,
-    bool? isAvailableForPurchase,
-    bool? isLinkedRole,
+    bool? availableForPurchase,
   });
   RoleTagsCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -696,40 +671,36 @@ class _RoleTagsCopyWithImpl<$R, $Out>
   $R call({
     Object? botId = $none,
     Object? integrationId = $none,
-    bool? isPremiumSubscriber,
+    Object? premiumSubscriber = $none,
     Object? subscriptionListingId = $none,
-    bool? isAvailableForPurchase,
-    bool? isLinkedRole,
+    Object? availableForPurchase = $none,
   }) => $apply(
     FieldCopyWithData({
       if (botId != $none) #botId: botId,
       if (integrationId != $none) #integrationId: integrationId,
-      if (isPremiumSubscriber != null)
-        #isPremiumSubscriber: isPremiumSubscriber,
+      if (premiumSubscriber != $none) #premiumSubscriber: premiumSubscriber,
       if (subscriptionListingId != $none)
         #subscriptionListingId: subscriptionListingId,
-      if (isAvailableForPurchase != null)
-        #isAvailableForPurchase: isAvailableForPurchase,
-      if (isLinkedRole != null) #isLinkedRole: isLinkedRole,
+      if (availableForPurchase != $none)
+        #availableForPurchase: availableForPurchase,
     }),
   );
   @override
   RoleTags $make(CopyWithData data) => RoleTags(
     botId: data.get(#botId, or: $value.botId),
     integrationId: data.get(#integrationId, or: $value.integrationId),
-    isPremiumSubscriber: data.get(
-      #isPremiumSubscriber,
-      or: $value.isPremiumSubscriber,
+    premiumSubscriber: data.get(
+      #premiumSubscriber,
+      or: $value.premiumSubscriber,
     ),
     subscriptionListingId: data.get(
       #subscriptionListingId,
       or: $value.subscriptionListingId,
     ),
-    isAvailableForPurchase: data.get(
-      #isAvailableForPurchase,
-      or: $value.isAvailableForPurchase,
+    availableForPurchase: data.get(
+      #availableForPurchase,
+      or: $value.availableForPurchase,
     ),
-    isLinkedRole: data.get(#isLinkedRole, or: $value.isLinkedRole),
   );
 
   @override

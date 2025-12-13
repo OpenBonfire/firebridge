@@ -1,4 +1,6 @@
 import 'package:firebridge/nyxx.dart';
+import 'package:firebridge/src/builders/guild/guild_subscriptions_bulk.dart';
+import 'package:firebridge/src/models/guild/guild_subscriptions_bulk.dart';
 
 void main() async {
   Firebridge.ensureInitialized();
@@ -15,9 +17,15 @@ void main() async {
 
   client.onEvent.listen((event) {
     // print(event.runtimeType);
-    // if (event is ReadyEvent) {
-    //   print(event.userGuildSettings.first.flags
-    //       .has(UserGuildSettingsFlags.optInChannelsOn));
-    // }
+    if (event is ReadyEvent) {
+      print("Got ready!");
+
+      // client.gateway.updateGuildSubscriptionsBulk(GuildSubscriptionsBulkBuilder(
+      //     subscriptions: [GuildSubscription(channels: {
+      //       event.guilds.first.: [
+
+      //       ]
+      //     })]));
+    }
   });
 }

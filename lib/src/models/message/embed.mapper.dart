@@ -81,7 +81,6 @@ class EmbedMapper extends ClassMapperBase<Embed> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = EmbedMapper._());
       EmbedTypeMapper.ensureInitialized();
-      DiscordColorMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -212,7 +211,6 @@ extension EmbedValueCopy<$R, $Out> on ObjectCopyWith<$R, Embed, $Out> {
 
 abstract class EmbedCopyWith<$R, $In extends Embed, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get color;
   ListCopyWith<$R, EmbedField, ObjectCopyWith<$R, EmbedField, EmbedField>>?
   get fields;
   $R call({
@@ -239,9 +237,6 @@ class _EmbedCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Embed, $Out>
 
   @override
   late final ClassMapperBase<Embed> $mapper = EmbedMapper.ensureInitialized();
-  @override
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get color =>
-      $value.color?.copyWith.$chain((v) => call(color: v));
   @override
   ListCopyWith<$R, EmbedField, ObjectCopyWith<$R, EmbedField, EmbedField>>?
   get fields => $value.fields != null

@@ -29,7 +29,7 @@ class ReadyEvent extends DispatchEvent with ReadyEventMappable {
   final User user;
 
   /// A list of guilds the user is in.
-  final List<PartialGuild> guilds;
+  final List<Guild> guilds;
 
   /// The ID of the Gateway session.
   final String sessionId;

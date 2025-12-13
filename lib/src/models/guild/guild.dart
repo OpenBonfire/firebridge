@@ -1,4 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:firebridge/src/models/channel/channel.dart';
 import 'package:firebridge/src/models/emoji.dart';
 import 'package:firebridge/src/models/guild/welcome_screen.dart';
 import 'package:firebridge/src/models/invite/invite.dart';
@@ -38,7 +39,7 @@ class UserGuild extends PartialGuild with UserGuildMappable {
   final Permissions? currentUserPermissions;
 
   /// A set of features enabled in this guild.
-  final GuildFeatures features;
+  // final GuildFeatures features;
 
   /// An approximate number of members in this guild.
   ///
@@ -63,7 +64,7 @@ class UserGuild extends PartialGuild with UserGuildMappable {
     required this.iconHash,
     required this.isOwnedByCurrentUser,
     required this.currentUserPermissions,
-    required this.features,
+    // required this.features,
     required this.approximateMemberCount,
     required this.approximatePresenceCount,
     required this.bannerHash,
@@ -93,7 +94,7 @@ class Guild extends UserGuild with GuildMappable {
   final Duration afkTimeout;
 
   /// Whether the widget is enabled in this guild.
-  final bool isWidgetEnabled;
+  final bool? widgetEnabled;
 
   /// The channel ID the widget's invite will send users to.
   final Snowflake? widgetChannelId;
@@ -102,18 +103,18 @@ class Guild extends UserGuild with GuildMappable {
   final VerificationLevel verificationLevel;
 
   /// The default message notification level.
-  final MessageNotificationLevel defaultMessageNotificationLevel;
+  final MessageNotificationLevel defaultMessageNotifications;
 
   /// The explicit content filter level for this guild.
-  final ExplicitContentFilterLevel explicitContentFilterLevel;
+  final ExplicitContentFilterLevel explicitContentFilter;
 
   /// A list of roles in this guild.
   // Renamed to avoid conflict with the roles manager.
-  final List<Role> roleList;
+  final List<Role> roles;
 
   /// A list of emojis in this guild.
   // Renamed to avoid conflict with the emojis manager.
-  final List<Emoji> emojiList;
+  // final List<Emoji> emojis;
 
   /// This guild's MFA level.
   final MfaLevel mfaLevel;
@@ -167,17 +168,19 @@ class Guild extends UserGuild with GuildMappable {
   final NsfwLevel nsfwLevel;
 
   /// Whether this guild has the premium progress bar enabled.
-  final bool hasPremiumProgressBarEnabled;
+  final bool premiumProgressBarEnabled;
 
   /// A list of stickers in this guild.
   // Renamed to avoid conflict with the stickers manager.
-  final List<GuildSticker> stickerList;
+  final List<GuildSticker> stickers;
 
   /// The ID of the channel safety alerts are sent to.
   final Snowflake? safetyAlertsChannelId;
 
   /// The incidents data for this guild.
   final IncidentsData? incidentsData;
+
+  final List<Channel> channels;
 
   /// {@macro guild}
   /// @nodoc
@@ -192,13 +195,13 @@ class Guild extends UserGuild with GuildMappable {
     required super.currentUserPermissions,
     required this.afkChannelId,
     required this.afkTimeout,
-    required this.isWidgetEnabled,
+    this.widgetEnabled,
     required this.widgetChannelId,
     required this.verificationLevel,
-    required this.defaultMessageNotificationLevel,
-    required this.explicitContentFilterLevel,
-    required this.roleList,
-    required super.features,
+    required this.defaultMessageNotifications,
+    required this.explicitContentFilter,
+    required this.roles,
+    // required super.features,
     required this.mfaLevel,
     required this.applicationId,
     required this.systemChannelId,
@@ -219,11 +222,12 @@ class Guild extends UserGuild with GuildMappable {
     required super.approximatePresenceCount,
     required this.welcomeScreen,
     required this.nsfwLevel,
-    required this.hasPremiumProgressBarEnabled,
-    required this.emojiList,
-    required this.stickerList,
+    required this.premiumProgressBarEnabled,
+    // required this.emojis,
+    required this.stickers,
     required this.safetyAlertsChannelId,
     required this.incidentsData,
+    required this.channels,
   });
 }
 

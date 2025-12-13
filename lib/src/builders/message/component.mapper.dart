@@ -2659,7 +2659,6 @@ class ContainerComponentBuilderMapper
         _instance = ContainerComponentBuilderMapper._(),
       );
       MessageComponentMapper.ensureInitialized();
-      DiscordColorMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -2794,7 +2793,6 @@ abstract class ContainerComponentBuilderCopyWith<
     >
   >
   get components;
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get accentColor;
   $R call({
     List<MessageComponentBuilder<MessageComponent>>? components,
     DiscordColor? accentColor,
@@ -2830,9 +2828,6 @@ class _ContainerComponentBuilderCopyWithImpl<$R, $Out>
     (v, t) => ObjectCopyWith(v, $identity, t),
     (v) => call(components: v),
   );
-  @override
-  DiscordColorCopyWith<$R, DiscordColor, DiscordColor>? get accentColor =>
-      $value.accentColor?.copyWith.$chain((v) => call(accentColor: v));
   @override
   $R call({
     List<MessageComponentBuilder<MessageComponent>>? components,
