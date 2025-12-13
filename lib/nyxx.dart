@@ -182,8 +182,6 @@ export 'src/models/oauth2.dart';
 export 'src/models/subscription.dart';
 
 export 'src/utils/flags.dart';
-export 'src/intents.dart';
-
 export 'src/plugin/plugin.dart';
 export 'src/plugin/logging.dart' show Logging, logging;
 export 'src/plugin/cli_integration.dart' show CliIntegration, cliIntegration;

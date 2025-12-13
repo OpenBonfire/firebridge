@@ -1,5 +1,7 @@
 import 'dart:async';
-import 'dart:convert';
+import 'package:firebridge/src/builders/guild/guild_subscriptions_bulk.dart';
+import 'package:firebridge/src/models/gateway/events/guild.dart';
+import 'package:firebridge/src/models/guild/member.dart';
 import 'package:logging/logging.dart';
 import 'package:firebridge/src/api_options.dart';
 import 'package:firebridge/src/builders/presence.dart';
@@ -151,6 +153,52 @@ class Gateway extends GatewayManager with EventParser {
     }
   }
 
+  /// Stream all members in a guild that match [query] or [userIds].
+  ///
+  /// If neither is provided, all members in the guild are returned.
+  Stream<Member> listGuildMembers(
+    Snowflake guildId, {
+    String? query,
+    int? limit,
+    List<Snowflake>? userIds,
+    bool? includePresences,
+    String? nonce,
+  }) async* {
+    if (userIds == null) {
+      query ??= '';
+    }
+
+    limit ??= 0;
+    nonce ??=
+        '${Snowflake.now().value.toRadixString(36)}${guildId.value.toRadixString(36)}';
+
+    final shard = shardFor(guildId);
+    shard.add(Send(opcode: Opcode.requestGuildMembers, data: {
+      'guild_id': guildId.toString(),
+      if (query != null) 'query': query,
+      'limit': limit,
+      if (includePresences != null) 'presences': includePresences,
+      if (userIds != null)
+        'user_ids': userIds.map((e) => e.toString()).toList(),
+      'nonce': nonce,
+    }));
+
+    int chunksReceived = 0;
+
+    await for (final event in events) {
+      if (event is! GuildMembersChunkEvent || event.nonce != nonce) {
+        continue;
+      }
+
+      yield* Stream.fromIterable(event.members);
+
+      chunksReceived++;
+      if (chunksReceived == event.chunkCount) {
+        break;
+      }
+    }
+  }
+
   /// Connect to the gateway using the provided [client] and [gatewayBot] configuration.
   static Future<Gateway> connect(
       FirebridgeGateway client, GatewayBot gatewayBot) async {
@@ -235,6 +283,14 @@ class Gateway extends GatewayManager with EventParser {
   void updatePresence(PresenceBuilder builder) {
     for (final shard in shards) {
       shard.add(Send(opcode: Opcode.presenceUpdate, data: builder.toMap()));
+    }
+  }
+
+  /// Update the current guild subscription
+  void updateGuildSubscriptionsBulk(GuildSubscriptionsBulkBuilder builder) {
+    for (final shard in shards) {
+      shard.add(
+          Send(opcode: Opcode.guildSubscriptionsBulk, data: builder.toMap()));
     }
   }
 }

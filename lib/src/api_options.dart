@@ -1,6 +1,4 @@
 import 'package:firebridge/src/builders/presence.dart';
-import 'package:firebridge/src/intents.dart';
-import 'package:firebridge/src/utils/flags.dart';
 
 /// Options for connecting to the Discord API.
 abstract class ApiOptions {
@@ -49,9 +47,6 @@ class RestApiOptions extends ApiOptions {
 /// Options for connecting to the Discord API for making HTTP requests and connecting to the Gateway
 /// with a bot token.
 class GatewayApiOptions extends RestApiOptions {
-  /// The intents to use.
-  final Flags<GatewayIntents> intents;
-
   /// The format of the Gateway payloads.
   final GatewayPayloadFormat payloadFormat;
 
@@ -86,7 +81,6 @@ class GatewayApiOptions extends RestApiOptions {
   GatewayApiOptions({
     required super.token,
     super.userAgent,
-    required this.intents,
     this.payloadFormat = GatewayPayloadFormat.json,
     this.compression = GatewayCompression.transport,
     this.shards,

@@ -12,14 +12,12 @@ import 'package:firebridge/src/event_mixin.dart';
 import 'package:firebridge/src/gateway/gateway.dart';
 import 'package:firebridge/src/http/handler.dart';
 import 'package:firebridge/src/http/managers/gateway_manager.dart';
-import 'package:firebridge/src/intents.dart';
 import 'package:firebridge/src/manager_mixin.dart';
 import 'package:firebridge/src/api_options.dart';
 import 'package:firebridge/src/models/guild/guild.dart';
 import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/models/user/user.dart';
 import 'package:firebridge/src/plugin/plugin.dart';
-import 'package:firebridge/src/utils/flags.dart';
 import 'package:runtime_type/runtime_type.dart';
 
 /// A helper function to nest and execute calls to plugin connect methods.
@@ -116,11 +114,9 @@ abstract class Firebridge {
 
   /// Create an instance of [FirebridgeGateway] that can perform requests to the HTTP API, connects
   /// to the gateway and is authenticated with a bot token.
-  static Future<FirebridgeGateway> connectGateway(
-          String token, Flags<GatewayIntents> intents,
+  static Future<FirebridgeGateway> connectGateway(String token,
           {GatewayClientOptions options = const GatewayClientOptions()}) =>
-      connectGatewayWithOptions(
-          GatewayApiOptions(token: token, intents: intents), options);
+      connectGatewayWithOptions(GatewayApiOptions(token: token), options);
 
   /// Create an instance of [FirebridgeGateway] using the provided options.
   static Future<FirebridgeGateway> connectGatewayWithOptions(
@@ -132,7 +128,7 @@ abstract class Firebridge {
         ..info('Connecting to the Gateway API')
         ..fine(
           'Token: ${apiOptions.token}, Authorization: ${apiOptions.authorizationHeader}, User-Agent: ${apiOptions.userAgent},'
-          ' Intents: ${apiOptions.intents.value}, Payloads: ${apiOptions.payloadFormat.value}, Compression: ${apiOptions.compression.name},'
+          ' Payloads: ${apiOptions.payloadFormat.value}, Compression: ${apiOptions.compression.name},'
           ' Shards: ${apiOptions.shards?.join(', ')}, Total shards: ${apiOptions.totalShards}, Large threshold: ${apiOptions.largeThreshold}',
         )
         ..fine(

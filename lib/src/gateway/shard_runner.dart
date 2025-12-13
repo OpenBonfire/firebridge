@@ -307,8 +307,8 @@ class ShardRunner {
         'token': data.apiOptions.token,
         'properties': {
           'os': Platform.operatingSystem,
-          'browser': 'nyxx',
-          'device': 'nyxx',
+          'browser': 'firebridge',
+          'device': 'firebridge',
         },
         if (data.apiOptions.compression == GatewayCompression.payload)
           'compress': true,
@@ -317,7 +317,6 @@ class ShardRunner {
         'shard': [data.id, data.totalShards],
         if (data.apiOptions.initialPresence != null)
           'presence': data.apiOptions.initialPresence!.toMap(),
-        'intents': data.apiOptions.intents.value,
       },
     ));
   }

@@ -2,10 +2,11 @@ import 'package:firebridge/nyxx.dart';
 
 void main() async {
   Firebridge.ensureInitialized();
-  final client = await Firebridge.connectGateway(
-    "",
-    GatewayIntents.allUnprivileged,
-    options: GatewayClientOptions(plugins: [logging, cliIntegration]),
+  final client = await Firebridge.connectGatewayWithOptions(
+    GatewayApiOptions(token: "", compression: GatewayCompression.none),
+    GatewayClientOptions(
+      plugins: [logging, cliIntegration],
+    ),
   );
 
   // await for (final MessageCreateEvent(:message) in client.onMessageCreate) {
