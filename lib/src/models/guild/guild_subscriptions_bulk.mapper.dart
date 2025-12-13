@@ -7,69 +7,6 @@
 
 part of 'guild_subscriptions_bulk.dart';
 
-class MemberListUpdateTypeMapper extends EnumMapper<MemberListUpdateType> {
-  MemberListUpdateTypeMapper._();
-
-  static MemberListUpdateTypeMapper? _instance;
-  static MemberListUpdateTypeMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = MemberListUpdateTypeMapper._());
-    }
-    return _instance!;
-  }
-
-  static MemberListUpdateType fromValue(dynamic value) {
-    ensureInitialized();
-    return MapperContainer.globals.fromValue(value);
-  }
-
-  @override
-  MemberListUpdateType decode(dynamic value) {
-    switch (value) {
-      case r'SYNC':
-        return MemberListUpdateType.sync;
-      case r'UPDATE':
-        return MemberListUpdateType.update;
-      case r'DELETE':
-        return MemberListUpdateType.delete;
-      case r'INSERT':
-        return MemberListUpdateType.insert;
-      case r'INVALIDATE':
-        return MemberListUpdateType.invalidate;
-      case r'UNKNOWN':
-        return MemberListUpdateType.unknown;
-      default:
-        throw MapperException.unknownEnumValue(value);
-    }
-  }
-
-  @override
-  dynamic encode(MemberListUpdateType self) {
-    switch (self) {
-      case MemberListUpdateType.sync:
-        return r'SYNC';
-      case MemberListUpdateType.update:
-        return r'UPDATE';
-      case MemberListUpdateType.delete:
-        return r'DELETE';
-      case MemberListUpdateType.insert:
-        return r'INSERT';
-      case MemberListUpdateType.invalidate:
-        return r'INVALIDATE';
-      case MemberListUpdateType.unknown:
-        return r'UNKNOWN';
-    }
-  }
-}
-
-extension MemberListUpdateTypeMapperExtension on MemberListUpdateType {
-  String toValue() {
-    MemberListUpdateTypeMapper.ensureInitialized();
-    return MapperContainer.globals.toValue<MemberListUpdateType>(this)
-        as String;
-  }
-}
-
 class GuildSubscriptionsBulkEventMapper
     extends ClassMapperBase<GuildSubscriptionsBulkEvent> {
   GuildSubscriptionsBulkEventMapper._();
@@ -949,7 +886,11 @@ class MemberListUpdateOperationMapper
       MapperContainer.globals.use(
         _instance = MemberListUpdateOperationMapper._(),
       );
-      MemberListUpdateTypeMapper.ensureInitialized();
+      MemberListUpdateSyncOperationMapper.ensureInitialized();
+      MemberListUpdateInsertOperationMapper.ensureInitialized();
+      MemberListUpdateUpdateOperationMapper.ensureInitialized();
+      MemberListUpdateDeleteOperationMapper.ensureInitialized();
+      MemberListUpdateInvalidateOperationMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -957,43 +898,14 @@ class MemberListUpdateOperationMapper
   @override
   final String id = 'MemberListUpdateOperation';
 
-  static MemberListUpdateType _$type(MemberListUpdateOperation v) => v.type;
-  static const Field<MemberListUpdateOperation, MemberListUpdateType> _f$type =
-      Field('type', _$type);
-  static dynamic _$data(MemberListUpdateOperation v) => v.data;
-  static const Field<MemberListUpdateOperation, dynamic> _f$data = Field(
-    'data',
-    _$data,
-  );
-  static int? _$index(MemberListUpdateOperation v) => v.index;
-  static const Field<MemberListUpdateOperation, int> _f$index = Field(
-    'index',
-    _$index,
-    opt: true,
-  );
-  static List<int>? _$range(MemberListUpdateOperation v) => v.range;
-  static const Field<MemberListUpdateOperation, List<int>> _f$range = Field(
-    'range',
-    _$range,
-    opt: true,
-  );
-
   @override
-  final MappableFields<MemberListUpdateOperation> fields = const {
-    #type: _f$type,
-    #data: _f$data,
-    #index: _f$index,
-    #range: _f$range,
-  };
+  final MappableFields<MemberListUpdateOperation> fields = const {};
 
-  @override
-  final MappingHook hook = const MemberListUpdateOperationHook();
   static MemberListUpdateOperation _instantiate(DecodingData data) {
-    return MemberListUpdateOperation(
-      type: data.dec(_f$type),
-      data: data.dec(_f$data),
-      index: data.dec(_f$index),
-      range: data.dec(_f$range),
+    throw MapperException.missingSubclass(
+      'MemberListUpdateOperation',
+      'op',
+      '${data.value['op']}',
     );
   }
 
@@ -1010,59 +922,14 @@ class MemberListUpdateOperationMapper
 }
 
 mixin MemberListUpdateOperationMappable {
-  String toJson() {
-    return MemberListUpdateOperationMapper.ensureInitialized()
-        .encodeJson<MemberListUpdateOperation>(
-          this as MemberListUpdateOperation,
-        );
-  }
-
-  Map<String, dynamic> toMap() {
-    return MemberListUpdateOperationMapper.ensureInitialized()
-        .encodeMap<MemberListUpdateOperation>(
-          this as MemberListUpdateOperation,
-        );
-  }
-
+  String toJson();
+  Map<String, dynamic> toMap();
   MemberListUpdateOperationCopyWith<
     MemberListUpdateOperation,
     MemberListUpdateOperation,
     MemberListUpdateOperation
   >
-  get copyWith =>
-      _MemberListUpdateOperationCopyWithImpl<
-        MemberListUpdateOperation,
-        MemberListUpdateOperation
-      >(this as MemberListUpdateOperation, $identity, $identity);
-  @override
-  String toString() {
-    return MemberListUpdateOperationMapper.ensureInitialized().stringifyValue(
-      this as MemberListUpdateOperation,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return MemberListUpdateOperationMapper.ensureInitialized().equalsValue(
-      this as MemberListUpdateOperation,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return MemberListUpdateOperationMapper.ensureInitialized().hashValue(
-      this as MemberListUpdateOperation,
-    );
-  }
-}
-
-extension MemberListUpdateOperationValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, MemberListUpdateOperation, $Out> {
-  MemberListUpdateOperationCopyWith<$R, MemberListUpdateOperation, $Out>
-  get $asMemberListUpdateOperation => $base.as(
-    (v, t, t2) => _MemberListUpdateOperationCopyWithImpl<$R, $Out>(v, t, t2),
-  );
+  get copyWith;
 }
 
 abstract class MemberListUpdateOperationCopyWith<
@@ -1071,63 +938,220 @@ abstract class MemberListUpdateOperationCopyWith<
   $Out
 >
     implements ClassCopyWith<$R, $In, $Out> {
-  ListCopyWith<$R, int, ObjectCopyWith<$R, int, int>>? get range;
-  $R call({
-    MemberListUpdateType? type,
-    dynamic data,
-    int? index,
-    List<int>? range,
-  });
+  $R call();
   MemberListUpdateOperationCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
 }
 
-class _MemberListUpdateOperationCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, MemberListUpdateOperation, $Out>
-    implements
-        MemberListUpdateOperationCopyWith<$R, MemberListUpdateOperation, $Out> {
-  _MemberListUpdateOperationCopyWithImpl(super.value, super.then, super.then2);
+class MemberListUpdateSyncOperationMapper
+    extends SubClassMapperBase<MemberListUpdateSyncOperation> {
+  MemberListUpdateSyncOperationMapper._();
+
+  static MemberListUpdateSyncOperationMapper? _instance;
+  static MemberListUpdateSyncOperationMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(
+        _instance = MemberListUpdateSyncOperationMapper._(),
+      );
+      MemberListUpdateOperationMapper.ensureInitialized().addSubMapper(
+        _instance!,
+      );
+      GuildMemberListUpdateItemMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
 
   @override
-  late final ClassMapperBase<MemberListUpdateOperation> $mapper =
+  final String id = 'MemberListUpdateSyncOperation';
+
+  static List<GuildMemberListUpdateItem> _$items(
+    MemberListUpdateSyncOperation v,
+  ) => v.items;
+  static const Field<
+    MemberListUpdateSyncOperation,
+    List<GuildMemberListUpdateItem>
+  >
+  _f$items = Field('items', _$items);
+  static List<int> _$range(MemberListUpdateSyncOperation v) => v.range;
+  static const Field<MemberListUpdateSyncOperation, List<int>> _f$range = Field(
+    'range',
+    _$range,
+  );
+
+  @override
+  final MappableFields<MemberListUpdateSyncOperation> fields = const {
+    #items: _f$items,
+    #range: _f$range,
+  };
+
+  @override
+  final String discriminatorKey = 'op';
+  @override
+  final dynamic discriminatorValue = 'SYNC';
+  @override
+  late final ClassMapperBase superMapper =
       MemberListUpdateOperationMapper.ensureInitialized();
+
+  static MemberListUpdateSyncOperation _instantiate(DecodingData data) {
+    return MemberListUpdateSyncOperation(
+      items: data.dec(_f$items),
+      range: data.dec(_f$range),
+    );
+  }
+
   @override
-  ListCopyWith<$R, int, ObjectCopyWith<$R, int, int>>? get range =>
-      $value.range != null
-      ? ListCopyWith(
-          $value.range!,
-          (v, t) => ObjectCopyWith(v, $identity, t),
-          (v) => call(range: v),
-        )
-      : null;
+  final Function instantiate = _instantiate;
+
+  static MemberListUpdateSyncOperation fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<MemberListUpdateSyncOperation>(map);
+  }
+
+  static MemberListUpdateSyncOperation fromJson(String json) {
+    return ensureInitialized().decodeJson<MemberListUpdateSyncOperation>(json);
+  }
+}
+
+mixin MemberListUpdateSyncOperationMappable {
+  String toJson() {
+    return MemberListUpdateSyncOperationMapper.ensureInitialized()
+        .encodeJson<MemberListUpdateSyncOperation>(
+          this as MemberListUpdateSyncOperation,
+        );
+  }
+
+  Map<String, dynamic> toMap() {
+    return MemberListUpdateSyncOperationMapper.ensureInitialized()
+        .encodeMap<MemberListUpdateSyncOperation>(
+          this as MemberListUpdateSyncOperation,
+        );
+  }
+
+  MemberListUpdateSyncOperationCopyWith<
+    MemberListUpdateSyncOperation,
+    MemberListUpdateSyncOperation,
+    MemberListUpdateSyncOperation
+  >
+  get copyWith =>
+      _MemberListUpdateSyncOperationCopyWithImpl<
+        MemberListUpdateSyncOperation,
+        MemberListUpdateSyncOperation
+      >(this as MemberListUpdateSyncOperation, $identity, $identity);
   @override
-  $R call({
-    MemberListUpdateType? type,
-    Object? data = $none,
-    Object? index = $none,
-    Object? range = $none,
-  }) => $apply(
+  String toString() {
+    return MemberListUpdateSyncOperationMapper.ensureInitialized()
+        .stringifyValue(this as MemberListUpdateSyncOperation);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return MemberListUpdateSyncOperationMapper.ensureInitialized().equalsValue(
+      this as MemberListUpdateSyncOperation,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return MemberListUpdateSyncOperationMapper.ensureInitialized().hashValue(
+      this as MemberListUpdateSyncOperation,
+    );
+  }
+}
+
+extension MemberListUpdateSyncOperationValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, MemberListUpdateSyncOperation, $Out> {
+  MemberListUpdateSyncOperationCopyWith<$R, MemberListUpdateSyncOperation, $Out>
+  get $asMemberListUpdateSyncOperation => $base.as(
+    (v, t, t2) =>
+        _MemberListUpdateSyncOperationCopyWithImpl<$R, $Out>(v, t, t2),
+  );
+}
+
+abstract class MemberListUpdateSyncOperationCopyWith<
+  $R,
+  $In extends MemberListUpdateSyncOperation,
+  $Out
+>
+    implements MemberListUpdateOperationCopyWith<$R, $In, $Out> {
+  ListCopyWith<
+    $R,
+    GuildMemberListUpdateItem,
+    GuildMemberListUpdateItemCopyWith<
+      $R,
+      GuildMemberListUpdateItem,
+      GuildMemberListUpdateItem
+    >
+  >
+  get items;
+  ListCopyWith<$R, int, ObjectCopyWith<$R, int, int>> get range;
+  @override
+  $R call({List<GuildMemberListUpdateItem>? items, List<int>? range});
+  MemberListUpdateSyncOperationCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  );
+}
+
+class _MemberListUpdateSyncOperationCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, MemberListUpdateSyncOperation, $Out>
+    implements
+        MemberListUpdateSyncOperationCopyWith<
+          $R,
+          MemberListUpdateSyncOperation,
+          $Out
+        > {
+  _MemberListUpdateSyncOperationCopyWithImpl(
+    super.value,
+    super.then,
+    super.then2,
+  );
+
+  @override
+  late final ClassMapperBase<MemberListUpdateSyncOperation> $mapper =
+      MemberListUpdateSyncOperationMapper.ensureInitialized();
+  @override
+  ListCopyWith<
+    $R,
+    GuildMemberListUpdateItem,
+    GuildMemberListUpdateItemCopyWith<
+      $R,
+      GuildMemberListUpdateItem,
+      GuildMemberListUpdateItem
+    >
+  >
+  get items => ListCopyWith(
+    $value.items,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(items: v),
+  );
+  @override
+  ListCopyWith<$R, int, ObjectCopyWith<$R, int, int>> get range => ListCopyWith(
+    $value.range,
+    (v, t) => ObjectCopyWith(v, $identity, t),
+    (v) => call(range: v),
+  );
+  @override
+  $R call({List<GuildMemberListUpdateItem>? items, List<int>? range}) => $apply(
     FieldCopyWithData({
-      if (type != null) #type: type,
-      if (data != $none) #data: data,
-      if (index != $none) #index: index,
-      if (range != $none) #range: range,
+      if (items != null) #items: items,
+      if (range != null) #range: range,
     }),
   );
   @override
-  MemberListUpdateOperation $make(CopyWithData data) =>
-      MemberListUpdateOperation(
-        type: data.get(#type, or: $value.type),
-        data: data.get(#data, or: $value.data),
-        index: data.get(#index, or: $value.index),
+  MemberListUpdateSyncOperation $make(CopyWithData data) =>
+      MemberListUpdateSyncOperation(
+        items: data.get(#items, or: $value.items),
         range: data.get(#range, or: $value.range),
       );
 
   @override
-  MemberListUpdateOperationCopyWith<$R2, MemberListUpdateOperation, $Out2>
+  MemberListUpdateSyncOperationCopyWith<
+    $R2,
+    MemberListUpdateSyncOperation,
+    $Out2
+  >
   $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _MemberListUpdateOperationCopyWithImpl<$R2, $Out2>($value, $cast, t);
+      _MemberListUpdateSyncOperationCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class GuildMemberListUpdateItemMapper
@@ -1288,5 +1312,736 @@ class _GuildMemberListUpdateItemCopyWithImpl<$R, $Out>
   GuildMemberListUpdateItemCopyWith<$R2, GuildMemberListUpdateItem, $Out2>
   $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
       _GuildMemberListUpdateItemCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
+class MemberListUpdateInsertOperationMapper
+    extends SubClassMapperBase<MemberListUpdateInsertOperation> {
+  MemberListUpdateInsertOperationMapper._();
+
+  static MemberListUpdateInsertOperationMapper? _instance;
+  static MemberListUpdateInsertOperationMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(
+        _instance = MemberListUpdateInsertOperationMapper._(),
+      );
+      MemberListUpdateOperationMapper.ensureInitialized().addSubMapper(
+        _instance!,
+      );
+      GuildMemberListUpdateItemMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'MemberListUpdateInsertOperation';
+
+  static int _$index(MemberListUpdateInsertOperation v) => v.index;
+  static const Field<MemberListUpdateInsertOperation, int> _f$index = Field(
+    'index',
+    _$index,
+  );
+  static GuildMemberListUpdateItem _$item(MemberListUpdateInsertOperation v) =>
+      v.item;
+  static const Field<MemberListUpdateInsertOperation, GuildMemberListUpdateItem>
+  _f$item = Field('item', _$item);
+
+  @override
+  final MappableFields<MemberListUpdateInsertOperation> fields = const {
+    #index: _f$index,
+    #item: _f$item,
+  };
+
+  @override
+  final String discriminatorKey = 'op';
+  @override
+  final dynamic discriminatorValue = 'INSERT';
+  @override
+  late final ClassMapperBase superMapper =
+      MemberListUpdateOperationMapper.ensureInitialized();
+
+  static MemberListUpdateInsertOperation _instantiate(DecodingData data) {
+    return MemberListUpdateInsertOperation(
+      index: data.dec(_f$index),
+      item: data.dec(_f$item),
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static MemberListUpdateInsertOperation fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<MemberListUpdateInsertOperation>(map);
+  }
+
+  static MemberListUpdateInsertOperation fromJson(String json) {
+    return ensureInitialized().decodeJson<MemberListUpdateInsertOperation>(
+      json,
+    );
+  }
+}
+
+mixin MemberListUpdateInsertOperationMappable {
+  String toJson() {
+    return MemberListUpdateInsertOperationMapper.ensureInitialized()
+        .encodeJson<MemberListUpdateInsertOperation>(
+          this as MemberListUpdateInsertOperation,
+        );
+  }
+
+  Map<String, dynamic> toMap() {
+    return MemberListUpdateInsertOperationMapper.ensureInitialized()
+        .encodeMap<MemberListUpdateInsertOperation>(
+          this as MemberListUpdateInsertOperation,
+        );
+  }
+
+  MemberListUpdateInsertOperationCopyWith<
+    MemberListUpdateInsertOperation,
+    MemberListUpdateInsertOperation,
+    MemberListUpdateInsertOperation
+  >
+  get copyWith =>
+      _MemberListUpdateInsertOperationCopyWithImpl<
+        MemberListUpdateInsertOperation,
+        MemberListUpdateInsertOperation
+      >(this as MemberListUpdateInsertOperation, $identity, $identity);
+  @override
+  String toString() {
+    return MemberListUpdateInsertOperationMapper.ensureInitialized()
+        .stringifyValue(this as MemberListUpdateInsertOperation);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return MemberListUpdateInsertOperationMapper.ensureInitialized()
+        .equalsValue(this as MemberListUpdateInsertOperation, other);
+  }
+
+  @override
+  int get hashCode {
+    return MemberListUpdateInsertOperationMapper.ensureInitialized().hashValue(
+      this as MemberListUpdateInsertOperation,
+    );
+  }
+}
+
+extension MemberListUpdateInsertOperationValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, MemberListUpdateInsertOperation, $Out> {
+  MemberListUpdateInsertOperationCopyWith<
+    $R,
+    MemberListUpdateInsertOperation,
+    $Out
+  >
+  get $asMemberListUpdateInsertOperation => $base.as(
+    (v, t, t2) =>
+        _MemberListUpdateInsertOperationCopyWithImpl<$R, $Out>(v, t, t2),
+  );
+}
+
+abstract class MemberListUpdateInsertOperationCopyWith<
+  $R,
+  $In extends MemberListUpdateInsertOperation,
+  $Out
+>
+    implements MemberListUpdateOperationCopyWith<$R, $In, $Out> {
+  GuildMemberListUpdateItemCopyWith<
+    $R,
+    GuildMemberListUpdateItem,
+    GuildMemberListUpdateItem
+  >
+  get item;
+  @override
+  $R call({int? index, GuildMemberListUpdateItem? item});
+  MemberListUpdateInsertOperationCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  );
+}
+
+class _MemberListUpdateInsertOperationCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, MemberListUpdateInsertOperation, $Out>
+    implements
+        MemberListUpdateInsertOperationCopyWith<
+          $R,
+          MemberListUpdateInsertOperation,
+          $Out
+        > {
+  _MemberListUpdateInsertOperationCopyWithImpl(
+    super.value,
+    super.then,
+    super.then2,
+  );
+
+  @override
+  late final ClassMapperBase<MemberListUpdateInsertOperation> $mapper =
+      MemberListUpdateInsertOperationMapper.ensureInitialized();
+  @override
+  GuildMemberListUpdateItemCopyWith<
+    $R,
+    GuildMemberListUpdateItem,
+    GuildMemberListUpdateItem
+  >
+  get item => $value.item.copyWith.$chain((v) => call(item: v));
+  @override
+  $R call({int? index, GuildMemberListUpdateItem? item}) => $apply(
+    FieldCopyWithData({
+      if (index != null) #index: index,
+      if (item != null) #item: item,
+    }),
+  );
+  @override
+  MemberListUpdateInsertOperation $make(CopyWithData data) =>
+      MemberListUpdateInsertOperation(
+        index: data.get(#index, or: $value.index),
+        item: data.get(#item, or: $value.item),
+      );
+
+  @override
+  MemberListUpdateInsertOperationCopyWith<
+    $R2,
+    MemberListUpdateInsertOperation,
+    $Out2
+  >
+  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
+      _MemberListUpdateInsertOperationCopyWithImpl<$R2, $Out2>(
+        $value,
+        $cast,
+        t,
+      );
+}
+
+class MemberListUpdateUpdateOperationMapper
+    extends SubClassMapperBase<MemberListUpdateUpdateOperation> {
+  MemberListUpdateUpdateOperationMapper._();
+
+  static MemberListUpdateUpdateOperationMapper? _instance;
+  static MemberListUpdateUpdateOperationMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(
+        _instance = MemberListUpdateUpdateOperationMapper._(),
+      );
+      MemberListUpdateOperationMapper.ensureInitialized().addSubMapper(
+        _instance!,
+      );
+      GuildMemberListUpdateItemMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'MemberListUpdateUpdateOperation';
+
+  static int _$index(MemberListUpdateUpdateOperation v) => v.index;
+  static const Field<MemberListUpdateUpdateOperation, int> _f$index = Field(
+    'index',
+    _$index,
+  );
+  static GuildMemberListUpdateItem _$item(MemberListUpdateUpdateOperation v) =>
+      v.item;
+  static const Field<MemberListUpdateUpdateOperation, GuildMemberListUpdateItem>
+  _f$item = Field('item', _$item);
+
+  @override
+  final MappableFields<MemberListUpdateUpdateOperation> fields = const {
+    #index: _f$index,
+    #item: _f$item,
+  };
+
+  @override
+  final String discriminatorKey = 'op';
+  @override
+  final dynamic discriminatorValue = 'UPDATE';
+  @override
+  late final ClassMapperBase superMapper =
+      MemberListUpdateOperationMapper.ensureInitialized();
+
+  static MemberListUpdateUpdateOperation _instantiate(DecodingData data) {
+    return MemberListUpdateUpdateOperation(
+      index: data.dec(_f$index),
+      item: data.dec(_f$item),
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static MemberListUpdateUpdateOperation fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<MemberListUpdateUpdateOperation>(map);
+  }
+
+  static MemberListUpdateUpdateOperation fromJson(String json) {
+    return ensureInitialized().decodeJson<MemberListUpdateUpdateOperation>(
+      json,
+    );
+  }
+}
+
+mixin MemberListUpdateUpdateOperationMappable {
+  String toJson() {
+    return MemberListUpdateUpdateOperationMapper.ensureInitialized()
+        .encodeJson<MemberListUpdateUpdateOperation>(
+          this as MemberListUpdateUpdateOperation,
+        );
+  }
+
+  Map<String, dynamic> toMap() {
+    return MemberListUpdateUpdateOperationMapper.ensureInitialized()
+        .encodeMap<MemberListUpdateUpdateOperation>(
+          this as MemberListUpdateUpdateOperation,
+        );
+  }
+
+  MemberListUpdateUpdateOperationCopyWith<
+    MemberListUpdateUpdateOperation,
+    MemberListUpdateUpdateOperation,
+    MemberListUpdateUpdateOperation
+  >
+  get copyWith =>
+      _MemberListUpdateUpdateOperationCopyWithImpl<
+        MemberListUpdateUpdateOperation,
+        MemberListUpdateUpdateOperation
+      >(this as MemberListUpdateUpdateOperation, $identity, $identity);
+  @override
+  String toString() {
+    return MemberListUpdateUpdateOperationMapper.ensureInitialized()
+        .stringifyValue(this as MemberListUpdateUpdateOperation);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return MemberListUpdateUpdateOperationMapper.ensureInitialized()
+        .equalsValue(this as MemberListUpdateUpdateOperation, other);
+  }
+
+  @override
+  int get hashCode {
+    return MemberListUpdateUpdateOperationMapper.ensureInitialized().hashValue(
+      this as MemberListUpdateUpdateOperation,
+    );
+  }
+}
+
+extension MemberListUpdateUpdateOperationValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, MemberListUpdateUpdateOperation, $Out> {
+  MemberListUpdateUpdateOperationCopyWith<
+    $R,
+    MemberListUpdateUpdateOperation,
+    $Out
+  >
+  get $asMemberListUpdateUpdateOperation => $base.as(
+    (v, t, t2) =>
+        _MemberListUpdateUpdateOperationCopyWithImpl<$R, $Out>(v, t, t2),
+  );
+}
+
+abstract class MemberListUpdateUpdateOperationCopyWith<
+  $R,
+  $In extends MemberListUpdateUpdateOperation,
+  $Out
+>
+    implements MemberListUpdateOperationCopyWith<$R, $In, $Out> {
+  GuildMemberListUpdateItemCopyWith<
+    $R,
+    GuildMemberListUpdateItem,
+    GuildMemberListUpdateItem
+  >
+  get item;
+  @override
+  $R call({int? index, GuildMemberListUpdateItem? item});
+  MemberListUpdateUpdateOperationCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  );
+}
+
+class _MemberListUpdateUpdateOperationCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, MemberListUpdateUpdateOperation, $Out>
+    implements
+        MemberListUpdateUpdateOperationCopyWith<
+          $R,
+          MemberListUpdateUpdateOperation,
+          $Out
+        > {
+  _MemberListUpdateUpdateOperationCopyWithImpl(
+    super.value,
+    super.then,
+    super.then2,
+  );
+
+  @override
+  late final ClassMapperBase<MemberListUpdateUpdateOperation> $mapper =
+      MemberListUpdateUpdateOperationMapper.ensureInitialized();
+  @override
+  GuildMemberListUpdateItemCopyWith<
+    $R,
+    GuildMemberListUpdateItem,
+    GuildMemberListUpdateItem
+  >
+  get item => $value.item.copyWith.$chain((v) => call(item: v));
+  @override
+  $R call({int? index, GuildMemberListUpdateItem? item}) => $apply(
+    FieldCopyWithData({
+      if (index != null) #index: index,
+      if (item != null) #item: item,
+    }),
+  );
+  @override
+  MemberListUpdateUpdateOperation $make(CopyWithData data) =>
+      MemberListUpdateUpdateOperation(
+        index: data.get(#index, or: $value.index),
+        item: data.get(#item, or: $value.item),
+      );
+
+  @override
+  MemberListUpdateUpdateOperationCopyWith<
+    $R2,
+    MemberListUpdateUpdateOperation,
+    $Out2
+  >
+  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
+      _MemberListUpdateUpdateOperationCopyWithImpl<$R2, $Out2>(
+        $value,
+        $cast,
+        t,
+      );
+}
+
+class MemberListUpdateDeleteOperationMapper
+    extends SubClassMapperBase<MemberListUpdateDeleteOperation> {
+  MemberListUpdateDeleteOperationMapper._();
+
+  static MemberListUpdateDeleteOperationMapper? _instance;
+  static MemberListUpdateDeleteOperationMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(
+        _instance = MemberListUpdateDeleteOperationMapper._(),
+      );
+      MemberListUpdateOperationMapper.ensureInitialized().addSubMapper(
+        _instance!,
+      );
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'MemberListUpdateDeleteOperation';
+
+  static int _$index(MemberListUpdateDeleteOperation v) => v.index;
+  static const Field<MemberListUpdateDeleteOperation, int> _f$index = Field(
+    'index',
+    _$index,
+  );
+
+  @override
+  final MappableFields<MemberListUpdateDeleteOperation> fields = const {
+    #index: _f$index,
+  };
+
+  @override
+  final String discriminatorKey = 'op';
+  @override
+  final dynamic discriminatorValue = 'DELETE';
+  @override
+  late final ClassMapperBase superMapper =
+      MemberListUpdateOperationMapper.ensureInitialized();
+
+  static MemberListUpdateDeleteOperation _instantiate(DecodingData data) {
+    return MemberListUpdateDeleteOperation(index: data.dec(_f$index));
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static MemberListUpdateDeleteOperation fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<MemberListUpdateDeleteOperation>(map);
+  }
+
+  static MemberListUpdateDeleteOperation fromJson(String json) {
+    return ensureInitialized().decodeJson<MemberListUpdateDeleteOperation>(
+      json,
+    );
+  }
+}
+
+mixin MemberListUpdateDeleteOperationMappable {
+  String toJson() {
+    return MemberListUpdateDeleteOperationMapper.ensureInitialized()
+        .encodeJson<MemberListUpdateDeleteOperation>(
+          this as MemberListUpdateDeleteOperation,
+        );
+  }
+
+  Map<String, dynamic> toMap() {
+    return MemberListUpdateDeleteOperationMapper.ensureInitialized()
+        .encodeMap<MemberListUpdateDeleteOperation>(
+          this as MemberListUpdateDeleteOperation,
+        );
+  }
+
+  MemberListUpdateDeleteOperationCopyWith<
+    MemberListUpdateDeleteOperation,
+    MemberListUpdateDeleteOperation,
+    MemberListUpdateDeleteOperation
+  >
+  get copyWith =>
+      _MemberListUpdateDeleteOperationCopyWithImpl<
+        MemberListUpdateDeleteOperation,
+        MemberListUpdateDeleteOperation
+      >(this as MemberListUpdateDeleteOperation, $identity, $identity);
+  @override
+  String toString() {
+    return MemberListUpdateDeleteOperationMapper.ensureInitialized()
+        .stringifyValue(this as MemberListUpdateDeleteOperation);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return MemberListUpdateDeleteOperationMapper.ensureInitialized()
+        .equalsValue(this as MemberListUpdateDeleteOperation, other);
+  }
+
+  @override
+  int get hashCode {
+    return MemberListUpdateDeleteOperationMapper.ensureInitialized().hashValue(
+      this as MemberListUpdateDeleteOperation,
+    );
+  }
+}
+
+extension MemberListUpdateDeleteOperationValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, MemberListUpdateDeleteOperation, $Out> {
+  MemberListUpdateDeleteOperationCopyWith<
+    $R,
+    MemberListUpdateDeleteOperation,
+    $Out
+  >
+  get $asMemberListUpdateDeleteOperation => $base.as(
+    (v, t, t2) =>
+        _MemberListUpdateDeleteOperationCopyWithImpl<$R, $Out>(v, t, t2),
+  );
+}
+
+abstract class MemberListUpdateDeleteOperationCopyWith<
+  $R,
+  $In extends MemberListUpdateDeleteOperation,
+  $Out
+>
+    implements MemberListUpdateOperationCopyWith<$R, $In, $Out> {
+  @override
+  $R call({int? index});
+  MemberListUpdateDeleteOperationCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  );
+}
+
+class _MemberListUpdateDeleteOperationCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, MemberListUpdateDeleteOperation, $Out>
+    implements
+        MemberListUpdateDeleteOperationCopyWith<
+          $R,
+          MemberListUpdateDeleteOperation,
+          $Out
+        > {
+  _MemberListUpdateDeleteOperationCopyWithImpl(
+    super.value,
+    super.then,
+    super.then2,
+  );
+
+  @override
+  late final ClassMapperBase<MemberListUpdateDeleteOperation> $mapper =
+      MemberListUpdateDeleteOperationMapper.ensureInitialized();
+  @override
+  $R call({int? index}) =>
+      $apply(FieldCopyWithData({if (index != null) #index: index}));
+  @override
+  MemberListUpdateDeleteOperation $make(CopyWithData data) =>
+      MemberListUpdateDeleteOperation(
+        index: data.get(#index, or: $value.index),
+      );
+
+  @override
+  MemberListUpdateDeleteOperationCopyWith<
+    $R2,
+    MemberListUpdateDeleteOperation,
+    $Out2
+  >
+  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
+      _MemberListUpdateDeleteOperationCopyWithImpl<$R2, $Out2>(
+        $value,
+        $cast,
+        t,
+      );
+}
+
+class MemberListUpdateInvalidateOperationMapper
+    extends SubClassMapperBase<MemberListUpdateInvalidateOperation> {
+  MemberListUpdateInvalidateOperationMapper._();
+
+  static MemberListUpdateInvalidateOperationMapper? _instance;
+  static MemberListUpdateInvalidateOperationMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(
+        _instance = MemberListUpdateInvalidateOperationMapper._(),
+      );
+      MemberListUpdateOperationMapper.ensureInitialized().addSubMapper(
+        _instance!,
+      );
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'MemberListUpdateInvalidateOperation';
+
+  static List<int> _$range(MemberListUpdateInvalidateOperation v) => v.range;
+  static const Field<MemberListUpdateInvalidateOperation, List<int>> _f$range =
+      Field('range', _$range);
+
+  @override
+  final MappableFields<MemberListUpdateInvalidateOperation> fields = const {
+    #range: _f$range,
+  };
+
+  @override
+  final String discriminatorKey = 'op';
+  @override
+  final dynamic discriminatorValue = 'INVALIDATE';
+  @override
+  late final ClassMapperBase superMapper =
+      MemberListUpdateOperationMapper.ensureInitialized();
+
+  static MemberListUpdateInvalidateOperation _instantiate(DecodingData data) {
+    return MemberListUpdateInvalidateOperation(range: data.dec(_f$range));
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static MemberListUpdateInvalidateOperation fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<MemberListUpdateInvalidateOperation>(
+      map,
+    );
+  }
+
+  static MemberListUpdateInvalidateOperation fromJson(String json) {
+    return ensureInitialized().decodeJson<MemberListUpdateInvalidateOperation>(
+      json,
+    );
+  }
+}
+
+mixin MemberListUpdateInvalidateOperationMappable {
+  String toJson() {
+    return MemberListUpdateInvalidateOperationMapper.ensureInitialized()
+        .encodeJson<MemberListUpdateInvalidateOperation>(
+          this as MemberListUpdateInvalidateOperation,
+        );
+  }
+
+  Map<String, dynamic> toMap() {
+    return MemberListUpdateInvalidateOperationMapper.ensureInitialized()
+        .encodeMap<MemberListUpdateInvalidateOperation>(
+          this as MemberListUpdateInvalidateOperation,
+        );
+  }
+
+  MemberListUpdateInvalidateOperationCopyWith<
+    MemberListUpdateInvalidateOperation,
+    MemberListUpdateInvalidateOperation,
+    MemberListUpdateInvalidateOperation
+  >
+  get copyWith =>
+      _MemberListUpdateInvalidateOperationCopyWithImpl<
+        MemberListUpdateInvalidateOperation,
+        MemberListUpdateInvalidateOperation
+      >(this as MemberListUpdateInvalidateOperation, $identity, $identity);
+  @override
+  String toString() {
+    return MemberListUpdateInvalidateOperationMapper.ensureInitialized()
+        .stringifyValue(this as MemberListUpdateInvalidateOperation);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return MemberListUpdateInvalidateOperationMapper.ensureInitialized()
+        .equalsValue(this as MemberListUpdateInvalidateOperation, other);
+  }
+
+  @override
+  int get hashCode {
+    return MemberListUpdateInvalidateOperationMapper.ensureInitialized()
+        .hashValue(this as MemberListUpdateInvalidateOperation);
+  }
+}
+
+extension MemberListUpdateInvalidateOperationValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, MemberListUpdateInvalidateOperation, $Out> {
+  MemberListUpdateInvalidateOperationCopyWith<
+    $R,
+    MemberListUpdateInvalidateOperation,
+    $Out
+  >
+  get $asMemberListUpdateInvalidateOperation => $base.as(
+    (v, t, t2) =>
+        _MemberListUpdateInvalidateOperationCopyWithImpl<$R, $Out>(v, t, t2),
+  );
+}
+
+abstract class MemberListUpdateInvalidateOperationCopyWith<
+  $R,
+  $In extends MemberListUpdateInvalidateOperation,
+  $Out
+>
+    implements MemberListUpdateOperationCopyWith<$R, $In, $Out> {
+  ListCopyWith<$R, int, ObjectCopyWith<$R, int, int>> get range;
+  @override
+  $R call({List<int>? range});
+  MemberListUpdateInvalidateOperationCopyWith<$R2, $In, $Out2>
+  $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+}
+
+class _MemberListUpdateInvalidateOperationCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, MemberListUpdateInvalidateOperation, $Out>
+    implements
+        MemberListUpdateInvalidateOperationCopyWith<
+          $R,
+          MemberListUpdateInvalidateOperation,
+          $Out
+        > {
+  _MemberListUpdateInvalidateOperationCopyWithImpl(
+    super.value,
+    super.then,
+    super.then2,
+  );
+
+  @override
+  late final ClassMapperBase<MemberListUpdateInvalidateOperation> $mapper =
+      MemberListUpdateInvalidateOperationMapper.ensureInitialized();
+  @override
+  ListCopyWith<$R, int, ObjectCopyWith<$R, int, int>> get range => ListCopyWith(
+    $value.range,
+    (v, t) => ObjectCopyWith(v, $identity, t),
+    (v) => call(range: v),
+  );
+  @override
+  $R call({List<int>? range}) =>
+      $apply(FieldCopyWithData({if (range != null) #range: range}));
+  @override
+  MemberListUpdateInvalidateOperation $make(CopyWithData data) =>
+      MemberListUpdateInvalidateOperation(
+        range: data.get(#range, or: $value.range),
+      );
+
+  @override
+  MemberListUpdateInvalidateOperationCopyWith<
+    $R2,
+    MemberListUpdateInvalidateOperation,
+    $Out2
+  >
+  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
+      _MemberListUpdateInvalidateOperationCopyWithImpl<$R2, $Out2>(
+        $value,
+        $cast,
+        t,
+      );
 }
 

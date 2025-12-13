@@ -1,4 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:firebridge/src/models/gateway/opcode.dart';
 import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/models/guild/member.dart';
 import 'package:firebridge/src/models/gateway/event.dart';
@@ -72,29 +73,56 @@ class GuildMemberListGroup with GuildMemberListGroupMappable {
   });
 }
 
-@MappableClass(hook: MemberListUpdateOperationHook())
-class MemberListUpdateOperation with MemberListUpdateOperationMappable {
-  final MemberListUpdateType type;
-  final dynamic data;
-  final int? index;
-  final List<int>? range;
-
-  MemberListUpdateOperation({
-    required this.type,
-    required this.data,
-    this.index,
-    this.range,
-  });
+@MappableClass(discriminatorKey: 'op')
+abstract class MemberListUpdateOperation
+    with MemberListUpdateOperationMappable {
+  const MemberListUpdateOperation();
 }
 
-@MappableEnum(caseStyle: CaseStyle.upperSnakeCase)
-enum MemberListUpdateType {
-  sync,
-  update,
-  delete,
-  insert,
-  invalidate,
-  unknown,
+@MappableClass(discriminatorValue: 'SYNC')
+class MemberListUpdateSyncOperation extends MemberListUpdateOperation
+    with MemberListUpdateSyncOperationMappable {
+  final List<GuildMemberListUpdateItem> items;
+  final List<int> range;
+
+  const MemberListUpdateSyncOperation(
+      {required this.items, required this.range});
+}
+
+@MappableClass(discriminatorValue: 'INSERT')
+class MemberListUpdateInsertOperation extends MemberListUpdateOperation
+    with MemberListUpdateInsertOperationMappable {
+  final int index;
+  final GuildMemberListUpdateItem item;
+
+  const MemberListUpdateInsertOperation(
+      {required this.index, required this.item});
+}
+
+@MappableClass(discriminatorValue: 'UPDATE')
+class MemberListUpdateUpdateOperation extends MemberListUpdateOperation
+    with MemberListUpdateUpdateOperationMappable {
+  final int index;
+  final GuildMemberListUpdateItem item;
+
+  const MemberListUpdateUpdateOperation(
+      {required this.index, required this.item});
+}
+
+@MappableClass(discriminatorValue: 'DELETE')
+class MemberListUpdateDeleteOperation extends MemberListUpdateOperation
+    with MemberListUpdateDeleteOperationMappable {
+  final int index;
+
+  const MemberListUpdateDeleteOperation({required this.index});
+}
+
+@MappableClass(discriminatorValue: 'INVALIDATE')
+class MemberListUpdateInvalidateOperation extends MemberListUpdateOperation
+    with MemberListUpdateInvalidateOperationMappable {
+  final List<int> range;
+
+  const MemberListUpdateInvalidateOperation({required this.range});
 }
 
 @MappableClass()
@@ -103,31 +131,4 @@ class GuildMemberListUpdateItem with GuildMemberListUpdateItemMappable {
   final Member? member;
 
   const GuildMemberListUpdateItem({this.group, this.member});
-}
-
-class MemberListUpdateOperationHook extends MappingHook {
-  const MemberListUpdateOperationHook();
-
-  @override
-  Object? beforeDecode(Object? value) {
-    if (value is Map<String, dynamic>) {
-      final newMap = Map<String, dynamic>.from(value);
-      newMap['type'] = value['op'];
-
-      final typeStr = value['op'] as String;
-      if (typeStr == 'SYNC') {
-        final items = value['items'] as List;
-        newMap['data'] = items
-            .map((e) => GuildMemberListUpdateItemMapper.fromMap(
-                e as Map<String, dynamic>))
-            .toList();
-      } else if (typeStr == 'INSERT' || typeStr == 'UPDATE') {
-        final item = value['item'] as Map<String, dynamic>;
-        newMap['data'] = GuildMemberListUpdateItemMapper.fromMap(item);
-      }
-
-      return newMap;
-    }
-    return value;
-  }
 }
