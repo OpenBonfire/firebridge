@@ -1,5 +1,5 @@
 import 'package:mocktail/mocktail.dart';
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import '../../../mocks/client.dart';
@@ -35,9 +35,11 @@ void checkVoiceState(VoiceState state) {
   expect(state.isStreaming, isFalse);
   expect(state.isVideoEnabled, isFalse);
   expect(state.isSuppressed, isFalse);
-  expect(state.requestedToSpeakAt, equals(DateTime.utc(2021, 3, 31, 18, 45, 31, 297, 561)));
+  expect(state.requestedToSpeakAt,
+      equals(DateTime.utc(2021, 3, 31, 18, 45, 31, 297, 561)));
   expect(state.member, isNotNull);
-  checkMemberNoUser(state.member!, expectedUserId: Snowflake(80351110224678912));
+  checkMemberNoUser(state.member!,
+      expectedUserId: Snowflake(80351110224678912));
 }
 
 final sampleVoiceRegion = {
@@ -58,12 +60,13 @@ void checkVoiceRegion(VoiceRegion region) {
 
 void main() {
   group('VoiceManager', () {
-    late MockNyxx client;
+    late MockFirebridge client;
     late VoiceManager manager;
 
     setUp(() {
-      client = MockNyxx();
-      when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
+      client = MockFirebridge();
+      when(() => client.apiOptions)
+          .thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
       when(() => client.options).thenReturn(RestClientOptions());
 
       manager = VoiceManager(client);

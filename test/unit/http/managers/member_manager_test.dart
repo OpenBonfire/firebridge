@@ -1,4 +1,4 @@
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import '../../../test_manager.dart';
@@ -23,7 +23,8 @@ final sampleMember = {
   "user": sampleUser,
 };
 
-void checkMemberNoUser(Member member, {Snowflake expectedUserId = const Snowflake(80351110224678912)}) {
+void checkMemberNoUser(Member member,
+    {Snowflake expectedUserId = const Snowflake(80351110224678912)}) {
   expect(member.id, equals(expectedUserId));
   expect(member.nick, equals('NOT API SUPPORT'));
   expect(member.avatarHash, isNull);
@@ -39,7 +40,8 @@ void checkMemberNoUser(Member member, {Snowflake expectedUserId = const Snowflak
   expect(member.bannerHash, equals('a_coolHashDude'));
 }
 
-void checkMember(Member member, {Snowflake expectedUserId = const Snowflake(80351110224678912)}) {
+void checkMember(Member member,
+    {Snowflake expectedUserId = const Snowflake(80351110224678912)}) {
   checkMemberNoUser(member, expectedUserId: expectedUserId);
 
   expect(member.user, isNotNull);
@@ -84,7 +86,8 @@ void main() {
         method: 'PATCH',
         source: sampleMember,
         urlMatcher: '/guilds/0/members/@me',
-        execute: (manager) => manager.updateCurrentMember(CurrentMemberUpdateBuilder()),
+        execute: (manager) =>
+            manager.updateCurrentMember(CurrentMemberUpdateBuilder()),
         check: checkMember,
       ),
       EndpointTest<MemberManager, void, void>(
@@ -100,11 +103,13 @@ void main() {
         method: 'DELETE',
         source: null,
         urlMatcher: '/guilds/0/members/0/roles/0',
-        execute: (manager) => manager.removeRole(Snowflake.zero, Snowflake.zero),
+        execute: (manager) =>
+            manager.removeRole(Snowflake.zero, Snowflake.zero),
         check: (_) {},
       ),
     ],
-    createBuilder: MemberBuilder(accessToken: 'TEST_ACCESS_TOKEN', userId: Snowflake.zero),
+    createBuilder:
+        MemberBuilder(accessToken: 'TEST_ACCESS_TOKEN', userId: Snowflake.zero),
     updateBuilder: MemberUpdateBuilder(),
   );
 }

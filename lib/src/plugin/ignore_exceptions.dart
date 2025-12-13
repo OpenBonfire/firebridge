@@ -1,14 +1,14 @@
 import 'dart:isolate';
 
 import 'package:logging/logging.dart';
-import 'package:nyxx/src/client.dart';
-import 'package:nyxx/src/plugin/plugin.dart';
+import 'package:firebridge/src/client.dart';
+import 'package:firebridge/src/plugin/plugin.dart';
 
 /// A global instance of the [IgnoreExceptions] plugin.
 final ignoreExceptions = IgnoreExceptions();
 
 /// A plugin that prevents errors from crashing the program, instead logging them to the console.
-class IgnoreExceptions extends NyxxPlugin {
+class IgnoreExceptions extends FirebridgePlugin {
   @override
   String get name => 'IgnoreExceptions';
 
@@ -26,7 +26,8 @@ class IgnoreExceptions extends NyxxPlugin {
 
     _errorPort = ReceivePort();
     _errorPort!.listen((err) {
-      final stackTrace = err[1] != null ? StackTrace.fromString(err[1] as String) : null;
+      final stackTrace =
+          err[1] != null ? StackTrace.fromString(err[1] as String) : null;
       final message = err[0] as String;
 
       logger.shout('Unhandled exception was thrown', message, stackTrace);
@@ -52,7 +53,7 @@ class IgnoreExceptions extends NyxxPlugin {
   }
 
   @override
-  void afterConnect(Nyxx client) {
+  void afterConnect(Firebridge client) {
     _clients++;
     _listenIfNeeded();
   }

@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:mocktail/mocktail.dart';
 import 'package:nock/nock.dart';
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import '../../mocks/client.dart';
@@ -26,12 +26,16 @@ void main() {
   group('HttpHandler', () {
     group('execute', () {
       test('can make basic requests', () async {
-        final client = MockNyxx();
-        when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'test token'));
+        final client = MockFirebridge();
+        when(() => client.apiOptions)
+            .thenReturn(RestApiOptions(token: 'test token'));
         when(() => client.options).thenReturn(RestClientOptions());
         final handler = HttpHandler(client);
 
-        final interceptor = nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get('/test')..reply(200, jsonEncode({'message': 'success'}));
+        final interceptor =
+            nock('https://discord.com/api/v${client.apiOptions.apiVersion}')
+                .get('/test')
+              ..reply(200, jsonEncode({'message': 'success'}));
 
         final route = HttpRoute()..test();
         final request = BasicRequest(route);
@@ -45,14 +49,18 @@ void main() {
       });
 
       test('returns the correct response type', () async {
-        final client = MockNyxx();
-        when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'test token'));
+        final client = MockFirebridge();
+        when(() => client.apiOptions)
+            .thenReturn(RestApiOptions(token: 'test token'));
         when(() => client.options).thenReturn(RestClientOptions());
         final handler = HttpHandler(client);
 
-        final scope = nock('https://discord.com/api/v${client.apiOptions.apiVersion}');
-        final successInterceptor = scope.get('/succeed')..reply(200, jsonEncode({'message': 'success'}));
-        final failureInterceptor = scope.get('/fail')..reply(400, jsonEncode({'message': 'failure'}));
+        final scope =
+            nock('https://discord.com/api/v${client.apiOptions.apiVersion}');
+        final successInterceptor = scope.get('/succeed')
+          ..reply(200, jsonEncode({'message': 'success'}));
+        final failureInterceptor = scope.get('/fail')
+          ..reply(400, jsonEncode({'message': 'failure'}));
 
         final successRequest = BasicRequest(HttpRoute()..succeed());
         final failureRequest = BasicRequest(HttpRoute()..fail());
@@ -69,8 +77,9 @@ void main() {
     });
 
     test('executeSafe throws on request failure', () async {
-      final client = MockNyxx();
-      when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'test token'));
+      final client = MockFirebridge();
+      when(() => client.apiOptions)
+          .thenReturn(RestApiOptions(token: 'test token'));
       when(() => client.options).thenReturn(RestClientOptions());
       final handler = HttpHandler(client);
 
@@ -81,18 +90,23 @@ void main() {
       final successRequest = BasicRequest(HttpRoute()..succeed());
       final failureRequest = BasicRequest(HttpRoute()..fail());
 
-      expect(handler.executeSafe(successRequest), completion(isA<HttpResponseSuccess>()));
-      expect(() => handler.executeSafe(failureRequest), throwsA(isA<HttpResponseError>()));
+      expect(handler.executeSafe(successRequest),
+          completion(isA<HttpResponseSuccess>()));
+      expect(() => handler.executeSafe(failureRequest),
+          throwsA(isA<HttpResponseError>()));
     });
 
     group('rate limits', () {
       test('creates buckets from headers', () async {
-        final client = MockNyxx();
-        when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'test token'));
+        final client = MockFirebridge();
+        when(() => client.apiOptions)
+            .thenReturn(RestApiOptions(token: 'test token'));
         when(() => client.options).thenReturn(RestClientOptions());
         final handler = HttpHandler(client);
 
-        nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get('/test').reply(
+        nock('https://discord.com/api/v${client.apiOptions.apiVersion}')
+            .get('/test')
+            .reply(
           200,
           jsonEncode({'message': 'success'}),
           headers: {
@@ -113,12 +127,15 @@ void main() {
       });
 
       test('hold requests when rate limit might be exceeded', () async {
-        final client = MockNyxx();
-        when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'test token'));
+        final client = MockFirebridge();
+        when(() => client.apiOptions)
+            .thenReturn(RestApiOptions(token: 'test token'));
         when(() => client.options).thenReturn(RestClientOptions());
         final handler = HttpHandler(client);
 
-        nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get('/test').reply(
+        nock('https://discord.com/api/v${client.apiOptions.apiVersion}')
+            .get('/test')
+            .reply(
           200,
           jsonEncode({'message': 'success'}),
           headers: {
@@ -136,7 +153,9 @@ void main() {
 
         // Only add handler after 4 seconds. If the second request runs before this, an error will be thrown.
         Timer(const Duration(seconds: 4), () {
-          nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get('/test').reply(
+          nock('https://discord.com/api/v${client.apiOptions.apiVersion}')
+              .get('/test')
+              .reply(
             200,
             jsonEncode({'message': 'success'}),
             headers: {
@@ -149,19 +168,27 @@ void main() {
           );
         });
 
-        expect(handler.onRateLimit.where((event) => event.isAnticipated), emits(predicate((_) => true)));
+        expect(handler.onRateLimit.where((event) => event.isAnticipated),
+            emits(predicate((_) => true)));
         expect(handler.execute(request), completes);
       });
 
       test('update on 429 response', () async {
-        final client = MockNyxx();
-        when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'test token'));
+        final client = MockFirebridge();
+        when(() => client.apiOptions)
+            .thenReturn(RestApiOptions(token: 'test token'));
         when(() => client.options).thenReturn(RestClientOptions());
         final handler = HttpHandler(client);
 
-        nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get('/test').reply(
+        nock('https://discord.com/api/v${client.apiOptions.apiVersion}')
+            .get('/test')
+            .reply(
           429,
-          jsonEncode({"message": "You are being rate limited.", "retry_after": 5.0, "global": false}),
+          jsonEncode({
+            "message": "You are being rate limited.",
+            "retry_after": 5.0,
+            "global": false
+          }),
           headers: {
             HttpBucket.xRateLimitBucket: 'testBucketId',
             HttpBucket.xRateLimitLimit: '20',
@@ -174,7 +201,9 @@ void main() {
         final request = BasicRequest(HttpRoute()..test());
 
         Timer(const Duration(seconds: 4), () {
-          nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get('/test').reply(
+          nock('https://discord.com/api/v${client.apiOptions.apiVersion}')
+              .get('/test')
+              .reply(
             200,
             jsonEncode({'message': 'success'}),
             headers: {
@@ -187,14 +216,16 @@ void main() {
           );
         });
 
-        expect(handler.onRateLimit.where((event) => !event.isAnticipated), emits(predicate((_) => true)));
+        expect(handler.onRateLimit.where((event) => !event.isAnticipated),
+            emits(predicate((_) => true)));
 
         await expectLater(
           handler.execute(request),
           completion(
             allOf(
               isA<HttpResponseSuccess>(),
-              predicate<HttpResponseSuccess>((response) => response.statusCode == 200),
+              predicate<HttpResponseSuccess>(
+                  (response) => response.statusCode == 200),
             ),
           ),
         );
@@ -203,14 +234,21 @@ void main() {
       });
 
       test('handles global rate limit', () async {
-        final client = MockNyxx();
-        when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'test token'));
+        final client = MockFirebridge();
+        when(() => client.apiOptions)
+            .thenReturn(RestApiOptions(token: 'test token'));
         when(() => client.options).thenReturn(RestClientOptions());
         final handler = HttpHandler(client);
 
-        nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get('/test').reply(
+        nock('https://discord.com/api/v${client.apiOptions.apiVersion}')
+            .get('/test')
+            .reply(
           429,
-          jsonEncode({"message": "You are being rate limited.", "retry_after": 5.0, "global": true}),
+          jsonEncode({
+            "message": "You are being rate limited.",
+            "retry_after": 5.0,
+            "global": true
+          }),
           headers: {
             HttpBucket.xRateLimitBucket: 'testBucketId',
             HttpBucket.xRateLimitLimit: '20',
@@ -223,7 +261,9 @@ void main() {
         final request = BasicRequest(HttpRoute()..test());
 
         Timer(const Duration(seconds: 4), () {
-          nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get('/test').reply(
+          nock('https://discord.com/api/v${client.apiOptions.apiVersion}')
+              .get('/test')
+              .reply(
             200,
             jsonEncode({'message': 'success'}),
             headers: {
@@ -236,14 +276,16 @@ void main() {
           );
         });
 
-        expect(handler.onRateLimit.where((event) => event.isGlobal), emits(predicate((_) => true)));
+        expect(handler.onRateLimit.where((event) => event.isGlobal),
+            emits(predicate((_) => true)));
 
         await expectLater(
           handler.execute(request),
           completion(
             allOf(
               isA<HttpResponseSuccess>(),
-              predicate<HttpResponseSuccess>((response) => response.statusCode == 200),
+              predicate<HttpResponseSuccess>(
+                  (response) => response.statusCode == 200),
             ),
           ),
         );
@@ -252,16 +294,23 @@ void main() {
       });
 
       test('handles batch request rate limits', () async {
-        final client = MockNyxx();
-        when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'test token'));
+        final client = MockFirebridge();
+        when(() => client.apiOptions)
+            .thenReturn(RestApiOptions(token: 'test token'));
         when(() => client.options).thenReturn(RestClientOptions());
         final handler = HttpHandler(client);
 
-        for (final duration in [Duration.zero, Duration(seconds: 4), Duration(seconds: 9)]) {
+        for (final duration in [
+          Duration.zero,
+          Duration(seconds: 4),
+          Duration(seconds: 9)
+        ]) {
           Timer(duration, () {
             // Accept 5 requests
             for (int i = 0; i < 5; i++) {
-              nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get('/test').reply(
+              nock('https://discord.com/api/v${client.apiOptions.apiVersion}')
+                  .get('/test')
+                  .reply(
                 200,
                 jsonEncode({'message': 'success'}),
                 headers: {
@@ -280,17 +329,21 @@ void main() {
         await Future.delayed(Duration(milliseconds: 1));
 
         // One request to populate bucket information
-        await handler.executeSafe(BasicRequest(HttpRoute()..test(), headers: {'count': 'first'}));
+        await handler.executeSafe(
+            BasicRequest(HttpRoute()..test(), headers: {'count': 'first'}));
 
         for (int i = 0; i < 14; i++) {
-          handler.executeSafe(BasicRequest(HttpRoute()..test(), headers: {'count': i.toString()}));
+          handler.executeSafe(BasicRequest(HttpRoute()..test(),
+              headers: {'count': i.toString()}));
         }
 
         // Test should take 15 seconds (3 batches of 5 second limits) + some small amount of processing time.
         // We need to close the handler so the call to toList below completes.
         Timer(Duration(seconds: 16), () => handler.close());
 
-        final list = await handler.onResponse.where((event) => event.statusCode == 429).toList();
+        final list = await handler.onResponse
+            .where((event) => event.statusCode == 429)
+            .toList();
 
         expect(list, isEmpty);
       });

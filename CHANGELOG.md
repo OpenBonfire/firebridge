@@ -231,7 +231,7 @@ __16.09.2023__
 - feat: Added `HttpHandler.onRateLimit` for tracking client rate limiting. ([`#532`](https://github.com/nyxx-discord/nyxx/pull/532)) - ([`76209f8`](https://github.com/nyxx-discord/nyxx/commit/76209f8c0c4cf267ff96de7f67354625c607bc2a))
 - feat: Parse emoji in reaction events. ([`#533`](https://github.com/nyxx-discord/nyxx/pull/533)) - ([`9d79001`](https://github.com/nyxx-discord/nyxx/commit/9d790014fb7b5c77cb3982253e57d1b96253e898))
 - feat: Allow specifying `stdout` and `stderr` in `Logging`. ([`#549`](https://github.com/nyxx-discord/nyxx/pull/549)) - ([`cf5c17d`](https://github.com/nyxx-discord/nyxx/commit/cf5c17debddd7b021c26ab02a98d5c2c3d550ab7))
-- feat: Add `NyxxRest.user` to get the current user. ([`#551`](https://github.com/nyxx-discord/nyxx/pull/551)) - ([`18bafed`](https://github.com/nyxx-discord/nyxx/commit/18bafed50f24a5028e46845f26418b3b854a902e))
+- feat: Add `FirebridgeRest.user` to get the current user. ([`#551`](https://github.com/nyxx-discord/nyxx/pull/551)) - ([`18bafed`](https://github.com/nyxx-discord/nyxx/commit/18bafed50f24a5028e46845f26418b3b854a902e))
 - feat: `Attachment` now implements `CdnAsset` for easier fetching. ([`#547`](https://github.com/nyxx-discord/nyxx/pull/547)) - ([`e1d7679`](https://github.com/nyxx-discord/nyxx/commit/e1d7679c6e1e650154d778e42e18e23f7fb5b049))
 - bug: Fixed emoji in SelectMenuBuilder not being sent correctly. ([`#528`](https://github.com/nyxx-discord/nyxx/pull/528)) - ([`e4f62ab`](https://github.com/nyxx-discord/nyxx/commit/e4f62ab6187df6c3be9440ab68d8c501b296f31c))
 - bug: Fixed parsing members in interaction data.  - 

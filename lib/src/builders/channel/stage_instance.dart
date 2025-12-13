@@ -1,7 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/builders/builder.dart';
-import 'package:nyxx/src/models/channel/stage_instance.dart';
-import 'package:nyxx/src/models/snowflake.dart';
+import 'package:firebridge/src/builders/builder.dart';
+import 'package:firebridge/src/models/channel/stage_instance.dart';
+import 'package:firebridge/src/models/snowflake.dart';
 
 part 'stage_instance.mapper.dart';
 

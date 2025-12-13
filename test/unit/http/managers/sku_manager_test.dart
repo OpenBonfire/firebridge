@@ -1,4 +1,4 @@
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import '../../../test_manager.dart';
@@ -30,7 +30,8 @@ void checkSku(Sku sku) {
 void main() {
   testReadOnlyManager<Sku, SkuManager>(
     'SkuManager',
-    (config, client) => SkuManager(config, client, applicationId: Snowflake.zero),
+    (config, client) =>
+        SkuManager(config, client, applicationId: Snowflake.zero),
     '/applications/0/skus',
     sampleObject: sampleSku,
     fetchObjectOverride: [sampleSku],

@@ -2,13 +2,14 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:isolate';
 
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 void main() {
   final testToken = Platform.environment['TEST_TOKEN'];
 
-  test('client.close() disposes all async resources', skip: testToken != null ? false : 'No test token provided', () async {
+  test('client.close() disposes all async resources',
+      skip: testToken != null ? false : 'No test token provided', () async {
     final receivePort = ReceivePort();
 
     Future<void> createAndDisposeClient(SendPort sendPort) async {
@@ -16,10 +17,12 @@ void main() {
       final testToken = Platform.environment['TEST_TOKEN'];
       final testGuild = Platform.environment['TEST_GUILD'];
 
-      final client = await Nyxx.connectGatewayWithOptions(GatewayApiOptions(
+      final client =
+          await Firebridge.connectGatewayWithOptions(GatewayApiOptions(
         token: testToken!,
         intents: GatewayIntents.allUnprivileged,
-        totalShards: 10, // Use many shards to ensure the client is still connecting some shards when we close it.
+        totalShards:
+            10, // Use many shards to ensure the client is still connecting some shards when we close it.
       ));
 
       final user = await client.user.get();
@@ -28,7 +31,8 @@ void main() {
 
       // Queue many shard messages to ensure the rate limiter schedules them at a later time.
       for (int i = 0; i < 200; i++) {
-        client.gateway.updatePresence(PresenceBuilder(status: CurrentUserStatus.online, isAfk: false));
+        client.gateway.updatePresence(
+            PresenceBuilder(status: CurrentUserStatus.online, isAfk: false));
       }
 
       // Get a handle to all async resources exposed on the client.
@@ -37,12 +41,16 @@ void main() {
       final clientEvents = client.onEvent.listen((_) {});
       final gatewayMessages = client.gateway.messages.listen((_) {});
       final gatewayEvents = client.gateway.events.listen((_) {});
-      final membersStream = (testGuild == null ? Stream.empty() : client.gateway.listGuildMembers(Snowflake.parse(testGuild))).listen((_) {});
+      final membersStream = (testGuild == null
+              ? Stream.empty()
+              : client.gateway.listGuildMembers(Snowflake.parse(testGuild)))
+          .listen((_) {});
       final shards = [
         for (final shard in client.gateway.shards) shard.listen((_) {}),
       ];
       final shardReceiveStreams = [
-        for (final shard in client.gateway.shards) shard.receiveStream.listen((_) {}),
+        for (final shard in client.gateway.shards)
+          shard.receiveStream.listen((_) {}),
       ];
       final requests = client.httpHandler.onRequest.listen((_) {});
       final responses = client.httpHandler.onResponse.listen((_) {});
@@ -100,7 +108,9 @@ void main() {
       sendPort.send('done');
     }
 
-    final isolate = await Isolate.spawn(createAndDisposeClient, receivePort.sendPort, paused: true);
+    final isolate = await Isolate.spawn(
+        createAndDisposeClient, receivePort.sendPort,
+        paused: true);
     isolate.addOnExitListener(receivePort.sendPort, response: 'exited');
     isolate.resume(isolate.pauseCapability!);
 
@@ -152,7 +162,8 @@ void main() {
         // If isDone is false, then we didn't properly dispose of all async resources and left some "hanging", so
         // awaiting them caused the isolate to exit prematurely.
         // This also fails the test if the isolate exits because of an error.
-        expect(isDone, isTrue, reason: 'isolate entrypoint should run to completion');
+        expect(isDone, isTrue,
+            reason: 'isolate entrypoint should run to completion');
       }
     });
 

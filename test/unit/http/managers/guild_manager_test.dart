@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import '../../../test_manager.dart';
@@ -71,8 +71,10 @@ void checkGuild(Guild guild) {
   expect(guild.isWidgetEnabled, isTrue);
   expect(guild.widgetChannelId, isNull);
   expect(guild.verificationLevel, equals(VerificationLevel.high));
-  expect(guild.defaultMessageNotificationLevel, equals(MessageNotificationLevel.onlyMentions));
-  expect(guild.explicitContentFilterLevel, equals(ExplicitContentFilterLevel.allMembers));
+  expect(guild.defaultMessageNotificationLevel,
+      equals(MessageNotificationLevel.onlyMentions));
+  expect(guild.explicitContentFilterLevel,
+      equals(ExplicitContentFilterLevel.allMembers));
   expect(
     guild.features,
     equals(
@@ -95,7 +97,8 @@ void checkGuild(Guild guild) {
   expect(guild.maxPresences, equals(40000));
   expect(guild.maxMembers, equals(250000));
   expect(guild.vanityUrlCode, equals('discord-testers'));
-  expect(guild.description, equals('The official place to report Discord Bugs!'));
+  expect(
+      guild.description, equals('The official place to report Discord Bugs!'));
   expect(guild.bannerHash, equals('9b6439a7de04f1d26af92f84ac9e1e4a'));
   expect(guild.premiumTier, equals(PremiumTier.three));
   expect(guild.premiumSubscriptionCount, equals(33));
@@ -201,8 +204,10 @@ void checkGuild2(Guild guild) {
   expect(guild.isWidgetEnabled, isTrue);
   expect(guild.widgetChannelId, Snowflake(639513352485470208));
   expect(guild.verificationLevel, equals(VerificationLevel.none));
-  expect(guild.defaultMessageNotificationLevel, equals(MessageNotificationLevel.onlyMentions));
-  expect(guild.explicitContentFilterLevel, equals(ExplicitContentFilterLevel.disabled));
+  expect(guild.defaultMessageNotificationLevel,
+      equals(MessageNotificationLevel.onlyMentions));
+  expect(guild.explicitContentFilterLevel,
+      equals(ExplicitContentFilterLevel.disabled));
   expect(
     guild.features,
     equals(
@@ -239,26 +244,54 @@ void checkGuild2(Guild guild) {
 }
 
 final sampleWelcomeScreen = {
-  "description": "Discord Developers is a place to learn about Discord's API, bots, and SDKs and integrations. This is NOT a general Discord support server.",
+  "description":
+      "Discord Developers is a place to learn about Discord's API, bots, and SDKs and integrations. This is NOT a general Discord support server.",
   "welcome_channels": [
-    {"channel_id": "697138785317814292", "description": "Follow for official Discord API updates", "emoji_id": null, "emoji_name": "📡"},
-    {"channel_id": "697236247739105340", "description": "Get help with Bot Verifications", "emoji_id": null, "emoji_name": "📸"},
-    {"channel_id": "697489244649816084", "description": "Create amazing things with Discord's API", "emoji_id": null, "emoji_name": "🔬"},
-    {"channel_id": "613425918748131338", "description": "Integrate Discord into your game", "emoji_id": null, "emoji_name": "🎮"},
-    {"channel_id": "646517734150242346", "description": "Find more places to help you on your quest", "emoji_id": null, "emoji_name": "🔦"}
+    {
+      "channel_id": "697138785317814292",
+      "description": "Follow for official Discord API updates",
+      "emoji_id": null,
+      "emoji_name": "📡"
+    },
+    {
+      "channel_id": "697236247739105340",
+      "description": "Get help with Bot Verifications",
+      "emoji_id": null,
+      "emoji_name": "📸"
+    },
+    {
+      "channel_id": "697489244649816084",
+      "description": "Create amazing things with Discord's API",
+      "emoji_id": null,
+      "emoji_name": "🔬"
+    },
+    {
+      "channel_id": "613425918748131338",
+      "description": "Integrate Discord into your game",
+      "emoji_id": null,
+      "emoji_name": "🎮"
+    },
+    {
+      "channel_id": "646517734150242346",
+      "description": "Find more places to help you on your quest",
+      "emoji_id": null,
+      "emoji_name": "🔦"
+    }
   ]
 };
 
 void checkWelcomeScreen(WelcomeScreen screen) {
   expect(
     screen.description,
-    equals("Discord Developers is a place to learn about Discord's API, bots, and SDKs and integrations. This is NOT a general Discord support server."),
+    equals(
+        "Discord Developers is a place to learn about Discord's API, bots, and SDKs and integrations. This is NOT a general Discord support server."),
   );
 
   expect(screen.channels, hasLength(5));
 
   expect(screen.channels[0].channelId, equals(Snowflake(697138785317814292)));
-  expect(screen.channels[0].description, equals('Follow for official Discord API updates'));
+  expect(screen.channels[0].description,
+      equals('Follow for official Discord API updates'));
   expect(screen.channels[0].emojiId, isNull);
   expect(screen.channels[0].emojiName, equals('📡'));
 }
@@ -308,10 +341,14 @@ void checkGuildPreview(GuildPreview preview) {
   );
   expect(preview.approximateMemberCount, equals(60814));
   expect(preview.approximatePresenceCount, equals(20034));
-  expect(preview.description, equals('The official place to report Discord Bugs!'));
+  expect(preview.description,
+      equals('The official place to report Discord Bugs!'));
 }
 
-final sampleWidgetSettings = {"enabled": true, "channel_id": "41771983444115456"};
+final sampleWidgetSettings = {
+  "enabled": true,
+  "channel_id": "41771983444115456"
+};
 
 void checkWidgetSettings(WidgetSettings settings) {
   expect(settings.isEnabled, isTrue);
@@ -353,7 +390,13 @@ void checkGuildWidget(GuildWidget widget) {
 
 final sampleBan = {
   "reason": "mentioning b1nzy",
-  "user": {"username": "Mason", "discriminator": "9999", "id": "53908099506183680", "avatar": "a_bab14f271d565501444b2ca3be944b25", "public_flags": 131141}
+  "user": {
+    "username": "Mason",
+    "discriminator": "9999",
+    "id": "53908099506183680",
+    "avatar": "a_bab14f271d565501444b2ca3be944b25",
+    "public_flags": 131141
+  }
 };
 
 void checkBan(Ban ban) {
@@ -372,7 +415,11 @@ final sampleOnboarding = {
           "id": "1067461047608422476",
           "title": "Chat with Friends",
           "description": "",
-          "emoji": {"id": "1070002302032826408", "name": "chat", "animated": false},
+          "emoji": {
+            "id": "1070002302032826408",
+            "name": "chat",
+            "animated": false
+          },
           "role_ids": [],
           "channel_ids": ["962007075288916001"]
         },
@@ -444,7 +491,13 @@ final sampleGuildTemplate = {
   "description": "",
   "usage_count": 49605,
   "creator_id": "132837293881950208",
-  "creator": {"id": "132837293881950208", "username": "hoges", "avatar": "79b0d9f8c340f2d43e1f78b09f175b62", "discriminator": "0001", "public_flags": 129},
+  "creator": {
+    "id": "132837293881950208",
+    "username": "hoges",
+    "avatar": "79b0d9f8c340f2d43e1f78b09f175b62",
+    "discriminator": "0001",
+    "public_flags": 129
+  },
   "created_at": "2020-04-02T21:10:38+00:00",
   "updated_at": "2020-05-01T17:57:38+00:00",
   "source_guild_id": "678070694164299796",
@@ -601,7 +654,8 @@ void main() {
         source: sampleGuildText,
         method: 'POST',
         urlMatcher: '/guilds/0/channels',
-        execute: (manager) => manager.createGuildChannel(Snowflake.zero, GuildTextChannelBuilder(name: 'test')),
+        execute: (manager) => manager.createGuildChannel(
+            Snowflake.zero, GuildTextChannelBuilder(name: 'test')),
         check: checkGuildText,
       ),
       EndpointTest<GuildManager, void, void>(
@@ -609,7 +663,8 @@ void main() {
         source: null,
         method: 'PATCH',
         urlMatcher: '/guilds/0/channels',
-        execute: (manager) => manager.updateChannelPositions(Snowflake.zero, []),
+        execute: (manager) =>
+            manager.updateChannelPositions(Snowflake.zero, []),
         check: (_) {},
       ),
       EndpointTest<GuildManager, ThreadList, Map<String, Object?>>(
@@ -658,7 +713,8 @@ void main() {
         method: 'POST',
         source: {'level': 0},
         urlMatcher: '/guilds/0/mfa',
-        execute: (manager) => manager.updateMfaLevel(Snowflake.zero, MfaLevel.none),
+        execute: (manager) =>
+            manager.updateMfaLevel(Snowflake.zero, MfaLevel.none),
         check: (level) => expect(level, equals(MfaLevel.none)),
       ),
       EndpointTest<GuildManager, int, Map<String, Object?>>(
@@ -699,7 +755,8 @@ void main() {
         method: 'PATCH',
         source: sampleWidgetSettings,
         urlMatcher: '/guilds/0/widget',
-        execute: (manager) => manager.updateWidgetSettings(Snowflake.zero, WidgetSettingsUpdateBuilder()),
+        execute: (manager) => manager.updateWidgetSettings(
+            Snowflake.zero, WidgetSettingsUpdateBuilder()),
         check: checkWidgetSettings,
       ),
       EndpointTest<GuildManager, GuildWidget, Map<String, Object?>>(
@@ -733,7 +790,8 @@ void main() {
         method: 'PATCH',
         source: sampleWelcomeScreen,
         urlMatcher: '/guilds/0/welcome-screen',
-        execute: (manager) => manager.updateWelcomeScreen(Snowflake.zero, WelcomeScreenUpdateBuilder()),
+        execute: (manager) => manager.updateWelcomeScreen(
+            Snowflake.zero, WelcomeScreenUpdateBuilder()),
         check: checkWelcomeScreen,
       ),
       EndpointTest<GuildManager, Onboarding, Map<String, Object?>>(
@@ -764,7 +822,8 @@ void main() {
         method: 'PATCH',
         source: null,
         urlMatcher: '/guilds/0/voice-states/@me',
-        execute: (manager) => manager.updateCurrentUserVoiceState(Snowflake.zero, CurrentUserVoiceStateUpdateBuilder()),
+        execute: (manager) => manager.updateCurrentUserVoiceState(
+            Snowflake.zero, CurrentUserVoiceStateUpdateBuilder()),
         check: (_) {},
       ),
       EndpointTest<GuildManager, void, void>(
@@ -772,7 +831,8 @@ void main() {
         method: 'PATCH',
         source: null,
         urlMatcher: '/guilds/0/voice-states/0',
-        execute: (manager) => manager.updateVoiceState(Snowflake.zero, Snowflake.zero, VoiceStateUpdateBuilder()),
+        execute: (manager) => manager.updateVoiceState(
+            Snowflake.zero, Snowflake.zero, VoiceStateUpdateBuilder()),
         check: (_) {},
       ),
       EndpointTest<GuildManager, GuildTemplate, Map<String, Object?>>(
@@ -787,7 +847,8 @@ void main() {
         method: 'POST',
         source: sampleGuild,
         urlMatcher: '/guilds/templates/test',
-        execute: (manager) => manager.createGuildFromTemplate('test', name: 'test guild'),
+        execute: (manager) =>
+            manager.createGuildFromTemplate('test', name: 'test guild'),
         check: checkGuild,
       ),
       EndpointTest<GuildManager, List<GuildTemplate>, List<Object?>>(
@@ -805,7 +866,8 @@ void main() {
         method: 'POST',
         source: sampleGuildTemplate,
         urlMatcher: '/guilds/0/templates',
-        execute: (manager) => manager.createGuildTemplate(Snowflake.zero, GuildTemplateBuilder(name: 'test')),
+        execute: (manager) => manager.createGuildTemplate(
+            Snowflake.zero, GuildTemplateBuilder(name: 'test')),
         check: checkGuildTemplate,
       ),
       EndpointTest<GuildManager, GuildTemplate, Map<String, Object?>>(
@@ -821,7 +883,8 @@ void main() {
         method: 'PATCH',
         source: sampleGuildTemplate,
         urlMatcher: '/guilds/0/templates/test',
-        execute: (manager) => manager.updateGuildTemplate(Snowflake.zero, 'test', GuildTemplateUpdateBuilder()),
+        execute: (manager) => manager.updateGuildTemplate(
+            Snowflake.zero, 'test', GuildTemplateUpdateBuilder()),
         check: checkGuildTemplate,
       ),
       EndpointTest<GuildManager, GuildTemplate, Map<String, Object?>>(
@@ -829,7 +892,8 @@ void main() {
         method: 'DELETE',
         source: sampleGuildTemplate,
         urlMatcher: '/guilds/0/templates/test',
-        execute: (manager) => manager.deleteGuildTemplate(Snowflake.zero, 'test'),
+        execute: (manager) =>
+            manager.deleteGuildTemplate(Snowflake.zero, 'test'),
         check: checkGuildTemplate,
       ),
       EndpointTest<GuildManager, List<Invite>, List<Object?>>(

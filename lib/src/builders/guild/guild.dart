@@ -1,14 +1,14 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/builders/builder.dart';
-import 'package:nyxx/src/builders/channel/guild_channel.dart';
-import 'package:nyxx/src/builders/image.dart';
-import 'package:nyxx/src/builders/role.dart';
-import 'package:nyxx/src/builders/sentinels.dart';
-import 'package:nyxx/src/models/channel/guild_channel.dart';
-import 'package:nyxx/src/models/guild/guild.dart';
-import 'package:nyxx/src/models/locale.dart';
-import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/utils/flags.dart';
+import 'package:firebridge/src/builders/builder.dart';
+import 'package:firebridge/src/builders/channel/guild_channel.dart';
+import 'package:firebridge/src/builders/image.dart';
+import 'package:firebridge/src/builders/role.dart';
+import 'package:firebridge/src/builders/sentinels.dart';
+import 'package:firebridge/src/models/channel/guild_channel.dart';
+import 'package:firebridge/src/models/guild/guild.dart';
+import 'package:firebridge/src/models/locale.dart';
+import 'package:firebridge/src/models/snowflake.dart';
+import 'package:firebridge/src/utils/flags.dart';
 
 part 'guild.mapper.dart';
 

@@ -1,6 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/models/application.dart';
-import 'package:nyxx/src/models/user/user.dart';
+import 'package:firebridge/src/models/application.dart';
+import 'package:firebridge/src/models/user/user.dart';
 
 part 'oauth2.mapper.dart';
 

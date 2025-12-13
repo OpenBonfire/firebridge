@@ -1,7 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/nyxx.dart';
-import 'package:nyxx/src/models/entitlement.dart';
-import 'package:nyxx/src/models/gateway/event.dart';
+import 'package:firebridge/nyxx.dart';
+import 'package:firebridge/src/models/entitlement.dart';
+import 'package:firebridge/src/models/gateway/event.dart';
 
 part 'entitlement.mapper.dart';
 

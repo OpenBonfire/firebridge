@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 
 void main() async {
-  final client = await Nyxx.connectGateway(
+  final client = await Firebridge.connectGateway(
     // Replace this line with a string containing your bot's token, or set
     // the TOKEN environment variable to your token.
     Platform.environment['TOKEN']!,
@@ -28,7 +28,8 @@ void main() async {
       // we received.
       await event.message.channel.sendMessage(MessageBuilder(
         content: 'Pong!',
-        referencedMessage: MessageReferenceBuilder.reply(messageId: event.message.id),
+        referencedMessage:
+            MessageReferenceBuilder.reply(messageId: event.message.id),
       ));
     }
   });

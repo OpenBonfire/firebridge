@@ -1,4 +1,4 @@
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import '../../../test_manager.dart';
@@ -13,7 +13,10 @@ final sampleAutoModerationRule = {
   "actions": [
     {
       "type": 1,
-      "metadata": {"custom_message": "Please keep financial discussions limited to the #finance channel"}
+      "metadata": {
+        "custom_message":
+            "Please keep financial discussions limited to the #finance channel"
+      }
     },
     {
       "type": 2,
@@ -38,14 +41,16 @@ void checkAutoModerationRule(AutoModerationRule rule) {}
 void main() {
   testManager<AutoModerationRule, AutoModerationManager>(
     'AutoModerationManager',
-    (config, client) => AutoModerationManager(config, client, guildId: Snowflake.zero),
+    (config, client) =>
+        AutoModerationManager(config, client, guildId: Snowflake.zero),
     RegExp(r'/guilds/0/auto-moderation/rules/\d+'),
     '/guilds/0/auto-moderation/rules',
     sampleObject: sampleAutoModerationRule,
     sampleMatches: checkAutoModerationRule,
     additionalParsingTests: [],
     additionalEndpointTests: [
-      EndpointTest<AutoModerationManager, List<AutoModerationRule>, List<Object?>>(
+      EndpointTest<AutoModerationManager, List<AutoModerationRule>,
+          List<Object?>>(
         name: 'list',
         source: [sampleAutoModerationRule],
         urlMatcher: '/guilds/0/auto-moderation/rules',
@@ -56,7 +61,11 @@ void main() {
         },
       ),
     ],
-    createBuilder: AutoModerationRuleBuilder(name: 'test', eventType: AutoModerationEventType.messageSend, triggerType: TriggerType.keyword, actions: []),
+    createBuilder: AutoModerationRuleBuilder(
+        name: 'test',
+        eventType: AutoModerationEventType.messageSend,
+        triggerType: TriggerType.keyword,
+        actions: []),
     updateBuilder: AutoModerationRuleUpdateBuilder(),
   );
 }

@@ -1,16 +1,16 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/builders/builder.dart';
-import 'package:nyxx/src/builders/message/allowed_mentions.dart';
-import 'package:nyxx/src/builders/message/attachment.dart';
-import 'package:nyxx/src/builders/message/component.dart';
-import 'package:nyxx/src/builders/message/embed.dart';
-import 'package:nyxx/src/builders/message/poll.dart';
-import 'package:nyxx/src/builders/sentinels.dart';
-import 'package:nyxx/src/models/message/component.dart';
-import 'package:nyxx/src/models/message/message.dart';
-import 'package:nyxx/src/models/message/reference.dart';
-import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/utils/flags.dart';
+import 'package:firebridge/src/builders/builder.dart';
+import 'package:firebridge/src/builders/message/allowed_mentions.dart';
+import 'package:firebridge/src/builders/message/attachment.dart';
+import 'package:firebridge/src/builders/message/component.dart';
+import 'package:firebridge/src/builders/message/embed.dart';
+import 'package:firebridge/src/builders/message/poll.dart';
+import 'package:firebridge/src/builders/sentinels.dart';
+import 'package:firebridge/src/models/message/component.dart';
+import 'package:firebridge/src/models/message/message.dart';
+import 'package:firebridge/src/models/message/reference.dart';
+import 'package:firebridge/src/models/snowflake.dart';
+import 'package:firebridge/src/utils/flags.dart';
 
 part 'message.mapper.dart';
 

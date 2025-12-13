@@ -1,4 +1,4 @@
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import '../../../test_manager.dart';
@@ -58,7 +58,8 @@ final sampleNitroStickerPacks = {
 void main() {
   testManager<GuildSticker, GuildStickerManager>(
     "GuildStickerManager",
-    (config, client) => GuildStickerManager(config, client, guildId: Snowflake.zero),
+    (config, client) =>
+        GuildStickerManager(config, client, guildId: Snowflake.zero),
     RegExp(r'/guilds/0/stickers/\d+'),
     '/guilds/0/stickers',
     sampleObject: sampleGuildSticker,
@@ -75,8 +76,13 @@ void main() {
     },
     additionalParsingTests: [],
     additionalEndpointTests: [],
-    createBuilder: StickerBuilder(name: "cool_sticker", description: "cool description", tags: "cool,new,tags", file: ImageBuilder(data: [], format: 'png')),
-    updateBuilder: StickerUpdateBuilder(name: "cool_new_name", tags: "cool,new,tags"),
+    createBuilder: StickerBuilder(
+        name: "cool_sticker",
+        description: "cool description",
+        tags: "cool,new,tags",
+        file: ImageBuilder(data: [], format: 'png')),
+    updateBuilder:
+        StickerUpdateBuilder(name: "cool_new_name", tags: "cool,new,tags"),
   );
 
   testReadOnlyManager<GlobalSticker, GlobalStickerManager>(
@@ -106,7 +112,8 @@ void main() {
           expect(stickerPack.stickers, hasLength(1));
         },
       ),
-      EndpointTest<GlobalStickerManager, List<StickerPack>, Map<String, Object?>>(
+      EndpointTest<GlobalStickerManager, List<StickerPack>,
+          Map<String, Object?>>(
         name: 'nitro-sticker-packs',
         source: sampleNitroStickerPacks,
         urlMatcher: '/sticker-packs',

@@ -1,12 +1,12 @@
-/// @docImport 'package:nyxx/nyxx.dart';
+/// @docImport 'package:firebridge/nyxx.dart';
 library;
 
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/models/channel/channel.dart';
-import 'package:nyxx/src/models/discord_color.dart';
-import 'package:nyxx/src/models/emoji.dart';
-import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+import 'package:firebridge/src/models/channel/channel.dart';
+import 'package:firebridge/src/models/discord_color.dart';
+import 'package:firebridge/src/models/emoji.dart';
+import 'package:firebridge/src/models/snowflake.dart';
+import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'component.mapper.dart';
 

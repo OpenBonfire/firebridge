@@ -1,11 +1,11 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/http/managers/voice_manager.dart';
-import 'package:nyxx/src/models/channel/channel.dart';
-import 'package:nyxx/src/models/guild/guild.dart';
-import 'package:nyxx/src/models/guild/member.dart';
-import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/models/user/user.dart';
-import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+import 'package:firebridge/src/http/managers/voice_manager.dart';
+import 'package:firebridge/src/models/channel/channel.dart';
+import 'package:firebridge/src/models/guild/guild.dart';
+import 'package:firebridge/src/models/guild/member.dart';
+import 'package:firebridge/src/models/snowflake.dart';
+import 'package:firebridge/src/models/user/user.dart';
+import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'voice_state.mapper.dart';
 
@@ -84,7 +84,7 @@ class VoiceState with ToStringHelper, VoiceStateMappable {
   /// Whether this user is muted.
   bool get isMuted => isServerMuted || isSelfMuted;
 
-  /// The key this voice state will have in the [NyxxRest.voice] cache.
+  /// The key this voice state will have in the [FirebridgeRest.voice] cache.
   @Deprecated('Use PartialGuild.voiceStates instead')
   Snowflake get cacheKey => Snowflake(Object.hash(guildId, userId));
 

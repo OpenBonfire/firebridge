@@ -1,5 +1,5 @@
 import 'package:mocktail/mocktail.dart';
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import '../../../mocks/client.dart';
@@ -19,7 +19,7 @@ final sampleUser = {
   "accent_color": 16711680,
   "premium_type": 1,
   "public_flags": 64,
-    "avatar_decoration_data": {
+  "avatar_decoration_data": {
     "sku_id": "1144058844004233369",
     "asset": "a_fed43ab12698df65902ba06727e20c0e"
   },
@@ -46,12 +46,16 @@ void checkSampleUser(User user) {
   expect(user.flags, equals(UserFlags(64)));
   expect(user.nitroType, equals(NitroType.classic));
   expect(user.publicFlags, equals(UserFlags(64)));
-  expect(user.avatarDecorationHash, equals('a_fed43ab12698df65902ba06727e20c0e'));
-  expect(user.avatarDecorationData!.skuId, equals(Snowflake(1144058844004233369)));
-  expect(user.primaryGuild!.identityGuildId, equals(Snowflake(80351110224678912)));
+  expect(
+      user.avatarDecorationHash, equals('a_fed43ab12698df65902ba06727e20c0e'));
+  expect(
+      user.avatarDecorationData!.skuId, equals(Snowflake(1144058844004233369)));
+  expect(
+      user.primaryGuild!.identityGuildId, equals(Snowflake(80351110224678912)));
   expect(user.primaryGuild!.isIdentityEnabled, isTrue);
   expect(user.primaryGuild!.tag, equals('CUTE'));
-  expect(user.primaryGuild!.badgeHash, equals('0fcf9a436df1a4b0de5644d3d42188e2'));
+  expect(
+      user.primaryGuild!.badgeHash, equals('0fcf9a436df1a4b0de5644d3d42188e2'));
 }
 
 final sampleConnection = {
@@ -129,7 +133,15 @@ void main() {
             'icon': null,
             'owner': false,
             'permissions': '533130099674816',
-            'features': ['COMMUNITY', 'INVITE_SPLASH', 'DISCOVERABLE', 'WELCOME_SCREEN_ENABLED', 'VERIFIED', 'VANITY_URL', 'NEWS']
+            'features': [
+              'COMMUNITY',
+              'INVITE_SPLASH',
+              'DISCOVERABLE',
+              'WELCOME_SCREEN_ENABLED',
+              'VERIFIED',
+              'VANITY_URL',
+              'NEWS'
+            ]
           }
         ],
         urlMatcher: '/users/@me/guilds',
@@ -158,7 +170,7 @@ void main() {
         urlMatcher: '/users/@me/guilds/0/member',
         execute: (manager) => manager.fetchCurrentUserMember(Snowflake.zero),
         check: (member) {
-          final client = MockNyxx();
+          final client = MockFirebridge();
           when(() => client.options).thenReturn(RestClientOptions());
 
           checkMemberNoUser(member, expectedUserId: client.user.id);
@@ -198,19 +210,24 @@ void main() {
           checkSampleConnection(connections.single);
         },
       ),
-      EndpointTest<UserManager, ApplicationRoleConnection, Map<String, Object?>>(
+      EndpointTest<UserManager, ApplicationRoleConnection,
+          Map<String, Object?>>(
         name: 'fetchCurrentUserApplicationRoleConnection',
         source: sampleApplicationRoleConnection,
         urlMatcher: '/users/@me/applications/0/role-connection',
-        execute: (manager) => manager.fetchCurrentUserApplicationRoleConnection(Snowflake.zero),
+        execute: (manager) =>
+            manager.fetchCurrentUserApplicationRoleConnection(Snowflake.zero),
         check: checkApplicationRoleConnection,
       ),
-      EndpointTest<UserManager, ApplicationRoleConnection, Map<String, Object?>>(
+      EndpointTest<UserManager, ApplicationRoleConnection,
+          Map<String, Object?>>(
         name: 'updateCurrentUserApplicationRoleConnection',
         method: 'PUT',
         source: sampleApplicationRoleConnection,
         urlMatcher: '/users/@me/applications/0/role-connection',
-        execute: (manager) => manager.updateCurrentUserApplicationRoleConnection(Snowflake.zero, ApplicationRoleConnectionUpdateBuilder()),
+        execute: (manager) =>
+            manager.updateCurrentUserApplicationRoleConnection(
+                Snowflake.zero, ApplicationRoleConnectionUpdateBuilder()),
         check: checkApplicationRoleConnection,
       ),
     ],

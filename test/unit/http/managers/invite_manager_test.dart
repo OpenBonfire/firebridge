@@ -1,5 +1,5 @@
 import 'package:mocktail/mocktail.dart';
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import '../../../mocks/client.dart';
@@ -23,9 +23,21 @@ final sampleInvite = {
     "premium_subscription_count": 5
   },
   "channel": {"id": "165176875973476352", "name": "illuminati", "type": 0},
-  "inviter": {"id": "115590097100865541", "username": "speed", "avatar": "deadbeef", "discriminator": "7653", "public_flags": 131328},
+  "inviter": {
+    "id": "115590097100865541",
+    "username": "speed",
+    "avatar": "deadbeef",
+    "discriminator": "7653",
+    "public_flags": 131328
+  },
   "target_type": 1,
-  "target_user": {"id": "165176875973476352", "username": "bob", "avatar": "deadbeef", "discriminator": "1234", "public_flags": 64}
+  "target_user": {
+    "id": "165176875973476352",
+    "username": "bob",
+    "avatar": "deadbeef",
+    "discriminator": "1234",
+    "public_flags": 64
+  }
 };
 
 void checkInvite(Invite invite) {
@@ -59,12 +71,13 @@ void checkInviteWithMetadata(InviteWithMetadata invite) {
 
 void main() {
   group('InviteManager', () {
-    late MockNyxx client;
+    late MockFirebridge client;
     late InviteManager manager;
 
     setUp(() {
-      client = MockNyxx();
-      when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
+      client = MockFirebridge();
+      when(() => client.apiOptions)
+          .thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
       when(() => client.options).thenReturn(RestClientOptions());
 
       manager = InviteManager(client);

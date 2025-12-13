@@ -1,5 +1,5 @@
 import 'package:mocktail/mocktail.dart';
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import '../../mocks/handler.dart';
@@ -43,13 +43,18 @@ void main() {
 
         // We're testing code with timings. Assume that up to 500ms lag could occur between the two calls.
         const expectedDuration = Duration(seconds: 17, milliseconds: 500);
-        expect(bucket?.resetAfter.inMilliseconds, closeTo(expectedDuration.inMilliseconds, 500));
-        expect(bucket?.resetAt.millisecondsSinceEpoch, closeTo(DateTime.now().add(expectedDuration).millisecondsSinceEpoch, 500));
+        expect(bucket?.resetAfter.inMilliseconds,
+            closeTo(expectedDuration.inMilliseconds, 500));
+        expect(
+            bucket?.resetAt.millisecondsSinceEpoch,
+            closeTo(DateTime.now().add(expectedDuration).millisecondsSinceEpoch,
+                500));
       });
     });
 
     test('updates correctly with updateWith', () {
-      final bucket = HttpBucket(MockHttpHandler(), id: 'testBucketId', remaining: 100, resetAt: DateTime(2000));
+      final bucket = HttpBucket(MockHttpHandler(),
+          id: 'testBucketId', remaining: 100, resetAt: DateTime(2000));
       final response = MockPackageHttpResponse();
 
       when(() => response.headers).thenReturn({
@@ -63,25 +68,35 @@ void main() {
       bucket.updateWith(response);
 
       expect(bucket.remaining, equals(10));
-      expect(bucket.resetAt.millisecondsSinceEpoch, closeTo(DateTime.now().add(const Duration(seconds: 100)).millisecondsSinceEpoch, 500));
+      expect(
+          bucket.resetAt.millisecondsSinceEpoch,
+          closeTo(
+              DateTime.now()
+                  .add(const Duration(seconds: 100))
+                  .millisecondsSinceEpoch,
+              500));
     });
 
     test('contains', () {
-      final bucket = HttpBucket(MockHttpHandler(), id: 'testBucketId', remaining: 100, resetAt: DateTime(2000));
+      final bucket = HttpBucket(MockHttpHandler(),
+          id: 'testBucketId', remaining: 100, resetAt: DateTime(2000));
 
       final response = MockPackageHttpResponse();
-      when(() => response.headers).thenReturn({HttpBucket.xRateLimitBucket: 'testBucketId'});
+      when(() => response.headers)
+          .thenReturn({HttpBucket.xRateLimitBucket: 'testBucketId'});
 
       expect(bucket.contains(response), isTrue);
 
       final response2 = MockPackageHttpResponse();
-      when(() => response2.headers).thenReturn({HttpBucket.xRateLimitBucket: 'aDifferentId'});
+      when(() => response2.headers)
+          .thenReturn({HttpBucket.xRateLimitBucket: 'aDifferentId'});
 
       expect(bucket.contains(response2), isFalse);
     });
 
     test('accounts for in-flight requests', () {
-      final bucket = HttpBucket(MockHttpHandler(), id: 'testBucketId', remaining: 100, resetAt: DateTime(2000));
+      final bucket = HttpBucket(MockHttpHandler(),
+          id: 'testBucketId', remaining: 100, resetAt: DateTime(2000));
 
       expect(bucket.remaining, equals(100));
 

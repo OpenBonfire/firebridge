@@ -1,5 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/http/route.dart';
+import 'package:firebridge/src/http/route.dart';
 
 part 'cdn_asset.mapper.dart';
 

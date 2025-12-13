@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:path/path.dart' as path_lib;
 
-import 'package:nyxx/src/builders/builder.dart';
-import 'package:nyxx/src/models/message/attachment.dart';
+import 'package:firebridge/src/builders/builder.dart';
+import 'package:firebridge/src/models/message/attachment.dart';
 
 part 'attachment.mapper.dart';
 

@@ -1,5 +1,5 @@
-import 'package:nyxx/src/http/managers/manager.dart';
-import 'package:nyxx/src/models/commands/application_command.dart';
+import 'package:firebridge/src/http/managers/manager.dart';
+import 'package:firebridge/src/models/commands/application_command.dart';
 
 /// A [Manager] for [ApplicationCommand]s.
 ///

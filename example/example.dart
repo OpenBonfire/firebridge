@@ -1,9 +1,8 @@
-import 'package:nyxx/nyxx.dart';
-import 'package:nyxx/src/models/common_hooks.dart';
+import 'package:firebridge/nyxx.dart';
 
 void main() async {
-  initNyxxMappers();
-  final client = await Nyxx.connectGateway(
+  Firebridge.ensureInitialized();
+  final client = await Firebridge.connectGateway(
     "",
     GatewayIntents.allUnprivileged,
     options: GatewayClientOptions(plugins: [logging, cliIntegration]),

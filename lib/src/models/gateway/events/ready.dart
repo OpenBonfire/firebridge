@@ -1,18 +1,18 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/models/channel/types/dm.dart';
-import 'package:nyxx/src/models/gateway/event.dart';
-import 'package:nyxx/src/models/gateway/events/presence.dart';
-import 'package:nyxx/src/models/gateway/opcode.dart';
-import 'package:nyxx/src/models/guild/guild.dart';
-import 'package:nyxx/src/models/guild/user_guild_settings.dart';
-import 'package:nyxx/src/models/notifications/notification_settings.dart';
-import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/models/user/auth.dart';
-import 'package:nyxx/src/models/user/relationship.dart';
-import 'package:nyxx/src/models/user/session.dart';
-import 'package:nyxx/src/models/user/settings/read_state.dart';
-import 'package:nyxx/src/models/user/settings/user_settings.dart';
-import 'package:nyxx/src/models/user/user.dart';
+import 'package:firebridge/src/models/channel/types/dm.dart';
+import 'package:firebridge/src/models/gateway/event.dart';
+import 'package:firebridge/src/models/gateway/events/presence.dart';
+import 'package:firebridge/src/models/gateway/opcode.dart';
+import 'package:firebridge/src/models/guild/guild.dart';
+import 'package:firebridge/src/models/guild/user_guild_settings.dart';
+import 'package:firebridge/src/models/notifications/notification_settings.dart';
+import 'package:firebridge/src/models/snowflake.dart';
+import 'package:firebridge/src/models/user/auth.dart';
+import 'package:firebridge/src/models/user/relationship.dart';
+import 'package:firebridge/src/models/user/session.dart';
+import 'package:firebridge/src/models/user/settings/read_state.dart';
+import 'package:firebridge/src/models/user/settings/user_settings.dart';
+import 'package:firebridge/src/models/user/user.dart';
 
 part 'ready.mapper.dart';
 

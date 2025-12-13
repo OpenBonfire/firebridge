@@ -1,5 +1,5 @@
 import 'package:mocktail/mocktail.dart';
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import '../../../mocks/client.dart';
@@ -29,7 +29,13 @@ final sampleApplication = {
     }
   },
   "name": "Baba O-Riley",
-  "owner": {"avatar": null, "discriminator": "1738", "flags": 1024, "id": "172150183260323840", "username": "i own a bot"},
+  "owner": {
+    "avatar": null,
+    "discriminator": "1738",
+    "flags": 1024,
+    "id": "172150183260323840",
+    "username": "i own a bot"
+  },
   "primary_sku_id": "172150183260323840",
   "slug": "test",
   "summary": "",
@@ -42,7 +48,12 @@ final sampleApplication = {
         "permissions": ["*"],
         "team_id": "531992624043786253",
         "role": "admin",
-        "user": {"avatar": "d9e261cd35999608eb7e3de1fae3688b", "discriminator": "0001", "id": "511972282709709995", "username": "Mr Owner"}
+        "user": {
+          "avatar": "d9e261cd35999608eb7e3de1fae3688b",
+          "discriminator": "0001",
+          "id": "511972282709709995",
+          "username": "Mr Owner"
+        }
       }
     ],
 
@@ -50,7 +61,8 @@ final sampleApplication = {
     "name": "test team",
     "owner_user_id": "0",
   },
-  "verify_key": "1e0a356058d627ca38a5c8c9648818061d49e49bd9da9e3ab17d98ad4d6bg2u8"
+  "verify_key":
+      "1e0a356058d627ca38a5c8c9648818061d49e49bd9da9e3ab17d98ad4d6bg2u8"
 };
 
 void checkApplication(Application application) {
@@ -64,22 +76,34 @@ void checkApplication(Application application) {
   expect(application.termsOfServiceUrl, isNull);
   expect(application.privacyPolicyUrl, isNull);
   expect(application.owner?.id, equals(Snowflake(172150183260323840)));
-  expect(application.verifyKey, equals('1e0a356058d627ca38a5c8c9648818061d49e49bd9da9e3ab17d98ad4d6bg2u8'));
+  expect(
+      application.verifyKey,
+      equals(
+          '1e0a356058d627ca38a5c8c9648818061d49e49bd9da9e3ab17d98ad4d6bg2u8'));
   expect(application.team?.id, equals(Snowflake(531992624043786253)));
   expect(application.guildId, equals(Snowflake(290926798626357260)));
   expect(application.primarySkuId, equals(Snowflake(172150183260323840)));
   expect(application.slug, equals('test'));
-  expect(application.coverImageHash, equals('31deabb7e45b6c8ecfef77d2f99c81a5'));
+  expect(
+      application.coverImageHash, equals('31deabb7e45b6c8ecfef77d2f99c81a5'));
   expect(application.flags, equals(ApplicationFlags(0)));
   expect(application.tags, isNull);
   expect(application.installationParameters, isNull);
   expect(application.customInstallUrl, isNull);
   expect(application.roleConnectionsVerificationUrl, isNull);
-  expect(application.integrationTypesConfig?[ApplicationIntegrationType.guildInstall], isNotNull);
-  expect(application.integrationTypesConfig![ApplicationIntegrationType.guildInstall]!, (ApplicationIntegrationTypeConfiguration config) {
+  expect(
+      application
+          .integrationTypesConfig?[ApplicationIntegrationType.guildInstall],
+      isNotNull);
+  expect(
+      application
+          .integrationTypesConfig![ApplicationIntegrationType.guildInstall]!,
+      (ApplicationIntegrationTypeConfiguration config) {
     expect(config.oauth2InstallParameters, isNotNull);
-    expect(config.oauth2InstallParameters!.scopes, equals(["applications.commands", "bot"]));
-    expect(config.oauth2InstallParameters!.permissions, equals(Permissions(2048)));
+    expect(config.oauth2InstallParameters!.scopes,
+        equals(["applications.commands", "bot"]));
+    expect(
+        config.oauth2InstallParameters!.permissions, equals(Permissions(2048)));
     return true;
   });
 }
@@ -103,8 +127,9 @@ void checkRoleConnectionMetadata(ApplicationRoleConnectionMetadata metadata) {
 void main() {
   group('ApplicationManager', () {
     test('parse', () {
-      final client = MockNyxx();
-      when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
+      final client = MockFirebridge();
+      when(() => client.apiOptions)
+          .thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
       when(() => client.options).thenReturn(RestClientOptions());
 
       ParsingTest<ApplicationManager, Application, Map<String, Object?>>(
@@ -116,11 +141,13 @@ void main() {
     });
 
     test('parseApplicationRoleConnectionMetadata', () {
-      final client = MockNyxx();
-      when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
+      final client = MockFirebridge();
+      when(() => client.apiOptions)
+          .thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
       when(() => client.options).thenReturn(RestClientOptions());
 
-      ParsingTest<ApplicationManager, ApplicationRoleConnectionMetadata, Map<String, Object?>>(
+      ParsingTest<ApplicationManager, ApplicationRoleConnectionMetadata,
+          Map<String, Object?>>(
         name: 'parseApplicationRoleConnectionMetadata',
         source: sampleRoleConnectionMetadata,
         parse: (manager) => manager.parseApplicationRoleConnectionMetadata,
@@ -131,7 +158,8 @@ void main() {
     testEndpoint(
       '/applications/0/role-connections/metadata',
       name: 'fetchApplicationRoleConnectionMetadata',
-      (client) => client.applications.fetchApplicationRoleConnectionMetadata(Snowflake.zero),
+      (client) => client.applications
+          .fetchApplicationRoleConnectionMetadata(Snowflake.zero),
       response: [sampleRoleConnectionMetadata],
     );
 
@@ -139,7 +167,8 @@ void main() {
       '/applications/0/role-connections/metadata',
       method: 'PUT',
       name: 'updateApplicationRoleConnectionMetadata',
-      (client) => client.applications.updateApplicationRoleConnectionMetadata(Snowflake.zero),
+      (client) => client.applications
+          .updateApplicationRoleConnectionMetadata(Snowflake.zero),
       response: [sampleRoleConnectionMetadata],
     );
 
@@ -152,7 +181,8 @@ void main() {
     testEndpoint(
       '/applications/@me',
       method: 'PATCH',
-      (client) => client.applications.updateCurrentApplication(ApplicationUpdateBuilder()),
+      (client) => client.applications
+          .updateCurrentApplication(ApplicationUpdateBuilder()),
       response: sampleApplication,
     );
   });

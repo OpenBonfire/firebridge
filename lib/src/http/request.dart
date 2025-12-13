@@ -1,7 +1,7 @@
 import 'package:http/http.dart' hide MultipartRequest;
 import 'package:http/http.dart' as http show MultipartRequest;
-import 'package:nyxx/src/client.dart';
-import 'package:nyxx/src/http/route.dart';
+import 'package:firebridge/src/client.dart';
+import 'package:firebridge/src/http/route.dart';
 
 /// An HTTP request to be made against the API.
 ///
@@ -64,17 +64,18 @@ abstract class HttpRequest {
   /// Transform this [HttpRequest] into a [BaseRequest] to be sent.
   ///
   /// The [client] will be used for authentication if authentication is enabled for this request.
-  BaseRequest prepare(Nyxx client);
+  BaseRequest prepare(Firebridge client);
 
-  Uri _getUri(Nyxx client) => Uri.https(
+  Uri _getUri(Firebridge client) => Uri.https(
         client.apiOptions.host,
         client.apiOptions.baseUri + route.path,
         queryParameters.isNotEmpty ? queryParameters : null,
       );
 
-  Map<String, String> _getHeaders(Nyxx client) => {
+  Map<String, String> _getHeaders(Firebridge client) => {
         userAgent: client.apiOptions.userAgent,
-        if (auditLogReason != null) xAuditLogReason: Uri.encodeComponent(auditLogReason!),
+        if (auditLogReason != null)
+          xAuditLogReason: Uri.encodeComponent(auditLogReason!),
         if (authenticated) authorization: client.apiOptions.authorizationHeader,
         ...headers,
       };
@@ -106,7 +107,7 @@ class BasicRequest extends HttpRequest {
   });
 
   @override
-  Request prepare(Nyxx client) {
+  Request prepare(Firebridge client) {
     final request = Request(method, _getUri(client));
     request.headers.addAll(_getHeaders(client));
 
@@ -140,7 +141,7 @@ class FormDataRequest extends HttpRequest {
   });
 
   @override
-  http.MultipartRequest prepare(Nyxx client) {
+  http.MultipartRequest prepare(Firebridge client) {
     final request = http.MultipartRequest(method, _getUri(client));
     request
       ..headers.addAll(_getHeaders(client))
@@ -164,5 +165,7 @@ class MultipartRequest extends FormDataRequest {
     super.headers,
     super.method,
     super.queryParameters,
-  }) : super(formParams: jsonPayload != null ? {'payload_json': jsonPayload} : {});
+  }) : super(
+            formParams:
+                jsonPayload != null ? {'payload_json': jsonPayload} : {});
 }

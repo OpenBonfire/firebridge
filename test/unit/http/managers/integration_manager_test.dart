@@ -1,4 +1,4 @@
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import '../../../test_manager.dart';
@@ -37,7 +37,8 @@ void checkIntegration(Integration integration) {
 void main() {
   testReadOnlyManager<Integration, IntegrationManager>(
     'IntegrationManager',
-    (config, client) => IntegrationManager(config, client, guildId: Snowflake.zero),
+    (config, client) =>
+        IntegrationManager(config, client, guildId: Snowflake.zero),
     '/guilds/0/integrations',
     sampleObject: sampleIntegration,
     sampleMatches: checkIntegration,

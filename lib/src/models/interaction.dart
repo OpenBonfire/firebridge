@@ -1,20 +1,20 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/builders/interaction_response.dart';
-import 'package:nyxx/src/models/application.dart';
-import 'package:nyxx/src/models/channel/channel.dart';
-import 'package:nyxx/src/models/commands/application_command.dart';
-import 'package:nyxx/src/models/commands/application_command_option.dart';
-import 'package:nyxx/src/models/entitlement.dart';
-import 'package:nyxx/src/models/guild/member.dart';
-import 'package:nyxx/src/models/locale.dart';
-import 'package:nyxx/src/models/message/attachment.dart';
-import 'package:nyxx/src/models/message/component.dart';
-import 'package:nyxx/src/models/message/message.dart';
-import 'package:nyxx/src/models/permissions.dart';
-import 'package:nyxx/src/models/role.dart';
-import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/models/user/user.dart';
-import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+import 'package:firebridge/src/builders/interaction_response.dart';
+import 'package:firebridge/src/models/application.dart';
+import 'package:firebridge/src/models/channel/channel.dart';
+import 'package:firebridge/src/models/commands/application_command.dart';
+import 'package:firebridge/src/models/commands/application_command_option.dart';
+import 'package:firebridge/src/models/entitlement.dart';
+import 'package:firebridge/src/models/guild/member.dart';
+import 'package:firebridge/src/models/locale.dart';
+import 'package:firebridge/src/models/message/attachment.dart';
+import 'package:firebridge/src/models/message/component.dart';
+import 'package:firebridge/src/models/message/message.dart';
+import 'package:firebridge/src/models/permissions.dart';
+import 'package:firebridge/src/models/role.dart';
+import 'package:firebridge/src/models/snowflake.dart';
+import 'package:firebridge/src/models/user/user.dart';
+import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'interaction.mapper.dart';
 

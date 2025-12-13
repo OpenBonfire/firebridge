@@ -1,4 +1,4 @@
-import 'package:nyxx/src/utils/flags.dart';
+import 'package:firebridge/src/utils/flags.dart';
 
 /// Flags used to set the intents when opening a Gateway session.
 class GatewayIntents extends Flags<GatewayIntents> {
@@ -21,7 +21,8 @@ class GatewayIntents extends Flags<GatewayIntents> {
   static const directMessageTyping = Flag<GatewayIntents>.fromOffset(14);
   static const messageContent = Flag<GatewayIntents>.fromOffset(15);
   static const guildScheduledEvents = Flag<GatewayIntents>.fromOffset(16);
-  static const autoModerationConfiguration = Flag<GatewayIntents>.fromOffset(20);
+  static const autoModerationConfiguration =
+      Flag<GatewayIntents>.fromOffset(20);
   static const autoModerationExecution = Flag<GatewayIntents>.fromOffset(21);
   static const guildMessagePolls = Flag<GatewayIntents>.fromOffset(24);
   static const directMessagePolls = Flag<GatewayIntents>.fromOffset(25);

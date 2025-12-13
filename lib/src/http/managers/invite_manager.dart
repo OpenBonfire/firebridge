@@ -1,14 +1,14 @@
-import 'package:nyxx/src/client.dart';
-import 'package:nyxx/src/http/request.dart';
-import 'package:nyxx/src/http/route.dart';
-import 'package:nyxx/src/models/invite/invite.dart';
-import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/utils/cache_helpers.dart';
+import 'package:firebridge/src/client.dart';
+import 'package:firebridge/src/http/request.dart';
+import 'package:firebridge/src/http/route.dart';
+import 'package:firebridge/src/models/invite/invite.dart';
+import 'package:firebridge/src/models/snowflake.dart';
+import 'package:firebridge/src/utils/cache_helpers.dart';
 
 /// A manager for [Invite]s.
 class InviteManager {
   /// The client this [InviteManager] is for.
-  final NyxxRest client;
+  final FirebridgeRest client;
 
   /// Create a new [InviteManager].
   InviteManager(this.client);

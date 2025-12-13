@@ -1,31 +1,31 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/models/application.dart';
-import 'package:nyxx/src/models/channel/channel.dart';
-import 'package:nyxx/src/models/discord_color.dart';
-import 'package:nyxx/src/models/emoji.dart';
-import 'package:nyxx/src/models/entitlement.dart';
-import 'package:nyxx/src/models/gateway/event.dart';
-import 'package:nyxx/src/models/gateway/events/message.dart';
-import 'package:nyxx/src/models/gateway/events/presence.dart';
-import 'package:nyxx/src/models/gateway/events/ready.dart';
-import 'package:nyxx/src/models/guild/guild.dart';
-import 'package:nyxx/src/models/guild/integration.dart';
-import 'package:nyxx/src/models/interaction.dart';
-import 'package:nyxx/src/models/invite/invite.dart';
-import 'package:nyxx/src/models/locale.dart';
-import 'package:nyxx/src/models/message/message.dart';
-import 'package:nyxx/src/models/oauth2.dart';
-import 'package:nyxx/src/models/permission_overwrite.dart';
-import 'package:nyxx/src/models/permissions.dart';
-import 'package:nyxx/src/models/presence.dart';
-import 'package:nyxx/src/models/role.dart';
-import 'package:nyxx/src/models/sku.dart';
-import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/models/soundboard/soundboard.dart';
-import 'package:nyxx/src/models/subscription.dart';
-import 'package:nyxx/src/models/team.dart';
-import 'package:nyxx/src/models/voice/voice_state.dart';
-import 'package:nyxx/src/models/webhook.dart';
+import 'package:firebridge/src/models/application.dart';
+import 'package:firebridge/src/models/channel/channel.dart';
+import 'package:firebridge/src/models/discord_color.dart';
+import 'package:firebridge/src/models/emoji.dart';
+import 'package:firebridge/src/models/entitlement.dart';
+import 'package:firebridge/src/models/gateway/event.dart';
+import 'package:firebridge/src/models/gateway/events/message.dart';
+import 'package:firebridge/src/models/gateway/events/presence.dart';
+import 'package:firebridge/src/models/gateway/events/ready.dart';
+import 'package:firebridge/src/models/guild/guild.dart';
+import 'package:firebridge/src/models/guild/integration.dart';
+import 'package:firebridge/src/models/interaction.dart';
+import 'package:firebridge/src/models/invite/invite.dart';
+import 'package:firebridge/src/models/locale.dart';
+import 'package:firebridge/src/models/message/message.dart';
+import 'package:firebridge/src/models/oauth2.dart';
+import 'package:firebridge/src/models/permission_overwrite.dart';
+import 'package:firebridge/src/models/permissions.dart';
+import 'package:firebridge/src/models/presence.dart';
+import 'package:firebridge/src/models/role.dart';
+import 'package:firebridge/src/models/sku.dart';
+import 'package:firebridge/src/models/snowflake.dart';
+import 'package:firebridge/src/models/soundboard/soundboard.dart';
+import 'package:firebridge/src/models/subscription.dart';
+import 'package:firebridge/src/models/team.dart';
+import 'package:firebridge/src/models/voice/voice_state.dart';
+import 'package:firebridge/src/models/webhook.dart';
 
 /// Custom mapper for [Uri] type.
 /// Discord's API sends URIs as strings.
@@ -69,7 +69,7 @@ class DurationMapper extends SimpleMapper<Duration> {
 }
 
 /// Initialize the custom mappers for built-in Dart types.
-void initNyxxMappers() {
+void initMappers() {
   MapperContainer.globals.use(const UriMapper());
   MapperContainer.globals.use(const DateTimeMapper());
   MapperContainer.globals.use(const DurationMapper());

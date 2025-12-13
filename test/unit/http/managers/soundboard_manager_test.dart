@@ -1,13 +1,13 @@
 import 'package:mocktail/mocktail.dart';
-import 'package:nyxx/src/api_options.dart';
-import 'package:nyxx/src/builders/sound.dart';
-import 'package:nyxx/src/builders/soundboard.dart';
-import 'package:nyxx/src/client.dart';
-import 'package:nyxx/src/client_options.dart';
-import 'package:nyxx/src/http/managers/soundboard_manager.dart';
-import 'package:nyxx/src/models/emoji.dart';
-import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/models/soundboard/soundboard.dart';
+import 'package:firebridge/src/api_options.dart';
+import 'package:firebridge/src/builders/sound.dart';
+import 'package:firebridge/src/builders/soundboard.dart';
+import 'package:firebridge/src/client.dart';
+import 'package:firebridge/src/client_options.dart';
+import 'package:firebridge/src/http/managers/soundboard_manager.dart';
+import 'package:firebridge/src/models/emoji.dart';
+import 'package:firebridge/src/models/snowflake.dart';
+import 'package:firebridge/src/models/soundboard/soundboard.dart';
 import 'package:test/test.dart';
 import '../../../mocks/client.dart';
 import '../../../test_manager.dart';
@@ -31,11 +31,14 @@ const sampleGuildSoundboardSound = {
   "available": true
 };
 
-void checkGlobalSoundboardSound(SoundboardSound sound, NyxxRest client) {
+void checkGlobalSoundboardSound(SoundboardSound sound, FirebridgeRest client) {
   expect(sound.id, equals(Snowflake(1)));
   expect(sound.name, equals('quack'));
   expect(sound.volume, equals(1.0));
-  expect(sound.emoji, equals(TextEmoji(id: Snowflake.zero, name: '🦆', manager: client.application.emojis)));
+  expect(
+      sound.emoji,
+      equals(TextEmoji(
+          id: Snowflake.zero, name: '🦆', manager: client.application.emojis)));
   expect(sound.emojiName, equals('🦆'));
   expect(sound.emojiId, isNull);
   expect(sound.guildId, isNull);
@@ -43,11 +46,14 @@ void checkGlobalSoundboardSound(SoundboardSound sound, NyxxRest client) {
   expect(sound.user, isNull);
 }
 
-void checkGuildSoundboardSound(SoundboardSound sound, NyxxRest client) {
+void checkGuildSoundboardSound(SoundboardSound sound, FirebridgeRest client) {
   expect(sound.id, equals(Snowflake(1106714396018884649)));
   expect(sound.name, equals('Yay'));
   expect(sound.volume, equals(1.0));
-  expect(sound.emoji, equals(client.guilds[Snowflake(613425648685547541)].emojis.cache[Snowflake(989193655938064464)]));
+  expect(
+      sound.emoji,
+      equals(client.guilds[Snowflake(613425648685547541)].emojis
+          .cache[Snowflake(989193655938064464)]));
   expect(sound.emojiName, isNull);
   expect(sound.emojiId, equals(Snowflake(989193655938064464)));
   expect(sound.guildId, equals(Snowflake(613425648685547541)));
@@ -56,7 +62,7 @@ void checkGuildSoundboardSound(SoundboardSound sound, NyxxRest client) {
 }
 
 void main() {
-  final client = MockNyxx();
+  final client = MockFirebridge();
   when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
   when(() => client.options).thenReturn(RestClientOptions());
   testReadOnlyManager<SoundboardSound, GlobalSoundboardManager>(
@@ -72,7 +78,8 @@ void main() {
 
   testManager<SoundboardSound, GuildSoundboardManager>(
     'GuildSoundboardManager',
-    (config, client) => GuildSoundboardManager(config, client, guildId: Snowflake.zero),
+    (config, client) =>
+        GuildSoundboardManager(config, client, guildId: Snowflake.zero),
     RegExp(r'/guilds/0/soundboard-sounds/\d+'),
     '/guilds/0/soundboard-sounds',
     sampleObject: sampleGuildSoundboardSound,
@@ -83,7 +90,8 @@ void main() {
           name: 'send-soundboard-sound',
           source: null,
           urlMatcher: '/channels/0/send-soundboard-sound',
-          execute: (manager) => manager.sendSoundboardSound(Snowflake.zero, soundId: Snowflake.zero),
+          execute: (manager) => manager.sendSoundboardSound(Snowflake.zero,
+              soundId: Snowflake.zero),
           check: (_) {},
           method: 'post'),
     ],

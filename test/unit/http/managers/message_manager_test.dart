@@ -1,6 +1,6 @@
-import 'package:nyxx/src/models/message/message.dart';
+import 'package:firebridge/src/models/message/message.dart';
 import 'package:test/test.dart';
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 
 import '../../../test_manager.dart';
 
@@ -26,7 +26,12 @@ final sampleMessage = {
   "id": "334385199974967042",
   "pinned": false,
   "edited_timestamp": null,
-  "author": {"username": "Mason", "discriminator": "9999", "id": "53908099506183680", "avatar": "a_bab14f271d565501444b2ca3be944b25"},
+  "author": {
+    "username": "Mason",
+    "discriminator": "9999",
+    "id": "53908099506183680",
+    "avatar": "a_bab14f271d565501444b2ca3be944b25"
+  },
   "mention_roles": [],
   "content": "Supa Hot",
   "channel_id": "290926798999357250",
@@ -69,7 +74,8 @@ void checkMessage(Message message) {
   expect(message.id, equals(Snowflake(334385199974967042)));
   expect(message.author.id, equals(Snowflake(53908099506183680)));
   expect(message.content, equals('Supa Hot'));
-  expect(message.timestamp, equals(DateTime.utc(2017, 07, 11, 17, 27, 07, 299)));
+  expect(
+      message.timestamp, equals(DateTime.utc(2017, 07, 11, 17, 27, 07, 299)));
   expect(message.editedTimestamp, isNull);
   expect(message.isTts, isFalse);
   expect(message.mentionsEveryone, isFalse);
@@ -98,7 +104,8 @@ void checkMessage(Message message) {
   expect(message.poll!.answers, hasLength(1));
   expect(message.poll!.answers.single.id, equals(1));
   expect(message.poll!.answers.single.pollMedia.text, equals('oof'));
-  expect(message.poll!.endsAt, equals(DateTime.utc(2024, 07, 12, 22, 00, 25, 095, 257)));
+  expect(message.poll!.endsAt,
+      equals(DateTime.utc(2024, 07, 12, 22, 00, 25, 095, 257)));
   expect(message.poll!.layoutType, equals(PollLayoutType.defaultLayout));
   expect(message.poll!.question.text, equals('Why are you so dumb?'));
   expect(message.poll!.results, isNotNull);
@@ -132,33 +139,52 @@ final sampleCrosspostedMessage = {
   "id": "334385199974967042",
   "pinned": false,
   "edited_timestamp": null,
-  "author": {"username": "Mason", "discriminator": "9999", "id": "53908099506183680", "avatar": "a_bab14f271d565501444b2ca3be944b25"},
+  "author": {
+    "username": "Mason",
+    "discriminator": "9999",
+    "id": "53908099506183680",
+    "avatar": "a_bab14f271d565501444b2ca3be944b25"
+  },
   "mention_roles": [],
   "mention_channels": [
-    {"id": "278325129692446722", "guild_id": "278325129692446720", "name": "big-news", "type": 5}
+    {
+      "id": "278325129692446722",
+      "guild_id": "278325129692446720",
+      "name": "big-news",
+      "type": 5
+    }
   ],
   "content": "Big news! In this <#278325129692446722> channel!",
   "channel_id": "290926798999357250",
   "mentions": [],
   "type": 0,
   "flags": 2,
-  "message_reference": {"channel_id": "278325129692446722", "guild_id": "278325129692446720", "message_id": "306588351130107906"}
+  "message_reference": {
+    "channel_id": "278325129692446722",
+    "guild_id": "278325129692446720",
+    "message_id": "306588351130107906"
+  }
 };
 
 void checkCrosspostedMessage(Message message) {
   expect(message.id, equals(Snowflake(334385199974967042)));
   expect(message.author.id, equals(Snowflake(53908099506183680)));
-  expect(message.content, equals('Big news! In this <#278325129692446722> channel!'));
-  expect(message.timestamp, equals(DateTime.utc(2017, 07, 11, 17, 27, 07, 299)));
+  expect(message.content,
+      equals('Big news! In this <#278325129692446722> channel!'));
+  expect(
+      message.timestamp, equals(DateTime.utc(2017, 07, 11, 17, 27, 07, 299)));
   expect(message.editedTimestamp, isNull);
   expect(message.isTts, isFalse);
   expect(message.mentionsEveryone, isFalse);
   expect(message.mentions, isEmpty);
   expect(message.channelMentions, hasLength(1));
-  expect(message.channelMentions.single.guildId, equals(Snowflake(278325129692446720)));
-  expect(message.channelMentions.single.id, equals(Snowflake(278325129692446722)));
+  expect(message.channelMentions.single.guildId,
+      equals(Snowflake(278325129692446720)));
+  expect(
+      message.channelMentions.single.id, equals(Snowflake(278325129692446722)));
   expect(message.channelMentions.single.name, equals('big-news'));
-  expect(message.channelMentions.single.type, equals(ChannelType.guildAnnouncement));
+  expect(message.channelMentions.single.type,
+      equals(ChannelType.guildAnnouncement));
   expect(message.attachments, isEmpty);
   expect(message.embeds, isEmpty);
   expect(message.reactions, hasLength(1));
@@ -253,7 +279,8 @@ final sampleForwardedMessage = {
 void checkForwardedMessage(Message message) {
   expect(message.author.id, equals(Snowflake(506759329068613643)));
   expect(message.content, equals(''));
-  expect(message.timestamp, equals(DateTime.utc(2024, 10, 08, 09, 18, 22, 532)));
+  expect(
+      message.timestamp, equals(DateTime.utc(2024, 10, 08, 09, 18, 22, 532)));
   expect(message.editedTimestamp, isNull);
   expect(message.isTts, isFalse);
   expect(message.mentionsEveryone, isFalse);
@@ -279,10 +306,12 @@ void checkForwardedMessage(Message message) {
     message.messageSnapshots,
     equals([
       wrapMatcher((MessageSnapshot snapshot) {
-        expect(snapshot.timestamp, equals(DateTime.utc(2024, 10, 08, 09, 17, 26, 429)));
+        expect(snapshot.timestamp,
+            equals(DateTime.utc(2024, 10, 08, 09, 17, 26, 429)));
         expect(snapshot.editedTimestamp, isNull);
         expect(snapshot.type, MessageType.normal);
-        expect(snapshot.content, equals('<@&786646877335977984> I ping myself for self validation'));
+        expect(snapshot.content,
+            equals('<@&786646877335977984> I ping myself for self validation'));
         expect(snapshot.attachments, equals([]));
         expect(snapshot.embeds, equals([]));
         expect(snapshot.flags, equals(MessageFlags(0)));
@@ -338,7 +367,8 @@ final sampleComponentsV2Message = {
             "id": 5,
             "media": {
               "url": "https://i.imgur.com/SpCbHBI.jpeg",
-              "proxy_url": "https://images-ext-1.discordapp.net/external/JnxJ6nc07YuYZoa1zhTq2JW6oHVNJh4fDcTKElOG1F8/https/i.imgur.com/SpCbHBI.jpeg",
+              "proxy_url":
+                  "https://images-ext-1.discordapp.net/external/JnxJ6nc07YuYZoa1zhTq2JW6oHVNJh4fDcTKElOG1F8/https/i.imgur.com/SpCbHBI.jpeg",
               "width": 640,
               "height": 640,
               "placeholder": "GSkKFwQ7d3dgiXiHeKZXWJd2eL+Y94wK",
@@ -359,7 +389,8 @@ final sampleComponentsV2Message = {
             {
               "media": {
                 "url": "https://i.imgur.com/JOKsNeT.jpeg",
-                "proxy_url": "https://images-ext-1.discordapp.net/external/oCSJtivfxPV1p3Al4__kvn8gU8K6j7RmAR6Ko0biOZs/https/i.imgur.com/JOKsNeT.jpeg",
+                "proxy_url":
+                    "https://images-ext-1.discordapp.net/external/oCSJtivfxPV1p3Al4__kvn8gU8K6j7RmAR6Ko0biOZs/https/i.imgur.com/JOKsNeT.jpeg",
                 "width": 455,
                 "height": 759,
                 "placeholder": "GCkKJAZpi6t7h2X1logwUgZUZQ==",
@@ -369,13 +400,15 @@ final sampleComponentsV2Message = {
                 "loading_state": 2,
                 "flags": 0
               },
-              "description": "Meow meow meeow meeooow... Meow meow meow meeeeemeow.....",
+              "description":
+                  "Meow meow meeow meeooow... Meow meow meow meeeeemeow.....",
               "spoiler": true
             },
             {
               "media": {
                 "url": "https://i.imgur.com/ujAO1Dl.mp4",
-                "proxy_url": "https://images-ext-1.discordapp.net/external/uNxJUvhDjfQJhhgf9Kb2_qHA1gVTpCr4_vrpv57sZVk/https/i.imgur.com/ujAO1Dl.mp4",
+                "proxy_url":
+                    "https://images-ext-1.discordapp.net/external/uNxJUvhDjfQJhhgf9Kb2_qHA1gVTpCr4_vrpv57sZVk/https/i.imgur.com/ujAO1Dl.mp4",
                 "width": 575,
                 "height": 1024,
                 "placeholder": "nAgGDAIYAok4d2qqKFkwuwVlWg==",
@@ -418,7 +451,12 @@ final sampleComponentsV2Message = {
       "spoiler": false
     }
   ],
-  "resolved": {"users": <String, dynamic>{}, "members": <String, dynamic>{}, "channels": <String, dynamic>{}, "roles": <String, dynamic>{}},
+  "resolved": {
+    "users": <String, dynamic>{},
+    "members": <String, dynamic>{},
+    "channels": <String, dynamic>{},
+    "roles": <String, dynamic>{}
+  },
   "id": "1343689361862168628",
   "channel_id": "1317207732318900244",
   "author": {
@@ -496,7 +534,8 @@ void checkComponentsV2Message(Message message) {
     return true;
   });
   expect(message.content, isEmpty);
-  expect(message.timestamp, equals(DateTime.utc(2025, 02, 24, 21, 01, 48, 409)));
+  expect(
+      message.timestamp, equals(DateTime.utc(2025, 02, 24, 21, 01, 48, 409)));
   expect(message.editedTimestamp, isNull);
   expect(message.isTts, isFalse);
   expect(message.mentionsEveryone, isFalse);
@@ -537,9 +576,11 @@ void checkComponentsV2Message(Message message) {
         expect(component.components, everyElement(isA<TextDisplayComponent>()));
         expect(component.accessory, isA<ThumbnailComponent>());
         expect(component.accessory, (ThumbnailComponent component) {
-          expect(component.description, equals('Meow meow meow meow meow, cat picture kanged.'));
+          expect(component.description,
+              equals('Meow meow meow meow meow, cat picture kanged.'));
           expect(component.isSpoiler, isFalse);
-          expect(component.media.url, Uri.https('i.imgur.com', '/SpCbHBI.jpeg'));
+          expect(
+              component.media.url, Uri.https('i.imgur.com', '/SpCbHBI.jpeg'));
 
           return true;
         });
@@ -613,7 +654,8 @@ void checkMessageInteractionMetadata(MessageInteractionMetadata metadata) {
   expect(metadata.originalResponseMessageId, Snowflake(1234567891234567804));
   expect(metadata.interactedMessageId, Snowflake(1234567891234567805));
   expect(metadata.triggeringInteractionMetadata, isNotNull);
-  MessageInteractionMetadata metadata2 = metadata.triggeringInteractionMetadata!;
+  MessageInteractionMetadata metadata2 =
+      metadata.triggeringInteractionMetadata!;
   expect(metadata2.id, equals(Snowflake(1234567891234567806)));
   expect(metadata2.type, equals(InteractionType.applicationCommand));
   expect(metadata2.user.id, equals(Snowflake(1234567891234567807)));
@@ -646,17 +688,27 @@ final samplePinList = {
 void main() {
   testManager<Message, MessageManager>(
     'MessageManager',
-    (config, client) => MessageManager(config, client, channelId: Snowflake.zero),
+    (config, client) =>
+        MessageManager(config, client, channelId: Snowflake.zero),
     RegExp(r'/channels/0/messages/\d+'),
     '/channels/0/messages',
     sampleObject: sampleMessage,
     sampleMatches: checkMessage,
-    additionalSampleObjects: [sampleCrosspostedMessage, sampleForwardedMessage, sampleComponentsV2Message],
-    additionalSampleMatchers: [checkCrosspostedMessage, checkForwardedMessage, checkComponentsV2Message],
+    additionalSampleObjects: [
+      sampleCrosspostedMessage,
+      sampleForwardedMessage,
+      sampleComponentsV2Message
+    ],
+    additionalSampleMatchers: [
+      checkCrosspostedMessage,
+      checkForwardedMessage,
+      checkComponentsV2Message
+    ],
     createBuilder: MessageBuilder(),
     updateBuilder: MessageUpdateBuilder(),
     additionalParsingTests: [
-      ParsingTest<MessageManager, MessageInteractionMetadata, Map<String, Object?>>(
+      ParsingTest<MessageManager, MessageInteractionMetadata,
+          Map<String, Object?>>(
         name: 'parseMessageInteractionMetadata',
         source: sampleMessageInteractionMetadata,
         parse: (manager) => manager.parseMessageInteractionMetadata,

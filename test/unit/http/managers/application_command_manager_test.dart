@@ -1,4 +1,4 @@
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import '../../../test_manager.dart';
@@ -78,14 +78,16 @@ void checkCommandPermissions(CommandPermissions permissions) {
 void main() {
   testManager<ApplicationCommand, GlobalApplicationCommandManager>(
     'GlobalApplicationCommandManager',
-    (config, client) => GlobalApplicationCommandManager(config, client, applicationId: Snowflake.zero),
+    (config, client) => GlobalApplicationCommandManager(config, client,
+        applicationId: Snowflake.zero),
     RegExp(r'/applications/0/commands/\d+'),
     '/applications/0/commands',
     sampleObject: sampleCommand,
     sampleMatches: checkCommand,
     additionalParsingTests: [],
     additionalEndpointTests: [
-      EndpointTest<GlobalApplicationCommandManager, List<ApplicationCommand>, List<Object?>>(
+      EndpointTest<GlobalApplicationCommandManager, List<ApplicationCommand>,
+          List<Object?>>(
         name: 'list',
         source: [sampleCommand],
         urlMatcher: '/applications/0/commands',
@@ -95,19 +97,24 @@ void main() {
           checkCommand(list.single);
         },
       ),
-      EndpointTest<GlobalApplicationCommandManager, List<ApplicationCommand>, List<Object?>>(
+      EndpointTest<GlobalApplicationCommandManager, List<ApplicationCommand>,
+          List<Object?>>(
         name: 'bulkOverride',
         method: 'PUT',
         source: [sampleCommand],
         urlMatcher: '/applications/0/commands',
-        execute: (manager) => manager.bulkOverride([ApplicationCommandBuilder(name: 'TEST', type: ApplicationCommandType.chatInput)]),
+        execute: (manager) => manager.bulkOverride([
+          ApplicationCommandBuilder(
+              name: 'TEST', type: ApplicationCommandType.chatInput)
+        ]),
         check: (list) {
           expect(list, hasLength(1));
           checkCommand(list.single);
         },
       ),
     ],
-    createBuilder: ApplicationCommandBuilder(name: 'TEST', type: ApplicationCommandType.chatInput),
+    createBuilder: ApplicationCommandBuilder(
+        name: 'TEST', type: ApplicationCommandType.chatInput),
     updateBuilder: ApplicationCommandUpdateBuilder(),
   );
 
@@ -125,7 +132,8 @@ void main() {
     sampleObject: sampleCommand,
     sampleMatches: checkCommand,
     additionalParsingTests: [
-      ParsingTest<GuildApplicationCommandManager, CommandPermissions, Map<String, Object?>>(
+      ParsingTest<GuildApplicationCommandManager, CommandPermissions,
+          Map<String, Object?>>(
         name: 'parseCommandPermissions',
         source: sampleCommandPermissions,
         parse: (manager) => manager.parseCommandPermissions,
@@ -133,7 +141,8 @@ void main() {
       ),
     ],
     additionalEndpointTests: [
-      EndpointTest<GuildApplicationCommandManager, List<ApplicationCommand>, List<Object?>>(
+      EndpointTest<GuildApplicationCommandManager, List<ApplicationCommand>,
+          List<Object?>>(
         name: 'list',
         source: [sampleCommand],
         urlMatcher: '/applications/0/guilds/1/commands',
@@ -143,18 +152,23 @@ void main() {
           checkCommand(list.single);
         },
       ),
-      EndpointTest<GuildApplicationCommandManager, List<ApplicationCommand>, List<Object?>>(
+      EndpointTest<GuildApplicationCommandManager, List<ApplicationCommand>,
+          List<Object?>>(
         name: 'bulkOverride',
         method: 'PUT',
         source: [sampleCommand],
         urlMatcher: '/applications/0/guilds/1/commands',
-        execute: (manager) => manager.bulkOverride([ApplicationCommandBuilder(name: 'TEST', type: ApplicationCommandType.chatInput)]),
+        execute: (manager) => manager.bulkOverride([
+          ApplicationCommandBuilder(
+              name: 'TEST', type: ApplicationCommandType.chatInput)
+        ]),
         check: (list) {
           expect(list, hasLength(1));
           checkCommand(list.single);
         },
       ),
-      EndpointTest<GuildApplicationCommandManager, List<CommandPermissions>, List<Object?>>(
+      EndpointTest<GuildApplicationCommandManager, List<CommandPermissions>,
+          List<Object?>>(
         name: 'listCommandPermissions',
         source: [sampleCommandPermissions],
         urlMatcher: '/applications/0/guilds/1/commands/permissions',
@@ -164,7 +178,8 @@ void main() {
           checkCommandPermissions(list.single);
         },
       ),
-      EndpointTest<GuildApplicationCommandManager, CommandPermissions, Map<String, Object?>>(
+      EndpointTest<GuildApplicationCommandManager, CommandPermissions,
+          Map<String, Object?>>(
         name: 'fetchCommandPermissions',
         source: sampleCommandPermissions,
         urlMatcher: '/applications/0/guilds/1/commands/2/permissions',
@@ -172,7 +187,8 @@ void main() {
         check: checkCommandPermissions,
       ),
     ],
-    createBuilder: ApplicationCommandBuilder(name: 'TEST', type: ApplicationCommandType.chatInput),
+    createBuilder: ApplicationCommandBuilder(
+        name: 'TEST', type: ApplicationCommandType.chatInput),
     updateBuilder: ApplicationCommandUpdateBuilder(),
   );
 }

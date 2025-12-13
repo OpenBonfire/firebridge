@@ -1,28 +1,28 @@
-import 'package:nyxx/src/gateway/shard.dart';
-import 'package:nyxx/src/models/gateway/gateway.dart';
-import 'package:nyxx/src/models/snowflake.dart';
+import 'package:firebridge/src/gateway/shard.dart';
+import 'package:firebridge/src/models/gateway/gateway.dart';
+import 'package:firebridge/src/models/snowflake.dart';
 
 /// The base class for all exceptions thrown by nyxx.
-class NyxxException implements Exception {
+class FirebridgeException implements Exception {
   /// The message for this exception.
   final String message;
 
-  /// Create a new [NyxxException] with the provided [message].
-  NyxxException(this.message);
+  /// Create a new [FirebridgeException] with the provided [message].
+  FirebridgeException(this.message);
 
   @override
   String toString() => message;
 }
 
 /// An exception thrown when an unexpected event is received on the Gateway.
-class InvalidEventException extends NyxxException {
+class InvalidEventException extends FirebridgeException {
   /// Create a new [InvalidEventException] with the provided [message].
   InvalidEventException(String message)
       : super('Invalid gateway event: $message');
 }
 
 /// An exception thrown when a member already exists in a guild.
-class MemberAlreadyExistsException extends NyxxException {
+class MemberAlreadyExistsException extends FirebridgeException {
   /// The ID of the guild.
   final Snowflake guildId;
 
@@ -35,7 +35,7 @@ class MemberAlreadyExistsException extends NyxxException {
 }
 
 /// An exception thrown when a role is not found in a guild.
-class RoleNotFoundException extends NyxxException {
+class RoleNotFoundException extends FirebridgeException {
   /// The ID of the guild.
   final Snowflake guildId;
 
@@ -48,7 +48,7 @@ class RoleNotFoundException extends NyxxException {
 }
 
 /// An exception thrown when a integration is not found in a guild.
-class IntegrationNotFoundException extends NyxxException {
+class IntegrationNotFoundException extends FirebridgeException {
   /// The ID of the guild.
   final Snowflake guildId;
 
@@ -61,7 +61,7 @@ class IntegrationNotFoundException extends NyxxException {
 }
 
 /// An exception thrown when an audit log entry is not found in a guild.
-class AuditLogEntryNotFoundException extends NyxxException {
+class AuditLogEntryNotFoundException extends FirebridgeException {
   /// The ID of the guild.
   final Snowflake guildId;
 
@@ -74,7 +74,7 @@ class AuditLogEntryNotFoundException extends NyxxException {
 }
 
 /// An exception thrown when an entitlement is not found for an application.
-class EntitlementNotFoundException extends NyxxException {
+class EntitlementNotFoundException extends FirebridgeException {
   /// The ID of the application.
   final Snowflake applicationId;
 
@@ -88,7 +88,7 @@ class EntitlementNotFoundException extends NyxxException {
 }
 
 /// An exception thrown when an SKU is not found for an application.
-class SkuNotFoundException extends NyxxException {
+class SkuNotFoundException extends FirebridgeException {
   /// The ID of the application.
   final Snowflake applicationId;
 
@@ -166,7 +166,7 @@ class ClientClosedError extends Error {
   String toString() => 'Client is closed';
 }
 
-class SoundboardSoundNotFoundException extends NyxxException {
+class SoundboardSoundNotFoundException extends FirebridgeException {
   /// The ID of the sound.
   final Snowflake soundId;
 

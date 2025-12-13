@@ -1,21 +1,21 @@
-import 'package:nyxx/src/client.dart';
-import 'package:nyxx/src/http/request.dart';
-import 'package:nyxx/src/http/route.dart';
-import 'package:nyxx/src/models/gateway/gateway.dart';
+import 'package:firebridge/src/client.dart';
+import 'package:firebridge/src/http/request.dart';
+import 'package:firebridge/src/http/route.dart';
+import 'package:firebridge/src/models/gateway/gateway.dart';
 
 /// A [Manager] for gateway information.
 // Use an abstract class so the client getter can be abstract,
 // allowing us to override it in Gateway to have a more specific type.
 abstract class GatewayManager {
   /// The client this manager is for.
-  NyxxRest get client;
+  FirebridgeRest get client;
 
   /// @nodoc
   // We need a constructor to be allowed to use this class as a superclass.
   GatewayManager.create();
 
   /// Create a new [GatewayManager].
-  factory GatewayManager(NyxxRest client) = _GatewayManagerImpl;
+  factory GatewayManager(FirebridgeRest client) = _GatewayManagerImpl;
 
   /// Fetch the current gateway configuration.
   Future<GatewayConfiguration> fetchGatewayConfiguration() async {
@@ -41,7 +41,7 @@ abstract class GatewayManager {
 
 class _GatewayManagerImpl extends GatewayManager {
   @override
-  final NyxxRest client;
+  final FirebridgeRest client;
 
   _GatewayManagerImpl(this.client) : super.create();
 }

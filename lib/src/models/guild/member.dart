@@ -1,10 +1,10 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/models/permissions.dart';
-import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
-import 'package:nyxx/src/models/user/avatar_decoration_data.dart';
-import 'package:nyxx/src/models/user/user.dart';
-import 'package:nyxx/src/utils/flags.dart';
+import 'package:firebridge/src/models/permissions.dart';
+import 'package:firebridge/src/models/snowflake.dart';
+import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
+import 'package:firebridge/src/models/user/avatar_decoration_data.dart';
+import 'package:firebridge/src/models/user/user.dart';
+import 'package:firebridge/src/utils/flags.dart';
 
 part 'member.mapper.dart';
 

@@ -1,32 +1,33 @@
 import 'dart:async';
 
+import 'package:firebridge/src/models/common_hooks.dart';
 import 'package:logging/logging.dart';
 import 'package:meta/meta.dart';
-import 'package:nyxx/src/builders/presence.dart';
-import 'package:nyxx/src/builders/voice.dart';
-import 'package:nyxx/src/cache/cache.dart';
-import 'package:nyxx/src/client_options.dart';
-import 'package:nyxx/src/errors.dart';
-import 'package:nyxx/src/event_mixin.dart';
-import 'package:nyxx/src/gateway/gateway.dart';
-import 'package:nyxx/src/http/handler.dart';
-import 'package:nyxx/src/http/managers/gateway_manager.dart';
-import 'package:nyxx/src/intents.dart';
-import 'package:nyxx/src/manager_mixin.dart';
-import 'package:nyxx/src/api_options.dart';
-import 'package:nyxx/src/models/guild/guild.dart';
-import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/models/user/user.dart';
-import 'package:nyxx/src/plugin/plugin.dart';
-import 'package:nyxx/src/utils/flags.dart';
+import 'package:firebridge/src/builders/presence.dart';
+import 'package:firebridge/src/builders/voice.dart';
+import 'package:firebridge/src/cache/cache.dart';
+import 'package:firebridge/src/client_options.dart';
+import 'package:firebridge/src/errors.dart';
+import 'package:firebridge/src/event_mixin.dart';
+import 'package:firebridge/src/gateway/gateway.dart';
+import 'package:firebridge/src/http/handler.dart';
+import 'package:firebridge/src/http/managers/gateway_manager.dart';
+import 'package:firebridge/src/intents.dart';
+import 'package:firebridge/src/manager_mixin.dart';
+import 'package:firebridge/src/api_options.dart';
+import 'package:firebridge/src/models/guild/guild.dart';
+import 'package:firebridge/src/models/snowflake.dart';
+import 'package:firebridge/src/models/user/user.dart';
+import 'package:firebridge/src/plugin/plugin.dart';
+import 'package:firebridge/src/utils/flags.dart';
 import 'package:runtime_type/runtime_type.dart';
 
 /// A helper function to nest and execute calls to plugin connect methods.
-Future<T> _doConnect<T extends Nyxx>(
+Future<T> _doConnect<T extends Firebridge>(
     ApiOptions apiOptions,
     ClientOptions clientOptions,
     Future<T> Function() connect,
-    List<NyxxPlugin> plugins) {
+    List<FirebridgePlugin> plugins) {
   final actualClientType = RuntimeType<T>();
 
   for (final plugin in plugins) {
@@ -49,8 +50,8 @@ Future<T> _doConnect<T extends Nyxx>(
 }
 
 /// A helper function to nest and execute calls to plugin close methods.
-Future<void> _doClose(
-    Nyxx client, Future<void> Function() close, List<NyxxPlugin> plugins) {
+Future<void> _doClose(Firebridge client, Future<void> Function() close,
+    List<FirebridgePlugin> plugins) {
   close = plugins.fold(
     close,
     (previousClose, plugin) => () => plugin.doClose(client, previousClose),
@@ -59,14 +60,14 @@ Future<void> _doClose(
 }
 
 @internal
-extension InternalReady on Nyxx {
+extension InternalReady on Firebridge {
   /// A future that completes when this client is initialized and can be passed to user defined callbacks.
   @internal
   Future<void> get initialized => _initializedCompleter.future;
 }
 
 /// The base class for clients interacting with the Discord API.
-abstract class Nyxx {
+abstract class Firebridge {
   /// The options this client will use when connecting to the API.
   ApiOptions get apiOptions;
 
@@ -84,14 +85,15 @@ abstract class Nyxx {
 
   Completer<void> get _initializedCompleter;
 
-  /// Create an instance of [NyxxRest] that can perform requests to the HTTP API and is
+  /// Create an instance of [FirebridgeRest] that can perform requests to the HTTP API and is
   /// authenticated with a bot token.
-  static Future<NyxxRest> connectRest(String token,
+  static Future<FirebridgeRest> connectRest(String token,
           {RestClientOptions options = const RestClientOptions()}) =>
       connectRestWithOptions(RestApiOptions(token: token), options);
 
-  /// Create an instance of [NyxxRest] using the provided options.
-  static Future<NyxxRest> connectRestWithOptions(RestApiOptions apiOptions,
+  /// Create an instance of [FirebridgeRest] using the provided options.
+  static Future<FirebridgeRest> connectRestWithOptions(
+      RestApiOptions apiOptions,
       [RestClientOptions clientOptions = const RestClientOptions()]) async {
     return _doConnect(apiOptions, clientOptions, () async {
       clientOptions.logger
@@ -101,22 +103,27 @@ abstract class Nyxx {
         ..fine(
             'Plugins: ${clientOptions.plugins.map((plugin) => plugin.name).join(', ')}');
 
-      final client = NyxxRest._(apiOptions, clientOptions);
+      final client = FirebridgeRest._(apiOptions, clientOptions);
 
       return client.._user = await client.users.fetchCurrentUser();
     }, clientOptions.plugins);
   }
 
-  /// Create an instance of [NyxxGateway] that can perform requests to the HTTP API, connects
+  /// Ensures the dart_mappable mappers are initialized
+  static void ensureInitialized() {
+    initMappers();
+  }
+
+  /// Create an instance of [FirebridgeGateway] that can perform requests to the HTTP API, connects
   /// to the gateway and is authenticated with a bot token.
-  static Future<NyxxGateway> connectGateway(
+  static Future<FirebridgeGateway> connectGateway(
           String token, Flags<GatewayIntents> intents,
           {GatewayClientOptions options = const GatewayClientOptions()}) =>
       connectGatewayWithOptions(
           GatewayApiOptions(token: token, intents: intents), options);
 
-  /// Create an instance of [NyxxGateway] using the provided options.
-  static Future<NyxxGateway> connectGatewayWithOptions(
+  /// Create an instance of [FirebridgeGateway] using the provided options.
+  static Future<FirebridgeGateway> connectGatewayWithOptions(
     GatewayApiOptions apiOptions, [
     GatewayClientOptions clientOptions = const GatewayClientOptions(),
   ]) async {
@@ -131,7 +138,7 @@ abstract class Nyxx {
         ..fine(
             'Plugins: ${clientOptions.plugins.map((plugin) => plugin.name).join(', ')}');
 
-      final client = NyxxGateway._(apiOptions, clientOptions);
+      final client = FirebridgeGateway._(apiOptions, clientOptions);
 
       client._user = await client.users.fetchCurrentUser();
 
@@ -150,7 +157,7 @@ abstract class Nyxx {
 }
 
 /// A client that can make requests to the HTTP API and is authenticated with a bot token.
-class NyxxRest with ManagerMixin implements Nyxx {
+class FirebridgeRest with ManagerMixin implements Firebridge {
   @override
   final RestApiOptions apiOptions;
 
@@ -173,7 +180,7 @@ class NyxxRest with ManagerMixin implements Nyxx {
   @override
   late final CacheManager cache = CacheManager(this);
 
-  NyxxRest._(this.apiOptions, this.options);
+  FirebridgeRest._(this.apiOptions, this.options);
 
   /// Add the current user to the thread with the ID [id].
   ///
@@ -202,7 +209,9 @@ class NyxxRest with ManagerMixin implements Nyxx {
 }
 
 /// A client that can make requests to the HTTP API, connects to the Gateway and is authenticated with a bot token.
-class NyxxGateway with ManagerMixin, EventMixin implements NyxxRest {
+class FirebridgeGateway
+    with ManagerMixin, EventMixin
+    implements FirebridgeRest {
   @override
   final GatewayApiOptions apiOptions;
 
@@ -232,7 +241,7 @@ class NyxxGateway with ManagerMixin, EventMixin implements NyxxRest {
   @override
   late final CacheManager cache = CacheManager(this);
 
-  NyxxGateway._(this.apiOptions, this.options);
+  FirebridgeGateway._(this.apiOptions, this.options);
 
   @override
   Future<void> joinThread(Snowflake id) => channels.joinThread(id);

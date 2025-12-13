@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:mocktail/mocktail.dart';
 import 'package:nock/nock.dart';
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import 'package:nock/src/interceptor.dart';
@@ -54,9 +54,10 @@ class EndpointTest<T, U, V> {
   }
 }
 
-Future<void> testReadOnlyManager<T extends ManagedSnowflakeEntity<T>, U extends ReadOnlyManager<T>>(
+Future<void> testReadOnlyManager<T extends ManagedSnowflakeEntity<T>,
+    U extends ReadOnlyManager<T>>(
   String name,
-  U Function(CacheConfig<T>, NyxxRest) create,
+  U Function(CacheConfig<T>, FirebridgeRest) create,
   Pattern baseUrlMatcher, {
   required Map<String, Object?> sampleObject,
   required void Function(T) sampleMatches,
@@ -74,8 +75,9 @@ Future<void> testReadOnlyManager<T extends ManagedSnowflakeEntity<T>, U extends 
 
   group(name, () {
     test('parse', () {
-      final client = MockNyxx();
-      when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
+      final client = MockFirebridge();
+      when(() => client.apiOptions)
+          .thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
       when(() => client.options).thenReturn(RestClientOptions());
       final config = CacheConfig<T>();
 
@@ -96,8 +98,9 @@ Future<void> testReadOnlyManager<T extends ManagedSnowflakeEntity<T>, U extends 
     if (additionalParsingTests != null) {
       for (final parsingTest in additionalParsingTests) {
         test(parsingTest.name, () {
-          final client = MockNyxx();
-          when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
+          final client = MockFirebridge();
+          when(() => client.apiOptions)
+              .thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
           when(() => client.options).thenReturn(RestClientOptions());
           final config = CacheConfig<T>();
 
@@ -120,12 +123,15 @@ Future<void> testReadOnlyManager<T extends ManagedSnowflakeEntity<T>, U extends 
     );
 
     test('fetch caches entity', () async {
-      final client = MockNyxx();
-      when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
+      final client = MockFirebridge();
+      when(() => client.apiOptions)
+          .thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
       when(() => client.options).thenReturn(RestClientOptions());
       when(() => client.httpHandler).thenReturn(HttpHandler(client));
 
-      nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get(baseUrlMatcher).reply(200, jsonEncode(fetchObjectOverride ?? sampleObject));
+      nock('https://discord.com/api/v${client.apiOptions.apiVersion}')
+          .get(baseUrlMatcher)
+          .reply(200, jsonEncode(fetchObjectOverride ?? sampleObject));
 
       final manager = create(CacheConfig(), client);
       final entity = await manager.fetch(Snowflake(1));
@@ -169,9 +175,10 @@ Future<void> testReadOnlyManager<T extends ManagedSnowflakeEntity<T>, U extends 
   });
 }
 
-Future<void> testManager<T extends WritableSnowflakeEntity<T>, U extends Manager<T>>(
+Future<void>
+    testManager<T extends WritableSnowflakeEntity<T>, U extends Manager<T>>(
   String name,
-  U Function(CacheConfig<T>, NyxxRest) create,
+  U Function(CacheConfig<T>, FirebridgeRest) create,
   Pattern baseUrlMatcher,
   Pattern createUrlMatcher, {
   required Map<String, Object?> sampleObject,
@@ -213,14 +220,16 @@ Future<void> testManager<T extends WritableSnowflakeEntity<T>, U extends Manager
       test('create caches entity', () async {
         nock.init();
 
-        final client = MockNyxx();
-        when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
+        final client = MockFirebridge();
+        when(() => client.apiOptions)
+            .thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
         when(() => client.options).thenReturn(RestClientOptions());
         when(() => client.httpHandler).thenReturn(HttpHandler(client));
 
         Interceptor(RequestMatcher(
           createMethod,
-          UriMatcher('https://discord.com/api/v${client.apiOptions.apiVersion}', createUrlMatcher),
+          UriMatcher('https://discord.com/api/v${client.apiOptions.apiVersion}',
+              createUrlMatcher),
           BodyMatcher((_, __) => true),
         )).reply(200, jsonEncode(sampleObject));
 
@@ -246,12 +255,15 @@ Future<void> testManager<T extends WritableSnowflakeEntity<T>, U extends Manager
       );
 
       test('update caches entity', () async {
-        final client = MockNyxx();
-        when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
+        final client = MockFirebridge();
+        when(() => client.apiOptions)
+            .thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
         when(() => client.options).thenReturn(RestClientOptions());
         when(() => client.httpHandler).thenReturn(HttpHandler(client));
 
-        nock('https://discord.com/api/v${client.apiOptions.apiVersion}').patch(baseUrlMatcher, (_) => true).reply(200, jsonEncode(sampleObject));
+        nock('https://discord.com/api/v${client.apiOptions.apiVersion}')
+            .patch(baseUrlMatcher, (_) => true)
+            .reply(200, jsonEncode(sampleObject));
 
         final manager = create(CacheConfig(), client);
         final entity = await manager.update(Snowflake(1), updateBuilder);
@@ -272,12 +284,15 @@ Future<void> testManager<T extends WritableSnowflakeEntity<T>, U extends Manager
       );
 
       test('delete caches entity', () async {
-        final client = MockNyxx();
-        when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
+        final client = MockFirebridge();
+        when(() => client.apiOptions)
+            .thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
         when(() => client.options).thenReturn(RestClientOptions());
         when(() => client.httpHandler).thenReturn(HttpHandler(client));
 
-        nock('https://discord.com/api/v${client.apiOptions.apiVersion}').delete(baseUrlMatcher).reply(200, jsonEncode(sampleObject));
+        nock('https://discord.com/api/v${client.apiOptions.apiVersion}')
+            .delete(baseUrlMatcher)
+            .reply(200, jsonEncode(sampleObject));
 
         final manager = create(CacheConfig(), client);
         final entity = manager.parse(sampleObject);

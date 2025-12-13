@@ -1,6 +1,6 @@
 import 'package:mocktail/mocktail.dart';
 import 'package:nock/nock.dart';
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import '../../../mocks/client.dart';
@@ -11,9 +11,10 @@ void main() {
     tearDownAll(() => nock.cleanAll());
 
     test('url', () {
-      final client = MockNyxx();
+      final client = MockFirebridge();
 
-      when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
+      when(() => client.apiOptions)
+          .thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
 
       final asset = CdnAsset(
         client: client,
@@ -23,13 +24,15 @@ void main() {
         hash: 'yup',
       );
 
-      expect(asset.url.toString(), equals('https://cdn.discordapp.com/hello/world/yup.png'));
+      expect(asset.url.toString(),
+          equals('https://cdn.discordapp.com/hello/world/yup.png'));
     });
 
     test('fetchStreamed handles errors', () async {
-      final client = MockNyxx();
+      final client = MockFirebridge();
 
-      when(() => client.apiOptions).thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
+      when(() => client.apiOptions)
+          .thenReturn(RestApiOptions(token: 'TEST_TOKEN'));
       when(() => client.options).thenReturn(RestClientOptions());
       when(() => client.httpHandler).thenReturn(HttpHandler(client));
 

@@ -1,4 +1,4 @@
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -17,16 +17,24 @@ void main() {
       expect(route.toString(), equals('/test/one/test-again/two/three'));
     });
 
-    test('rateLimitId is the same for two routes with different minor parameters', () {
-      final route1 = HttpRoute()..add(HttpRoutePart('test', [HttpRouteParam('one')]));
-      final route2 = HttpRoute()..add(HttpRoutePart('test', [HttpRouteParam('one')]));
+    test(
+        'rateLimitId is the same for two routes with different minor parameters',
+        () {
+      final route1 = HttpRoute()
+        ..add(HttpRoutePart('test', [HttpRouteParam('one')]));
+      final route2 = HttpRoute()
+        ..add(HttpRoutePart('test', [HttpRouteParam('one')]));
 
       expect(route1.rateLimitId, equals(route2.rateLimitId));
     });
 
-    test('rateLimitId is different for two routes with different major parameters', () {
-      final route1 = HttpRoute()..add(HttpRoutePart('test', [HttpRouteParam('one', isMajor: true)]));
-      final route2 = HttpRoute()..add(HttpRoutePart('test', [HttpRouteParam('one', isMajor: true)]));
+    test(
+        'rateLimitId is different for two routes with different major parameters',
+        () {
+      final route1 = HttpRoute()
+        ..add(HttpRoutePart('test', [HttpRouteParam('one', isMajor: true)]));
+      final route2 = HttpRoute()
+        ..add(HttpRoutePart('test', [HttpRouteParam('one', isMajor: true)]));
 
       expect(route1.rateLimitId, equals(route2.rateLimitId));
     });

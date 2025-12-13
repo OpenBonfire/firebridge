@@ -1,22 +1,22 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' hide MultipartRequest;
-import 'package:nyxx/src/builders/interaction_response.dart';
-import 'package:nyxx/src/builders/message/message.dart';
-import 'package:nyxx/src/builders/sentinels.dart';
-import 'package:nyxx/src/client.dart';
-import 'package:nyxx/src/http/request.dart';
-import 'package:nyxx/src/http/route.dart';
-import 'package:nyxx/src/models/interaction.dart';
-import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/utils/cache_helpers.dart';
+import 'package:firebridge/src/builders/interaction_response.dart';
+import 'package:firebridge/src/builders/message/message.dart';
+import 'package:firebridge/src/builders/sentinels.dart';
+import 'package:firebridge/src/client.dart';
+import 'package:firebridge/src/http/request.dart';
+import 'package:firebridge/src/http/route.dart';
+import 'package:firebridge/src/models/interaction.dart';
+import 'package:firebridge/src/models/snowflake.dart';
+import 'package:firebridge/src/utils/cache_helpers.dart';
 
 // TODO: For firebridge, this needs to be from the client's perspective
 
 /// A [Manager] for [Interaction]s.
 class InteractionManager {
   /// The client for this [InteractionManager].
-  final NyxxRest client;
+  final FirebridgeRest client;
 
   /// Create a new [InteractionManager].
   InteractionManager(this.client);

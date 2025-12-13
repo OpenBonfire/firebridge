@@ -1,5 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/models/presence.dart';
+import 'package:firebridge/src/models/presence.dart';
 
 part 'session.mapper.dart';
 

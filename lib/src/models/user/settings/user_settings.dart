@@ -1,6 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/models/presence.dart';
-import 'package:nyxx/src/models/snowflake.dart';
+import 'package:firebridge/src/models/presence.dart';
+import 'package:firebridge/src/models/snowflake.dart';
 
 part 'user_settings.mapper.dart';
 

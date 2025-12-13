@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:collection';
 
-import 'package:nyxx/src/client.dart';
-import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
+import 'package:firebridge/src/client.dart';
+import 'package:firebridge/src/models/snowflake.dart';
+import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 
 /// A manager for all the caches associated with a client.
 ///
@@ -13,7 +13,7 @@ import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
 /// Empty caches are automatically discarded.
 class CacheManager {
   /// The client this [CacheManager] is for.
-  final Nyxx client;
+  final Firebridge client;
 
   final Map<String, Cache<dynamic>> _caches = {};
 
@@ -36,7 +36,8 @@ class CacheManager {
         return cache;
       }
 
-      throw ArgumentError('Type of cache (${cache.runtimeType}) does not match type argument ($T) for $identifier');
+      throw ArgumentError(
+          'Type of cache (${cache.runtimeType}) does not match type argument ($T) for $identifier');
     }
 
     if (_emptyCaches[identifier] case final reference?) {
@@ -45,7 +46,8 @@ class CacheManager {
           return cache;
         }
 
-        throw ArgumentError('Type of cache (${cache.runtimeType}) does not match type argument ($T) for $identifier');
+        throw ArgumentError(
+            'Type of cache (${cache.runtimeType}) does not match type argument ($T) for $identifier');
       } else {
         _emptyCaches.remove(identifier);
       }
@@ -109,7 +111,8 @@ final class _CacheEntry<T> extends LinkedListEntry<_CacheEntry<T>> {
 class Cache<T> extends MapBase<Snowflake, T> {
   /// Return a mapping of identifier to cache contents for all caches associated with [client].
   @Deprecated('Use client.cache.caches')
-  static Map<String, Map<Snowflake, Object?>> cachesFor(Nyxx client) => client.cache.caches;
+  static Map<String, Map<Snowflake, Object?>> cachesFor(Firebridge client) =>
+      client.cache.caches;
 
   /// A list containing the entries of this cache, with the most recently
   /// accessed or updated entry first.
@@ -140,12 +143,13 @@ class Cache<T> extends MapBase<Snowflake, T> {
   final CacheManager manager;
 
   /// The client this cache is for.
-  Nyxx get client => manager.client;
+  Firebridge get client => manager.client;
 
   Cache._(this.manager, this.identifier, this.config);
 
   @Deprecated('Use client.cache.getCache')
-  factory Cache(Nyxx client, String identifier, CacheConfig<T> config) => client.cache.getCache(identifier, config);
+  factory Cache(Firebridge client, String identifier, CacheConfig<T> config) =>
+      client.cache.getCache(identifier, config);
 
   @override
   Iterable<Snowflake> get keys => _entries.keys;

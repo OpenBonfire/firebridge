@@ -3,13 +3,13 @@ import 'dart:collection';
 
 import 'package:http/http.dart' hide MultipartRequest;
 import 'package:logging/logging.dart';
-import 'package:nyxx/src/client.dart';
-import 'package:nyxx/src/errors.dart';
-import 'package:nyxx/src/http/bucket.dart';
-import 'package:nyxx/src/http/request.dart';
-import 'package:nyxx/src/http/response.dart';
-import 'package:nyxx/src/plugin/plugin.dart';
-import 'package:nyxx/src/utils/iterable_extension.dart';
+import 'package:firebridge/src/client.dart';
+import 'package:firebridge/src/errors.dart';
+import 'package:firebridge/src/http/bucket.dart';
+import 'package:firebridge/src/http/request.dart';
+import 'package:firebridge/src/http/response.dart';
+import 'package:firebridge/src/plugin/plugin.dart';
+import 'package:firebridge/src/utils/iterable_extension.dart';
 
 extension on HttpRequest {
   String get loggingId => '$method $route';
@@ -36,7 +36,7 @@ typedef RateLimitInfo = ({
 /// {@endtemplate}
 class HttpHandler {
   /// The client this handler is attached to.
-  final Nyxx client;
+  final Firebridge client;
 
   /// The HTTP client used to make requests.
   final Client httpClient = Client();
@@ -158,7 +158,7 @@ class HttpHandler {
   ///
   /// Otherwise, this method returns a [HttpResponseError].
   ///
-  /// This method calls [NyxxPlugin.interceptRequest] on all plugins registered to the [client] which may intercept the [request].
+  /// This method calls [FirebridgePlugin.interceptRequest] on all plugins registered to the [client] which may intercept the [request].
   Future<HttpResponse> execute(HttpRequest request) async {
     final executeFn = client.options.plugins.fold(
       _execute,

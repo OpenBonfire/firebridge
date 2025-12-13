@@ -1,5 +1,5 @@
 import 'package:matcher/expect.dart';
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 
 import '../../../test_manager.dart';
 
@@ -26,7 +26,8 @@ final sampleAuditLog = {
 void main() {
   testReadOnlyManager<AuditLogEntry, AuditLogManager>(
     'AuditLogManager',
-    (config, client) => AuditLogManager(config, client, guildId: Snowflake.zero),
+    (config, client) =>
+        AuditLogManager(config, client, guildId: Snowflake.zero),
     // fetch() artificially creates a before field as before = id + 1 - testing ID is 1 so before is 2
     '/guilds/0/audit-logs?before=2',
     sampleObject: sampleAuditLogEntry,

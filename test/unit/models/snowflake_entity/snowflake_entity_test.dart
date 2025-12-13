@@ -1,8 +1,9 @@
 import 'package:mocktail/mocktail.dart';
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
-class PartialMockSnowflakeEntity extends WritableSnowflakeEntity<MockSnowflakeEntity> {
+class PartialMockSnowflakeEntity
+    extends WritableSnowflakeEntity<MockSnowflakeEntity> {
   @override
   final MockSnowflakeEntityManager manager = MockSnowflakeEntityManager();
 
@@ -15,7 +16,9 @@ class MockSnowflakeEntity extends PartialMockSnowflakeEntity {
   MockSnowflakeEntity({required super.id});
 }
 
-class MockSnowflakeEntityManager with Mock implements Manager<MockSnowflakeEntity> {}
+class MockSnowflakeEntityManager
+    with Mock
+    implements Manager<MockSnowflakeEntity> {}
 
 void main() {
   group('SnowflakeEntity', () {

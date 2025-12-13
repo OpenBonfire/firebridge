@@ -2,16 +2,16 @@ import 'dart:async';
 import 'dart:io' as io;
 
 import 'package:logging/logging.dart';
-import 'package:nyxx/src/api_options.dart';
-import 'package:nyxx/src/client.dart';
-import 'package:nyxx/src/client_options.dart';
-import 'package:nyxx/src/plugin/plugin.dart';
+import 'package:firebridge/src/api_options.dart';
+import 'package:firebridge/src/client.dart';
+import 'package:firebridge/src/client_options.dart';
+import 'package:firebridge/src/plugin/plugin.dart';
 
 /// A global instance of the [Logging] plugin.
 final logging = Logging();
 
 /// A plugin that outputs a client's logs to [stdout] and [stderr].
-class Logging extends NyxxPlugin {
+class Logging extends FirebridgePlugin {
   @override
   String get name => 'Logging';
 
@@ -80,7 +80,8 @@ class Logging extends NyxxPlugin {
         customMessage = '${customMessage.substring(0, truncateLogsAt! - 3)}...';
       }
 
-      message.writeln('[${rec.time}] [${rec.level.name}] [${rec.loggerName}] $customMessage');
+      message.writeln(
+          '[${rec.time}] [${rec.level.name}] [${rec.loggerName}] $customMessage');
 
       final error = rec.error;
       if (error != null) {
@@ -98,7 +99,8 @@ class Logging extends NyxxPlugin {
         }
       }
 
-      final stackTrace = (error is Error ? error.stackTrace : null) ?? rec.stackTrace;
+      final stackTrace =
+          (error is Error ? error.stackTrace : null) ?? rec.stackTrace;
       if (stackTrace != null) {
         message.writeln('Stack trace:\n$stackTrace\n');
       }
@@ -135,13 +137,13 @@ class Logging extends NyxxPlugin {
   }
 
   @override
-  Future<void> doClose(Nyxx client, Future<void> Function() close) async {
+  Future<void> doClose(Firebridge client, Future<void> Function() close) async {
     await super.doClose(client, close);
 
     _clients--;
     _stopListeningIfNeeded();
 
-    if (client is NyxxRest) {
+    if (client is FirebridgeRest) {
       _tokens.remove(client.apiOptions.token);
     }
   }

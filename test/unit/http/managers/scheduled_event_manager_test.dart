@@ -1,4 +1,4 @@
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import '../../../test_manager.dart';
@@ -43,8 +43,10 @@ void checkScheduledEvent(ScheduledEvent event) {
   expect(event.creatorId, equals(Snowflake(1033681843708510238)));
   expect(event.name, equals('test event'));
   expect(event.description, isNull);
-  expect(event.scheduledStartTime, equals(DateTime.utc(2024, 08, 29, 19, 59, 07, 45, 563)));
-  expect(event.scheduledEndTime, equals(DateTime.utc(2024, 08, 29, 19, 59, 17, 45, 564)));
+  expect(event.scheduledStartTime,
+      equals(DateTime.utc(2024, 08, 29, 19, 59, 07, 45, 563)));
+  expect(event.scheduledEndTime,
+      equals(DateTime.utc(2024, 08, 29, 19, 59, 17, 45, 564)));
   expect(event.privacyLevel, equals(PrivacyLevel.guildOnly));
   expect(event.status, equals(EventStatus.scheduled));
   expect(event.type, equals(ScheduledEntityType.external));
@@ -63,7 +65,8 @@ void checkScheduledEvent(ScheduledEvent event) {
     expect(rule.end, isNull);
     expect(rule.frequency, equals(RecurrenceRuleFrequency.weekly));
     expect(rule.interval, equals(1));
-    expect(rule.start, equals(DateTime.utc(2024, 08, 29, 19, 59, 07, 045, 594)));
+    expect(
+        rule.start, equals(DateTime.utc(2024, 08, 29, 19, 59, 07, 045, 594)));
     return true;
   });
 }
@@ -96,7 +99,8 @@ void checkScheduledEvent2(ScheduledEvent event) {
   expect(event.creatorId, equals(Snowflake(506759329068613643)));
   expect(event.name, equals('test event'));
   expect(event.description, equals(''));
-  expect(event.scheduledStartTime, equals(DateTime.utc(2024, 08, 29, 19, 00, 00, 859)));
+  expect(event.scheduledStartTime,
+      equals(DateTime.utc(2024, 08, 29, 19, 00, 00, 859)));
   expect(event.scheduledEndTime, isNull);
   expect(event.privacyLevel, equals(PrivacyLevel.guildOnly));
   expect(event.status, equals(EventStatus.scheduled));
@@ -124,7 +128,8 @@ void checkScheduledEventUser(ScheduledEventUser user) {
 void main() {
   testManager<ScheduledEvent, ScheduledEventManager>(
     'ScheduledEventManager',
-    (config, client) => ScheduledEventManager(config, client, guildId: Snowflake.zero),
+    (config, client) =>
+        ScheduledEventManager(config, client, guildId: Snowflake.zero),
     RegExp(r'/guilds/0/scheduled-events/\d+'),
     '/guilds/0/scheduled-events',
     sampleObject: sampleScheduledEvent,
@@ -132,7 +137,8 @@ void main() {
     additionalSampleObjects: [sampleScheduledEvent2],
     additionalSampleMatchers: [checkScheduledEvent2],
     additionalParsingTests: [
-      ParsingTest<ScheduledEventManager, ScheduledEventUser, Map<String, Object?>>(
+      ParsingTest<ScheduledEventManager, ScheduledEventUser,
+          Map<String, Object?>>(
         name: 'parseScheduledEventUser',
         source: sampleScheduledEventUser,
         parse: (manager) => manager.parseScheduledEventUser,
@@ -150,7 +156,8 @@ void main() {
           checkScheduledEvent(list.single);
         },
       ),
-      EndpointTest<ScheduledEventManager, List<ScheduledEventUser>, List<Object?>>(
+      EndpointTest<ScheduledEventManager, List<ScheduledEventUser>,
+          List<Object?>>(
         name: 'listEventUsers',
         source: [sampleScheduledEventUser],
         urlMatcher: '/guilds/0/scheduled-events/1/users',

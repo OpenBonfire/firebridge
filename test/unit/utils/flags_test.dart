@@ -1,4 +1,4 @@
-import 'package:nyxx/src/utils/flags.dart';
+import 'package:firebridge/src/utils/flags.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -26,13 +26,16 @@ void main() {
     });
 
     test('|', () {
-      final flags = Flags<Never>(3) | Flag<Never>.fromOffset(2) | Flags<Never>(0xff00);
+      final flags =
+          Flags<Never>(3) | Flag<Never>.fromOffset(2) | Flags<Never>(0xff00);
 
       expect(flags, equals(Flags<Never>(0xff07)));
     });
 
     test('iterator', () {
-      final flags = Flag<Never>.fromOffset(3) | Flag<Never>.fromOffset(2) | Flag<Never>.fromOffset(10);
+      final flags = Flag<Never>.fromOffset(3) |
+          Flag<Never>.fromOffset(2) |
+          Flag<Never>.fromOffset(10);
 
       expect(flags, hasLength(3));
       expect(flags.first, equals(Flag<Never>.fromOffset(2)));

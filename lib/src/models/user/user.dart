@@ -1,13 +1,13 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/models/commands/application_command_option.dart';
-import 'package:nyxx/src/models/discord_color.dart';
-import 'package:nyxx/src/models/locale.dart';
-import 'package:nyxx/src/models/message/author.dart';
-import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/models/snowflake_entity/snowflake_entity.dart';
-import 'package:nyxx/src/models/user/avatar_decoration_data.dart';
-import 'package:nyxx/src/models/user/primary_guild.dart';
-import 'package:nyxx/src/utils/flags.dart';
+import 'package:firebridge/src/models/commands/application_command_option.dart';
+import 'package:firebridge/src/models/discord_color.dart';
+import 'package:firebridge/src/models/locale.dart';
+import 'package:firebridge/src/models/message/author.dart';
+import 'package:firebridge/src/models/snowflake.dart';
+import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
+import 'package:firebridge/src/models/user/avatar_decoration_data.dart';
+import 'package:firebridge/src/models/user/primary_guild.dart';
+import 'package:firebridge/src/utils/flags.dart';
 
 part 'user.mapper.dart';
 

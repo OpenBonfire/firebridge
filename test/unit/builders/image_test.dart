@@ -1,4 +1,4 @@
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -9,7 +9,8 @@ void main() {
         data: [0, 0, 0, 255, 255, 255],
       );
 
-      expect(builder.buildDataString(), equals('data:image/png;base64,AAAA////'));
+      expect(
+          builder.buildDataString(), equals('data:image/png;base64,AAAA////'));
     });
   });
 }

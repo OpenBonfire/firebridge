@@ -1,78 +1,78 @@
-import 'package:nyxx/src/client.dart';
-import 'package:nyxx/src/client_options.dart';
-import 'package:nyxx/src/http/managers/channel_manager.dart';
-import 'package:nyxx/src/http/managers/interaction_manager.dart';
-import 'package:nyxx/src/http/managers/invite_manager.dart';
-import 'package:nyxx/src/http/managers/gateway_manager.dart';
-import 'package:nyxx/src/http/managers/guild_manager.dart';
-import 'package:nyxx/src/http/managers/soundboard_manager.dart';
-import 'package:nyxx/src/http/managers/sticker_manager.dart';
-import 'package:nyxx/src/http/managers/user_manager.dart';
-import 'package:nyxx/src/http/managers/webhook_manager.dart';
-import 'package:nyxx/src/http/managers/application_manager.dart';
-import 'package:nyxx/src/http/managers/voice_manager.dart';
+import 'package:firebridge/src/client.dart';
+import 'package:firebridge/src/client_options.dart';
+import 'package:firebridge/src/http/managers/channel_manager.dart';
+import 'package:firebridge/src/http/managers/interaction_manager.dart';
+import 'package:firebridge/src/http/managers/invite_manager.dart';
+import 'package:firebridge/src/http/managers/gateway_manager.dart';
+import 'package:firebridge/src/http/managers/guild_manager.dart';
+import 'package:firebridge/src/http/managers/soundboard_manager.dart';
+import 'package:firebridge/src/http/managers/sticker_manager.dart';
+import 'package:firebridge/src/http/managers/user_manager.dart';
+import 'package:firebridge/src/http/managers/webhook_manager.dart';
+import 'package:firebridge/src/http/managers/application_manager.dart';
+import 'package:firebridge/src/http/managers/voice_manager.dart';
 
-/// An internal mixin to add managers to a [Nyxx] instance.
-mixin ManagerMixin implements Nyxx {
+/// An internal mixin to add managers to a [Firebridge] instance.
+mixin ManagerMixin implements Firebridge {
   @override
   RestClientOptions get options;
 
   /// A [UserManager] that manages users for this client.
   UserManager get users => _users;
   late final UserManager _users =
-      UserManager(options.userCacheConfig, this as NyxxRest);
+      UserManager(options.userCacheConfig, this as FirebridgeRest);
 
   /// A [ChannelManager] that manages channels for this client.
   ChannelManager get channels => _channels;
   late final ChannelManager _channels = ChannelManager(
-      options.channelCacheConfig, this as NyxxRest,
+      options.channelCacheConfig, this as FirebridgeRest,
       stageInstanceConfig: options.stageInstanceCacheConfig);
 
   /// A [WebhookManager] that manages webhooks for this client.
   WebhookManager get webhooks => _webhooks;
   late final WebhookManager _webhooks =
-      WebhookManager(options.webhookCacheConfig, this as NyxxRest);
+      WebhookManager(options.webhookCacheConfig, this as FirebridgeRest);
 
   /// A [GuildManager] that manages guilds for this client.
   GuildManager get guilds => _guilds;
   late final GuildManager _guilds =
-      GuildManager(options.guildCacheConfig, this as NyxxRest);
+      GuildManager(options.guildCacheConfig, this as FirebridgeRest);
 
   /// An [ApplicationManager] that manages applications for this client.
   ApplicationManager get applications => _applications;
   late final ApplicationManager _applications =
-      ApplicationManager(this as NyxxRest);
+      ApplicationManager(this as FirebridgeRest);
 
   /// A [VoiceManager] that manages voice states for this client.
   VoiceManager get voice => _voice;
-  late final VoiceManager _voice = VoiceManager(this as NyxxRest);
+  late final VoiceManager _voice = VoiceManager(this as FirebridgeRest);
 
   /// An [InviteManager] that manages invites for this client.
   InviteManager get invites => _invites;
-  late final InviteManager _invites = InviteManager(this as NyxxRest);
+  late final InviteManager _invites = InviteManager(this as FirebridgeRest);
 
   /// A [GatewayManager] that manages gateway metadata for this client.
   GatewayManager get gateway => _gateway;
-  late final GatewayManager _gateway = GatewayManager(this as NyxxRest);
+  late final GatewayManager _gateway = GatewayManager(this as FirebridgeRest);
 
   /// A [GlobalStickerManager] that manages global stickers.
   GlobalStickerManager get stickers => _stickers;
-  late final GlobalStickerManager _stickers =
-      GlobalStickerManager(options.globalStickerCacheConfig, this as NyxxRest);
+  late final GlobalStickerManager _stickers = GlobalStickerManager(
+      options.globalStickerCacheConfig, this as FirebridgeRest);
 
   // /// A [GlobalApplicationCommandManager] that manages global application commands.
   // GlobalApplicationCommandManager get commands => _commands;
   // late final GlobalApplicationCommandManager _commands =
   //     GlobalApplicationCommandManager(
-  //         options.applicationCommandConfig, this as NyxxRest);
+  //         options.applicationCommandConfig, this as FirebridgeRest);
 
   /// An [InteractionManager] that manages interactions received by the client.
   InteractionManager get interactions => _interactions;
   late final InteractionManager _interactions =
-      InteractionManager(this as NyxxRest);
+      InteractionManager(this as FirebridgeRest);
 
   /// A [GlobalSoundboardManager] that manages global soundboard sounds.
   GlobalSoundboardManager get soundboard => _soundboard;
   late final GlobalSoundboardManager _soundboard = GlobalSoundboardManager(
-      options.globalSoundboardCacheConfig, this as NyxxRest);
+      options.globalSoundboardCacheConfig, this as FirebridgeRest);
 }

@@ -1,4 +1,4 @@
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import '../../../mocks/client.dart';
@@ -117,7 +117,12 @@ final sampleDm = {
   "type": 1,
   "id": "319674150115610528",
   "recipients": [
-    {"username": "test", "discriminator": "9999", "id": "82198898841029460", "avatar": "33ecab261d4681afa4d85a04691c4a01"}
+    {
+      "username": "test",
+      "discriminator": "9999",
+      "id": "82198898841029460",
+      "avatar": "33ecab261d4681afa4d85a04691c4a01"
+    }
   ]
 };
 
@@ -137,8 +142,18 @@ final sampleGroupDm = {
   "name": "Some test channel",
   "icon": null,
   "recipients": [
-    {"username": "test", "discriminator": "9999", "id": "82198898841029460", "avatar": "33ecab261d4681afa4d85a04691c4a01"},
-    {"username": "test2", "discriminator": "9999", "id": "82198810841029460", "avatar": "33ecab261d4681afa4d85a10691c4a01"}
+    {
+      "username": "test",
+      "discriminator": "9999",
+      "id": "82198898841029460",
+      "avatar": "33ecab261d4681afa4d85a04691c4a01"
+    },
+    {
+      "username": "test2",
+      "discriminator": "9999",
+      "id": "82198810841029460",
+      "avatar": "33ecab261d4681afa4d85a10691c4a01"
+    }
   ],
   "last_message_id": "3343820033257021450",
   "type": 3,
@@ -199,7 +214,12 @@ final sampleThread = {
   "message_count": 1,
   "member_count": 5,
   "rate_limit_per_user": 2,
-  "thread_metadata": {"archived": false, "auto_archive_duration": 1440, "archive_timestamp": "2021-04-12T23:40:39.855793+00:00", "locked": false},
+  "thread_metadata": {
+    "archived": false,
+    "auto_archive_duration": 1440,
+    "archive_timestamp": "2021-04-12T23:40:39.855793+00:00",
+    "locked": false
+  },
   "total_message_sent": 1
 };
 
@@ -211,7 +231,8 @@ void checkThread(Channel channel) {
   expect(channel.id, equals(Snowflake(41771983423143937)));
   expect(channel.appliedTags, isNull);
   expect(channel.approximateMemberCount, equals(5));
-  expect(channel.archiveTimestamp, equals(DateTime.utc(2021, 04, 12, 23, 40, 39, 855, 793)));
+  expect(channel.archiveTimestamp,
+      equals(DateTime.utc(2021, 04, 12, 23, 40, 39, 855, 793)));
   expect(channel.autoArchiveDuration, equals(Duration(minutes: 1440)));
   expect(channel.createdAt, equals(DateTime(2022, 01, 09)));
   expect(channel.guildId, equals(Snowflake(41771983423143937)));
@@ -261,9 +282,11 @@ void checkAnnouncementThread(Channel channel) {
   expect(channel.id, equals(Snowflake(1093553602909442119)));
   expect(channel.appliedTags, isNull);
   expect(channel.approximateMemberCount, equals(1));
-  expect(channel.archiveTimestamp, equals(DateTime.utc(2023, 04, 06, 15, 11, 36, 177)));
+  expect(channel.archiveTimestamp,
+      equals(DateTime.utc(2023, 04, 06, 15, 11, 36, 177)));
   expect(channel.autoArchiveDuration, equals(Duration(minutes: 4320)));
-  expect(channel.createdAt, equals(DateTime.utc(2023, 04, 06, 15, 11, 36, 177)));
+  expect(
+      channel.createdAt, equals(DateTime.utc(2023, 04, 06, 15, 11, 36, 177)));
   expect(channel.guildId, equals(Snowflake(1033681997136146462)));
   expect(channel.isArchived, isFalse);
   expect(channel.isLocked, isFalse);
@@ -321,9 +344,11 @@ void checkPrivateThread(Channel channel) {
   expect(channel.isInvitable, isTrue);
   expect(channel.appliedTags, isNull);
   expect(channel.approximateMemberCount, equals(2));
-  expect(channel.archiveTimestamp, equals(DateTime.utc(2023, 04, 06, 15, 22, 39, 155)));
+  expect(channel.archiveTimestamp,
+      equals(DateTime.utc(2023, 04, 06, 15, 22, 39, 155)));
   expect(channel.autoArchiveDuration, equals(Duration(minutes: 4320)));
-  expect(channel.createdAt, equals(DateTime.utc(2023, 04, 06, 15, 22, 39, 155)));
+  expect(
+      channel.createdAt, equals(DateTime.utc(2023, 04, 06, 15, 22, 39, 155)));
   expect(channel.guildId, equals(Snowflake(1033681997136146462)));
   expect(channel.isArchived, isFalse);
   expect(channel.isLocked, isFalse);
@@ -445,7 +470,8 @@ void checkStageInstance(StageInstance instance) {
 void main() {
   testReadOnlyManager<Channel, ChannelManager>(
     'ChannelManager',
-    (config, client) => ChannelManager(config, client, stageInstanceConfig: CacheConfig()),
+    (config, client) =>
+        ChannelManager(config, client, stageInstanceConfig: CacheConfig()),
     RegExp(r'/channels/\d+'),
     sampleObject: sampleGuildText,
     sampleMatches: checkGuildText,
@@ -519,7 +545,8 @@ void main() {
         method: 'patch',
         source: sampleGuildText,
         urlMatcher: '/channels/0',
-        execute: (manager) => manager.update(Snowflake.zero, GuildTextChannelUpdateBuilder()),
+        execute: (manager) =>
+            manager.update(Snowflake.zero, GuildTextChannelUpdateBuilder()),
         check: checkGuildText,
       ),
       EndpointTest<ChannelManager, Channel, Map<String, Object?>>(
@@ -535,8 +562,10 @@ void main() {
         method: 'put',
         source: null,
         urlMatcher: '/channels/0/permissions/1',
-        execute: (manager) =>
-            manager.updatePermissionOverwrite(Snowflake.zero, PermissionOverwriteBuilder(id: Snowflake(1), type: PermissionOverwriteType.role)),
+        execute: (manager) => manager.updatePermissionOverwrite(
+            Snowflake.zero,
+            PermissionOverwriteBuilder(
+                id: Snowflake(1), type: PermissionOverwriteType.role)),
         check: (_) {},
       ),
       EndpointTest<ChannelManager, void, void>(
@@ -544,7 +573,8 @@ void main() {
         method: 'delete',
         source: null,
         urlMatcher: '/channels/0/permissions/1',
-        execute: (manager) => manager.deletePermissionOverwrite(Snowflake.zero, Snowflake(1)),
+        execute: (manager) =>
+            manager.deletePermissionOverwrite(Snowflake.zero, Snowflake(1)),
         check: (_) {},
       ),
       EndpointTest<ChannelManager, List<InviteWithMetadata>, List<Object?>>(
@@ -563,7 +593,8 @@ void main() {
         method: 'POST',
         source: sampleInvite,
         urlMatcher: '/channels/0/invites',
-        execute: (manager) => manager.createInvite(Snowflake.zero, InviteBuilder()),
+        execute: (manager) =>
+            manager.createInvite(Snowflake.zero, InviteBuilder()),
         check: checkInvite,
       ),
       EndpointTest<ChannelManager, FollowedChannel, Map<String, Object?>>(
@@ -571,7 +602,8 @@ void main() {
         method: 'post',
         source: sampleFollowedChannel,
         urlMatcher: '/channels/0/followers',
-        execute: (manager) => manager.followChannel(Snowflake(1), Snowflake.zero),
+        execute: (manager) =>
+            manager.followChannel(Snowflake(1), Snowflake.zero),
         check: checkFollowedChannel,
       ),
       EndpointTest<ChannelManager, void, void>(
@@ -587,7 +619,8 @@ void main() {
         method: 'post',
         source: sampleThread,
         urlMatcher: '/channels/0/messages/1/threads',
-        execute: (manager) => manager.createThreadFromMessage(Snowflake.zero, Snowflake(1), ThreadFromMessageBuilder(name: 'test')),
+        execute: (manager) => manager.createThreadFromMessage(Snowflake.zero,
+            Snowflake(1), ThreadFromMessageBuilder(name: 'test')),
         check: checkThread,
       ),
       EndpointTest<ChannelManager, Thread, Map<String, Object?>>(
@@ -595,7 +628,8 @@ void main() {
         method: 'post',
         source: sampleThread,
         urlMatcher: '/channels/0/threads',
-        execute: (manager) => manager.createThread(Snowflake.zero, ThreadBuilder(name: 'test', type: ChannelType.publicThread)),
+        execute: (manager) => manager.createThread(Snowflake.zero,
+            ThreadBuilder(name: 'test', type: ChannelType.publicThread)),
         check: checkThread,
       ),
       EndpointTest<ChannelManager, Thread, Map<String, Object?>>(
@@ -603,7 +637,8 @@ void main() {
         method: 'post',
         source: sampleThread,
         urlMatcher: '/channels/0/threads',
-        execute: (manager) => manager.createForumThread(Snowflake.zero, ForumThreadBuilder(name: 'test', message: MessageBuilder())),
+        execute: (manager) => manager.createForumThread(Snowflake.zero,
+            ForumThreadBuilder(name: 'test', message: MessageBuilder())),
         check: checkThread,
       ),
       EndpointTest<ChannelManager, void, void>(
@@ -619,7 +654,8 @@ void main() {
         method: 'put',
         source: null,
         urlMatcher: '/channels/0/thread-members/1',
-        execute: (manager) => manager.addThreadMember(Snowflake.zero, Snowflake(1)),
+        execute: (manager) =>
+            manager.addThreadMember(Snowflake.zero, Snowflake(1)),
         check: (_) {},
       ),
       EndpointTest<ChannelManager, void, void>(
@@ -635,14 +671,16 @@ void main() {
         method: 'delete',
         source: null,
         urlMatcher: '/channels/0/thread-members/1',
-        execute: (manager) => manager.removeThreadMember(Snowflake.zero, Snowflake(1)),
+        execute: (manager) =>
+            manager.removeThreadMember(Snowflake.zero, Snowflake(1)),
         check: (_) {},
       ),
       EndpointTest<ChannelManager, ThreadMember, Map<String, Object?>>(
         name: 'fetchThreadMember',
         source: sampleThreadMember,
         urlMatcher: '/channels/0/thread-members/1',
-        execute: (manager) => manager.fetchThreadMember(Snowflake.zero, Snowflake(1)),
+        execute: (manager) =>
+            manager.fetchThreadMember(Snowflake.zero, Snowflake(1)),
         check: checkThreadMember,
       ),
       EndpointTest<ChannelManager, List<ThreadMember>, List<Object?>>(
@@ -666,14 +704,16 @@ void main() {
         name: 'listPrivateArchivedThreads',
         source: sampleThreadList,
         urlMatcher: '/channels/0/threads/archived/private',
-        execute: (manager) => manager.listPrivateArchivedThreads(Snowflake.zero),
+        execute: (manager) =>
+            manager.listPrivateArchivedThreads(Snowflake.zero),
         check: checkThreadList,
       ),
       EndpointTest<ChannelManager, ThreadList, Map<String, Object?>>(
         name: 'listJoinedPrivateArchivedThreads',
         source: sampleThreadList,
         urlMatcher: '/channels/0/users/@me/threads/archived/private',
-        execute: (manager) => manager.listJoinedPrivateArchivedThreads(Snowflake.zero),
+        execute: (manager) =>
+            manager.listJoinedPrivateArchivedThreads(Snowflake.zero),
         check: checkThreadList,
       ),
       EndpointTest<ChannelManager, StageInstance, Map<String, Object?>>(
@@ -681,7 +721,8 @@ void main() {
         method: 'POST',
         source: sampleStageInstance,
         urlMatcher: '/stage-instances',
-        execute: (manager) => manager.createStageInstance(Snowflake.zero, StageInstanceBuilder(topic: 'test')),
+        execute: (manager) => manager.createStageInstance(
+            Snowflake.zero, StageInstanceBuilder(topic: 'test')),
         check: checkStageInstance,
       ),
       EndpointTest<ChannelManager, StageInstance, Map<String, Object?>>(
@@ -696,7 +737,8 @@ void main() {
         method: 'PATCH',
         source: sampleStageInstance,
         urlMatcher: '/stage-instances/0',
-        execute: (manager) => manager.updateStageInstance(Snowflake.zero, StageInstanceUpdateBuilder()),
+        execute: (manager) => manager.updateStageInstance(
+            Snowflake.zero, StageInstanceUpdateBuilder()),
         check: checkStageInstance,
       ),
       EndpointTest<ChannelManager, void, void>(
@@ -710,7 +752,8 @@ void main() {
     ],
     extraRun: () {
       test('[] returns PartialTextChannel', () {
-        final manager = ChannelManager(const CacheConfig(), MockNyxx(), stageInstanceConfig: const CacheConfig());
+        final manager = ChannelManager(const CacheConfig(), MockFirebridge(),
+            stageInstanceConfig: const CacheConfig());
 
         expect(manager[Snowflake.zero], isA<PartialTextChannel>());
       });

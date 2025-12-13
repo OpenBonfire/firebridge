@@ -1,24 +1,25 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:logging/logging.dart';
-import 'package:nyxx/src/api_options.dart';
-import 'package:nyxx/src/builders/presence.dart';
-import 'package:nyxx/src/builders/voice.dart';
-import 'package:nyxx/src/client.dart';
-import 'package:nyxx/src/errors.dart';
-import 'package:nyxx/src/gateway/event_parser.dart';
-import 'package:nyxx/src/gateway/message.dart';
-import 'package:nyxx/src/gateway/shard.dart';
-import 'package:nyxx/src/http/managers/gateway_manager.dart';
-import 'package:nyxx/src/models/gateway/gateway.dart';
-import 'package:nyxx/src/models/gateway/event.dart';
-import 'package:nyxx/src/models/gateway/opcode.dart';
-import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/utils/cache_helpers.dart';
+import 'package:firebridge/src/api_options.dart';
+import 'package:firebridge/src/builders/presence.dart';
+import 'package:firebridge/src/builders/voice.dart';
+import 'package:firebridge/src/client.dart';
+import 'package:firebridge/src/errors.dart';
+import 'package:firebridge/src/gateway/event_parser.dart';
+import 'package:firebridge/src/gateway/message.dart';
+import 'package:firebridge/src/gateway/shard.dart';
+import 'package:firebridge/src/http/managers/gateway_manager.dart';
+import 'package:firebridge/src/models/gateway/gateway.dart';
+import 'package:firebridge/src/models/gateway/event.dart';
+import 'package:firebridge/src/models/gateway/opcode.dart';
+import 'package:firebridge/src/models/snowflake.dart';
+import 'package:firebridge/src/utils/cache_helpers.dart';
 
 /// Handles the connection to Discord's Gateway with shards, manages the client's cache based on Gateway events and provides an interface to the Gateway.
 class Gateway extends GatewayManager with EventParser {
   @override
-  final NyxxGateway client;
+  final FirebridgeGateway client;
 
   /// The [GatewayBot] instance used to configure this [Gateway].
   final GatewayBot gatewayBot;
@@ -152,7 +153,7 @@ class Gateway extends GatewayManager with EventParser {
 
   /// Connect to the gateway using the provided [client] and [gatewayBot] configuration.
   static Future<Gateway> connect(
-      NyxxGateway client, GatewayBot gatewayBot) async {
+      FirebridgeGateway client, GatewayBot gatewayBot) async {
     final logger = Logger('${client.options.loggerName}.Gateway');
 
     final totalShards = client.apiOptions.totalShards ?? gatewayBot.shards;
@@ -216,10 +217,7 @@ class Gateway extends GatewayManager with EventParser {
 
   /// Parse a [DispatchEvent] from [raw].
   DispatchEvent parseDispatchEvent(RawDispatchEvent raw) {
-    // if (raw.name == "READY") {
-    //   print("ready");
-    //   print(jsonEncode(raw.payload));
-    // }
+    // print(raw.name);
     final event = DispatchEventMapper.fromMap({
       'type': raw.name,
       'payload': raw,

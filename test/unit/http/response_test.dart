@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:mocktail/mocktail.dart';
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import '../../mocks/request.dart';
@@ -18,7 +18,8 @@ void main() {
       final response = HttpResponseSuccess(
         response: mockHttpResponse,
         request: MockHttpRequest(),
-        body: Uint8List.fromList(utf8.encode(jsonEncode({'value': 'test body'}))),
+        body:
+            Uint8List.fromList(utf8.encode(jsonEncode({'value': 'test body'}))),
       );
 
       expect(response.textBody, equals(r'{"value":"test body"}'));
@@ -52,7 +53,8 @@ void main() {
       final response = HttpResponseSuccess(
         response: mockHttpResponse,
         request: MockHttpRequest(),
-        body: Uint8List.fromList(utf8.encode(jsonEncode({'value': 'test body'}))),
+        body:
+            Uint8List.fromList(utf8.encode(jsonEncode({'value': 'test body'}))),
       );
 
       expect(response.textBody, equals(r'{"value":"test body"}'));
@@ -109,15 +111,19 @@ void main() {
       expect(FieldError.pathToName([]), equals(''));
       expect(FieldError.pathToName(['foo']), equals('foo'));
       expect(FieldError.pathToName(['foo', 'bar']), equals('foo.bar'));
-      expect(FieldError.pathToName(['foo', '175', 'bar']), equals('foo[175].bar'));
-      expect(FieldError.pathToName(['foo', '175', '80', 'bar']), equals('foo[175][80].bar'));
+      expect(
+          FieldError.pathToName(['foo', '175', 'bar']), equals('foo[175].bar'));
+      expect(FieldError.pathToName(['foo', '175', '80', 'bar']),
+          equals('foo[175][80].bar'));
     });
   });
 
   group('HttpErrorData', () {
     test('throws TypeError on invalid input', () {
-      expect(() => HttpErrorData.parse({'some': 'invalid', 'input': '80'}), throwsA(isA<TypeError>()));
-      expect(() => HttpErrorData.parse({'code': 'invalid', 'message': '80'}), throwsA(isA<TypeError>()));
+      expect(() => HttpErrorData.parse({'some': 'invalid', 'input': '80'}),
+          throwsA(isA<TypeError>()));
+      expect(() => HttpErrorData.parse({'code': 'invalid', 'message': '80'}),
+          throwsA(isA<TypeError>()));
     });
 
     test('parses error messages correctly', () {
@@ -128,12 +134,19 @@ void main() {
             "0": {
               "platform": {
                 "_errors": [
-                  {"code": "BASE_TYPE_CHOICES", "message": "Value must be one of ('desktop', 'android', 'ios')."}
+                  {
+                    "code": "BASE_TYPE_CHOICES",
+                    "message":
+                        "Value must be one of ('desktop', 'android', 'ios')."
+                  }
                 ]
               },
               "type": {
                 "_errors": [
-                  {"code": "BASE_TYPE_CHOICES", "message": "Value must be one of (0, 1, 2, 3, 4, 5)."}
+                  {
+                    "code": "BASE_TYPE_CHOICES",
+                    "message": "Value must be one of (0, 1, 2, 3, 4, 5)."
+                  }
                 ]
               }
             }
@@ -146,8 +159,10 @@ void main() {
       expect(errorData.errorMessage, equals('Invalid Form Body'));
       expect(errorData.fieldErrors.length, equals(2));
 
-      expect(errorData.fieldErrors['activities[0].platform']?.errorCode, equals('BASE_TYPE_CHOICES'));
-      expect(errorData.fieldErrors['activities[0].type']?.errorMessage, equals('Value must be one of (0, 1, 2, 3, 4, 5).'));
+      expect(errorData.fieldErrors['activities[0].platform']?.errorCode,
+          equals('BASE_TYPE_CHOICES'));
+      expect(errorData.fieldErrors['activities[0].type']?.errorMessage,
+          equals('Value must be one of (0, 1, 2, 3, 4, 5).'));
     });
   });
 }

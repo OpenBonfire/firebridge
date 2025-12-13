@@ -1,4 +1,4 @@
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 import 'package:test/test.dart';
 
 import '../../../test_manager.dart';
@@ -27,14 +27,17 @@ void checkEntitlement(Entitlement entitlement) {
   expect(entitlement.applicationId, equals(Snowflake(1019370614521200640)));
   expect(entitlement.type, equals(EntitlementType.applicationSubscription));
   expect(entitlement.isConsumed, isFalse);
-  expect(entitlement.startsAt, equals(DateTime.utc(2022, 09, 14, 17, 0, 18, 704, 163)));
-  expect(entitlement.endsAt, equals(DateTime.utc(2022, 10, 14, 17, 0, 18, 704, 163)));
+  expect(entitlement.startsAt,
+      equals(DateTime.utc(2022, 09, 14, 17, 0, 18, 704, 163)));
+  expect(entitlement.endsAt,
+      equals(DateTime.utc(2022, 10, 14, 17, 0, 18, 704, 163)));
 }
 
 void main() {
   testReadOnlyManager<Entitlement, EntitlementManager>(
     'EntitlementManager',
-    (config, client) => EntitlementManager(config, client, applicationId: Snowflake.zero),
+    (config, client) =>
+        EntitlementManager(config, client, applicationId: Snowflake.zero),
     // fetch() artificially creates a before field as before = id + 1 - testing ID is 1 so before is 2
     '/applications/0/entitlements?before=2',
     sampleObject: sampleEntitlement,
@@ -58,8 +61,11 @@ void main() {
         method: 'POST',
         source: sampleEntitlement,
         urlMatcher: '/applications/0/entitlements',
-        execute: (manager) => manager
-            .createTestEntitlement(TestEntitlementBuilder(skuId: Snowflake.zero, ownerId: Snowflake.zero, ownerType: TestEntitlementType.userSubscription)),
+        execute: (manager) => manager.createTestEntitlement(
+            TestEntitlementBuilder(
+                skuId: Snowflake.zero,
+                ownerId: Snowflake.zero,
+                ownerType: TestEntitlementType.userSubscription)),
         check: checkEntitlement,
       ),
       EndpointTest<EntitlementManager, void, void>(

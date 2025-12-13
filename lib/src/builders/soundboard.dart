@@ -1,9 +1,9 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/builders/builder.dart';
-import 'package:nyxx/src/builders/sentinels.dart';
-import 'package:nyxx/src/builders/sound.dart';
-import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/models/soundboard/soundboard.dart';
+import 'package:firebridge/src/builders/builder.dart';
+import 'package:firebridge/src/builders/sentinels.dart';
+import 'package:firebridge/src/builders/sound.dart';
+import 'package:firebridge/src/models/snowflake.dart';
+import 'package:firebridge/src/models/soundboard/soundboard.dart';
 
 part 'soundboard.mapper.dart';
 

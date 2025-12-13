@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:nyxx/nyxx.dart';
+import 'package:firebridge/nyxx.dart';
 
 void main() async {
-  final client = await Nyxx.connectGateway(
+  final client = await Firebridge.connectGateway(
     Platform.environment['TOKEN']!,
     GatewayIntents.allUnprivileged | GatewayIntents.messageContent,
     options: GatewayClientOptions(plugins: [logging, cliIntegration]),

@@ -1,12 +1,12 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/models/guild/guild.dart';
-import 'package:nyxx/src/models/locale.dart';
-import 'package:nyxx/src/models/permissions.dart';
-import 'package:nyxx/src/models/snowflake.dart';
-import 'package:nyxx/src/models/team.dart';
-import 'package:nyxx/src/models/user/user.dart';
-import 'package:nyxx/src/utils/flags.dart';
-import 'package:nyxx/src/utils/to_string_helper/to_string_helper.dart';
+import 'package:firebridge/src/models/guild/guild.dart';
+import 'package:firebridge/src/models/locale.dart';
+import 'package:firebridge/src/models/permissions.dart';
+import 'package:firebridge/src/models/snowflake.dart';
+import 'package:firebridge/src/models/team.dart';
+import 'package:firebridge/src/models/user/user.dart';
+import 'package:firebridge/src/utils/flags.dart';
+import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'application.mapper.dart';
 

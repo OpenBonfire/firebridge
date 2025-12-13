@@ -1,7 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/nyxx.dart';
-import 'package:nyxx/src/models/channel/has_threads_channel.dart';
-import 'package:nyxx/src/models/snowflake.dart';
+import 'package:firebridge/nyxx.dart';
+import 'package:firebridge/src/models/channel/has_threads_channel.dart';
+import 'package:firebridge/src/models/snowflake.dart';
 
 part 'thread_aggregate.mapper.dart';
 

@@ -1,17 +1,17 @@
 import 'dart:convert';
 
-import 'package:nyxx/src/builders/application.dart';
-import 'package:nyxx/src/client.dart';
-import 'package:nyxx/src/http/request.dart';
-import 'package:nyxx/src/http/route.dart';
-import 'package:nyxx/src/models/application.dart';
-import 'package:nyxx/src/models/snowflake.dart';
+import 'package:firebridge/src/builders/application.dart';
+import 'package:firebridge/src/client.dart';
+import 'package:firebridge/src/http/request.dart';
+import 'package:firebridge/src/http/route.dart';
+import 'package:firebridge/src/models/application.dart';
+import 'package:firebridge/src/models/snowflake.dart';
 
 /// A manager for [Application]s.
 // See the comment on PartialApplication for why we do not implement Manager.
 class ApplicationManager {
   /// The client this manager belongs to.
-  final NyxxRest client;
+  final FirebridgeRest client;
 
   /// Create a new [ApplicationManager].
   ApplicationManager(this.client);

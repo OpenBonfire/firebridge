@@ -1,7 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:nyxx/src/builders/builder.dart';
-import 'package:nyxx/src/models/discord_color.dart';
-import 'package:nyxx/src/models/message/embed.dart';
+import 'package:firebridge/src/builders/builder.dart';
+import 'package:firebridge/src/models/discord_color.dart';
+import 'package:firebridge/src/models/message/embed.dart';
 
 part 'embed.mapper.dart';
 
