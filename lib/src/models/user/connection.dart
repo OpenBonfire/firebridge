@@ -1,5 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/models/guild/integration.dart';
+import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'connection.mapper.dart';
@@ -23,7 +24,7 @@ class Connection with ToStringHelper, ConnectionMappable {
   final bool? isRevoked;
 
   /// A list of integrations associated with this connection.
-  final List<PartialIntegration>? integrations;
+  final List<Snowflake>? integrations;
 
   /// Whether the connection is verified.
   final bool isVerified;

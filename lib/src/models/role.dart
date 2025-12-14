@@ -3,20 +3,10 @@ import 'package:firebridge/src/models/commands/application_command_option.dart';
 import 'package:firebridge/src/models/discord_color.dart';
 import 'package:firebridge/src/models/permissions.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:firebridge/src/utils/flags.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'role.mapper.dart';
-
-/// A partial [Role].
-@MappableClass()
-class PartialRole extends WritableSnowflakeEntity<Role>
-    with PartialRoleMappable {
-  /// Create a new [PartialRole].
-  /// @nodoc
-  PartialRole({required super.id});
-}
 
 /// {@template role}
 /// A role in a [Guild].
@@ -25,9 +15,9 @@ class PartialRole extends WritableSnowflakeEntity<Role>
 /// * Discord API Reference: https://discord.com/developers/docs/topics/permissions#role-object
 /// {@endtemplate}
 @MappableClass()
-class Role extends PartialRole
-    with RoleMappable
-    implements CommandOptionMentionable<Role> {
+class Role with RoleMappable implements CommandOptionMentionable<Role> {
+  final Snowflake id;
+
   /// The name of this role.
   final String name;
 
@@ -67,7 +57,7 @@ class Role extends PartialRole
   /// {@macro role}
   /// @nodoc
   Role({
-    required super.id,
+    required this.id,
     required this.name,
     required this.color,
     required this.colors,

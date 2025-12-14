@@ -25,11 +25,11 @@ part 'guild.mapper.dart';
 class UnavailableGuildCreateEvent extends DispatchEvent
     with UnavailableGuildCreateEventMappable {
   /// The guild the client was added to.
-  final PartialGuild guild;
+  final Snowflake id;
 
   /// {@macro unavailable_guild_create_event}
   /// @nodoc
-  UnavailableGuildCreateEvent({required this.guild});
+  UnavailableGuildCreateEvent({required this.id});
 }
 
 /// {@template guild_create_event}
@@ -40,7 +40,7 @@ class GuildCreateEvent extends DispatchEvent
     with GuildCreateEventMappable
     implements UnavailableGuildCreateEvent {
   @override
-  final Guild guild;
+  final Snowflake id;
 
   /// The time at which the client joined the guild.
   final DateTime joinedAt;
@@ -75,7 +75,7 @@ class GuildCreateEvent extends DispatchEvent
   /// {@macro guild_create_event}
   /// @nodoc
   GuildCreateEvent({
-    required this.guild,
+    required this.id,
     required this.joinedAt,
     required this.isLarge,
     required this.memberCount,
@@ -111,7 +111,7 @@ class GuildUpdateEvent extends DispatchEvent with GuildUpdateEventMappable {
 @MappableClass(discriminatorValue: 'GUILD_DELETE')
 class GuildDeleteEvent extends DispatchEvent with GuildDeleteEventMappable {
   /// The guild the client was removed from.
-  final PartialGuild guild;
+  final Snowflake id;
 
   /// Whether the client was removed because the guild is unavailable.
   final bool isUnavailable;
@@ -122,7 +122,7 @@ class GuildDeleteEvent extends DispatchEvent with GuildDeleteEventMappable {
   /// {@macro guild_delete_event}
   /// @nodoc
   GuildDeleteEvent(
-      {required this.guild,
+      {required this.id,
       required this.isUnavailable,
       required this.deletedGuild});
 }

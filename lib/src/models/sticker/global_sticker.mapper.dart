@@ -7,136 +7,6 @@
 
 part of 'global_sticker.dart';
 
-class PartialGlobalStickerMapper extends ClassMapperBase<PartialGlobalSticker> {
-  PartialGlobalStickerMapper._();
-
-  static PartialGlobalStickerMapper? _instance;
-  static PartialGlobalStickerMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = PartialGlobalStickerMapper._());
-      ManagedSnowflakeEntityMapper.ensureInitialized();
-      GlobalStickerMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'PartialGlobalSticker';
-
-  static Snowflake _$id(PartialGlobalSticker v) => v.id;
-  static const Field<PartialGlobalSticker, Snowflake> _f$id = Field('id', _$id);
-
-  @override
-  final MappableFields<PartialGlobalSticker> fields = const {#id: _f$id};
-
-  static PartialGlobalSticker _instantiate(DecodingData data) {
-    return PartialGlobalSticker(id: data.dec(_f$id));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static PartialGlobalSticker fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<PartialGlobalSticker>(map);
-  }
-
-  static PartialGlobalSticker fromJson(String json) {
-    return ensureInitialized().decodeJson<PartialGlobalSticker>(json);
-  }
-}
-
-mixin PartialGlobalStickerMappable {
-  String toJson() {
-    return PartialGlobalStickerMapper.ensureInitialized()
-        .encodeJson<PartialGlobalSticker>(this as PartialGlobalSticker);
-  }
-
-  Map<String, dynamic> toMap() {
-    return PartialGlobalStickerMapper.ensureInitialized()
-        .encodeMap<PartialGlobalSticker>(this as PartialGlobalSticker);
-  }
-
-  PartialGlobalStickerCopyWith<
-    PartialGlobalSticker,
-    PartialGlobalSticker,
-    PartialGlobalSticker
-  >
-  get copyWith =>
-      _PartialGlobalStickerCopyWithImpl<
-        PartialGlobalSticker,
-        PartialGlobalSticker
-      >(this as PartialGlobalSticker, $identity, $identity);
-  @override
-  String toString() {
-    return PartialGlobalStickerMapper.ensureInitialized().stringifyValue(
-      this as PartialGlobalSticker,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return PartialGlobalStickerMapper.ensureInitialized().equalsValue(
-      this as PartialGlobalSticker,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return PartialGlobalStickerMapper.ensureInitialized().hashValue(
-      this as PartialGlobalSticker,
-    );
-  }
-}
-
-extension PartialGlobalStickerValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PartialGlobalSticker, $Out> {
-  PartialGlobalStickerCopyWith<$R, PartialGlobalSticker, $Out>
-  get $asPartialGlobalSticker => $base.as(
-    (v, t, t2) => _PartialGlobalStickerCopyWithImpl<$R, $Out>(v, t, t2),
-  );
-}
-
-abstract class PartialGlobalStickerCopyWith<
-  $R,
-  $In extends PartialGlobalSticker,
-  $Out
->
-    implements ManagedSnowflakeEntityCopyWith<$R, $In, $Out, GlobalSticker> {
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  @override
-  $R call({Snowflake? id});
-  PartialGlobalStickerCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _PartialGlobalStickerCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PartialGlobalSticker, $Out>
-    implements PartialGlobalStickerCopyWith<$R, PartialGlobalSticker, $Out> {
-  _PartialGlobalStickerCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<PartialGlobalSticker> $mapper =
-      PartialGlobalStickerMapper.ensureInitialized();
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  $R call({Snowflake? id}) =>
-      $apply(FieldCopyWithData({if (id != null) #id: id}));
-  @override
-  PartialGlobalSticker $make(CopyWithData data) =>
-      PartialGlobalSticker(id: data.get(#id, or: $value.id));
-
-  @override
-  PartialGlobalStickerCopyWith<$R2, PartialGlobalSticker, $Out2>
-  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _PartialGlobalStickerCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class GlobalStickerMapper extends ClassMapperBase<GlobalSticker> {
   GlobalStickerMapper._();
 
@@ -144,7 +14,6 @@ class GlobalStickerMapper extends ClassMapperBase<GlobalSticker> {
   static GlobalStickerMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GlobalStickerMapper._());
-      PartialGlobalStickerMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       StickerTypeMapper.ensureInitialized();
       StickerFormatTypeMapper.ensureInitialized();
@@ -291,12 +160,10 @@ extension GlobalStickerValueCopy<$R, $Out>
 }
 
 abstract class GlobalStickerCopyWith<$R, $In extends GlobalSticker, $Out>
-    implements PartialGlobalStickerCopyWith<$R, $In, $Out> {
-  @override
+    implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get packId;
   PartialUserCopyWith<$R, PartialUser, PartialUser>? get user;
-  @override
   $R call({
     Snowflake? id,
     String? name,

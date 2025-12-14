@@ -193,128 +193,6 @@ extension MessageTypeMapperExtension on MessageType {
   }
 }
 
-class PartialMessageMapper extends ClassMapperBase<PartialMessage> {
-  PartialMessageMapper._();
-
-  static PartialMessageMapper? _instance;
-  static PartialMessageMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = PartialMessageMapper._());
-      WritableSnowflakeEntityMapper.ensureInitialized();
-      MessageMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'PartialMessage';
-
-  static Snowflake _$id(PartialMessage v) => v.id;
-  static const Field<PartialMessage, Snowflake> _f$id = Field('id', _$id);
-
-  @override
-  final MappableFields<PartialMessage> fields = const {#id: _f$id};
-
-  static PartialMessage _instantiate(DecodingData data) {
-    return PartialMessage(id: data.dec(_f$id));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static PartialMessage fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<PartialMessage>(map);
-  }
-
-  static PartialMessage fromJson(String json) {
-    return ensureInitialized().decodeJson<PartialMessage>(json);
-  }
-}
-
-mixin PartialMessageMappable {
-  String toJson() {
-    return PartialMessageMapper.ensureInitialized().encodeJson<PartialMessage>(
-      this as PartialMessage,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return PartialMessageMapper.ensureInitialized().encodeMap<PartialMessage>(
-      this as PartialMessage,
-    );
-  }
-
-  PartialMessageCopyWith<PartialMessage, PartialMessage, PartialMessage>
-  get copyWith => _PartialMessageCopyWithImpl<PartialMessage, PartialMessage>(
-    this as PartialMessage,
-    $identity,
-    $identity,
-  );
-  @override
-  String toString() {
-    return PartialMessageMapper.ensureInitialized().stringifyValue(
-      this as PartialMessage,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return PartialMessageMapper.ensureInitialized().equalsValue(
-      this as PartialMessage,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return PartialMessageMapper.ensureInitialized().hashValue(
-      this as PartialMessage,
-    );
-  }
-}
-
-extension PartialMessageValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PartialMessage, $Out> {
-  PartialMessageCopyWith<$R, PartialMessage, $Out> get $asPartialMessage =>
-      $base.as((v, t, t2) => _PartialMessageCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class PartialMessageCopyWith<$R, $In extends PartialMessage, $Out>
-    implements WritableSnowflakeEntityCopyWith<$R, $In, $Out, Message> {
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  @override
-  $R call({Snowflake? id});
-  PartialMessageCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _PartialMessageCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PartialMessage, $Out>
-    implements PartialMessageCopyWith<$R, PartialMessage, $Out> {
-  _PartialMessageCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<PartialMessage> $mapper =
-      PartialMessageMapper.ensureInitialized();
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  $R call({Snowflake? id}) =>
-      $apply(FieldCopyWithData({if (id != null) #id: id}));
-  @override
-  PartialMessage $make(CopyWithData data) =>
-      PartialMessage(id: data.get(#id, or: $value.id));
-
-  @override
-  PartialMessageCopyWith<$R2, PartialMessage, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _PartialMessageCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class MessageMapper extends ClassMapperBase<Message> {
   MessageMapper._();
 
@@ -322,14 +200,13 @@ class MessageMapper extends ClassMapperBase<Message> {
   static MessageMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = MessageMapper._());
-      PartialMessageMapper.ensureInitialized();
+      MessageSnapshotMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       ChannelMentionMapper.ensureInitialized();
       AttachmentMapper.ensureInitialized();
       EmbedMapper.ensureInitialized();
       MessageTypeMapper.ensureInitialized();
-      PartialApplicationMapper.ensureInitialized();
       MessageReferenceMapper.ensureInitialized();
       MessageSnapshotMapper.ensureInitialized();
       MessageFlagsMapper.ensureInitialized();
@@ -435,11 +312,6 @@ class MessageMapper extends ClassMapperBase<Message> {
     'activity',
     _$activity,
   );
-  static PartialApplication? _$application(Message v) => v.application;
-  static const Field<Message, PartialApplication> _f$application = Field(
-    'application',
-    _$application,
-  );
   static Snowflake? _$applicationId(Message v) => v.applicationId;
   static const Field<Message, Snowflake> _f$applicationId = Field(
     'applicationId',
@@ -532,7 +404,6 @@ class MessageMapper extends ClassMapperBase<Message> {
     #webhookId: _f$webhookId,
     #type: _f$type,
     #activity: _f$activity,
-    #application: _f$application,
     #applicationId: _f$applicationId,
     #reference: _f$reference,
     #messageSnapshots: _f$messageSnapshots,
@@ -570,7 +441,6 @@ class MessageMapper extends ClassMapperBase<Message> {
       webhookId: data.dec(_f$webhookId),
       type: data.dec(_f$type),
       activity: data.dec(_f$activity),
-      application: data.dec(_f$application),
       applicationId: data.dec(_f$applicationId),
       reference: data.dec(_f$reference),
       messageSnapshots: data.dec(_f$messageSnapshots),
@@ -645,10 +515,7 @@ extension MessageValueCopy<$R, $Out> on ObjectCopyWith<$R, Message, $Out> {
 }
 
 abstract class MessageCopyWith<$R, $In extends Message, $Out>
-    implements
-        PartialMessageCopyWith<$R, $In, $Out>,
-        MessageSnapshotCopyWith<$R, $In, $Out> {
-  @override
+    implements MessageSnapshotCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   ListCopyWith<$R, User, UserCopyWith<$R, User, User>> get mentions;
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
@@ -665,8 +532,6 @@ abstract class MessageCopyWith<$R, $In extends Message, $Out>
   ListCopyWith<$R, Reaction, ObjectCopyWith<$R, Reaction, Reaction>>
   get reactions;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get webhookId;
-  PartialApplicationCopyWith<$R, PartialApplication, PartialApplication>?
-  get application;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get applicationId;
   MessageReferenceCopyWith<$R, MessageReference, MessageReference>?
   get reference;
@@ -724,7 +589,6 @@ abstract class MessageCopyWith<$R, $In extends Message, $Out>
     Snowflake? webhookId,
     MessageType? type,
     MessageActivity? activity,
-    PartialApplication? application,
     Snowflake? applicationId,
     MessageReference? reference,
     List<MessageSnapshot>? messageSnapshots,
@@ -804,10 +668,6 @@ class _MessageCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get webhookId =>
       $value.webhookId?.copyWith.$chain((v) => call(webhookId: v));
-  @override
-  PartialApplicationCopyWith<$R, PartialApplication, PartialApplication>?
-  get application =>
-      $value.application?.copyWith.$chain((v) => call(application: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get applicationId =>
       $value.applicationId?.copyWith.$chain((v) => call(applicationId: v));
@@ -909,7 +769,6 @@ class _MessageCopyWithImpl<$R, $Out>
     Object? webhookId = $none,
     MessageType? type,
     Object? activity = $none,
-    Object? application = $none,
     Object? applicationId = $none,
     Object? reference = $none,
     Object? messageSnapshots = $none,
@@ -945,7 +804,6 @@ class _MessageCopyWithImpl<$R, $Out>
       if (webhookId != $none) #webhookId: webhookId,
       if (type != null) #type: type,
       if (activity != $none) #activity: activity,
-      if (application != $none) #application: application,
       if (applicationId != $none) #applicationId: applicationId,
       if (reference != $none) #reference: reference,
       if (messageSnapshots != $none) #messageSnapshots: messageSnapshots,
@@ -985,7 +843,6 @@ class _MessageCopyWithImpl<$R, $Out>
     webhookId: data.get(#webhookId, or: $value.webhookId),
     type: data.get(#type, or: $value.type),
     activity: data.get(#activity, or: $value.activity),
-    application: data.get(#application, or: $value.application),
     applicationId: data.get(#applicationId, or: $value.applicationId),
     reference: data.get(#reference, or: $value.reference),
     messageSnapshots: data.get(#messageSnapshots, or: $value.messageSnapshots),

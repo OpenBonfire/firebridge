@@ -84,7 +84,7 @@ class ThreadUpdateEvent extends DispatchEvent with ThreadUpdateEventMappable {
 @MappableClass(discriminatorValue: "THREAD_DELETE")
 class ThreadDeleteEvent extends DispatchEvent with ThreadDeleteEventMappable {
   /// The thread which was deleted.
-  final PartialChannel thread;
+  final Snowflake thread;
 
   /// The thread as it was cached before it was deleted.
   final Thread? deletedThread;

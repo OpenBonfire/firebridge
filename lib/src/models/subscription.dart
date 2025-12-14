@@ -1,21 +1,14 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/models/sku.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 
 part 'subscription.mapper.dart';
 
-/// A partial [Subscription].
-@MappableClass()
-class PartialSubscription extends ManagedSnowflakeEntity<Subscription>
-    with PartialSubscriptionMappable {
-  /// @nodoc
-  PartialSubscription({required super.id});
-}
-
 /// A subscription to an [Sku].
 @MappableClass()
-class Subscription extends PartialSubscription with SubscriptionMappable {
+class Subscription with SubscriptionMappable {
+  final Snowflake id;
+
   /// The ID of the user this subscription is for.
   final Snowflake userId;
 
@@ -43,8 +36,8 @@ class Subscription extends PartialSubscription with SubscriptionMappable {
   final String? countryCode;
 
   /// @nodoc
-  Subscription({
-    required super.id,
+  const Subscription({
+    required this.id,
     required this.userId,
     required this.skuIds,
     required this.entitlementIds,

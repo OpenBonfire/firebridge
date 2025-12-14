@@ -97,136 +97,13 @@ extension ChannelTypeMapperExtension on ChannelType {
   }
 }
 
-class PartialChannelMapper extends ClassMapperBase<PartialChannel> {
-  PartialChannelMapper._();
-
-  static PartialChannelMapper? _instance;
-  static PartialChannelMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = PartialChannelMapper._());
-      ManagedSnowflakeEntityMapper.ensureInitialized();
-      ChannelMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'PartialChannel';
-
-  static Snowflake _$id(PartialChannel v) => v.id;
-  static const Field<PartialChannel, Snowflake> _f$id = Field('id', _$id);
-
-  @override
-  final MappableFields<PartialChannel> fields = const {#id: _f$id};
-
-  static PartialChannel _instantiate(DecodingData data) {
-    return PartialChannel(id: data.dec(_f$id));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static PartialChannel fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<PartialChannel>(map);
-  }
-
-  static PartialChannel fromJson(String json) {
-    return ensureInitialized().decodeJson<PartialChannel>(json);
-  }
-}
-
-mixin PartialChannelMappable {
-  String toJson() {
-    return PartialChannelMapper.ensureInitialized().encodeJson<PartialChannel>(
-      this as PartialChannel,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return PartialChannelMapper.ensureInitialized().encodeMap<PartialChannel>(
-      this as PartialChannel,
-    );
-  }
-
-  PartialChannelCopyWith<PartialChannel, PartialChannel, PartialChannel>
-  get copyWith => _PartialChannelCopyWithImpl<PartialChannel, PartialChannel>(
-    this as PartialChannel,
-    $identity,
-    $identity,
-  );
-  @override
-  String toString() {
-    return PartialChannelMapper.ensureInitialized().stringifyValue(
-      this as PartialChannel,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return PartialChannelMapper.ensureInitialized().equalsValue(
-      this as PartialChannel,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return PartialChannelMapper.ensureInitialized().hashValue(
-      this as PartialChannel,
-    );
-  }
-}
-
-extension PartialChannelValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PartialChannel, $Out> {
-  PartialChannelCopyWith<$R, PartialChannel, $Out> get $asPartialChannel =>
-      $base.as((v, t, t2) => _PartialChannelCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class PartialChannelCopyWith<$R, $In extends PartialChannel, $Out>
-    implements ManagedSnowflakeEntityCopyWith<$R, $In, $Out, Channel> {
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  @override
-  $R call({Snowflake? id});
-  PartialChannelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _PartialChannelCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PartialChannel, $Out>
-    implements PartialChannelCopyWith<$R, PartialChannel, $Out> {
-  _PartialChannelCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<PartialChannel> $mapper =
-      PartialChannelMapper.ensureInitialized();
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  $R call({Snowflake? id}) =>
-      $apply(FieldCopyWithData({if (id != null) #id: id}));
-  @override
-  PartialChannel $make(CopyWithData data) =>
-      PartialChannel(id: data.get(#id, or: $value.id));
-
-  @override
-  PartialChannelCopyWith<$R2, PartialChannel, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _PartialChannelCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
-class ChannelMapper extends SubClassMapperBase<Channel> {
+class ChannelMapper extends ClassMapperBase<Channel> {
   ChannelMapper._();
 
   static ChannelMapper? _instance;
   static ChannelMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ChannelMapper._());
-      PartialChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -240,14 +117,6 @@ class ChannelMapper extends SubClassMapperBase<Channel> {
 
   @override
   final MappableFields<Channel> fields = const {#id: _f$id};
-
-  @override
-  final String discriminatorKey = 'type';
-  @override
-  final dynamic discriminatorValue = 'Channel';
-  @override
-  late final ClassMapperBase superMapper =
-      PartialChannelMapper.ensureInitialized();
 
   static Channel _instantiate(DecodingData data) {
     throw MapperException.missingConstructor('Channel');
@@ -272,10 +141,8 @@ mixin ChannelMappable {
 }
 
 abstract class ChannelCopyWith<$R, $In extends Channel, $Out>
-    implements PartialChannelCopyWith<$R, $In, $Out> {
-  @override
+    implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  @override
   $R call({Snowflake? id});
   ChannelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }

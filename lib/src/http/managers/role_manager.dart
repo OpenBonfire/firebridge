@@ -18,9 +18,6 @@ class RoleManager extends Manager<Role> {
   RoleManager(super.config, super.client, {required this.guildId})
       : super(identifier: '$guildId.roles');
 
-  @override
-  PartialRole operator [](Snowflake id) => PartialRole(id: id);
-
   /// List the roles in this guild.
   Future<List<Role>> list() async {
     final route = HttpRoute()

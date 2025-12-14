@@ -25,9 +25,6 @@ class MessageManager extends Manager<Message> {
       : super(identifier: '$channelId.messages');
 
   @override
-  PartialMessage operator [](Snowflake id) => PartialMessage(id: id);
-
-  @override
   Future<Message> create(MessageBuilder builder) async {
     final route = HttpRoute()
       ..channels(id: channelId.toString())

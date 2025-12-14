@@ -230,7 +230,7 @@ class MessageReactionRemoveEmojiEvent extends DispatchEvent
   /// The ID of the guild the message is in.
   final Snowflake? guildId;
 
-  final PartialEmoji emoji;
+  final Emoji emoji;
 
   /// {@macro message_reaction_remove_emoji_event}
   /// @nodoc

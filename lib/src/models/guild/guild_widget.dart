@@ -1,6 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/http/managers/guild_manager.dart';
-import 'package:firebridge/src/models/channel/channel.dart';
+import 'package:firebridge/src/models/channel/guild_channel.dart';
 import 'package:firebridge/src/models/guild/guild.dart';
 import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/models/user/user.dart';
@@ -26,7 +26,7 @@ class GuildWidget with ToStringHelper, GuildWidgetMappable {
   final String? invite;
 
   /// A list of channels in the guild.
-  final List<PartialChannel> channels;
+  final List<GuildChannel> channels;
 
   /// A list of users in the guild.
   final List<PartialUser> users;
@@ -45,9 +45,6 @@ class GuildWidget with ToStringHelper, GuildWidgetMappable {
     required this.users,
     required this.presenceCount,
   });
-
-  /// The guild this widget is for.
-  PartialGuild get guild => manager.client.guilds[guildId];
 }
 
 /// {@template widget_settings}

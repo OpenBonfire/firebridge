@@ -34,9 +34,6 @@ class GuildManager extends Manager<Guild> {
   GuildManager(super.config, super.client) : super(identifier: 'guilds');
 
   @override
-  PartialGuild operator [](Snowflake id) => PartialGuild(id: id);
-
-  @override
   Future<Guild> fetch(Snowflake id, {bool? withCounts}) async {
     final route = HttpRoute()..guilds(id: id.toString());
     final request = BasicRequest(route, queryParameters: {

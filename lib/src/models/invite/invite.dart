@@ -3,6 +3,7 @@ import 'package:firebridge/src/models/application.dart';
 import 'package:firebridge/src/models/channel/channel.dart';
 import 'package:firebridge/src/models/guild/guild.dart';
 import 'package:firebridge/src/models/guild/scheduled_event.dart';
+import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/models/user/user.dart';
 import 'package:firebridge/src/utils/flags.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
@@ -21,11 +22,14 @@ class Invite with ToStringHelper, InviteMappable {
   /// The invite's code. This is a unique identifier.
   final String code;
 
-  /// The [Guild] this invite is for.
-  final PartialGuild? guild;
+  // /// The [Guild] this invite is for.
+  // final InviteGuild? guild;
 
   /// The [PartialChannel] this invite is for.
-  final PartialChannel channel;
+  /// TODO: This should be a partial channel (the user one)
+  final Snowflake channel;
+
+  final Snowflake guildId;
 
   /// The [User] who created this invite.
   final User? inviter;
@@ -37,7 +41,7 @@ class Invite with ToStringHelper, InviteMappable {
   final User? targetUser;
 
   /// The [PartialApplication] to open for this voice channel embedded application invite.
-  final PartialApplication? targetApplication;
+  final Snowflake? targetApplication;
 
   /// The approximate count of members in the [Guild] this invite is for.
   ///
@@ -67,7 +71,7 @@ class Invite with ToStringHelper, InviteMappable {
   Invite({
     required this.type,
     required this.code,
-    required this.guild,
+    required this.guildId,
     required this.channel,
     required this.inviter,
     required this.targetType,

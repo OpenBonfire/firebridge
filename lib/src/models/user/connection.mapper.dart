@@ -199,7 +199,7 @@ class ConnectionMapper extends ClassMapperBase<Connection> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ConnectionMapper._());
       ConnectionTypeMapper.ensureInitialized();
-      PartialIntegrationMapper.ensureInitialized();
+      SnowflakeMapper.ensureInitialized();
       ConnectionVisibilityMapper.ensureInitialized();
     }
     return _instance!;
@@ -223,10 +223,11 @@ class ConnectionMapper extends ClassMapperBase<Connection> {
     _$isRevoked,
     key: r'is_revoked',
   );
-  static List<PartialIntegration>? _$integrations(Connection v) =>
-      v.integrations;
-  static const Field<Connection, List<PartialIntegration>> _f$integrations =
-      Field('integrations', _$integrations);
+  static List<Snowflake>? _$integrations(Connection v) => v.integrations;
+  static const Field<Connection, List<Snowflake>> _f$integrations = Field(
+    'integrations',
+    _$integrations,
+  );
   static bool _$isVerified(Connection v) => v.isVerified;
   static const Field<Connection, bool> _f$isVerified = Field(
     'isVerified',
@@ -346,18 +347,14 @@ extension ConnectionValueCopy<$R, $Out>
 
 abstract class ConnectionCopyWith<$R, $In extends Connection, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  ListCopyWith<
-    $R,
-    PartialIntegration,
-    PartialIntegrationCopyWith<$R, PartialIntegration, PartialIntegration>
-  >?
+  ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>?
   get integrations;
   $R call({
     String? id,
     String? name,
     ConnectionType? type,
     bool? isRevoked,
-    List<PartialIntegration>? integrations,
+    List<Snowflake>? integrations,
     bool? isVerified,
     bool? isFriendSyncEnabled,
     bool? showActivity,
@@ -376,11 +373,7 @@ class _ConnectionCopyWithImpl<$R, $Out>
   late final ClassMapperBase<Connection> $mapper =
       ConnectionMapper.ensureInitialized();
   @override
-  ListCopyWith<
-    $R,
-    PartialIntegration,
-    PartialIntegrationCopyWith<$R, PartialIntegration, PartialIntegration>
-  >?
+  ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>?
   get integrations => $value.integrations != null
       ? ListCopyWith(
           $value.integrations!,

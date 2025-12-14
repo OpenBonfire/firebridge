@@ -19,7 +19,7 @@ class UnavailableGuildCreateEventMapper
       );
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       GuildCreateEventMapper.ensureInitialized();
-      PartialGuildMapper.ensureInitialized();
+      SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -27,9 +27,11 @@ class UnavailableGuildCreateEventMapper
   @override
   final String id = 'UnavailableGuildCreateEvent';
 
-  static PartialGuild _$guild(UnavailableGuildCreateEvent v) => v.guild;
-  static const Field<UnavailableGuildCreateEvent, PartialGuild> _f$guild =
-      Field('guild', _$guild);
+  static Snowflake _$id(UnavailableGuildCreateEvent v) => v.id;
+  static const Field<UnavailableGuildCreateEvent, Snowflake> _f$id = Field(
+    'id',
+    _$id,
+  );
   static Opcode _$opcode(UnavailableGuildCreateEvent v) => v.opcode;
   static const Field<UnavailableGuildCreateEvent, Opcode> _f$opcode = Field(
     'opcode',
@@ -39,7 +41,7 @@ class UnavailableGuildCreateEventMapper
 
   @override
   final MappableFields<UnavailableGuildCreateEvent> fields = const {
-    #guild: _f$guild,
+    #id: _f$id,
     #opcode: _f$opcode,
   };
 
@@ -52,7 +54,7 @@ class UnavailableGuildCreateEventMapper
       DispatchEventMapper.ensureInitialized();
 
   static UnavailableGuildCreateEvent _instantiate(DecodingData data) {
-    return UnavailableGuildCreateEvent(guild: data.dec(_f$guild));
+    return UnavailableGuildCreateEvent(id: data.dec(_f$id));
   }
 
   @override
@@ -129,9 +131,9 @@ abstract class UnavailableGuildCreateEventCopyWith<
   $Out
 >
     implements DispatchEventCopyWith<$R, $In, $Out> {
-  PartialGuildCopyWith<$R, PartialGuild, PartialGuild> get guild;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   @override
-  $R call({PartialGuild? guild});
+  $R call({Snowflake? id});
   UnavailableGuildCreateEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -155,14 +157,14 @@ class _UnavailableGuildCreateEventCopyWithImpl<$R, $Out>
   late final ClassMapperBase<UnavailableGuildCreateEvent> $mapper =
       UnavailableGuildCreateEventMapper.ensureInitialized();
   @override
-  PartialGuildCopyWith<$R, PartialGuild, PartialGuild> get guild =>
-      $value.guild.copyWith.$chain((v) => call(guild: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
+      $value.id.copyWith.$chain((v) => call(id: v));
   @override
-  $R call({PartialGuild? guild}) =>
-      $apply(FieldCopyWithData({if (guild != null) #guild: guild}));
+  $R call({Snowflake? id}) =>
+      $apply(FieldCopyWithData({if (id != null) #id: id}));
   @override
   UnavailableGuildCreateEvent $make(CopyWithData data) =>
-      UnavailableGuildCreateEvent(guild: data.get(#guild, or: $value.guild));
+      UnavailableGuildCreateEvent(id: data.get(#id, or: $value.id));
 
   @override
   UnavailableGuildCreateEventCopyWith<$R2, UnavailableGuildCreateEvent, $Out2>
@@ -178,7 +180,7 @@ class GuildCreateEventMapper extends SubClassMapperBase<GuildCreateEvent> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildCreateEventMapper._());
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
-      GuildMapper.ensureInitialized();
+      SnowflakeMapper.ensureInitialized();
       VoiceStateMapper.ensureInitialized();
       MemberMapper.ensureInitialized();
       GuildChannelMapper.ensureInitialized();
@@ -193,11 +195,8 @@ class GuildCreateEventMapper extends SubClassMapperBase<GuildCreateEvent> {
   @override
   final String id = 'GuildCreateEvent';
 
-  static Guild _$guild(GuildCreateEvent v) => v.guild;
-  static const Field<GuildCreateEvent, Guild> _f$guild = Field(
-    'guild',
-    _$guild,
-  );
+  static Snowflake _$id(GuildCreateEvent v) => v.id;
+  static const Field<GuildCreateEvent, Snowflake> _f$id = Field('id', _$id);
   static DateTime _$joinedAt(GuildCreateEvent v) => v.joinedAt;
   static const Field<GuildCreateEvent, DateTime> _f$joinedAt = Field(
     'joinedAt',
@@ -262,7 +261,7 @@ class GuildCreateEventMapper extends SubClassMapperBase<GuildCreateEvent> {
 
   @override
   final MappableFields<GuildCreateEvent> fields = const {
-    #guild: _f$guild,
+    #id: _f$id,
     #joinedAt: _f$joinedAt,
     #isLarge: _f$isLarge,
     #memberCount: _f$memberCount,
@@ -286,7 +285,7 @@ class GuildCreateEventMapper extends SubClassMapperBase<GuildCreateEvent> {
 
   static GuildCreateEvent _instantiate(DecodingData data) {
     return GuildCreateEvent(
-      guild: data.dec(_f$guild),
+      id: data.dec(_f$id),
       joinedAt: data.dec(_f$joinedAt),
       isLarge: data.dec(_f$isLarge),
       memberCount: data.dec(_f$memberCount),
@@ -364,7 +363,7 @@ abstract class GuildCreateEventCopyWith<$R, $In extends GuildCreateEvent, $Out>
     implements
         DispatchEventCopyWith<$R, $In, $Out>,
         UnavailableGuildCreateEventCopyWith<$R, $In, $Out> {
-  GuildCopyWith<$R, Guild, Guild> get guild;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   ListCopyWith<$R, VoiceState, VoiceStateCopyWith<$R, VoiceState, VoiceState>>
   get voiceStates;
   ListCopyWith<$R, Member, MemberCopyWith<$R, Member, Member>> get members;
@@ -395,7 +394,7 @@ abstract class GuildCreateEventCopyWith<$R, $In extends GuildCreateEvent, $Out>
   get scheduledEvents;
   @override
   $R call({
-    covariant Guild? guild,
+    Snowflake? id,
     DateTime? joinedAt,
     bool? isLarge,
     int? memberCount,
@@ -421,8 +420,8 @@ class _GuildCreateEventCopyWithImpl<$R, $Out>
   late final ClassMapperBase<GuildCreateEvent> $mapper =
       GuildCreateEventMapper.ensureInitialized();
   @override
-  GuildCopyWith<$R, Guild, Guild> get guild =>
-      $value.guild.copyWith.$chain((v) => call(guild: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
+      $value.id.copyWith.$chain((v) => call(id: v));
   @override
   ListCopyWith<$R, VoiceState, VoiceStateCopyWith<$R, VoiceState, VoiceState>>
   get voiceStates => ListCopyWith(
@@ -490,7 +489,7 @@ class _GuildCreateEventCopyWithImpl<$R, $Out>
   );
   @override
   $R call({
-    Guild? guild,
+    Snowflake? id,
     DateTime? joinedAt,
     bool? isLarge,
     int? memberCount,
@@ -503,7 +502,7 @@ class _GuildCreateEventCopyWithImpl<$R, $Out>
     List<ScheduledEvent>? scheduledEvents,
   }) => $apply(
     FieldCopyWithData({
-      if (guild != null) #guild: guild,
+      if (id != null) #id: id,
       if (joinedAt != null) #joinedAt: joinedAt,
       if (isLarge != null) #isLarge: isLarge,
       if (memberCount != null) #memberCount: memberCount,
@@ -518,7 +517,7 @@ class _GuildCreateEventCopyWithImpl<$R, $Out>
   );
   @override
   GuildCreateEvent $make(CopyWithData data) => GuildCreateEvent(
-    guild: data.get(#guild, or: $value.guild),
+    id: data.get(#id, or: $value.id),
     joinedAt: data.get(#joinedAt, or: $value.joinedAt),
     isLarge: data.get(#isLarge, or: $value.isLarge),
     memberCount: data.get(#memberCount, or: $value.memberCount),
@@ -705,7 +704,7 @@ class GuildDeleteEventMapper extends SubClassMapperBase<GuildDeleteEvent> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildDeleteEventMapper._());
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
-      PartialGuildMapper.ensureInitialized();
+      SnowflakeMapper.ensureInitialized();
       GuildMapper.ensureInitialized();
     }
     return _instance!;
@@ -714,11 +713,8 @@ class GuildDeleteEventMapper extends SubClassMapperBase<GuildDeleteEvent> {
   @override
   final String id = 'GuildDeleteEvent';
 
-  static PartialGuild _$guild(GuildDeleteEvent v) => v.guild;
-  static const Field<GuildDeleteEvent, PartialGuild> _f$guild = Field(
-    'guild',
-    _$guild,
-  );
+  static Snowflake _$id(GuildDeleteEvent v) => v.id;
+  static const Field<GuildDeleteEvent, Snowflake> _f$id = Field('id', _$id);
   static bool _$isUnavailable(GuildDeleteEvent v) => v.isUnavailable;
   static const Field<GuildDeleteEvent, bool> _f$isUnavailable = Field(
     'isUnavailable',
@@ -740,7 +736,7 @@ class GuildDeleteEventMapper extends SubClassMapperBase<GuildDeleteEvent> {
 
   @override
   final MappableFields<GuildDeleteEvent> fields = const {
-    #guild: _f$guild,
+    #id: _f$id,
     #isUnavailable: _f$isUnavailable,
     #deletedGuild: _f$deletedGuild,
     #opcode: _f$opcode,
@@ -756,7 +752,7 @@ class GuildDeleteEventMapper extends SubClassMapperBase<GuildDeleteEvent> {
 
   static GuildDeleteEvent _instantiate(DecodingData data) {
     return GuildDeleteEvent(
-      guild: data.dec(_f$guild),
+      id: data.dec(_f$id),
       isUnavailable: data.dec(_f$isUnavailable),
       deletedGuild: data.dec(_f$deletedGuild),
     );
@@ -824,10 +820,10 @@ extension GuildDeleteEventValueCopy<$R, $Out>
 
 abstract class GuildDeleteEventCopyWith<$R, $In extends GuildDeleteEvent, $Out>
     implements DispatchEventCopyWith<$R, $In, $Out> {
-  PartialGuildCopyWith<$R, PartialGuild, PartialGuild> get guild;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   GuildCopyWith<$R, Guild, Guild>? get deletedGuild;
   @override
-  $R call({PartialGuild? guild, bool? isUnavailable, Guild? deletedGuild});
+  $R call({Snowflake? id, bool? isUnavailable, Guild? deletedGuild});
   GuildDeleteEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -842,26 +838,23 @@ class _GuildDeleteEventCopyWithImpl<$R, $Out>
   late final ClassMapperBase<GuildDeleteEvent> $mapper =
       GuildDeleteEventMapper.ensureInitialized();
   @override
-  PartialGuildCopyWith<$R, PartialGuild, PartialGuild> get guild =>
-      $value.guild.copyWith.$chain((v) => call(guild: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
+      $value.id.copyWith.$chain((v) => call(id: v));
   @override
   GuildCopyWith<$R, Guild, Guild>? get deletedGuild =>
       $value.deletedGuild?.copyWith.$chain((v) => call(deletedGuild: v));
   @override
-  $R call({
-    PartialGuild? guild,
-    bool? isUnavailable,
-    Object? deletedGuild = $none,
-  }) => $apply(
-    FieldCopyWithData({
-      if (guild != null) #guild: guild,
-      if (isUnavailable != null) #isUnavailable: isUnavailable,
-      if (deletedGuild != $none) #deletedGuild: deletedGuild,
-    }),
-  );
+  $R call({Snowflake? id, bool? isUnavailable, Object? deletedGuild = $none}) =>
+      $apply(
+        FieldCopyWithData({
+          if (id != null) #id: id,
+          if (isUnavailable != null) #isUnavailable: isUnavailable,
+          if (deletedGuild != $none) #deletedGuild: deletedGuild,
+        }),
+      );
   @override
   GuildDeleteEvent $make(CopyWithData data) => GuildDeleteEvent(
-    guild: data.get(#guild, or: $value.guild),
+    id: data.get(#id, or: $value.id),
     isUnavailable: data.get(#isUnavailable, or: $value.isUnavailable),
     deletedGuild: data.get(#deletedGuild, or: $value.deletedGuild),
   );
@@ -1499,7 +1492,7 @@ abstract class GuildEmojisUpdateEventCopyWith<
 >
     implements DispatchEventCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
-  ListCopyWith<$R, Emoji, EmojiCopyWith<$R, Emoji, Emoji>> get emojis;
+  ListCopyWith<$R, Emoji, ObjectCopyWith<$R, Emoji, Emoji>> get emojis;
   @override
   $R call({Snowflake? guildId, List<Emoji>? emojis});
   GuildEmojisUpdateEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
@@ -1520,10 +1513,10 @@ class _GuildEmojisUpdateEventCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
       $value.guildId.copyWith.$chain((v) => call(guildId: v));
   @override
-  ListCopyWith<$R, Emoji, EmojiCopyWith<$R, Emoji, Emoji>> get emojis =>
+  ListCopyWith<$R, Emoji, ObjectCopyWith<$R, Emoji, Emoji>> get emojis =>
       ListCopyWith(
         $value.emojis,
-        (v, t) => v.copyWith.$chain(t),
+        (v, t) => ObjectCopyWith(v, $identity, t),
         (v) => call(emojis: v),
       );
   @override

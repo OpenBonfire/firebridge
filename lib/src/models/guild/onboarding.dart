@@ -40,9 +40,6 @@ class Onboarding with ToStringHelper, OnboardingMappable {
     required this.isEnabled,
     required this.mode,
   });
-
-  /// The guild this onboarding is for.
-  PartialGuild get guild => manager.client.guilds[guildId];
 }
 
 /// {@template onboarding_prompt}

@@ -1,13 +1,12 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:firebridge/src/models/application.dart';
+import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/models/user/user.dart';
 
 part 'oauth2.mapper.dart';
 
 @MappableClass()
 class OAuth2Information with OAuth2InformationMappable {
-  /// The current application.
-  final PartialApplication application;
+  final Snowflake id;
 
   /// The scopes the user has authorized the application for.
   final List<String> scopes;
@@ -20,7 +19,7 @@ class OAuth2Information with OAuth2InformationMappable {
 
   /// @nodoc
   OAuth2Information(
-      {required this.application,
+      {required this.id,
       required this.scopes,
       required this.expiresOn,
       this.user});

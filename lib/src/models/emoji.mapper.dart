@@ -7,126 +7,6 @@
 
 part of 'emoji.dart';
 
-class PartialEmojiMapper extends ClassMapperBase<PartialEmoji> {
-  PartialEmojiMapper._();
-
-  static PartialEmojiMapper? _instance;
-  static PartialEmojiMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = PartialEmojiMapper._());
-      WritableSnowflakeEntityMapper.ensureInitialized();
-      EmojiMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'PartialEmoji';
-
-  static Snowflake _$id(PartialEmoji v) => v.id;
-  static const Field<PartialEmoji, Snowflake> _f$id = Field('id', _$id);
-
-  @override
-  final MappableFields<PartialEmoji> fields = const {#id: _f$id};
-
-  static PartialEmoji _instantiate(DecodingData data) {
-    return PartialEmoji(id: data.dec(_f$id));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static PartialEmoji fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<PartialEmoji>(map);
-  }
-
-  static PartialEmoji fromJson(String json) {
-    return ensureInitialized().decodeJson<PartialEmoji>(json);
-  }
-}
-
-mixin PartialEmojiMappable {
-  String toJson() {
-    return PartialEmojiMapper.ensureInitialized().encodeJson<PartialEmoji>(
-      this as PartialEmoji,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return PartialEmojiMapper.ensureInitialized().encodeMap<PartialEmoji>(
-      this as PartialEmoji,
-    );
-  }
-
-  PartialEmojiCopyWith<PartialEmoji, PartialEmoji, PartialEmoji> get copyWith =>
-      _PartialEmojiCopyWithImpl<PartialEmoji, PartialEmoji>(
-        this as PartialEmoji,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return PartialEmojiMapper.ensureInitialized().stringifyValue(
-      this as PartialEmoji,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return PartialEmojiMapper.ensureInitialized().equalsValue(
-      this as PartialEmoji,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return PartialEmojiMapper.ensureInitialized().hashValue(
-      this as PartialEmoji,
-    );
-  }
-}
-
-extension PartialEmojiValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PartialEmoji, $Out> {
-  PartialEmojiCopyWith<$R, PartialEmoji, $Out> get $asPartialEmoji =>
-      $base.as((v, t, t2) => _PartialEmojiCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class PartialEmojiCopyWith<$R, $In extends PartialEmoji, $Out>
-    implements WritableSnowflakeEntityCopyWith<$R, $In, $Out, Emoji> {
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  @override
-  $R call({Snowflake? id});
-  PartialEmojiCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
-}
-
-class _PartialEmojiCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PartialEmoji, $Out>
-    implements PartialEmojiCopyWith<$R, PartialEmoji, $Out> {
-  _PartialEmojiCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<PartialEmoji> $mapper =
-      PartialEmojiMapper.ensureInitialized();
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  $R call({Snowflake? id}) =>
-      $apply(FieldCopyWithData({if (id != null) #id: id}));
-  @override
-  PartialEmoji $make(CopyWithData data) =>
-      PartialEmoji(id: data.get(#id, or: $value.id));
-
-  @override
-  PartialEmojiCopyWith<$R2, PartialEmoji, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _PartialEmojiCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class EmojiMapper extends ClassMapperBase<Emoji> {
   EmojiMapper._();
 
@@ -134,7 +14,6 @@ class EmojiMapper extends ClassMapperBase<Emoji> {
   static EmojiMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = EmojiMapper._());
-      PartialEmojiMapper.ensureInitialized();
       TextEmojiMapper.ensureInitialized();
       ApplicationEmojiMapper.ensureInitialized();
       GuildEmojiMapper.ensureInitialized();
@@ -148,9 +27,11 @@ class EmojiMapper extends ClassMapperBase<Emoji> {
 
   static Snowflake _$id(Emoji v) => v.id;
   static const Field<Emoji, Snowflake> _f$id = Field('id', _$id);
+  static String? _$name(Emoji v) => v.name;
+  static const Field<Emoji, String> _f$name = Field('name', _$name, opt: true);
 
   @override
-  final MappableFields<Emoji> fields = const {#id: _f$id};
+  final MappableFields<Emoji> fields = const {#id: _f$id, #name: _f$name};
 
   static Emoji _instantiate(DecodingData data) {
     throw MapperException.missingConstructor('Emoji');
@@ -175,11 +56,9 @@ mixin EmojiMappable {
 }
 
 abstract class EmojiCopyWith<$R, $In extends Emoji, $Out>
-    implements PartialEmojiCopyWith<$R, $In, $Out> {
-  @override
+    implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  @override
-  $R call({Snowflake? id});
+  $R call({Snowflake? id, String? name});
   EmojiCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -201,7 +80,7 @@ class TextEmojiMapper extends ClassMapperBase<TextEmoji> {
 
   static Snowflake _$id(TextEmoji v) => v.id;
   static const Field<TextEmoji, Snowflake> _f$id = Field('id', _$id);
-  static String _$name(TextEmoji v) => v.name;
+  static String? _$name(TextEmoji v) => v.name;
   static const Field<TextEmoji, String> _f$name = Field('name', _$name);
 
   @override
@@ -289,8 +168,11 @@ class _TextEmojiCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
-  $R call({Snowflake? id, String? name}) => $apply(
-    FieldCopyWithData({if (id != null) #id: id, if (name != null) #name: name}),
+  $R call({Snowflake? id, Object? name = $none}) => $apply(
+    FieldCopyWithData({
+      if (id != null) #id: id,
+      if (name != $none) #name: name,
+    }),
   );
   @override
   TextEmoji $make(CopyWithData data) => TextEmoji(
@@ -323,7 +205,7 @@ class ApplicationEmojiMapper extends ClassMapperBase<ApplicationEmoji> {
 
   static Snowflake _$id(ApplicationEmoji v) => v.id;
   static const Field<ApplicationEmoji, Snowflake> _f$id = Field('id', _$id);
-  static String _$name(ApplicationEmoji v) => v.name;
+  static String? _$name(ApplicationEmoji v) => v.name;
   static const Field<ApplicationEmoji, String> _f$name = Field('name', _$name);
   static User? _$user(ApplicationEmoji v) => v.user;
   static const Field<ApplicationEmoji, User> _f$user = Field('user', _$user);
@@ -472,7 +354,7 @@ class _ApplicationEmojiCopyWithImpl<$R, $Out>
   @override
   $R call({
     Snowflake? id,
-    String? name,
+    Object? name = $none,
     Object? user = $none,
     bool? requiresColons,
     bool? isManaged,
@@ -481,7 +363,7 @@ class _ApplicationEmojiCopyWithImpl<$R, $Out>
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
-      if (name != null) #name: name,
+      if (name != $none) #name: name,
       if (user != $none) #user: user,
       if (requiresColons != null) #requiresColons: requiresColons,
       if (isManaged != null) #isManaged: isManaged,
@@ -541,23 +423,17 @@ class GuildEmojiMapper extends ClassMapperBase<GuildEmoji> {
     _$requiresColons,
     key: r'requires_colons',
   );
-  static bool? _$isManaged(GuildEmoji v) => v.isManaged;
-  static const Field<GuildEmoji, bool> _f$isManaged = Field(
-    'isManaged',
-    _$isManaged,
-    key: r'is_managed',
+  static bool? _$managed(GuildEmoji v) => v.managed;
+  static const Field<GuildEmoji, bool> _f$managed = Field('managed', _$managed);
+  static bool? _$animated(GuildEmoji v) => v.animated;
+  static const Field<GuildEmoji, bool> _f$animated = Field(
+    'animated',
+    _$animated,
   );
-  static bool? _$isAnimated(GuildEmoji v) => v.isAnimated;
-  static const Field<GuildEmoji, bool> _f$isAnimated = Field(
-    'isAnimated',
-    _$isAnimated,
-    key: r'is_animated',
-  );
-  static bool? _$isAvailable(GuildEmoji v) => v.isAvailable;
-  static const Field<GuildEmoji, bool> _f$isAvailable = Field(
-    'isAvailable',
-    _$isAvailable,
-    key: r'is_available',
+  static bool? _$available(GuildEmoji v) => v.available;
+  static const Field<GuildEmoji, bool> _f$available = Field(
+    'available',
+    _$available,
   );
 
   @override
@@ -567,9 +443,9 @@ class GuildEmojiMapper extends ClassMapperBase<GuildEmoji> {
     #roleIds: _f$roleIds,
     #user: _f$user,
     #requiresColons: _f$requiresColons,
-    #isManaged: _f$isManaged,
-    #isAnimated: _f$isAnimated,
-    #isAvailable: _f$isAvailable,
+    #managed: _f$managed,
+    #animated: _f$animated,
+    #available: _f$available,
   };
 
   static GuildEmoji _instantiate(DecodingData data) {
@@ -579,9 +455,9 @@ class GuildEmojiMapper extends ClassMapperBase<GuildEmoji> {
       roleIds: data.dec(_f$roleIds),
       user: data.dec(_f$user),
       requiresColons: data.dec(_f$requiresColons),
-      isManaged: data.dec(_f$isManaged),
-      isAnimated: data.dec(_f$isAnimated),
-      isAvailable: data.dec(_f$isAvailable),
+      managed: data.dec(_f$managed),
+      animated: data.dec(_f$animated),
+      available: data.dec(_f$available),
     );
   }
 
@@ -657,9 +533,9 @@ abstract class GuildEmojiCopyWith<$R, $In extends GuildEmoji, $Out>
     List<Snowflake>? roleIds,
     User? user,
     bool? requiresColons,
-    bool? isManaged,
-    bool? isAnimated,
-    bool? isAvailable,
+    bool? managed,
+    bool? animated,
+    bool? available,
   });
   GuildEmojiCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -694,9 +570,9 @@ class _GuildEmojiCopyWithImpl<$R, $Out>
     Object? roleIds = $none,
     Object? user = $none,
     Object? requiresColons = $none,
-    Object? isManaged = $none,
-    Object? isAnimated = $none,
-    Object? isAvailable = $none,
+    Object? managed = $none,
+    Object? animated = $none,
+    Object? available = $none,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
@@ -704,9 +580,9 @@ class _GuildEmojiCopyWithImpl<$R, $Out>
       if (roleIds != $none) #roleIds: roleIds,
       if (user != $none) #user: user,
       if (requiresColons != $none) #requiresColons: requiresColons,
-      if (isManaged != $none) #isManaged: isManaged,
-      if (isAnimated != $none) #isAnimated: isAnimated,
-      if (isAvailable != $none) #isAvailable: isAvailable,
+      if (managed != $none) #managed: managed,
+      if (animated != $none) #animated: animated,
+      if (available != $none) #available: available,
     }),
   );
   @override
@@ -716,9 +592,9 @@ class _GuildEmojiCopyWithImpl<$R, $Out>
     roleIds: data.get(#roleIds, or: $value.roleIds),
     user: data.get(#user, or: $value.user),
     requiresColons: data.get(#requiresColons, or: $value.requiresColons),
-    isManaged: data.get(#isManaged, or: $value.isManaged),
-    isAnimated: data.get(#isAnimated, or: $value.isAnimated),
-    isAvailable: data.get(#isAvailable, or: $value.isAvailable),
+    managed: data.get(#managed, or: $value.managed),
+    animated: data.get(#animated, or: $value.animated),
+    available: data.get(#available, or: $value.available),
   );
 
   @override

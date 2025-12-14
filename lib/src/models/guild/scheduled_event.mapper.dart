@@ -320,140 +320,6 @@ extension RecurrenceRuleMonthMapperExtension on RecurrenceRuleMonth {
   }
 }
 
-class PartialScheduledEventMapper
-    extends ClassMapperBase<PartialScheduledEvent> {
-  PartialScheduledEventMapper._();
-
-  static PartialScheduledEventMapper? _instance;
-  static PartialScheduledEventMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = PartialScheduledEventMapper._());
-      WritableSnowflakeEntityMapper.ensureInitialized();
-      ScheduledEventMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'PartialScheduledEvent';
-
-  static Snowflake _$id(PartialScheduledEvent v) => v.id;
-  static const Field<PartialScheduledEvent, Snowflake> _f$id = Field(
-    'id',
-    _$id,
-  );
-
-  @override
-  final MappableFields<PartialScheduledEvent> fields = const {#id: _f$id};
-
-  static PartialScheduledEvent _instantiate(DecodingData data) {
-    return PartialScheduledEvent(id: data.dec(_f$id));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static PartialScheduledEvent fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<PartialScheduledEvent>(map);
-  }
-
-  static PartialScheduledEvent fromJson(String json) {
-    return ensureInitialized().decodeJson<PartialScheduledEvent>(json);
-  }
-}
-
-mixin PartialScheduledEventMappable {
-  String toJson() {
-    return PartialScheduledEventMapper.ensureInitialized()
-        .encodeJson<PartialScheduledEvent>(this as PartialScheduledEvent);
-  }
-
-  Map<String, dynamic> toMap() {
-    return PartialScheduledEventMapper.ensureInitialized()
-        .encodeMap<PartialScheduledEvent>(this as PartialScheduledEvent);
-  }
-
-  PartialScheduledEventCopyWith<
-    PartialScheduledEvent,
-    PartialScheduledEvent,
-    PartialScheduledEvent
-  >
-  get copyWith =>
-      _PartialScheduledEventCopyWithImpl<
-        PartialScheduledEvent,
-        PartialScheduledEvent
-      >(this as PartialScheduledEvent, $identity, $identity);
-  @override
-  String toString() {
-    return PartialScheduledEventMapper.ensureInitialized().stringifyValue(
-      this as PartialScheduledEvent,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return PartialScheduledEventMapper.ensureInitialized().equalsValue(
-      this as PartialScheduledEvent,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return PartialScheduledEventMapper.ensureInitialized().hashValue(
-      this as PartialScheduledEvent,
-    );
-  }
-}
-
-extension PartialScheduledEventValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PartialScheduledEvent, $Out> {
-  PartialScheduledEventCopyWith<$R, PartialScheduledEvent, $Out>
-  get $asPartialScheduledEvent => $base.as(
-    (v, t, t2) => _PartialScheduledEventCopyWithImpl<$R, $Out>(v, t, t2),
-  );
-}
-
-abstract class PartialScheduledEventCopyWith<
-  $R,
-  $In extends PartialScheduledEvent,
-  $Out
->
-    implements WritableSnowflakeEntityCopyWith<$R, $In, $Out, ScheduledEvent> {
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  @override
-  $R call({Snowflake? id});
-  PartialScheduledEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _PartialScheduledEventCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PartialScheduledEvent, $Out>
-    implements PartialScheduledEventCopyWith<$R, PartialScheduledEvent, $Out> {
-  _PartialScheduledEventCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<PartialScheduledEvent> $mapper =
-      PartialScheduledEventMapper.ensureInitialized();
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  $R call({Snowflake? id}) =>
-      $apply(FieldCopyWithData({if (id != null) #id: id}));
-  @override
-  PartialScheduledEvent $make(CopyWithData data) =>
-      PartialScheduledEvent(id: data.get(#id, or: $value.id));
-
-  @override
-  PartialScheduledEventCopyWith<$R2, PartialScheduledEvent, $Out2>
-  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _PartialScheduledEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class ScheduledEventMapper extends ClassMapperBase<ScheduledEvent> {
   ScheduledEventMapper._();
 
@@ -461,7 +327,6 @@ class ScheduledEventMapper extends ClassMapperBase<ScheduledEvent> {
   static ScheduledEventMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ScheduledEventMapper._());
-      PartialScheduledEventMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       PrivacyLevelMapper.ensureInitialized();
       EventStatusMapper.ensureInitialized();
@@ -671,8 +536,7 @@ extension ScheduledEventValueCopy<$R, $Out>
 }
 
 abstract class ScheduledEventCopyWith<$R, $In extends ScheduledEvent, $Out>
-    implements PartialScheduledEventCopyWith<$R, $In, $Out> {
-  @override
+    implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
@@ -682,7 +546,6 @@ abstract class ScheduledEventCopyWith<$R, $In extends ScheduledEvent, $Out>
   UserCopyWith<$R, User, User>? get creator;
   RecurrenceRuleCopyWith<$R, RecurrenceRule, RecurrenceRule>?
   get recurrenceRule;
-  @override
   $R call({
     Snowflake? id,
     Snowflake? guildId,

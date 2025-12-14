@@ -19,9 +19,6 @@ class WebhookManager extends Manager<Webhook> {
   /// Create a new [WebhookManager].
   WebhookManager(super.config, super.client) : super(identifier: 'webhooks');
 
-  @override
-  PartialWebhook operator [](Snowflake id) => PartialWebhook(id: id);
-
   /// Parse a [WebhookAuthor] from [raw].
   WebhookAuthor parseWebhookAuthor(Map<String, Object?> raw) {
     return WebhookAuthor(

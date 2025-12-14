@@ -12,7 +12,9 @@ part 'channel_mention.mapper.dart';
 /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#channel-mention-object
 /// {@endtemplate}
 @MappableClass()
-class ChannelMention extends PartialChannel with ChannelMentionMappable {
+class ChannelMention with ChannelMentionMappable {
+  final Snowflake id;
+
   /// The ID of the [Guild] containing the mentioned channel.
   final Snowflake guildId;
 
@@ -25,7 +27,7 @@ class ChannelMention extends PartialChannel with ChannelMentionMappable {
   /// {@macro channel_mention}
   /// @nodoc
   ChannelMention({
-    required super.id,
+    required this.id,
     required this.guildId,
     required this.type,
     required this.name,

@@ -7,141 +7,6 @@
 
 part of 'soundboard.dart';
 
-class PartialSoundboardSoundMapper
-    extends ClassMapperBase<PartialSoundboardSound> {
-  PartialSoundboardSoundMapper._();
-
-  static PartialSoundboardSoundMapper? _instance;
-  static PartialSoundboardSoundMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = PartialSoundboardSoundMapper._());
-      WritableSnowflakeEntityMapper.ensureInitialized();
-      SoundboardSoundMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'PartialSoundboardSound';
-
-  static Snowflake _$id(PartialSoundboardSound v) => v.id;
-  static const Field<PartialSoundboardSound, Snowflake> _f$id = Field(
-    'id',
-    _$id,
-  );
-
-  @override
-  final MappableFields<PartialSoundboardSound> fields = const {#id: _f$id};
-
-  static PartialSoundboardSound _instantiate(DecodingData data) {
-    return PartialSoundboardSound(id: data.dec(_f$id));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static PartialSoundboardSound fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<PartialSoundboardSound>(map);
-  }
-
-  static PartialSoundboardSound fromJson(String json) {
-    return ensureInitialized().decodeJson<PartialSoundboardSound>(json);
-  }
-}
-
-mixin PartialSoundboardSoundMappable {
-  String toJson() {
-    return PartialSoundboardSoundMapper.ensureInitialized()
-        .encodeJson<PartialSoundboardSound>(this as PartialSoundboardSound);
-  }
-
-  Map<String, dynamic> toMap() {
-    return PartialSoundboardSoundMapper.ensureInitialized()
-        .encodeMap<PartialSoundboardSound>(this as PartialSoundboardSound);
-  }
-
-  PartialSoundboardSoundCopyWith<
-    PartialSoundboardSound,
-    PartialSoundboardSound,
-    PartialSoundboardSound
-  >
-  get copyWith =>
-      _PartialSoundboardSoundCopyWithImpl<
-        PartialSoundboardSound,
-        PartialSoundboardSound
-      >(this as PartialSoundboardSound, $identity, $identity);
-  @override
-  String toString() {
-    return PartialSoundboardSoundMapper.ensureInitialized().stringifyValue(
-      this as PartialSoundboardSound,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return PartialSoundboardSoundMapper.ensureInitialized().equalsValue(
-      this as PartialSoundboardSound,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return PartialSoundboardSoundMapper.ensureInitialized().hashValue(
-      this as PartialSoundboardSound,
-    );
-  }
-}
-
-extension PartialSoundboardSoundValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PartialSoundboardSound, $Out> {
-  PartialSoundboardSoundCopyWith<$R, PartialSoundboardSound, $Out>
-  get $asPartialSoundboardSound => $base.as(
-    (v, t, t2) => _PartialSoundboardSoundCopyWithImpl<$R, $Out>(v, t, t2),
-  );
-}
-
-abstract class PartialSoundboardSoundCopyWith<
-  $R,
-  $In extends PartialSoundboardSound,
-  $Out
->
-    implements WritableSnowflakeEntityCopyWith<$R, $In, $Out, SoundboardSound> {
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  @override
-  $R call({Snowflake? id});
-  PartialSoundboardSoundCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _PartialSoundboardSoundCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PartialSoundboardSound, $Out>
-    implements
-        PartialSoundboardSoundCopyWith<$R, PartialSoundboardSound, $Out> {
-  _PartialSoundboardSoundCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<PartialSoundboardSound> $mapper =
-      PartialSoundboardSoundMapper.ensureInitialized();
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  $R call({Snowflake? id}) =>
-      $apply(FieldCopyWithData({if (id != null) #id: id}));
-  @override
-  PartialSoundboardSound $make(CopyWithData data) =>
-      PartialSoundboardSound(id: data.get(#id, or: $value.id));
-
-  @override
-  PartialSoundboardSoundCopyWith<$R2, PartialSoundboardSound, $Out2>
-  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _PartialSoundboardSoundCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class SoundboardSoundMapper extends ClassMapperBase<SoundboardSound> {
   SoundboardSoundMapper._();
 
@@ -149,7 +14,6 @@ class SoundboardSoundMapper extends ClassMapperBase<SoundboardSound> {
   static SoundboardSoundMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = SoundboardSoundMapper._());
-      PartialSoundboardSoundMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       EmojiMapper.ensureInitialized();
       UserMapper.ensureInitialized();
@@ -286,14 +150,11 @@ extension SoundboardSoundValueCopy<$R, $Out>
 }
 
 abstract class SoundboardSoundCopyWith<$R, $In extends SoundboardSound, $Out>
-    implements PartialSoundboardSoundCopyWith<$R, $In, $Out> {
-  @override
+    implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  EmojiCopyWith<$R, Emoji, Emoji>? get emoji;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get emojiId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   UserCopyWith<$R, User, User>? get user;
-  @override
   $R call({
     Snowflake? id,
     String? name,
@@ -321,9 +182,6 @@ class _SoundboardSoundCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  EmojiCopyWith<$R, Emoji, Emoji>? get emoji =>
-      $value.emoji?.copyWith.$chain((v) => call(emoji: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get emojiId =>
       $value.emojiId?.copyWith.$chain((v) => call(emojiId: v));

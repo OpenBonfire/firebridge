@@ -2,13 +2,11 @@ import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/builders/builder.dart';
 import 'package:firebridge/src/builders/sentinels.dart';
 import 'package:firebridge/src/models/channel/channel.dart';
-import 'package:firebridge/src/models/commands/application_command_option.dart';
 import 'package:firebridge/src/models/discord_color.dart';
 import 'package:firebridge/src/models/emoji.dart';
 import 'package:firebridge/src/models/message/component.dart';
 import 'package:firebridge/src/models/role.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:firebridge/src/models/user/user.dart';
 
 part 'component.mapper.dart';
@@ -160,7 +158,7 @@ class SelectMenuBuilder extends MessageComponentBuilder<SelectMenuComponent>
   SelectMenuBuilder.userSelect({
     required this.customId,
     this.placeholder,
-    List<DefaultValue<User>>? this.defaultValues,
+    this.defaultValues,
     this.minValues,
     this.maxValues,
     this.isDisabled,
@@ -171,7 +169,7 @@ class SelectMenuBuilder extends MessageComponentBuilder<SelectMenuComponent>
   SelectMenuBuilder.roleSelect({
     required this.customId,
     this.placeholder,
-    List<DefaultValue<Role>>? this.defaultValues,
+    this.defaultValues,
     this.minValues,
     this.maxValues,
     this.isDisabled,
@@ -183,7 +181,7 @@ class SelectMenuBuilder extends MessageComponentBuilder<SelectMenuComponent>
     required this.customId,
     this.channelTypes,
     this.placeholder,
-    List<DefaultValue<CommandOptionMentionable>>? this.defaultValues,
+    this.defaultValues,
     this.minValues,
     this.maxValues,
     this.isDisabled,
@@ -194,7 +192,7 @@ class SelectMenuBuilder extends MessageComponentBuilder<SelectMenuComponent>
   SelectMenuBuilder.channelSelect({
     required this.customId,
     this.placeholder,
-    List<DefaultValue<Channel>>? this.defaultValues,
+    this.defaultValues,
     this.minValues,
     this.maxValues,
     this.isDisabled,
@@ -226,8 +224,8 @@ class SelectMenuOptionBuilder extends CreateBuilder<SelectMenuOption>
 }
 
 @MappableClass()
-class DefaultValue<T extends SnowflakeEntity<T>>
-    extends CreateBuilder<DefaultValue<T>> with DefaultValueMappable<T> {
+class DefaultValue<T> extends CreateBuilder<DefaultValue<T>>
+    with DefaultValueMappable {
   Snowflake id;
 
   String type;

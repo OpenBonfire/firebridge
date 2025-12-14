@@ -589,7 +589,6 @@ abstract class OnboardingPromptOptionBuilderCopyWith<
   get channelIds;
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
   get roleIds;
-  EmojiCopyWith<$R, Emoji, Emoji>? get emoji;
   $R call({
     List<Snowflake>? channelIds,
     List<Snowflake>? roleIds,
@@ -633,9 +632,6 @@ class _OnboardingPromptOptionBuilderCopyWithImpl<$R, $Out>
     (v, t) => v.copyWith.$chain(t),
     (v) => call(roleIds: v),
   );
-  @override
-  EmojiCopyWith<$R, Emoji, Emoji>? get emoji =>
-      $value.emoji?.copyWith.$chain((v) => call(emoji: v));
   @override
   $R call({
     List<Snowflake>? channelIds,

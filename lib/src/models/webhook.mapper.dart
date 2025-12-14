@@ -57,128 +57,6 @@ extension WebhookTypeMapperExtension on WebhookType {
   }
 }
 
-class PartialWebhookMapper extends ClassMapperBase<PartialWebhook> {
-  PartialWebhookMapper._();
-
-  static PartialWebhookMapper? _instance;
-  static PartialWebhookMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = PartialWebhookMapper._());
-      WritableSnowflakeEntityMapper.ensureInitialized();
-      WebhookMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'PartialWebhook';
-
-  static Snowflake _$id(PartialWebhook v) => v.id;
-  static const Field<PartialWebhook, Snowflake> _f$id = Field('id', _$id);
-
-  @override
-  final MappableFields<PartialWebhook> fields = const {#id: _f$id};
-
-  static PartialWebhook _instantiate(DecodingData data) {
-    return PartialWebhook(id: data.dec(_f$id));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static PartialWebhook fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<PartialWebhook>(map);
-  }
-
-  static PartialWebhook fromJson(String json) {
-    return ensureInitialized().decodeJson<PartialWebhook>(json);
-  }
-}
-
-mixin PartialWebhookMappable {
-  String toJson() {
-    return PartialWebhookMapper.ensureInitialized().encodeJson<PartialWebhook>(
-      this as PartialWebhook,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return PartialWebhookMapper.ensureInitialized().encodeMap<PartialWebhook>(
-      this as PartialWebhook,
-    );
-  }
-
-  PartialWebhookCopyWith<PartialWebhook, PartialWebhook, PartialWebhook>
-  get copyWith => _PartialWebhookCopyWithImpl<PartialWebhook, PartialWebhook>(
-    this as PartialWebhook,
-    $identity,
-    $identity,
-  );
-  @override
-  String toString() {
-    return PartialWebhookMapper.ensureInitialized().stringifyValue(
-      this as PartialWebhook,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return PartialWebhookMapper.ensureInitialized().equalsValue(
-      this as PartialWebhook,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return PartialWebhookMapper.ensureInitialized().hashValue(
-      this as PartialWebhook,
-    );
-  }
-}
-
-extension PartialWebhookValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PartialWebhook, $Out> {
-  PartialWebhookCopyWith<$R, PartialWebhook, $Out> get $asPartialWebhook =>
-      $base.as((v, t, t2) => _PartialWebhookCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class PartialWebhookCopyWith<$R, $In extends PartialWebhook, $Out>
-    implements WritableSnowflakeEntityCopyWith<$R, $In, $Out, Webhook> {
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  @override
-  $R call({Snowflake? id});
-  PartialWebhookCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _PartialWebhookCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PartialWebhook, $Out>
-    implements PartialWebhookCopyWith<$R, PartialWebhook, $Out> {
-  _PartialWebhookCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<PartialWebhook> $mapper =
-      PartialWebhookMapper.ensureInitialized();
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  $R call({Snowflake? id}) =>
-      $apply(FieldCopyWithData({if (id != null) #id: id}));
-  @override
-  PartialWebhook $make(CopyWithData data) =>
-      PartialWebhook(id: data.get(#id, or: $value.id));
-
-  @override
-  PartialWebhookCopyWith<$R2, PartialWebhook, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _PartialWebhookCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class WebhookMapper extends ClassMapperBase<Webhook> {
   WebhookMapper._();
 
@@ -186,12 +64,9 @@ class WebhookMapper extends ClassMapperBase<Webhook> {
   static WebhookMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = WebhookMapper._());
-      PartialWebhookMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       WebhookTypeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
-      PartialGuildMapper.ensureInitialized();
-      PartialChannelMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -233,14 +108,14 @@ class WebhookMapper extends ClassMapperBase<Webhook> {
     _$applicationId,
     key: r'application_id',
   );
-  static PartialGuild? _$sourceGuild(Webhook v) => v.sourceGuild;
-  static const Field<Webhook, PartialGuild> _f$sourceGuild = Field(
+  static Snowflake? _$sourceGuild(Webhook v) => v.sourceGuild;
+  static const Field<Webhook, Snowflake> _f$sourceGuild = Field(
     'sourceGuild',
     _$sourceGuild,
     key: r'source_guild',
   );
-  static PartialChannel? _$sourceChannel(Webhook v) => v.sourceChannel;
-  static const Field<Webhook, PartialChannel> _f$sourceChannel = Field(
+  static Snowflake? _$sourceChannel(Webhook v) => v.sourceChannel;
+  static const Field<Webhook, Snowflake> _f$sourceChannel = Field(
     'sourceChannel',
     _$sourceChannel,
     key: r'source_channel',
@@ -337,16 +212,14 @@ extension WebhookValueCopy<$R, $Out> on ObjectCopyWith<$R, Webhook, $Out> {
 }
 
 abstract class WebhookCopyWith<$R, $In extends Webhook, $Out>
-    implements PartialWebhookCopyWith<$R, $In, $Out> {
-  @override
+    implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
   UserCopyWith<$R, User, User>? get user;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get applicationId;
-  PartialGuildCopyWith<$R, PartialGuild, PartialGuild>? get sourceGuild;
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel>? get sourceChannel;
-  @override
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get sourceGuild;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get sourceChannel;
   $R call({
     Snowflake? id,
     WebhookType? type,
@@ -357,8 +230,8 @@ abstract class WebhookCopyWith<$R, $In extends Webhook, $Out>
     String? avatarHash,
     String? token,
     Snowflake? applicationId,
-    PartialGuild? sourceGuild,
-    PartialChannel? sourceChannel,
+    Snowflake? sourceGuild,
+    Snowflake? sourceChannel,
     Uri? url,
   });
   WebhookCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
@@ -388,11 +261,10 @@ class _WebhookCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get applicationId =>
       $value.applicationId?.copyWith.$chain((v) => call(applicationId: v));
   @override
-  PartialGuildCopyWith<$R, PartialGuild, PartialGuild>? get sourceGuild =>
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get sourceGuild =>
       $value.sourceGuild?.copyWith.$chain((v) => call(sourceGuild: v));
   @override
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel>?
-  get sourceChannel =>
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get sourceChannel =>
       $value.sourceChannel?.copyWith.$chain((v) => call(sourceChannel: v));
   @override
   $R call({

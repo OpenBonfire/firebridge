@@ -127,134 +127,6 @@ extension ConnectionMetadataTypeMapperExtension on ConnectionMetadataType {
   }
 }
 
-class PartialApplicationMapper extends ClassMapperBase<PartialApplication> {
-  PartialApplicationMapper._();
-
-  static PartialApplicationMapper? _instance;
-  static PartialApplicationMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = PartialApplicationMapper._());
-      ApplicationMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'PartialApplication';
-
-  static Snowflake _$id(PartialApplication v) => v.id;
-  static const Field<PartialApplication, Snowflake> _f$id = Field('id', _$id);
-
-  @override
-  final MappableFields<PartialApplication> fields = const {#id: _f$id};
-
-  static PartialApplication _instantiate(DecodingData data) {
-    return PartialApplication(id: data.dec(_f$id));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static PartialApplication fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<PartialApplication>(map);
-  }
-
-  static PartialApplication fromJson(String json) {
-    return ensureInitialized().decodeJson<PartialApplication>(json);
-  }
-}
-
-mixin PartialApplicationMappable {
-  String toJson() {
-    return PartialApplicationMapper.ensureInitialized()
-        .encodeJson<PartialApplication>(this as PartialApplication);
-  }
-
-  Map<String, dynamic> toMap() {
-    return PartialApplicationMapper.ensureInitialized()
-        .encodeMap<PartialApplication>(this as PartialApplication);
-  }
-
-  PartialApplicationCopyWith<
-    PartialApplication,
-    PartialApplication,
-    PartialApplication
-  >
-  get copyWith =>
-      _PartialApplicationCopyWithImpl<PartialApplication, PartialApplication>(
-        this as PartialApplication,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return PartialApplicationMapper.ensureInitialized().stringifyValue(
-      this as PartialApplication,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return PartialApplicationMapper.ensureInitialized().equalsValue(
-      this as PartialApplication,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return PartialApplicationMapper.ensureInitialized().hashValue(
-      this as PartialApplication,
-    );
-  }
-}
-
-extension PartialApplicationValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PartialApplication, $Out> {
-  PartialApplicationCopyWith<$R, PartialApplication, $Out>
-  get $asPartialApplication => $base.as(
-    (v, t, t2) => _PartialApplicationCopyWithImpl<$R, $Out>(v, t, t2),
-  );
-}
-
-abstract class PartialApplicationCopyWith<
-  $R,
-  $In extends PartialApplication,
-  $Out
->
-    implements ClassCopyWith<$R, $In, $Out> {
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  $R call({Snowflake? id});
-  PartialApplicationCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _PartialApplicationCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PartialApplication, $Out>
-    implements PartialApplicationCopyWith<$R, PartialApplication, $Out> {
-  _PartialApplicationCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<PartialApplication> $mapper =
-      PartialApplicationMapper.ensureInitialized();
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  $R call({Snowflake? id}) =>
-      $apply(FieldCopyWithData({if (id != null) #id: id}));
-  @override
-  PartialApplication $make(CopyWithData data) =>
-      PartialApplication(id: data.get(#id, or: $value.id));
-
-  @override
-  PartialApplicationCopyWith<$R2, PartialApplication, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _PartialApplicationCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class ApplicationIntegrationTypeConfigurationMapper
     extends ClassMapperBase<ApplicationIntegrationTypeConfiguration> {
   ApplicationIntegrationTypeConfigurationMapper._();
@@ -609,11 +481,9 @@ class ApplicationMapper extends ClassMapperBase<Application> {
   static ApplicationMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ApplicationMapper._());
-      PartialApplicationMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       PartialUserMapper.ensureInitialized();
       TeamMapper.ensureInitialized();
-      PartialGuildMapper.ensureInitialized();
       ApplicationFlagsMapper.ensureInitialized();
       InstallationParametersMapper.ensureInitialized();
       ApplicationIntegrationTypeMapper.ensureInitialized();
@@ -690,11 +560,6 @@ class ApplicationMapper extends ClassMapperBase<Application> {
     'guildId',
     _$guildId,
     key: r'guild_id',
-  );
-  static PartialGuild? _$guild(Application v) => v.guild;
-  static const Field<Application, PartialGuild> _f$guild = Field(
-    'guild',
-    _$guild,
   );
   static Snowflake? _$primarySkuId(Application v) => v.primarySkuId;
   static const Field<Application, Snowflake> _f$primarySkuId = Field(
@@ -796,7 +661,6 @@ class ApplicationMapper extends ClassMapperBase<Application> {
     #verifyKey: _f$verifyKey,
     #team: _f$team,
     #guildId: _f$guildId,
-    #guild: _f$guild,
     #primarySkuId: _f$primarySkuId,
     #slug: _f$slug,
     #coverImageHash: _f$coverImageHash,
@@ -828,7 +692,6 @@ class ApplicationMapper extends ClassMapperBase<Application> {
       verifyKey: data.dec(_f$verifyKey),
       team: data.dec(_f$team),
       guildId: data.dec(_f$guildId),
-      guild: data.dec(_f$guild),
       primarySkuId: data.dec(_f$primarySkuId),
       slug: data.dec(_f$slug),
       coverImageHash: data.dec(_f$coverImageHash),
@@ -906,15 +769,13 @@ extension ApplicationValueCopy<$R, $Out>
 }
 
 abstract class ApplicationCopyWith<$R, $In extends Application, $Out>
-    implements PartialApplicationCopyWith<$R, $In, $Out> {
-  @override
+    implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>? get rpcOrigins;
   PartialUserCopyWith<$R, PartialUser, PartialUser>? get bot;
   PartialUserCopyWith<$R, PartialUser, PartialUser>? get owner;
   TeamCopyWith<$R, Team, Team>? get team;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
-  PartialGuildCopyWith<$R, PartialGuild, PartialGuild>? get guild;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get primarySkuId;
   ApplicationFlagsCopyWith<$R, ApplicationFlags, ApplicationFlags> get flags;
   ListCopyWith<$R, Uri, ObjectCopyWith<$R, Uri, Uri>>? get redirectUris;
@@ -936,7 +797,6 @@ abstract class ApplicationCopyWith<$R, $In extends Application, $Out>
     >
   >?
   get integrationTypesConfig;
-  @override
   $R call({
     Snowflake? id,
     String? name,
@@ -952,7 +812,6 @@ abstract class ApplicationCopyWith<$R, $In extends Application, $Out>
     String? verifyKey,
     Team? team,
     Snowflake? guildId,
-    PartialGuild? guild,
     Snowflake? primarySkuId,
     String? slug,
     String? coverImageHash,
@@ -1003,9 +862,6 @@ class _ApplicationCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
       $value.guildId?.copyWith.$chain((v) => call(guildId: v));
-  @override
-  PartialGuildCopyWith<$R, PartialGuild, PartialGuild>? get guild =>
-      $value.guild?.copyWith.$chain((v) => call(guild: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get primarySkuId =>
       $value.primarySkuId?.copyWith.$chain((v) => call(primarySkuId: v));
@@ -1073,7 +929,6 @@ class _ApplicationCopyWithImpl<$R, $Out>
     String? verifyKey,
     Object? team = $none,
     Object? guildId = $none,
-    Object? guild = $none,
     Object? primarySkuId = $none,
     Object? slug = $none,
     Object? coverImageHash = $none,
@@ -1104,7 +959,6 @@ class _ApplicationCopyWithImpl<$R, $Out>
       if (verifyKey != null) #verifyKey: verifyKey,
       if (team != $none) #team: team,
       if (guildId != $none) #guildId: guildId,
-      if (guild != $none) #guild: guild,
       if (primarySkuId != $none) #primarySkuId: primarySkuId,
       if (slug != $none) #slug: slug,
       if (coverImageHash != $none) #coverImageHash: coverImageHash,
@@ -1148,7 +1002,6 @@ class _ApplicationCopyWithImpl<$R, $Out>
     verifyKey: data.get(#verifyKey, or: $value.verifyKey),
     team: data.get(#team, or: $value.team),
     guildId: data.get(#guildId, or: $value.guildId),
-    guild: data.get(#guild, or: $value.guild),
     primarySkuId: data.get(#primarySkuId, or: $value.primarySkuId),
     slug: data.get(#slug, or: $value.slug),
     coverImageHash: data.get(#coverImageHash, or: $value.coverImageHash),

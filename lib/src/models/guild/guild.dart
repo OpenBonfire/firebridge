@@ -1,31 +1,22 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/models/channel/channel.dart';
-import 'package:firebridge/src/models/emoji.dart';
 import 'package:firebridge/src/models/guild/welcome_screen.dart';
 import 'package:firebridge/src/models/invite/invite.dart';
 import 'package:firebridge/src/models/locale.dart';
 import 'package:firebridge/src/models/permissions.dart';
 import 'package:firebridge/src/models/role.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:firebridge/src/models/sticker/guild_sticker.dart';
 import 'package:firebridge/src/utils/flags.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'guild.mapper.dart';
 
-/// A partial [Guild].
-@MappableClass()
-class PartialGuild extends WritableSnowflakeEntity<Guild>
-    with PartialGuildMappable {
-  /// Create a new [PartialGuild].
-  /// @nodoc
-  PartialGuild({required super.id});
-}
-
 /// {@macro guild}
 @MappableClass()
-class UserGuild extends PartialGuild with UserGuildMappable {
+class UserGuild with UserGuildMappable {
+  final Snowflake id;
+
   /// This guild's name.
   final String name;
 
@@ -59,7 +50,7 @@ class UserGuild extends PartialGuild with UserGuildMappable {
   /// {@macro guild}
   /// @nodoc
   UserGuild({
-    required super.id,
+    required this.id,
     required this.name,
     required this.iconHash,
     required this.isOwnedByCurrentUser,

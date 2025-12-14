@@ -1,25 +1,17 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:firebridge/src/models/user/user.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'integration.mapper.dart';
 
-/// A partial [Integration].
-@MappableClass()
-class PartialIntegration extends ManagedSnowflakeEntity<Integration>
-    with PartialIntegrationMappable {
-  /// Create a new [PartialIntegration].
-  /// @nodoc
-  PartialIntegration({required super.id});
-}
-
 /// {@template integration}
 /// An integration in a [Guild].
 /// {@endtemplate}
 @MappableClass()
-class Integration extends PartialIntegration with IntegrationMappable {
+class Integration with IntegrationMappable {
+  final Snowflake id;
+
   /// The name of this integration.
   final String name;
 
@@ -68,7 +60,7 @@ class Integration extends PartialIntegration with IntegrationMappable {
   /// {@macro integration}
   /// @nodoc
   Integration({
-    required super.id,
+    required this.id,
     required this.name,
     required this.type,
     required this.isEnabled,

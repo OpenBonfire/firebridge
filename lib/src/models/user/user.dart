@@ -1,6 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/models/commands/application_command_option.dart';
-import 'package:firebridge/src/models/discord_color.dart';
 import 'package:firebridge/src/models/locale.dart';
 import 'package:firebridge/src/models/message/author.dart';
 import 'package:firebridge/src/models/snowflake.dart';
@@ -15,9 +14,35 @@ part 'user.mapper.dart';
 @MappableClass()
 class PartialUser extends ManagedSnowflakeEntity<User>
     with PartialUserMappable {
+  final String username;
+  final String discriminator;
+  final String? globalName;
+  final String? avatar;
+  final UserPrimaryGuild? primaryGuild;
+  final bool? bot;
+  final bool? system;
+  final String? banner;
+  final int? accentColor;
+  final UserFlags? publicFlags;
+
+  /// The user's avatar deciration data.
+  final AvatarDecorationData? avatarDecorationData;
+
   /// Create a new [PartialUser].
   /// @nodoc
-  PartialUser({required super.id});
+  PartialUser(
+      {required super.id,
+      required this.username,
+      required this.discriminator,
+      this.globalName,
+      this.avatar,
+      this.primaryGuild,
+      this.bot,
+      this.system,
+      this.banner,
+      this.accentColor,
+      this.publicFlags,
+      this.avatarDecorationData});
 }
 
 /// {@template user}
@@ -33,16 +58,6 @@ class PartialUser extends ManagedSnowflakeEntity<User>
 class User extends PartialUser
     with UserMappable
     implements MessageAuthor, CommandOptionMentionable<User> {
-  /// The user's username.
-  @override
-  final String username;
-
-  /// The user's discriminator.
-  final String discriminator;
-
-  /// The user's global display name, if it is set.
-  final String? globalName;
-
   /// The user's avatar hash, if they have an avatar.
   @override
   final String? avatarHash;
@@ -59,9 +74,6 @@ class User extends PartialUser
   /// The user's banner hash, if they have a banner.
   final String? bannerHash;
 
-  /// The user's accent color, if they have an accent color.
-  final DiscordColor? accentColor;
-
   /// The user's locale, if they have a locale.
   final Locale? locale;
 
@@ -72,13 +84,9 @@ class User extends PartialUser
   // final NitroType nitroType;
 
   /// The public [UserFlags] on the user's account.
-  final UserFlags? publicFlags;
 
   /// The hash of this user's avatar decoration.
   final String? avatarDecorationHash;
-
-  /// The user's avatar deciration data.
-  final AvatarDecorationData? avatarDecorationData;
 
   /// The user's clan data.
   final UserPrimaryGuild? primaryGuild;
@@ -87,21 +95,21 @@ class User extends PartialUser
   /// @nodoc
   User({
     required super.id,
-    required this.username,
-    required this.discriminator,
-    required this.globalName,
+    required super.username,
+    required super.discriminator,
+    required super.globalName,
     required this.avatarHash,
     this.bot,
     this.system,
     this.mfaEnabled = false,
     required this.bannerHash,
-    required this.accentColor,
+    required super.accentColor,
     required this.locale,
     required this.flags,
     // required this.nitroType,
-    required this.publicFlags,
+    required super.publicFlags,
     required this.avatarDecorationHash,
-    required this.avatarDecorationData,
+    super.avatarDecorationData,
     required this.primaryGuild,
   });
 }

@@ -57,148 +57,6 @@ extension ApplicationCommandTypeMapperExtension on ApplicationCommandType {
   }
 }
 
-class PartialApplicationCommandMapper
-    extends ClassMapperBase<PartialApplicationCommand> {
-  PartialApplicationCommandMapper._();
-
-  static PartialApplicationCommandMapper? _instance;
-  static PartialApplicationCommandMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(
-        _instance = PartialApplicationCommandMapper._(),
-      );
-      WritableSnowflakeEntityMapper.ensureInitialized();
-      ApplicationCommandMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'PartialApplicationCommand';
-
-  static Snowflake _$id(PartialApplicationCommand v) => v.id;
-  static const Field<PartialApplicationCommand, Snowflake> _f$id = Field(
-    'id',
-    _$id,
-  );
-
-  @override
-  final MappableFields<PartialApplicationCommand> fields = const {#id: _f$id};
-
-  static PartialApplicationCommand _instantiate(DecodingData data) {
-    return PartialApplicationCommand(id: data.dec(_f$id));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static PartialApplicationCommand fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<PartialApplicationCommand>(map);
-  }
-
-  static PartialApplicationCommand fromJson(String json) {
-    return ensureInitialized().decodeJson<PartialApplicationCommand>(json);
-  }
-}
-
-mixin PartialApplicationCommandMappable {
-  String toJson() {
-    return PartialApplicationCommandMapper.ensureInitialized()
-        .encodeJson<PartialApplicationCommand>(
-          this as PartialApplicationCommand,
-        );
-  }
-
-  Map<String, dynamic> toMap() {
-    return PartialApplicationCommandMapper.ensureInitialized()
-        .encodeMap<PartialApplicationCommand>(
-          this as PartialApplicationCommand,
-        );
-  }
-
-  PartialApplicationCommandCopyWith<
-    PartialApplicationCommand,
-    PartialApplicationCommand,
-    PartialApplicationCommand
-  >
-  get copyWith =>
-      _PartialApplicationCommandCopyWithImpl<
-        PartialApplicationCommand,
-        PartialApplicationCommand
-      >(this as PartialApplicationCommand, $identity, $identity);
-  @override
-  String toString() {
-    return PartialApplicationCommandMapper.ensureInitialized().stringifyValue(
-      this as PartialApplicationCommand,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return PartialApplicationCommandMapper.ensureInitialized().equalsValue(
-      this as PartialApplicationCommand,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return PartialApplicationCommandMapper.ensureInitialized().hashValue(
-      this as PartialApplicationCommand,
-    );
-  }
-}
-
-extension PartialApplicationCommandValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PartialApplicationCommand, $Out> {
-  PartialApplicationCommandCopyWith<$R, PartialApplicationCommand, $Out>
-  get $asPartialApplicationCommand => $base.as(
-    (v, t, t2) => _PartialApplicationCommandCopyWithImpl<$R, $Out>(v, t, t2),
-  );
-}
-
-abstract class PartialApplicationCommandCopyWith<
-  $R,
-  $In extends PartialApplicationCommand,
-  $Out
->
-    implements
-        WritableSnowflakeEntityCopyWith<$R, $In, $Out, ApplicationCommand> {
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  @override
-  $R call({Snowflake? id});
-  PartialApplicationCommandCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _PartialApplicationCommandCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PartialApplicationCommand, $Out>
-    implements
-        PartialApplicationCommandCopyWith<$R, PartialApplicationCommand, $Out> {
-  _PartialApplicationCommandCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<PartialApplicationCommand> $mapper =
-      PartialApplicationCommandMapper.ensureInitialized();
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  $R call({Snowflake? id}) =>
-      $apply(FieldCopyWithData({if (id != null) #id: id}));
-  @override
-  PartialApplicationCommand $make(CopyWithData data) =>
-      PartialApplicationCommand(id: data.get(#id, or: $value.id));
-
-  @override
-  PartialApplicationCommandCopyWith<$R2, PartialApplicationCommand, $Out2>
-  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _PartialApplicationCommandCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class ApplicationCommandMapper extends ClassMapperBase<ApplicationCommand> {
   ApplicationCommandMapper._();
 
@@ -206,7 +64,6 @@ class ApplicationCommandMapper extends ClassMapperBase<ApplicationCommand> {
   static ApplicationCommandMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ApplicationCommandMapper._());
-      PartialApplicationCommandMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       ApplicationCommandTypeMapper.ensureInitialized();
       LocaleMapper.ensureInitialized();
@@ -417,8 +274,7 @@ abstract class ApplicationCommandCopyWith<
   $In extends ApplicationCommand,
   $Out
 >
-    implements PartialApplicationCommandCopyWith<$R, $In, $Out> {
-  @override
+    implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get applicationId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
@@ -447,7 +303,6 @@ abstract class ApplicationCommandCopyWith<
   >?
   get contexts;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get version;
-  @override
   $R call({
     Snowflake? id,
     ApplicationCommandType? type,

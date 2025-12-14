@@ -16,7 +16,6 @@ import 'package:firebridge/src/models/message/reaction.dart';
 import 'package:firebridge/src/models/channel/text_channel.dart';
 import 'package:firebridge/src/models/message/role_subscription_data.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:firebridge/src/models/sticker/sticker.dart';
 import 'package:firebridge/src/models/user/user.dart';
 import 'package:firebridge/src/models/webhook.dart';
@@ -24,17 +23,6 @@ import 'package:firebridge/src/utils/flags.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'message.mapper.dart';
-
-/// {@template partial_message}
-/// A partial [Message] object.
-/// {@endtemplate}
-@MappableClass()
-class PartialMessage extends WritableSnowflakeEntity<Message>
-    with PartialMessageMappable {
-  /// {@macro partial_message}
-  /// @nodoc
-  PartialMessage({required super.id});
-}
 
 /// {@template message}
 /// Represents a message sent in a [TextChannel].
@@ -46,9 +34,9 @@ class PartialMessage extends WritableSnowflakeEntity<Message>
 /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#message-object
 /// {@endtemplate}
 @MappableClass()
-class Message extends PartialMessage
-    with MessageMappable
-    implements MessageSnapshot {
+class Message with MessageMappable implements MessageSnapshot {
+  final Snowflake id;
+
   /// The author of this message.
   ///
   /// This could be a [User] or a [WebhookAuthor].
@@ -104,9 +92,6 @@ class Message extends PartialMessage
   /// Activity information if this message is related to Rich Presence, `null` otherwise.
   final MessageActivity? activity;
 
-  /// The application associated with this message if this messages is related to Rich Presence, `null` otherwise.
-  final PartialApplication? application;
-
   /// The ID of the [Application] that sent this message if it is an interaction or a webhook, `null` otherwise.
   final Snowflake? applicationId;
 
@@ -160,7 +145,7 @@ class Message extends PartialMessage
   /// {@macro message}
   /// @nodoc
   Message({
-    required super.id,
+    required this.id,
     required this.author,
     required this.content,
     required this.timestamp,
@@ -178,7 +163,6 @@ class Message extends PartialMessage
     required this.webhookId,
     required this.type,
     required this.activity,
-    required this.application,
     required this.applicationId,
     required this.reference,
     required this.messageSnapshots,
@@ -456,7 +440,7 @@ class MessageInteractionMetadata
 // useful data using existing nyxx types, we instead forward the field of the
 // nested object into this type.
 @MappableClass()
-class MessageSnapshot with ToStringHelper, MessageSnapshotMappable {
+class MessageSnapshot with MessageSnapshotMappable {
   /// The time when this message was sent.
   final DateTime timestamp;
 

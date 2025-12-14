@@ -580,7 +580,6 @@ abstract class VoiceChannelEffectSendEventCopyWith<
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get channelId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get userId;
-  EmojiCopyWith<$R, Emoji, Emoji>? get emoji;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get soundId;
   @override
   $R call({
@@ -624,9 +623,6 @@ class _VoiceChannelEffectSendEventCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get userId =>
       $value.userId.copyWith.$chain((v) => call(userId: v));
-  @override
-  EmojiCopyWith<$R, Emoji, Emoji>? get emoji =>
-      $value.emoji?.copyWith.$chain((v) => call(emoji: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get soundId =>
       $value.soundId?.copyWith.$chain((v) => call(soundId: v));

@@ -25,10 +25,6 @@ class GuildSoundboardManager extends SoundboardManager {
       : super(identifier: '$guildId.soundboard');
 
   @override
-  PartialSoundboardSound operator [](Snowflake id) =>
-      PartialSoundboardSound(id: id);
-
-  @override
   Future<SoundboardSound> fetch(Snowflake id) async {
     final route = HttpRoute()
       ..guilds(id: guildId.toString())
@@ -146,10 +142,6 @@ class GlobalSoundboardManager extends SoundboardManager
     implements ReadOnlyManager<SoundboardSound> {
   GlobalSoundboardManager(super.config, super.client)
       : super(identifier: 'soundboard');
-
-  @override
-  PartialSoundboardSound operator [](Snowflake id) =>
-      PartialSoundboardSound(id: id);
 
   @override
   Future<SoundboardSound> fetch(Snowflake id) async {

@@ -47,7 +47,7 @@ abstract class Interaction<T> with ToStringHelper, InteractionMappable {
   final Snowflake? guildId;
 
   /// The channel this interaction was triggered in.
-  final PartialChannel? channel;
+  final Snowflake? channel;
 
   /// The ID of the channel this interaction was triggered in.
   final Snowflake? channelId;
@@ -335,10 +335,10 @@ class ResolvedData with ToStringHelper, ResolvedDataMappable {
   final Map<Snowflake, Role>? roles;
 
   /// A mapping of channel ID to [PartialChannel].
-  final Map<Snowflake, PartialChannel>? channels;
+  final Map<Snowflake, Snowflake>? channels;
 
   /// A mapping of message ID to [PartialMessage].
-  final Map<Snowflake, PartialMessage>? messages;
+  final Map<Snowflake, Snowflake>? messages;
 
   /// A mapping of attachment ID to [Attachment].
   final Map<Snowflake, Attachment>? attachments;

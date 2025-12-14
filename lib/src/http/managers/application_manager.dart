@@ -5,7 +5,6 @@ import 'package:firebridge/src/client.dart';
 import 'package:firebridge/src/http/request.dart';
 import 'package:firebridge/src/http/route.dart';
 import 'package:firebridge/src/models/application.dart';
-import 'package:firebridge/src/models/snowflake.dart';
 
 /// A manager for [Application]s.
 // See the comment on PartialApplication for why we do not implement Manager.
@@ -15,9 +14,6 @@ class ApplicationManager {
 
   /// Create a new [ApplicationManager].
   ApplicationManager(this.client);
-
-  /// Return a partial application with the given [id].
-  PartialApplication operator [](Snowflake id) => PartialApplication(id: id);
 
   /// Fetch the current OAuth2 application.
   Future<Application> fetchOAuth2CurrentApplication() async {

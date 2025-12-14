@@ -15,10 +15,6 @@ class IntegrationManager extends ReadOnlyManager<Integration> {
   /// Create a new [IntegrationManager].
   IntegrationManager(super.config, super.client, {required this.guildId})
       : super(identifier: '$guildId.integrations');
-
-  @override
-  PartialIntegration operator [](Snowflake id) => PartialIntegration(id: id);
-
   @override
   Future<Integration> fetch(Snowflake id) async {
     final integrations = await list();

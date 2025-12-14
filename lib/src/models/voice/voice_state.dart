@@ -1,9 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/http/managers/voice_manager.dart';
-import 'package:firebridge/src/models/guild/guild.dart';
 import 'package:firebridge/src/models/guild/member.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/user/user.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'voice_state.mapper.dart';
@@ -86,11 +84,4 @@ class VoiceState with ToStringHelper, VoiceStateMappable {
   /// The key this voice state will have in the [FirebridgeRest.voice] cache.
   @Deprecated('Use PartialGuild.voiceStates instead')
   Snowflake get cacheKey => Snowflake(Object.hash(guildId, userId));
-
-  /// The guild this voice state is in.
-  PartialGuild? get guild =>
-      guildId == null ? null : manager.client.guilds[guildId!];
-
-  /// The user this voice state is for.
-  PartialUser get user => manager.client.users[userId];
 }

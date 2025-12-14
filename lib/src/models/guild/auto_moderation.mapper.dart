@@ -218,148 +218,6 @@ extension ActionTypeMapperExtension on ActionType {
   }
 }
 
-class PartialAutoModerationRuleMapper
-    extends ClassMapperBase<PartialAutoModerationRule> {
-  PartialAutoModerationRuleMapper._();
-
-  static PartialAutoModerationRuleMapper? _instance;
-  static PartialAutoModerationRuleMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(
-        _instance = PartialAutoModerationRuleMapper._(),
-      );
-      WritableSnowflakeEntityMapper.ensureInitialized();
-      AutoModerationRuleMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'PartialAutoModerationRule';
-
-  static Snowflake _$id(PartialAutoModerationRule v) => v.id;
-  static const Field<PartialAutoModerationRule, Snowflake> _f$id = Field(
-    'id',
-    _$id,
-  );
-
-  @override
-  final MappableFields<PartialAutoModerationRule> fields = const {#id: _f$id};
-
-  static PartialAutoModerationRule _instantiate(DecodingData data) {
-    return PartialAutoModerationRule(id: data.dec(_f$id));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static PartialAutoModerationRule fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<PartialAutoModerationRule>(map);
-  }
-
-  static PartialAutoModerationRule fromJson(String json) {
-    return ensureInitialized().decodeJson<PartialAutoModerationRule>(json);
-  }
-}
-
-mixin PartialAutoModerationRuleMappable {
-  String toJson() {
-    return PartialAutoModerationRuleMapper.ensureInitialized()
-        .encodeJson<PartialAutoModerationRule>(
-          this as PartialAutoModerationRule,
-        );
-  }
-
-  Map<String, dynamic> toMap() {
-    return PartialAutoModerationRuleMapper.ensureInitialized()
-        .encodeMap<PartialAutoModerationRule>(
-          this as PartialAutoModerationRule,
-        );
-  }
-
-  PartialAutoModerationRuleCopyWith<
-    PartialAutoModerationRule,
-    PartialAutoModerationRule,
-    PartialAutoModerationRule
-  >
-  get copyWith =>
-      _PartialAutoModerationRuleCopyWithImpl<
-        PartialAutoModerationRule,
-        PartialAutoModerationRule
-      >(this as PartialAutoModerationRule, $identity, $identity);
-  @override
-  String toString() {
-    return PartialAutoModerationRuleMapper.ensureInitialized().stringifyValue(
-      this as PartialAutoModerationRule,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return PartialAutoModerationRuleMapper.ensureInitialized().equalsValue(
-      this as PartialAutoModerationRule,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return PartialAutoModerationRuleMapper.ensureInitialized().hashValue(
-      this as PartialAutoModerationRule,
-    );
-  }
-}
-
-extension PartialAutoModerationRuleValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PartialAutoModerationRule, $Out> {
-  PartialAutoModerationRuleCopyWith<$R, PartialAutoModerationRule, $Out>
-  get $asPartialAutoModerationRule => $base.as(
-    (v, t, t2) => _PartialAutoModerationRuleCopyWithImpl<$R, $Out>(v, t, t2),
-  );
-}
-
-abstract class PartialAutoModerationRuleCopyWith<
-  $R,
-  $In extends PartialAutoModerationRule,
-  $Out
->
-    implements
-        WritableSnowflakeEntityCopyWith<$R, $In, $Out, AutoModerationRule> {
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  @override
-  $R call({Snowflake? id});
-  PartialAutoModerationRuleCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _PartialAutoModerationRuleCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PartialAutoModerationRule, $Out>
-    implements
-        PartialAutoModerationRuleCopyWith<$R, PartialAutoModerationRule, $Out> {
-  _PartialAutoModerationRuleCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<PartialAutoModerationRule> $mapper =
-      PartialAutoModerationRuleMapper.ensureInitialized();
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  $R call({Snowflake? id}) =>
-      $apply(FieldCopyWithData({if (id != null) #id: id}));
-  @override
-  PartialAutoModerationRule $make(CopyWithData data) =>
-      PartialAutoModerationRule(id: data.get(#id, or: $value.id));
-
-  @override
-  PartialAutoModerationRuleCopyWith<$R2, PartialAutoModerationRule, $Out2>
-  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _PartialAutoModerationRuleCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class AutoModerationRuleMapper extends ClassMapperBase<AutoModerationRule> {
   AutoModerationRuleMapper._();
 
@@ -367,7 +225,6 @@ class AutoModerationRuleMapper extends ClassMapperBase<AutoModerationRule> {
   static AutoModerationRuleMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = AutoModerationRuleMapper._());
-      PartialAutoModerationRuleMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       AutoModerationEventTypeMapper.ensureInitialized();
       TriggerTypeMapper.ensureInitialized();
@@ -534,8 +391,7 @@ abstract class AutoModerationRuleCopyWith<
   $In extends AutoModerationRule,
   $Out
 >
-    implements PartialAutoModerationRuleCopyWith<$R, $In, $Out> {
-  @override
+    implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get creatorId;
@@ -550,7 +406,6 @@ abstract class AutoModerationRuleCopyWith<
   get exemptRoleIds;
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
   get exemptChannelIds;
-  @override
   $R call({
     Snowflake? id,
     Snowflake? guildId,

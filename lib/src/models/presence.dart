@@ -103,7 +103,15 @@ class Activity with ToStringHelper, ActivityMappable {
 
 /// The type of an activity.
 @MappableEnum(mode: ValuesMode.indexed)
-enum ActivityType { game, streaming, listening, watching, custom, competing }
+enum ActivityType {
+  game,
+  streaming,
+  listening,
+  watching,
+  custom,
+  competing,
+  hang
+}
 
 /// {@template activity_timestamps}
 /// Information about an [Activity]'s timings.

@@ -1,5 +1,4 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:firebridge/src/models/guild/guild.dart';
 import 'package:firebridge/src/models/locale.dart';
 import 'package:firebridge/src/models/permissions.dart';
 import 'package:firebridge/src/models/snowflake.dart';
@@ -9,19 +8,6 @@ import 'package:firebridge/src/utils/flags.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'application.mapper.dart';
-
-/// A partial [Application] object.
-// We intentionally do not use SnowflakeEntity as applications do not have the same access in the API as other entities with IDs, so they cannot be thought of
-// as being in a "group".
-@MappableClass()
-class PartialApplication with ToStringHelper, PartialApplicationMappable {
-  /// The ID of this application.
-  final Snowflake id;
-
-  /// Create a new [PartialApplication].
-  /// @nodoc
-  PartialApplication({required this.id});
-}
 
 @MappableClass()
 class ApplicationIntegrationTypeConfiguration
@@ -38,7 +24,9 @@ class ApplicationIntegrationTypeConfiguration
 /// An OAuth2 application.
 /// {@endtemplate}
 @MappableClass()
-class Application extends PartialApplication with ApplicationMappable {
+class Application with ApplicationMappable {
+  final Snowflake id;
+
   /// The name of this application.
   final String name;
 
@@ -78,8 +66,8 @@ class Application extends PartialApplication with ApplicationMappable {
   /// The ID of the guild associated with this application.
   final Snowflake? guildId;
 
-  /// The guild associated with this application.
-  final PartialGuild? guild;
+  // /// The guild associated with this application.
+  // final Snowflake? guild;
 
   /// If this application is a game sold on Discord, the ID of the "Game SKU" that is created, if it exists.
   final Snowflake? primarySkuId;
@@ -126,7 +114,7 @@ class Application extends PartialApplication with ApplicationMappable {
   /// {@macro application}
   /// @nodoc
   Application({
-    required super.id,
+    required this.id,
     required this.name,
     required this.iconHash,
     required this.description,
@@ -140,7 +128,7 @@ class Application extends PartialApplication with ApplicationMappable {
     required this.verifyKey,
     required this.team,
     required this.guildId,
-    required this.guild,
+    // required this.guild,
     required this.primarySkuId,
     required this.slug,
     required this.coverImageHash,

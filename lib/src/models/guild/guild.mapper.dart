@@ -322,126 +322,6 @@ extension NsfwLevelMapperExtension on NsfwLevel {
   }
 }
 
-class PartialGuildMapper extends ClassMapperBase<PartialGuild> {
-  PartialGuildMapper._();
-
-  static PartialGuildMapper? _instance;
-  static PartialGuildMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = PartialGuildMapper._());
-      WritableSnowflakeEntityMapper.ensureInitialized();
-      UserGuildMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'PartialGuild';
-
-  static Snowflake _$id(PartialGuild v) => v.id;
-  static const Field<PartialGuild, Snowflake> _f$id = Field('id', _$id);
-
-  @override
-  final MappableFields<PartialGuild> fields = const {#id: _f$id};
-
-  static PartialGuild _instantiate(DecodingData data) {
-    return PartialGuild(id: data.dec(_f$id));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static PartialGuild fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<PartialGuild>(map);
-  }
-
-  static PartialGuild fromJson(String json) {
-    return ensureInitialized().decodeJson<PartialGuild>(json);
-  }
-}
-
-mixin PartialGuildMappable {
-  String toJson() {
-    return PartialGuildMapper.ensureInitialized().encodeJson<PartialGuild>(
-      this as PartialGuild,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return PartialGuildMapper.ensureInitialized().encodeMap<PartialGuild>(
-      this as PartialGuild,
-    );
-  }
-
-  PartialGuildCopyWith<PartialGuild, PartialGuild, PartialGuild> get copyWith =>
-      _PartialGuildCopyWithImpl<PartialGuild, PartialGuild>(
-        this as PartialGuild,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return PartialGuildMapper.ensureInitialized().stringifyValue(
-      this as PartialGuild,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return PartialGuildMapper.ensureInitialized().equalsValue(
-      this as PartialGuild,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return PartialGuildMapper.ensureInitialized().hashValue(
-      this as PartialGuild,
-    );
-  }
-}
-
-extension PartialGuildValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PartialGuild, $Out> {
-  PartialGuildCopyWith<$R, PartialGuild, $Out> get $asPartialGuild =>
-      $base.as((v, t, t2) => _PartialGuildCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class PartialGuildCopyWith<$R, $In extends PartialGuild, $Out>
-    implements WritableSnowflakeEntityCopyWith<$R, $In, $Out, Guild> {
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  @override
-  $R call({Snowflake? id});
-  PartialGuildCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
-}
-
-class _PartialGuildCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PartialGuild, $Out>
-    implements PartialGuildCopyWith<$R, PartialGuild, $Out> {
-  _PartialGuildCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<PartialGuild> $mapper =
-      PartialGuildMapper.ensureInitialized();
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  $R call({Snowflake? id}) =>
-      $apply(FieldCopyWithData({if (id != null) #id: id}));
-  @override
-  PartialGuild $make(CopyWithData data) =>
-      PartialGuild(id: data.get(#id, or: $value.id));
-
-  @override
-  PartialGuildCopyWith<$R2, PartialGuild, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _PartialGuildCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class UserGuildMapper extends ClassMapperBase<UserGuild> {
   UserGuildMapper._();
 
@@ -449,7 +329,6 @@ class UserGuildMapper extends ClassMapperBase<UserGuild> {
   static UserGuildMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = UserGuildMapper._());
-      PartialGuildMapper.ensureInitialized();
       GuildMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       PermissionsMapper.ensureInitialized();
@@ -586,11 +465,9 @@ extension UserGuildValueCopy<$R, $Out> on ObjectCopyWith<$R, UserGuild, $Out> {
 }
 
 abstract class UserGuildCopyWith<$R, $In extends UserGuild, $Out>
-    implements PartialGuildCopyWith<$R, $In, $Out> {
-  @override
+    implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   PermissionsCopyWith<$R, Permissions, Permissions>? get currentUserPermissions;
-  @override
   $R call({
     Snowflake? id,
     String? name,
@@ -1107,7 +984,7 @@ abstract class GuildCopyWith<$R, $In extends Guild, $Out>
   get stickers;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get safetyAlertsChannelId;
   IncidentsDataCopyWith<$R, IncidentsData, IncidentsData>? get incidentsData;
-  ListCopyWith<$R, Channel, ChannelCopyWith<$R, Channel, Channel>> get channels;
+  ListCopyWith<$R, Channel, ObjectCopyWith<$R, Channel, Channel>> get channels;
   @override
   $R call({
     Snowflake? id,
@@ -1227,10 +1104,10 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
   IncidentsDataCopyWith<$R, IncidentsData, IncidentsData>? get incidentsData =>
       $value.incidentsData?.copyWith.$chain((v) => call(incidentsData: v));
   @override
-  ListCopyWith<$R, Channel, ChannelCopyWith<$R, Channel, Channel>>
+  ListCopyWith<$R, Channel, ObjectCopyWith<$R, Channel, Channel>>
   get channels => ListCopyWith(
     $value.channels,
-    (v, t) => v.copyWith.$chain(t),
+    (v, t) => ObjectCopyWith(v, $identity, t),
     (v) => call(channels: v),
   );
   @override

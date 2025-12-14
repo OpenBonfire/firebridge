@@ -6,19 +6,13 @@ import 'package:firebridge/src/models/user/user.dart';
 
 part 'global_sticker.mapper.dart';
 
-@MappableClass()
-class PartialGlobalSticker extends ManagedSnowflakeEntity<GlobalSticker>
-    with PartialGlobalStickerMappable {
-  /// @nodoc
-  PartialGlobalSticker({required super.id});
-}
-
 /// {@template global_sticker}
 /// A sticker that can be sent in messages. Represents global stickers (default stickers)
 /// {@endtemplate}
 @MappableClass()
-class GlobalSticker extends PartialGlobalSticker
-    with Sticker, GlobalStickerMappable {
+class GlobalSticker with Sticker, GlobalStickerMappable {
+  final Snowflake id;
+
   /// Name of the sticker
   @override
   final String name;
@@ -57,7 +51,7 @@ class GlobalSticker extends PartialGlobalSticker
   /// {@macro global_sticker}
   /// @nodoc
   GlobalSticker({
-    required super.id,
+    required this.id,
     required this.name,
     required this.description,
     required this.tags,

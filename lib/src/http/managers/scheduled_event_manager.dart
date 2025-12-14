@@ -17,9 +17,6 @@ class ScheduledEventManager extends Manager<ScheduledEvent> {
   ScheduledEventManager(super.config, super.client, {required this.guildId})
       : super(identifier: '$guildId.scheduledEvents');
 
-  @override
-  PartialScheduledEvent operator [](Snowflake id) =>
-      PartialScheduledEvent(id: id);
   EntityMetadata parseEntityMetadata(Map<String, Object?> raw) {
     return EntityMetadata(
       location: raw['location'] as String?,

@@ -308,7 +308,6 @@ extension ButtonBuilderValueCopy<$R, $Out>
 
 abstract class ButtonBuilderCopyWith<$R, $In extends ButtonBuilder, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  EmojiCopyWith<$R, Emoji, Emoji>? get emoji;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get skuId;
   $R call({
     ButtonStyle? style,
@@ -331,9 +330,6 @@ class _ButtonBuilderCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<ButtonBuilder> $mapper =
       ButtonBuilderMapper.ensureInitialized();
-  @override
-  EmojiCopyWith<$R, Emoji, Emoji>? get emoji =>
-      $value.emoji?.copyWith.$chain((v) => call(emoji: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get skuId =>
       $value.skuId?.copyWith.$chain((v) => call(skuId: v));
@@ -388,7 +384,6 @@ class SelectMenuBuilderMapper extends ClassMapperBase<SelectMenuBuilder> {
       SelectMenuOptionBuilderMapper.ensureInitialized();
       ChannelTypeMapper.ensureInitialized();
       DefaultValueMapper.ensureInitialized();
-      SnowflakeEntityMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -421,13 +416,9 @@ class SelectMenuBuilderMapper extends ClassMapperBase<SelectMenuBuilder> {
     _$placeholder,
     opt: true,
   );
-  static List<DefaultValue<SnowflakeEntity<dynamic>>>? _$defaultValues(
-    SelectMenuBuilder v,
-  ) => v.defaultValues;
-  static const Field<
-    SelectMenuBuilder,
-    List<DefaultValue<SnowflakeEntity<dynamic>>>
-  >
+  static List<DefaultValue<dynamic>>? _$defaultValues(SelectMenuBuilder v) =>
+      v.defaultValues;
+  static const Field<SelectMenuBuilder, List<DefaultValue<dynamic>>>
   _f$defaultValues = Field(
     'defaultValues',
     _$defaultValues,
@@ -584,12 +575,12 @@ abstract class SelectMenuBuilderCopyWith<
   get channelTypes;
   ListCopyWith<
     $R,
-    DefaultValue<SnowflakeEntity<dynamic>>,
+    DefaultValue<dynamic>,
     DefaultValueCopyWith<
       $R,
-      DefaultValue<SnowflakeEntity<dynamic>>,
-      DefaultValue<SnowflakeEntity<dynamic>>,
-      SnowflakeEntity<dynamic>
+      DefaultValue<dynamic>,
+      DefaultValue<dynamic>,
+      dynamic
     >
   >?
   get defaultValues;
@@ -599,7 +590,7 @@ abstract class SelectMenuBuilderCopyWith<
     List<SelectMenuOptionBuilder>? options,
     List<ChannelType>? channelTypes,
     String? placeholder,
-    List<DefaultValue<SnowflakeEntity<dynamic>>>? defaultValues,
+    List<DefaultValue<dynamic>>? defaultValues,
     int? minValues,
     int? maxValues,
     bool? isDisabled,
@@ -647,12 +638,12 @@ class _SelectMenuBuilderCopyWithImpl<$R, $Out>
   @override
   ListCopyWith<
     $R,
-    DefaultValue<SnowflakeEntity<dynamic>>,
+    DefaultValue<dynamic>,
     DefaultValueCopyWith<
       $R,
-      DefaultValue<SnowflakeEntity<dynamic>>,
-      DefaultValue<SnowflakeEntity<dynamic>>,
-      SnowflakeEntity<dynamic>
+      DefaultValue<dynamic>,
+      DefaultValue<dynamic>,
+      dynamic
     >
   >?
   get defaultValues => $value.defaultValues != null
@@ -845,7 +836,6 @@ abstract class SelectMenuOptionBuilderCopyWith<
   $Out
 >
     implements ClassCopyWith<$R, $In, $Out> {
-  EmojiCopyWith<$R, Emoji, Emoji>? get emoji;
   $R call({
     String? label,
     String? value,
@@ -867,9 +857,6 @@ class _SelectMenuOptionBuilderCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<SelectMenuOptionBuilder> $mapper =
       SelectMenuOptionBuilderMapper.ensureInitialized();
-  @override
-  EmojiCopyWith<$R, Emoji, Emoji>? get emoji =>
-      $value.emoji?.copyWith.$chain((v) => call(emoji: v));
   @override
   $R call({
     String? label,
@@ -909,7 +896,6 @@ class DefaultValueMapper extends ClassMapperBase<DefaultValue> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = DefaultValueMapper._());
       SnowflakeMapper.ensureInitialized();
-      SnowflakeEntityMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -918,11 +904,7 @@ class DefaultValueMapper extends ClassMapperBase<DefaultValue> {
   final String id = 'DefaultValue';
   @override
   Function get typeFactory =>
-      <T extends SnowflakeEntity>(f) => <T>[] is List<SnowflakeEntity<T>>
-      ? _typeFactory<T>(f)
-      : f<DefaultValue>();
-  final Function _typeFactory = <T extends SnowflakeEntity<T>>(f) =>
-      f<DefaultValue<T>>();
+      <T>(f) => f<DefaultValue<T>>();
 
   static Snowflake _$id(DefaultValue v) => v.id;
   static const Field<DefaultValue, Snowflake> _f$id = Field('id', _$id);
@@ -935,27 +917,23 @@ class DefaultValueMapper extends ClassMapperBase<DefaultValue> {
     #type: _f$type,
   };
 
-  static DefaultValue<T> _instantiate<T extends SnowflakeEntity<T>>(
-    DecodingData data,
-  ) {
+  static DefaultValue<T> _instantiate<T>(DecodingData data) {
     return DefaultValue(id: data.dec(_f$id), type: data.dec(_f$type));
   }
 
   @override
   final Function instantiate = _instantiate;
 
-  static DefaultValue<T> fromMap<T extends SnowflakeEntity<T>>(
-    Map<String, dynamic> map,
-  ) {
+  static DefaultValue<T> fromMap<T>(Map<String, dynamic> map) {
     return ensureInitialized().decodeMap<DefaultValue<T>>(map);
   }
 
-  static DefaultValue<T> fromJson<T extends SnowflakeEntity<T>>(String json) {
+  static DefaultValue<T> fromJson<T>(String json) {
     return ensureInitialized().decodeJson<DefaultValue<T>>(json);
   }
 }
 
-mixin DefaultValueMappable<T extends SnowflakeEntity<T>> {
+mixin DefaultValueMappable<T> {
   String toJson() {
     return DefaultValueMapper.ensureInitialized().encodeJson<DefaultValue<T>>(
       this as DefaultValue<T>,
@@ -998,18 +976,13 @@ mixin DefaultValueMappable<T extends SnowflakeEntity<T>> {
   }
 }
 
-extension DefaultValueValueCopy<$R, $Out, T extends SnowflakeEntity<T>>
+extension DefaultValueValueCopy<$R, $Out, T>
     on ObjectCopyWith<$R, DefaultValue<T>, $Out> {
   DefaultValueCopyWith<$R, DefaultValue<T>, $Out, T> get $asDefaultValue =>
       $base.as((v, t, t2) => _DefaultValueCopyWithImpl<$R, $Out, T>(v, t, t2));
 }
 
-abstract class DefaultValueCopyWith<
-  $R,
-  $In extends DefaultValue<T>,
-  $Out,
-  T extends SnowflakeEntity<T>
->
+abstract class DefaultValueCopyWith<$R, $In extends DefaultValue<T>, $Out, T>
     implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   $R call({Snowflake? id, String? type});
@@ -1018,7 +991,7 @@ abstract class DefaultValueCopyWith<
   );
 }
 
-class _DefaultValueCopyWithImpl<$R, $Out, T extends SnowflakeEntity<T>>
+class _DefaultValueCopyWithImpl<$R, $Out, T>
     extends ClassCopyWithBase<$R, DefaultValue<T>, $Out>
     implements DefaultValueCopyWith<$R, DefaultValue<T>, $Out, T> {
   _DefaultValueCopyWithImpl(super.value, super.then, super.then2);

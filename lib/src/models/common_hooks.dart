@@ -100,7 +100,6 @@ void initMappers() {
   GatewayEventMapper.ensureInitialized();
   ResumedEventMapper.ensureInitialized();
   MessageCreateEventMapper.ensureInitialized();
-  PartialApplicationMapper.ensureInitialized();
   DiscordColorMapper.ensureInitialized();
   EmojiMapper.ensureInitialized();
   EntitlementMapper.ensureInitialized();

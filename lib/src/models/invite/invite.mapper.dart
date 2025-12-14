@@ -111,11 +111,9 @@ class InviteMapper extends ClassMapperBase<Invite> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = InviteMapper._());
       InviteTypeMapper.ensureInitialized();
-      PartialGuildMapper.ensureInitialized();
-      PartialChannelMapper.ensureInitialized();
+      SnowflakeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       TargetTypeMapper.ensureInitialized();
-      PartialApplicationMapper.ensureInitialized();
       ScheduledEventMapper.ensureInitialized();
       GuildInviteFlagsMapper.ensureInitialized();
     }
@@ -129,10 +127,14 @@ class InviteMapper extends ClassMapperBase<Invite> {
   static const Field<Invite, InviteType> _f$type = Field('type', _$type);
   static String _$code(Invite v) => v.code;
   static const Field<Invite, String> _f$code = Field('code', _$code);
-  static PartialGuild? _$guild(Invite v) => v.guild;
-  static const Field<Invite, PartialGuild> _f$guild = Field('guild', _$guild);
-  static PartialChannel _$channel(Invite v) => v.channel;
-  static const Field<Invite, PartialChannel> _f$channel = Field(
+  static Snowflake _$guildId(Invite v) => v.guildId;
+  static const Field<Invite, Snowflake> _f$guildId = Field(
+    'guildId',
+    _$guildId,
+    key: r'guild_id',
+  );
+  static Snowflake _$channel(Invite v) => v.channel;
+  static const Field<Invite, Snowflake> _f$channel = Field(
     'channel',
     _$channel,
   );
@@ -150,9 +152,8 @@ class InviteMapper extends ClassMapperBase<Invite> {
     _$targetUser,
     key: r'target_user',
   );
-  static PartialApplication? _$targetApplication(Invite v) =>
-      v.targetApplication;
-  static const Field<Invite, PartialApplication> _f$targetApplication = Field(
+  static Snowflake? _$targetApplication(Invite v) => v.targetApplication;
+  static const Field<Invite, Snowflake> _f$targetApplication = Field(
     'targetApplication',
     _$targetApplication,
     key: r'target_application',
@@ -193,7 +194,7 @@ class InviteMapper extends ClassMapperBase<Invite> {
   final MappableFields<Invite> fields = const {
     #type: _f$type,
     #code: _f$code,
-    #guild: _f$guild,
+    #guildId: _f$guildId,
     #channel: _f$channel,
     #inviter: _f$inviter,
     #targetType: _f$targetType,
@@ -210,7 +211,7 @@ class InviteMapper extends ClassMapperBase<Invite> {
     return Invite(
       type: data.dec(_f$type),
       code: data.dec(_f$code),
-      guild: data.dec(_f$guild),
+      guildId: data.dec(_f$guildId),
       channel: data.dec(_f$channel),
       inviter: data.dec(_f$inviter),
       targetType: data.dec(_f$targetType),
@@ -270,24 +271,23 @@ extension InviteValueCopy<$R, $Out> on ObjectCopyWith<$R, Invite, $Out> {
 
 abstract class InviteCopyWith<$R, $In extends Invite, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  PartialGuildCopyWith<$R, PartialGuild, PartialGuild>? get guild;
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel> get channel;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get channel;
   UserCopyWith<$R, User, User>? get inviter;
   UserCopyWith<$R, User, User>? get targetUser;
-  PartialApplicationCopyWith<$R, PartialApplication, PartialApplication>?
-  get targetApplication;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get targetApplication;
   ScheduledEventCopyWith<$R, ScheduledEvent, ScheduledEvent>?
   get guildScheduledEvent;
   GuildInviteFlagsCopyWith<$R, GuildInviteFlags, GuildInviteFlags>? get flags;
   $R call({
     InviteType? type,
     String? code,
-    PartialGuild? guild,
-    PartialChannel? channel,
+    Snowflake? guildId,
+    Snowflake? channel,
     User? inviter,
     TargetType? targetType,
     User? targetUser,
-    PartialApplication? targetApplication,
+    Snowflake? targetApplication,
     int? approximateMemberCount,
     int? approximatePresenceCount,
     DateTime? expiresAt,
@@ -304,10 +304,10 @@ class _InviteCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Invite, $Out>
   @override
   late final ClassMapperBase<Invite> $mapper = InviteMapper.ensureInitialized();
   @override
-  PartialGuildCopyWith<$R, PartialGuild, PartialGuild>? get guild =>
-      $value.guild?.copyWith.$chain((v) => call(guild: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
+      $value.guildId.copyWith.$chain((v) => call(guildId: v));
   @override
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel> get channel =>
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get channel =>
       $value.channel.copyWith.$chain((v) => call(channel: v));
   @override
   UserCopyWith<$R, User, User>? get inviter =>
@@ -316,10 +316,10 @@ class _InviteCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Invite, $Out>
   UserCopyWith<$R, User, User>? get targetUser =>
       $value.targetUser?.copyWith.$chain((v) => call(targetUser: v));
   @override
-  PartialApplicationCopyWith<$R, PartialApplication, PartialApplication>?
-  get targetApplication => $value.targetApplication?.copyWith.$chain(
-    (v) => call(targetApplication: v),
-  );
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get targetApplication => $value
+      .targetApplication
+      ?.copyWith
+      .$chain((v) => call(targetApplication: v));
   @override
   ScheduledEventCopyWith<$R, ScheduledEvent, ScheduledEvent>?
   get guildScheduledEvent => $value.guildScheduledEvent?.copyWith.$chain(
@@ -332,8 +332,8 @@ class _InviteCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Invite, $Out>
   $R call({
     InviteType? type,
     String? code,
-    Object? guild = $none,
-    PartialChannel? channel,
+    Snowflake? guildId,
+    Snowflake? channel,
     Object? inviter = $none,
     Object? targetType = $none,
     Object? targetUser = $none,
@@ -347,7 +347,7 @@ class _InviteCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Invite, $Out>
     FieldCopyWithData({
       if (type != null) #type: type,
       if (code != null) #code: code,
-      if (guild != $none) #guild: guild,
+      if (guildId != null) #guildId: guildId,
       if (channel != null) #channel: channel,
       if (inviter != $none) #inviter: inviter,
       if (targetType != $none) #targetType: targetType,
@@ -367,7 +367,7 @@ class _InviteCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Invite, $Out>
   Invite $make(CopyWithData data) => Invite(
     type: data.get(#type, or: $value.type),
     code: data.get(#code, or: $value.code),
-    guild: data.get(#guild, or: $value.guild),
+    guildId: data.get(#guildId, or: $value.guildId),
     channel: data.get(#channel, or: $value.channel),
     inviter: data.get(#inviter, or: $value.inviter),
     targetType: data.get(#targetType, or: $value.targetType),

@@ -1,27 +1,18 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/http/managers/audit_log_manager.dart';
-import 'package:firebridge/src/models/application.dart';
 import 'package:firebridge/src/models/permission_overwrite.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'audit_log.mapper.dart';
-
-/// A partial [AuditLogEntry].
-@MappableClass()
-class PartialAuditLogEntry extends ManagedSnowflakeEntity<AuditLogEntry>
-    with PartialAuditLogEntryMappable {
-  /// Create a new [PartialAuditLogEntry].
-  /// @nodoc
-  PartialAuditLogEntry({required super.id});
-}
 
 /// {@template audit_log_entry}
 /// An entry in a [Guild]'s audit log.
 /// {@endtemplate}
 @MappableClass()
-class AuditLogEntry extends PartialAuditLogEntry with AuditLogEntryMappable {
+class AuditLogEntry with AuditLogEntryMappable {
+  final Snowflake id;
+
   /// The ID of the targeted entity.
   final Snowflake? targetId;
 
@@ -43,7 +34,7 @@ class AuditLogEntry extends PartialAuditLogEntry with AuditLogEntryMappable {
   /// {@macro audit_log_entry}
   /// @nodoc
   AuditLogEntry({
-    required super.id,
+    required this.id,
     required this.targetId,
     required this.changes,
     required this.userId,
@@ -268,9 +259,4 @@ class AuditLogEntryInfo with ToStringHelper, AuditLogEntryInfoMappable {
     required this.overwriteType,
     required this.integrationType,
   });
-
-  /// The application whose permissions were targeted.
-  PartialApplication? get application => applicationId == null
-      ? null
-      : manager.client.applications[applicationId!];
 }

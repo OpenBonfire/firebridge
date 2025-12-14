@@ -5,19 +5,8 @@ import 'package:firebridge/src/models/interaction.dart';
 import 'package:firebridge/src/models/locale.dart';
 import 'package:firebridge/src/models/permissions.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 
 part 'application_command.mapper.dart';
-
-/// A partial [ApplicationCommand]
-@MappableClass()
-class PartialApplicationCommand
-    extends WritableSnowflakeEntity<ApplicationCommand>
-    with PartialApplicationCommandMappable {
-  /// Create a new [PartialApplicationCommand].
-  /// @nodoc
-  PartialApplicationCommand({required super.id});
-}
 
 /// {@template application_command}
 /// A command that can be executed by users and is displayed in the Discord client UI.
@@ -25,8 +14,9 @@ class PartialApplicationCommand
 /// Also known as "Slash commands".
 /// {@endtemplate}
 @MappableClass()
-class ApplicationCommand extends PartialApplicationCommand
-    with ApplicationCommandMappable {
+class ApplicationCommand with ApplicationCommandMappable {
+  final Snowflake id;
+
   /// The type of this command.
   final ApplicationCommandType type;
 
@@ -73,7 +63,7 @@ class ApplicationCommand extends PartialApplicationCommand
   /// {@macro application_command}
   /// @nodoc
   ApplicationCommand({
-    required super.id,
+    required this.id,
     required this.type,
     required this.applicationId,
     required this.guildId,

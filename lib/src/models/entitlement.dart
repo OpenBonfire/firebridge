@@ -2,25 +2,17 @@ import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/models/application.dart';
 import 'package:firebridge/src/models/guild/guild.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:firebridge/src/models/user/user.dart';
 
 part 'entitlement.mapper.dart';
-
-/// A partial [Entitlement].
-@MappableClass()
-class PartialEntitlement extends ManagedSnowflakeEntity<Entitlement>
-    with PartialEntitlementMappable {
-  /// Create a new [PartialEntitlement].
-  /// @nodoc
-  PartialEntitlement({required super.id});
-}
 
 /// {@template entitlement}
 /// Premium access a user or guild has for an application.
 /// {@endtemplate}
 @MappableClass()
-class Entitlement extends PartialEntitlement with EntitlementMappable {
+class Entitlement with EntitlementMappable {
+  final Snowflake id;
+
   /// The ID of the SKU.
   final Snowflake skuId;
 
@@ -37,10 +29,10 @@ class Entitlement extends PartialEntitlement with EntitlementMappable {
   final EntitlementType type;
 
   /// Whether entitlement was deleted.
-  final bool isDeleted;
+  final bool deleted;
 
   /// Whether this entitlement is consumed.
-  final bool isConsumed;
+  final bool consumed;
 
   /// The time at which this entitlement becomes valid.
   final DateTime? startsAt;
@@ -51,14 +43,14 @@ class Entitlement extends PartialEntitlement with EntitlementMappable {
   /// {@macro entitlement}
   /// @nodoc
   Entitlement({
-    required super.id,
+    required this.id,
     required this.skuId,
     required this.userId,
     required this.guildId,
     required this.applicationId,
     required this.type,
-    required this.isConsumed,
-    required this.isDeleted,
+    required this.consumed,
+    required this.deleted,
     required this.startsAt,
     required this.endsAt,
   });

@@ -4,22 +4,14 @@ import 'package:firebridge/src/models/guild/guild.dart';
 import 'package:firebridge/src/models/message/author.dart';
 import 'package:firebridge/src/models/message/message.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:firebridge/src/models/user/user.dart';
 
 part 'webhook.mapper.dart';
 
-/// A partial [Webhook].
-@MappableClass()
-class PartialWebhook extends WritableSnowflakeEntity<Webhook>
-    with PartialWebhookMappable {
-  /// Create a new [PartialWebhook].
-  /// @nodoc
-  PartialWebhook({required super.id});
-}
-
 /// A partial [Webhook] sent as part of a [Message].
-class WebhookAuthor extends PartialWebhook implements MessageAuthor {
+class WebhookAuthor implements MessageAuthor {
+  @override
+  final Snowflake id;
   @override
   final String? avatarHash;
 
@@ -29,7 +21,7 @@ class WebhookAuthor extends PartialWebhook implements MessageAuthor {
   /// Create a new [WebhookAuthor].
   /// @nodoc
   WebhookAuthor(
-      {required super.id, required this.avatarHash, required this.username});
+      {required this.id, required this.avatarHash, required this.username});
 }
 
 /// {@template webhook}
@@ -39,7 +31,9 @@ class WebhookAuthor extends PartialWebhook implements MessageAuthor {
 /// * Discord API Reference: https://discord.com/developers/docs/resources/webhook#webhook-resource
 /// {@endtemplate}
 @MappableClass()
-class Webhook extends PartialWebhook with WebhookMappable {
+class Webhook with WebhookMappable {
+  final Snowflake id;
+
   /// The type of this webhook.
   final WebhookType type;
 
@@ -64,18 +58,18 @@ class Webhook extends PartialWebhook with WebhookMappable {
   /// The ID of the application that created this webhook.
   final Snowflake? applicationId;
 
-  final PartialGuild? sourceGuild;
+  final Snowflake? sourceGuild;
 
   /// If this is a [WebhookType.channelFollower], this webhook's source channel.
-  final PartialChannel? sourceChannel;
+  final Snowflake? sourceChannel;
 
   /// The URL to use to execute the webhook.
   final Uri? url;
 
   /// {@macro webhook}
   /// @nodoc
-  Webhook({
-    required super.id,
+  const Webhook({
+    required this.id,
     required this.type,
     required this.guildId,
     required this.channelId,

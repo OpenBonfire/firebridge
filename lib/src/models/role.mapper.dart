@@ -7,124 +7,6 @@
 
 part of 'role.dart';
 
-class PartialRoleMapper extends ClassMapperBase<PartialRole> {
-  PartialRoleMapper._();
-
-  static PartialRoleMapper? _instance;
-  static PartialRoleMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = PartialRoleMapper._());
-      WritableSnowflakeEntityMapper.ensureInitialized();
-      RoleMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'PartialRole';
-
-  static Snowflake _$id(PartialRole v) => v.id;
-  static const Field<PartialRole, Snowflake> _f$id = Field('id', _$id);
-
-  @override
-  final MappableFields<PartialRole> fields = const {#id: _f$id};
-
-  static PartialRole _instantiate(DecodingData data) {
-    return PartialRole(id: data.dec(_f$id));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static PartialRole fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<PartialRole>(map);
-  }
-
-  static PartialRole fromJson(String json) {
-    return ensureInitialized().decodeJson<PartialRole>(json);
-  }
-}
-
-mixin PartialRoleMappable {
-  String toJson() {
-    return PartialRoleMapper.ensureInitialized().encodeJson<PartialRole>(
-      this as PartialRole,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return PartialRoleMapper.ensureInitialized().encodeMap<PartialRole>(
-      this as PartialRole,
-    );
-  }
-
-  PartialRoleCopyWith<PartialRole, PartialRole, PartialRole> get copyWith =>
-      _PartialRoleCopyWithImpl<PartialRole, PartialRole>(
-        this as PartialRole,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return PartialRoleMapper.ensureInitialized().stringifyValue(
-      this as PartialRole,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return PartialRoleMapper.ensureInitialized().equalsValue(
-      this as PartialRole,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return PartialRoleMapper.ensureInitialized().hashValue(this as PartialRole);
-  }
-}
-
-extension PartialRoleValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PartialRole, $Out> {
-  PartialRoleCopyWith<$R, PartialRole, $Out> get $asPartialRole =>
-      $base.as((v, t, t2) => _PartialRoleCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class PartialRoleCopyWith<$R, $In extends PartialRole, $Out>
-    implements WritableSnowflakeEntityCopyWith<$R, $In, $Out, Role> {
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  @override
-  $R call({Snowflake? id});
-  PartialRoleCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
-}
-
-class _PartialRoleCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PartialRole, $Out>
-    implements PartialRoleCopyWith<$R, PartialRole, $Out> {
-  _PartialRoleCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<PartialRole> $mapper =
-      PartialRoleMapper.ensureInitialized();
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  $R call({Snowflake? id}) =>
-      $apply(FieldCopyWithData({if (id != null) #id: id}));
-  @override
-  PartialRole $make(CopyWithData data) =>
-      PartialRole(id: data.get(#id, or: $value.id));
-
-  @override
-  PartialRoleCopyWith<$R2, PartialRole, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _PartialRoleCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class RoleMapper extends ClassMapperBase<Role> {
   RoleMapper._();
 
@@ -132,7 +14,6 @@ class RoleMapper extends ClassMapperBase<Role> {
   static RoleMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = RoleMapper._());
-      PartialRoleMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       RoleColorsMapper.ensureInitialized();
       PermissionsMapper.ensureInitialized();
@@ -262,14 +143,12 @@ extension RoleValueCopy<$R, $Out> on ObjectCopyWith<$R, Role, $Out> {
 }
 
 abstract class RoleCopyWith<$R, $In extends Role, $Out>
-    implements PartialRoleCopyWith<$R, $In, $Out> {
-  @override
+    implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   RoleColorsCopyWith<$R, RoleColors, RoleColors> get colors;
   PermissionsCopyWith<$R, Permissions, Permissions> get permissions;
   RoleTagsCopyWith<$R, RoleTags, RoleTags>? get tags;
   RoleFlagsCopyWith<$R, RoleFlags, RoleFlags> get flags;
-  @override
   $R call({
     Snowflake? id,
     String? name,

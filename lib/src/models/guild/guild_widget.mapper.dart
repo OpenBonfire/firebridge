@@ -73,7 +73,7 @@ class GuildWidgetMapper extends ClassMapperBase<GuildWidget> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildWidgetMapper._());
       SnowflakeMapper.ensureInitialized();
-      PartialChannelMapper.ensureInitialized();
+      GuildChannelMapper.ensureInitialized();
       PartialUserMapper.ensureInitialized();
     }
     return _instance!;
@@ -97,8 +97,8 @@ class GuildWidgetMapper extends ClassMapperBase<GuildWidget> {
   static const Field<GuildWidget, String> _f$name = Field('name', _$name);
   static String? _$invite(GuildWidget v) => v.invite;
   static const Field<GuildWidget, String> _f$invite = Field('invite', _$invite);
-  static List<PartialChannel> _$channels(GuildWidget v) => v.channels;
-  static const Field<GuildWidget, List<PartialChannel>> _f$channels = Field(
+  static List<GuildChannel> _$channels(GuildWidget v) => v.channels;
+  static const Field<GuildWidget, List<GuildChannel>> _f$channels = Field(
     'channels',
     _$channels,
   );
@@ -200,8 +200,8 @@ abstract class GuildWidgetCopyWith<$R, $In extends GuildWidget, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
   ListCopyWith<
     $R,
-    PartialChannel,
-    PartialChannelCopyWith<$R, PartialChannel, PartialChannel>
+    GuildChannel,
+    GuildChannelCopyWith<$R, GuildChannel, GuildChannel>
   >
   get channels;
   ListCopyWith<
@@ -215,7 +215,7 @@ abstract class GuildWidgetCopyWith<$R, $In extends GuildWidget, $Out>
     Snowflake? guildId,
     String? name,
     String? invite,
-    List<PartialChannel>? channels,
+    List<GuildChannel>? channels,
     List<PartialUser>? users,
     int? presenceCount,
   });
@@ -236,8 +236,8 @@ class _GuildWidgetCopyWithImpl<$R, $Out>
   @override
   ListCopyWith<
     $R,
-    PartialChannel,
-    PartialChannelCopyWith<$R, PartialChannel, PartialChannel>
+    GuildChannel,
+    GuildChannelCopyWith<$R, GuildChannel, GuildChannel>
   >
   get channels => ListCopyWith(
     $value.channels,
@@ -261,7 +261,7 @@ class _GuildWidgetCopyWithImpl<$R, $Out>
     Snowflake? guildId,
     String? name,
     Object? invite = $none,
-    List<PartialChannel>? channels,
+    List<GuildChannel>? channels,
     List<PartialUser>? users,
     int? presenceCount,
   }) => $apply(

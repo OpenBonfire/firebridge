@@ -1044,7 +1044,6 @@ abstract class MessageReactionAddEventCopyWith<
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get messageId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   MemberCopyWith<$R, Member, Member>? get member;
-  EmojiCopyWith<$R, Emoji, Emoji> get emoji;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get messageAuthorId;
   @override
   $R call({
@@ -1085,9 +1084,6 @@ class _MessageReactionAddEventCopyWithImpl<$R, $Out>
   @override
   MemberCopyWith<$R, Member, Member>? get member =>
       $value.member?.copyWith.$chain((v) => call(member: v));
-  @override
-  EmojiCopyWith<$R, Emoji, Emoji> get emoji =>
-      $value.emoji.copyWith.$chain((v) => call(emoji: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get messageAuthorId =>
       $value.messageAuthorId?.copyWith.$chain((v) => call(messageAuthorId: v));
@@ -1284,7 +1280,6 @@ abstract class MessageReactionRemoveEventCopyWith<
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get channelId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get messageId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
-  EmojiCopyWith<$R, Emoji, Emoji> get emoji;
   @override
   $R call({
     Snowflake? userId,
@@ -1323,9 +1318,6 @@ class _MessageReactionRemoveEventCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
       $value.guildId?.copyWith.$chain((v) => call(guildId: v));
-  @override
-  EmojiCopyWith<$R, Emoji, Emoji> get emoji =>
-      $value.emoji.copyWith.$chain((v) => call(emoji: v));
   @override
   $R call({
     Snowflake? userId,
@@ -1569,7 +1561,7 @@ class MessageReactionRemoveEmojiEventMapper
       );
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
-      PartialEmojiMapper.ensureInitialized();
+      EmojiMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -1588,9 +1580,11 @@ class MessageReactionRemoveEmojiEventMapper
   static Snowflake? _$guildId(MessageReactionRemoveEmojiEvent v) => v.guildId;
   static const Field<MessageReactionRemoveEmojiEvent, Snowflake> _f$guildId =
       Field('guildId', _$guildId, key: r'guild_id');
-  static PartialEmoji _$emoji(MessageReactionRemoveEmojiEvent v) => v.emoji;
-  static const Field<MessageReactionRemoveEmojiEvent, PartialEmoji> _f$emoji =
-      Field('emoji', _$emoji);
+  static Emoji _$emoji(MessageReactionRemoveEmojiEvent v) => v.emoji;
+  static const Field<MessageReactionRemoveEmojiEvent, Emoji> _f$emoji = Field(
+    'emoji',
+    _$emoji,
+  );
   static Opcode _$opcode(MessageReactionRemoveEmojiEvent v) => v.opcode;
   static const Field<MessageReactionRemoveEmojiEvent, Opcode> _f$opcode = Field(
     'opcode',
@@ -1705,13 +1699,12 @@ abstract class MessageReactionRemoveEmojiEventCopyWith<
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get channelId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get messageId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
-  PartialEmojiCopyWith<$R, PartialEmoji, PartialEmoji> get emoji;
   @override
   $R call({
     Snowflake? channelId,
     Snowflake? messageId,
     Snowflake? guildId,
-    PartialEmoji? emoji,
+    Emoji? emoji,
   });
   MessageReactionRemoveEmojiEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -1745,14 +1738,11 @@ class _MessageReactionRemoveEmojiEventCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
       $value.guildId?.copyWith.$chain((v) => call(guildId: v));
   @override
-  PartialEmojiCopyWith<$R, PartialEmoji, PartialEmoji> get emoji =>
-      $value.emoji.copyWith.$chain((v) => call(emoji: v));
-  @override
   $R call({
     Snowflake? channelId,
     Snowflake? messageId,
     Object? guildId = $none,
-    PartialEmoji? emoji,
+    Emoji? emoji,
   }) => $apply(
     FieldCopyWithData({
       if (channelId != null) #channelId: channelId,

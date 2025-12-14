@@ -14,9 +14,6 @@ import 'manager.dart';
 abstract class EmojiManager extends Manager<Emoji> {
   EmojiManager(super.config, super.client, {required super.identifier});
 
-  @override
-  PartialEmoji operator [](Snowflake id) => PartialEmoji(id: id);
-
   /// List the emojis.
   Future<List<Emoji>> list();
 }

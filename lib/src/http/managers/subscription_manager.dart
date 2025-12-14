@@ -15,8 +15,6 @@ class SubscriptionManager extends ReadOnlyManager<Subscription> {
       : super(identifier: '$applicationId.$skuId.subscriptions');
 
   @override
-  PartialSubscription operator [](Snowflake id) => PartialSubscription(id: id);
-  @override
   Future<Subscription> fetch(Snowflake id) async {
     final route = HttpRoute()
       ..skus(id: skuId.toString())

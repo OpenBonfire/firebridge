@@ -1,7 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/http/managers/channel_manager.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/webhook.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'followed_channel.mapper.dart';
@@ -26,7 +25,4 @@ class FollowedChannel with ToStringHelper, FollowedChannelMappable {
       {required this.manager,
       required this.channelId,
       required this.webhookId});
-
-  /// The webhook created in the subscriber channel.
-  PartialWebhook get webhook => manager.client.webhooks[webhookId];
 }

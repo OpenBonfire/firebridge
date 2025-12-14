@@ -107,7 +107,6 @@ extension PollMediaBuilderValueCopy<$R, $Out>
 
 abstract class PollMediaBuilderCopyWith<$R, $In extends PollMediaBuilder, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  EmojiCopyWith<$R, Emoji, Emoji>? get emoji;
   $R call({String? text, Emoji? emoji});
   PollMediaBuilderCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -122,9 +121,6 @@ class _PollMediaBuilderCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<PollMediaBuilder> $mapper =
       PollMediaBuilderMapper.ensureInitialized();
-  @override
-  EmojiCopyWith<$R, Emoji, Emoji>? get emoji =>
-      $value.emoji?.copyWith.$chain((v) => call(emoji: v));
   @override
   $R call({Object? text = $none, Object? emoji = $none}) => $apply(
     FieldCopyWithData({

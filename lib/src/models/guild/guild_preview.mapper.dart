@@ -14,7 +14,6 @@ class GuildPreviewMapper extends ClassMapperBase<GuildPreview> {
   static GuildPreviewMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildPreviewMapper._());
-      PartialGuildMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       EmojiMapper.ensureInitialized();
       GuildFeaturesMapper.ensureInitialized();
@@ -177,10 +176,9 @@ extension GuildPreviewValueCopy<$R, $Out>
 }
 
 abstract class GuildPreviewCopyWith<$R, $In extends GuildPreview, $Out>
-    implements PartialGuildCopyWith<$R, $In, $Out> {
-  @override
+    implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  ListCopyWith<$R, Emoji, EmojiCopyWith<$R, Emoji, Emoji>> get emojiList;
+  ListCopyWith<$R, Emoji, ObjectCopyWith<$R, Emoji, Emoji>> get emojiList;
   GuildFeaturesCopyWith<$R, GuildFeatures, GuildFeatures> get features;
   ListCopyWith<
     $R,
@@ -188,7 +186,6 @@ abstract class GuildPreviewCopyWith<$R, $In extends GuildPreview, $Out>
     GuildStickerCopyWith<$R, GuildSticker, GuildSticker>
   >
   get stickerList;
-  @override
   $R call({
     Snowflake? id,
     String? name,
@@ -217,10 +214,10 @@ class _GuildPreviewCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
-  ListCopyWith<$R, Emoji, EmojiCopyWith<$R, Emoji, Emoji>> get emojiList =>
+  ListCopyWith<$R, Emoji, ObjectCopyWith<$R, Emoji, Emoji>> get emojiList =>
       ListCopyWith(
         $value.emojiList,
-        (v, t) => v.copyWith.$chain(t),
+        (v, t) => ObjectCopyWith(v, $identity, t),
         (v) => call(emojiList: v),
       );
   @override

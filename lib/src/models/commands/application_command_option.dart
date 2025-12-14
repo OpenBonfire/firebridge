@@ -1,7 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/models/channel/channel.dart';
 import 'package:firebridge/src/models/locale.dart';
-import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'application_command_option.mapper.dart';
@@ -126,4 +125,4 @@ class CommandOptionChoice with CommandOptionChoiceMappable {
 ///
 /// The only subtypes are [User] and [Role].
 abstract interface class CommandOptionMentionable<
-    T extends CommandOptionMentionable<T>> implements SnowflakeEntity<T> {}
+    T extends CommandOptionMentionable<T>> {}

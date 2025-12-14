@@ -7,15 +7,9 @@ import 'package:firebridge/src/models/user/user.dart';
 part 'soundboard.mapper.dart';
 
 @MappableClass()
-class PartialSoundboardSound extends WritableSnowflakeEntity<SoundboardSound>
-    with PartialSoundboardSoundMappable {
-  /// @nodoc
-  PartialSoundboardSound({required super.id});
-}
+class SoundboardSound with SoundboardSoundMappable {
+  final Snowflake id;
 
-@MappableClass()
-class SoundboardSound extends PartialSoundboardSound
-    with SoundboardSoundMappable {
   /// The name of this sound.
   final String name;
 
@@ -42,7 +36,7 @@ class SoundboardSound extends PartialSoundboardSound
 
   /// @nodoc
   SoundboardSound({
-    required super.id,
+    required this.id,
     required this.name,
     required this.volume,
     required this.emoji,

@@ -297,136 +297,6 @@ extension AuditLogEventMapperExtension on AuditLogEvent {
   }
 }
 
-class PartialAuditLogEntryMapper extends ClassMapperBase<PartialAuditLogEntry> {
-  PartialAuditLogEntryMapper._();
-
-  static PartialAuditLogEntryMapper? _instance;
-  static PartialAuditLogEntryMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = PartialAuditLogEntryMapper._());
-      ManagedSnowflakeEntityMapper.ensureInitialized();
-      AuditLogEntryMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'PartialAuditLogEntry';
-
-  static Snowflake _$id(PartialAuditLogEntry v) => v.id;
-  static const Field<PartialAuditLogEntry, Snowflake> _f$id = Field('id', _$id);
-
-  @override
-  final MappableFields<PartialAuditLogEntry> fields = const {#id: _f$id};
-
-  static PartialAuditLogEntry _instantiate(DecodingData data) {
-    return PartialAuditLogEntry(id: data.dec(_f$id));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static PartialAuditLogEntry fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<PartialAuditLogEntry>(map);
-  }
-
-  static PartialAuditLogEntry fromJson(String json) {
-    return ensureInitialized().decodeJson<PartialAuditLogEntry>(json);
-  }
-}
-
-mixin PartialAuditLogEntryMappable {
-  String toJson() {
-    return PartialAuditLogEntryMapper.ensureInitialized()
-        .encodeJson<PartialAuditLogEntry>(this as PartialAuditLogEntry);
-  }
-
-  Map<String, dynamic> toMap() {
-    return PartialAuditLogEntryMapper.ensureInitialized()
-        .encodeMap<PartialAuditLogEntry>(this as PartialAuditLogEntry);
-  }
-
-  PartialAuditLogEntryCopyWith<
-    PartialAuditLogEntry,
-    PartialAuditLogEntry,
-    PartialAuditLogEntry
-  >
-  get copyWith =>
-      _PartialAuditLogEntryCopyWithImpl<
-        PartialAuditLogEntry,
-        PartialAuditLogEntry
-      >(this as PartialAuditLogEntry, $identity, $identity);
-  @override
-  String toString() {
-    return PartialAuditLogEntryMapper.ensureInitialized().stringifyValue(
-      this as PartialAuditLogEntry,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return PartialAuditLogEntryMapper.ensureInitialized().equalsValue(
-      this as PartialAuditLogEntry,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return PartialAuditLogEntryMapper.ensureInitialized().hashValue(
-      this as PartialAuditLogEntry,
-    );
-  }
-}
-
-extension PartialAuditLogEntryValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PartialAuditLogEntry, $Out> {
-  PartialAuditLogEntryCopyWith<$R, PartialAuditLogEntry, $Out>
-  get $asPartialAuditLogEntry => $base.as(
-    (v, t, t2) => _PartialAuditLogEntryCopyWithImpl<$R, $Out>(v, t, t2),
-  );
-}
-
-abstract class PartialAuditLogEntryCopyWith<
-  $R,
-  $In extends PartialAuditLogEntry,
-  $Out
->
-    implements ManagedSnowflakeEntityCopyWith<$R, $In, $Out, AuditLogEntry> {
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  @override
-  $R call({Snowflake? id});
-  PartialAuditLogEntryCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _PartialAuditLogEntryCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PartialAuditLogEntry, $Out>
-    implements PartialAuditLogEntryCopyWith<$R, PartialAuditLogEntry, $Out> {
-  _PartialAuditLogEntryCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<PartialAuditLogEntry> $mapper =
-      PartialAuditLogEntryMapper.ensureInitialized();
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  $R call({Snowflake? id}) =>
-      $apply(FieldCopyWithData({if (id != null) #id: id}));
-  @override
-  PartialAuditLogEntry $make(CopyWithData data) =>
-      PartialAuditLogEntry(id: data.get(#id, or: $value.id));
-
-  @override
-  PartialAuditLogEntryCopyWith<$R2, PartialAuditLogEntry, $Out2>
-  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _PartialAuditLogEntryCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class AuditLogEntryMapper extends ClassMapperBase<AuditLogEntry> {
   AuditLogEntryMapper._();
 
@@ -434,7 +304,6 @@ class AuditLogEntryMapper extends ClassMapperBase<AuditLogEntry> {
   static AuditLogEntryMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = AuditLogEntryMapper._());
-      PartialAuditLogEntryMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       AuditLogChangeMapper.ensureInitialized();
       AuditLogEventMapper.ensureInitialized();
@@ -566,8 +435,7 @@ extension AuditLogEntryValueCopy<$R, $Out>
 }
 
 abstract class AuditLogEntryCopyWith<$R, $In extends AuditLogEntry, $Out>
-    implements PartialAuditLogEntryCopyWith<$R, $In, $Out> {
-  @override
+    implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get targetId;
   ListCopyWith<
@@ -579,7 +447,6 @@ abstract class AuditLogEntryCopyWith<$R, $In extends AuditLogEntry, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get userId;
   AuditLogEntryInfoCopyWith<$R, AuditLogEntryInfo, AuditLogEntryInfo>?
   get options;
-  @override
   $R call({
     Snowflake? id,
     Snowflake? targetId,

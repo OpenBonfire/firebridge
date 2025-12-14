@@ -19,8 +19,6 @@ class GuildStickerManager extends Manager<GuildSticker> {
       : super(identifier: "$guildId.stickers");
 
   @override
-  PartialGuildSticker operator [](Snowflake id) => PartialGuildSticker(id: id);
-  @override
   Future<GuildSticker> create(StickerBuilder builder,
       {String? auditLogReason}) async {
     final route = HttpRoute()
@@ -106,11 +104,6 @@ class GuildStickerManager extends Manager<GuildSticker> {
 class GlobalStickerManager extends ReadOnlyManager<GlobalSticker> {
   GlobalStickerManager(super.config, super.client)
       : super(identifier: 'stickers');
-
-  @override
-  PartialGlobalSticker operator [](Snowflake id) => PartialGlobalSticker(
-        id: id,
-      );
 
   @override
   Future<GlobalSticker> fetch(Snowflake id) async {

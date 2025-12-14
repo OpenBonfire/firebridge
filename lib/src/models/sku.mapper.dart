@@ -61,124 +61,6 @@ extension SkuTypeMapperExtension on SkuType {
   }
 }
 
-class PartialSkuMapper extends ClassMapperBase<PartialSku> {
-  PartialSkuMapper._();
-
-  static PartialSkuMapper? _instance;
-  static PartialSkuMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = PartialSkuMapper._());
-      ManagedSnowflakeEntityMapper.ensureInitialized();
-      SkuMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'PartialSku';
-
-  static Snowflake _$id(PartialSku v) => v.id;
-  static const Field<PartialSku, Snowflake> _f$id = Field('id', _$id);
-
-  @override
-  final MappableFields<PartialSku> fields = const {#id: _f$id};
-
-  static PartialSku _instantiate(DecodingData data) {
-    return PartialSku(id: data.dec(_f$id));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static PartialSku fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<PartialSku>(map);
-  }
-
-  static PartialSku fromJson(String json) {
-    return ensureInitialized().decodeJson<PartialSku>(json);
-  }
-}
-
-mixin PartialSkuMappable {
-  String toJson() {
-    return PartialSkuMapper.ensureInitialized().encodeJson<PartialSku>(
-      this as PartialSku,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return PartialSkuMapper.ensureInitialized().encodeMap<PartialSku>(
-      this as PartialSku,
-    );
-  }
-
-  PartialSkuCopyWith<PartialSku, PartialSku, PartialSku> get copyWith =>
-      _PartialSkuCopyWithImpl<PartialSku, PartialSku>(
-        this as PartialSku,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return PartialSkuMapper.ensureInitialized().stringifyValue(
-      this as PartialSku,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return PartialSkuMapper.ensureInitialized().equalsValue(
-      this as PartialSku,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return PartialSkuMapper.ensureInitialized().hashValue(this as PartialSku);
-  }
-}
-
-extension PartialSkuValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PartialSku, $Out> {
-  PartialSkuCopyWith<$R, PartialSku, $Out> get $asPartialSku =>
-      $base.as((v, t, t2) => _PartialSkuCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class PartialSkuCopyWith<$R, $In extends PartialSku, $Out>
-    implements ManagedSnowflakeEntityCopyWith<$R, $In, $Out, Sku> {
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  @override
-  $R call({Snowflake? id});
-  PartialSkuCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
-}
-
-class _PartialSkuCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PartialSku, $Out>
-    implements PartialSkuCopyWith<$R, PartialSku, $Out> {
-  _PartialSkuCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<PartialSku> $mapper =
-      PartialSkuMapper.ensureInitialized();
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  $R call({Snowflake? id}) =>
-      $apply(FieldCopyWithData({if (id != null) #id: id}));
-  @override
-  PartialSku $make(CopyWithData data) =>
-      PartialSku(id: data.get(#id, or: $value.id));
-
-  @override
-  PartialSkuCopyWith<$R2, PartialSku, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _PartialSkuCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class SkuMapper extends ClassMapperBase<Sku> {
   SkuMapper._();
 
@@ -186,7 +68,6 @@ class SkuMapper extends ClassMapperBase<Sku> {
   static SkuMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = SkuMapper._());
-      PartialSkuMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       SkuTypeMapper.ensureInitialized();
       SkuFlagsMapper.ensureInitialized();
@@ -280,12 +161,10 @@ extension SkuValueCopy<$R, $Out> on ObjectCopyWith<$R, Sku, $Out> {
 }
 
 abstract class SkuCopyWith<$R, $In extends Sku, $Out>
-    implements PartialSkuCopyWith<$R, $In, $Out> {
-  @override
+    implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get applicationId;
   SkuFlagsCopyWith<$R, SkuFlags, SkuFlags> get flags;
-  @override
   $R call({
     Snowflake? id,
     SkuType? type,

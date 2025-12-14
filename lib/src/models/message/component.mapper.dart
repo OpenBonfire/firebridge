@@ -845,7 +845,6 @@ extension ButtonComponentValueCopy<$R, $Out>
 
 abstract class ButtonComponentCopyWith<$R, $In extends ButtonComponent, $Out>
     implements MessageComponentCopyWith<$R, $In, $Out> {
-  EmojiCopyWith<$R, Emoji, Emoji>? get emoji;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get skuId;
   @override
   $R call({
@@ -871,9 +870,6 @@ class _ButtonComponentCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<ButtonComponent> $mapper =
       ButtonComponentMapper.ensureInitialized();
-  @override
-  EmojiCopyWith<$R, Emoji, Emoji>? get emoji =>
-      $value.emoji?.copyWith.$chain((v) => call(emoji: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get skuId =>
       $value.skuId?.copyWith.$chain((v) => call(skuId: v));
@@ -1351,7 +1347,6 @@ extension SelectMenuOptionValueCopy<$R, $Out>
 
 abstract class SelectMenuOptionCopyWith<$R, $In extends SelectMenuOption, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  EmojiCopyWith<$R, Emoji, Emoji>? get emoji;
   $R call({
     String? label,
     String? value,
@@ -1372,9 +1367,6 @@ class _SelectMenuOptionCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<SelectMenuOption> $mapper =
       SelectMenuOptionMapper.ensureInitialized();
-  @override
-  EmojiCopyWith<$R, Emoji, Emoji>? get emoji =>
-      $value.emoji?.copyWith.$chain((v) => call(emoji: v));
   @override
   $R call({
     String? label,

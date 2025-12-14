@@ -13,9 +13,6 @@ class SkuManager extends ReadOnlyManager<Sku> {
   SkuManager(super.config, super.client, {required this.applicationId})
       : super(identifier: '$applicationId.skus');
 
-  @override
-  PartialSku operator [](Snowflake id) => PartialSku(id: id);
-
   Future<List<Sku>> list() async {
     final route = HttpRoute()
       ..applications(id: applicationId.toString())

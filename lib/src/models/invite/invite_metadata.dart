@@ -1,8 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:firebridge/src/models/application.dart';
-import 'package:firebridge/src/models/channel/channel.dart';
-import 'package:firebridge/src/models/guild/guild.dart';
 import 'package:firebridge/src/models/guild/scheduled_event.dart';
+import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/models/user/user.dart';
 
 import 'invite.dart';
@@ -30,7 +28,7 @@ class InviteWithMetadata extends Invite with InviteWithMetadataMappable {
   InviteWithMetadata({
     required super.type,
     required super.code,
-    required super.guild,
+    required super.guildId,
     required super.channel,
     required super.inviter,
     required super.targetType,

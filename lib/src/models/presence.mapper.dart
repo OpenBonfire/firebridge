@@ -92,6 +92,8 @@ class ActivityTypeMapper extends EnumMapper<ActivityType> {
         return ActivityType.custom;
       case 5:
         return ActivityType.competing;
+      case 6:
+        return ActivityType.hang;
       default:
         throw MapperException.unknownEnumValue(value);
     }
@@ -112,6 +114,8 @@ class ActivityTypeMapper extends EnumMapper<ActivityType> {
         return 4;
       case ActivityType.competing:
         return 5;
+      case ActivityType.hang:
+        return 6;
     }
   }
 }
@@ -448,7 +452,6 @@ abstract class ActivityCopyWith<$R, $In extends Activity, $Out>
   ActivityTimestampsCopyWith<$R, ActivityTimestamps, ActivityTimestamps>?
   get timestamps;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get applicationId;
-  EmojiCopyWith<$R, Emoji, Emoji>? get emoji;
   ActivityPartyCopyWith<$R, ActivityParty, ActivityParty>? get party;
   ActivityAssetsCopyWith<$R, ActivityAssets, ActivityAssets>? get assets;
   ActivitySecretsCopyWith<$R, ActivitySecrets, ActivitySecrets>? get secrets;
@@ -494,9 +497,6 @@ class _ActivityCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get applicationId =>
       $value.applicationId?.copyWith.$chain((v) => call(applicationId: v));
-  @override
-  EmojiCopyWith<$R, Emoji, Emoji>? get emoji =>
-      $value.emoji?.copyWith.$chain((v) => call(emoji: v));
   @override
   ActivityPartyCopyWith<$R, ActivityParty, ActivityParty>? get party =>
       $value.party?.copyWith.$chain((v) => call(party: v));

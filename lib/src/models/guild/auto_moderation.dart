@@ -2,27 +2,17 @@ import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/builders/guild/auto_moderation.dart';
 import 'package:firebridge/src/models/guild/guild.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'auto_moderation.mapper.dart';
-
-/// A partial [AutoModerationRule].
-@MappableClass()
-class PartialAutoModerationRule
-    extends WritableSnowflakeEntity<AutoModerationRule>
-    with PartialAutoModerationRuleMappable {
-  /// Create a new [PartialAutoModerationRule].
-  /// @nodoc
-  PartialAutoModerationRule({required super.id});
-}
 
 /// {@template auto_moderation_rule}
 /// A rule use for auto-moderation in a [Guild].
 /// {@endtemplate}
 @MappableClass()
-class AutoModerationRule extends PartialAutoModerationRule
-    with AutoModerationRuleMappable {
+class AutoModerationRule with AutoModerationRuleMappable {
+  final Snowflake id;
+
   /// The ID of the guild this rule is in.
   final Snowflake guildId;
 
@@ -56,7 +46,7 @@ class AutoModerationRule extends PartialAutoModerationRule
   /// {@macro auto_moderation_rule}
   /// @nodoc
   AutoModerationRule({
-    required super.id,
+    required this.id,
     required this.guildId,
     required this.name,
     required this.creatorId,

@@ -1,42 +1,24 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:firebridge/src/models/channel/types/forum.dart';
-import 'package:firebridge/src/models/channel/types/guild_category.dart';
-import 'package:firebridge/src/models/channel/types/guild_media.dart';
-import 'package:firebridge/src/models/channel/types/guild_text.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:firebridge/src/utils/flags.dart';
 
 part 'channel.mapper.dart';
-
-/// A partial [Channel] object.
-@MappableClass()
-class PartialChannel extends ManagedSnowflakeEntity<Channel>
-    with PartialChannelMappable {
-  /// Create a new [PartialChannel].
-  /// @nodoc
-  PartialChannel({required super.id});
-}
 
 /// {@template channel}
 /// A channel of any type.
 /// {@endtemplate}
 @MappableClass(
   discriminatorKey: "type",
-//  includeSubClasses: [
-//   GuildTextChannel,
-//   ForumChannel,
-//   GuildMediaChannel,
-//   GuildCategory
-// ]
 )
-abstract class Channel extends PartialChannel with ChannelMappable {
+abstract class Channel with ChannelMappable {
+  final Snowflake id;
+
   /// The type of this channel.
   ChannelType get type;
 
   /// {@macro channel}
   /// @nodoc
-  Channel({required super.id});
+  Channel({required this.id});
 }
 
 /// The type of a channel.

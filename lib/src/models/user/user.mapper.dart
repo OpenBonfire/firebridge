@@ -71,6 +71,9 @@ class PartialUserMapper extends ClassMapperBase<PartialUser> {
       ManagedSnowflakeEntityMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
+      UserPrimaryGuildMapper.ensureInitialized();
+      UserFlagsMapper.ensureInitialized();
+      AvatarDecorationDataMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -80,12 +83,105 @@ class PartialUserMapper extends ClassMapperBase<PartialUser> {
 
   static Snowflake _$id(PartialUser v) => v.id;
   static const Field<PartialUser, Snowflake> _f$id = Field('id', _$id);
+  static String _$username(PartialUser v) => v.username;
+  static const Field<PartialUser, String> _f$username = Field(
+    'username',
+    _$username,
+  );
+  static String _$discriminator(PartialUser v) => v.discriminator;
+  static const Field<PartialUser, String> _f$discriminator = Field(
+    'discriminator',
+    _$discriminator,
+  );
+  static String? _$globalName(PartialUser v) => v.globalName;
+  static const Field<PartialUser, String> _f$globalName = Field(
+    'globalName',
+    _$globalName,
+    key: r'global_name',
+    opt: true,
+  );
+  static String? _$avatar(PartialUser v) => v.avatar;
+  static const Field<PartialUser, String> _f$avatar = Field(
+    'avatar',
+    _$avatar,
+    opt: true,
+  );
+  static UserPrimaryGuild? _$primaryGuild(PartialUser v) => v.primaryGuild;
+  static const Field<PartialUser, UserPrimaryGuild> _f$primaryGuild = Field(
+    'primaryGuild',
+    _$primaryGuild,
+    key: r'primary_guild',
+    opt: true,
+  );
+  static bool? _$bot(PartialUser v) => v.bot;
+  static const Field<PartialUser, bool> _f$bot = Field('bot', _$bot, opt: true);
+  static bool? _$system(PartialUser v) => v.system;
+  static const Field<PartialUser, bool> _f$system = Field(
+    'system',
+    _$system,
+    opt: true,
+  );
+  static String? _$banner(PartialUser v) => v.banner;
+  static const Field<PartialUser, String> _f$banner = Field(
+    'banner',
+    _$banner,
+    opt: true,
+  );
+  static int? _$accentColor(PartialUser v) => v.accentColor;
+  static const Field<PartialUser, int> _f$accentColor = Field(
+    'accentColor',
+    _$accentColor,
+    key: r'accent_color',
+    opt: true,
+  );
+  static UserFlags? _$publicFlags(PartialUser v) => v.publicFlags;
+  static const Field<PartialUser, UserFlags> _f$publicFlags = Field(
+    'publicFlags',
+    _$publicFlags,
+    key: r'public_flags',
+    opt: true,
+  );
+  static AvatarDecorationData? _$avatarDecorationData(PartialUser v) =>
+      v.avatarDecorationData;
+  static const Field<PartialUser, AvatarDecorationData>
+  _f$avatarDecorationData = Field(
+    'avatarDecorationData',
+    _$avatarDecorationData,
+    key: r'avatar_decoration_data',
+    opt: true,
+  );
 
   @override
-  final MappableFields<PartialUser> fields = const {#id: _f$id};
+  final MappableFields<PartialUser> fields = const {
+    #id: _f$id,
+    #username: _f$username,
+    #discriminator: _f$discriminator,
+    #globalName: _f$globalName,
+    #avatar: _f$avatar,
+    #primaryGuild: _f$primaryGuild,
+    #bot: _f$bot,
+    #system: _f$system,
+    #banner: _f$banner,
+    #accentColor: _f$accentColor,
+    #publicFlags: _f$publicFlags,
+    #avatarDecorationData: _f$avatarDecorationData,
+  };
 
   static PartialUser _instantiate(DecodingData data) {
-    return PartialUser(id: data.dec(_f$id));
+    return PartialUser(
+      id: data.dec(_f$id),
+      username: data.dec(_f$username),
+      discriminator: data.dec(_f$discriminator),
+      globalName: data.dec(_f$globalName),
+      avatar: data.dec(_f$avatar),
+      primaryGuild: data.dec(_f$primaryGuild),
+      bot: data.dec(_f$bot),
+      system: data.dec(_f$system),
+      banner: data.dec(_f$banner),
+      accentColor: data.dec(_f$accentColor),
+      publicFlags: data.dec(_f$publicFlags),
+      avatarDecorationData: data.dec(_f$avatarDecorationData),
+    );
   }
 
   @override
@@ -150,8 +246,24 @@ abstract class PartialUserCopyWith<$R, $In extends PartialUser, $Out>
     implements ManagedSnowflakeEntityCopyWith<$R, $In, $Out, User> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  UserPrimaryGuildCopyWith<$R, UserPrimaryGuild, UserPrimaryGuild>?
+  get primaryGuild;
+  UserFlagsCopyWith<$R, UserFlags, UserFlags>? get publicFlags;
+  AvatarDecorationDataCopyWith<$R, AvatarDecorationData, AvatarDecorationData>?
+  get avatarDecorationData;
   @override
-  $R call({Snowflake? id});
+  $R call({
+    Snowflake? id,
+    String? username,
+    String? discriminator,
+    String? globalName,
+    UserPrimaryGuild? primaryGuild,
+    bool? bot,
+    bool? system,
+    int? accentColor,
+    UserFlags? publicFlags,
+    AvatarDecorationData? avatarDecorationData,
+  });
   PartialUserCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -167,247 +279,9 @@ class _PartialUserCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
-  $R call({Snowflake? id}) =>
-      $apply(FieldCopyWithData({if (id != null) #id: id}));
-  @override
-  PartialUser $make(CopyWithData data) =>
-      PartialUser(id: data.get(#id, or: $value.id));
-
-  @override
-  PartialUserCopyWith<$R2, PartialUser, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _PartialUserCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
-class UserMapper extends ClassMapperBase<User> {
-  UserMapper._();
-
-  static UserMapper? _instance;
-  static UserMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = UserMapper._());
-      PartialUserMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
-      LocaleMapper.ensureInitialized();
-      UserFlagsMapper.ensureInitialized();
-      AvatarDecorationDataMapper.ensureInitialized();
-      UserPrimaryGuildMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'User';
-
-  static Snowflake _$id(User v) => v.id;
-  static const Field<User, Snowflake> _f$id = Field('id', _$id);
-  static String _$username(User v) => v.username;
-  static const Field<User, String> _f$username = Field('username', _$username);
-  static String _$discriminator(User v) => v.discriminator;
-  static const Field<User, String> _f$discriminator = Field(
-    'discriminator',
-    _$discriminator,
-  );
-  static String? _$globalName(User v) => v.globalName;
-  static const Field<User, String> _f$globalName = Field(
-    'globalName',
-    _$globalName,
-    key: r'global_name',
-  );
-  static String? _$avatarHash(User v) => v.avatarHash;
-  static const Field<User, String> _f$avatarHash = Field(
-    'avatarHash',
-    _$avatarHash,
-    key: r'avatar_hash',
-  );
-  static bool? _$bot(User v) => v.bot;
-  static const Field<User, bool> _f$bot = Field('bot', _$bot, opt: true);
-  static bool? _$system(User v) => v.system;
-  static const Field<User, bool> _f$system = Field(
-    'system',
-    _$system,
-    opt: true,
-  );
-  static bool? _$mfaEnabled(User v) => v.mfaEnabled;
-  static const Field<User, bool> _f$mfaEnabled = Field(
-    'mfaEnabled',
-    _$mfaEnabled,
-    key: r'mfa_enabled',
-    opt: true,
-    def: false,
-  );
-  static String? _$bannerHash(User v) => v.bannerHash;
-  static const Field<User, String> _f$bannerHash = Field(
-    'bannerHash',
-    _$bannerHash,
-    key: r'banner_hash',
-  );
-  static DiscordColor? _$accentColor(User v) => v.accentColor;
-  static const Field<User, DiscordColor> _f$accentColor = Field(
-    'accentColor',
-    _$accentColor,
-    key: r'accent_color',
-  );
-  static Locale? _$locale(User v) => v.locale;
-  static const Field<User, Locale> _f$locale = Field('locale', _$locale);
-  static UserFlags? _$flags(User v) => v.flags;
-  static const Field<User, UserFlags> _f$flags = Field('flags', _$flags);
-  static UserFlags? _$publicFlags(User v) => v.publicFlags;
-  static const Field<User, UserFlags> _f$publicFlags = Field(
-    'publicFlags',
-    _$publicFlags,
-    key: r'public_flags',
-  );
-  static String? _$avatarDecorationHash(User v) => v.avatarDecorationHash;
-  static const Field<User, String> _f$avatarDecorationHash = Field(
-    'avatarDecorationHash',
-    _$avatarDecorationHash,
-    key: r'avatar_decoration_hash',
-  );
-  static AvatarDecorationData? _$avatarDecorationData(User v) =>
-      v.avatarDecorationData;
-  static const Field<User, AvatarDecorationData> _f$avatarDecorationData =
-      Field(
-        'avatarDecorationData',
-        _$avatarDecorationData,
-        key: r'avatar_decoration_data',
-      );
-  static UserPrimaryGuild? _$primaryGuild(User v) => v.primaryGuild;
-  static const Field<User, UserPrimaryGuild> _f$primaryGuild = Field(
-    'primaryGuild',
-    _$primaryGuild,
-    key: r'primary_guild',
-  );
-
-  @override
-  final MappableFields<User> fields = const {
-    #id: _f$id,
-    #username: _f$username,
-    #discriminator: _f$discriminator,
-    #globalName: _f$globalName,
-    #avatarHash: _f$avatarHash,
-    #bot: _f$bot,
-    #system: _f$system,
-    #mfaEnabled: _f$mfaEnabled,
-    #bannerHash: _f$bannerHash,
-    #accentColor: _f$accentColor,
-    #locale: _f$locale,
-    #flags: _f$flags,
-    #publicFlags: _f$publicFlags,
-    #avatarDecorationHash: _f$avatarDecorationHash,
-    #avatarDecorationData: _f$avatarDecorationData,
-    #primaryGuild: _f$primaryGuild,
-  };
-
-  static User _instantiate(DecodingData data) {
-    return User(
-      id: data.dec(_f$id),
-      username: data.dec(_f$username),
-      discriminator: data.dec(_f$discriminator),
-      globalName: data.dec(_f$globalName),
-      avatarHash: data.dec(_f$avatarHash),
-      bot: data.dec(_f$bot),
-      system: data.dec(_f$system),
-      mfaEnabled: data.dec(_f$mfaEnabled),
-      bannerHash: data.dec(_f$bannerHash),
-      accentColor: data.dec(_f$accentColor),
-      locale: data.dec(_f$locale),
-      flags: data.dec(_f$flags),
-      publicFlags: data.dec(_f$publicFlags),
-      avatarDecorationHash: data.dec(_f$avatarDecorationHash),
-      avatarDecorationData: data.dec(_f$avatarDecorationData),
-      primaryGuild: data.dec(_f$primaryGuild),
-    );
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static User fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<User>(map);
-  }
-
-  static User fromJson(String json) {
-    return ensureInitialized().decodeJson<User>(json);
-  }
-}
-
-mixin UserMappable {
-  String toJson() {
-    return UserMapper.ensureInitialized().encodeJson<User>(this as User);
-  }
-
-  Map<String, dynamic> toMap() {
-    return UserMapper.ensureInitialized().encodeMap<User>(this as User);
-  }
-
-  UserCopyWith<User, User, User> get copyWith =>
-      _UserCopyWithImpl<User, User>(this as User, $identity, $identity);
-  @override
-  String toString() {
-    return UserMapper.ensureInitialized().stringifyValue(this as User);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return UserMapper.ensureInitialized().equalsValue(this as User, other);
-  }
-
-  @override
-  int get hashCode {
-    return UserMapper.ensureInitialized().hashValue(this as User);
-  }
-}
-
-extension UserValueCopy<$R, $Out> on ObjectCopyWith<$R, User, $Out> {
-  UserCopyWith<$R, User, $Out> get $asUser =>
-      $base.as((v, t, t2) => _UserCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class UserCopyWith<$R, $In extends User, $Out>
-    implements PartialUserCopyWith<$R, $In, $Out> {
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  UserFlagsCopyWith<$R, UserFlags, UserFlags>? get flags;
-  UserFlagsCopyWith<$R, UserFlags, UserFlags>? get publicFlags;
-  AvatarDecorationDataCopyWith<$R, AvatarDecorationData, AvatarDecorationData>?
-  get avatarDecorationData;
   UserPrimaryGuildCopyWith<$R, UserPrimaryGuild, UserPrimaryGuild>?
-  get primaryGuild;
-  @override
-  $R call({
-    Snowflake? id,
-    String? username,
-    String? discriminator,
-    String? globalName,
-    String? avatarHash,
-    bool? bot,
-    bool? system,
-    bool? mfaEnabled,
-    String? bannerHash,
-    DiscordColor? accentColor,
-    Locale? locale,
-    UserFlags? flags,
-    UserFlags? publicFlags,
-    String? avatarDecorationHash,
-    AvatarDecorationData? avatarDecorationData,
-    UserPrimaryGuild? primaryGuild,
-  });
-  UserCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
-}
-
-class _UserCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, User, $Out>
-    implements UserCopyWith<$R, User, $Out> {
-  _UserCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<User> $mapper = UserMapper.ensureInitialized();
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  UserFlagsCopyWith<$R, UserFlags, UserFlags>? get flags =>
-      $value.flags?.copyWith.$chain((v) => call(flags: v));
+  get primaryGuild =>
+      $value.primaryGuild?.copyWith.$chain((v) => call(primaryGuild: v));
   @override
   UserFlagsCopyWith<$R, UserFlags, UserFlags>? get publicFlags =>
       $value.publicFlags?.copyWith.$chain((v) => call(publicFlags: v));
@@ -417,78 +291,55 @@ class _UserCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, User, $Out>
     (v) => call(avatarDecorationData: v),
   );
   @override
-  UserPrimaryGuildCopyWith<$R, UserPrimaryGuild, UserPrimaryGuild>?
-  get primaryGuild =>
-      $value.primaryGuild?.copyWith.$chain((v) => call(primaryGuild: v));
-  @override
   $R call({
     Snowflake? id,
     String? username,
     String? discriminator,
     Object? globalName = $none,
-    Object? avatarHash = $none,
+    Object? primaryGuild = $none,
     Object? bot = $none,
     Object? system = $none,
-    Object? mfaEnabled = $none,
-    Object? bannerHash = $none,
     Object? accentColor = $none,
-    Object? locale = $none,
-    Object? flags = $none,
     Object? publicFlags = $none,
-    Object? avatarDecorationHash = $none,
     Object? avatarDecorationData = $none,
-    Object? primaryGuild = $none,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
       if (username != null) #username: username,
       if (discriminator != null) #discriminator: discriminator,
       if (globalName != $none) #globalName: globalName,
-      if (avatarHash != $none) #avatarHash: avatarHash,
+      if (primaryGuild != $none) #primaryGuild: primaryGuild,
       if (bot != $none) #bot: bot,
       if (system != $none) #system: system,
-      if (mfaEnabled != $none) #mfaEnabled: mfaEnabled,
-      if (bannerHash != $none) #bannerHash: bannerHash,
       if (accentColor != $none) #accentColor: accentColor,
-      if (locale != $none) #locale: locale,
-      if (flags != $none) #flags: flags,
       if (publicFlags != $none) #publicFlags: publicFlags,
-      if (avatarDecorationHash != $none)
-        #avatarDecorationHash: avatarDecorationHash,
       if (avatarDecorationData != $none)
         #avatarDecorationData: avatarDecorationData,
-      if (primaryGuild != $none) #primaryGuild: primaryGuild,
     }),
   );
   @override
-  User $make(CopyWithData data) => User(
+  PartialUser $make(CopyWithData data) => PartialUser(
     id: data.get(#id, or: $value.id),
     username: data.get(#username, or: $value.username),
     discriminator: data.get(#discriminator, or: $value.discriminator),
     globalName: data.get(#globalName, or: $value.globalName),
-    avatarHash: data.get(#avatarHash, or: $value.avatarHash),
+    avatar: data.get(#avatar, or: $value.avatar),
+    primaryGuild: data.get(#primaryGuild, or: $value.primaryGuild),
     bot: data.get(#bot, or: $value.bot),
     system: data.get(#system, or: $value.system),
-    mfaEnabled: data.get(#mfaEnabled, or: $value.mfaEnabled),
-    bannerHash: data.get(#bannerHash, or: $value.bannerHash),
+    banner: data.get(#banner, or: $value.banner),
     accentColor: data.get(#accentColor, or: $value.accentColor),
-    locale: data.get(#locale, or: $value.locale),
-    flags: data.get(#flags, or: $value.flags),
     publicFlags: data.get(#publicFlags, or: $value.publicFlags),
-    avatarDecorationHash: data.get(
-      #avatarDecorationHash,
-      or: $value.avatarDecorationHash,
-    ),
     avatarDecorationData: data.get(
       #avatarDecorationData,
       or: $value.avatarDecorationData,
     ),
-    primaryGuild: data.get(#primaryGuild, or: $value.primaryGuild),
   );
 
   @override
-  UserCopyWith<$R2, User, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _UserCopyWithImpl<$R2, $Out2>($value, $cast, t);
+  PartialUserCopyWith<$R2, PartialUser, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _PartialUserCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class UserFlagsMapper extends ClassMapperBase<UserFlags> {
@@ -602,5 +453,334 @@ class _UserFlagsCopyWithImpl<$R, $Out>
   UserFlagsCopyWith<$R2, UserFlags, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   ) => _UserFlagsCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
+class UserMapper extends ClassMapperBase<User> {
+  UserMapper._();
+
+  static UserMapper? _instance;
+  static UserMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = UserMapper._());
+      PartialUserMapper.ensureInitialized();
+      SnowflakeMapper.ensureInitialized();
+      LocaleMapper.ensureInitialized();
+      UserFlagsMapper.ensureInitialized();
+      AvatarDecorationDataMapper.ensureInitialized();
+      UserPrimaryGuildMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'User';
+
+  static Snowflake _$id(User v) => v.id;
+  static const Field<User, Snowflake> _f$id = Field('id', _$id);
+  static String _$username(User v) => v.username;
+  static const Field<User, String> _f$username = Field('username', _$username);
+  static String _$discriminator(User v) => v.discriminator;
+  static const Field<User, String> _f$discriminator = Field(
+    'discriminator',
+    _$discriminator,
+  );
+  static String? _$globalName(User v) => v.globalName;
+  static const Field<User, String> _f$globalName = Field(
+    'globalName',
+    _$globalName,
+    key: r'global_name',
+  );
+  static String? _$avatarHash(User v) => v.avatarHash;
+  static const Field<User, String> _f$avatarHash = Field(
+    'avatarHash',
+    _$avatarHash,
+    key: r'avatar_hash',
+  );
+  static bool? _$bot(User v) => v.bot;
+  static const Field<User, bool> _f$bot = Field('bot', _$bot, opt: true);
+  static bool? _$system(User v) => v.system;
+  static const Field<User, bool> _f$system = Field(
+    'system',
+    _$system,
+    opt: true,
+  );
+  static bool? _$mfaEnabled(User v) => v.mfaEnabled;
+  static const Field<User, bool> _f$mfaEnabled = Field(
+    'mfaEnabled',
+    _$mfaEnabled,
+    key: r'mfa_enabled',
+    opt: true,
+    def: false,
+  );
+  static String? _$bannerHash(User v) => v.bannerHash;
+  static const Field<User, String> _f$bannerHash = Field(
+    'bannerHash',
+    _$bannerHash,
+    key: r'banner_hash',
+  );
+  static int? _$accentColor(User v) => v.accentColor;
+  static const Field<User, int> _f$accentColor = Field(
+    'accentColor',
+    _$accentColor,
+    key: r'accent_color',
+  );
+  static Locale? _$locale(User v) => v.locale;
+  static const Field<User, Locale> _f$locale = Field('locale', _$locale);
+  static UserFlags? _$flags(User v) => v.flags;
+  static const Field<User, UserFlags> _f$flags = Field('flags', _$flags);
+  static UserFlags? _$publicFlags(User v) => v.publicFlags;
+  static const Field<User, UserFlags> _f$publicFlags = Field(
+    'publicFlags',
+    _$publicFlags,
+    key: r'public_flags',
+  );
+  static String? _$avatarDecorationHash(User v) => v.avatarDecorationHash;
+  static const Field<User, String> _f$avatarDecorationHash = Field(
+    'avatarDecorationHash',
+    _$avatarDecorationHash,
+    key: r'avatar_decoration_hash',
+  );
+  static AvatarDecorationData? _$avatarDecorationData(User v) =>
+      v.avatarDecorationData;
+  static const Field<User, AvatarDecorationData> _f$avatarDecorationData =
+      Field(
+        'avatarDecorationData',
+        _$avatarDecorationData,
+        key: r'avatar_decoration_data',
+        opt: true,
+      );
+  static UserPrimaryGuild? _$primaryGuild(User v) => v.primaryGuild;
+  static const Field<User, UserPrimaryGuild> _f$primaryGuild = Field(
+    'primaryGuild',
+    _$primaryGuild,
+    key: r'primary_guild',
+  );
+  static String? _$avatar(User v) => v.avatar;
+  static const Field<User, String> _f$avatar = Field(
+    'avatar',
+    _$avatar,
+    mode: FieldMode.member,
+  );
+  static String? _$banner(User v) => v.banner;
+  static const Field<User, String> _f$banner = Field(
+    'banner',
+    _$banner,
+    mode: FieldMode.member,
+  );
+
+  @override
+  final MappableFields<User> fields = const {
+    #id: _f$id,
+    #username: _f$username,
+    #discriminator: _f$discriminator,
+    #globalName: _f$globalName,
+    #avatarHash: _f$avatarHash,
+    #bot: _f$bot,
+    #system: _f$system,
+    #mfaEnabled: _f$mfaEnabled,
+    #bannerHash: _f$bannerHash,
+    #accentColor: _f$accentColor,
+    #locale: _f$locale,
+    #flags: _f$flags,
+    #publicFlags: _f$publicFlags,
+    #avatarDecorationHash: _f$avatarDecorationHash,
+    #avatarDecorationData: _f$avatarDecorationData,
+    #primaryGuild: _f$primaryGuild,
+    #avatar: _f$avatar,
+    #banner: _f$banner,
+  };
+
+  static User _instantiate(DecodingData data) {
+    return User(
+      id: data.dec(_f$id),
+      username: data.dec(_f$username),
+      discriminator: data.dec(_f$discriminator),
+      globalName: data.dec(_f$globalName),
+      avatarHash: data.dec(_f$avatarHash),
+      bot: data.dec(_f$bot),
+      system: data.dec(_f$system),
+      mfaEnabled: data.dec(_f$mfaEnabled),
+      bannerHash: data.dec(_f$bannerHash),
+      accentColor: data.dec(_f$accentColor),
+      locale: data.dec(_f$locale),
+      flags: data.dec(_f$flags),
+      publicFlags: data.dec(_f$publicFlags),
+      avatarDecorationHash: data.dec(_f$avatarDecorationHash),
+      avatarDecorationData: data.dec(_f$avatarDecorationData),
+      primaryGuild: data.dec(_f$primaryGuild),
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static User fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<User>(map);
+  }
+
+  static User fromJson(String json) {
+    return ensureInitialized().decodeJson<User>(json);
+  }
+}
+
+mixin UserMappable {
+  String toJson() {
+    return UserMapper.ensureInitialized().encodeJson<User>(this as User);
+  }
+
+  Map<String, dynamic> toMap() {
+    return UserMapper.ensureInitialized().encodeMap<User>(this as User);
+  }
+
+  UserCopyWith<User, User, User> get copyWith =>
+      _UserCopyWithImpl<User, User>(this as User, $identity, $identity);
+  @override
+  String toString() {
+    return UserMapper.ensureInitialized().stringifyValue(this as User);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return UserMapper.ensureInitialized().equalsValue(this as User, other);
+  }
+
+  @override
+  int get hashCode {
+    return UserMapper.ensureInitialized().hashValue(this as User);
+  }
+}
+
+extension UserValueCopy<$R, $Out> on ObjectCopyWith<$R, User, $Out> {
+  UserCopyWith<$R, User, $Out> get $asUser =>
+      $base.as((v, t, t2) => _UserCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class UserCopyWith<$R, $In extends User, $Out>
+    implements PartialUserCopyWith<$R, $In, $Out> {
+  @override
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  UserFlagsCopyWith<$R, UserFlags, UserFlags>? get flags;
+  @override
+  UserFlagsCopyWith<$R, UserFlags, UserFlags>? get publicFlags;
+  @override
+  AvatarDecorationDataCopyWith<$R, AvatarDecorationData, AvatarDecorationData>?
+  get avatarDecorationData;
+  UserPrimaryGuildCopyWith<$R, UserPrimaryGuild, UserPrimaryGuild>?
+  get primaryGuild;
+  @override
+  $R call({
+    Snowflake? id,
+    String? username,
+    String? discriminator,
+    String? globalName,
+    String? avatarHash,
+    bool? bot,
+    bool? system,
+    bool? mfaEnabled,
+    String? bannerHash,
+    int? accentColor,
+    Locale? locale,
+    UserFlags? flags,
+    UserFlags? publicFlags,
+    String? avatarDecorationHash,
+    AvatarDecorationData? avatarDecorationData,
+    UserPrimaryGuild? primaryGuild,
+  });
+  UserCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+}
+
+class _UserCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, User, $Out>
+    implements UserCopyWith<$R, User, $Out> {
+  _UserCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<User> $mapper = UserMapper.ensureInitialized();
+  @override
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
+      $value.id.copyWith.$chain((v) => call(id: v));
+  @override
+  UserFlagsCopyWith<$R, UserFlags, UserFlags>? get flags =>
+      $value.flags?.copyWith.$chain((v) => call(flags: v));
+  @override
+  UserFlagsCopyWith<$R, UserFlags, UserFlags>? get publicFlags =>
+      $value.publicFlags?.copyWith.$chain((v) => call(publicFlags: v));
+  @override
+  AvatarDecorationDataCopyWith<$R, AvatarDecorationData, AvatarDecorationData>?
+  get avatarDecorationData => $value.avatarDecorationData?.copyWith.$chain(
+    (v) => call(avatarDecorationData: v),
+  );
+  @override
+  UserPrimaryGuildCopyWith<$R, UserPrimaryGuild, UserPrimaryGuild>?
+  get primaryGuild =>
+      $value.primaryGuild?.copyWith.$chain((v) => call(primaryGuild: v));
+  @override
+  $R call({
+    Snowflake? id,
+    String? username,
+    String? discriminator,
+    Object? globalName = $none,
+    Object? avatarHash = $none,
+    Object? bot = $none,
+    Object? system = $none,
+    Object? mfaEnabled = $none,
+    Object? bannerHash = $none,
+    Object? accentColor = $none,
+    Object? locale = $none,
+    Object? flags = $none,
+    Object? publicFlags = $none,
+    Object? avatarDecorationHash = $none,
+    Object? avatarDecorationData = $none,
+    Object? primaryGuild = $none,
+  }) => $apply(
+    FieldCopyWithData({
+      if (id != null) #id: id,
+      if (username != null) #username: username,
+      if (discriminator != null) #discriminator: discriminator,
+      if (globalName != $none) #globalName: globalName,
+      if (avatarHash != $none) #avatarHash: avatarHash,
+      if (bot != $none) #bot: bot,
+      if (system != $none) #system: system,
+      if (mfaEnabled != $none) #mfaEnabled: mfaEnabled,
+      if (bannerHash != $none) #bannerHash: bannerHash,
+      if (accentColor != $none) #accentColor: accentColor,
+      if (locale != $none) #locale: locale,
+      if (flags != $none) #flags: flags,
+      if (publicFlags != $none) #publicFlags: publicFlags,
+      if (avatarDecorationHash != $none)
+        #avatarDecorationHash: avatarDecorationHash,
+      if (avatarDecorationData != $none)
+        #avatarDecorationData: avatarDecorationData,
+      if (primaryGuild != $none) #primaryGuild: primaryGuild,
+    }),
+  );
+  @override
+  User $make(CopyWithData data) => User(
+    id: data.get(#id, or: $value.id),
+    username: data.get(#username, or: $value.username),
+    discriminator: data.get(#discriminator, or: $value.discriminator),
+    globalName: data.get(#globalName, or: $value.globalName),
+    avatarHash: data.get(#avatarHash, or: $value.avatarHash),
+    bot: data.get(#bot, or: $value.bot),
+    system: data.get(#system, or: $value.system),
+    mfaEnabled: data.get(#mfaEnabled, or: $value.mfaEnabled),
+    bannerHash: data.get(#bannerHash, or: $value.bannerHash),
+    accentColor: data.get(#accentColor, or: $value.accentColor),
+    locale: data.get(#locale, or: $value.locale),
+    flags: data.get(#flags, or: $value.flags),
+    publicFlags: data.get(#publicFlags, or: $value.publicFlags),
+    avatarDecorationHash: data.get(
+      #avatarDecorationHash,
+      or: $value.avatarDecorationHash,
+    ),
+    avatarDecorationData: data.get(
+      #avatarDecorationData,
+      or: $value.avatarDecorationData,
+    ),
+    primaryGuild: data.get(#primaryGuild, or: $value.primaryGuild),
+  );
+
+  @override
+  UserCopyWith<$R2, User, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
+      _UserCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 

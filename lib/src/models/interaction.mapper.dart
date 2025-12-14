@@ -130,7 +130,6 @@ class InteractionMapper extends ClassMapperBase<Interaction> {
       UnknownInteractionMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       InteractionTypeMapper.ensureInitialized();
-      PartialChannelMapper.ensureInitialized();
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
@@ -175,8 +174,8 @@ class InteractionMapper extends ClassMapperBase<Interaction> {
     _$guildId,
     key: r'guild_id',
   );
-  static PartialChannel? _$channel(Interaction v) => v.channel;
-  static const Field<Interaction, PartialChannel> _f$channel = Field(
+  static Snowflake? _$channel(Interaction v) => v.channel;
+  static const Field<Interaction, Snowflake> _f$channel = Field(
     'channel',
     _$channel,
   );
@@ -290,7 +289,7 @@ abstract class InteractionCopyWith<$R, $In extends Interaction<T>, $Out, T>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get applicationId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel>? get channel;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channel;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
   MemberCopyWith<$R, Member, Member>? get member;
   UserCopyWith<$R, User, User>? get user;
@@ -314,7 +313,7 @@ abstract class InteractionCopyWith<$R, $In extends Interaction<T>, $Out, T>
     Snowflake? applicationId,
     InteractionType? type,
     Snowflake? guildId,
-    PartialChannel? channel,
+    Snowflake? channel,
     Snowflake? channelId,
     Member? member,
     User? user,
@@ -345,8 +344,6 @@ class ResolvedDataMapper extends ClassMapperBase<ResolvedData> {
       UserMapper.ensureInitialized();
       MemberMapper.ensureInitialized();
       RoleMapper.ensureInitialized();
-      PartialChannelMapper.ensureInitialized();
-      PartialMessageMapper.ensureInitialized();
       AttachmentMapper.ensureInitialized();
     }
     return _instance!;
@@ -370,13 +367,11 @@ class ResolvedDataMapper extends ClassMapperBase<ResolvedData> {
     'roles',
     _$roles,
   );
-  static Map<Snowflake, PartialChannel>? _$channels(ResolvedData v) =>
-      v.channels;
-  static const Field<ResolvedData, Map<Snowflake, PartialChannel>> _f$channels =
+  static Map<Snowflake, Snowflake>? _$channels(ResolvedData v) => v.channels;
+  static const Field<ResolvedData, Map<Snowflake, Snowflake>> _f$channels =
       Field('channels', _$channels);
-  static Map<Snowflake, PartialMessage>? _$messages(ResolvedData v) =>
-      v.messages;
-  static const Field<ResolvedData, Map<Snowflake, PartialMessage>> _f$messages =
+  static Map<Snowflake, Snowflake>? _$messages(ResolvedData v) => v.messages;
+  static const Field<ResolvedData, Map<Snowflake, Snowflake>> _f$messages =
       Field('messages', _$messages);
   static Map<Snowflake, Attachment>? _$attachments(ResolvedData v) =>
       v.attachments;
@@ -473,15 +468,15 @@ abstract class ResolvedDataCopyWith<$R, $In extends ResolvedData, $Out>
   MapCopyWith<
     $R,
     Snowflake,
-    PartialChannel,
-    PartialChannelCopyWith<$R, PartialChannel, PartialChannel>
+    Snowflake,
+    SnowflakeCopyWith<$R, Snowflake, Snowflake>
   >?
   get channels;
   MapCopyWith<
     $R,
     Snowflake,
-    PartialMessage,
-    PartialMessageCopyWith<$R, PartialMessage, PartialMessage>
+    Snowflake,
+    SnowflakeCopyWith<$R, Snowflake, Snowflake>
   >?
   get messages;
   MapCopyWith<
@@ -495,8 +490,8 @@ abstract class ResolvedDataCopyWith<$R, $In extends ResolvedData, $Out>
     Map<Snowflake, User>? users,
     Map<Snowflake, Member>? members,
     Map<Snowflake, Role>? roles,
-    Map<Snowflake, PartialChannel>? channels,
-    Map<Snowflake, PartialMessage>? messages,
+    Map<Snowflake, Snowflake>? channels,
+    Map<Snowflake, Snowflake>? messages,
     Map<Snowflake, Attachment>? attachments,
   });
   ResolvedDataCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
@@ -541,8 +536,8 @@ class _ResolvedDataCopyWithImpl<$R, $Out>
   MapCopyWith<
     $R,
     Snowflake,
-    PartialChannel,
-    PartialChannelCopyWith<$R, PartialChannel, PartialChannel>
+    Snowflake,
+    SnowflakeCopyWith<$R, Snowflake, Snowflake>
   >?
   get channels => $value.channels != null
       ? MapCopyWith(
@@ -555,8 +550,8 @@ class _ResolvedDataCopyWithImpl<$R, $Out>
   MapCopyWith<
     $R,
     Snowflake,
-    PartialMessage,
-    PartialMessageCopyWith<$R, PartialMessage, PartialMessage>
+    Snowflake,
+    SnowflakeCopyWith<$R, Snowflake, Snowflake>
   >?
   get messages => $value.messages != null
       ? MapCopyWith(
@@ -623,7 +618,6 @@ class PingInteractionMapper extends ClassMapperBase<PingInteraction> {
       InteractionMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       InteractionTypeMapper.ensureInitialized();
-      PartialChannelMapper.ensureInitialized();
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
@@ -658,8 +652,8 @@ class PingInteractionMapper extends ClassMapperBase<PingInteraction> {
     _$guildId,
     key: r'guild_id',
   );
-  static PartialChannel? _$channel(PingInteraction v) => v.channel;
-  static const Field<PingInteraction, PartialChannel> _f$channel = Field(
+  static Snowflake? _$channel(PingInteraction v) => v.channel;
+  static const Field<PingInteraction, Snowflake> _f$channel = Field(
     'channel',
     _$channel,
   );
@@ -854,7 +848,7 @@ abstract class PingInteractionCopyWith<$R, $In extends PingInteraction, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   @override
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel>? get channel;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channel;
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
   @override
@@ -886,7 +880,7 @@ abstract class PingInteractionCopyWith<$R, $In extends PingInteraction, $Out>
     Snowflake? applicationId,
     InteractionType? type,
     Snowflake? guildId,
-    PartialChannel? channel,
+    Snowflake? channel,
     Snowflake? channelId,
     Member? member,
     User? user,
@@ -924,7 +918,7 @@ class _PingInteractionCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
       $value.guildId?.copyWith.$chain((v) => call(guildId: v));
   @override
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel>? get channel =>
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channel =>
       $value.channel?.copyWith.$chain((v) => call(channel: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId =>
@@ -1059,7 +1053,6 @@ class ApplicationCommandInteractionMapper
       SnowflakeMapper.ensureInitialized();
       InteractionTypeMapper.ensureInitialized();
       ApplicationCommandInteractionDataMapper.ensureInitialized();
-      PartialChannelMapper.ensureInitialized();
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
@@ -1102,9 +1095,8 @@ class ApplicationCommandInteractionMapper
   static Snowflake? _$guildId(ApplicationCommandInteraction v) => v.guildId;
   static const Field<ApplicationCommandInteraction, Snowflake> _f$guildId =
       Field('guildId', _$guildId, key: r'guild_id');
-  static PartialChannel? _$channel(ApplicationCommandInteraction v) =>
-      v.channel;
-  static const Field<ApplicationCommandInteraction, PartialChannel> _f$channel =
+  static Snowflake? _$channel(ApplicationCommandInteraction v) => v.channel;
+  static const Field<ApplicationCommandInteraction, Snowflake> _f$channel =
       Field('channel', _$channel);
   static Snowflake? _$channelId(ApplicationCommandInteraction v) => v.channelId;
   static const Field<ApplicationCommandInteraction, Snowflake> _f$channelId =
@@ -1316,7 +1308,7 @@ abstract class ApplicationCommandInteractionCopyWith<
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   @override
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel>? get channel;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channel;
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
   @override
@@ -1349,7 +1341,7 @@ abstract class ApplicationCommandInteractionCopyWith<
     InteractionType? type,
     ApplicationCommandInteractionData? data,
     Snowflake? guildId,
-    PartialChannel? channel,
+    Snowflake? channel,
     Snowflake? channelId,
     Member? member,
     User? user,
@@ -1404,7 +1396,7 @@ class _ApplicationCommandInteractionCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
       $value.guildId?.copyWith.$chain((v) => call(guildId: v));
   @override
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel>? get channel =>
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channel =>
       $value.channel?.copyWith.$chain((v) => call(channel: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId =>
@@ -2009,7 +2001,6 @@ class MessageComponentInteractionMapper
       SnowflakeMapper.ensureInitialized();
       InteractionTypeMapper.ensureInitialized();
       MessageComponentInteractionDataMapper.ensureInitialized();
-      PartialChannelMapper.ensureInitialized();
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
@@ -2051,9 +2042,11 @@ class MessageComponentInteractionMapper
     _$guildId,
     key: r'guild_id',
   );
-  static PartialChannel? _$channel(MessageComponentInteraction v) => v.channel;
-  static const Field<MessageComponentInteraction, PartialChannel> _f$channel =
-      Field('channel', _$channel);
+  static Snowflake? _$channel(MessageComponentInteraction v) => v.channel;
+  static const Field<MessageComponentInteraction, Snowflake> _f$channel = Field(
+    'channel',
+    _$channel,
+  );
   static Snowflake? _$channelId(MessageComponentInteraction v) => v.channelId;
   static const Field<MessageComponentInteraction, Snowflake> _f$channelId =
       Field('channelId', _$channelId, key: r'channel_id');
@@ -2263,7 +2256,7 @@ abstract class MessageComponentInteractionCopyWith<
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   @override
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel>? get channel;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channel;
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
   @override
@@ -2296,7 +2289,7 @@ abstract class MessageComponentInteractionCopyWith<
     InteractionType? type,
     MessageComponentInteractionData? data,
     Snowflake? guildId,
-    PartialChannel? channel,
+    Snowflake? channel,
     Snowflake? channelId,
     Member? member,
     User? user,
@@ -2352,7 +2345,7 @@ class _MessageComponentInteractionCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
       $value.guildId?.copyWith.$chain((v) => call(guildId: v));
   @override
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel>? get channel =>
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channel =>
       $value.channel?.copyWith.$chain((v) => call(channel: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId =>
@@ -2697,7 +2690,6 @@ class ModalSubmitInteractionMapper
       SnowflakeMapper.ensureInitialized();
       InteractionTypeMapper.ensureInitialized();
       ModalSubmitInteractionDataMapper.ensureInitialized();
-      PartialChannelMapper.ensureInitialized();
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
@@ -2735,8 +2727,8 @@ class ModalSubmitInteractionMapper
     _$guildId,
     key: r'guild_id',
   );
-  static PartialChannel? _$channel(ModalSubmitInteraction v) => v.channel;
-  static const Field<ModalSubmitInteraction, PartialChannel> _f$channel = Field(
+  static Snowflake? _$channel(ModalSubmitInteraction v) => v.channel;
+  static const Field<ModalSubmitInteraction, Snowflake> _f$channel = Field(
     'channel',
     _$channel,
   );
@@ -2946,7 +2938,7 @@ abstract class ModalSubmitInteractionCopyWith<
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   @override
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel>? get channel;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channel;
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
   @override
@@ -2979,7 +2971,7 @@ abstract class ModalSubmitInteractionCopyWith<
     InteractionType? type,
     ModalSubmitInteractionData? data,
     Snowflake? guildId,
-    PartialChannel? channel,
+    Snowflake? channel,
     Snowflake? channelId,
     Member? member,
     User? user,
@@ -3027,7 +3019,7 @@ class _ModalSubmitInteractionCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
       $value.guildId?.copyWith.$chain((v) => call(guildId: v));
   @override
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel>? get channel =>
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channel =>
       $value.channel?.copyWith.$chain((v) => call(channel: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId =>
@@ -3337,7 +3329,6 @@ class ApplicationCommandAutocompleteInteractionMapper
       SnowflakeMapper.ensureInitialized();
       InteractionTypeMapper.ensureInitialized();
       ApplicationCommandInteractionDataMapper.ensureInitialized();
-      PartialChannelMapper.ensureInitialized();
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
@@ -3381,10 +3372,9 @@ class ApplicationCommandAutocompleteInteractionMapper
       v.guildId;
   static const Field<ApplicationCommandAutocompleteInteraction, Snowflake>
   _f$guildId = Field('guildId', _$guildId, key: r'guild_id');
-  static PartialChannel? _$channel(
-    ApplicationCommandAutocompleteInteraction v,
-  ) => v.channel;
-  static const Field<ApplicationCommandAutocompleteInteraction, PartialChannel>
+  static Snowflake? _$channel(ApplicationCommandAutocompleteInteraction v) =>
+      v.channel;
+  static const Field<ApplicationCommandAutocompleteInteraction, Snowflake>
   _f$channel = Field('channel', _$channel);
   static Snowflake? _$channelId(ApplicationCommandAutocompleteInteraction v) =>
       v.channelId;
@@ -3615,7 +3605,7 @@ abstract class ApplicationCommandAutocompleteInteractionCopyWith<
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   @override
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel>? get channel;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channel;
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
   @override
@@ -3648,7 +3638,7 @@ abstract class ApplicationCommandAutocompleteInteractionCopyWith<
     InteractionType? type,
     ApplicationCommandInteractionData? data,
     Snowflake? guildId,
-    PartialChannel? channel,
+    Snowflake? channel,
     Snowflake? channelId,
     Member? member,
     User? user,
@@ -3703,7 +3693,7 @@ class _ApplicationCommandAutocompleteInteractionCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
       $value.guildId?.copyWith.$chain((v) => call(guildId: v));
   @override
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel>? get channel =>
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channel =>
       $value.channel?.copyWith.$chain((v) => call(channel: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId =>
@@ -3846,7 +3836,6 @@ class UnknownInteractionMapper extends ClassMapperBase<UnknownInteraction> {
       InteractionMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       InteractionTypeMapper.ensureInitialized();
-      PartialChannelMapper.ensureInitialized();
       MemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
@@ -3881,8 +3870,8 @@ class UnknownInteractionMapper extends ClassMapperBase<UnknownInteraction> {
     _$guildId,
     key: r'guild_id',
   );
-  static PartialChannel? _$channel(UnknownInteraction v) => v.channel;
-  static const Field<UnknownInteraction, PartialChannel> _f$channel = Field(
+  static Snowflake? _$channel(UnknownInteraction v) => v.channel;
+  static const Field<UnknownInteraction, Snowflake> _f$channel = Field(
     'channel',
     _$channel,
   );
@@ -4088,7 +4077,7 @@ abstract class UnknownInteractionCopyWith<
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   @override
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel>? get channel;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channel;
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
   @override
@@ -4120,7 +4109,7 @@ abstract class UnknownInteractionCopyWith<
     Snowflake? applicationId,
     InteractionType? type,
     Snowflake? guildId,
-    PartialChannel? channel,
+    Snowflake? channel,
     Snowflake? channelId,
     Member? member,
     User? user,
@@ -4158,7 +4147,7 @@ class _UnknownInteractionCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
       $value.guildId?.copyWith.$chain((v) => call(guildId: v));
   @override
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel>? get channel =>
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channel =>
       $value.channel?.copyWith.$chain((v) => call(channel: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId =>

@@ -1,22 +1,16 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:firebridge/src/utils/flags.dart';
 
 part 'sku.mapper.dart';
-
-/// A partial [Sku].
-@MappableClass()
-class PartialSku extends ManagedSnowflakeEntity<Sku> with PartialSkuMappable {
-  /// @nodoc
-  PartialSku({required super.id});
-}
 
 /// {@template sku}
 /// A premium offering that can be made available to your application's users or guilds.
 /// {@endtemplate}
 @MappableClass()
-class Sku extends PartialSku with SkuMappable {
+class Sku with SkuMappable {
+  final Snowflake id;
+
   /// This SKU's type.
   final SkuType type;
 
@@ -35,7 +29,7 @@ class Sku extends PartialSku with SkuMappable {
   /// {@macro sku}
   /// @nodoc
   Sku({
-    required super.id,
+    required this.id,
     required this.type,
     required this.applicationId,
     required this.name,

@@ -4,26 +4,18 @@ import 'package:firebridge/src/models/channel/stage_instance.dart';
 import 'package:firebridge/src/models/guild/guild.dart';
 import 'package:firebridge/src/models/guild/member.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:firebridge/src/models/user/user.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
 part 'scheduled_event.mapper.dart';
 
-/// A partial [ScheduledEvent].
-@MappableClass()
-class PartialScheduledEvent extends WritableSnowflakeEntity<ScheduledEvent>
-    with PartialScheduledEventMappable {
-  /// Create a new [PartialScheduledEvent].
-  /// @nodoc
-  PartialScheduledEvent({required super.id});
-}
-
 /// {@template scheduled_event}
 /// A scheduled event in a [Guild].
 /// {@endtemplate}
 @MappableClass()
-class ScheduledEvent extends PartialScheduledEvent with ScheduledEventMappable {
+class ScheduledEvent with ScheduledEventMappable {
+  final Snowflake id;
+
   /// The ID of the guild this event is in.
   final Snowflake guildId;
 
@@ -77,7 +69,7 @@ class ScheduledEvent extends PartialScheduledEvent with ScheduledEventMappable {
   /// {@macro scheduled_event}
   /// @nodoc
   ScheduledEvent({
-    required super.id,
+    required this.id,
     required this.guildId,
     required this.channelId,
     required this.creatorId,
@@ -142,9 +134,6 @@ class ScheduledEventUser with ToStringHelper, ScheduledEventUserMappable {
     required this.user,
     required this.member,
   });
-
-  /// The event the user followed.
-  PartialScheduledEvent get scheduledEvent => manager[scheduledEventId];
 }
 
 /// Indicates how often a [ScheduledEvent] should recur.

@@ -24,9 +24,6 @@ class UserManager extends ReadOnlyManager<User> {
   UserManager(super.config, super.client) : super(identifier: 'users');
 
   @override
-  PartialUser operator [](Snowflake id) => PartialUser(id: id);
-
-  @override
   Future<User> fetch(Snowflake id) async {
     final route = HttpRoute()..users(id: id.toString());
     final request = BasicRequest(route);

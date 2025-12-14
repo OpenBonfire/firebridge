@@ -16,11 +16,9 @@ class InviteWithMetadataMapper extends ClassMapperBase<InviteWithMetadata> {
       MapperContainer.globals.use(_instance = InviteWithMetadataMapper._());
       InviteMapper.ensureInitialized();
       InviteTypeMapper.ensureInitialized();
-      PartialGuildMapper.ensureInitialized();
-      PartialChannelMapper.ensureInitialized();
+      SnowflakeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       TargetTypeMapper.ensureInitialized();
-      PartialApplicationMapper.ensureInitialized();
       ScheduledEventMapper.ensureInitialized();
       GuildInviteFlagsMapper.ensureInitialized();
     }
@@ -40,13 +38,14 @@ class InviteWithMetadataMapper extends ClassMapperBase<InviteWithMetadata> {
     'code',
     _$code,
   );
-  static PartialGuild? _$guild(InviteWithMetadata v) => v.guild;
-  static const Field<InviteWithMetadata, PartialGuild> _f$guild = Field(
-    'guild',
-    _$guild,
+  static Snowflake _$guildId(InviteWithMetadata v) => v.guildId;
+  static const Field<InviteWithMetadata, Snowflake> _f$guildId = Field(
+    'guildId',
+    _$guildId,
+    key: r'guild_id',
   );
-  static PartialChannel _$channel(InviteWithMetadata v) => v.channel;
-  static const Field<InviteWithMetadata, PartialChannel> _f$channel = Field(
+  static Snowflake _$channel(InviteWithMetadata v) => v.channel;
+  static const Field<InviteWithMetadata, Snowflake> _f$channel = Field(
     'channel',
     _$channel,
   );
@@ -67,14 +66,14 @@ class InviteWithMetadataMapper extends ClassMapperBase<InviteWithMetadata> {
     _$targetUser,
     key: r'target_user',
   );
-  static PartialApplication? _$targetApplication(InviteWithMetadata v) =>
+  static Snowflake? _$targetApplication(InviteWithMetadata v) =>
       v.targetApplication;
-  static const Field<InviteWithMetadata, PartialApplication>
-  _f$targetApplication = Field(
-    'targetApplication',
-    _$targetApplication,
-    key: r'target_application',
-  );
+  static const Field<InviteWithMetadata, Snowflake> _f$targetApplication =
+      Field(
+        'targetApplication',
+        _$targetApplication,
+        key: r'target_application',
+      );
   static int? _$approximateMemberCount(InviteWithMetadata v) =>
       v.approximateMemberCount;
   static const Field<InviteWithMetadata, int> _f$approximateMemberCount = Field(
@@ -140,7 +139,7 @@ class InviteWithMetadataMapper extends ClassMapperBase<InviteWithMetadata> {
   final MappableFields<InviteWithMetadata> fields = const {
     #type: _f$type,
     #code: _f$code,
-    #guild: _f$guild,
+    #guildId: _f$guildId,
     #channel: _f$channel,
     #inviter: _f$inviter,
     #targetType: _f$targetType,
@@ -162,7 +161,7 @@ class InviteWithMetadataMapper extends ClassMapperBase<InviteWithMetadata> {
     return InviteWithMetadata(
       type: data.dec(_f$type),
       code: data.dec(_f$code),
-      guild: data.dec(_f$guild),
+      guildId: data.dec(_f$guildId),
       channel: data.dec(_f$channel),
       inviter: data.dec(_f$inviter),
       targetType: data.dec(_f$targetType),
@@ -253,16 +252,15 @@ abstract class InviteWithMetadataCopyWith<
 >
     implements InviteCopyWith<$R, $In, $Out> {
   @override
-  PartialGuildCopyWith<$R, PartialGuild, PartialGuild>? get guild;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
   @override
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel> get channel;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get channel;
   @override
   UserCopyWith<$R, User, User>? get inviter;
   @override
   UserCopyWith<$R, User, User>? get targetUser;
   @override
-  PartialApplicationCopyWith<$R, PartialApplication, PartialApplication>?
-  get targetApplication;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get targetApplication;
   @override
   ScheduledEventCopyWith<$R, ScheduledEvent, ScheduledEvent>?
   get guildScheduledEvent;
@@ -272,12 +270,12 @@ abstract class InviteWithMetadataCopyWith<
   $R call({
     InviteType? type,
     String? code,
-    PartialGuild? guild,
-    PartialChannel? channel,
+    Snowflake? guildId,
+    Snowflake? channel,
     User? inviter,
     TargetType? targetType,
     User? targetUser,
-    PartialApplication? targetApplication,
+    Snowflake? targetApplication,
     int? approximateMemberCount,
     int? approximatePresenceCount,
     DateTime? expiresAt,
@@ -303,10 +301,10 @@ class _InviteWithMetadataCopyWithImpl<$R, $Out>
   late final ClassMapperBase<InviteWithMetadata> $mapper =
       InviteWithMetadataMapper.ensureInitialized();
   @override
-  PartialGuildCopyWith<$R, PartialGuild, PartialGuild>? get guild =>
-      $value.guild?.copyWith.$chain((v) => call(guild: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
+      $value.guildId.copyWith.$chain((v) => call(guildId: v));
   @override
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel> get channel =>
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get channel =>
       $value.channel.copyWith.$chain((v) => call(channel: v));
   @override
   UserCopyWith<$R, User, User>? get inviter =>
@@ -315,10 +313,10 @@ class _InviteWithMetadataCopyWithImpl<$R, $Out>
   UserCopyWith<$R, User, User>? get targetUser =>
       $value.targetUser?.copyWith.$chain((v) => call(targetUser: v));
   @override
-  PartialApplicationCopyWith<$R, PartialApplication, PartialApplication>?
-  get targetApplication => $value.targetApplication?.copyWith.$chain(
-    (v) => call(targetApplication: v),
-  );
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get targetApplication => $value
+      .targetApplication
+      ?.copyWith
+      .$chain((v) => call(targetApplication: v));
   @override
   ScheduledEventCopyWith<$R, ScheduledEvent, ScheduledEvent>?
   get guildScheduledEvent => $value.guildScheduledEvent?.copyWith.$chain(
@@ -331,8 +329,8 @@ class _InviteWithMetadataCopyWithImpl<$R, $Out>
   $R call({
     InviteType? type,
     String? code,
-    Object? guild = $none,
-    PartialChannel? channel,
+    Snowflake? guildId,
+    Snowflake? channel,
     Object? inviter = $none,
     Object? targetType = $none,
     Object? targetUser = $none,
@@ -351,7 +349,7 @@ class _InviteWithMetadataCopyWithImpl<$R, $Out>
     FieldCopyWithData({
       if (type != null) #type: type,
       if (code != null) #code: code,
-      if (guild != $none) #guild: guild,
+      if (guildId != null) #guildId: guildId,
       if (channel != null) #channel: channel,
       if (inviter != $none) #inviter: inviter,
       if (targetType != $none) #targetType: targetType,
@@ -376,7 +374,7 @@ class _InviteWithMetadataCopyWithImpl<$R, $Out>
   InviteWithMetadata $make(CopyWithData data) => InviteWithMetadata(
     type: data.get(#type, or: $value.type),
     code: data.get(#code, or: $value.code),
-    guild: data.get(#guild, or: $value.guild),
+    guildId: data.get(#guildId, or: $value.guildId),
     channel: data.get(#channel, or: $value.channel),
     inviter: data.get(#inviter, or: $value.inviter),
     targetType: data.get(#targetType, or: $value.targetType),

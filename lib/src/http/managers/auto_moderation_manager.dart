@@ -16,10 +16,6 @@ class AutoModerationManager extends Manager<AutoModerationRule> {
       : super(identifier: '$guildId.autoModerationRules');
 
   @override
-  PartialAutoModerationRule operator [](Snowflake id) =>
-      PartialAutoModerationRule(id: id);
-
-  @override
   Future<AutoModerationRule> fetch(Snowflake id) async {
     final route = HttpRoute()
       ..guilds(id: guildId.toString())

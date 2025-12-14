@@ -19,9 +19,6 @@ class EntitlementManager extends ReadOnlyManager<Entitlement> {
   EntitlementManager(super.config, super.client, {required this.applicationId})
       : super(identifier: '$applicationId.entitlements');
 
-  @override
-  PartialEntitlement operator [](Snowflake id) => PartialEntitlement(id: id);
-
   /// List all the entitlements for this application.
   Future<List<Entitlement>> list({
     Snowflake? userId,

@@ -77,137 +77,6 @@ extension EntitlementTypeMapperExtension on EntitlementType {
   }
 }
 
-class PartialEntitlementMapper extends ClassMapperBase<PartialEntitlement> {
-  PartialEntitlementMapper._();
-
-  static PartialEntitlementMapper? _instance;
-  static PartialEntitlementMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = PartialEntitlementMapper._());
-      ManagedSnowflakeEntityMapper.ensureInitialized();
-      EntitlementMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'PartialEntitlement';
-
-  static Snowflake _$id(PartialEntitlement v) => v.id;
-  static const Field<PartialEntitlement, Snowflake> _f$id = Field('id', _$id);
-
-  @override
-  final MappableFields<PartialEntitlement> fields = const {#id: _f$id};
-
-  static PartialEntitlement _instantiate(DecodingData data) {
-    return PartialEntitlement(id: data.dec(_f$id));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static PartialEntitlement fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<PartialEntitlement>(map);
-  }
-
-  static PartialEntitlement fromJson(String json) {
-    return ensureInitialized().decodeJson<PartialEntitlement>(json);
-  }
-}
-
-mixin PartialEntitlementMappable {
-  String toJson() {
-    return PartialEntitlementMapper.ensureInitialized()
-        .encodeJson<PartialEntitlement>(this as PartialEntitlement);
-  }
-
-  Map<String, dynamic> toMap() {
-    return PartialEntitlementMapper.ensureInitialized()
-        .encodeMap<PartialEntitlement>(this as PartialEntitlement);
-  }
-
-  PartialEntitlementCopyWith<
-    PartialEntitlement,
-    PartialEntitlement,
-    PartialEntitlement
-  >
-  get copyWith =>
-      _PartialEntitlementCopyWithImpl<PartialEntitlement, PartialEntitlement>(
-        this as PartialEntitlement,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return PartialEntitlementMapper.ensureInitialized().stringifyValue(
-      this as PartialEntitlement,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return PartialEntitlementMapper.ensureInitialized().equalsValue(
-      this as PartialEntitlement,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return PartialEntitlementMapper.ensureInitialized().hashValue(
-      this as PartialEntitlement,
-    );
-  }
-}
-
-extension PartialEntitlementValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PartialEntitlement, $Out> {
-  PartialEntitlementCopyWith<$R, PartialEntitlement, $Out>
-  get $asPartialEntitlement => $base.as(
-    (v, t, t2) => _PartialEntitlementCopyWithImpl<$R, $Out>(v, t, t2),
-  );
-}
-
-abstract class PartialEntitlementCopyWith<
-  $R,
-  $In extends PartialEntitlement,
-  $Out
->
-    implements ManagedSnowflakeEntityCopyWith<$R, $In, $Out, Entitlement> {
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  @override
-  $R call({Snowflake? id});
-  PartialEntitlementCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _PartialEntitlementCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PartialEntitlement, $Out>
-    implements PartialEntitlementCopyWith<$R, PartialEntitlement, $Out> {
-  _PartialEntitlementCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<PartialEntitlement> $mapper =
-      PartialEntitlementMapper.ensureInitialized();
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  $R call({Snowflake? id}) =>
-      $apply(FieldCopyWithData({if (id != null) #id: id}));
-  @override
-  PartialEntitlement $make(CopyWithData data) =>
-      PartialEntitlement(id: data.get(#id, or: $value.id));
-
-  @override
-  PartialEntitlementCopyWith<$R2, PartialEntitlement, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _PartialEntitlementCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class EntitlementMapper extends ClassMapperBase<Entitlement> {
   EntitlementMapper._();
 
@@ -215,7 +84,6 @@ class EntitlementMapper extends ClassMapperBase<Entitlement> {
   static EntitlementMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = EntitlementMapper._());
-      PartialEntitlementMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       EntitlementTypeMapper.ensureInitialized();
     }
@@ -256,17 +124,15 @@ class EntitlementMapper extends ClassMapperBase<Entitlement> {
     'type',
     _$type,
   );
-  static bool _$isConsumed(Entitlement v) => v.isConsumed;
-  static const Field<Entitlement, bool> _f$isConsumed = Field(
-    'isConsumed',
-    _$isConsumed,
-    key: r'is_consumed',
+  static bool _$consumed(Entitlement v) => v.consumed;
+  static const Field<Entitlement, bool> _f$consumed = Field(
+    'consumed',
+    _$consumed,
   );
-  static bool _$isDeleted(Entitlement v) => v.isDeleted;
-  static const Field<Entitlement, bool> _f$isDeleted = Field(
-    'isDeleted',
-    _$isDeleted,
-    key: r'is_deleted',
+  static bool _$deleted(Entitlement v) => v.deleted;
+  static const Field<Entitlement, bool> _f$deleted = Field(
+    'deleted',
+    _$deleted,
   );
   static DateTime? _$startsAt(Entitlement v) => v.startsAt;
   static const Field<Entitlement, DateTime> _f$startsAt = Field(
@@ -289,8 +155,8 @@ class EntitlementMapper extends ClassMapperBase<Entitlement> {
     #guildId: _f$guildId,
     #applicationId: _f$applicationId,
     #type: _f$type,
-    #isConsumed: _f$isConsumed,
-    #isDeleted: _f$isDeleted,
+    #consumed: _f$consumed,
+    #deleted: _f$deleted,
     #startsAt: _f$startsAt,
     #endsAt: _f$endsAt,
   };
@@ -303,8 +169,8 @@ class EntitlementMapper extends ClassMapperBase<Entitlement> {
       guildId: data.dec(_f$guildId),
       applicationId: data.dec(_f$applicationId),
       type: data.dec(_f$type),
-      isConsumed: data.dec(_f$isConsumed),
-      isDeleted: data.dec(_f$isDeleted),
+      consumed: data.dec(_f$consumed),
+      deleted: data.dec(_f$deleted),
       startsAt: data.dec(_f$startsAt),
       endsAt: data.dec(_f$endsAt),
     );
@@ -369,14 +235,12 @@ extension EntitlementValueCopy<$R, $Out>
 }
 
 abstract class EntitlementCopyWith<$R, $In extends Entitlement, $Out>
-    implements PartialEntitlementCopyWith<$R, $In, $Out> {
-  @override
+    implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get skuId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get userId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get applicationId;
-  @override
   $R call({
     Snowflake? id,
     Snowflake? skuId,
@@ -384,8 +248,8 @@ abstract class EntitlementCopyWith<$R, $In extends Entitlement, $Out>
     Snowflake? guildId,
     Snowflake? applicationId,
     EntitlementType? type,
-    bool? isConsumed,
-    bool? isDeleted,
+    bool? consumed,
+    bool? deleted,
     DateTime? startsAt,
     DateTime? endsAt,
   });
@@ -423,8 +287,8 @@ class _EntitlementCopyWithImpl<$R, $Out>
     Object? guildId = $none,
     Snowflake? applicationId,
     EntitlementType? type,
-    bool? isConsumed,
-    bool? isDeleted,
+    bool? consumed,
+    bool? deleted,
     Object? startsAt = $none,
     Object? endsAt = $none,
   }) => $apply(
@@ -435,8 +299,8 @@ class _EntitlementCopyWithImpl<$R, $Out>
       if (guildId != $none) #guildId: guildId,
       if (applicationId != null) #applicationId: applicationId,
       if (type != null) #type: type,
-      if (isConsumed != null) #isConsumed: isConsumed,
-      if (isDeleted != null) #isDeleted: isDeleted,
+      if (consumed != null) #consumed: consumed,
+      if (deleted != null) #deleted: deleted,
       if (startsAt != $none) #startsAt: startsAt,
       if (endsAt != $none) #endsAt: endsAt,
     }),
@@ -449,8 +313,8 @@ class _EntitlementCopyWithImpl<$R, $Out>
     guildId: data.get(#guildId, or: $value.guildId),
     applicationId: data.get(#applicationId, or: $value.applicationId),
     type: data.get(#type, or: $value.type),
-    isConsumed: data.get(#isConsumed, or: $value.isConsumed),
-    isDeleted: data.get(#isDeleted, or: $value.isDeleted),
+    consumed: data.get(#consumed, or: $value.consumed),
+    deleted: data.get(#deleted, or: $value.deleted),
     startsAt: data.get(#startsAt, or: $value.startsAt),
     endsAt: data.get(#endsAt, or: $value.endsAt),
   );

@@ -1,5 +1,5 @@
 import 'package:firebridge/src/models/discord_color.dart';
-import 'package:firebridge/src/models/emoji.dart';
+import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
 /// {@template reaction}
@@ -22,7 +22,7 @@ class Reaction with ToStringHelper {
   final bool meBurst;
 
   /// The emoji for this reaction.
-  final PartialEmoji emoji;
+  final Snowflake emoji;
 
   /// The colors used for this the super reaction.
   final List<DiscordColor> burstColors;

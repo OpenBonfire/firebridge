@@ -800,7 +800,7 @@ class ThreadDeleteEventMapper extends SubClassMapperBase<ThreadDeleteEvent> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ThreadDeleteEventMapper._());
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
-      PartialChannelMapper.ensureInitialized();
+      SnowflakeMapper.ensureInitialized();
       ThreadMapper.ensureInitialized();
     }
     return _instance!;
@@ -809,8 +809,8 @@ class ThreadDeleteEventMapper extends SubClassMapperBase<ThreadDeleteEvent> {
   @override
   final String id = 'ThreadDeleteEvent';
 
-  static PartialChannel _$thread(ThreadDeleteEvent v) => v.thread;
-  static const Field<ThreadDeleteEvent, PartialChannel> _f$thread = Field(
+  static Snowflake _$thread(ThreadDeleteEvent v) => v.thread;
+  static const Field<ThreadDeleteEvent, Snowflake> _f$thread = Field(
     'thread',
     _$thread,
   );
@@ -920,10 +920,10 @@ abstract class ThreadDeleteEventCopyWith<
   $Out
 >
     implements DispatchEventCopyWith<$R, $In, $Out> {
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel> get thread;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get thread;
   ThreadCopyWith<$R, Thread, Thread>? get deletedThread;
   @override
-  $R call({PartialChannel? thread, Thread? deletedThread});
+  $R call({Snowflake? thread, Thread? deletedThread});
   ThreadDeleteEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -938,13 +938,13 @@ class _ThreadDeleteEventCopyWithImpl<$R, $Out>
   late final ClassMapperBase<ThreadDeleteEvent> $mapper =
       ThreadDeleteEventMapper.ensureInitialized();
   @override
-  PartialChannelCopyWith<$R, PartialChannel, PartialChannel> get thread =>
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get thread =>
       $value.thread.copyWith.$chain((v) => call(thread: v));
   @override
   ThreadCopyWith<$R, Thread, Thread>? get deletedThread =>
       $value.deletedThread?.copyWith.$chain((v) => call(deletedThread: v));
   @override
-  $R call({PartialChannel? thread, Object? deletedThread = $none}) => $apply(
+  $R call({Snowflake? thread, Object? deletedThread = $none}) => $apply(
     FieldCopyWithData({
       if (thread != null) #thread: thread,
       if (deletedThread != $none) #deletedThread: deletedThread,

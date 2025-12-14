@@ -14,7 +14,6 @@ class ChannelMentionMapper extends ClassMapperBase<ChannelMention> {
   static ChannelMentionMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ChannelMentionMapper._());
-      PartialChannelMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       ChannelTypeMapper.ensureInitialized();
     }
@@ -118,11 +117,9 @@ extension ChannelMentionValueCopy<$R, $Out>
 }
 
 abstract class ChannelMentionCopyWith<$R, $In extends ChannelMention, $Out>
-    implements PartialChannelCopyWith<$R, $In, $Out> {
-  @override
+    implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
-  @override
   $R call({Snowflake? id, Snowflake? guildId, ChannelType? type, String? name});
   ChannelMentionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,

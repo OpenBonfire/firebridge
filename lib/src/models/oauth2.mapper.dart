@@ -14,7 +14,7 @@ class OAuth2InformationMapper extends ClassMapperBase<OAuth2Information> {
   static OAuth2InformationMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = OAuth2InformationMapper._());
-      PartialApplicationMapper.ensureInitialized();
+      SnowflakeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
     }
     return _instance!;
@@ -23,9 +23,8 @@ class OAuth2InformationMapper extends ClassMapperBase<OAuth2Information> {
   @override
   final String id = 'OAuth2Information';
 
-  static PartialApplication _$application(OAuth2Information v) => v.application;
-  static const Field<OAuth2Information, PartialApplication> _f$application =
-      Field('application', _$application);
+  static Snowflake _$id(OAuth2Information v) => v.id;
+  static const Field<OAuth2Information, Snowflake> _f$id = Field('id', _$id);
   static List<String> _$scopes(OAuth2Information v) => v.scopes;
   static const Field<OAuth2Information, List<String>> _f$scopes = Field(
     'scopes',
@@ -46,7 +45,7 @@ class OAuth2InformationMapper extends ClassMapperBase<OAuth2Information> {
 
   @override
   final MappableFields<OAuth2Information> fields = const {
-    #application: _f$application,
+    #id: _f$id,
     #scopes: _f$scopes,
     #expiresOn: _f$expiresOn,
     #user: _f$user,
@@ -54,7 +53,7 @@ class OAuth2InformationMapper extends ClassMapperBase<OAuth2Information> {
 
   static OAuth2Information _instantiate(DecodingData data) {
     return OAuth2Information(
-      application: data.dec(_f$application),
+      id: data.dec(_f$id),
       scopes: data.dec(_f$scopes),
       expiresOn: data.dec(_f$expiresOn),
       user: data.dec(_f$user),
@@ -132,12 +131,11 @@ abstract class OAuth2InformationCopyWith<
   $Out
 >
     implements ClassCopyWith<$R, $In, $Out> {
-  PartialApplicationCopyWith<$R, PartialApplication, PartialApplication>
-  get application;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get scopes;
   UserCopyWith<$R, User, User>? get user;
   $R call({
-    PartialApplication? application,
+    Snowflake? id,
     List<String>? scopes,
     DateTime? expiresOn,
     User? user,
@@ -156,9 +154,8 @@ class _OAuth2InformationCopyWithImpl<$R, $Out>
   late final ClassMapperBase<OAuth2Information> $mapper =
       OAuth2InformationMapper.ensureInitialized();
   @override
-  PartialApplicationCopyWith<$R, PartialApplication, PartialApplication>
-  get application =>
-      $value.application.copyWith.$chain((v) => call(application: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
+      $value.id.copyWith.$chain((v) => call(id: v));
   @override
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get scopes =>
       ListCopyWith(
@@ -171,13 +168,13 @@ class _OAuth2InformationCopyWithImpl<$R, $Out>
       $value.user?.copyWith.$chain((v) => call(user: v));
   @override
   $R call({
-    PartialApplication? application,
+    Snowflake? id,
     List<String>? scopes,
     DateTime? expiresOn,
     Object? user = $none,
   }) => $apply(
     FieldCopyWithData({
-      if (application != null) #application: application,
+      if (id != null) #id: id,
       if (scopes != null) #scopes: scopes,
       if (expiresOn != null) #expiresOn: expiresOn,
       if (user != $none) #user: user,
@@ -185,7 +182,7 @@ class _OAuth2InformationCopyWithImpl<$R, $Out>
   );
   @override
   OAuth2Information $make(CopyWithData data) => OAuth2Information(
-    application: data.get(#application, or: $value.application),
+    id: data.get(#id, or: $value.id),
     scopes: data.get(#scopes, or: $value.scopes),
     expiresOn: data.get(#expiresOn, or: $value.expiresOn),
     user: data.get(#user, or: $value.user),

@@ -6,19 +6,13 @@ import 'package:firebridge/src/models/user/user.dart';
 
 part 'guild_sticker.mapper.dart';
 
-@MappableClass()
-class PartialGuildSticker extends WritableSnowflakeEntity<GuildSticker>
-    with PartialGuildStickerMappable {
-  /// @nodoc
-  PartialGuildSticker({required super.id});
-}
-
 /// {@template guild_sticker}
 /// A sticker that can be sent in messages. Represent stickers added to guild
 /// {@endtemplate}
 @MappableClass()
-class GuildSticker extends PartialGuildSticker
-    with Sticker, GuildStickerMappable {
+class GuildSticker with Sticker, GuildStickerMappable {
+  final Snowflake id;
+
   /// Name of the sticker
   @override
   final String name;
@@ -57,7 +51,7 @@ class GuildSticker extends PartialGuildSticker
   /// {@macro guild_sticker}
   /// @nodoc
   GuildSticker({
-    required super.id,
+    required this.id,
     required this.name,
     required this.description,
     required this.tags,

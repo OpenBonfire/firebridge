@@ -10,7 +10,9 @@ part 'guild_preview.mapper.dart';
 /// A preview of a [Guild].
 /// {@endtemplate}
 @MappableClass()
-class GuildPreview extends PartialGuild with GuildPreviewMappable {
+class GuildPreview with GuildPreviewMappable {
+  final Snowflake id;
+
   /// The name of the guild.
   final String name;
 
@@ -44,7 +46,7 @@ class GuildPreview extends PartialGuild with GuildPreviewMappable {
   /// {@macro guild_preview}
   /// @nodoc
   GuildPreview({
-    required super.id,
+    required this.id,
     required this.name,
     required this.iconHash,
     required this.splashHash,
