@@ -1,27 +1,17 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/models/permissions.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:firebridge/src/models/user/avatar_decoration_data.dart';
 import 'package:firebridge/src/models/user/user.dart';
 import 'package:firebridge/src/utils/flags.dart';
 
 part 'member.mapper.dart';
 
-/// A partial [Member].
-@MappableClass()
-class PartialMember extends WritableSnowflakeEntity<Member>
-    with PartialMemberMappable {
-  /// Create a new [PartialMember].
-  /// @nodoc
-  PartialMember({required super.id});
-}
-
 /// {@template member}
 /// The representation of a [User] in a [Guild].
 /// {@endtemplate}
 @MappableClass()
-class Member extends PartialMember with MemberMappable {
+class Member with MemberMappable {
   /// The [User] this member represents.
   final User? user;
 
@@ -35,7 +25,7 @@ class Member extends PartialMember with MemberMappable {
   final String? bannerHash;
 
   /// A list of the IDs of the roles this member has.
-  final List<Snowflake> roleIds;
+  final List<Snowflake> roles;
 
   /// The time at which this member joined the guild.
   /// If the value is less than [Snowflake.epoch], it is a guest member.
@@ -46,16 +36,16 @@ class Member extends PartialMember with MemberMappable {
   final DateTime? premiumSince;
 
   /// Whether this member is deafened in voice channels.
-  final bool? isDeaf;
+  final bool? deaf;
 
   /// Whether this member is muted in voice channels.
-  final bool? isMute;
+  final bool? mute;
 
   /// A set of flags associated with this member.
   final MemberFlags flags;
 
   /// Whether this member has not yet passed the guild's membership screening requirements.
-  final bool isPending;
+  final bool pending;
 
   /// In an interaction payload, the computed permissions of this member in the current channel.
   final Permissions? permissions;
@@ -72,18 +62,17 @@ class Member extends PartialMember with MemberMappable {
   /// {@macro member}
   /// @nodoc
   Member({
-    required super.id,
     required this.user,
     required this.nick,
     required this.avatarHash,
     required this.bannerHash,
-    required this.roleIds,
+    required this.roles,
     required this.joinedAt,
     required this.premiumSince,
-    required this.isDeaf,
-    required this.isMute,
+    required this.deaf,
+    required this.mute,
     required this.flags,
-    required this.isPending,
+    required this.pending,
     required this.permissions,
     required this.communicationDisabledUntil,
     required this.avatarDecorationData,

@@ -1769,7 +1769,6 @@ class MessageInteractionMapper extends ClassMapperBase<MessageInteraction> {
       SnowflakeMapper.ensureInitialized();
       InteractionTypeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
-      PartialMemberMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -1791,10 +1790,11 @@ class MessageInteractionMapper extends ClassMapperBase<MessageInteraction> {
   );
   static User _$user(MessageInteraction v) => v.user;
   static const Field<MessageInteraction, User> _f$user = Field('user', _$user);
-  static PartialMember? _$member(MessageInteraction v) => v.member;
-  static const Field<MessageInteraction, PartialMember> _f$member = Field(
-    'member',
-    _$member,
+  static Snowflake? _$memberId(MessageInteraction v) => v.memberId;
+  static const Field<MessageInteraction, Snowflake> _f$memberId = Field(
+    'memberId',
+    _$memberId,
+    key: r'member_id',
   );
 
   @override
@@ -1803,7 +1803,7 @@ class MessageInteractionMapper extends ClassMapperBase<MessageInteraction> {
     #type: _f$type,
     #name: _f$name,
     #user: _f$user,
-    #member: _f$member,
+    #memberId: _f$memberId,
   };
 
   static MessageInteraction _instantiate(DecodingData data) {
@@ -1812,7 +1812,7 @@ class MessageInteractionMapper extends ClassMapperBase<MessageInteraction> {
       type: data.dec(_f$type),
       name: data.dec(_f$name),
       user: data.dec(_f$user),
-      member: data.dec(_f$member),
+      memberId: data.dec(_f$memberId),
     );
   }
 
@@ -1889,13 +1889,13 @@ abstract class MessageInteractionCopyWith<
     implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   UserCopyWith<$R, User, User> get user;
-  PartialMemberCopyWith<$R, PartialMember, PartialMember>? get member;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get memberId;
   $R call({
     Snowflake? id,
     InteractionType? type,
     String? name,
     User? user,
-    PartialMember? member,
+    Snowflake? memberId,
   });
   MessageInteractionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -1917,22 +1917,22 @@ class _MessageInteractionCopyWithImpl<$R, $Out>
   UserCopyWith<$R, User, User> get user =>
       $value.user.copyWith.$chain((v) => call(user: v));
   @override
-  PartialMemberCopyWith<$R, PartialMember, PartialMember>? get member =>
-      $value.member?.copyWith.$chain((v) => call(member: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get memberId =>
+      $value.memberId?.copyWith.$chain((v) => call(memberId: v));
   @override
   $R call({
     Snowflake? id,
     InteractionType? type,
     String? name,
     User? user,
-    Object? member = $none,
+    Object? memberId = $none,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
       if (type != null) #type: type,
       if (name != null) #name: name,
       if (user != null) #user: user,
-      if (member != $none) #member: member,
+      if (memberId != $none) #memberId: memberId,
     }),
   );
   @override
@@ -1941,7 +1941,7 @@ class _MessageInteractionCopyWithImpl<$R, $Out>
     type: data.get(#type, or: $value.type),
     name: data.get(#name, or: $value.name),
     user: data.get(#user, or: $value.user),
-    member: data.get(#member, or: $value.member),
+    memberId: data.get(#memberId, or: $value.memberId),
   );
 
   @override

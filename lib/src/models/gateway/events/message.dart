@@ -18,7 +18,7 @@ class MessageCreateEvent extends DispatchEvent with MessageCreateEventMappable {
   final Snowflake? guildId;
 
   /// The member that sent the message.
-  final PartialMember? member;
+  final Snowflake? memberId;
 
   /// A list of users explicitly mentioned in the message.
   final List<User> mentions;
@@ -30,7 +30,7 @@ class MessageCreateEvent extends DispatchEvent with MessageCreateEventMappable {
   /// @nodoc
   MessageCreateEvent(
       {required this.guildId,
-      required this.member,
+      required this.memberId,
       required this.mentions,
       required this.message});
 }
@@ -44,7 +44,7 @@ class MessageUpdateEvent extends DispatchEvent with MessageUpdateEventMappable {
   final Snowflake? guildId;
 
   /// The member that sent the message.
-  final PartialMember? member;
+  final Snowflake? memberId;
 
   /// A list of users explicitly mentioned in the message.
   final List<User>? mentions;
@@ -59,7 +59,7 @@ class MessageUpdateEvent extends DispatchEvent with MessageUpdateEventMappable {
   /// @nodoc
   MessageUpdateEvent({
     required this.guildId,
-    required this.member,
+    required this.memberId,
     required this.mentions,
     required this.message,
     required this.oldMessage,

@@ -7,126 +7,6 @@
 
 part of 'member.dart';
 
-class PartialMemberMapper extends ClassMapperBase<PartialMember> {
-  PartialMemberMapper._();
-
-  static PartialMemberMapper? _instance;
-  static PartialMemberMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = PartialMemberMapper._());
-      WritableSnowflakeEntityMapper.ensureInitialized();
-      MemberMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'PartialMember';
-
-  static Snowflake _$id(PartialMember v) => v.id;
-  static const Field<PartialMember, Snowflake> _f$id = Field('id', _$id);
-
-  @override
-  final MappableFields<PartialMember> fields = const {#id: _f$id};
-
-  static PartialMember _instantiate(DecodingData data) {
-    return PartialMember(id: data.dec(_f$id));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static PartialMember fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<PartialMember>(map);
-  }
-
-  static PartialMember fromJson(String json) {
-    return ensureInitialized().decodeJson<PartialMember>(json);
-  }
-}
-
-mixin PartialMemberMappable {
-  String toJson() {
-    return PartialMemberMapper.ensureInitialized().encodeJson<PartialMember>(
-      this as PartialMember,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return PartialMemberMapper.ensureInitialized().encodeMap<PartialMember>(
-      this as PartialMember,
-    );
-  }
-
-  PartialMemberCopyWith<PartialMember, PartialMember, PartialMember>
-  get copyWith => _PartialMemberCopyWithImpl<PartialMember, PartialMember>(
-    this as PartialMember,
-    $identity,
-    $identity,
-  );
-  @override
-  String toString() {
-    return PartialMemberMapper.ensureInitialized().stringifyValue(
-      this as PartialMember,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return PartialMemberMapper.ensureInitialized().equalsValue(
-      this as PartialMember,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return PartialMemberMapper.ensureInitialized().hashValue(
-      this as PartialMember,
-    );
-  }
-}
-
-extension PartialMemberValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PartialMember, $Out> {
-  PartialMemberCopyWith<$R, PartialMember, $Out> get $asPartialMember =>
-      $base.as((v, t, t2) => _PartialMemberCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class PartialMemberCopyWith<$R, $In extends PartialMember, $Out>
-    implements WritableSnowflakeEntityCopyWith<$R, $In, $Out, Member> {
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  @override
-  $R call({Snowflake? id});
-  PartialMemberCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
-}
-
-class _PartialMemberCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PartialMember, $Out>
-    implements PartialMemberCopyWith<$R, PartialMember, $Out> {
-  _PartialMemberCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<PartialMember> $mapper =
-      PartialMemberMapper.ensureInitialized();
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
-  $R call({Snowflake? id}) =>
-      $apply(FieldCopyWithData({if (id != null) #id: id}));
-  @override
-  PartialMember $make(CopyWithData data) =>
-      PartialMember(id: data.get(#id, or: $value.id));
-
-  @override
-  PartialMemberCopyWith<$R2, PartialMember, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _PartialMemberCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class MemberMapper extends ClassMapperBase<Member> {
   MemberMapper._();
 
@@ -134,9 +14,8 @@ class MemberMapper extends ClassMapperBase<Member> {
   static MemberMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = MemberMapper._());
-      PartialMemberMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
+      SnowflakeMapper.ensureInitialized();
       MemberFlagsMapper.ensureInitialized();
       PermissionsMapper.ensureInitialized();
       AvatarDecorationDataMapper.ensureInitialized();
@@ -147,8 +26,6 @@ class MemberMapper extends ClassMapperBase<Member> {
   @override
   final String id = 'Member';
 
-  static Snowflake _$id(Member v) => v.id;
-  static const Field<Member, Snowflake> _f$id = Field('id', _$id);
   static User? _$user(Member v) => v.user;
   static const Field<Member, User> _f$user = Field('user', _$user);
   static String? _$nick(Member v) => v.nick;
@@ -165,11 +42,10 @@ class MemberMapper extends ClassMapperBase<Member> {
     _$bannerHash,
     key: r'banner_hash',
   );
-  static List<Snowflake> _$roleIds(Member v) => v.roleIds;
-  static const Field<Member, List<Snowflake>> _f$roleIds = Field(
-    'roleIds',
-    _$roleIds,
-    key: r'role_ids',
+  static List<Snowflake> _$roles(Member v) => v.roles;
+  static const Field<Member, List<Snowflake>> _f$roles = Field(
+    'roles',
+    _$roles,
   );
   static DateTime _$joinedAt(Member v) => v.joinedAt;
   static const Field<Member, DateTime> _f$joinedAt = Field(
@@ -183,26 +59,14 @@ class MemberMapper extends ClassMapperBase<Member> {
     _$premiumSince,
     key: r'premium_since',
   );
-  static bool? _$isDeaf(Member v) => v.isDeaf;
-  static const Field<Member, bool> _f$isDeaf = Field(
-    'isDeaf',
-    _$isDeaf,
-    key: r'is_deaf',
-  );
-  static bool? _$isMute(Member v) => v.isMute;
-  static const Field<Member, bool> _f$isMute = Field(
-    'isMute',
-    _$isMute,
-    key: r'is_mute',
-  );
+  static bool? _$deaf(Member v) => v.deaf;
+  static const Field<Member, bool> _f$deaf = Field('deaf', _$deaf);
+  static bool? _$mute(Member v) => v.mute;
+  static const Field<Member, bool> _f$mute = Field('mute', _$mute);
   static MemberFlags _$flags(Member v) => v.flags;
   static const Field<Member, MemberFlags> _f$flags = Field('flags', _$flags);
-  static bool _$isPending(Member v) => v.isPending;
-  static const Field<Member, bool> _f$isPending = Field(
-    'isPending',
-    _$isPending,
-    key: r'is_pending',
-  );
+  static bool _$pending(Member v) => v.pending;
+  static const Field<Member, bool> _f$pending = Field('pending', _$pending);
   static Permissions? _$permissions(Member v) => v.permissions;
   static const Field<Member, Permissions> _f$permissions = Field(
     'permissions',
@@ -232,18 +96,17 @@ class MemberMapper extends ClassMapperBase<Member> {
 
   @override
   final MappableFields<Member> fields = const {
-    #id: _f$id,
     #user: _f$user,
     #nick: _f$nick,
     #avatarHash: _f$avatarHash,
     #bannerHash: _f$bannerHash,
-    #roleIds: _f$roleIds,
+    #roles: _f$roles,
     #joinedAt: _f$joinedAt,
     #premiumSince: _f$premiumSince,
-    #isDeaf: _f$isDeaf,
-    #isMute: _f$isMute,
+    #deaf: _f$deaf,
+    #mute: _f$mute,
     #flags: _f$flags,
-    #isPending: _f$isPending,
+    #pending: _f$pending,
     #permissions: _f$permissions,
     #communicationDisabledUntil: _f$communicationDisabledUntil,
     #avatarDecorationData: _f$avatarDecorationData,
@@ -252,18 +115,17 @@ class MemberMapper extends ClassMapperBase<Member> {
 
   static Member _instantiate(DecodingData data) {
     return Member(
-      id: data.dec(_f$id),
       user: data.dec(_f$user),
       nick: data.dec(_f$nick),
       avatarHash: data.dec(_f$avatarHash),
       bannerHash: data.dec(_f$bannerHash),
-      roleIds: data.dec(_f$roleIds),
+      roles: data.dec(_f$roles),
       joinedAt: data.dec(_f$joinedAt),
       premiumSince: data.dec(_f$premiumSince),
-      isDeaf: data.dec(_f$isDeaf),
-      isMute: data.dec(_f$isMute),
+      deaf: data.dec(_f$deaf),
+      mute: data.dec(_f$mute),
       flags: data.dec(_f$flags),
-      isPending: data.dec(_f$isPending),
+      pending: data.dec(_f$pending),
       permissions: data.dec(_f$permissions),
       communicationDisabledUntil: data.dec(_f$communicationDisabledUntil),
       avatarDecorationData: data.dec(_f$avatarDecorationData),
@@ -316,30 +178,26 @@ extension MemberValueCopy<$R, $Out> on ObjectCopyWith<$R, Member, $Out> {
 }
 
 abstract class MemberCopyWith<$R, $In extends Member, $Out>
-    implements PartialMemberCopyWith<$R, $In, $Out> {
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+    implements ClassCopyWith<$R, $In, $Out> {
   UserCopyWith<$R, User, User>? get user;
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
-  get roleIds;
+  get roles;
   MemberFlagsCopyWith<$R, MemberFlags, MemberFlags> get flags;
   PermissionsCopyWith<$R, Permissions, Permissions>? get permissions;
   AvatarDecorationDataCopyWith<$R, AvatarDecorationData, AvatarDecorationData>?
   get avatarDecorationData;
-  @override
   $R call({
-    Snowflake? id,
     User? user,
     String? nick,
     String? avatarHash,
     String? bannerHash,
-    List<Snowflake>? roleIds,
+    List<Snowflake>? roles,
     DateTime? joinedAt,
     DateTime? premiumSince,
-    bool? isDeaf,
-    bool? isMute,
+    bool? deaf,
+    bool? mute,
     MemberFlags? flags,
-    bool? isPending,
+    bool? pending,
     Permissions? permissions,
     DateTime? communicationDisabledUntil,
     AvatarDecorationData? avatarDecorationData,
@@ -355,17 +213,14 @@ class _MemberCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Member, $Out>
   @override
   late final ClassMapperBase<Member> $mapper = MemberMapper.ensureInitialized();
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
   UserCopyWith<$R, User, User>? get user =>
       $value.user?.copyWith.$chain((v) => call(user: v));
   @override
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
-  get roleIds => ListCopyWith(
-    $value.roleIds,
+  get roles => ListCopyWith(
+    $value.roles,
     (v, t) => v.copyWith.$chain(t),
-    (v) => call(roleIds: v),
+    (v) => call(roles: v),
   );
   @override
   MemberFlagsCopyWith<$R, MemberFlags, MemberFlags> get flags =>
@@ -380,36 +235,34 @@ class _MemberCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Member, $Out>
   );
   @override
   $R call({
-    Snowflake? id,
     Object? user = $none,
     Object? nick = $none,
     Object? avatarHash = $none,
     Object? bannerHash = $none,
-    List<Snowflake>? roleIds,
+    List<Snowflake>? roles,
     DateTime? joinedAt,
     Object? premiumSince = $none,
-    Object? isDeaf = $none,
-    Object? isMute = $none,
+    Object? deaf = $none,
+    Object? mute = $none,
     MemberFlags? flags,
-    bool? isPending,
+    bool? pending,
     Object? permissions = $none,
     Object? communicationDisabledUntil = $none,
     Object? avatarDecorationData = $none,
     Object? avatarDecorationHash = $none,
   }) => $apply(
     FieldCopyWithData({
-      if (id != null) #id: id,
       if (user != $none) #user: user,
       if (nick != $none) #nick: nick,
       if (avatarHash != $none) #avatarHash: avatarHash,
       if (bannerHash != $none) #bannerHash: bannerHash,
-      if (roleIds != null) #roleIds: roleIds,
+      if (roles != null) #roles: roles,
       if (joinedAt != null) #joinedAt: joinedAt,
       if (premiumSince != $none) #premiumSince: premiumSince,
-      if (isDeaf != $none) #isDeaf: isDeaf,
-      if (isMute != $none) #isMute: isMute,
+      if (deaf != $none) #deaf: deaf,
+      if (mute != $none) #mute: mute,
       if (flags != null) #flags: flags,
-      if (isPending != null) #isPending: isPending,
+      if (pending != null) #pending: pending,
       if (permissions != $none) #permissions: permissions,
       if (communicationDisabledUntil != $none)
         #communicationDisabledUntil: communicationDisabledUntil,
@@ -421,18 +274,17 @@ class _MemberCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Member, $Out>
   );
   @override
   Member $make(CopyWithData data) => Member(
-    id: data.get(#id, or: $value.id),
     user: data.get(#user, or: $value.user),
     nick: data.get(#nick, or: $value.nick),
     avatarHash: data.get(#avatarHash, or: $value.avatarHash),
     bannerHash: data.get(#bannerHash, or: $value.bannerHash),
-    roleIds: data.get(#roleIds, or: $value.roleIds),
+    roles: data.get(#roles, or: $value.roles),
     joinedAt: data.get(#joinedAt, or: $value.joinedAt),
     premiumSince: data.get(#premiumSince, or: $value.premiumSince),
-    isDeaf: data.get(#isDeaf, or: $value.isDeaf),
-    isMute: data.get(#isMute, or: $value.isMute),
+    deaf: data.get(#deaf, or: $value.deaf),
+    mute: data.get(#mute, or: $value.mute),
     flags: data.get(#flags, or: $value.flags),
-    isPending: data.get(#isPending, or: $value.isPending),
+    pending: data.get(#pending, or: $value.pending),
     permissions: data.get(#permissions, or: $value.permissions),
     communicationDisabledUntil: data.get(
       #communicationDisabledUntil,

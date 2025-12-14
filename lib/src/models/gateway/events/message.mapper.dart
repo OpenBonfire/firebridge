@@ -16,7 +16,6 @@ class MessageCreateEventMapper extends SubClassMapperBase<MessageCreateEvent> {
       MapperContainer.globals.use(_instance = MessageCreateEventMapper._());
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
-      PartialMemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
     }
@@ -32,10 +31,11 @@ class MessageCreateEventMapper extends SubClassMapperBase<MessageCreateEvent> {
     _$guildId,
     key: r'guild_id',
   );
-  static PartialMember? _$member(MessageCreateEvent v) => v.member;
-  static const Field<MessageCreateEvent, PartialMember> _f$member = Field(
-    'member',
-    _$member,
+  static Snowflake? _$memberId(MessageCreateEvent v) => v.memberId;
+  static const Field<MessageCreateEvent, Snowflake> _f$memberId = Field(
+    'memberId',
+    _$memberId,
+    key: r'member_id',
   );
   static List<User> _$mentions(MessageCreateEvent v) => v.mentions;
   static const Field<MessageCreateEvent, List<User>> _f$mentions = Field(
@@ -57,7 +57,7 @@ class MessageCreateEventMapper extends SubClassMapperBase<MessageCreateEvent> {
   @override
   final MappableFields<MessageCreateEvent> fields = const {
     #guildId: _f$guildId,
-    #member: _f$member,
+    #memberId: _f$memberId,
     #mentions: _f$mentions,
     #message: _f$message,
     #opcode: _f$opcode,
@@ -74,7 +74,7 @@ class MessageCreateEventMapper extends SubClassMapperBase<MessageCreateEvent> {
   static MessageCreateEvent _instantiate(DecodingData data) {
     return MessageCreateEvent(
       guildId: data.dec(_f$guildId),
-      member: data.dec(_f$member),
+      memberId: data.dec(_f$memberId),
       mentions: data.dec(_f$mentions),
       message: data.dec(_f$message),
     );
@@ -152,13 +152,13 @@ abstract class MessageCreateEventCopyWith<
 >
     implements DispatchEventCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
-  PartialMemberCopyWith<$R, PartialMember, PartialMember>? get member;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get memberId;
   ListCopyWith<$R, User, UserCopyWith<$R, User, User>> get mentions;
   MessageCopyWith<$R, Message, Message> get message;
   @override
   $R call({
     Snowflake? guildId,
-    PartialMember? member,
+    Snowflake? memberId,
     List<User>? mentions,
     Message? message,
   });
@@ -179,8 +179,8 @@ class _MessageCreateEventCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
       $value.guildId?.copyWith.$chain((v) => call(guildId: v));
   @override
-  PartialMemberCopyWith<$R, PartialMember, PartialMember>? get member =>
-      $value.member?.copyWith.$chain((v) => call(member: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get memberId =>
+      $value.memberId?.copyWith.$chain((v) => call(memberId: v));
   @override
   ListCopyWith<$R, User, UserCopyWith<$R, User, User>> get mentions =>
       ListCopyWith(
@@ -194,13 +194,13 @@ class _MessageCreateEventCopyWithImpl<$R, $Out>
   @override
   $R call({
     Object? guildId = $none,
-    Object? member = $none,
+    Object? memberId = $none,
     List<User>? mentions,
     Message? message,
   }) => $apply(
     FieldCopyWithData({
       if (guildId != $none) #guildId: guildId,
-      if (member != $none) #member: member,
+      if (memberId != $none) #memberId: memberId,
       if (mentions != null) #mentions: mentions,
       if (message != null) #message: message,
     }),
@@ -208,7 +208,7 @@ class _MessageCreateEventCopyWithImpl<$R, $Out>
   @override
   MessageCreateEvent $make(CopyWithData data) => MessageCreateEvent(
     guildId: data.get(#guildId, or: $value.guildId),
-    member: data.get(#member, or: $value.member),
+    memberId: data.get(#memberId, or: $value.memberId),
     mentions: data.get(#mentions, or: $value.mentions),
     message: data.get(#message, or: $value.message),
   );
@@ -228,7 +228,6 @@ class MessageUpdateEventMapper extends SubClassMapperBase<MessageUpdateEvent> {
       MapperContainer.globals.use(_instance = MessageUpdateEventMapper._());
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
-      PartialMemberMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       MessageMapper.ensureInitialized();
     }
@@ -244,10 +243,11 @@ class MessageUpdateEventMapper extends SubClassMapperBase<MessageUpdateEvent> {
     _$guildId,
     key: r'guild_id',
   );
-  static PartialMember? _$member(MessageUpdateEvent v) => v.member;
-  static const Field<MessageUpdateEvent, PartialMember> _f$member = Field(
-    'member',
-    _$member,
+  static Snowflake? _$memberId(MessageUpdateEvent v) => v.memberId;
+  static const Field<MessageUpdateEvent, Snowflake> _f$memberId = Field(
+    'memberId',
+    _$memberId,
+    key: r'member_id',
   );
   static List<User>? _$mentions(MessageUpdateEvent v) => v.mentions;
   static const Field<MessageUpdateEvent, List<User>> _f$mentions = Field(
@@ -275,7 +275,7 @@ class MessageUpdateEventMapper extends SubClassMapperBase<MessageUpdateEvent> {
   @override
   final MappableFields<MessageUpdateEvent> fields = const {
     #guildId: _f$guildId,
-    #member: _f$member,
+    #memberId: _f$memberId,
     #mentions: _f$mentions,
     #message: _f$message,
     #oldMessage: _f$oldMessage,
@@ -293,7 +293,7 @@ class MessageUpdateEventMapper extends SubClassMapperBase<MessageUpdateEvent> {
   static MessageUpdateEvent _instantiate(DecodingData data) {
     return MessageUpdateEvent(
       guildId: data.dec(_f$guildId),
-      member: data.dec(_f$member),
+      memberId: data.dec(_f$memberId),
       mentions: data.dec(_f$mentions),
       message: data.dec(_f$message),
       oldMessage: data.dec(_f$oldMessage),
@@ -372,14 +372,14 @@ abstract class MessageUpdateEventCopyWith<
 >
     implements DispatchEventCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
-  PartialMemberCopyWith<$R, PartialMember, PartialMember>? get member;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get memberId;
   ListCopyWith<$R, User, UserCopyWith<$R, User, User>>? get mentions;
   MessageCopyWith<$R, Message, Message> get message;
   MessageCopyWith<$R, Message, Message>? get oldMessage;
   @override
   $R call({
     Snowflake? guildId,
-    PartialMember? member,
+    Snowflake? memberId,
     List<User>? mentions,
     Message? message,
     Message? oldMessage,
@@ -401,8 +401,8 @@ class _MessageUpdateEventCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
       $value.guildId?.copyWith.$chain((v) => call(guildId: v));
   @override
-  PartialMemberCopyWith<$R, PartialMember, PartialMember>? get member =>
-      $value.member?.copyWith.$chain((v) => call(member: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get memberId =>
+      $value.memberId?.copyWith.$chain((v) => call(memberId: v));
   @override
   ListCopyWith<$R, User, UserCopyWith<$R, User, User>>? get mentions =>
       $value.mentions != null
@@ -421,14 +421,14 @@ class _MessageUpdateEventCopyWithImpl<$R, $Out>
   @override
   $R call({
     Object? guildId = $none,
-    Object? member = $none,
+    Object? memberId = $none,
     Object? mentions = $none,
     Message? message,
     Object? oldMessage = $none,
   }) => $apply(
     FieldCopyWithData({
       if (guildId != $none) #guildId: guildId,
-      if (member != $none) #member: member,
+      if (memberId != $none) #memberId: memberId,
       if (mentions != $none) #mentions: mentions,
       if (message != null) #message: message,
       if (oldMessage != $none) #oldMessage: oldMessage,
@@ -437,7 +437,7 @@ class _MessageUpdateEventCopyWithImpl<$R, $Out>
   @override
   MessageUpdateEvent $make(CopyWithData data) => MessageUpdateEvent(
     guildId: data.get(#guildId, or: $value.guildId),
-    member: data.get(#member, or: $value.member),
+    memberId: data.get(#memberId, or: $value.memberId),
     mentions: data.get(#mentions, or: $value.mentions),
     message: data.get(#message, or: $value.message),
     oldMessage: data.get(#oldMessage, or: $value.oldMessage),

@@ -20,10 +20,6 @@ class AuditLogManager extends ReadOnlyManager<AuditLogEntry> {
       : super(identifier: '$guildId.auditLogEntries');
 
   @override
-  PartialAuditLogEntry operator [](Snowflake id) =>
-      PartialAuditLogEntry(id: id);
-
-  @override
   Future<AuditLogEntry> fetch(Snowflake id) async {
     // Add one because before and after are exclusive.
     final entries = await list(before: Snowflake(id.value + 1));

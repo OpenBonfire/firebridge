@@ -19,9 +19,6 @@ class MemberManager extends Manager<Member> {
       : super(identifier: '$guildId.members');
 
   @override
-  PartialMember operator [](Snowflake id) => PartialMember(id: id);
-
-  @override
   Future<Member> fetch(Snowflake id) async {
     final route = HttpRoute()
       ..guilds(id: guildId.toString())

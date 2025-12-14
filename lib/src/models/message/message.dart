@@ -3,7 +3,6 @@ import 'package:firebridge/src/builders/message/message.dart';
 import 'package:firebridge/src/http/managers/message_manager.dart';
 import 'package:firebridge/src/models/application.dart';
 import 'package:firebridge/src/models/channel/thread.dart';
-import 'package:firebridge/src/models/guild/member.dart';
 import 'package:firebridge/src/models/interaction.dart';
 import 'package:firebridge/src/models/message/activity.dart';
 import 'package:firebridge/src/models/message/attachment.dart';
@@ -392,7 +391,7 @@ class MessageInteraction with ToStringHelper, MessageInteractionMappable {
   final User user;
 
   /// The member that triggered the interaction.
-  final PartialMember? member;
+  final Snowflake? memberId;
 
   /// {@macro message_interaction}
   /// @nodoc
@@ -401,7 +400,7 @@ class MessageInteraction with ToStringHelper, MessageInteractionMappable {
     required this.type,
     required this.name,
     required this.user,
-    required this.member,
+    required this.memberId,
   });
 }
 

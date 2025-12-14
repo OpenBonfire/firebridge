@@ -4,10 +4,9 @@ import 'package:firebridge/src/builders/builder.dart';
 import 'package:firebridge/src/cache/cache.dart';
 import 'package:firebridge/src/client.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 
 /// A [Manager] that provides only read access to the API.
-abstract class ReadOnlyManager<T extends ManagedSnowflakeEntity<T>> {
+abstract class ReadOnlyManager<T> {
   /// The cache for this manager.
   final Cache<T> cache;
 
@@ -37,8 +36,7 @@ abstract class ReadOnlyManager<T extends ManagedSnowflakeEntity<T>> {
 /// [parse] can be used to convert a raw API response into an instance of the managed type.
 ///
 /// {@endtemplate}
-abstract class Manager<T extends WritableSnowflakeEntity<T>>
-    extends ReadOnlyManager<T> {
+abstract class Manager<T> extends ReadOnlyManager<T> {
   /// Create a new manager.
   ///
   /// {@macro manager}
@@ -60,7 +58,4 @@ abstract class Manager<T extends WritableSnowflakeEntity<T>>
   ///
   /// {@macro ensure_cache_updated}
   Future<void> delete(Snowflake id);
-
-  @override
-  WritableSnowflakeEntity<T> operator [](Snowflake id);
 }

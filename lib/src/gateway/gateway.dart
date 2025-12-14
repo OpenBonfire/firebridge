@@ -266,17 +266,6 @@ class Gateway extends GatewayManager with EventParser {
 
   /// Parse a [DispatchEvent] from [raw].
   DispatchEvent parseDispatchEvent(RawDispatchEvent raw) {
-    print("event name = ${raw.name}");
-    if (raw.name == "GUILD_MEMBER_LIST_UPDATE") {
-      // print(((raw.payload)["ops"] as dynamic)
-      //     .first["items"][1]["member"]
-      //     .keys
-      //     .toList());
-      print(jsonEncode(raw.payload));
-      // this is fucked I think
-      // member doesn't have an ID
-      // killing myself
-    }
     final event = DispatchEventMapper.fromMap({
       'type': raw.name,
       'payload': raw,
