@@ -1,8 +1,8 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:firebridge/nyxx.dart';
 import 'package:firebridge/src/models/channel/channel.dart';
 import 'package:firebridge/src/models/channel/thread.dart';
 import 'package:firebridge/src/models/gateway/event.dart';
+import 'package:firebridge/src/models/gateway/opcode.dart';
 import 'package:firebridge/src/models/snowflake.dart';
 
 part 'channel.mapper.dart';

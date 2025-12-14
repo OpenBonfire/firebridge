@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:firebridge/src/builders/guild/guild_subscriptions_bulk.dart';
 import 'package:firebridge/src/models/gateway/events/guild.dart';
 import 'package:firebridge/src/models/guild/member.dart';
@@ -265,7 +266,17 @@ class Gateway extends GatewayManager with EventParser {
 
   /// Parse a [DispatchEvent] from [raw].
   DispatchEvent parseDispatchEvent(RawDispatchEvent raw) {
-    // print(raw.name);
+    print("event name = ${raw.name}");
+    if (raw.name == "GUILD_MEMBER_LIST_UPDATE") {
+      // print(((raw.payload)["ops"] as dynamic)
+      //     .first["items"][1]["member"]
+      //     .keys
+      //     .toList());
+      print(jsonEncode(raw.payload));
+      // this is fucked I think
+      // member doesn't have an ID
+      // killing myself
+    }
     final event = DispatchEventMapper.fromMap({
       'type': raw.name,
       'payload': raw,

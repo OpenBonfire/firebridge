@@ -17,6 +17,7 @@ class GuildSubscriptionsBulkBuilderMapper
       MapperContainer.globals.use(
         _instance = GuildSubscriptionsBulkBuilderMapper._(),
       );
+      SnowflakeMapper.ensureInitialized();
       GuildSubscriptionMapper.ensureInitialized();
     }
     return _instance!;
@@ -25,16 +26,21 @@ class GuildSubscriptionsBulkBuilderMapper
   @override
   final String id = 'GuildSubscriptionsBulkBuilder';
 
-  static List<GuildSubscription>? _$subscriptions(
+  static Map<Snowflake, GuildSubscription> _$subscriptions(
     GuildSubscriptionsBulkBuilder v,
   ) => v.subscriptions;
-  static const Field<GuildSubscriptionsBulkBuilder, List<GuildSubscription>>
+  static const Field<
+    GuildSubscriptionsBulkBuilder,
+    Map<Snowflake, GuildSubscription>
+  >
   _f$subscriptions = Field('subscriptions', _$subscriptions);
 
   @override
   final MappableFields<GuildSubscriptionsBulkBuilder> fields = const {
     #subscriptions: _f$subscriptions,
   };
+  @override
+  final bool ignoreNull = true;
 
   static GuildSubscriptionsBulkBuilder _instantiate(DecodingData data) {
     return GuildSubscriptionsBulkBuilder(
@@ -116,13 +122,14 @@ abstract class GuildSubscriptionsBulkBuilderCopyWith<
   $Out
 >
     implements ClassCopyWith<$R, $In, $Out> {
-  ListCopyWith<
+  MapCopyWith<
     $R,
+    Snowflake,
     GuildSubscription,
     GuildSubscriptionCopyWith<$R, GuildSubscription, GuildSubscription>
-  >?
+  >
   get subscriptions;
-  $R call({List<GuildSubscription>? subscriptions});
+  $R call({Map<Snowflake, GuildSubscription>? subscriptions});
   GuildSubscriptionsBulkBuilderCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -146,22 +153,21 @@ class _GuildSubscriptionsBulkBuilderCopyWithImpl<$R, $Out>
   late final ClassMapperBase<GuildSubscriptionsBulkBuilder> $mapper =
       GuildSubscriptionsBulkBuilderMapper.ensureInitialized();
   @override
-  ListCopyWith<
+  MapCopyWith<
     $R,
+    Snowflake,
     GuildSubscription,
     GuildSubscriptionCopyWith<$R, GuildSubscription, GuildSubscription>
-  >?
-  get subscriptions => $value.subscriptions != null
-      ? ListCopyWith(
-          $value.subscriptions!,
-          (v, t) => v.copyWith.$chain(t),
-          (v) => call(subscriptions: v),
-        )
-      : null;
+  >
+  get subscriptions => MapCopyWith(
+    $value.subscriptions,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(subscriptions: v),
+  );
   @override
-  $R call({Object? subscriptions = $none}) => $apply(
+  $R call({Map<Snowflake, GuildSubscription>? subscriptions}) => $apply(
     FieldCopyWithData({
-      if (subscriptions != $none) #subscriptions: subscriptions,
+      if (subscriptions != null) #subscriptions: subscriptions,
     }),
   );
   @override

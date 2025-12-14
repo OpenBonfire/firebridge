@@ -17,6 +17,7 @@ class GuildSubscriptionsBulkEventMapper
       MapperContainer.globals.use(
         _instance = GuildSubscriptionsBulkEventMapper._(),
       );
+      GatewayEventMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       GuildSubscriptionMapper.ensureInitialized();
     }
@@ -34,10 +35,17 @@ class GuildSubscriptionsBulkEventMapper
     Map<Snowflake, GuildSubscription>
   >
   _f$subscriptions = Field('subscriptions', _$subscriptions);
+  static Opcode _$opcode(GuildSubscriptionsBulkEvent v) => v.opcode;
+  static const Field<GuildSubscriptionsBulkEvent, Opcode> _f$opcode = Field(
+    'opcode',
+    _$opcode,
+    mode: FieldMode.member,
+  );
 
   @override
   final MappableFields<GuildSubscriptionsBulkEvent> fields = const {
     #subscriptions: _f$subscriptions,
+    #opcode: _f$opcode,
   };
 
   static GuildSubscriptionsBulkEvent _instantiate(DecodingData data) {
@@ -119,7 +127,7 @@ abstract class GuildSubscriptionsBulkEventCopyWith<
   $In extends GuildSubscriptionsBulkEvent,
   $Out
 >
-    implements ClassCopyWith<$R, $In, $Out> {
+    implements GatewayEventCopyWith<$R, $In, $Out> {
   MapCopyWith<
     $R,
     Snowflake,
@@ -127,6 +135,7 @@ abstract class GuildSubscriptionsBulkEventCopyWith<
     GuildSubscriptionCopyWith<$R, GuildSubscription, GuildSubscription>
   >
   get subscriptions;
+  @override
   $R call({Map<Snowflake, GuildSubscription>? subscriptions});
   GuildSubscriptionsBulkEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -250,6 +259,8 @@ class GuildSubscriptionMapper extends ClassMapperBase<GuildSubscription> {
     #threadMemberLists: _f$threadMemberLists,
     #channels: _f$channels,
   };
+  @override
+  final bool ignoreNull = true;
 
   static GuildSubscription _instantiate(DecodingData data) {
     return GuildSubscription(
@@ -724,7 +735,6 @@ class GuildMemberListGroupMapper extends ClassMapperBase<GuildMemberListGroup> {
   static GuildMemberListGroupMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GuildMemberListGroupMapper._());
-      SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -732,8 +742,8 @@ class GuildMemberListGroupMapper extends ClassMapperBase<GuildMemberListGroup> {
   @override
   final String id = 'GuildMemberListGroup';
 
-  static Snowflake? _$id(GuildMemberListGroup v) => v.id;
-  static const Field<GuildMemberListGroup, Snowflake> _f$id = Field(
+  static String? _$id(GuildMemberListGroup v) => v.id;
+  static const Field<GuildMemberListGroup, String> _f$id = Field(
     'id',
     _$id,
     opt: true,
@@ -836,8 +846,7 @@ abstract class GuildMemberListGroupCopyWith<
   $Out
 >
     implements ClassCopyWith<$R, $In, $Out> {
-  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get id;
-  $R call({Snowflake? id, String? name, int? count});
+  $R call({String? id, String? name, int? count});
   GuildMemberListGroupCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -851,9 +860,6 @@ class _GuildMemberListGroupCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<GuildMemberListGroup> $mapper =
       GuildMemberListGroupMapper.ensureInitialized();
-  @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get id =>
-      $value.id?.copyWith.$chain((v) => call(id: v));
   @override
   $R call({Object? id = $none, Object? name = $none, Object? count = $none}) =>
       $apply(

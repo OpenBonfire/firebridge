@@ -7,13 +7,15 @@ import 'package:firebridge/src/models/gateway/event.dart';
 part 'guild_subscriptions_bulk.mapper.dart';
 
 @MappableClass()
-class GuildSubscriptionsBulkEvent with GuildSubscriptionsBulkEventMappable {
+class GuildSubscriptionsBulkEvent extends GatewayEvent
+    with GuildSubscriptionsBulkEventMappable {
   final Map<Snowflake, GuildSubscription> subscriptions;
 
-  const GuildSubscriptionsBulkEvent({required this.subscriptions});
+  GuildSubscriptionsBulkEvent({required this.subscriptions})
+      : super(opcode: Opcode.guildSubscriptionsBulk);
 }
 
-@MappableClass()
+@MappableClass(ignoreNull: true)
 class GuildSubscription with GuildSubscriptionMappable {
   final bool? typing;
   final bool? threads;
@@ -60,9 +62,8 @@ class GuildMemberListUpdateEvent extends DispatchEvent
 
 @MappableClass()
 class GuildMemberListGroup with GuildMemberListGroupMappable {
-  final Snowflake? id;
+  final String? id;
 
-  /// The name of the group, if applicable. (Ex: "online")
   final String? name;
   final int? count;
 

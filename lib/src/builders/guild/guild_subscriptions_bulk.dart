@@ -1,14 +1,15 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/builders/builder.dart';
 import 'package:firebridge/src/models/guild/guild_subscriptions_bulk.dart';
+import 'package:firebridge/src/models/snowflake.dart';
 
 part 'guild_subscriptions_bulk.mapper.dart';
 
-@MappableClass()
+@MappableClass(ignoreNull: true)
 class GuildSubscriptionsBulkBuilder
     extends CreateBuilder<GuildSubscriptionsBulkEvent>
     with GuildSubscriptionsBulkBuilderMappable {
-  final List<GuildSubscription>? subscriptions;
+  final Map<Snowflake, GuildSubscription> subscriptions;
 
   const GuildSubscriptionsBulkBuilder({required this.subscriptions});
 }

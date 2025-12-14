@@ -16,16 +16,17 @@ void main() async {
   // }
 
   client.onEvent.listen((event) {
-    // print(event.runtimeType);
+    // todo: we need sessions replace
+    print("Got event from example - ${event.runtimeType}");
     if (event is ReadyEvent) {
-      print("Got ready!");
-
-      // client.gateway.updateGuildSubscriptionsBulk(GuildSubscriptionsBulkBuilder(
-      //     subscriptions: [GuildSubscription(channels: {
-      //       event.guilds.first.: [
-
-      //       ]
-      //     })]));
+      client.gateway.updateGuildSubscriptionsBulk(
+          GuildSubscriptionsBulkBuilder(subscriptions: {
+        event.guilds.first.id: GuildSubscription(typing: true, channels: {
+          event.guilds.first.channels.first.id: [
+            [0, 99]
+          ]
+        })
+      }));
     }
   });
 }

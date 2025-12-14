@@ -30,6 +30,7 @@ import 'package:firebridge/src/models/gateway/events/message.dart';
 import 'package:firebridge/src/models/gateway/events/presence.dart';
 import 'package:firebridge/src/models/gateway/events/ready.dart';
 import 'package:firebridge/src/models/guild/guild.dart';
+import 'package:firebridge/src/models/guild/guild_subscriptions_bulk.dart';
 import 'package:firebridge/src/models/guild/integration.dart';
 import 'package:firebridge/src/models/interaction.dart';
 import 'package:firebridge/src/models/invite/invite.dart';
@@ -147,4 +148,6 @@ void initMappers() {
   GuildVoiceChannelMapper.ensureInitialized();
   PrivateThreadMapper.ensureInitialized();
   PublicThreadMapper.ensureInitialized();
+
+  GuildMemberListUpdateEventMapper.ensureInitialized();
 }
