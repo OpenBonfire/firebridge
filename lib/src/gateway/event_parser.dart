@@ -30,7 +30,7 @@ mixin class EventParser {
 
   InvalidSessionEvent parseInvalidSession(Map<String, Object?> raw) {
     return InvalidSessionEvent(
-      isResumable: raw['d'] as bool,
+      resumable: raw['d'] as bool,
     );
   }
 

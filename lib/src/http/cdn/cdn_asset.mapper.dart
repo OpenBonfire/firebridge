@@ -97,11 +97,10 @@ class CdnAssetMapper extends ClassMapperBase<CdnAsset> {
     key: r'default_format',
     opt: true,
   );
-  static bool _$isAnimated(CdnAsset v) => v.isAnimated;
-  static const Field<CdnAsset, bool> _f$isAnimated = Field(
-    'isAnimated',
-    _$isAnimated,
-    key: r'is_animated',
+  static bool _$animated(CdnAsset v) => v.animated;
+  static const Field<CdnAsset, bool> _f$animated = Field(
+    'animated',
+    _$animated,
     opt: true,
   );
 
@@ -111,7 +110,7 @@ class CdnAssetMapper extends ClassMapperBase<CdnAsset> {
     #hash: _f$hash,
     #url: _f$url,
     #defaultFormat: _f$defaultFormat,
-    #isAnimated: _f$isAnimated,
+    #animated: _f$animated,
   };
 
   static CdnAsset _instantiate(DecodingData data) {
@@ -120,7 +119,7 @@ class CdnAssetMapper extends ClassMapperBase<CdnAsset> {
       hash: data.dec(_f$hash),
       url: data.dec(_f$url),
       defaultFormat: data.dec(_f$defaultFormat),
-      isAnimated: data.dec(_f$isAnimated),
+      animated: data.dec(_f$animated),
     );
   }
 
@@ -186,7 +185,7 @@ abstract class CdnAssetCopyWith<$R, $In extends CdnAsset, $Out>
     String? hash,
     Uri? url,
     CdnFormat? defaultFormat,
-    bool? isAnimated,
+    bool? animated,
   });
   CdnAssetCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -205,14 +204,14 @@ class _CdnAssetCopyWithImpl<$R, $Out>
     String? hash,
     Uri? url,
     Object? defaultFormat = $none,
-    Object? isAnimated = $none,
+    Object? animated = $none,
   }) => $apply(
     FieldCopyWithData({
       if (base != null) #base: base,
       if (hash != null) #hash: hash,
       if (url != null) #url: url,
       if (defaultFormat != $none) #defaultFormat: defaultFormat,
-      if (isAnimated != $none) #isAnimated: isAnimated,
+      if (animated != $none) #animated: animated,
     }),
   );
   @override
@@ -221,7 +220,7 @@ class _CdnAssetCopyWithImpl<$R, $Out>
     hash: data.get(#hash, or: $value.hash),
     url: data.get(#url, or: $value.url),
     defaultFormat: data.get(#defaultFormat, or: $value.defaultFormat),
-    isAnimated: data.get(#isAnimated, or: $value.isAnimated),
+    animated: data.get(#animated, or: $value.animated),
   );
 
   @override

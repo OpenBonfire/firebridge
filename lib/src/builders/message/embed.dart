@@ -86,11 +86,11 @@ class EmbedFieldBuilder extends CreateBuilder<EmbedField>
 
   String value;
 
-  bool isInline;
+  bool inline;
 
   EmbedFieldBuilder({
     required this.name,
     required this.value,
-    required this.isInline,
+    required this.inline,
   });
 }

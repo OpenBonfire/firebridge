@@ -27,7 +27,7 @@ class GroupDmChannel extends TextChannel with GroupDmChannelMappable {
   final Snowflake? applicationId;
 
   /// Whether this channel is managed.
-  final bool isManaged;
+  final bool managed;
 
   @override
   final Snowflake? lastMessageId;
@@ -50,7 +50,7 @@ class GroupDmChannel extends TextChannel with GroupDmChannelMappable {
     required this.iconHash,
     required this.ownerId,
     required this.applicationId,
-    required this.isManaged,
+    required this.managed,
     required this.lastMessageId,
     required this.lastPinTimestamp,
     required this.rateLimitPerUser,

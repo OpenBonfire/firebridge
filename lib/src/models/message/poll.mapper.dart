@@ -450,11 +450,10 @@ class PollResultsMapper extends ClassMapperBase<PollResults> {
   @override
   final String id = 'PollResults';
 
-  static bool _$isFinalized(PollResults v) => v.isFinalized;
-  static const Field<PollResults, bool> _f$isFinalized = Field(
-    'isFinalized',
-    _$isFinalized,
-    key: r'is_finalized',
+  static bool _$finalized(PollResults v) => v.finalized;
+  static const Field<PollResults, bool> _f$finalized = Field(
+    'finalized',
+    _$finalized,
   );
   static List<PollAnswerCount> _$answerCounts(PollResults v) => v.answerCounts;
   static const Field<PollResults, List<PollAnswerCount>> _f$answerCounts =
@@ -462,13 +461,13 @@ class PollResultsMapper extends ClassMapperBase<PollResults> {
 
   @override
   final MappableFields<PollResults> fields = const {
-    #isFinalized: _f$isFinalized,
+    #finalized: _f$finalized,
     #answerCounts: _f$answerCounts,
   };
 
   static PollResults _instantiate(DecodingData data) {
     return PollResults(
-      isFinalized: data.dec(_f$isFinalized),
+      finalized: data.dec(_f$finalized),
       answerCounts: data.dec(_f$answerCounts),
     );
   }
@@ -539,7 +538,7 @@ abstract class PollResultsCopyWith<$R, $In extends PollResults, $Out>
     PollAnswerCountCopyWith<$R, PollAnswerCount, PollAnswerCount>
   >
   get answerCounts;
-  $R call({bool? isFinalized, List<PollAnswerCount>? answerCounts});
+  $R call({bool? finalized, List<PollAnswerCount>? answerCounts});
   PollResultsCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -563,15 +562,15 @@ class _PollResultsCopyWithImpl<$R, $Out>
     (v) => call(answerCounts: v),
   );
   @override
-  $R call({bool? isFinalized, List<PollAnswerCount>? answerCounts}) => $apply(
+  $R call({bool? finalized, List<PollAnswerCount>? answerCounts}) => $apply(
     FieldCopyWithData({
-      if (isFinalized != null) #isFinalized: isFinalized,
+      if (finalized != null) #finalized: finalized,
       if (answerCounts != null) #answerCounts: answerCounts,
     }),
   );
   @override
   PollResults $make(CopyWithData data) => PollResults(
-    isFinalized: data.get(#isFinalized, or: $value.isFinalized),
+    finalized: data.get(#finalized, or: $value.finalized),
     answerCounts: data.get(#answerCounts, or: $value.answerCounts),
   );
 

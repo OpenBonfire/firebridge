@@ -51,11 +51,10 @@ class GroupDmChannelMapper extends SubClassMapperBase<GroupDmChannel> {
     _$applicationId,
     key: r'application_id',
   );
-  static bool _$isManaged(GroupDmChannel v) => v.isManaged;
-  static const Field<GroupDmChannel, bool> _f$isManaged = Field(
-    'isManaged',
-    _$isManaged,
-    key: r'is_managed',
+  static bool _$managed(GroupDmChannel v) => v.managed;
+  static const Field<GroupDmChannel, bool> _f$managed = Field(
+    'managed',
+    _$managed,
   );
   static Snowflake? _$lastMessageId(GroupDmChannel v) => v.lastMessageId;
   static const Field<GroupDmChannel, Snowflake> _f$lastMessageId = Field(
@@ -84,7 +83,7 @@ class GroupDmChannelMapper extends SubClassMapperBase<GroupDmChannel> {
     #iconHash: _f$iconHash,
     #ownerId: _f$ownerId,
     #applicationId: _f$applicationId,
-    #isManaged: _f$isManaged,
+    #managed: _f$managed,
     #lastMessageId: _f$lastMessageId,
     #lastPinTimestamp: _f$lastPinTimestamp,
     #rateLimitPerUser: _f$rateLimitPerUser,
@@ -106,7 +105,7 @@ class GroupDmChannelMapper extends SubClassMapperBase<GroupDmChannel> {
       iconHash: data.dec(_f$iconHash),
       ownerId: data.dec(_f$ownerId),
       applicationId: data.dec(_f$applicationId),
-      isManaged: data.dec(_f$isManaged),
+      managed: data.dec(_f$managed),
       lastMessageId: data.dec(_f$lastMessageId),
       lastPinTimestamp: data.dec(_f$lastPinTimestamp),
       rateLimitPerUser: data.dec(_f$rateLimitPerUser),
@@ -189,7 +188,7 @@ abstract class GroupDmChannelCopyWith<$R, $In extends GroupDmChannel, $Out>
     String? iconHash,
     Snowflake? ownerId,
     Snowflake? applicationId,
-    bool? isManaged,
+    bool? managed,
     Snowflake? lastMessageId,
     DateTime? lastPinTimestamp,
     Duration? rateLimitPerUser,
@@ -234,7 +233,7 @@ class _GroupDmChannelCopyWithImpl<$R, $Out>
     Object? iconHash = $none,
     Snowflake? ownerId,
     Object? applicationId = $none,
-    bool? isManaged,
+    bool? managed,
     Object? lastMessageId = $none,
     Object? lastPinTimestamp = $none,
     Object? rateLimitPerUser = $none,
@@ -246,7 +245,7 @@ class _GroupDmChannelCopyWithImpl<$R, $Out>
       if (iconHash != $none) #iconHash: iconHash,
       if (ownerId != null) #ownerId: ownerId,
       if (applicationId != $none) #applicationId: applicationId,
-      if (isManaged != null) #isManaged: isManaged,
+      if (managed != null) #managed: managed,
       if (lastMessageId != $none) #lastMessageId: lastMessageId,
       if (lastPinTimestamp != $none) #lastPinTimestamp: lastPinTimestamp,
       if (rateLimitPerUser != $none) #rateLimitPerUser: rateLimitPerUser,
@@ -260,7 +259,7 @@ class _GroupDmChannelCopyWithImpl<$R, $Out>
     iconHash: data.get(#iconHash, or: $value.iconHash),
     ownerId: data.get(#ownerId, or: $value.ownerId),
     applicationId: data.get(#applicationId, or: $value.applicationId),
-    isManaged: data.get(#isManaged, or: $value.isManaged),
+    managed: data.get(#managed, or: $value.managed),
     lastMessageId: data.get(#lastMessageId, or: $value.lastMessageId),
     lastPinTimestamp: data.get(#lastPinTimestamp, or: $value.lastPinTimestamp),
     rateLimitPerUser: data.get(#rateLimitPerUser, or: $value.rateLimitPerUser),

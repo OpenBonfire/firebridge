@@ -13,14 +13,14 @@ class OnboardingUpdateBuilder extends UpdateBuilder<Onboarding>
 
   List<Snowflake> defaultChannelIds;
 
-  bool isEnabled;
+  bool enabled;
 
   OnboardingMode mode;
 
   OnboardingUpdateBuilder({
     required this.prompts,
     required this.defaultChannelIds,
-    required this.isEnabled,
+    required this.enabled,
     required this.mode,
   });
 }
@@ -34,19 +34,19 @@ class OnboardingPromptBuilder extends CreateBuilder<OnboardingPrompt>
 
   String title;
 
-  bool isSingleSelect;
+  bool singleSelect;
 
-  bool isRequired;
+  bool required;
 
-  bool isInOnboarding;
+  bool inOnboarding;
 
   OnboardingPromptBuilder({
     required this.type,
     required this.options,
     required this.title,
-    required this.isSingleSelect,
-    required this.isRequired,
-    required this.isInOnboarding,
+    required this.singleSelect,
+    required this.required,
+    required this.inOnboarding,
   });
 }
 

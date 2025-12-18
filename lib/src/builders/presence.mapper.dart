@@ -95,19 +95,15 @@ class PresenceBuilderMapper extends ClassMapperBase<PresenceBuilder> {
     'status',
     _$status,
   );
-  static bool _$isAfk(PresenceBuilder v) => v.isAfk;
-  static const Field<PresenceBuilder, bool> _f$isAfk = Field(
-    'isAfk',
-    _$isAfk,
-    key: r'is_afk',
-  );
+  static bool _$afk(PresenceBuilder v) => v.afk;
+  static const Field<PresenceBuilder, bool> _f$afk = Field('afk', _$afk);
 
   @override
   final MappableFields<PresenceBuilder> fields = const {
     #since: _f$since,
     #activities: _f$activities,
     #status: _f$status,
-    #isAfk: _f$isAfk,
+    #afk: _f$afk,
   };
 
   static PresenceBuilder _instantiate(DecodingData data) {
@@ -115,7 +111,7 @@ class PresenceBuilderMapper extends ClassMapperBase<PresenceBuilder> {
       since: data.dec(_f$since),
       activities: data.dec(_f$activities),
       status: data.dec(_f$status),
-      isAfk: data.dec(_f$isAfk),
+      afk: data.dec(_f$afk),
     );
   }
 
@@ -191,7 +187,7 @@ abstract class PresenceBuilderCopyWith<$R, $In extends PresenceBuilder, $Out>
     DateTime? since,
     List<ActivityBuilder>? activities,
     CurrentUserStatus? status,
-    bool? isAfk,
+    bool? afk,
   });
   PresenceBuilderCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -224,13 +220,13 @@ class _PresenceBuilderCopyWithImpl<$R, $Out>
     Object? since = $none,
     Object? activities = $none,
     CurrentUserStatus? status,
-    bool? isAfk,
+    bool? afk,
   }) => $apply(
     FieldCopyWithData({
       if (since != $none) #since: since,
       if (activities != $none) #activities: activities,
       if (status != null) #status: status,
-      if (isAfk != null) #isAfk: isAfk,
+      if (afk != null) #afk: afk,
     }),
   );
   @override
@@ -238,7 +234,7 @@ class _PresenceBuilderCopyWithImpl<$R, $Out>
     since: data.get(#since, or: $value.since),
     activities: data.get(#activities, or: $value.activities),
     status: data.get(#status, or: $value.status),
-    isAfk: data.get(#isAfk, or: $value.isAfk),
+    afk: data.get(#afk, or: $value.afk),
   );
 
   @override

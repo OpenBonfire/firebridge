@@ -35,7 +35,7 @@ class AutoModerationRule with AutoModerationRuleMappable {
   final List<AutoModerationAction> actions;
 
   /// Whether this rule is enabled.
-  final bool isEnabled;
+  final bool enabled;
 
   /// The IDs of the roles exempt to this rule.
   final List<Snowflake> exemptRoleIds;
@@ -54,7 +54,7 @@ class AutoModerationRule with AutoModerationRuleMappable {
     required this.triggerType,
     required this.metadata,
     required this.actions,
-    required this.isEnabled,
+    required this.enabled,
     required this.exemptRoleIds,
     required this.exemptChannelIds,
   });

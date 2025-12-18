@@ -215,23 +215,20 @@ class ApplicationEmojiMapper extends ClassMapperBase<ApplicationEmoji> {
     _$requiresColons,
     key: r'requires_colons',
   );
-  static bool _$isManaged(ApplicationEmoji v) => v.isManaged;
-  static const Field<ApplicationEmoji, bool> _f$isManaged = Field(
-    'isManaged',
-    _$isManaged,
-    key: r'is_managed',
+  static bool _$managed(ApplicationEmoji v) => v.managed;
+  static const Field<ApplicationEmoji, bool> _f$managed = Field(
+    'managed',
+    _$managed,
   );
-  static bool _$isAnimated(ApplicationEmoji v) => v.isAnimated;
-  static const Field<ApplicationEmoji, bool> _f$isAnimated = Field(
-    'isAnimated',
-    _$isAnimated,
-    key: r'is_animated',
+  static bool _$animated(ApplicationEmoji v) => v.animated;
+  static const Field<ApplicationEmoji, bool> _f$animated = Field(
+    'animated',
+    _$animated,
   );
-  static bool _$isAvailable(ApplicationEmoji v) => v.isAvailable;
-  static const Field<ApplicationEmoji, bool> _f$isAvailable = Field(
-    'isAvailable',
-    _$isAvailable,
-    key: r'is_available',
+  static bool _$available(ApplicationEmoji v) => v.available;
+  static const Field<ApplicationEmoji, bool> _f$available = Field(
+    'available',
+    _$available,
   );
 
   @override
@@ -240,9 +237,9 @@ class ApplicationEmojiMapper extends ClassMapperBase<ApplicationEmoji> {
     #name: _f$name,
     #user: _f$user,
     #requiresColons: _f$requiresColons,
-    #isManaged: _f$isManaged,
-    #isAnimated: _f$isAnimated,
-    #isAvailable: _f$isAvailable,
+    #managed: _f$managed,
+    #animated: _f$animated,
+    #available: _f$available,
   };
 
   static ApplicationEmoji _instantiate(DecodingData data) {
@@ -251,9 +248,9 @@ class ApplicationEmojiMapper extends ClassMapperBase<ApplicationEmoji> {
       name: data.dec(_f$name),
       user: data.dec(_f$user),
       requiresColons: data.dec(_f$requiresColons),
-      isManaged: data.dec(_f$isManaged),
-      isAnimated: data.dec(_f$isAnimated),
-      isAvailable: data.dec(_f$isAvailable),
+      managed: data.dec(_f$managed),
+      animated: data.dec(_f$animated),
+      available: data.dec(_f$available),
     );
   }
 
@@ -328,9 +325,9 @@ abstract class ApplicationEmojiCopyWith<$R, $In extends ApplicationEmoji, $Out>
     String? name,
     User? user,
     bool? requiresColons,
-    bool? isManaged,
-    bool? isAnimated,
-    bool? isAvailable,
+    bool? managed,
+    bool? animated,
+    bool? available,
   });
   ApplicationEmojiCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -357,18 +354,18 @@ class _ApplicationEmojiCopyWithImpl<$R, $Out>
     Object? name = $none,
     Object? user = $none,
     bool? requiresColons,
-    bool? isManaged,
-    bool? isAnimated,
-    bool? isAvailable,
+    bool? managed,
+    bool? animated,
+    bool? available,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
       if (name != $none) #name: name,
       if (user != $none) #user: user,
       if (requiresColons != null) #requiresColons: requiresColons,
-      if (isManaged != null) #isManaged: isManaged,
-      if (isAnimated != null) #isAnimated: isAnimated,
-      if (isAvailable != null) #isAvailable: isAvailable,
+      if (managed != null) #managed: managed,
+      if (animated != null) #animated: animated,
+      if (available != null) #available: available,
     }),
   );
   @override
@@ -377,9 +374,9 @@ class _ApplicationEmojiCopyWithImpl<$R, $Out>
     name: data.get(#name, or: $value.name),
     user: data.get(#user, or: $value.user),
     requiresColons: data.get(#requiresColons, or: $value.requiresColons),
-    isManaged: data.get(#isManaged, or: $value.isManaged),
-    isAnimated: data.get(#isAnimated, or: $value.isAnimated),
-    isAvailable: data.get(#isAvailable, or: $value.isAvailable),
+    managed: data.get(#managed, or: $value.managed),
+    animated: data.get(#animated, or: $value.animated),
+    available: data.get(#available, or: $value.available),
   );
 
   @override

@@ -228,17 +228,16 @@ class ConnectionMapper extends ClassMapperBase<Connection> {
     'integrations',
     _$integrations,
   );
-  static bool _$isVerified(Connection v) => v.isVerified;
-  static const Field<Connection, bool> _f$isVerified = Field(
-    'isVerified',
-    _$isVerified,
-    key: r'is_verified',
+  static bool _$verified(Connection v) => v.verified;
+  static const Field<Connection, bool> _f$verified = Field(
+    'verified',
+    _$verified,
   );
-  static bool _$isFriendSyncEnabled(Connection v) => v.isFriendSyncEnabled;
-  static const Field<Connection, bool> _f$isFriendSyncEnabled = Field(
-    'isFriendSyncEnabled',
-    _$isFriendSyncEnabled,
-    key: r'is_friend_sync_enabled',
+  static bool _$friendSyncEnabled(Connection v) => v.friendSyncEnabled;
+  static const Field<Connection, bool> _f$friendSyncEnabled = Field(
+    'friendSyncEnabled',
+    _$friendSyncEnabled,
+    key: r'friend_sync_enabled',
   );
   static bool _$showActivity(Connection v) => v.showActivity;
   static const Field<Connection, bool> _f$showActivity = Field(
@@ -246,11 +245,11 @@ class ConnectionMapper extends ClassMapperBase<Connection> {
     _$showActivity,
     key: r'show_activity',
   );
-  static bool _$isTwoWayLink(Connection v) => v.isTwoWayLink;
-  static const Field<Connection, bool> _f$isTwoWayLink = Field(
-    'isTwoWayLink',
-    _$isTwoWayLink,
-    key: r'is_two_way_link',
+  static bool _$twoWayLink(Connection v) => v.twoWayLink;
+  static const Field<Connection, bool> _f$twoWayLink = Field(
+    'twoWayLink',
+    _$twoWayLink,
+    key: r'two_way_link',
   );
   static ConnectionVisibility _$visibility(Connection v) => v.visibility;
   static const Field<Connection, ConnectionVisibility> _f$visibility = Field(
@@ -265,10 +264,10 @@ class ConnectionMapper extends ClassMapperBase<Connection> {
     #type: _f$type,
     #isRevoked: _f$isRevoked,
     #integrations: _f$integrations,
-    #isVerified: _f$isVerified,
-    #isFriendSyncEnabled: _f$isFriendSyncEnabled,
+    #verified: _f$verified,
+    #friendSyncEnabled: _f$friendSyncEnabled,
     #showActivity: _f$showActivity,
-    #isTwoWayLink: _f$isTwoWayLink,
+    #twoWayLink: _f$twoWayLink,
     #visibility: _f$visibility,
   };
 
@@ -279,10 +278,10 @@ class ConnectionMapper extends ClassMapperBase<Connection> {
       type: data.dec(_f$type),
       isRevoked: data.dec(_f$isRevoked),
       integrations: data.dec(_f$integrations),
-      isVerified: data.dec(_f$isVerified),
-      isFriendSyncEnabled: data.dec(_f$isFriendSyncEnabled),
+      verified: data.dec(_f$verified),
+      friendSyncEnabled: data.dec(_f$friendSyncEnabled),
       showActivity: data.dec(_f$showActivity),
-      isTwoWayLink: data.dec(_f$isTwoWayLink),
+      twoWayLink: data.dec(_f$twoWayLink),
       visibility: data.dec(_f$visibility),
     );
   }
@@ -355,10 +354,10 @@ abstract class ConnectionCopyWith<$R, $In extends Connection, $Out>
     ConnectionType? type,
     bool? isRevoked,
     List<Snowflake>? integrations,
-    bool? isVerified,
-    bool? isFriendSyncEnabled,
+    bool? verified,
+    bool? friendSyncEnabled,
     bool? showActivity,
-    bool? isTwoWayLink,
+    bool? twoWayLink,
     ConnectionVisibility? visibility,
   });
   ConnectionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
@@ -388,10 +387,10 @@ class _ConnectionCopyWithImpl<$R, $Out>
     ConnectionType? type,
     Object? isRevoked = $none,
     Object? integrations = $none,
-    bool? isVerified,
-    bool? isFriendSyncEnabled,
+    bool? verified,
+    bool? friendSyncEnabled,
     bool? showActivity,
-    bool? isTwoWayLink,
+    bool? twoWayLink,
     ConnectionVisibility? visibility,
   }) => $apply(
     FieldCopyWithData({
@@ -400,11 +399,10 @@ class _ConnectionCopyWithImpl<$R, $Out>
       if (type != null) #type: type,
       if (isRevoked != $none) #isRevoked: isRevoked,
       if (integrations != $none) #integrations: integrations,
-      if (isVerified != null) #isVerified: isVerified,
-      if (isFriendSyncEnabled != null)
-        #isFriendSyncEnabled: isFriendSyncEnabled,
+      if (verified != null) #verified: verified,
+      if (friendSyncEnabled != null) #friendSyncEnabled: friendSyncEnabled,
       if (showActivity != null) #showActivity: showActivity,
-      if (isTwoWayLink != null) #isTwoWayLink: isTwoWayLink,
+      if (twoWayLink != null) #twoWayLink: twoWayLink,
       if (visibility != null) #visibility: visibility,
     }),
   );
@@ -415,13 +413,13 @@ class _ConnectionCopyWithImpl<$R, $Out>
     type: data.get(#type, or: $value.type),
     isRevoked: data.get(#isRevoked, or: $value.isRevoked),
     integrations: data.get(#integrations, or: $value.integrations),
-    isVerified: data.get(#isVerified, or: $value.isVerified),
-    isFriendSyncEnabled: data.get(
-      #isFriendSyncEnabled,
-      or: $value.isFriendSyncEnabled,
+    verified: data.get(#verified, or: $value.verified),
+    friendSyncEnabled: data.get(
+      #friendSyncEnabled,
+      or: $value.friendSyncEnabled,
     ),
     showActivity: data.get(#showActivity, or: $value.showActivity),
-    isTwoWayLink: data.get(#isTwoWayLink, or: $value.isTwoWayLink),
+    twoWayLink: data.get(#twoWayLink, or: $value.twoWayLink),
     visibility: data.get(#visibility, or: $value.visibility),
   );
 

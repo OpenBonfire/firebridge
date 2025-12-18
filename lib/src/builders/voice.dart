@@ -32,12 +32,10 @@ class GatewayVoiceStateBuilder extends CreateBuilder<VoiceState>
     with GatewayVoiceStateBuilderMappable {
   Snowflake? channelId;
 
-  bool isMuted;
+  bool muted;
 
-  bool isDeafened;
+  bool deafened;
 
   GatewayVoiceStateBuilder(
-      {required this.channelId,
-      required this.isMuted,
-      required this.isDeafened});
+      {required this.channelId, required this.muted, required this.deafened});
 }

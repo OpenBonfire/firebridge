@@ -64,17 +64,15 @@ class AnnouncementThreadMapper extends SubClassMapperBase<AnnouncementThread> {
     _$guildId,
     key: r'guild_id',
   );
-  static bool _$isArchived(AnnouncementThread v) => v.isArchived;
-  static const Field<AnnouncementThread, bool> _f$isArchived = Field(
-    'isArchived',
-    _$isArchived,
-    key: r'is_archived',
+  static bool _$archived(AnnouncementThread v) => v.archived;
+  static const Field<AnnouncementThread, bool> _f$archived = Field(
+    'archived',
+    _$archived,
   );
-  static bool _$isLocked(AnnouncementThread v) => v.isLocked;
-  static const Field<AnnouncementThread, bool> _f$isLocked = Field(
-    'isLocked',
-    _$isLocked,
-    key: r'is_locked',
+  static bool _$locked(AnnouncementThread v) => v.locked;
+  static const Field<AnnouncementThread, bool> _f$locked = Field(
+    'locked',
+    _$locked,
   );
   static bool _$nsfw(AnnouncementThread v) => v.nsfw;
   static const Field<AnnouncementThread, bool> _f$nsfw = Field(
@@ -161,8 +159,8 @@ class AnnouncementThreadMapper extends SubClassMapperBase<AnnouncementThread> {
     #autoArchiveDuration: _f$autoArchiveDuration,
     #createdAt: _f$createdAt,
     #guildId: _f$guildId,
-    #isArchived: _f$isArchived,
-    #isLocked: _f$isLocked,
+    #archived: _f$archived,
+    #locked: _f$locked,
     #nsfw: _f$nsfw,
     #lastMessageId: _f$lastMessageId,
     #lastPinTimestamp: _f$lastPinTimestamp,
@@ -194,8 +192,8 @@ class AnnouncementThreadMapper extends SubClassMapperBase<AnnouncementThread> {
       autoArchiveDuration: data.dec(_f$autoArchiveDuration),
       createdAt: data.dec(_f$createdAt),
       guildId: data.dec(_f$guildId),
-      isArchived: data.dec(_f$isArchived),
-      isLocked: data.dec(_f$isLocked),
+      archived: data.dec(_f$archived),
+      locked: data.dec(_f$locked),
       nsfw: data.dec(_f$nsfw),
       lastMessageId: data.dec(_f$lastMessageId),
       lastPinTimestamp: data.dec(_f$lastPinTimestamp),
@@ -308,8 +306,8 @@ abstract class AnnouncementThreadCopyWith<
     Duration? autoArchiveDuration,
     DateTime? createdAt,
     Snowflake? guildId,
-    bool? isArchived,
-    bool? isLocked,
+    bool? archived,
+    bool? locked,
     bool? nsfw,
     Snowflake? lastMessageId,
     DateTime? lastPinTimestamp,
@@ -383,8 +381,8 @@ class _AnnouncementThreadCopyWithImpl<$R, $Out>
     Duration? autoArchiveDuration,
     DateTime? createdAt,
     Snowflake? guildId,
-    bool? isArchived,
-    bool? isLocked,
+    bool? archived,
+    bool? locked,
     bool? nsfw,
     Object? lastMessageId = $none,
     Object? lastPinTimestamp = $none,
@@ -408,8 +406,8 @@ class _AnnouncementThreadCopyWithImpl<$R, $Out>
         #autoArchiveDuration: autoArchiveDuration,
       if (createdAt != null) #createdAt: createdAt,
       if (guildId != null) #guildId: guildId,
-      if (isArchived != null) #isArchived: isArchived,
-      if (isLocked != null) #isLocked: isLocked,
+      if (archived != null) #archived: archived,
+      if (locked != null) #locked: locked,
       if (nsfw != null) #nsfw: nsfw,
       if (lastMessageId != $none) #lastMessageId: lastMessageId,
       if (lastPinTimestamp != $none) #lastPinTimestamp: lastPinTimestamp,
@@ -440,8 +438,8 @@ class _AnnouncementThreadCopyWithImpl<$R, $Out>
     ),
     createdAt: data.get(#createdAt, or: $value.createdAt),
     guildId: data.get(#guildId, or: $value.guildId),
-    isArchived: data.get(#isArchived, or: $value.isArchived),
-    isLocked: data.get(#isLocked, or: $value.isLocked),
+    archived: data.get(#archived, or: $value.archived),
+    locked: data.get(#locked, or: $value.locked),
     nsfw: data.get(#nsfw, or: $value.nsfw),
     lastMessageId: data.get(#lastMessageId, or: $value.lastMessageId),
     lastPinTimestamp: data.get(#lastPinTimestamp, or: $value.lastPinTimestamp),

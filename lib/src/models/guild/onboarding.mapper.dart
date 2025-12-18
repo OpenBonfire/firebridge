@@ -140,12 +140,8 @@ class OnboardingMapper extends ClassMapperBase<Onboarding> {
     _$defaultChannelIds,
     key: r'default_channel_ids',
   );
-  static bool _$isEnabled(Onboarding v) => v.isEnabled;
-  static const Field<Onboarding, bool> _f$isEnabled = Field(
-    'isEnabled',
-    _$isEnabled,
-    key: r'is_enabled',
-  );
+  static bool _$enabled(Onboarding v) => v.enabled;
+  static const Field<Onboarding, bool> _f$enabled = Field('enabled', _$enabled);
   static OnboardingMode _$mode(Onboarding v) => v.mode;
   static const Field<Onboarding, OnboardingMode> _f$mode = Field(
     'mode',
@@ -158,7 +154,7 @@ class OnboardingMapper extends ClassMapperBase<Onboarding> {
     #guildId: _f$guildId,
     #prompts: _f$prompts,
     #defaultChannelIds: _f$defaultChannelIds,
-    #isEnabled: _f$isEnabled,
+    #enabled: _f$enabled,
     #mode: _f$mode,
   };
 
@@ -168,7 +164,7 @@ class OnboardingMapper extends ClassMapperBase<Onboarding> {
       guildId: data.dec(_f$guildId),
       prompts: data.dec(_f$prompts),
       defaultChannelIds: data.dec(_f$defaultChannelIds),
-      isEnabled: data.dec(_f$isEnabled),
+      enabled: data.dec(_f$enabled),
       mode: data.dec(_f$mode),
     );
   }
@@ -247,7 +243,7 @@ abstract class OnboardingCopyWith<$R, $In extends Onboarding, $Out>
     Snowflake? guildId,
     List<OnboardingPrompt>? prompts,
     List<Snowflake>? defaultChannelIds,
-    bool? isEnabled,
+    bool? enabled,
     OnboardingMode? mode,
   });
   OnboardingCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
@@ -288,7 +284,7 @@ class _OnboardingCopyWithImpl<$R, $Out>
     Snowflake? guildId,
     List<OnboardingPrompt>? prompts,
     List<Snowflake>? defaultChannelIds,
-    bool? isEnabled,
+    bool? enabled,
     OnboardingMode? mode,
   }) => $apply(
     FieldCopyWithData({
@@ -296,7 +292,7 @@ class _OnboardingCopyWithImpl<$R, $Out>
       if (guildId != null) #guildId: guildId,
       if (prompts != null) #prompts: prompts,
       if (defaultChannelIds != null) #defaultChannelIds: defaultChannelIds,
-      if (isEnabled != null) #isEnabled: isEnabled,
+      if (enabled != null) #enabled: enabled,
       if (mode != null) #mode: mode,
     }),
   );
@@ -309,7 +305,7 @@ class _OnboardingCopyWithImpl<$R, $Out>
       #defaultChannelIds,
       or: $value.defaultChannelIds,
     ),
-    isEnabled: data.get(#isEnabled, or: $value.isEnabled),
+    enabled: data.get(#enabled, or: $value.enabled),
     mode: data.get(#mode, or: $value.mode),
   );
 
@@ -352,23 +348,22 @@ class OnboardingPromptMapper extends ClassMapperBase<OnboardingPrompt> {
     'title',
     _$title,
   );
-  static bool _$isSingleSelect(OnboardingPrompt v) => v.isSingleSelect;
-  static const Field<OnboardingPrompt, bool> _f$isSingleSelect = Field(
-    'isSingleSelect',
-    _$isSingleSelect,
-    key: r'is_single_select',
+  static bool _$singleSelect(OnboardingPrompt v) => v.singleSelect;
+  static const Field<OnboardingPrompt, bool> _f$singleSelect = Field(
+    'singleSelect',
+    _$singleSelect,
+    key: r'single_select',
   );
-  static bool _$isRequired(OnboardingPrompt v) => v.isRequired;
-  static const Field<OnboardingPrompt, bool> _f$isRequired = Field(
-    'isRequired',
-    _$isRequired,
-    key: r'is_required',
+  static bool _$required(OnboardingPrompt v) => v.required;
+  static const Field<OnboardingPrompt, bool> _f$required = Field(
+    'required',
+    _$required,
   );
-  static bool _$isInOnboarding(OnboardingPrompt v) => v.isInOnboarding;
-  static const Field<OnboardingPrompt, bool> _f$isInOnboarding = Field(
-    'isInOnboarding',
-    _$isInOnboarding,
-    key: r'is_in_onboarding',
+  static bool _$inOnboarding(OnboardingPrompt v) => v.inOnboarding;
+  static const Field<OnboardingPrompt, bool> _f$inOnboarding = Field(
+    'inOnboarding',
+    _$inOnboarding,
+    key: r'in_onboarding',
   );
 
   @override
@@ -377,9 +372,9 @@ class OnboardingPromptMapper extends ClassMapperBase<OnboardingPrompt> {
     #type: _f$type,
     #options: _f$options,
     #title: _f$title,
-    #isSingleSelect: _f$isSingleSelect,
-    #isRequired: _f$isRequired,
-    #isInOnboarding: _f$isInOnboarding,
+    #singleSelect: _f$singleSelect,
+    #required: _f$required,
+    #inOnboarding: _f$inOnboarding,
   };
 
   static OnboardingPrompt _instantiate(DecodingData data) {
@@ -388,9 +383,9 @@ class OnboardingPromptMapper extends ClassMapperBase<OnboardingPrompt> {
       type: data.dec(_f$type),
       options: data.dec(_f$options),
       title: data.dec(_f$title),
-      isSingleSelect: data.dec(_f$isSingleSelect),
-      isRequired: data.dec(_f$isRequired),
-      isInOnboarding: data.dec(_f$isInOnboarding),
+      singleSelect: data.dec(_f$singleSelect),
+      required: data.dec(_f$required),
+      inOnboarding: data.dec(_f$inOnboarding),
     );
   }
 
@@ -472,9 +467,9 @@ abstract class OnboardingPromptCopyWith<$R, $In extends OnboardingPrompt, $Out>
     OnboardingPromptType? type,
     List<OnboardingPromptOption>? options,
     String? title,
-    bool? isSingleSelect,
-    bool? isRequired,
-    bool? isInOnboarding,
+    bool? singleSelect,
+    bool? required,
+    bool? inOnboarding,
   });
   OnboardingPromptCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -513,18 +508,18 @@ class _OnboardingPromptCopyWithImpl<$R, $Out>
     OnboardingPromptType? type,
     List<OnboardingPromptOption>? options,
     String? title,
-    bool? isSingleSelect,
-    bool? isRequired,
-    bool? isInOnboarding,
+    bool? singleSelect,
+    bool? required,
+    bool? inOnboarding,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
       if (type != null) #type: type,
       if (options != null) #options: options,
       if (title != null) #title: title,
-      if (isSingleSelect != null) #isSingleSelect: isSingleSelect,
-      if (isRequired != null) #isRequired: isRequired,
-      if (isInOnboarding != null) #isInOnboarding: isInOnboarding,
+      if (singleSelect != null) #singleSelect: singleSelect,
+      if (required != null) #required: required,
+      if (inOnboarding != null) #inOnboarding: inOnboarding,
     }),
   );
   @override
@@ -533,9 +528,9 @@ class _OnboardingPromptCopyWithImpl<$R, $Out>
     type: data.get(#type, or: $value.type),
     options: data.get(#options, or: $value.options),
     title: data.get(#title, or: $value.title),
-    isSingleSelect: data.get(#isSingleSelect, or: $value.isSingleSelect),
-    isRequired: data.get(#isRequired, or: $value.isRequired),
-    isInOnboarding: data.get(#isInOnboarding, or: $value.isInOnboarding),
+    singleSelect: data.get(#singleSelect, or: $value.singleSelect),
+    required: data.get(#required, or: $value.required),
+    inOnboarding: data.get(#inOnboarding, or: $value.inOnboarding),
   );
 
   @override

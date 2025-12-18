@@ -19,7 +19,7 @@ class Integration with IntegrationMappable {
   final String type;
 
   /// Whether this integration is enabled.
-  final bool isEnabled;
+  final bool enabled;
 
   /// Whether this integration is syncing.
   final bool? isSyncing;
@@ -63,7 +63,7 @@ class Integration with IntegrationMappable {
     required this.id,
     required this.name,
     required this.type,
-    required this.isEnabled,
+    required this.enabled,
     required this.isSyncing,
     required this.roleId,
     required this.enableEmoticons,

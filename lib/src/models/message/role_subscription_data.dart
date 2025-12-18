@@ -22,7 +22,7 @@ class RoleSubscriptionData with ToStringHelper, RoleSubscriptionDataMappable {
   final int totalMonthsSubscribed;
 
   /// Whether this notification is for a renewal rather than a new purchase.
-  final bool isRenewal;
+  final bool renewal;
 
   /// {@macro role_subscription_data}
   /// @nodoc
@@ -30,6 +30,6 @@ class RoleSubscriptionData with ToStringHelper, RoleSubscriptionDataMappable {
     required this.listingId,
     required this.tierName,
     required this.totalMonthsSubscribed,
-    required this.isRenewal,
+    required this.renewal,
   });
 }

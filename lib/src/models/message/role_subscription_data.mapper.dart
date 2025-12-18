@@ -42,11 +42,10 @@ class RoleSubscriptionDataMapper extends ClassMapperBase<RoleSubscriptionData> {
         _$totalMonthsSubscribed,
         key: r'total_months_subscribed',
       );
-  static bool _$isRenewal(RoleSubscriptionData v) => v.isRenewal;
-  static const Field<RoleSubscriptionData, bool> _f$isRenewal = Field(
-    'isRenewal',
-    _$isRenewal,
-    key: r'is_renewal',
+  static bool _$renewal(RoleSubscriptionData v) => v.renewal;
+  static const Field<RoleSubscriptionData, bool> _f$renewal = Field(
+    'renewal',
+    _$renewal,
   );
 
   @override
@@ -54,7 +53,7 @@ class RoleSubscriptionDataMapper extends ClassMapperBase<RoleSubscriptionData> {
     #listingId: _f$listingId,
     #tierName: _f$tierName,
     #totalMonthsSubscribed: _f$totalMonthsSubscribed,
-    #isRenewal: _f$isRenewal,
+    #renewal: _f$renewal,
   };
 
   static RoleSubscriptionData _instantiate(DecodingData data) {
@@ -62,7 +61,7 @@ class RoleSubscriptionDataMapper extends ClassMapperBase<RoleSubscriptionData> {
       listingId: data.dec(_f$listingId),
       tierName: data.dec(_f$tierName),
       totalMonthsSubscribed: data.dec(_f$totalMonthsSubscribed),
-      isRenewal: data.dec(_f$isRenewal),
+      renewal: data.dec(_f$renewal),
     );
   }
 
@@ -141,7 +140,7 @@ abstract class RoleSubscriptionDataCopyWith<
     Snowflake? listingId,
     String? tierName,
     int? totalMonthsSubscribed,
-    bool? isRenewal,
+    bool? renewal,
   });
   RoleSubscriptionDataCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -164,14 +163,14 @@ class _RoleSubscriptionDataCopyWithImpl<$R, $Out>
     Snowflake? listingId,
     String? tierName,
     int? totalMonthsSubscribed,
-    bool? isRenewal,
+    bool? renewal,
   }) => $apply(
     FieldCopyWithData({
       if (listingId != null) #listingId: listingId,
       if (tierName != null) #tierName: tierName,
       if (totalMonthsSubscribed != null)
         #totalMonthsSubscribed: totalMonthsSubscribed,
-      if (isRenewal != null) #isRenewal: isRenewal,
+      if (renewal != null) #renewal: renewal,
     }),
   );
   @override
@@ -182,7 +181,7 @@ class _RoleSubscriptionDataCopyWithImpl<$R, $Out>
       #totalMonthsSubscribed,
       or: $value.totalMonthsSubscribed,
     ),
-    isRenewal: data.get(#isRenewal, or: $value.isRenewal),
+    renewal: data.get(#renewal, or: $value.renewal),
   );
 
   @override

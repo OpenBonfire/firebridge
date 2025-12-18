@@ -104,7 +104,7 @@ class ThreadUpdateBuilder extends UpdateBuilder<Thread>
   String? name;
 
   /// Whether the thread is archived.
-  bool? isArchived;
+  bool? archived;
 
   /// {@macro channel_default_auto_archive_duration}
   Duration? autoArchiveDuration;
@@ -126,7 +126,7 @@ class ThreadUpdateBuilder extends UpdateBuilder<Thread>
 
   ThreadUpdateBuilder({
     this.name,
-    this.isArchived,
+    this.archived,
     this.autoArchiveDuration,
     this.isLocked,
     this.isInvitable,

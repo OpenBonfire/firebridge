@@ -23,8 +23,8 @@ extension on HttpRequest {
 typedef RateLimitInfo = ({
   HttpRequest request,
   Duration delay,
-  bool isGlobal,
-  bool isAnticipated
+  bool global,
+  bool anticipated
 });
 
 /// A handler for making HTTP requests to the Discord API.
@@ -114,7 +114,7 @@ class HttpHandler {
   HttpHandler(this.client) {
     if (client.options.rateLimitWarningThreshold case final threshold?) {
       onRateLimit.listen((info) {
-        final (:request, :delay, :isGlobal, :isAnticipated) = info;
+        final (:request, :delay, :global, :anticipated) = info;
         final requestStopwatch = _latencyStopwatches[request];
         if (requestStopwatch == null) return;
 
@@ -130,10 +130,10 @@ class HttpHandler {
             '${request.loggingId} has been pending for ${requestStopwatch.elapsed} and will be sent in $delay due to rate limiting.'
             ' The request will have been pending for $totalDelay.',
           );
-          if (isAnticipated) {
+          if (anticipated) {
             logger.info(
                 'This is a predicted rate limit and was anticipated based on previous responses');
-          } else if (isGlobal) {
+          } else if (global) {
             logger.info(
                 'This is a global rate limit and will apply to all requests for the next $delay');
           } else {
@@ -231,8 +231,8 @@ class HttpHandler {
         _onRateLimitController.add((
           request: request,
           delay: waitTime,
-          isGlobal: isGlobal,
-          isAnticipated: true
+          global: isGlobal,
+          anticipated: true
         ));
 
         // Don't use Future.delayed so that we can exit early if close() is called.
@@ -330,8 +330,8 @@ class HttpHandler {
         _onRateLimitController.add((
           request: request,
           delay: retryAfter,
-          isGlobal: isGlobal,
-          isAnticipated: false
+          global: isGlobal,
+          anticipated: false
         ));
 
         // Don't use Future.delayed so that we can exit early if close() is called.

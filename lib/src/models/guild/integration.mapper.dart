@@ -82,11 +82,10 @@ class IntegrationMapper extends ClassMapperBase<Integration> {
   static const Field<Integration, String> _f$name = Field('name', _$name);
   static String _$type(Integration v) => v.type;
   static const Field<Integration, String> _f$type = Field('type', _$type);
-  static bool _$isEnabled(Integration v) => v.isEnabled;
-  static const Field<Integration, bool> _f$isEnabled = Field(
-    'isEnabled',
-    _$isEnabled,
-    key: r'is_enabled',
+  static bool _$enabled(Integration v) => v.enabled;
+  static const Field<Integration, bool> _f$enabled = Field(
+    'enabled',
+    _$enabled,
   );
   static bool? _$isSyncing(Integration v) => v.isSyncing;
   static const Field<Integration, bool> _f$isSyncing = Field(
@@ -155,7 +154,7 @@ class IntegrationMapper extends ClassMapperBase<Integration> {
     #id: _f$id,
     #name: _f$name,
     #type: _f$type,
-    #isEnabled: _f$isEnabled,
+    #enabled: _f$enabled,
     #isSyncing: _f$isSyncing,
     #roleId: _f$roleId,
     #enableEmoticons: _f$enableEmoticons,
@@ -175,7 +174,7 @@ class IntegrationMapper extends ClassMapperBase<Integration> {
       id: data.dec(_f$id),
       name: data.dec(_f$name),
       type: data.dec(_f$type),
-      isEnabled: data.dec(_f$isEnabled),
+      enabled: data.dec(_f$enabled),
       isSyncing: data.dec(_f$isSyncing),
       roleId: data.dec(_f$roleId),
       enableEmoticons: data.dec(_f$enableEmoticons),
@@ -267,7 +266,7 @@ abstract class IntegrationCopyWith<$R, $In extends Integration, $Out>
     Snowflake? id,
     String? name,
     String? type,
-    bool? isEnabled,
+    bool? enabled,
     bool? isSyncing,
     Snowflake? roleId,
     bool? enableEmoticons,
@@ -326,7 +325,7 @@ class _IntegrationCopyWithImpl<$R, $Out>
     Snowflake? id,
     String? name,
     String? type,
-    bool? isEnabled,
+    bool? enabled,
     Object? isSyncing = $none,
     Object? roleId = $none,
     Object? enableEmoticons = $none,
@@ -344,7 +343,7 @@ class _IntegrationCopyWithImpl<$R, $Out>
       if (id != null) #id: id,
       if (name != null) #name: name,
       if (type != null) #type: type,
-      if (isEnabled != null) #isEnabled: isEnabled,
+      if (enabled != null) #enabled: enabled,
       if (isSyncing != $none) #isSyncing: isSyncing,
       if (roleId != $none) #roleId: roleId,
       if (enableEmoticons != $none) #enableEmoticons: enableEmoticons,
@@ -364,7 +363,7 @@ class _IntegrationCopyWithImpl<$R, $Out>
     id: data.get(#id, or: $value.id),
     name: data.get(#name, or: $value.name),
     type: data.get(#type, or: $value.type),
-    isEnabled: data.get(#isEnabled, or: $value.isEnabled),
+    enabled: data.get(#enabled, or: $value.enabled),
     isSyncing: data.get(#isSyncing, or: $value.isSyncing),
     roleId: data.get(#roleId, or: $value.roleId),
     enableEmoticons: data.get(#enableEmoticons, or: $value.enableEmoticons),

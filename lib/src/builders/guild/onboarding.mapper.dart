@@ -39,11 +39,10 @@ class OnboardingUpdateBuilderMapper
     _$defaultChannelIds,
     key: r'default_channel_ids',
   );
-  static bool _$isEnabled(OnboardingUpdateBuilder v) => v.isEnabled;
-  static const Field<OnboardingUpdateBuilder, bool> _f$isEnabled = Field(
-    'isEnabled',
-    _$isEnabled,
-    key: r'is_enabled',
+  static bool _$enabled(OnboardingUpdateBuilder v) => v.enabled;
+  static const Field<OnboardingUpdateBuilder, bool> _f$enabled = Field(
+    'enabled',
+    _$enabled,
   );
   static OnboardingMode _$mode(OnboardingUpdateBuilder v) => v.mode;
   static const Field<OnboardingUpdateBuilder, OnboardingMode> _f$mode = Field(
@@ -55,7 +54,7 @@ class OnboardingUpdateBuilderMapper
   final MappableFields<OnboardingUpdateBuilder> fields = const {
     #prompts: _f$prompts,
     #defaultChannelIds: _f$defaultChannelIds,
-    #isEnabled: _f$isEnabled,
+    #enabled: _f$enabled,
     #mode: _f$mode,
   };
 
@@ -63,7 +62,7 @@ class OnboardingUpdateBuilderMapper
     return OnboardingUpdateBuilder(
       prompts: data.dec(_f$prompts),
       defaultChannelIds: data.dec(_f$defaultChannelIds),
-      isEnabled: data.dec(_f$isEnabled),
+      enabled: data.dec(_f$enabled),
       mode: data.dec(_f$mode),
     );
   }
@@ -153,7 +152,7 @@ abstract class OnboardingUpdateBuilderCopyWith<
   $R call({
     List<OnboardingPromptBuilder>? prompts,
     List<Snowflake>? defaultChannelIds,
-    bool? isEnabled,
+    bool? enabled,
     OnboardingMode? mode,
   });
   OnboardingUpdateBuilderCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
@@ -196,13 +195,13 @@ class _OnboardingUpdateBuilderCopyWithImpl<$R, $Out>
   $R call({
     List<OnboardingPromptBuilder>? prompts,
     List<Snowflake>? defaultChannelIds,
-    bool? isEnabled,
+    bool? enabled,
     OnboardingMode? mode,
   }) => $apply(
     FieldCopyWithData({
       if (prompts != null) #prompts: prompts,
       if (defaultChannelIds != null) #defaultChannelIds: defaultChannelIds,
-      if (isEnabled != null) #isEnabled: isEnabled,
+      if (enabled != null) #enabled: enabled,
       if (mode != null) #mode: mode,
     }),
   );
@@ -213,7 +212,7 @@ class _OnboardingUpdateBuilderCopyWithImpl<$R, $Out>
       #defaultChannelIds,
       or: $value.defaultChannelIds,
     ),
-    isEnabled: data.get(#isEnabled, or: $value.isEnabled),
+    enabled: data.get(#enabled, or: $value.enabled),
     mode: data.get(#mode, or: $value.mode),
   );
 
@@ -258,23 +257,22 @@ class OnboardingPromptBuilderMapper
     'title',
     _$title,
   );
-  static bool _$isSingleSelect(OnboardingPromptBuilder v) => v.isSingleSelect;
-  static const Field<OnboardingPromptBuilder, bool> _f$isSingleSelect = Field(
-    'isSingleSelect',
-    _$isSingleSelect,
-    key: r'is_single_select',
+  static bool _$singleSelect(OnboardingPromptBuilder v) => v.singleSelect;
+  static const Field<OnboardingPromptBuilder, bool> _f$singleSelect = Field(
+    'singleSelect',
+    _$singleSelect,
+    key: r'single_select',
   );
-  static bool _$isRequired(OnboardingPromptBuilder v) => v.isRequired;
-  static const Field<OnboardingPromptBuilder, bool> _f$isRequired = Field(
-    'isRequired',
-    _$isRequired,
-    key: r'is_required',
+  static bool _$required(OnboardingPromptBuilder v) => v.required;
+  static const Field<OnboardingPromptBuilder, bool> _f$required = Field(
+    'required',
+    _$required,
   );
-  static bool _$isInOnboarding(OnboardingPromptBuilder v) => v.isInOnboarding;
-  static const Field<OnboardingPromptBuilder, bool> _f$isInOnboarding = Field(
-    'isInOnboarding',
-    _$isInOnboarding,
-    key: r'is_in_onboarding',
+  static bool _$inOnboarding(OnboardingPromptBuilder v) => v.inOnboarding;
+  static const Field<OnboardingPromptBuilder, bool> _f$inOnboarding = Field(
+    'inOnboarding',
+    _$inOnboarding,
+    key: r'in_onboarding',
   );
 
   @override
@@ -282,9 +280,9 @@ class OnboardingPromptBuilderMapper
     #type: _f$type,
     #options: _f$options,
     #title: _f$title,
-    #isSingleSelect: _f$isSingleSelect,
-    #isRequired: _f$isRequired,
-    #isInOnboarding: _f$isInOnboarding,
+    #singleSelect: _f$singleSelect,
+    #required: _f$required,
+    #inOnboarding: _f$inOnboarding,
   };
 
   static OnboardingPromptBuilder _instantiate(DecodingData data) {
@@ -292,9 +290,9 @@ class OnboardingPromptBuilderMapper
       type: data.dec(_f$type),
       options: data.dec(_f$options),
       title: data.dec(_f$title),
-      isSingleSelect: data.dec(_f$isSingleSelect),
-      isRequired: data.dec(_f$isRequired),
-      isInOnboarding: data.dec(_f$isInOnboarding),
+      singleSelect: data.dec(_f$singleSelect),
+      required: data.dec(_f$required),
+      inOnboarding: data.dec(_f$inOnboarding),
     );
   }
 
@@ -382,9 +380,9 @@ abstract class OnboardingPromptBuilderCopyWith<
     OnboardingPromptType? type,
     List<OnboardingPromptOptionBuilder>? options,
     String? title,
-    bool? isSingleSelect,
-    bool? isRequired,
-    bool? isInOnboarding,
+    bool? singleSelect,
+    bool? required,
+    bool? inOnboarding,
   });
   OnboardingPromptBuilderCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -420,17 +418,17 @@ class _OnboardingPromptBuilderCopyWithImpl<$R, $Out>
     OnboardingPromptType? type,
     List<OnboardingPromptOptionBuilder>? options,
     String? title,
-    bool? isSingleSelect,
-    bool? isRequired,
-    bool? isInOnboarding,
+    bool? singleSelect,
+    bool? required,
+    bool? inOnboarding,
   }) => $apply(
     FieldCopyWithData({
       if (type != null) #type: type,
       if (options != null) #options: options,
       if (title != null) #title: title,
-      if (isSingleSelect != null) #isSingleSelect: isSingleSelect,
-      if (isRequired != null) #isRequired: isRequired,
-      if (isInOnboarding != null) #isInOnboarding: isInOnboarding,
+      if (singleSelect != null) #singleSelect: singleSelect,
+      if (required != null) #required: required,
+      if (inOnboarding != null) #inOnboarding: inOnboarding,
     }),
   );
   @override
@@ -438,9 +436,9 @@ class _OnboardingPromptBuilderCopyWithImpl<$R, $Out>
     type: data.get(#type, or: $value.type),
     options: data.get(#options, or: $value.options),
     title: data.get(#title, or: $value.title),
-    isSingleSelect: data.get(#isSingleSelect, or: $value.isSingleSelect),
-    isRequired: data.get(#isRequired, or: $value.isRequired),
-    isInOnboarding: data.get(#isInOnboarding, or: $value.isInOnboarding),
+    singleSelect: data.get(#singleSelect, or: $value.singleSelect),
+    required: data.get(#required, or: $value.required),
+    inOnboarding: data.get(#inOnboarding, or: $value.inOnboarding),
   );
 
   @override

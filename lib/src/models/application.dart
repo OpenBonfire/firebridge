@@ -40,7 +40,7 @@ class Application with ApplicationMappable {
   final List<String>? rpcOrigins;
 
   /// Whether the bot account associated with this application can be added to guilds by anyone.
-  final bool isBotPublic;
+  final bool botPublic;
 
   /// Whether the bot account associated with this application requires the OAuth2 code grant to be completed before joining a guild.
   final bool botRequiresCodeGrant;
@@ -119,7 +119,7 @@ class Application with ApplicationMappable {
     required this.iconHash,
     required this.description,
     required this.rpcOrigins,
-    required this.isBotPublic,
+    required this.botPublic,
     required this.botRequiresCodeGrant,
     required this.bot,
     required this.termsOfServiceUrl,

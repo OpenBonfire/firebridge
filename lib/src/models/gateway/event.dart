@@ -91,11 +91,11 @@ class ReconnectEvent extends GatewayEvent with ReconnectEventMappable {
 class InvalidSessionEvent extends GatewayEvent
     with InvalidSessionEventMappable {
   /// Whether the client can resume the session on a new connection.
-  final bool isResumable;
+  final bool resumable;
 
   /// {@macro invalid_session_event}
   /// @nodoc
-  InvalidSessionEvent({required this.isResumable})
+  InvalidSessionEvent({required this.resumable})
       : super(opcode: Opcode.invalidSession);
 }
 

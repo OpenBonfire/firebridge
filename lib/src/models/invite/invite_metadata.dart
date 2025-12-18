@@ -19,7 +19,7 @@ class InviteWithMetadata extends Invite with InviteWithMetadataMappable {
   final Duration maxAge;
 
   /// Whether this invite only grants temporary membership.
-  final bool isTemporary;
+  final bool temporary;
 
   /// When this invite was created.
   final DateTime createdAt;
@@ -42,7 +42,7 @@ class InviteWithMetadata extends Invite with InviteWithMetadataMappable {
     required this.uses,
     required this.maxUses,
     required this.maxAge,
-    required this.isTemporary,
+    required this.temporary,
     required this.createdAt,
   });
 }

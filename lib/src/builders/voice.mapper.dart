@@ -387,31 +387,29 @@ class GatewayVoiceStateBuilderMapper
     _$channelId,
     key: r'channel_id',
   );
-  static bool _$isMuted(GatewayVoiceStateBuilder v) => v.isMuted;
-  static const Field<GatewayVoiceStateBuilder, bool> _f$isMuted = Field(
-    'isMuted',
-    _$isMuted,
-    key: r'is_muted',
+  static bool _$muted(GatewayVoiceStateBuilder v) => v.muted;
+  static const Field<GatewayVoiceStateBuilder, bool> _f$muted = Field(
+    'muted',
+    _$muted,
   );
-  static bool _$isDeafened(GatewayVoiceStateBuilder v) => v.isDeafened;
-  static const Field<GatewayVoiceStateBuilder, bool> _f$isDeafened = Field(
-    'isDeafened',
-    _$isDeafened,
-    key: r'is_deafened',
+  static bool _$deafened(GatewayVoiceStateBuilder v) => v.deafened;
+  static const Field<GatewayVoiceStateBuilder, bool> _f$deafened = Field(
+    'deafened',
+    _$deafened,
   );
 
   @override
   final MappableFields<GatewayVoiceStateBuilder> fields = const {
     #channelId: _f$channelId,
-    #isMuted: _f$isMuted,
-    #isDeafened: _f$isDeafened,
+    #muted: _f$muted,
+    #deafened: _f$deafened,
   };
 
   static GatewayVoiceStateBuilder _instantiate(DecodingData data) {
     return GatewayVoiceStateBuilder(
       channelId: data.dec(_f$channelId),
-      isMuted: data.dec(_f$isMuted),
-      isDeafened: data.dec(_f$isDeafened),
+      muted: data.dec(_f$muted),
+      deafened: data.dec(_f$deafened),
     );
   }
 
@@ -486,7 +484,7 @@ abstract class GatewayVoiceStateBuilderCopyWith<
 >
     implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
-  $R call({Snowflake? channelId, bool? isMuted, bool? isDeafened});
+  $R call({Snowflake? channelId, bool? muted, bool? deafened});
   GatewayVoiceStateBuilderCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -505,19 +503,18 @@ class _GatewayVoiceStateBuilderCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId =>
       $value.channelId?.copyWith.$chain((v) => call(channelId: v));
   @override
-  $R call({Object? channelId = $none, bool? isMuted, bool? isDeafened}) =>
-      $apply(
-        FieldCopyWithData({
-          if (channelId != $none) #channelId: channelId,
-          if (isMuted != null) #isMuted: isMuted,
-          if (isDeafened != null) #isDeafened: isDeafened,
-        }),
-      );
+  $R call({Object? channelId = $none, bool? muted, bool? deafened}) => $apply(
+    FieldCopyWithData({
+      if (channelId != $none) #channelId: channelId,
+      if (muted != null) #muted: muted,
+      if (deafened != null) #deafened: deafened,
+    }),
+  );
   @override
   GatewayVoiceStateBuilder $make(CopyWithData data) => GatewayVoiceStateBuilder(
     channelId: data.get(#channelId, or: $value.channelId),
-    isMuted: data.get(#isMuted, or: $value.isMuted),
-    isDeafened: data.get(#isDeafened, or: $value.isDeafened),
+    muted: data.get(#muted, or: $value.muted),
+    deafened: data.get(#deafened, or: $value.deafened),
   );
 
   @override

@@ -46,7 +46,7 @@ class GuildCreateEvent extends DispatchEvent
   final DateTime joinedAt;
 
   /// Whether the guild is large.
-  final bool isLarge;
+  final bool large;
 
   /// The number of members in the guild.
   final int memberCount;
@@ -77,7 +77,7 @@ class GuildCreateEvent extends DispatchEvent
   GuildCreateEvent({
     required this.id,
     required this.joinedAt,
-    required this.isLarge,
+    required this.large,
     required this.memberCount,
     required this.voiceStates,
     required this.members,
@@ -114,7 +114,7 @@ class GuildDeleteEvent extends DispatchEvent with GuildDeleteEventMappable {
   final Snowflake id;
 
   /// Whether the client was removed because the guild is unavailable.
-  final bool isUnavailable;
+  final bool unavailable;
 
   /// The guild as it was cached before it was deleted.
   final Guild? deletedGuild;
@@ -123,7 +123,7 @@ class GuildDeleteEvent extends DispatchEvent with GuildDeleteEventMappable {
   /// @nodoc
   GuildDeleteEvent(
       {required this.id,
-      required this.isUnavailable,
+      required this.unavailable,
       required this.deletedGuild});
 }
 

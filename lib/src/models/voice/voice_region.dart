@@ -20,21 +20,21 @@ class VoiceRegion with ToStringHelper, VoiceRegionMappable {
   /// Whether this voice region is optimal based on the current client's position.
   ///
   /// This will be `true` on at most one region at a time.
-  final bool isOptimal;
+  final bool optimal;
 
   /// Whether this voice region is deprecated.
-  final bool isDeprecated;
+  final bool deprecated;
 
   /// Whether this is a custom voice region.
-  final bool isCustom;
+  final bool custom;
 
   /// {@macro voice_region}
   /// @nodoc
   VoiceRegion({
     required this.id,
     required this.name,
-    required this.isOptimal,
-    required this.isDeprecated,
-    required this.isCustom,
+    required this.optimal,
+    required this.deprecated,
+    required this.custom,
   });
 }

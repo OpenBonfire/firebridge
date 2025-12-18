@@ -90,11 +90,11 @@ class Shard extends Stream<ShardMessage> implements StreamSink<GatewayMessage> {
           logger.finer('Receive: ${event.opcode.name}');
 
           switch (event) {
-            case InvalidSessionEvent(:final isResumable):
-              if (isResumable) {
-                logger.finest('Resumable: $isResumable');
+            case InvalidSessionEvent(:final resumable):
+              if (resumable) {
+                logger.finest('Resumable: $resumable');
               } else {
-                logger.warning('Resumable: $isResumable');
+                logger.warning('Resumable: $resumable');
               }
             case HelloEvent(:final heartbeatInterval):
               logger.finest('Heartbeat Interval: $heartbeatInterval');

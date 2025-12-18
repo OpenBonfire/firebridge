@@ -28,7 +28,7 @@ class SoundboardSound with SoundboardSoundMappable {
   final Snowflake? guildId;
 
   /// Whether this sound can be used, may be `false` due to loss of Server Boosts.
-  final bool isAvailable;
+  final bool available;
 
   /// The user who created this sound.
   final User? user;
@@ -42,7 +42,7 @@ class SoundboardSound with SoundboardSoundMappable {
     required this.emojiName,
     required this.emojiId,
     required this.guildId,
-    required this.isAvailable,
+    required this.available,
     required this.user,
   });
 }

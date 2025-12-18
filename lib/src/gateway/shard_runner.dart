@@ -193,7 +193,7 @@ class ShardRunner {
               controller.add(Reconnecting(reason: 'Reconnect requested'));
               connection!.close(4000);
             } else if (event is InvalidSessionEvent) {
-              if (!event.isResumable) {
+              if (!event.resumable) {
                 canResume = false;
                 gatewayUri = originalGatewayUri;
               }

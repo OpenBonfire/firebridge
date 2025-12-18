@@ -46,13 +46,13 @@ class ApplicationEmoji extends Emoji with ApplicationEmojiMappable {
   final bool requiresColons;
 
   /// Whether this emoji is managed.
-  final bool isManaged;
+  final bool managed;
 
   /// Whether this emoji is animated.
-  final bool isAnimated;
+  final bool animated;
 
   /// Whether this emoji can be used, always true for ApplicationEmojis.
-  final bool isAvailable;
+  final bool available;
 
   /// @nodoc
   ApplicationEmoji({
@@ -60,9 +60,9 @@ class ApplicationEmoji extends Emoji with ApplicationEmojiMappable {
     required super.name,
     required this.user,
     required this.requiresColons,
-    required this.isManaged,
-    required this.isAnimated,
-    required this.isAvailable,
+    required this.managed,
+    required this.animated,
+    required this.available,
   });
 }
 

@@ -685,11 +685,10 @@ class InvalidSessionEventMapper extends ClassMapperBase<InvalidSessionEvent> {
   @override
   final String id = 'InvalidSessionEvent';
 
-  static bool _$isResumable(InvalidSessionEvent v) => v.isResumable;
-  static const Field<InvalidSessionEvent, bool> _f$isResumable = Field(
-    'isResumable',
-    _$isResumable,
-    key: r'is_resumable',
+  static bool _$resumable(InvalidSessionEvent v) => v.resumable;
+  static const Field<InvalidSessionEvent, bool> _f$resumable = Field(
+    'resumable',
+    _$resumable,
   );
   static Opcode _$opcode(InvalidSessionEvent v) => v.opcode;
   static const Field<InvalidSessionEvent, Opcode> _f$opcode = Field(
@@ -700,12 +699,12 @@ class InvalidSessionEventMapper extends ClassMapperBase<InvalidSessionEvent> {
 
   @override
   final MappableFields<InvalidSessionEvent> fields = const {
-    #isResumable: _f$isResumable,
+    #resumable: _f$resumable,
     #opcode: _f$opcode,
   };
 
   static InvalidSessionEvent _instantiate(DecodingData data) {
-    return InvalidSessionEvent(isResumable: data.dec(_f$isResumable));
+    return InvalidSessionEvent(resumable: data.dec(_f$resumable));
   }
 
   @override
@@ -779,7 +778,7 @@ abstract class InvalidSessionEventCopyWith<
 >
     implements GatewayEventCopyWith<$R, $In, $Out> {
   @override
-  $R call({bool? isResumable});
+  $R call({bool? resumable});
   InvalidSessionEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -794,12 +793,11 @@ class _InvalidSessionEventCopyWithImpl<$R, $Out>
   late final ClassMapperBase<InvalidSessionEvent> $mapper =
       InvalidSessionEventMapper.ensureInitialized();
   @override
-  $R call({bool? isResumable}) => $apply(
-    FieldCopyWithData({if (isResumable != null) #isResumable: isResumable}),
-  );
+  $R call({bool? resumable}) =>
+      $apply(FieldCopyWithData({if (resumable != null) #resumable: resumable}));
   @override
   InvalidSessionEvent $make(CopyWithData data) => InvalidSessionEvent(
-    isResumable: data.get(#isResumable, or: $value.isResumable),
+    resumable: data.get(#resumable, or: $value.resumable),
   );
 
   @override

@@ -27,11 +27,10 @@ class PrivateThreadMapper extends SubClassMapperBase<PrivateThread> {
 
   static Snowflake _$id(PrivateThread v) => v.id;
   static const Field<PrivateThread, Snowflake> _f$id = Field('id', _$id);
-  static bool _$isInvitable(PrivateThread v) => v.isInvitable;
-  static const Field<PrivateThread, bool> _f$isInvitable = Field(
-    'isInvitable',
-    _$isInvitable,
-    key: r'is_invitable',
+  static bool _$invitable(PrivateThread v) => v.invitable;
+  static const Field<PrivateThread, bool> _f$invitable = Field(
+    'invitable',
+    _$invitable,
   );
   static List<Snowflake>? _$appliedTags(PrivateThread v) => v.appliedTags;
   static const Field<PrivateThread, List<Snowflake>> _f$appliedTags = Field(
@@ -71,18 +70,13 @@ class PrivateThreadMapper extends SubClassMapperBase<PrivateThread> {
     _$guildId,
     key: r'guild_id',
   );
-  static bool _$isArchived(PrivateThread v) => v.isArchived;
-  static const Field<PrivateThread, bool> _f$isArchived = Field(
-    'isArchived',
-    _$isArchived,
-    key: r'is_archived',
+  static bool _$archived(PrivateThread v) => v.archived;
+  static const Field<PrivateThread, bool> _f$archived = Field(
+    'archived',
+    _$archived,
   );
-  static bool _$isLocked(PrivateThread v) => v.isLocked;
-  static const Field<PrivateThread, bool> _f$isLocked = Field(
-    'isLocked',
-    _$isLocked,
-    key: r'is_locked',
-  );
+  static bool _$locked(PrivateThread v) => v.locked;
+  static const Field<PrivateThread, bool> _f$locked = Field('locked', _$locked);
   static bool _$nsfw(PrivateThread v) => v.nsfw;
   static const Field<PrivateThread, bool> _f$nsfw = Field(
     'nsfw',
@@ -156,15 +150,15 @@ class PrivateThreadMapper extends SubClassMapperBase<PrivateThread> {
   @override
   final MappableFields<PrivateThread> fields = const {
     #id: _f$id,
-    #isInvitable: _f$isInvitable,
+    #invitable: _f$invitable,
     #appliedTags: _f$appliedTags,
     #approximateMemberCount: _f$approximateMemberCount,
     #archiveTimestamp: _f$archiveTimestamp,
     #autoArchiveDuration: _f$autoArchiveDuration,
     #createdAt: _f$createdAt,
     #guildId: _f$guildId,
-    #isArchived: _f$isArchived,
-    #isLocked: _f$isLocked,
+    #archived: _f$archived,
+    #locked: _f$locked,
     #nsfw: _f$nsfw,
     #lastMessageId: _f$lastMessageId,
     #lastPinTimestamp: _f$lastPinTimestamp,
@@ -190,15 +184,15 @@ class PrivateThreadMapper extends SubClassMapperBase<PrivateThread> {
   static PrivateThread _instantiate(DecodingData data) {
     return PrivateThread(
       id: data.dec(_f$id),
-      isInvitable: data.dec(_f$isInvitable),
+      invitable: data.dec(_f$invitable),
       appliedTags: data.dec(_f$appliedTags),
       approximateMemberCount: data.dec(_f$approximateMemberCount),
       archiveTimestamp: data.dec(_f$archiveTimestamp),
       autoArchiveDuration: data.dec(_f$autoArchiveDuration),
       createdAt: data.dec(_f$createdAt),
       guildId: data.dec(_f$guildId),
-      isArchived: data.dec(_f$isArchived),
-      isLocked: data.dec(_f$isLocked),
+      archived: data.dec(_f$archived),
+      locked: data.dec(_f$locked),
       nsfw: data.dec(_f$nsfw),
       lastMessageId: data.dec(_f$lastMessageId),
       lastPinTimestamp: data.dec(_f$lastPinTimestamp),
@@ -296,15 +290,15 @@ abstract class PrivateThreadCopyWith<$R, $In extends PrivateThread, $Out>
   @override
   $R call({
     Snowflake? id,
-    bool? isInvitable,
+    bool? invitable,
     List<Snowflake>? appliedTags,
     int? approximateMemberCount,
     DateTime? archiveTimestamp,
     Duration? autoArchiveDuration,
     DateTime? createdAt,
     Snowflake? guildId,
-    bool? isArchived,
-    bool? isLocked,
+    bool? archived,
+    bool? locked,
     bool? nsfw,
     Snowflake? lastMessageId,
     DateTime? lastPinTimestamp,
@@ -370,15 +364,15 @@ class _PrivateThreadCopyWithImpl<$R, $Out>
   @override
   $R call({
     Snowflake? id,
-    bool? isInvitable,
+    bool? invitable,
     Object? appliedTags = $none,
     int? approximateMemberCount,
     DateTime? archiveTimestamp,
     Duration? autoArchiveDuration,
     DateTime? createdAt,
     Object? guildId = $none,
-    bool? isArchived,
-    bool? isLocked,
+    bool? archived,
+    bool? locked,
     bool? nsfw,
     Object? lastMessageId = $none,
     Object? lastPinTimestamp = $none,
@@ -394,7 +388,7 @@ class _PrivateThreadCopyWithImpl<$R, $Out>
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
-      if (isInvitable != null) #isInvitable: isInvitable,
+      if (invitable != null) #invitable: invitable,
       if (appliedTags != $none) #appliedTags: appliedTags,
       if (approximateMemberCount != null)
         #approximateMemberCount: approximateMemberCount,
@@ -403,8 +397,8 @@ class _PrivateThreadCopyWithImpl<$R, $Out>
         #autoArchiveDuration: autoArchiveDuration,
       if (createdAt != null) #createdAt: createdAt,
       if (guildId != $none) #guildId: guildId,
-      if (isArchived != null) #isArchived: isArchived,
-      if (isLocked != null) #isLocked: isLocked,
+      if (archived != null) #archived: archived,
+      if (locked != null) #locked: locked,
       if (nsfw != null) #nsfw: nsfw,
       if (lastMessageId != $none) #lastMessageId: lastMessageId,
       if (lastPinTimestamp != $none) #lastPinTimestamp: lastPinTimestamp,
@@ -423,7 +417,7 @@ class _PrivateThreadCopyWithImpl<$R, $Out>
   @override
   PrivateThread $make(CopyWithData data) => PrivateThread(
     id: data.get(#id, or: $value.id),
-    isInvitable: data.get(#isInvitable, or: $value.isInvitable),
+    invitable: data.get(#invitable, or: $value.invitable),
     appliedTags: data.get(#appliedTags, or: $value.appliedTags),
     approximateMemberCount: data.get(
       #approximateMemberCount,
@@ -436,8 +430,8 @@ class _PrivateThreadCopyWithImpl<$R, $Out>
     ),
     createdAt: data.get(#createdAt, or: $value.createdAt),
     guildId: data.get(#guildId, or: $value.guildId),
-    isArchived: data.get(#isArchived, or: $value.isArchived),
-    isLocked: data.get(#isLocked, or: $value.isLocked),
+    archived: data.get(#archived, or: $value.archived),
+    locked: data.get(#locked, or: $value.locked),
     nsfw: data.get(#nsfw, or: $value.nsfw),
     lastMessageId: data.get(#lastMessageId, or: $value.lastMessageId),
     lastPinTimestamp: data.get(#lastPinTimestamp, or: $value.lastPinTimestamp),

@@ -26,16 +26,16 @@ class Connection with ToStringHelper, ConnectionMappable {
   final List<Snowflake>? integrations;
 
   /// Whether the connection is verified.
-  final bool isVerified;
+  final bool verified;
 
   /// Whether friend sync is enabled for this connection.
-  final bool isFriendSyncEnabled;
+  final bool friendSyncEnabled;
 
   /// Whether activities related to this connection will be shown in presence updates.
   final bool showActivity;
 
   /// Whether the connection has a corresponding third party OAuth2 token.
-  final bool isTwoWayLink;
+  final bool twoWayLink;
 
   /// The visibility of this connection.
   final ConnectionVisibility visibility;
@@ -48,10 +48,10 @@ class Connection with ToStringHelper, ConnectionMappable {
     required this.type,
     required this.isRevoked,
     required this.integrations,
-    required this.isVerified,
-    required this.isFriendSyncEnabled,
+    required this.verified,
+    required this.friendSyncEnabled,
     required this.showActivity,
-    required this.isTwoWayLink,
+    required this.twoWayLink,
     required this.visibility,
   });
 }

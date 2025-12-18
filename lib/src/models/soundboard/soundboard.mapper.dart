@@ -53,11 +53,10 @@ class SoundboardSoundMapper extends ClassMapperBase<SoundboardSound> {
     _$guildId,
     key: r'guild_id',
   );
-  static bool _$isAvailable(SoundboardSound v) => v.isAvailable;
-  static const Field<SoundboardSound, bool> _f$isAvailable = Field(
-    'isAvailable',
-    _$isAvailable,
-    key: r'is_available',
+  static bool _$available(SoundboardSound v) => v.available;
+  static const Field<SoundboardSound, bool> _f$available = Field(
+    'available',
+    _$available,
   );
   static User? _$user(SoundboardSound v) => v.user;
   static const Field<SoundboardSound, User> _f$user = Field('user', _$user);
@@ -71,7 +70,7 @@ class SoundboardSoundMapper extends ClassMapperBase<SoundboardSound> {
     #emojiName: _f$emojiName,
     #emojiId: _f$emojiId,
     #guildId: _f$guildId,
-    #isAvailable: _f$isAvailable,
+    #available: _f$available,
     #user: _f$user,
   };
 
@@ -84,7 +83,7 @@ class SoundboardSoundMapper extends ClassMapperBase<SoundboardSound> {
       emojiName: data.dec(_f$emojiName),
       emojiId: data.dec(_f$emojiId),
       guildId: data.dec(_f$guildId),
-      isAvailable: data.dec(_f$isAvailable),
+      available: data.dec(_f$available),
       user: data.dec(_f$user),
     );
   }
@@ -163,7 +162,7 @@ abstract class SoundboardSoundCopyWith<$R, $In extends SoundboardSound, $Out>
     String? emojiName,
     Snowflake? emojiId,
     Snowflake? guildId,
-    bool? isAvailable,
+    bool? available,
     User? user,
   });
   SoundboardSoundCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
@@ -200,7 +199,7 @@ class _SoundboardSoundCopyWithImpl<$R, $Out>
     Object? emojiName = $none,
     Object? emojiId = $none,
     Object? guildId = $none,
-    bool? isAvailable,
+    bool? available,
     Object? user = $none,
   }) => $apply(
     FieldCopyWithData({
@@ -211,7 +210,7 @@ class _SoundboardSoundCopyWithImpl<$R, $Out>
       if (emojiName != $none) #emojiName: emojiName,
       if (emojiId != $none) #emojiId: emojiId,
       if (guildId != $none) #guildId: guildId,
-      if (isAvailable != null) #isAvailable: isAvailable,
+      if (available != null) #available: available,
       if (user != $none) #user: user,
     }),
   );
@@ -224,7 +223,7 @@ class _SoundboardSoundCopyWithImpl<$R, $Out>
     emojiName: data.get(#emojiName, or: $value.emojiName),
     emojiId: data.get(#emojiId, or: $value.emojiId),
     guildId: data.get(#guildId, or: $value.guildId),
-    isAvailable: data.get(#isAvailable, or: $value.isAvailable),
+    available: data.get(#available, or: $value.available),
     user: data.get(#user, or: $value.user),
   );
 

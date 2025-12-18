@@ -122,11 +122,10 @@ class InviteWithMetadataMapper extends ClassMapperBase<InviteWithMetadata> {
     _$maxAge,
     key: r'max_age',
   );
-  static bool _$isTemporary(InviteWithMetadata v) => v.isTemporary;
-  static const Field<InviteWithMetadata, bool> _f$isTemporary = Field(
-    'isTemporary',
-    _$isTemporary,
-    key: r'is_temporary',
+  static bool _$temporary(InviteWithMetadata v) => v.temporary;
+  static const Field<InviteWithMetadata, bool> _f$temporary = Field(
+    'temporary',
+    _$temporary,
   );
   static DateTime _$createdAt(InviteWithMetadata v) => v.createdAt;
   static const Field<InviteWithMetadata, DateTime> _f$createdAt = Field(
@@ -153,7 +152,7 @@ class InviteWithMetadataMapper extends ClassMapperBase<InviteWithMetadata> {
     #uses: _f$uses,
     #maxUses: _f$maxUses,
     #maxAge: _f$maxAge,
-    #isTemporary: _f$isTemporary,
+    #temporary: _f$temporary,
     #createdAt: _f$createdAt,
   };
 
@@ -175,7 +174,7 @@ class InviteWithMetadataMapper extends ClassMapperBase<InviteWithMetadata> {
       uses: data.dec(_f$uses),
       maxUses: data.dec(_f$maxUses),
       maxAge: data.dec(_f$maxAge),
-      isTemporary: data.dec(_f$isTemporary),
+      temporary: data.dec(_f$temporary),
       createdAt: data.dec(_f$createdAt),
     );
   }
@@ -284,7 +283,7 @@ abstract class InviteWithMetadataCopyWith<
     int? uses,
     int? maxUses,
     Duration? maxAge,
-    bool? isTemporary,
+    bool? temporary,
     DateTime? createdAt,
   });
   InviteWithMetadataCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
@@ -343,7 +342,7 @@ class _InviteWithMetadataCopyWithImpl<$R, $Out>
     int? uses,
     int? maxUses,
     Duration? maxAge,
-    bool? isTemporary,
+    bool? temporary,
     DateTime? createdAt,
   }) => $apply(
     FieldCopyWithData({
@@ -366,7 +365,7 @@ class _InviteWithMetadataCopyWithImpl<$R, $Out>
       if (uses != null) #uses: uses,
       if (maxUses != null) #maxUses: maxUses,
       if (maxAge != null) #maxAge: maxAge,
-      if (isTemporary != null) #isTemporary: isTemporary,
+      if (temporary != null) #temporary: temporary,
       if (createdAt != null) #createdAt: createdAt,
     }),
   );
@@ -400,7 +399,7 @@ class _InviteWithMetadataCopyWithImpl<$R, $Out>
     uses: data.get(#uses, or: $value.uses),
     maxUses: data.get(#maxUses, or: $value.maxUses),
     maxAge: data.get(#maxAge, or: $value.maxAge),
-    isTemporary: data.get(#isTemporary, or: $value.isTemporary),
+    temporary: data.get(#temporary, or: $value.temporary),
     createdAt: data.get(#createdAt, or: $value.createdAt),
   );
 

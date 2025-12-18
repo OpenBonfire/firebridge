@@ -54,47 +54,45 @@ class VoiceStateMapper extends ClassMapperBase<VoiceState> {
     _$sessionId,
     key: r'session_id',
   );
-  static bool _$isServerDeafened(VoiceState v) => v.isServerDeafened;
-  static const Field<VoiceState, bool> _f$isServerDeafened = Field(
-    'isServerDeafened',
-    _$isServerDeafened,
-    key: r'is_server_deafened',
+  static bool _$selfDeafened(VoiceState v) => v.selfDeafened;
+  static const Field<VoiceState, bool> _f$selfDeafened = Field(
+    'selfDeafened',
+    _$selfDeafened,
+    key: r'self_deafened',
   );
-  static bool _$isServerMuted(VoiceState v) => v.isServerMuted;
-  static const Field<VoiceState, bool> _f$isServerMuted = Field(
-    'isServerMuted',
-    _$isServerMuted,
-    key: r'is_server_muted',
+  static bool _$serverMuted(VoiceState v) => v.serverMuted;
+  static const Field<VoiceState, bool> _f$serverMuted = Field(
+    'serverMuted',
+    _$serverMuted,
+    key: r'server_muted',
   );
-  static bool _$isSelfDeafened(VoiceState v) => v.isSelfDeafened;
-  static const Field<VoiceState, bool> _f$isSelfDeafened = Field(
-    'isSelfDeafened',
-    _$isSelfDeafened,
-    key: r'is_self_deafened',
+  static bool _$serverDeafened(VoiceState v) => v.serverDeafened;
+  static const Field<VoiceState, bool> _f$serverDeafened = Field(
+    'serverDeafened',
+    _$serverDeafened,
+    key: r'server_deafened',
   );
-  static bool _$isSelfMuted(VoiceState v) => v.isSelfMuted;
-  static const Field<VoiceState, bool> _f$isSelfMuted = Field(
-    'isSelfMuted',
-    _$isSelfMuted,
-    key: r'is_self_muted',
+  static bool _$selfMuted(VoiceState v) => v.selfMuted;
+  static const Field<VoiceState, bool> _f$selfMuted = Field(
+    'selfMuted',
+    _$selfMuted,
+    key: r'self_muted',
   );
-  static bool _$isStreaming(VoiceState v) => v.isStreaming;
-  static const Field<VoiceState, bool> _f$isStreaming = Field(
-    'isStreaming',
-    _$isStreaming,
-    key: r'is_streaming',
+  static bool _$streaming(VoiceState v) => v.streaming;
+  static const Field<VoiceState, bool> _f$streaming = Field(
+    'streaming',
+    _$streaming,
   );
-  static bool _$isVideoEnabled(VoiceState v) => v.isVideoEnabled;
-  static const Field<VoiceState, bool> _f$isVideoEnabled = Field(
-    'isVideoEnabled',
-    _$isVideoEnabled,
-    key: r'is_video_enabled',
+  static bool _$videoEnabled(VoiceState v) => v.videoEnabled;
+  static const Field<VoiceState, bool> _f$videoEnabled = Field(
+    'videoEnabled',
+    _$videoEnabled,
+    key: r'video_enabled',
   );
-  static bool _$isSuppressed(VoiceState v) => v.isSuppressed;
-  static const Field<VoiceState, bool> _f$isSuppressed = Field(
-    'isSuppressed',
-    _$isSuppressed,
-    key: r'is_suppressed',
+  static bool _$suppressed(VoiceState v) => v.suppressed;
+  static const Field<VoiceState, bool> _f$suppressed = Field(
+    'suppressed',
+    _$suppressed,
   );
   static DateTime? _$requestedToSpeakAt(VoiceState v) => v.requestedToSpeakAt;
   static const Field<VoiceState, DateTime> _f$requestedToSpeakAt = Field(
@@ -111,13 +109,13 @@ class VoiceStateMapper extends ClassMapperBase<VoiceState> {
     #userId: _f$userId,
     #member: _f$member,
     #sessionId: _f$sessionId,
-    #isServerDeafened: _f$isServerDeafened,
-    #isServerMuted: _f$isServerMuted,
-    #isSelfDeafened: _f$isSelfDeafened,
-    #isSelfMuted: _f$isSelfMuted,
-    #isStreaming: _f$isStreaming,
-    #isVideoEnabled: _f$isVideoEnabled,
-    #isSuppressed: _f$isSuppressed,
+    #selfDeafened: _f$selfDeafened,
+    #serverMuted: _f$serverMuted,
+    #serverDeafened: _f$serverDeafened,
+    #selfMuted: _f$selfMuted,
+    #streaming: _f$streaming,
+    #videoEnabled: _f$videoEnabled,
+    #suppressed: _f$suppressed,
     #requestedToSpeakAt: _f$requestedToSpeakAt,
   };
 
@@ -129,13 +127,13 @@ class VoiceStateMapper extends ClassMapperBase<VoiceState> {
       userId: data.dec(_f$userId),
       member: data.dec(_f$member),
       sessionId: data.dec(_f$sessionId),
-      isServerDeafened: data.dec(_f$isServerDeafened),
-      isServerMuted: data.dec(_f$isServerMuted),
-      isSelfDeafened: data.dec(_f$isSelfDeafened),
-      isSelfMuted: data.dec(_f$isSelfMuted),
-      isStreaming: data.dec(_f$isStreaming),
-      isVideoEnabled: data.dec(_f$isVideoEnabled),
-      isSuppressed: data.dec(_f$isSuppressed),
+      selfDeafened: data.dec(_f$selfDeafened),
+      serverMuted: data.dec(_f$serverMuted),
+      serverDeafened: data.dec(_f$serverDeafened),
+      selfMuted: data.dec(_f$selfMuted),
+      streaming: data.dec(_f$streaming),
+      videoEnabled: data.dec(_f$videoEnabled),
+      suppressed: data.dec(_f$suppressed),
       requestedToSpeakAt: data.dec(_f$requestedToSpeakAt),
     );
   }
@@ -211,13 +209,13 @@ abstract class VoiceStateCopyWith<$R, $In extends VoiceState, $Out>
     Snowflake? userId,
     Member? member,
     String? sessionId,
-    bool? isServerDeafened,
-    bool? isServerMuted,
-    bool? isSelfDeafened,
-    bool? isSelfMuted,
-    bool? isStreaming,
-    bool? isVideoEnabled,
-    bool? isSuppressed,
+    bool? selfDeafened,
+    bool? serverMuted,
+    bool? serverDeafened,
+    bool? selfMuted,
+    bool? streaming,
+    bool? videoEnabled,
+    bool? suppressed,
     DateTime? requestedToSpeakAt,
   });
   VoiceStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
@@ -251,13 +249,13 @@ class _VoiceStateCopyWithImpl<$R, $Out>
     Snowflake? userId,
     Object? member = $none,
     String? sessionId,
-    bool? isServerDeafened,
-    bool? isServerMuted,
-    bool? isSelfDeafened,
-    bool? isSelfMuted,
-    bool? isStreaming,
-    bool? isVideoEnabled,
-    bool? isSuppressed,
+    bool? selfDeafened,
+    bool? serverMuted,
+    bool? serverDeafened,
+    bool? selfMuted,
+    bool? streaming,
+    bool? videoEnabled,
+    bool? suppressed,
     Object? requestedToSpeakAt = $none,
   }) => $apply(
     FieldCopyWithData({
@@ -267,13 +265,13 @@ class _VoiceStateCopyWithImpl<$R, $Out>
       if (userId != null) #userId: userId,
       if (member != $none) #member: member,
       if (sessionId != null) #sessionId: sessionId,
-      if (isServerDeafened != null) #isServerDeafened: isServerDeafened,
-      if (isServerMuted != null) #isServerMuted: isServerMuted,
-      if (isSelfDeafened != null) #isSelfDeafened: isSelfDeafened,
-      if (isSelfMuted != null) #isSelfMuted: isSelfMuted,
-      if (isStreaming != null) #isStreaming: isStreaming,
-      if (isVideoEnabled != null) #isVideoEnabled: isVideoEnabled,
-      if (isSuppressed != null) #isSuppressed: isSuppressed,
+      if (selfDeafened != null) #selfDeafened: selfDeafened,
+      if (serverMuted != null) #serverMuted: serverMuted,
+      if (serverDeafened != null) #serverDeafened: serverDeafened,
+      if (selfMuted != null) #selfMuted: selfMuted,
+      if (streaming != null) #streaming: streaming,
+      if (videoEnabled != null) #videoEnabled: videoEnabled,
+      if (suppressed != null) #suppressed: suppressed,
       if (requestedToSpeakAt != $none) #requestedToSpeakAt: requestedToSpeakAt,
     }),
   );
@@ -285,13 +283,13 @@ class _VoiceStateCopyWithImpl<$R, $Out>
     userId: data.get(#userId, or: $value.userId),
     member: data.get(#member, or: $value.member),
     sessionId: data.get(#sessionId, or: $value.sessionId),
-    isServerDeafened: data.get(#isServerDeafened, or: $value.isServerDeafened),
-    isServerMuted: data.get(#isServerMuted, or: $value.isServerMuted),
-    isSelfDeafened: data.get(#isSelfDeafened, or: $value.isSelfDeafened),
-    isSelfMuted: data.get(#isSelfMuted, or: $value.isSelfMuted),
-    isStreaming: data.get(#isStreaming, or: $value.isStreaming),
-    isVideoEnabled: data.get(#isVideoEnabled, or: $value.isVideoEnabled),
-    isSuppressed: data.get(#isSuppressed, or: $value.isSuppressed),
+    selfDeafened: data.get(#selfDeafened, or: $value.selfDeafened),
+    serverMuted: data.get(#serverMuted, or: $value.serverMuted),
+    serverDeafened: data.get(#serverDeafened, or: $value.serverDeafened),
+    selfMuted: data.get(#selfMuted, or: $value.selfMuted),
+    streaming: data.get(#streaming, or: $value.streaming),
+    videoEnabled: data.get(#videoEnabled, or: $value.videoEnabled),
+    suppressed: data.get(#suppressed, or: $value.suppressed),
     requestedToSpeakAt: data.get(
       #requestedToSpeakAt,
       or: $value.requestedToSpeakAt,

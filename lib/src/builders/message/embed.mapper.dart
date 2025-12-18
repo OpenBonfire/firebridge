@@ -854,25 +854,24 @@ class EmbedFieldBuilderMapper extends ClassMapperBase<EmbedFieldBuilder> {
     'value',
     _$value,
   );
-  static bool _$isInline(EmbedFieldBuilder v) => v.isInline;
-  static const Field<EmbedFieldBuilder, bool> _f$isInline = Field(
-    'isInline',
-    _$isInline,
-    key: r'is_inline',
+  static bool _$inline(EmbedFieldBuilder v) => v.inline;
+  static const Field<EmbedFieldBuilder, bool> _f$inline = Field(
+    'inline',
+    _$inline,
   );
 
   @override
   final MappableFields<EmbedFieldBuilder> fields = const {
     #name: _f$name,
     #value: _f$value,
-    #isInline: _f$isInline,
+    #inline: _f$inline,
   };
 
   static EmbedFieldBuilder _instantiate(DecodingData data) {
     return EmbedFieldBuilder(
       name: data.dec(_f$name),
       value: data.dec(_f$value),
-      isInline: data.dec(_f$isInline),
+      inline: data.dec(_f$inline),
     );
   }
 
@@ -947,7 +946,7 @@ abstract class EmbedFieldBuilderCopyWith<
   $Out
 >
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? name, String? value, bool? isInline});
+  $R call({String? name, String? value, bool? inline});
   EmbedFieldBuilderCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -962,18 +961,18 @@ class _EmbedFieldBuilderCopyWithImpl<$R, $Out>
   late final ClassMapperBase<EmbedFieldBuilder> $mapper =
       EmbedFieldBuilderMapper.ensureInitialized();
   @override
-  $R call({String? name, String? value, bool? isInline}) => $apply(
+  $R call({String? name, String? value, bool? inline}) => $apply(
     FieldCopyWithData({
       if (name != null) #name: name,
       if (value != null) #value: value,
-      if (isInline != null) #isInline: isInline,
+      if (inline != null) #inline: inline,
     }),
   );
   @override
   EmbedFieldBuilder $make(CopyWithData data) => EmbedFieldBuilder(
     name: data.get(#name, or: $value.name),
     value: data.get(#value, or: $value.value),
-    isInline: data.get(#isInline, or: $value.isInline),
+    inline: data.get(#inline, or: $value.inline),
   );
 
   @override

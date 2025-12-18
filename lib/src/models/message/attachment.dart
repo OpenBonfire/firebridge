@@ -48,7 +48,7 @@ class Attachment with ToStringHelper, AttachmentMappable {
   final int? width;
 
   /// Whether this attachment is ephemeral.
-  final bool isEphemeral;
+  final bool ephemeral;
 
   /// The duration of this audio file for voice messages.
   final Duration? duration;
@@ -72,7 +72,7 @@ class Attachment with ToStringHelper, AttachmentMappable {
     required this.proxiedUrl,
     required this.height,
     required this.width,
-    required this.isEphemeral,
+    required this.ephemeral,
     required this.duration,
     required this.waveform,
     required this.flags,

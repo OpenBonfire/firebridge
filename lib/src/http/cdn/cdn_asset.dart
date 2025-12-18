@@ -33,7 +33,7 @@ class CdnAsset with CdnAssetMappable {
   final CdnFormat defaultFormat;
 
   /// Whether this asset is an animated image.
-  final bool isAnimated;
+  final bool animated;
 
   /// The URL at which this asset can be fetched from.
   final Uri url;
@@ -44,10 +44,10 @@ class CdnAsset with CdnAssetMappable {
     required this.hash,
     required this.url,
     CdnFormat? defaultFormat,
-    bool? isAnimated,
-  })  : isAnimated = isAnimated ?? hash.startsWith('a_'),
+    bool? animated,
+  })  : animated = animated ?? hash.startsWith('a_'),
         defaultFormat = defaultFormat ??
-            ((isAnimated ?? hash.startsWith('a_'))
+            ((animated ?? hash.startsWith('a_'))
                 ? CdnFormat.gif
                 : CdnFormat.png);
   @override

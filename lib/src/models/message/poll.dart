@@ -86,14 +86,14 @@ class PollAnswerCount with ToStringHelper, PollAnswerCountMappable {
 @MappableClass()
 class PollResults with ToStringHelper, PollResultsMappable {
   /// Whether the votes have been precisely counted.
-  final bool isFinalized;
+  final bool finalized;
 
   /// The counts for each answer.
   final List<PollAnswerCount> answerCounts;
 
   /// {@macro poll_results}
   /// @nodoc
-  PollResults({required this.isFinalized, required this.answerCounts});
+  PollResults({required this.finalized, required this.answerCounts});
 }
 
 /// {@template poll}

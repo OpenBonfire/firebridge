@@ -9,6 +9,7 @@ part 'auto_moderation.mapper.dart';
 /// {@template auto_moderation_rule_create_event}
 /// Emitted when an auto moderation rule is created.
 /// {@endtemplate}
+///
 @MappableClass(discriminatorValue: "AUTO_MODERATION_RULE_CREATE")
 class AutoModerationRuleCreateEvent extends DispatchEvent
     with AutoModerationRuleCreateEventMappable {

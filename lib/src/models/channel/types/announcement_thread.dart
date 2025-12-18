@@ -30,10 +30,10 @@ class AnnouncementThread extends TextChannel
   final Snowflake guildId;
 
   @override
-  final bool isArchived;
+  final bool archived;
 
   @override
-  final bool isLocked;
+  final bool locked;
 
   @override
   final bool nsfw;
@@ -83,8 +83,8 @@ class AnnouncementThread extends TextChannel
     required this.autoArchiveDuration,
     required this.createdAt,
     required this.guildId,
-    required this.isArchived,
-    required this.isLocked,
+    required this.archived,
+    required this.locked,
     this.nsfw = false,
     required this.lastMessageId,
     required this.lastPinTimestamp,

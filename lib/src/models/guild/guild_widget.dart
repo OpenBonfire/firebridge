@@ -56,7 +56,7 @@ class WidgetSettings with ToStringHelper, WidgetSettingsMappable {
   final GuildManager manager;
 
   /// Whether the widget is enabled in this guild.
-  final bool isEnabled;
+  final bool enabled;
 
   /// The ID of the channel the widget should send users to.
   final Snowflake? channelId;
@@ -65,7 +65,7 @@ class WidgetSettings with ToStringHelper, WidgetSettingsMappable {
   /// @nodoc
   WidgetSettings({
     required this.manager,
-    required this.isEnabled,
+    required this.enabled,
     required this.channelId,
   });
 }

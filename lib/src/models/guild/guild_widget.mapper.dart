@@ -312,11 +312,10 @@ class WidgetSettingsMapper extends ClassMapperBase<WidgetSettings> {
     'manager',
     _$manager,
   );
-  static bool _$isEnabled(WidgetSettings v) => v.isEnabled;
-  static const Field<WidgetSettings, bool> _f$isEnabled = Field(
-    'isEnabled',
-    _$isEnabled,
-    key: r'is_enabled',
+  static bool _$enabled(WidgetSettings v) => v.enabled;
+  static const Field<WidgetSettings, bool> _f$enabled = Field(
+    'enabled',
+    _$enabled,
   );
   static Snowflake? _$channelId(WidgetSettings v) => v.channelId;
   static const Field<WidgetSettings, Snowflake> _f$channelId = Field(
@@ -328,14 +327,14 @@ class WidgetSettingsMapper extends ClassMapperBase<WidgetSettings> {
   @override
   final MappableFields<WidgetSettings> fields = const {
     #manager: _f$manager,
-    #isEnabled: _f$isEnabled,
+    #enabled: _f$enabled,
     #channelId: _f$channelId,
   };
 
   static WidgetSettings _instantiate(DecodingData data) {
     return WidgetSettings(
       manager: data.dec(_f$manager),
-      isEnabled: data.dec(_f$isEnabled),
+      enabled: data.dec(_f$enabled),
       channelId: data.dec(_f$channelId),
     );
   }
@@ -403,7 +402,7 @@ extension WidgetSettingsValueCopy<$R, $Out>
 abstract class WidgetSettingsCopyWith<$R, $In extends WidgetSettings, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
-  $R call({GuildManager? manager, bool? isEnabled, Snowflake? channelId});
+  $R call({GuildManager? manager, bool? enabled, Snowflake? channelId});
   WidgetSettingsCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -421,21 +420,18 @@ class _WidgetSettingsCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId =>
       $value.channelId?.copyWith.$chain((v) => call(channelId: v));
   @override
-  $R call({
-    GuildManager? manager,
-    bool? isEnabled,
-    Object? channelId = $none,
-  }) => $apply(
-    FieldCopyWithData({
-      if (manager != null) #manager: manager,
-      if (isEnabled != null) #isEnabled: isEnabled,
-      if (channelId != $none) #channelId: channelId,
-    }),
-  );
+  $R call({GuildManager? manager, bool? enabled, Object? channelId = $none}) =>
+      $apply(
+        FieldCopyWithData({
+          if (manager != null) #manager: manager,
+          if (enabled != null) #enabled: enabled,
+          if (channelId != $none) #channelId: channelId,
+        }),
+      );
   @override
   WidgetSettings $make(CopyWithData data) => WidgetSettings(
     manager: data.get(#manager, or: $value.manager),
-    isEnabled: data.get(#isEnabled, or: $value.isEnabled),
+    enabled: data.get(#enabled, or: $value.enabled),
     channelId: data.get(#channelId, or: $value.channelId),
   );
 

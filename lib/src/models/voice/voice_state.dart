@@ -33,25 +33,25 @@ class VoiceState with ToStringHelper, VoiceStateMappable {
   final String sessionId;
 
   /// Whether the user is deafened by the server.
-  final bool isServerDeafened;
+  final bool serverDeafened;
 
   /// Whether the user is muted by the server.
-  final bool isServerMuted;
+  final bool serverMuted;
 
   /// Whether the user has deafened themselves.
-  final bool isSelfDeafened;
+  final bool selfDeafened;
 
   /// Whether the used has muted themselves.
-  final bool isSelfMuted;
+  final bool selfMuted;
 
   /// Whether the user is streaming.
-  final bool isStreaming;
+  final bool streaming;
 
   /// Whether the user's camera is enabled.
-  final bool isVideoEnabled;
+  final bool videoEnabled;
 
   /// Whether the user is not permitted to speak.
-  final bool isSuppressed;
+  final bool suppressed;
 
   /// The timestamp at which this user requested to speak.
   final DateTime? requestedToSpeakAt;
@@ -65,21 +65,21 @@ class VoiceState with ToStringHelper, VoiceStateMappable {
     required this.userId,
     required this.member,
     required this.sessionId,
-    required this.isServerDeafened,
-    required this.isServerMuted,
-    required this.isSelfDeafened,
-    required this.isSelfMuted,
-    required this.isStreaming,
-    required this.isVideoEnabled,
-    required this.isSuppressed,
+    required this.selfDeafened,
+    required this.serverMuted,
+    required this.serverDeafened,
+    required this.selfMuted,
+    required this.streaming,
+    required this.videoEnabled,
+    required this.suppressed,
     required this.requestedToSpeakAt,
   });
 
   /// Whether this user is deafened.
-  bool get isDeafened => isServerDeafened || isSelfDeafened;
+  bool get isDeafened => serverDeafened || selfDeafened;
 
   /// Whether this user is muted.
-  bool get isMuted => isServerMuted || isSelfMuted;
+  bool get isMuted => serverMuted || selfMuted;
 
   /// The key this voice state will have in the [FirebridgeRest.voice] cache.
   @Deprecated('Use PartialGuild.voiceStates instead')

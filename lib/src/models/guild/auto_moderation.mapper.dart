@@ -275,11 +275,10 @@ class AutoModerationRuleMapper extends ClassMapperBase<AutoModerationRule> {
       v.actions;
   static const Field<AutoModerationRule, List<AutoModerationAction>>
   _f$actions = Field('actions', _$actions);
-  static bool _$isEnabled(AutoModerationRule v) => v.isEnabled;
-  static const Field<AutoModerationRule, bool> _f$isEnabled = Field(
-    'isEnabled',
-    _$isEnabled,
-    key: r'is_enabled',
+  static bool _$enabled(AutoModerationRule v) => v.enabled;
+  static const Field<AutoModerationRule, bool> _f$enabled = Field(
+    'enabled',
+    _$enabled,
   );
   static List<Snowflake> _$exemptRoleIds(AutoModerationRule v) =>
       v.exemptRoleIds;
@@ -300,7 +299,7 @@ class AutoModerationRuleMapper extends ClassMapperBase<AutoModerationRule> {
     #triggerType: _f$triggerType,
     #metadata: _f$metadata,
     #actions: _f$actions,
-    #isEnabled: _f$isEnabled,
+    #enabled: _f$enabled,
     #exemptRoleIds: _f$exemptRoleIds,
     #exemptChannelIds: _f$exemptChannelIds,
   };
@@ -315,7 +314,7 @@ class AutoModerationRuleMapper extends ClassMapperBase<AutoModerationRule> {
       triggerType: data.dec(_f$triggerType),
       metadata: data.dec(_f$metadata),
       actions: data.dec(_f$actions),
-      isEnabled: data.dec(_f$isEnabled),
+      enabled: data.dec(_f$enabled),
       exemptRoleIds: data.dec(_f$exemptRoleIds),
       exemptChannelIds: data.dec(_f$exemptChannelIds),
     );
@@ -415,7 +414,7 @@ abstract class AutoModerationRuleCopyWith<
     TriggerType? triggerType,
     TriggerMetadata? metadata,
     List<AutoModerationAction>? actions,
-    bool? isEnabled,
+    bool? enabled,
     List<Snowflake>? exemptRoleIds,
     List<Snowflake>? exemptChannelIds,
   });
@@ -479,7 +478,7 @@ class _AutoModerationRuleCopyWithImpl<$R, $Out>
     TriggerType? triggerType,
     TriggerMetadata? metadata,
     List<AutoModerationAction>? actions,
-    bool? isEnabled,
+    bool? enabled,
     List<Snowflake>? exemptRoleIds,
     List<Snowflake>? exemptChannelIds,
   }) => $apply(
@@ -492,7 +491,7 @@ class _AutoModerationRuleCopyWithImpl<$R, $Out>
       if (triggerType != null) #triggerType: triggerType,
       if (metadata != null) #metadata: metadata,
       if (actions != null) #actions: actions,
-      if (isEnabled != null) #isEnabled: isEnabled,
+      if (enabled != null) #enabled: enabled,
       if (exemptRoleIds != null) #exemptRoleIds: exemptRoleIds,
       if (exemptChannelIds != null) #exemptChannelIds: exemptChannelIds,
     }),
@@ -507,7 +506,7 @@ class _AutoModerationRuleCopyWithImpl<$R, $Out>
     triggerType: data.get(#triggerType, or: $value.triggerType),
     metadata: data.get(#metadata, or: $value.metadata),
     actions: data.get(#actions, or: $value.actions),
-    isEnabled: data.get(#isEnabled, or: $value.isEnabled),
+    enabled: data.get(#enabled, or: $value.enabled),
     exemptRoleIds: data.get(#exemptRoleIds, or: $value.exemptRoleIds),
     exemptChannelIds: data.get(#exemptChannelIds, or: $value.exemptChannelIds),
   );

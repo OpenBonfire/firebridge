@@ -13,7 +13,7 @@ part 'private_thread.mapper.dart';
 class PrivateThread extends TextChannel
     with PrivateThreadMappable
     implements Thread {
-  final bool isInvitable;
+  final bool invitable;
 
   @override
   final List<Snowflake>? appliedTags;
@@ -34,10 +34,10 @@ class PrivateThread extends TextChannel
   final Snowflake? guildId;
 
   @override
-  final bool isArchived;
+  final bool archived;
 
   @override
-  final bool isLocked;
+  final bool locked;
 
   @override
   final bool nsfw;
@@ -82,15 +82,15 @@ class PrivateThread extends TextChannel
   /// @nodoc
   PrivateThread({
     required super.id,
-    required this.isInvitable,
+    required this.invitable,
     required this.appliedTags,
     required this.approximateMemberCount,
     required this.archiveTimestamp,
     required this.autoArchiveDuration,
     required this.createdAt,
     required this.guildId,
-    required this.isArchived,
-    required this.isLocked,
+    required this.archived,
+    required this.locked,
     this.nsfw = false,
     required this.lastMessageId,
     required this.lastPinTimestamp,

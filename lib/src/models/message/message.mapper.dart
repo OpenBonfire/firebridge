@@ -247,12 +247,8 @@ class MessageMapper extends ClassMapperBase<Message> {
     _$editedTimestamp,
     key: r'edited_timestamp',
   );
-  static bool _$isTts(Message v) => v.isTts;
-  static const Field<Message, bool> _f$isTts = Field(
-    'isTts',
-    _$isTts,
-    key: r'is_tts',
-  );
+  static bool _$tts(Message v) => v.tts;
+  static const Field<Message, bool> _f$tts = Field('tts', _$tts);
   static bool _$mentionsEveryone(Message v) => v.mentionsEveryone;
   static const Field<Message, bool> _f$mentionsEveryone = Field(
     'mentionsEveryone',
@@ -293,12 +289,8 @@ class MessageMapper extends ClassMapperBase<Message> {
   );
   static dynamic _$nonce(Message v) => v.nonce;
   static const Field<Message, dynamic> _f$nonce = Field('nonce', _$nonce);
-  static bool _$isPinned(Message v) => v.isPinned;
-  static const Field<Message, bool> _f$isPinned = Field(
-    'isPinned',
-    _$isPinned,
-    key: r'is_pinned',
-  );
+  static bool _$pinned(Message v) => v.pinned;
+  static const Field<Message, bool> _f$pinned = Field('pinned', _$pinned);
   static Snowflake? _$webhookId(Message v) => v.webhookId;
   static const Field<Message, Snowflake> _f$webhookId = Field(
     'webhookId',
@@ -391,7 +383,7 @@ class MessageMapper extends ClassMapperBase<Message> {
     #content: _f$content,
     #timestamp: _f$timestamp,
     #editedTimestamp: _f$editedTimestamp,
-    #isTts: _f$isTts,
+    #tts: _f$tts,
     #mentionsEveryone: _f$mentionsEveryone,
     #mentions: _f$mentions,
     #roleMentionIds: _f$roleMentionIds,
@@ -400,7 +392,7 @@ class MessageMapper extends ClassMapperBase<Message> {
     #embeds: _f$embeds,
     #reactions: _f$reactions,
     #nonce: _f$nonce,
-    #isPinned: _f$isPinned,
+    #pinned: _f$pinned,
     #webhookId: _f$webhookId,
     #type: _f$type,
     #activity: _f$activity,
@@ -428,7 +420,7 @@ class MessageMapper extends ClassMapperBase<Message> {
       content: data.dec(_f$content),
       timestamp: data.dec(_f$timestamp),
       editedTimestamp: data.dec(_f$editedTimestamp),
-      isTts: data.dec(_f$isTts),
+      tts: data.dec(_f$tts),
       mentionsEveryone: data.dec(_f$mentionsEveryone),
       mentions: data.dec(_f$mentions),
       roleMentionIds: data.dec(_f$roleMentionIds),
@@ -437,7 +429,7 @@ class MessageMapper extends ClassMapperBase<Message> {
       embeds: data.dec(_f$embeds),
       reactions: data.dec(_f$reactions),
       nonce: data.dec(_f$nonce),
-      isPinned: data.dec(_f$isPinned),
+      pinned: data.dec(_f$pinned),
       webhookId: data.dec(_f$webhookId),
       type: data.dec(_f$type),
       activity: data.dec(_f$activity),
@@ -576,7 +568,7 @@ abstract class MessageCopyWith<$R, $In extends Message, $Out>
     String? content,
     DateTime? timestamp,
     DateTime? editedTimestamp,
-    bool? isTts,
+    bool? tts,
     bool? mentionsEveryone,
     List<User>? mentions,
     List<Snowflake>? roleMentionIds,
@@ -585,7 +577,7 @@ abstract class MessageCopyWith<$R, $In extends Message, $Out>
     List<Embed>? embeds,
     List<Reaction>? reactions,
     dynamic nonce,
-    bool? isPinned,
+    bool? pinned,
     Snowflake? webhookId,
     MessageType? type,
     MessageActivity? activity,
@@ -756,7 +748,7 @@ class _MessageCopyWithImpl<$R, $Out>
     String? content,
     DateTime? timestamp,
     Object? editedTimestamp = $none,
-    bool? isTts,
+    bool? tts,
     bool? mentionsEveryone,
     List<User>? mentions,
     List<Snowflake>? roleMentionIds,
@@ -765,7 +757,7 @@ class _MessageCopyWithImpl<$R, $Out>
     List<Embed>? embeds,
     List<Reaction>? reactions,
     Object? nonce = $none,
-    bool? isPinned,
+    bool? pinned,
     Object? webhookId = $none,
     MessageType? type,
     Object? activity = $none,
@@ -791,7 +783,7 @@ class _MessageCopyWithImpl<$R, $Out>
       if (content != null) #content: content,
       if (timestamp != null) #timestamp: timestamp,
       if (editedTimestamp != $none) #editedTimestamp: editedTimestamp,
-      if (isTts != null) #isTts: isTts,
+      if (tts != null) #tts: tts,
       if (mentionsEveryone != null) #mentionsEveryone: mentionsEveryone,
       if (mentions != null) #mentions: mentions,
       if (roleMentionIds != null) #roleMentionIds: roleMentionIds,
@@ -800,7 +792,7 @@ class _MessageCopyWithImpl<$R, $Out>
       if (embeds != null) #embeds: embeds,
       if (reactions != null) #reactions: reactions,
       if (nonce != $none) #nonce: nonce,
-      if (isPinned != null) #isPinned: isPinned,
+      if (pinned != null) #pinned: pinned,
       if (webhookId != $none) #webhookId: webhookId,
       if (type != null) #type: type,
       if (activity != $none) #activity: activity,
@@ -830,7 +822,7 @@ class _MessageCopyWithImpl<$R, $Out>
     content: data.get(#content, or: $value.content),
     timestamp: data.get(#timestamp, or: $value.timestamp),
     editedTimestamp: data.get(#editedTimestamp, or: $value.editedTimestamp),
-    isTts: data.get(#isTts, or: $value.isTts),
+    tts: data.get(#tts, or: $value.tts),
     mentionsEveryone: data.get(#mentionsEveryone, or: $value.mentionsEveryone),
     mentions: data.get(#mentions, or: $value.mentions),
     roleMentionIds: data.get(#roleMentionIds, or: $value.roleMentionIds),
@@ -839,7 +831,7 @@ class _MessageCopyWithImpl<$R, $Out>
     embeds: data.get(#embeds, or: $value.embeds),
     reactions: data.get(#reactions, or: $value.reactions),
     nonce: data.get(#nonce, or: $value.nonce),
-    isPinned: data.get(#isPinned, or: $value.isPinned),
+    pinned: data.get(#pinned, or: $value.pinned),
     webhookId: data.get(#webhookId, or: $value.webhookId),
     type: data.get(#type, or: $value.type),
     activity: data.get(#activity, or: $value.activity),

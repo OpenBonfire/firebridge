@@ -25,7 +25,7 @@ class Onboarding with ToStringHelper, OnboardingMappable {
   final List<Snowflake> defaultChannelIds;
 
   /// Whether onboarding is enabled for this guild.
-  final bool isEnabled;
+  final bool enabled;
 
   /// The current onboarding mode.
   final OnboardingMode mode;
@@ -37,7 +37,7 @@ class Onboarding with ToStringHelper, OnboardingMappable {
     required this.guildId,
     required this.prompts,
     required this.defaultChannelIds,
-    required this.isEnabled,
+    required this.enabled,
     required this.mode,
   });
 }
@@ -60,15 +60,15 @@ class OnboardingPrompt with ToStringHelper, OnboardingPromptMappable {
   final String title;
 
   /// Whether the user can select at most one option.
-  final bool isSingleSelect;
+  final bool singleSelect;
 
   /// Whether selecting an option is required.
-  final bool isRequired;
+  final bool required;
 
   /// If this prompt appears in the onboarding flow.
   ///
   /// If `false`, this prompt will only be visible in the Roles & Channels tab of the Discord client.
-  final bool isInOnboarding;
+  final bool inOnboarding;
 
   /// {@macro onboarding_prompt}
   /// @nodoc
@@ -77,9 +77,9 @@ class OnboardingPrompt with ToStringHelper, OnboardingPromptMappable {
     required this.type,
     required this.options,
     required this.title,
-    required this.isSingleSelect,
-    required this.isRequired,
-    required this.isInOnboarding,
+    required this.singleSelect,
+    required this.required,
+    required this.inOnboarding,
   });
 }
 

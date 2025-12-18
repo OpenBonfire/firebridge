@@ -25,41 +25,35 @@ class VoiceRegionMapper extends ClassMapperBase<VoiceRegion> {
   static const Field<VoiceRegion, String> _f$id = Field('id', _$id);
   static String _$name(VoiceRegion v) => v.name;
   static const Field<VoiceRegion, String> _f$name = Field('name', _$name);
-  static bool _$isOptimal(VoiceRegion v) => v.isOptimal;
-  static const Field<VoiceRegion, bool> _f$isOptimal = Field(
-    'isOptimal',
-    _$isOptimal,
-    key: r'is_optimal',
+  static bool _$optimal(VoiceRegion v) => v.optimal;
+  static const Field<VoiceRegion, bool> _f$optimal = Field(
+    'optimal',
+    _$optimal,
   );
-  static bool _$isDeprecated(VoiceRegion v) => v.isDeprecated;
-  static const Field<VoiceRegion, bool> _f$isDeprecated = Field(
-    'isDeprecated',
-    _$isDeprecated,
-    key: r'is_deprecated',
+  static bool _$deprecated(VoiceRegion v) => v.deprecated;
+  static const Field<VoiceRegion, bool> _f$deprecated = Field(
+    'deprecated',
+    _$deprecated,
   );
-  static bool _$isCustom(VoiceRegion v) => v.isCustom;
-  static const Field<VoiceRegion, bool> _f$isCustom = Field(
-    'isCustom',
-    _$isCustom,
-    key: r'is_custom',
-  );
+  static bool _$custom(VoiceRegion v) => v.custom;
+  static const Field<VoiceRegion, bool> _f$custom = Field('custom', _$custom);
 
   @override
   final MappableFields<VoiceRegion> fields = const {
     #id: _f$id,
     #name: _f$name,
-    #isOptimal: _f$isOptimal,
-    #isDeprecated: _f$isDeprecated,
-    #isCustom: _f$isCustom,
+    #optimal: _f$optimal,
+    #deprecated: _f$deprecated,
+    #custom: _f$custom,
   };
 
   static VoiceRegion _instantiate(DecodingData data) {
     return VoiceRegion(
       id: data.dec(_f$id),
       name: data.dec(_f$name),
-      isOptimal: data.dec(_f$isOptimal),
-      isDeprecated: data.dec(_f$isDeprecated),
-      isCustom: data.dec(_f$isCustom),
+      optimal: data.dec(_f$optimal),
+      deprecated: data.dec(_f$deprecated),
+      custom: data.dec(_f$custom),
     );
   }
 
@@ -126,9 +120,9 @@ abstract class VoiceRegionCopyWith<$R, $In extends VoiceRegion, $Out>
   $R call({
     String? id,
     String? name,
-    bool? isOptimal,
-    bool? isDeprecated,
-    bool? isCustom,
+    bool? optimal,
+    bool? deprecated,
+    bool? custom,
   });
   VoiceRegionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -145,25 +139,25 @@ class _VoiceRegionCopyWithImpl<$R, $Out>
   $R call({
     String? id,
     String? name,
-    bool? isOptimal,
-    bool? isDeprecated,
-    bool? isCustom,
+    bool? optimal,
+    bool? deprecated,
+    bool? custom,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
       if (name != null) #name: name,
-      if (isOptimal != null) #isOptimal: isOptimal,
-      if (isDeprecated != null) #isDeprecated: isDeprecated,
-      if (isCustom != null) #isCustom: isCustom,
+      if (optimal != null) #optimal: optimal,
+      if (deprecated != null) #deprecated: deprecated,
+      if (custom != null) #custom: custom,
     }),
   );
   @override
   VoiceRegion $make(CopyWithData data) => VoiceRegion(
     id: data.get(#id, or: $value.id),
     name: data.get(#name, or: $value.name),
-    isOptimal: data.get(#isOptimal, or: $value.isOptimal),
-    isDeprecated: data.get(#isDeprecated, or: $value.isDeprecated),
-    isCustom: data.get(#isCustom, or: $value.isCustom),
+    optimal: data.get(#optimal, or: $value.optimal),
+    deprecated: data.get(#deprecated, or: $value.deprecated),
+    custom: data.get(#custom, or: $value.custom),
   );
 
   @override

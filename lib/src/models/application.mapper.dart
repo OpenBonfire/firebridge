@@ -516,11 +516,11 @@ class ApplicationMapper extends ClassMapperBase<Application> {
     _$rpcOrigins,
     key: r'rpc_origins',
   );
-  static bool _$isBotPublic(Application v) => v.isBotPublic;
-  static const Field<Application, bool> _f$isBotPublic = Field(
-    'isBotPublic',
-    _$isBotPublic,
-    key: r'is_bot_public',
+  static bool _$botPublic(Application v) => v.botPublic;
+  static const Field<Application, bool> _f$botPublic = Field(
+    'botPublic',
+    _$botPublic,
+    key: r'bot_public',
   );
   static bool _$botRequiresCodeGrant(Application v) => v.botRequiresCodeGrant;
   static const Field<Application, bool> _f$botRequiresCodeGrant = Field(
@@ -652,7 +652,7 @@ class ApplicationMapper extends ClassMapperBase<Application> {
     #iconHash: _f$iconHash,
     #description: _f$description,
     #rpcOrigins: _f$rpcOrigins,
-    #isBotPublic: _f$isBotPublic,
+    #botPublic: _f$botPublic,
     #botRequiresCodeGrant: _f$botRequiresCodeGrant,
     #bot: _f$bot,
     #termsOfServiceUrl: _f$termsOfServiceUrl,
@@ -683,7 +683,7 @@ class ApplicationMapper extends ClassMapperBase<Application> {
       iconHash: data.dec(_f$iconHash),
       description: data.dec(_f$description),
       rpcOrigins: data.dec(_f$rpcOrigins),
-      isBotPublic: data.dec(_f$isBotPublic),
+      botPublic: data.dec(_f$botPublic),
       botRequiresCodeGrant: data.dec(_f$botRequiresCodeGrant),
       bot: data.dec(_f$bot),
       termsOfServiceUrl: data.dec(_f$termsOfServiceUrl),
@@ -803,7 +803,7 @@ abstract class ApplicationCopyWith<$R, $In extends Application, $Out>
     String? iconHash,
     String? description,
     List<String>? rpcOrigins,
-    bool? isBotPublic,
+    bool? botPublic,
     bool? botRequiresCodeGrant,
     PartialUser? bot,
     Uri? termsOfServiceUrl,
@@ -920,7 +920,7 @@ class _ApplicationCopyWithImpl<$R, $Out>
     Object? iconHash = $none,
     String? description,
     Object? rpcOrigins = $none,
-    bool? isBotPublic,
+    bool? botPublic,
     bool? botRequiresCodeGrant,
     Object? bot = $none,
     Object? termsOfServiceUrl = $none,
@@ -949,7 +949,7 @@ class _ApplicationCopyWithImpl<$R, $Out>
       if (iconHash != $none) #iconHash: iconHash,
       if (description != null) #description: description,
       if (rpcOrigins != $none) #rpcOrigins: rpcOrigins,
-      if (isBotPublic != null) #isBotPublic: isBotPublic,
+      if (botPublic != null) #botPublic: botPublic,
       if (botRequiresCodeGrant != null)
         #botRequiresCodeGrant: botRequiresCodeGrant,
       if (bot != $none) #bot: bot,
@@ -987,7 +987,7 @@ class _ApplicationCopyWithImpl<$R, $Out>
     iconHash: data.get(#iconHash, or: $value.iconHash),
     description: data.get(#description, or: $value.description),
     rpcOrigins: data.get(#rpcOrigins, or: $value.rpcOrigins),
-    isBotPublic: data.get(#isBotPublic, or: $value.isBotPublic),
+    botPublic: data.get(#botPublic, or: $value.botPublic),
     botRequiresCodeGrant: data.get(
       #botRequiresCodeGrant,
       or: $value.botRequiresCodeGrant,

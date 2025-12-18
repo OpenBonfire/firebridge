@@ -60,11 +60,10 @@ class AttachmentMapper extends ClassMapperBase<Attachment> {
   static const Field<Attachment, int> _f$height = Field('height', _$height);
   static int? _$width(Attachment v) => v.width;
   static const Field<Attachment, int> _f$width = Field('width', _$width);
-  static bool _$isEphemeral(Attachment v) => v.isEphemeral;
-  static const Field<Attachment, bool> _f$isEphemeral = Field(
-    'isEphemeral',
-    _$isEphemeral,
-    key: r'is_ephemeral',
+  static bool _$ephemeral(Attachment v) => v.ephemeral;
+  static const Field<Attachment, bool> _f$ephemeral = Field(
+    'ephemeral',
+    _$ephemeral,
   );
   static Duration? _$duration(Attachment v) => v.duration;
   static const Field<Attachment, Duration> _f$duration = Field(
@@ -94,7 +93,7 @@ class AttachmentMapper extends ClassMapperBase<Attachment> {
     #proxiedUrl: _f$proxiedUrl,
     #height: _f$height,
     #width: _f$width,
-    #isEphemeral: _f$isEphemeral,
+    #ephemeral: _f$ephemeral,
     #duration: _f$duration,
     #waveform: _f$waveform,
     #flags: _f$flags,
@@ -112,7 +111,7 @@ class AttachmentMapper extends ClassMapperBase<Attachment> {
       proxiedUrl: data.dec(_f$proxiedUrl),
       height: data.dec(_f$height),
       width: data.dec(_f$width),
-      isEphemeral: data.dec(_f$isEphemeral),
+      ephemeral: data.dec(_f$ephemeral),
       duration: data.dec(_f$duration),
       waveform: data.dec(_f$waveform),
       flags: data.dec(_f$flags),
@@ -192,7 +191,7 @@ abstract class AttachmentCopyWith<$R, $In extends Attachment, $Out>
     Uri? proxiedUrl,
     int? height,
     int? width,
-    bool? isEphemeral,
+    bool? ephemeral,
     Duration? duration,
     List<int>? waveform,
     AttachmentFlags? flags,
@@ -232,7 +231,7 @@ class _AttachmentCopyWithImpl<$R, $Out>
     Uri? proxiedUrl,
     Object? height = $none,
     Object? width = $none,
-    bool? isEphemeral,
+    bool? ephemeral,
     Object? duration = $none,
     Object? waveform = $none,
     Object? flags = $none,
@@ -248,7 +247,7 @@ class _AttachmentCopyWithImpl<$R, $Out>
       if (proxiedUrl != null) #proxiedUrl: proxiedUrl,
       if (height != $none) #height: height,
       if (width != $none) #width: width,
-      if (isEphemeral != null) #isEphemeral: isEphemeral,
+      if (ephemeral != null) #ephemeral: ephemeral,
       if (duration != $none) #duration: duration,
       if (waveform != $none) #waveform: waveform,
       if (flags != $none) #flags: flags,
@@ -266,7 +265,7 @@ class _AttachmentCopyWithImpl<$R, $Out>
     proxiedUrl: data.get(#proxiedUrl, or: $value.proxiedUrl),
     height: data.get(#height, or: $value.height),
     width: data.get(#width, or: $value.width),
-    isEphemeral: data.get(#isEphemeral, or: $value.isEphemeral),
+    ephemeral: data.get(#ephemeral, or: $value.ephemeral),
     duration: data.get(#duration, or: $value.duration),
     waveform: data.get(#waveform, or: $value.waveform),
     flags: data.get(#flags, or: $value.flags),

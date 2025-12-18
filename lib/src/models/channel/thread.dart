@@ -29,18 +29,18 @@ abstract class Thread with ThreadMappable implements TextChannel, GuildChannel {
   int get approximateMemberCount;
 
   /// Whether this thread is archived.
-  bool get isArchived;
+  bool get archived;
 
   /// The time after which this thread will be archived.
   Duration get autoArchiveDuration;
 
   /// The time at which this thread's archive status was last updated.
   ///
-  /// Will be the creation time if [isArchived] is `false`.
+  /// Will be the creation time if [archived] is `false`.
   DateTime get archiveTimestamp;
 
   /// Whether this thread is locked.
-  bool get isLocked;
+  bool get locked;
 
   /// The time at which this thread was created.
   DateTime get createdAt;

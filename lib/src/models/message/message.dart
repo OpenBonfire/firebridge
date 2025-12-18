@@ -52,7 +52,7 @@ class Message with MessageMappable implements MessageSnapshot {
   final DateTime? editedTimestamp;
 
   /// Whether this was a TTS message.
-  final bool isTts;
+  final bool tts;
 
   /// Whether this message mentions everyone.
   final bool mentionsEveryone;
@@ -81,7 +81,7 @@ class Message with MessageMappable implements MessageSnapshot {
   final dynamic /* int | String */ nonce;
 
   /// Whether this message is pinned.
-  final bool isPinned;
+  final bool pinned;
 
   /// The ID of the webhook that sent this message if it was sent by a webhook, `null` otherwise.
   final Snowflake? webhookId;
@@ -150,7 +150,7 @@ class Message with MessageMappable implements MessageSnapshot {
     required this.content,
     required this.timestamp,
     required this.editedTimestamp,
-    required this.isTts,
+    required this.tts,
     required this.mentionsEveryone,
     required this.mentions,
     required this.roleMentionIds,
@@ -159,7 +159,7 @@ class Message with MessageMappable implements MessageSnapshot {
     required this.embeds,
     required this.reactions,
     required this.nonce,
-    required this.isPinned,
+    required this.pinned,
     required this.webhookId,
     required this.type,
     required this.activity,

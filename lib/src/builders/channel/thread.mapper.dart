@@ -589,11 +589,10 @@ class ThreadUpdateBuilderMapper extends ClassMapperBase<ThreadUpdateBuilder> {
     _$name,
     opt: true,
   );
-  static bool? _$isArchived(ThreadUpdateBuilder v) => v.isArchived;
-  static const Field<ThreadUpdateBuilder, bool> _f$isArchived = Field(
-    'isArchived',
-    _$isArchived,
-    key: r'is_archived',
+  static bool? _$archived(ThreadUpdateBuilder v) => v.archived;
+  static const Field<ThreadUpdateBuilder, bool> _f$archived = Field(
+    'archived',
+    _$archived,
     opt: true,
   );
   static Duration? _$autoArchiveDuration(ThreadUpdateBuilder v) =>
@@ -641,7 +640,7 @@ class ThreadUpdateBuilderMapper extends ClassMapperBase<ThreadUpdateBuilder> {
   @override
   final MappableFields<ThreadUpdateBuilder> fields = const {
     #name: _f$name,
-    #isArchived: _f$isArchived,
+    #archived: _f$archived,
     #autoArchiveDuration: _f$autoArchiveDuration,
     #isLocked: _f$isLocked,
     #isInvitable: _f$isInvitable,
@@ -653,7 +652,7 @@ class ThreadUpdateBuilderMapper extends ClassMapperBase<ThreadUpdateBuilder> {
   static ThreadUpdateBuilder _instantiate(DecodingData data) {
     return ThreadUpdateBuilder(
       name: data.dec(_f$name),
-      isArchived: data.dec(_f$isArchived),
+      archived: data.dec(_f$archived),
       autoArchiveDuration: data.dec(_f$autoArchiveDuration),
       isLocked: data.dec(_f$isLocked),
       isInvitable: data.dec(_f$isInvitable),
@@ -739,7 +738,7 @@ abstract class ThreadUpdateBuilderCopyWith<
   get appliedTags;
   $R call({
     String? name,
-    bool? isArchived,
+    bool? archived,
     Duration? autoArchiveDuration,
     bool? isLocked,
     bool? isInvitable,
@@ -775,7 +774,7 @@ class _ThreadUpdateBuilderCopyWithImpl<$R, $Out>
   @override
   $R call({
     Object? name = $none,
-    Object? isArchived = $none,
+    Object? archived = $none,
     Object? autoArchiveDuration = $none,
     Object? isLocked = $none,
     Object? isInvitable = $none,
@@ -785,7 +784,7 @@ class _ThreadUpdateBuilderCopyWithImpl<$R, $Out>
   }) => $apply(
     FieldCopyWithData({
       if (name != $none) #name: name,
-      if (isArchived != $none) #isArchived: isArchived,
+      if (archived != $none) #archived: archived,
       if (autoArchiveDuration != $none)
         #autoArchiveDuration: autoArchiveDuration,
       if (isLocked != $none) #isLocked: isLocked,
@@ -798,7 +797,7 @@ class _ThreadUpdateBuilderCopyWithImpl<$R, $Out>
   @override
   ThreadUpdateBuilder $make(CopyWithData data) => ThreadUpdateBuilder(
     name: data.get(#name, or: $value.name),
-    isArchived: data.get(#isArchived, or: $value.isArchived),
+    archived: data.get(#archived, or: $value.archived),
     autoArchiveDuration: data.get(
       #autoArchiveDuration,
       or: $value.autoArchiveDuration,

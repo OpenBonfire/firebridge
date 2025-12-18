@@ -14,10 +14,10 @@ class PresenceBuilder extends CreateBuilder<PresenceUpdateEvent>
 
   CurrentUserStatus status;
 
-  bool isAfk;
+  bool afk;
 
   PresenceBuilder(
-      {this.since, this.activities, required this.status, required this.isAfk});
+      {this.since, this.activities, required this.status, required this.afk});
 }
 
 @MappableEnum()
