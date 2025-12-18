@@ -5,18 +5,18 @@ part 'channel_override.mapper.dart';
 
 @MappableClass()
 class ChannelOverride with ToStringHelper, ChannelOverrideMappable {
-  bool muted;
-  dynamic muteConfig;
-  int messageNotifications;
-  int flags;
-  bool collapsed;
-  String channelId;
+  final bool muted;
+  final dynamic muteConfig;
+  final int messageNotifications;
+  final int? flags;
+  final bool collapsed;
+  final String channelId;
 
-  ChannelOverride({
+  const ChannelOverride({
     required this.muted,
     required this.muteConfig,
     required this.messageNotifications,
-    required this.flags,
+    this.flags,
     required this.collapsed,
     required this.channelId,
   });

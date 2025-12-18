@@ -32,11 +32,12 @@ class SessionMapper extends ClassMapperBase<Session> {
     _$sessionId,
     key: r'session_id',
   );
-  static DateTime _$processedAtTimestamp(Session v) => v.processedAtTimestamp;
+  static DateTime? _$processedAtTimestamp(Session v) => v.processedAtTimestamp;
   static const Field<Session, DateTime> _f$processedAtTimestamp = Field(
     'processedAtTimestamp',
     _$processedAtTimestamp,
     key: r'processed_at_timestamp',
+    opt: true,
   );
   static List<Activity> _$hiddenActivities(Session v) => v.hiddenActivities;
   static const Field<Session, List<Activity>> _f$hiddenActivities = Field(
@@ -179,7 +180,7 @@ class _SessionCopyWithImpl<$R, $Out>
   $R call({
     UserStatus? status,
     String? sessionId,
-    DateTime? processedAtTimestamp,
+    Object? processedAtTimestamp = $none,
     List<Activity>? hiddenActivities,
     ClientInfo? clientInfo,
     List<Activity>? activities,
@@ -187,7 +188,7 @@ class _SessionCopyWithImpl<$R, $Out>
     FieldCopyWithData({
       if (status != null) #status: status,
       if (sessionId != null) #sessionId: sessionId,
-      if (processedAtTimestamp != null)
+      if (processedAtTimestamp != $none)
         #processedAtTimestamp: processedAtTimestamp,
       if (hiddenActivities != null) #hiddenActivities: hiddenActivities,
       if (clientInfo != null) #clientInfo: clientInfo,

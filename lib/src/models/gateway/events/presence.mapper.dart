@@ -16,7 +16,7 @@ class PresenceUpdateEventMapper
     if (_instance == null) {
       MapperContainer.globals.use(_instance = PresenceUpdateEventMapper._());
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
-      PartialUserMapper.ensureInitialized();
+      PresenceUpdateUserMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       UserStatusMapper.ensureInitialized();
       ActivityMapper.ensureInitialized();
@@ -28,26 +28,30 @@ class PresenceUpdateEventMapper
   @override
   final String id = 'PresenceUpdateEvent';
 
-  static PartialUser? _$user(PresenceUpdateEvent v) => v.user;
-  static const Field<PresenceUpdateEvent, PartialUser> _f$user = Field(
+  static PresenceUpdateUser? _$user(PresenceUpdateEvent v) => v.user;
+  static const Field<PresenceUpdateEvent, PresenceUpdateUser> _f$user = Field(
     'user',
     _$user,
+    opt: true,
   );
   static Snowflake? _$guildId(PresenceUpdateEvent v) => v.guildId;
   static const Field<PresenceUpdateEvent, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
     key: r'guild_id',
+    opt: true,
   );
   static UserStatus? _$status(PresenceUpdateEvent v) => v.status;
   static const Field<PresenceUpdateEvent, UserStatus> _f$status = Field(
     'status',
     _$status,
+    opt: true,
   );
   static List<Activity>? _$activities(PresenceUpdateEvent v) => v.activities;
   static const Field<PresenceUpdateEvent, List<Activity>> _f$activities = Field(
     'activities',
     _$activities,
+    opt: true,
   );
   static ClientStatus? _$clientStatus(PresenceUpdateEvent v) => v.clientStatus;
   static const Field<PresenceUpdateEvent, ClientStatus> _f$clientStatus = Field(
@@ -160,14 +164,15 @@ abstract class PresenceUpdateEventCopyWith<
   $Out
 >
     implements DispatchEventCopyWith<$R, $In, $Out> {
-  PartialUserCopyWith<$R, PartialUser, PartialUser>? get user;
+  PresenceUpdateUserCopyWith<$R, PresenceUpdateUser, PresenceUpdateUser>?
+  get user;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   ListCopyWith<$R, Activity, ActivityCopyWith<$R, Activity, Activity>>?
   get activities;
   ClientStatusCopyWith<$R, ClientStatus, ClientStatus>? get clientStatus;
   @override
   $R call({
-    PartialUser? user,
+    PresenceUpdateUser? user,
     Snowflake? guildId,
     UserStatus? status,
     List<Activity>? activities,
@@ -187,8 +192,8 @@ class _PresenceUpdateEventCopyWithImpl<$R, $Out>
   late final ClassMapperBase<PresenceUpdateEvent> $mapper =
       PresenceUpdateEventMapper.ensureInitialized();
   @override
-  PartialUserCopyWith<$R, PartialUser, PartialUser>? get user =>
-      $value.user?.copyWith.$chain((v) => call(user: v));
+  PresenceUpdateUserCopyWith<$R, PresenceUpdateUser, PresenceUpdateUser>?
+  get user => $value.user?.copyWith.$chain((v) => call(user: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
       $value.guildId?.copyWith.$chain((v) => call(guildId: v));
@@ -233,6 +238,133 @@ class _PresenceUpdateEventCopyWithImpl<$R, $Out>
   PresenceUpdateEventCopyWith<$R2, PresenceUpdateEvent, $Out2>
   $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
       _PresenceUpdateEventCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
+class PresenceUpdateUserMapper extends ClassMapperBase<PresenceUpdateUser> {
+  PresenceUpdateUserMapper._();
+
+  static PresenceUpdateUserMapper? _instance;
+  static PresenceUpdateUserMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = PresenceUpdateUserMapper._());
+      SnowflakeMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'PresenceUpdateUser';
+
+  static Snowflake _$id(PresenceUpdateUser v) => v.id;
+  static const Field<PresenceUpdateUser, Snowflake> _f$id = Field('id', _$id);
+
+  @override
+  final MappableFields<PresenceUpdateUser> fields = const {#id: _f$id};
+
+  static PresenceUpdateUser _instantiate(DecodingData data) {
+    return PresenceUpdateUser(id: data.dec(_f$id));
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static PresenceUpdateUser fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<PresenceUpdateUser>(map);
+  }
+
+  static PresenceUpdateUser fromJson(String json) {
+    return ensureInitialized().decodeJson<PresenceUpdateUser>(json);
+  }
+}
+
+mixin PresenceUpdateUserMappable {
+  String toJson() {
+    return PresenceUpdateUserMapper.ensureInitialized()
+        .encodeJson<PresenceUpdateUser>(this as PresenceUpdateUser);
+  }
+
+  Map<String, dynamic> toMap() {
+    return PresenceUpdateUserMapper.ensureInitialized()
+        .encodeMap<PresenceUpdateUser>(this as PresenceUpdateUser);
+  }
+
+  PresenceUpdateUserCopyWith<
+    PresenceUpdateUser,
+    PresenceUpdateUser,
+    PresenceUpdateUser
+  >
+  get copyWith =>
+      _PresenceUpdateUserCopyWithImpl<PresenceUpdateUser, PresenceUpdateUser>(
+        this as PresenceUpdateUser,
+        $identity,
+        $identity,
+      );
+  @override
+  String toString() {
+    return PresenceUpdateUserMapper.ensureInitialized().stringifyValue(
+      this as PresenceUpdateUser,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return PresenceUpdateUserMapper.ensureInitialized().equalsValue(
+      this as PresenceUpdateUser,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return PresenceUpdateUserMapper.ensureInitialized().hashValue(
+      this as PresenceUpdateUser,
+    );
+  }
+}
+
+extension PresenceUpdateUserValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, PresenceUpdateUser, $Out> {
+  PresenceUpdateUserCopyWith<$R, PresenceUpdateUser, $Out>
+  get $asPresenceUpdateUser => $base.as(
+    (v, t, t2) => _PresenceUpdateUserCopyWithImpl<$R, $Out>(v, t, t2),
+  );
+}
+
+abstract class PresenceUpdateUserCopyWith<
+  $R,
+  $In extends PresenceUpdateUser,
+  $Out
+>
+    implements ClassCopyWith<$R, $In, $Out> {
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  $R call({Snowflake? id});
+  PresenceUpdateUserCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  );
+}
+
+class _PresenceUpdateUserCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, PresenceUpdateUser, $Out>
+    implements PresenceUpdateUserCopyWith<$R, PresenceUpdateUser, $Out> {
+  _PresenceUpdateUserCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<PresenceUpdateUser> $mapper =
+      PresenceUpdateUserMapper.ensureInitialized();
+  @override
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
+      $value.id.copyWith.$chain((v) => call(id: v));
+  @override
+  $R call({Snowflake? id}) =>
+      $apply(FieldCopyWithData({if (id != null) #id: id}));
+  @override
+  PresenceUpdateUser $make(CopyWithData data) =>
+      PresenceUpdateUser(id: data.get(#id, or: $value.id));
+
+  @override
+  PresenceUpdateUserCopyWith<$R2, PresenceUpdateUser, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _PresenceUpdateUserCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class TypingStartEventMapper extends SubClassMapperBase<TypingStartEvent> {

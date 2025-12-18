@@ -16,7 +16,7 @@ class UserGuildSettings with UserGuildSettingsMappable {
   final bool mobilePush;
   final int messageNotifications;
   final bool hideMutedChannels;
-  final Snowflake guildId;
+  final Snowflake? guildId;
   final UserGuildSettingsFlags flags;
   final List<ChannelOverride> channelOverrides;
 
@@ -30,7 +30,7 @@ class UserGuildSettings with UserGuildSettingsMappable {
       required this.mobilePush,
       required this.messageNotifications,
       required this.hideMutedChannels,
-      required this.guildId,
+      this.guildId,
       required this.flags,
       required this.channelOverrides});
 }

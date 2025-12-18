@@ -36,8 +36,12 @@ class ChannelOverrideMapper extends ClassMapperBase<ChannelOverride> {
     _$messageNotifications,
     key: r'message_notifications',
   );
-  static int _$flags(ChannelOverride v) => v.flags;
-  static const Field<ChannelOverride, int> _f$flags = Field('flags', _$flags);
+  static int? _$flags(ChannelOverride v) => v.flags;
+  static const Field<ChannelOverride, int> _f$flags = Field(
+    'flags',
+    _$flags,
+    opt: true,
+  );
   static bool _$collapsed(ChannelOverride v) => v.collapsed;
   static const Field<ChannelOverride, bool> _f$collapsed = Field(
     'collapsed',
@@ -159,7 +163,7 @@ class _ChannelOverrideCopyWithImpl<$R, $Out>
     bool? muted,
     Object? muteConfig = $none,
     int? messageNotifications,
-    int? flags,
+    Object? flags = $none,
     bool? collapsed,
     String? channelId,
   }) => $apply(
@@ -168,7 +172,7 @@ class _ChannelOverrideCopyWithImpl<$R, $Out>
       if (muteConfig != $none) #muteConfig: muteConfig,
       if (messageNotifications != null)
         #messageNotifications: messageNotifications,
-      if (flags != null) #flags: flags,
+      if (flags != $none) #flags: flags,
       if (collapsed != null) #collapsed: collapsed,
       if (channelId != null) #channelId: channelId,
     }),

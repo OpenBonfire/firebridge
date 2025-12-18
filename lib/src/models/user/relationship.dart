@@ -9,9 +9,9 @@ class Relationship with RelationshipMappable {
   final User user;
   final RelationshipType type;
   final bool userIgnored;
-  final DateTime since;
+  final DateTime? since;
 
-  final bool isSpamRequest;
+  final bool? isSpamRequest;
   final String? nickname;
 
   const Relationship({
@@ -19,8 +19,8 @@ class Relationship with RelationshipMappable {
     required this.user,
     required this.type,
     required this.userIgnored,
-    required this.since,
-    required this.isSpamRequest,
+    this.since,
+    this.isSpamRequest,
     this.nickname,
   });
 }

@@ -7,7 +7,7 @@ part 'session.mapper.dart';
 class Session with SessionMappable {
   final UserStatus status;
   final String sessionId;
-  final DateTime processedAtTimestamp;
+  final DateTime? processedAtTimestamp;
   final List<Activity> hiddenActivities;
   final ClientInfo clientInfo;
   final List<Activity> activities;
@@ -15,7 +15,7 @@ class Session with SessionMappable {
   const Session(
       {required this.status,
       required this.sessionId,
-      required this.processedAtTimestamp,
+      this.processedAtTimestamp,
       required this.hiddenActivities,
       required this.clientInfo,
       required this.activities});

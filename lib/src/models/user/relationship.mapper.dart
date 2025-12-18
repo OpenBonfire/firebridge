@@ -105,13 +105,18 @@ class RelationshipMapper extends ClassMapperBase<Relationship> {
     _$userIgnored,
     key: r'user_ignored',
   );
-  static DateTime _$since(Relationship v) => v.since;
-  static const Field<Relationship, DateTime> _f$since = Field('since', _$since);
-  static bool _$isSpamRequest(Relationship v) => v.isSpamRequest;
+  static DateTime? _$since(Relationship v) => v.since;
+  static const Field<Relationship, DateTime> _f$since = Field(
+    'since',
+    _$since,
+    opt: true,
+  );
+  static bool? _$isSpamRequest(Relationship v) => v.isSpamRequest;
   static const Field<Relationship, bool> _f$isSpamRequest = Field(
     'isSpamRequest',
     _$isSpamRequest,
     key: r'is_spam_request',
+    opt: true,
   );
   static String? _$nickname(Relationship v) => v.nickname;
   static const Field<Relationship, String> _f$nickname = Field(
@@ -239,8 +244,8 @@ class _RelationshipCopyWithImpl<$R, $Out>
     User? user,
     RelationshipType? type,
     bool? userIgnored,
-    DateTime? since,
-    bool? isSpamRequest,
+    Object? since = $none,
+    Object? isSpamRequest = $none,
     Object? nickname = $none,
   }) => $apply(
     FieldCopyWithData({
@@ -248,8 +253,8 @@ class _RelationshipCopyWithImpl<$R, $Out>
       if (user != null) #user: user,
       if (type != null) #type: type,
       if (userIgnored != null) #userIgnored: userIgnored,
-      if (since != null) #since: since,
-      if (isSpamRequest != null) #isSpamRequest: isSpamRequest,
+      if (since != $none) #since: since,
+      if (isSpamRequest != $none) #isSpamRequest: isSpamRequest,
       if (nickname != $none) #nickname: nickname,
     }),
   );

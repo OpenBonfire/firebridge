@@ -15,7 +15,7 @@ part 'presence.mapper.dart';
 class PresenceUpdateEvent extends DispatchEvent
     with PresenceUpdateEventMappable {
   /// The user that updated their presence.
-  final PartialUser? user;
+  final PresenceUpdateUser? user;
 
   /// The ID of the guild the presence was updated in.
   final Snowflake? guildId;
@@ -32,12 +32,18 @@ class PresenceUpdateEvent extends DispatchEvent
   /// {@macro presence_update_event}
   /// @nodoc
   PresenceUpdateEvent({
-    required this.user,
-    required this.guildId,
-    required this.status,
-    required this.activities,
+    this.user,
+    this.guildId,
+    this.status,
+    this.activities,
     required this.clientStatus,
   });
+}
+
+@MappableClass()
+class PresenceUpdateUser with PresenceUpdateUserMappable {
+  final Snowflake id;
+  const PresenceUpdateUser({required this.id});
 }
 
 /// {@template typing_start_event}

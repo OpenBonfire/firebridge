@@ -80,11 +80,12 @@ class UserGuildSettingsMapper extends ClassMapperBase<UserGuildSettings> {
     _$hideMutedChannels,
     key: r'hide_muted_channels',
   );
-  static Snowflake _$guildId(UserGuildSettings v) => v.guildId;
+  static Snowflake? _$guildId(UserGuildSettings v) => v.guildId;
   static const Field<UserGuildSettings, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
     key: r'guild_id',
+    opt: true,
   );
   static UserGuildSettingsFlags _$flags(UserGuildSettings v) => v.flags;
   static const Field<UserGuildSettings, UserGuildSettingsFlags> _f$flags =
@@ -202,7 +203,7 @@ abstract class UserGuildSettingsCopyWith<
   $Out
 >
     implements ClassCopyWith<$R, $In, $Out> {
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   UserGuildSettingsFlagsCopyWith<
     $R,
     UserGuildSettingsFlags,
@@ -243,8 +244,8 @@ class _UserGuildSettingsCopyWithImpl<$R, $Out>
   late final ClassMapperBase<UserGuildSettings> $mapper =
       UserGuildSettingsMapper.ensureInitialized();
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
-      $value.guildId.copyWith.$chain((v) => call(guildId: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
+      $value.guildId?.copyWith.$chain((v) => call(guildId: v));
   @override
   UserGuildSettingsFlagsCopyWith<
     $R,
@@ -274,7 +275,7 @@ class _UserGuildSettingsCopyWithImpl<$R, $Out>
     bool? mobilePush,
     int? messageNotifications,
     bool? hideMutedChannels,
-    Snowflake? guildId,
+    Object? guildId = $none,
     UserGuildSettingsFlags? flags,
     List<ChannelOverride>? channelOverrides,
   }) => $apply(
@@ -290,7 +291,7 @@ class _UserGuildSettingsCopyWithImpl<$R, $Out>
       if (messageNotifications != null)
         #messageNotifications: messageNotifications,
       if (hideMutedChannels != null) #hideMutedChannels: hideMutedChannels,
-      if (guildId != null) #guildId: guildId,
+      if (guildId != $none) #guildId: guildId,
       if (flags != null) #flags: flags,
       if (channelOverrides != null) #channelOverrides: channelOverrides,
     }),

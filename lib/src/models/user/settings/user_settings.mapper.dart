@@ -157,12 +157,6 @@ class UserSettingsMapper extends ClassMapperBase<UserSettings> {
     _$friendDiscoveryFlags,
     key: r'friend_discovery_flags',
   );
-  static int? _$friendSourceFlags(UserSettings v) => v.friendSourceFlags;
-  static const Field<UserSettings, int> _f$friendSourceFlags = Field(
-    'friendSourceFlags',
-    _$friendSourceFlags,
-    key: r'friend_source_flags',
-  );
   static bool _$allowActivityPartyPrivacyFriends(UserSettings v) =>
       v.allowActivityPartyPrivacyFriends;
   static const Field<UserSettings, bool> _f$allowActivityPartyPrivacyFriends =
@@ -206,12 +200,6 @@ class UserSettingsMapper extends ClassMapperBase<UserSettings> {
     'convertEmoticons',
     _$convertEmoticons,
     key: r'convert_emoticons',
-  );
-  static UserStatus? _$customStatus(UserSettings v) => v.customStatus;
-  static const Field<UserSettings, UserStatus> _f$customStatus = Field(
-    'customStatus',
-    _$customStatus,
-    key: r'custom_status',
   );
   static bool _$viewNsfwCommands(UserSettings v) => v.viewNsfwCommands;
   static const Field<UserSettings, bool> _f$viewNsfwCommands = Field(
@@ -275,7 +263,6 @@ class UserSettingsMapper extends ClassMapperBase<UserSettings> {
     #defaultGuildsRestricted: _f$defaultGuildsRestricted,
     #developerMode: _f$developerMode,
     #friendDiscoveryFlags: _f$friendDiscoveryFlags,
-    #friendSourceFlags: _f$friendSourceFlags,
     #allowActivityPartyPrivacyFriends: _f$allowActivityPartyPrivacyFriends,
     #explicitContentFilter: _f$explicitContentFilter,
     #showCurrentGame: _f$showCurrentGame,
@@ -283,7 +270,6 @@ class UserSettingsMapper extends ClassMapperBase<UserSettings> {
     #restrictedGuilds: _f$restrictedGuilds,
     #contactSyncEnabled: _f$contactSyncEnabled,
     #convertEmoticons: _f$convertEmoticons,
-    #customStatus: _f$customStatus,
     #viewNsfwCommands: _f$viewNsfwCommands,
     #inlineEmbedMedia: _f$inlineEmbedMedia,
     #nativePhoneIntegrationEnabled: _f$nativePhoneIntegrationEnabled,
@@ -319,7 +305,6 @@ class UserSettingsMapper extends ClassMapperBase<UserSettings> {
       defaultGuildsRestricted: data.dec(_f$defaultGuildsRestricted),
       developerMode: data.dec(_f$developerMode),
       friendDiscoveryFlags: data.dec(_f$friendDiscoveryFlags),
-      friendSourceFlags: data.dec(_f$friendSourceFlags),
       allowActivityPartyPrivacyFriends: data.dec(
         _f$allowActivityPartyPrivacyFriends,
       ),
@@ -329,7 +314,6 @@ class UserSettingsMapper extends ClassMapperBase<UserSettings> {
       restrictedGuilds: data.dec(_f$restrictedGuilds),
       contactSyncEnabled: data.dec(_f$contactSyncEnabled),
       convertEmoticons: data.dec(_f$convertEmoticons),
-      customStatus: data.dec(_f$customStatus),
       viewNsfwCommands: data.dec(_f$viewNsfwCommands),
       inlineEmbedMedia: data.dec(_f$inlineEmbedMedia),
       nativePhoneIntegrationEnabled: data.dec(_f$nativePhoneIntegrationEnabled),
@@ -429,7 +413,6 @@ abstract class UserSettingsCopyWith<$R, $In extends UserSettings, $Out>
     bool? defaultGuildsRestricted,
     bool? developerMode,
     int? friendDiscoveryFlags,
-    int? friendSourceFlags,
     bool? allowActivityPartyPrivacyFriends,
     int? explicitContentFilter,
     bool? showCurrentGame,
@@ -437,7 +420,6 @@ abstract class UserSettingsCopyWith<$R, $In extends UserSettings, $Out>
     List<Object>? restrictedGuilds,
     bool? contactSyncEnabled,
     bool? convertEmoticons,
-    UserStatus? customStatus,
     bool? viewNsfwCommands,
     bool? inlineEmbedMedia,
     bool? nativePhoneIntegrationEnabled,
@@ -500,7 +482,6 @@ class _UserSettingsCopyWithImpl<$R, $Out>
     bool? defaultGuildsRestricted,
     bool? developerMode,
     int? friendDiscoveryFlags,
-    Object? friendSourceFlags = $none,
     bool? allowActivityPartyPrivacyFriends,
     int? explicitContentFilter,
     bool? showCurrentGame,
@@ -508,7 +489,6 @@ class _UserSettingsCopyWithImpl<$R, $Out>
     List<Object>? restrictedGuilds,
     bool? contactSyncEnabled,
     bool? convertEmoticons,
-    Object? customStatus = $none,
     bool? viewNsfwCommands,
     bool? inlineEmbedMedia,
     bool? nativePhoneIntegrationEnabled,
@@ -550,7 +530,6 @@ class _UserSettingsCopyWithImpl<$R, $Out>
       if (developerMode != null) #developerMode: developerMode,
       if (friendDiscoveryFlags != null)
         #friendDiscoveryFlags: friendDiscoveryFlags,
-      if (friendSourceFlags != $none) #friendSourceFlags: friendSourceFlags,
       if (allowActivityPartyPrivacyFriends != null)
         #allowActivityPartyPrivacyFriends: allowActivityPartyPrivacyFriends,
       if (explicitContentFilter != null)
@@ -560,7 +539,6 @@ class _UserSettingsCopyWithImpl<$R, $Out>
       if (restrictedGuilds != null) #restrictedGuilds: restrictedGuilds,
       if (contactSyncEnabled != null) #contactSyncEnabled: contactSyncEnabled,
       if (convertEmoticons != null) #convertEmoticons: convertEmoticons,
-      if (customStatus != $none) #customStatus: customStatus,
       if (viewNsfwCommands != null) #viewNsfwCommands: viewNsfwCommands,
       if (inlineEmbedMedia != null) #inlineEmbedMedia: inlineEmbedMedia,
       if (nativePhoneIntegrationEnabled != null)
@@ -626,10 +604,6 @@ class _UserSettingsCopyWithImpl<$R, $Out>
       #friendDiscoveryFlags,
       or: $value.friendDiscoveryFlags,
     ),
-    friendSourceFlags: data.get(
-      #friendSourceFlags,
-      or: $value.friendSourceFlags,
-    ),
     allowActivityPartyPrivacyFriends: data.get(
       #allowActivityPartyPrivacyFriends,
       or: $value.allowActivityPartyPrivacyFriends,
@@ -646,7 +620,6 @@ class _UserSettingsCopyWithImpl<$R, $Out>
       or: $value.contactSyncEnabled,
     ),
     convertEmoticons: data.get(#convertEmoticons, or: $value.convertEmoticons),
-    customStatus: data.get(#customStatus, or: $value.customStatus),
     viewNsfwCommands: data.get(#viewNsfwCommands, or: $value.viewNsfwCommands),
     inlineEmbedMedia: data.get(#inlineEmbedMedia, or: $value.inlineEmbedMedia),
     nativePhoneIntegrationEnabled: data.get(

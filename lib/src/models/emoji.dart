@@ -8,12 +8,12 @@ part 'emoji.mapper.dart';
 @MappableClass()
 abstract class Emoji with EmojiMappable {
   /// The emoji's name. Can be `dartlang` for a custom emoji, or `❤️` for a text emoji.
-  final Snowflake id;
+  final Snowflake? id;
   final String? name;
 
   /// @nodoc
   const Emoji({
-    required this.id,
+    this.id,
     this.name,
   });
 }
@@ -26,7 +26,7 @@ class TextEmoji extends Emoji with TextEmojiMappable {
 
   /// @nodoc
   TextEmoji({
-    required super.id,
+    super.id,
     required super.name,
   });
 
@@ -92,7 +92,7 @@ class GuildEmoji extends Emoji with GuildEmojiMappable {
 
   /// @nodoc
   GuildEmoji({
-    required super.id,
+    super.id,
     required this.name,
     required this.roleIds,
     required this.user,
@@ -107,5 +107,5 @@ class GuildEmoji extends Emoji with GuildEmojiMappable {
 class ActivityEmoji extends Emoji with ActivityEmojiMappable {
   /// Whether this emoji is animated
   final bool? animated;
-  const ActivityEmoji({required super.id, required super.name, this.animated});
+  const ActivityEmoji({super.id, required super.name, this.animated});
 }

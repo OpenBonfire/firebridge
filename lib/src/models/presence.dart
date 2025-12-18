@@ -28,7 +28,7 @@ class ClientStatus with ToStringHelper, ClientStatusMappable {
 
 /// The status of a client.
 @MappableEnum()
-enum UserStatus { online, dnd, idle, offline }
+enum UserStatus { online, dnd, idle, offline, custom }
 
 /// {@template activity}
 /// A Rich Presence activity.
@@ -78,7 +78,7 @@ class Activity with ToStringHelper, ActivityMappable {
   final ActivityFlags? flags;
 
   /// A list of buttons displayed with the activity.
-  final List<ActivityButton>? buttons;
+  // final List<ActivityButton>? buttons;
 
   /// {@macro activity}
   /// @nodoc
@@ -97,7 +97,7 @@ class Activity with ToStringHelper, ActivityMappable {
     required this.secrets,
     required this.isInstance,
     required this.flags,
-    required this.buttons,
+    // required this.buttons,
   });
 }
 

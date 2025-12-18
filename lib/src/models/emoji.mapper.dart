@@ -26,8 +26,8 @@ class EmojiMapper extends ClassMapperBase<Emoji> {
   @override
   final String id = 'Emoji';
 
-  static Snowflake _$id(Emoji v) => v.id;
-  static const Field<Emoji, Snowflake> _f$id = Field('id', _$id);
+  static Snowflake? _$id(Emoji v) => v.id;
+  static const Field<Emoji, Snowflake> _f$id = Field('id', _$id, opt: true);
   static String? _$name(Emoji v) => v.name;
   static const Field<Emoji, String> _f$name = Field('name', _$name, opt: true);
 
@@ -58,7 +58,7 @@ mixin EmojiMappable {
 
 abstract class EmojiCopyWith<$R, $In extends Emoji, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get id;
   $R call({Snowflake? id, String? name});
   EmojiCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -79,8 +79,8 @@ class TextEmojiMapper extends ClassMapperBase<TextEmoji> {
   @override
   final String id = 'TextEmoji';
 
-  static Snowflake _$id(TextEmoji v) => v.id;
-  static const Field<TextEmoji, Snowflake> _f$id = Field('id', _$id);
+  static Snowflake? _$id(TextEmoji v) => v.id;
+  static const Field<TextEmoji, Snowflake> _f$id = Field('id', _$id, opt: true);
   static String? _$name(TextEmoji v) => v.name;
   static const Field<TextEmoji, String> _f$name = Field('name', _$name);
 
@@ -151,7 +151,7 @@ extension TextEmojiValueCopy<$R, $Out> on ObjectCopyWith<$R, TextEmoji, $Out> {
 abstract class TextEmojiCopyWith<$R, $In extends TextEmoji, $Out>
     implements EmojiCopyWith<$R, $In, $Out> {
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get id;
   @override
   $R call({Snowflake? id, String? name});
   TextEmojiCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
@@ -166,12 +166,12 @@ class _TextEmojiCopyWithImpl<$R, $Out>
   late final ClassMapperBase<TextEmoji> $mapper =
       TextEmojiMapper.ensureInitialized();
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get id =>
+      $value.id?.copyWith.$chain((v) => call(id: v));
   @override
-  $R call({Snowflake? id, Object? name = $none}) => $apply(
+  $R call({Object? id = $none, Object? name = $none}) => $apply(
     FieldCopyWithData({
-      if (id != null) #id: id,
+      if (id != $none) #id: id,
       if (name != $none) #name: name,
     }),
   );
@@ -204,7 +204,7 @@ class ApplicationEmojiMapper extends ClassMapperBase<ApplicationEmoji> {
   @override
   final String id = 'ApplicationEmoji';
 
-  static Snowflake _$id(ApplicationEmoji v) => v.id;
+  static Snowflake? _$id(ApplicationEmoji v) => v.id;
   static const Field<ApplicationEmoji, Snowflake> _f$id = Field('id', _$id);
   static String? _$name(ApplicationEmoji v) => v.name;
   static const Field<ApplicationEmoji, String> _f$name = Field('name', _$name);
@@ -318,7 +318,7 @@ extension ApplicationEmojiValueCopy<$R, $Out>
 abstract class ApplicationEmojiCopyWith<$R, $In extends ApplicationEmoji, $Out>
     implements EmojiCopyWith<$R, $In, $Out> {
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get id;
   UserCopyWith<$R, User, User>? get user;
   @override
   $R call({
@@ -344,14 +344,14 @@ class _ApplicationEmojiCopyWithImpl<$R, $Out>
   late final ClassMapperBase<ApplicationEmoji> $mapper =
       ApplicationEmojiMapper.ensureInitialized();
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get id =>
+      $value.id?.copyWith.$chain((v) => call(id: v));
   @override
   UserCopyWith<$R, User, User>? get user =>
       $value.user?.copyWith.$chain((v) => call(user: v));
   @override
   $R call({
-    Snowflake? id,
+    Object? id = $none,
     Object? name = $none,
     Object? user = $none,
     bool? requiresColons,
@@ -360,7 +360,7 @@ class _ApplicationEmojiCopyWithImpl<$R, $Out>
     bool? available,
   }) => $apply(
     FieldCopyWithData({
-      if (id != null) #id: id,
+      if (id != $none) #id: id,
       if (name != $none) #name: name,
       if (user != $none) #user: user,
       if (requiresColons != null) #requiresColons: requiresColons,
@@ -403,8 +403,12 @@ class GuildEmojiMapper extends ClassMapperBase<GuildEmoji> {
   @override
   final String id = 'GuildEmoji';
 
-  static Snowflake _$id(GuildEmoji v) => v.id;
-  static const Field<GuildEmoji, Snowflake> _f$id = Field('id', _$id);
+  static Snowflake? _$id(GuildEmoji v) => v.id;
+  static const Field<GuildEmoji, Snowflake> _f$id = Field(
+    'id',
+    _$id,
+    opt: true,
+  );
   static String? _$name(GuildEmoji v) => v.name;
   static const Field<GuildEmoji, String> _f$name = Field('name', _$name);
   static List<Snowflake>? _$roleIds(GuildEmoji v) => v.roleIds;
@@ -520,7 +524,7 @@ extension GuildEmojiValueCopy<$R, $Out>
 abstract class GuildEmojiCopyWith<$R, $In extends GuildEmoji, $Out>
     implements EmojiCopyWith<$R, $In, $Out> {
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get id;
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>?
   get roleIds;
   UserCopyWith<$R, User, User>? get user;
@@ -547,8 +551,8 @@ class _GuildEmojiCopyWithImpl<$R, $Out>
   late final ClassMapperBase<GuildEmoji> $mapper =
       GuildEmojiMapper.ensureInitialized();
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get id =>
+      $value.id?.copyWith.$chain((v) => call(id: v));
   @override
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>?
   get roleIds => $value.roleIds != null
@@ -563,7 +567,7 @@ class _GuildEmojiCopyWithImpl<$R, $Out>
       $value.user?.copyWith.$chain((v) => call(user: v));
   @override
   $R call({
-    Snowflake? id,
+    Object? id = $none,
     Object? name = $none,
     Object? roleIds = $none,
     Object? user = $none,
@@ -573,7 +577,7 @@ class _GuildEmojiCopyWithImpl<$R, $Out>
     Object? available = $none,
   }) => $apply(
     FieldCopyWithData({
-      if (id != null) #id: id,
+      if (id != $none) #id: id,
       if (name != $none) #name: name,
       if (roleIds != $none) #roleIds: roleIds,
       if (user != $none) #user: user,
@@ -617,8 +621,12 @@ class ActivityEmojiMapper extends ClassMapperBase<ActivityEmoji> {
   @override
   final String id = 'ActivityEmoji';
 
-  static Snowflake _$id(ActivityEmoji v) => v.id;
-  static const Field<ActivityEmoji, Snowflake> _f$id = Field('id', _$id);
+  static Snowflake? _$id(ActivityEmoji v) => v.id;
+  static const Field<ActivityEmoji, Snowflake> _f$id = Field(
+    'id',
+    _$id,
+    opt: true,
+  );
   static String? _$name(ActivityEmoji v) => v.name;
   static const Field<ActivityEmoji, String> _f$name = Field('name', _$name);
   static bool? _$animated(ActivityEmoji v) => v.animated;
@@ -706,7 +714,7 @@ extension ActivityEmojiValueCopy<$R, $Out>
 abstract class ActivityEmojiCopyWith<$R, $In extends ActivityEmoji, $Out>
     implements EmojiCopyWith<$R, $In, $Out> {
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get id;
   @override
   $R call({Snowflake? id, String? name, bool? animated});
   ActivityEmojiCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
@@ -721,17 +729,20 @@ class _ActivityEmojiCopyWithImpl<$R, $Out>
   late final ClassMapperBase<ActivityEmoji> $mapper =
       ActivityEmojiMapper.ensureInitialized();
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get id =>
+      $value.id?.copyWith.$chain((v) => call(id: v));
   @override
-  $R call({Snowflake? id, Object? name = $none, Object? animated = $none}) =>
-      $apply(
-        FieldCopyWithData({
-          if (id != null) #id: id,
-          if (name != $none) #name: name,
-          if (animated != $none) #animated: animated,
-        }),
-      );
+  $R call({
+    Object? id = $none,
+    Object? name = $none,
+    Object? animated = $none,
+  }) => $apply(
+    FieldCopyWithData({
+      if (id != $none) #id: id,
+      if (name != $none) #name: name,
+      if (animated != $none) #animated: animated,
+    }),
+  );
   @override
   ActivityEmoji $make(CopyWithData data) => ActivityEmoji(
     id: data.get(#id, or: $value.id),

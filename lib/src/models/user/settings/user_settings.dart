@@ -9,6 +9,7 @@ class UserSettings with UserSettingsMappable {
   final bool detectPlatformAccounts;
   final int animateStickers;
   final bool inlineAttachmentMedia;
+
   final UserStatus status;
   final bool messageDisplayCompact;
   final bool allowActivityPartyPrivacyVoiceChannel;
@@ -20,14 +21,15 @@ class UserSettings with UserSettingsMappable {
   final bool animateEmoji;
   final Object? applicationSettings;
   final List<Snowflake> activityJoiningRestrictedGuildIds;
-  final int? friendSourceFlags;
+  // hm... `friend_source_flags(int?): FormatException: {all: true}`
+  // final int? friendSourceFlags;
   final bool allowActivityPartyPrivacyFriends;
   final bool convertEmoticons;
   final int afkTimeout;
   final bool passwordless;
   final bool contactSyncEnabled;
   final bool gifAutoPlay;
-  final UserStatus? customStatus;
+  // final UserStatus? customStatus;
   final bool nativePhoneIntegrationEnabled;
   final int friendDiscoveryFlags;
   final bool showCurrentGame;
@@ -65,7 +67,7 @@ class UserSettings with UserSettingsMappable {
     required this.defaultGuildsRestricted,
     required this.developerMode,
     required this.friendDiscoveryFlags,
-    required this.friendSourceFlags,
+    // required this.friendSourceFlags,
     required this.allowActivityPartyPrivacyFriends,
     required this.explicitContentFilter,
     required this.showCurrentGame,
@@ -73,7 +75,7 @@ class UserSettings with UserSettingsMappable {
     required this.restrictedGuilds,
     required this.contactSyncEnabled,
     required this.convertEmoticons,
-    required this.customStatus,
+    // this.customStatus,
     required this.viewNsfwCommands,
     required this.inlineEmbedMedia,
     required this.nativePhoneIntegrationEnabled,

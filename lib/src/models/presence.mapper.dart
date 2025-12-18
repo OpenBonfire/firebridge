@@ -34,6 +34,8 @@ class UserStatusMapper extends EnumMapper<UserStatus> {
         return UserStatus.idle;
       case r'offline':
         return UserStatus.offline;
+      case r'custom':
+        return UserStatus.custom;
       default:
         throw MapperException.unknownEnumValue(value);
     }
@@ -50,6 +52,8 @@ class UserStatusMapper extends EnumMapper<UserStatus> {
         return r'idle';
       case UserStatus.offline:
         return r'offline';
+      case UserStatus.custom:
+        return r'custom';
     }
   }
 }
@@ -284,7 +288,6 @@ class ActivityMapper extends ClassMapperBase<Activity> {
       ActivityAssetsMapper.ensureInitialized();
       ActivitySecretsMapper.ensureInitialized();
       ActivityFlagsMapper.ensureInitialized();
-      ActivityButtonMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -350,11 +353,6 @@ class ActivityMapper extends ClassMapperBase<Activity> {
     'flags',
     _$flags,
   );
-  static List<ActivityButton>? _$buttons(Activity v) => v.buttons;
-  static const Field<Activity, List<ActivityButton>> _f$buttons = Field(
-    'buttons',
-    _$buttons,
-  );
 
   @override
   final MappableFields<Activity> fields = const {
@@ -372,7 +370,6 @@ class ActivityMapper extends ClassMapperBase<Activity> {
     #secrets: _f$secrets,
     #isInstance: _f$isInstance,
     #flags: _f$flags,
-    #buttons: _f$buttons,
   };
 
   static Activity _instantiate(DecodingData data) {
@@ -391,7 +388,6 @@ class ActivityMapper extends ClassMapperBase<Activity> {
       secrets: data.dec(_f$secrets),
       isInstance: data.dec(_f$isInstance),
       flags: data.dec(_f$flags),
-      buttons: data.dec(_f$buttons),
     );
   }
 
@@ -460,12 +456,6 @@ abstract class ActivityCopyWith<$R, $In extends Activity, $Out>
   ActivityAssetsCopyWith<$R, ActivityAssets, ActivityAssets>? get assets;
   ActivitySecretsCopyWith<$R, ActivitySecrets, ActivitySecrets>? get secrets;
   ActivityFlagsCopyWith<$R, ActivityFlags, ActivityFlags>? get flags;
-  ListCopyWith<
-    $R,
-    ActivityButton,
-    ActivityButtonCopyWith<$R, ActivityButton, ActivityButton>
-  >?
-  get buttons;
   $R call({
     String? name,
     ActivityType? type,
@@ -481,7 +471,6 @@ abstract class ActivityCopyWith<$R, $In extends Activity, $Out>
     ActivitySecrets? secrets,
     bool? isInstance,
     ActivityFlags? flags,
-    List<ActivityButton>? buttons,
   });
   ActivityCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -517,19 +506,6 @@ class _ActivityCopyWithImpl<$R, $Out>
   ActivityFlagsCopyWith<$R, ActivityFlags, ActivityFlags>? get flags =>
       $value.flags?.copyWith.$chain((v) => call(flags: v));
   @override
-  ListCopyWith<
-    $R,
-    ActivityButton,
-    ActivityButtonCopyWith<$R, ActivityButton, ActivityButton>
-  >?
-  get buttons => $value.buttons != null
-      ? ListCopyWith(
-          $value.buttons!,
-          (v, t) => v.copyWith.$chain(t),
-          (v) => call(buttons: v),
-        )
-      : null;
-  @override
   $R call({
     String? name,
     ActivityType? type,
@@ -545,7 +521,6 @@ class _ActivityCopyWithImpl<$R, $Out>
     Object? secrets = $none,
     Object? isInstance = $none,
     Object? flags = $none,
-    Object? buttons = $none,
   }) => $apply(
     FieldCopyWithData({
       if (name != null) #name: name,
@@ -562,7 +537,6 @@ class _ActivityCopyWithImpl<$R, $Out>
       if (secrets != $none) #secrets: secrets,
       if (isInstance != $none) #isInstance: isInstance,
       if (flags != $none) #flags: flags,
-      if (buttons != $none) #buttons: buttons,
     }),
   );
   @override
@@ -581,7 +555,6 @@ class _ActivityCopyWithImpl<$R, $Out>
     secrets: data.get(#secrets, or: $value.secrets),
     isInstance: data.get(#isInstance, or: $value.isInstance),
     flags: data.get(#flags, or: $value.flags),
-    buttons: data.get(#buttons, or: $value.buttons),
   );
 
   @override
