@@ -44,6 +44,7 @@ export 'src/builders/soundboard.dart';
 export 'src/builders/sound.dart';
 
 export 'src/cache/cache.dart';
+export 'src/cache_mixin.dart';
 
 export 'src/http/bucket.dart';
 export 'src/http/handler.dart';
