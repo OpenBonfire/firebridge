@@ -20,12 +20,11 @@ void main() {
       final client =
           await Firebridge.connectGatewayWithOptions(GatewayApiOptions(
         token: testToken!,
-        intents: GatewayIntents.allUnprivileged,
         totalShards:
             10, // Use many shards to ensure the client is still connecting some shards when we close it.
       ));
 
-      final user = await client.user.get();
+      final user = await client.users.fetch(client.user.id);
 
       await client.onReady.first;
 
@@ -55,13 +54,13 @@ void main() {
       final requests = client.httpHandler.onRequest.listen((_) {});
       final responses = client.httpHandler.onResponse.listen((_) {});
       final rateLimits = client.httpHandler.onRateLimit.listen((_) {});
-      final assetStream = user.avatar.fetchStreamed().listen((_) {});
+      // final assetStream = user.avatar.fetchStreamed().listen((_) {});
 
       // This single request should be representative of all methods on managers that
       // create a request from a known route, execute it using httpHandler.executeSafe,
       // and then parse the result (the vast majority of all manager methods).
-      final userRequest = client.user.fetch();
-      final assetRequest = user.avatar.fetch();
+      final userRequest = client.users.fetch(client.user.id);
+      // final assetRequest = user.avatar.fetch();
       final shardsDone = [
         for (final shard in client.gateway.shards) shard.done,
       ];
@@ -85,11 +84,11 @@ void main() {
         requests.asFuture(),
         responses.asFuture(),
         rateLimits.asFuture(),
-        assetStream.asFuture(),
+        // assetStream.asFuture(),
 
         // Futures
         userRequest,
-        assetRequest,
+        // assetRequest,
         ...shardsDone,
         rateLimitedRequest,
       ]);

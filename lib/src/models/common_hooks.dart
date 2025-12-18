@@ -1,5 +1,4 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:firebridge/src/models/application.dart';
 import 'package:firebridge/src/models/channel/channel.dart';
 import 'package:firebridge/src/models/channel/followed_channel.dart';
 import 'package:firebridge/src/models/channel/guild_channel.dart';

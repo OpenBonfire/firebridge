@@ -1,5 +1,4 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:firebridge/src/models/guild/integration.dart';
 import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 

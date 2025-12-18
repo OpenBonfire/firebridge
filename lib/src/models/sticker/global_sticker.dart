@@ -1,6 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/models/snowflake.dart';
-import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:firebridge/src/models/sticker/sticker.dart';
 import 'package:firebridge/src/models/user/user.dart';
 

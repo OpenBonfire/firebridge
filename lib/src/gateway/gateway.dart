@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:firebridge/src/builders/guild/guild_subscriptions_bulk.dart';
 import 'package:firebridge/src/models/gateway/events/guild.dart';
 import 'package:firebridge/src/models/guild/member.dart';

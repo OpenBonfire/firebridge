@@ -1,7 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/builders/interaction_response.dart';
 import 'package:firebridge/src/models/application.dart';
-import 'package:firebridge/src/models/channel/channel.dart';
 import 'package:firebridge/src/models/commands/application_command.dart';
 import 'package:firebridge/src/models/commands/application_command_option.dart';
 import 'package:firebridge/src/models/entitlement.dart';

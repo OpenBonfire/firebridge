@@ -15,7 +15,7 @@ void main() {
     );
 
     expect(
-      builder2.build(),
+      builder2.toMap(),
       equals({
         'name': 'test',
         'emoji_id': '0',

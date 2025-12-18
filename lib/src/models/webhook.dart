@@ -1,6 +1,4 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:firebridge/src/models/channel/channel.dart';
-import 'package:firebridge/src/models/guild/guild.dart';
 import 'package:firebridge/src/models/message/author.dart';
 import 'package:firebridge/src/models/message/message.dart';
 import 'package:firebridge/src/models/snowflake.dart';
