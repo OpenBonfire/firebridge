@@ -80,6 +80,12 @@ class AttachmentMapper extends ClassMapperBase<Attachment> {
     'flags',
     _$flags,
   );
+  static String? _$placeholder(Attachment v) => v.placeholder;
+  static const Field<Attachment, String> _f$placeholder = Field(
+    'placeholder',
+    _$placeholder,
+    opt: true,
+  );
 
   @override
   final MappableFields<Attachment> fields = const {
@@ -97,6 +103,7 @@ class AttachmentMapper extends ClassMapperBase<Attachment> {
     #duration: _f$duration,
     #waveform: _f$waveform,
     #flags: _f$flags,
+    #placeholder: _f$placeholder,
   };
 
   static Attachment _instantiate(DecodingData data) {
@@ -115,6 +122,7 @@ class AttachmentMapper extends ClassMapperBase<Attachment> {
       duration: data.dec(_f$duration),
       waveform: data.dec(_f$waveform),
       flags: data.dec(_f$flags),
+      placeholder: data.dec(_f$placeholder),
     );
   }
 
@@ -195,6 +203,7 @@ abstract class AttachmentCopyWith<$R, $In extends Attachment, $Out>
     Duration? duration,
     List<int>? waveform,
     AttachmentFlags? flags,
+    String? placeholder,
   });
   AttachmentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -235,6 +244,7 @@ class _AttachmentCopyWithImpl<$R, $Out>
     Object? duration = $none,
     Object? waveform = $none,
     Object? flags = $none,
+    Object? placeholder = $none,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
@@ -251,6 +261,7 @@ class _AttachmentCopyWithImpl<$R, $Out>
       if (duration != $none) #duration: duration,
       if (waveform != $none) #waveform: waveform,
       if (flags != $none) #flags: flags,
+      if (placeholder != $none) #placeholder: placeholder,
     }),
   );
   @override
@@ -269,6 +280,7 @@ class _AttachmentCopyWithImpl<$R, $Out>
     duration: data.get(#duration, or: $value.duration),
     waveform: data.get(#waveform, or: $value.waveform),
     flags: data.get(#flags, or: $value.flags),
+    placeholder: data.get(#placeholder, or: $value.placeholder),
   );
 
   @override

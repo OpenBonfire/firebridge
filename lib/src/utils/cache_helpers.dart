@@ -49,7 +49,7 @@
 // import 'package:firebridge/src/models/voice/voice_state.dart';
 // import 'package:firebridge/src/models/webhook.dart';
 
-import 'package:firebridge/nyxx.dart';
+import 'package:firebridge/firebridge.dart';
 
 extension CacheUpdates on FirebridgeRest {
   void updateCacheWith(Object? entity) {}

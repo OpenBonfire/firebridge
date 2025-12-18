@@ -1487,7 +1487,7 @@ abstract class GuildEmojisUpdateEventCopyWith<
 >
     implements DispatchEventCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
-  ListCopyWith<$R, Emoji, ObjectCopyWith<$R, Emoji, Emoji>> get emojis;
+  ListCopyWith<$R, Emoji, EmojiCopyWith<$R, Emoji, Emoji>> get emojis;
   @override
   $R call({Snowflake? guildId, List<Emoji>? emojis});
   GuildEmojisUpdateEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
@@ -1508,10 +1508,10 @@ class _GuildEmojisUpdateEventCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
       $value.guildId.copyWith.$chain((v) => call(guildId: v));
   @override
-  ListCopyWith<$R, Emoji, ObjectCopyWith<$R, Emoji, Emoji>> get emojis =>
+  ListCopyWith<$R, Emoji, EmojiCopyWith<$R, Emoji, Emoji>> get emojis =>
       ListCopyWith(
         $value.emojis,
-        (v, t) => ObjectCopyWith(v, $identity, t),
+        (v, t) => v.copyWith.$chain(t),
         (v) => call(emojis: v),
       );
   @override

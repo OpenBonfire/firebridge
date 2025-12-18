@@ -1,5 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:firebridge/nyxx.dart';
+import 'package:firebridge/firebridge.dart';
 import 'package:firebridge/src/models/channel/has_threads_channel.dart';
 import 'package:firebridge/src/models/snowflake.dart';
 

@@ -279,7 +279,7 @@ class ActivityMapper extends ClassMapperBase<Activity> {
       ActivityTypeMapper.ensureInitialized();
       ActivityTimestampsMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
-      EmojiMapper.ensureInitialized();
+      ActivityEmojiMapper.ensureInitialized();
       ActivityPartyMapper.ensureInitialized();
       ActivityAssetsMapper.ensureInitialized();
       ActivitySecretsMapper.ensureInitialized();
@@ -319,8 +319,11 @@ class ActivityMapper extends ClassMapperBase<Activity> {
   static const Field<Activity, String> _f$details = Field('details', _$details);
   static String? _$state(Activity v) => v.state;
   static const Field<Activity, String> _f$state = Field('state', _$state);
-  static Emoji? _$emoji(Activity v) => v.emoji;
-  static const Field<Activity, Emoji> _f$emoji = Field('emoji', _$emoji);
+  static ActivityEmoji? _$emoji(Activity v) => v.emoji;
+  static const Field<Activity, ActivityEmoji> _f$emoji = Field(
+    'emoji',
+    _$emoji,
+  );
   static ActivityParty? _$party(Activity v) => v.party;
   static const Field<Activity, ActivityParty> _f$party = Field(
     'party',
@@ -452,6 +455,7 @@ abstract class ActivityCopyWith<$R, $In extends Activity, $Out>
   ActivityTimestampsCopyWith<$R, ActivityTimestamps, ActivityTimestamps>?
   get timestamps;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get applicationId;
+  ActivityEmojiCopyWith<$R, ActivityEmoji, ActivityEmoji>? get emoji;
   ActivityPartyCopyWith<$R, ActivityParty, ActivityParty>? get party;
   ActivityAssetsCopyWith<$R, ActivityAssets, ActivityAssets>? get assets;
   ActivitySecretsCopyWith<$R, ActivitySecrets, ActivitySecrets>? get secrets;
@@ -471,7 +475,7 @@ abstract class ActivityCopyWith<$R, $In extends Activity, $Out>
     Snowflake? applicationId,
     String? details,
     String? state,
-    Emoji? emoji,
+    ActivityEmoji? emoji,
     ActivityParty? party,
     ActivityAssets? assets,
     ActivitySecrets? secrets,
@@ -497,6 +501,9 @@ class _ActivityCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get applicationId =>
       $value.applicationId?.copyWith.$chain((v) => call(applicationId: v));
+  @override
+  ActivityEmojiCopyWith<$R, ActivityEmoji, ActivityEmoji>? get emoji =>
+      $value.emoji?.copyWith.$chain((v) => call(emoji: v));
   @override
   ActivityPartyCopyWith<$R, ActivityParty, ActivityParty>? get party =>
       $value.party?.copyWith.$chain((v) => call(party: v));

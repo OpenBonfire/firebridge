@@ -102,3 +102,10 @@ class GuildEmoji extends Emoji with GuildEmojiMappable {
     required this.available,
   });
 }
+
+@MappableClass()
+class ActivityEmoji extends Emoji with ActivityEmojiMappable {
+  /// Whether this emoji is animated
+  final bool? animated;
+  const ActivityEmoji({required super.id, required super.name, this.animated});
+}

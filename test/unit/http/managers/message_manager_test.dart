@@ -1,6 +1,6 @@
 import 'package:firebridge/src/models/message/message.dart';
 import 'package:test/test.dart';
-import 'package:firebridge/nyxx.dart';
+import 'package:firebridge/firebridge.dart';
 
 import '../../../test_manager.dart';
 

@@ -1,4 +1,4 @@
-import 'package:firebridge/nyxx.dart';
+import 'package:firebridge/firebridge.dart';
 import 'package:firebridge/src/builders/guild/guild_subscriptions_bulk.dart';
 import 'package:firebridge/src/models/guild/guild_subscriptions_bulk.dart';
 

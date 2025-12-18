@@ -59,24 +59,27 @@ class Attachment with ToStringHelper, AttachmentMappable {
   /// This attachment's flags.
   final AttachmentFlags? flags;
 
+  /// A low-resolution thumbhash of the attachment, to display before it is loaded
+  final String? placeholder;
+
   /// {@macro attachment}
   /// @nodoc
-  Attachment({
-    required this.id,
-    required this.manager,
-    required this.fileName,
-    required this.description,
-    required this.contentType,
-    required this.size,
-    required this.url,
-    required this.proxiedUrl,
-    required this.height,
-    required this.width,
-    required this.ephemeral,
-    required this.duration,
-    required this.waveform,
-    required this.flags,
-  });
+  Attachment(
+      {required this.id,
+      required this.manager,
+      required this.fileName,
+      required this.description,
+      required this.contentType,
+      required this.size,
+      required this.url,
+      required this.proxiedUrl,
+      required this.height,
+      required this.width,
+      required this.ephemeral,
+      required this.duration,
+      required this.waveform,
+      required this.flags,
+      this.placeholder});
 }
 
 /// The flags for an [Attachment].

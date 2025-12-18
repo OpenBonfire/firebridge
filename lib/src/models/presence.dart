@@ -60,7 +60,7 @@ class Activity with ToStringHelper, ActivityMappable {
   final String? state;
 
   /// The custom emoji for this activity.
-  final Emoji? emoji;
+  final ActivityEmoji? emoji;
 
   /// Information about this activity's party.
   final ActivityParty? party;

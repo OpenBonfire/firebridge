@@ -1,4 +1,4 @@
-import 'package:firebridge/nyxx.dart';
+import 'package:firebridge/firebridge.dart';
 
 Map<String, String> makeEmojiMap({Snowflake? emojiId, String? emojiName}) => {
       if (emojiName case final String emojiName?) 'emoji_name': emojiName,

@@ -17,6 +17,7 @@ class EmojiMapper extends ClassMapperBase<Emoji> {
       TextEmojiMapper.ensureInitialized();
       ApplicationEmojiMapper.ensureInitialized();
       GuildEmojiMapper.ensureInitialized();
+      ActivityEmojiMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
     }
     return _instance!;
@@ -598,5 +599,149 @@ class _GuildEmojiCopyWithImpl<$R, $Out>
   GuildEmojiCopyWith<$R2, GuildEmoji, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   ) => _GuildEmojiCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
+class ActivityEmojiMapper extends ClassMapperBase<ActivityEmoji> {
+  ActivityEmojiMapper._();
+
+  static ActivityEmojiMapper? _instance;
+  static ActivityEmojiMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = ActivityEmojiMapper._());
+      EmojiMapper.ensureInitialized();
+      SnowflakeMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'ActivityEmoji';
+
+  static Snowflake _$id(ActivityEmoji v) => v.id;
+  static const Field<ActivityEmoji, Snowflake> _f$id = Field('id', _$id);
+  static String? _$name(ActivityEmoji v) => v.name;
+  static const Field<ActivityEmoji, String> _f$name = Field('name', _$name);
+  static bool? _$animated(ActivityEmoji v) => v.animated;
+  static const Field<ActivityEmoji, bool> _f$animated = Field(
+    'animated',
+    _$animated,
+    opt: true,
+  );
+
+  @override
+  final MappableFields<ActivityEmoji> fields = const {
+    #id: _f$id,
+    #name: _f$name,
+    #animated: _f$animated,
+  };
+
+  static ActivityEmoji _instantiate(DecodingData data) {
+    return ActivityEmoji(
+      id: data.dec(_f$id),
+      name: data.dec(_f$name),
+      animated: data.dec(_f$animated),
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static ActivityEmoji fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<ActivityEmoji>(map);
+  }
+
+  static ActivityEmoji fromJson(String json) {
+    return ensureInitialized().decodeJson<ActivityEmoji>(json);
+  }
+}
+
+mixin ActivityEmojiMappable {
+  String toJson() {
+    return ActivityEmojiMapper.ensureInitialized().encodeJson<ActivityEmoji>(
+      this as ActivityEmoji,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return ActivityEmojiMapper.ensureInitialized().encodeMap<ActivityEmoji>(
+      this as ActivityEmoji,
+    );
+  }
+
+  ActivityEmojiCopyWith<ActivityEmoji, ActivityEmoji, ActivityEmoji>
+  get copyWith => _ActivityEmojiCopyWithImpl<ActivityEmoji, ActivityEmoji>(
+    this as ActivityEmoji,
+    $identity,
+    $identity,
+  );
+  @override
+  String toString() {
+    return ActivityEmojiMapper.ensureInitialized().stringifyValue(
+      this as ActivityEmoji,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return ActivityEmojiMapper.ensureInitialized().equalsValue(
+      this as ActivityEmoji,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return ActivityEmojiMapper.ensureInitialized().hashValue(
+      this as ActivityEmoji,
+    );
+  }
+}
+
+extension ActivityEmojiValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, ActivityEmoji, $Out> {
+  ActivityEmojiCopyWith<$R, ActivityEmoji, $Out> get $asActivityEmoji =>
+      $base.as((v, t, t2) => _ActivityEmojiCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class ActivityEmojiCopyWith<$R, $In extends ActivityEmoji, $Out>
+    implements EmojiCopyWith<$R, $In, $Out> {
+  @override
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  @override
+  $R call({Snowflake? id, String? name, bool? animated});
+  ActivityEmojiCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+}
+
+class _ActivityEmojiCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, ActivityEmoji, $Out>
+    implements ActivityEmojiCopyWith<$R, ActivityEmoji, $Out> {
+  _ActivityEmojiCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<ActivityEmoji> $mapper =
+      ActivityEmojiMapper.ensureInitialized();
+  @override
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
+      $value.id.copyWith.$chain((v) => call(id: v));
+  @override
+  $R call({Snowflake? id, Object? name = $none, Object? animated = $none}) =>
+      $apply(
+        FieldCopyWithData({
+          if (id != null) #id: id,
+          if (name != $none) #name: name,
+          if (animated != $none) #animated: animated,
+        }),
+      );
+  @override
+  ActivityEmoji $make(CopyWithData data) => ActivityEmoji(
+    id: data.get(#id, or: $value.id),
+    name: data.get(#name, or: $value.name),
+    animated: data.get(#animated, or: $value.animated),
+  );
+
+  @override
+  ActivityEmojiCopyWith<$R2, ActivityEmoji, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _ActivityEmojiCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 

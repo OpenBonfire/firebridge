@@ -17,6 +17,8 @@ class PartialUser extends ManagedSnowflakeEntity<User>
   final String username;
   final String discriminator;
   final String? globalName;
+
+  /// The user's avatar hash
   final String? avatar;
   final UserPrimaryGuild? primaryGuild;
   final bool? bot;
