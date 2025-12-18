@@ -29,7 +29,7 @@ class UserSettings with UserSettingsMappable {
   final bool passwordless;
   final bool contactSyncEnabled;
   final bool gifAutoPlay;
-  // final UserStatus? customStatus;
+  final CustomStatus? customStatus;
   final bool nativePhoneIntegrationEnabled;
   final int friendDiscoveryFlags;
   final bool showCurrentGame;
@@ -75,7 +75,7 @@ class UserSettings with UserSettingsMappable {
     required this.restrictedGuilds,
     required this.contactSyncEnabled,
     required this.convertEmoticons,
-    // this.customStatus,
+    this.customStatus,
     required this.viewNsfwCommands,
     required this.inlineEmbedMedia,
     required this.nativePhoneIntegrationEnabled,

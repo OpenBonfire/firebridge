@@ -264,3 +264,12 @@ class ActivityButton with ToStringHelper, ActivityButtonMappable {
   /// @nodoc
   ActivityButton({required this.label, required this.url});
 }
+
+@MappableClass()
+class CustomStatus with CustomStatusMappable {
+  final String? text;
+  final Snowflake? emojiId;
+  final String? emojiName;
+  final DateTime? expiresAt;
+  const CustomStatus({this.text, this.emojiId, this.emojiName, this.expiresAt});
+}

@@ -16,6 +16,7 @@ class UserSettingsMapper extends ClassMapperBase<UserSettings> {
       MapperContainer.globals.use(_instance = UserSettingsMapper._());
       UserStatusMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
+      CustomStatusMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -201,6 +202,13 @@ class UserSettingsMapper extends ClassMapperBase<UserSettings> {
     _$convertEmoticons,
     key: r'convert_emoticons',
   );
+  static CustomStatus? _$customStatus(UserSettings v) => v.customStatus;
+  static const Field<UserSettings, CustomStatus> _f$customStatus = Field(
+    'customStatus',
+    _$customStatus,
+    key: r'custom_status',
+    opt: true,
+  );
   static bool _$viewNsfwCommands(UserSettings v) => v.viewNsfwCommands;
   static const Field<UserSettings, bool> _f$viewNsfwCommands = Field(
     'viewNsfwCommands',
@@ -270,6 +278,7 @@ class UserSettingsMapper extends ClassMapperBase<UserSettings> {
     #restrictedGuilds: _f$restrictedGuilds,
     #contactSyncEnabled: _f$contactSyncEnabled,
     #convertEmoticons: _f$convertEmoticons,
+    #customStatus: _f$customStatus,
     #viewNsfwCommands: _f$viewNsfwCommands,
     #inlineEmbedMedia: _f$inlineEmbedMedia,
     #nativePhoneIntegrationEnabled: _f$nativePhoneIntegrationEnabled,
@@ -314,6 +323,7 @@ class UserSettingsMapper extends ClassMapperBase<UserSettings> {
       restrictedGuilds: data.dec(_f$restrictedGuilds),
       contactSyncEnabled: data.dec(_f$contactSyncEnabled),
       convertEmoticons: data.dec(_f$convertEmoticons),
+      customStatus: data.dec(_f$customStatus),
       viewNsfwCommands: data.dec(_f$viewNsfwCommands),
       inlineEmbedMedia: data.dec(_f$inlineEmbedMedia),
       nativePhoneIntegrationEnabled: data.dec(_f$nativePhoneIntegrationEnabled),
@@ -391,6 +401,7 @@ abstract class UserSettingsCopyWith<$R, $In extends UserSettings, $Out>
   get activityRestrictedGuildIds;
   ListCopyWith<$R, Object, ObjectCopyWith<$R, Object, Object>>
   get restrictedGuilds;
+  CustomStatusCopyWith<$R, CustomStatus, CustomStatus>? get customStatus;
   $R call({
     bool? detectPlatformAccounts,
     int? animateStickers,
@@ -420,6 +431,7 @@ abstract class UserSettingsCopyWith<$R, $In extends UserSettings, $Out>
     List<Object>? restrictedGuilds,
     bool? contactSyncEnabled,
     bool? convertEmoticons,
+    CustomStatus? customStatus,
     bool? viewNsfwCommands,
     bool? inlineEmbedMedia,
     bool? nativePhoneIntegrationEnabled,
@@ -460,6 +472,9 @@ class _UserSettingsCopyWithImpl<$R, $Out>
     (v) => call(restrictedGuilds: v),
   );
   @override
+  CustomStatusCopyWith<$R, CustomStatus, CustomStatus>? get customStatus =>
+      $value.customStatus?.copyWith.$chain((v) => call(customStatus: v));
+  @override
   $R call({
     bool? detectPlatformAccounts,
     int? animateStickers,
@@ -489,6 +504,7 @@ class _UserSettingsCopyWithImpl<$R, $Out>
     List<Object>? restrictedGuilds,
     bool? contactSyncEnabled,
     bool? convertEmoticons,
+    Object? customStatus = $none,
     bool? viewNsfwCommands,
     bool? inlineEmbedMedia,
     bool? nativePhoneIntegrationEnabled,
@@ -539,6 +555,7 @@ class _UserSettingsCopyWithImpl<$R, $Out>
       if (restrictedGuilds != null) #restrictedGuilds: restrictedGuilds,
       if (contactSyncEnabled != null) #contactSyncEnabled: contactSyncEnabled,
       if (convertEmoticons != null) #convertEmoticons: convertEmoticons,
+      if (customStatus != $none) #customStatus: customStatus,
       if (viewNsfwCommands != null) #viewNsfwCommands: viewNsfwCommands,
       if (inlineEmbedMedia != null) #inlineEmbedMedia: inlineEmbedMedia,
       if (nativePhoneIntegrationEnabled != null)
@@ -620,6 +637,7 @@ class _UserSettingsCopyWithImpl<$R, $Out>
       or: $value.contactSyncEnabled,
     ),
     convertEmoticons: data.get(#convertEmoticons, or: $value.convertEmoticons),
+    customStatus: data.get(#customStatus, or: $value.customStatus),
     viewNsfwCommands: data.get(#viewNsfwCommands, or: $value.viewNsfwCommands),
     inlineEmbedMedia: data.get(#inlineEmbedMedia, or: $value.inlineEmbedMedia),
     nativePhoneIntegrationEnabled: data.get(

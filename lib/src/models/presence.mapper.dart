@@ -1390,3 +1390,174 @@ class _ActivityButtonCopyWithImpl<$R, $Out>
   ) => _ActivityButtonCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
+class CustomStatusMapper extends ClassMapperBase<CustomStatus> {
+  CustomStatusMapper._();
+
+  static CustomStatusMapper? _instance;
+  static CustomStatusMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = CustomStatusMapper._());
+      SnowflakeMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'CustomStatus';
+
+  static String? _$text(CustomStatus v) => v.text;
+  static const Field<CustomStatus, String> _f$text = Field(
+    'text',
+    _$text,
+    opt: true,
+  );
+  static Snowflake? _$emojiId(CustomStatus v) => v.emojiId;
+  static const Field<CustomStatus, Snowflake> _f$emojiId = Field(
+    'emojiId',
+    _$emojiId,
+    key: r'emoji_id',
+    opt: true,
+  );
+  static String? _$emojiName(CustomStatus v) => v.emojiName;
+  static const Field<CustomStatus, String> _f$emojiName = Field(
+    'emojiName',
+    _$emojiName,
+    key: r'emoji_name',
+    opt: true,
+  );
+  static DateTime? _$expiresAt(CustomStatus v) => v.expiresAt;
+  static const Field<CustomStatus, DateTime> _f$expiresAt = Field(
+    'expiresAt',
+    _$expiresAt,
+    key: r'expires_at',
+    opt: true,
+  );
+
+  @override
+  final MappableFields<CustomStatus> fields = const {
+    #text: _f$text,
+    #emojiId: _f$emojiId,
+    #emojiName: _f$emojiName,
+    #expiresAt: _f$expiresAt,
+  };
+
+  static CustomStatus _instantiate(DecodingData data) {
+    return CustomStatus(
+      text: data.dec(_f$text),
+      emojiId: data.dec(_f$emojiId),
+      emojiName: data.dec(_f$emojiName),
+      expiresAt: data.dec(_f$expiresAt),
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static CustomStatus fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<CustomStatus>(map);
+  }
+
+  static CustomStatus fromJson(String json) {
+    return ensureInitialized().decodeJson<CustomStatus>(json);
+  }
+}
+
+mixin CustomStatusMappable {
+  String toJson() {
+    return CustomStatusMapper.ensureInitialized().encodeJson<CustomStatus>(
+      this as CustomStatus,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return CustomStatusMapper.ensureInitialized().encodeMap<CustomStatus>(
+      this as CustomStatus,
+    );
+  }
+
+  CustomStatusCopyWith<CustomStatus, CustomStatus, CustomStatus> get copyWith =>
+      _CustomStatusCopyWithImpl<CustomStatus, CustomStatus>(
+        this as CustomStatus,
+        $identity,
+        $identity,
+      );
+  @override
+  String toString() {
+    return CustomStatusMapper.ensureInitialized().stringifyValue(
+      this as CustomStatus,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return CustomStatusMapper.ensureInitialized().equalsValue(
+      this as CustomStatus,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return CustomStatusMapper.ensureInitialized().hashValue(
+      this as CustomStatus,
+    );
+  }
+}
+
+extension CustomStatusValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, CustomStatus, $Out> {
+  CustomStatusCopyWith<$R, CustomStatus, $Out> get $asCustomStatus =>
+      $base.as((v, t, t2) => _CustomStatusCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class CustomStatusCopyWith<$R, $In extends CustomStatus, $Out>
+    implements ClassCopyWith<$R, $In, $Out> {
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get emojiId;
+  $R call({
+    String? text,
+    Snowflake? emojiId,
+    String? emojiName,
+    DateTime? expiresAt,
+  });
+  CustomStatusCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+}
+
+class _CustomStatusCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, CustomStatus, $Out>
+    implements CustomStatusCopyWith<$R, CustomStatus, $Out> {
+  _CustomStatusCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<CustomStatus> $mapper =
+      CustomStatusMapper.ensureInitialized();
+  @override
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get emojiId =>
+      $value.emojiId?.copyWith.$chain((v) => call(emojiId: v));
+  @override
+  $R call({
+    Object? text = $none,
+    Object? emojiId = $none,
+    Object? emojiName = $none,
+    Object? expiresAt = $none,
+  }) => $apply(
+    FieldCopyWithData({
+      if (text != $none) #text: text,
+      if (emojiId != $none) #emojiId: emojiId,
+      if (emojiName != $none) #emojiName: emojiName,
+      if (expiresAt != $none) #expiresAt: expiresAt,
+    }),
+  );
+  @override
+  CustomStatus $make(CopyWithData data) => CustomStatus(
+    text: data.get(#text, or: $value.text),
+    emojiId: data.get(#emojiId, or: $value.emojiId),
+    emojiName: data.get(#emojiName, or: $value.emojiName),
+    expiresAt: data.get(#expiresAt, or: $value.expiresAt),
+  );
+
+  @override
+  CustomStatusCopyWith<$R2, CustomStatus, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _CustomStatusCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+

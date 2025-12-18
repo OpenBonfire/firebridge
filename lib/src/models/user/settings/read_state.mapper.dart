@@ -22,8 +22,12 @@ class ReadStateMapper extends ClassMapperBase<ReadState> {
   @override
   final String id = 'ReadState';
 
-  static Snowflake _$id(ReadState v) => v.id;
-  static const Field<ReadState, Snowflake> _f$id = Field('id', _$id);
+  static Snowflake _$channelId(ReadState v) => v.channelId;
+  static const Field<ReadState, Snowflake> _f$channelId = Field(
+    'channelId',
+    _$channelId,
+    key: r'id',
+  );
   static int? _$flags(ReadState v) => v.flags;
   static const Field<ReadState, int> _f$flags = Field(
     'flags',
@@ -61,7 +65,7 @@ class ReadStateMapper extends ClassMapperBase<ReadState> {
 
   @override
   final MappableFields<ReadState> fields = const {
-    #id: _f$id,
+    #channelId: _f$channelId,
     #flags: _f$flags,
     #mentionCount: _f$mentionCount,
     #lastMessageId: _f$lastMessageId,
@@ -71,7 +75,7 @@ class ReadStateMapper extends ClassMapperBase<ReadState> {
 
   static ReadState _instantiate(DecodingData data) {
     return ReadState(
-      id: data.dec(_f$id),
+      channelId: data.dec(_f$channelId),
       flags: data.dec(_f$flags),
       mentionCount: data.dec(_f$mentionCount),
       lastMessageId: data.dec(_f$lastMessageId),
@@ -139,10 +143,10 @@ extension ReadStateValueCopy<$R, $Out> on ObjectCopyWith<$R, ReadState, $Out> {
 
 abstract class ReadStateCopyWith<$R, $In extends ReadState, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get channelId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId;
   $R call({
-    Snowflake? id,
+    Snowflake? channelId,
     int? flags,
     int? mentionCount,
     Snowflake? lastMessageId,
@@ -161,14 +165,14 @@ class _ReadStateCopyWithImpl<$R, $Out>
   late final ClassMapperBase<ReadState> $mapper =
       ReadStateMapper.ensureInitialized();
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get channelId =>
+      $value.channelId.copyWith.$chain((v) => call(channelId: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId =>
       $value.lastMessageId?.copyWith.$chain((v) => call(lastMessageId: v));
   @override
   $R call({
-    Snowflake? id,
+    Snowflake? channelId,
     Object? flags = $none,
     Object? mentionCount = $none,
     Object? lastMessageId = $none,
@@ -176,7 +180,7 @@ class _ReadStateCopyWithImpl<$R, $Out>
     Object? lastPinTimestamp = $none,
   }) => $apply(
     FieldCopyWithData({
-      if (id != null) #id: id,
+      if (channelId != null) #channelId: channelId,
       if (flags != $none) #flags: flags,
       if (mentionCount != $none) #mentionCount: mentionCount,
       if (lastMessageId != $none) #lastMessageId: lastMessageId,
@@ -186,7 +190,7 @@ class _ReadStateCopyWithImpl<$R, $Out>
   );
   @override
   ReadState $make(CopyWithData data) => ReadState(
-    id: data.get(#id, or: $value.id),
+    channelId: data.get(#channelId, or: $value.channelId),
     flags: data.get(#flags, or: $value.flags),
     mentionCount: data.get(#mentionCount, or: $value.mentionCount),
     lastMessageId: data.get(#lastMessageId, or: $value.lastMessageId),

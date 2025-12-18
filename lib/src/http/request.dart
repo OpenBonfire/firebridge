@@ -1,5 +1,7 @@
-import 'package:http/http.dart' hide MultipartRequest;
+import 'dart:convert';
+
 import 'package:http/http.dart' as http show MultipartRequest;
+import 'package:http/http.dart' hide MultipartRequest;
 import 'package:firebridge/src/client.dart';
 import 'package:firebridge/src/http/route.dart';
 
@@ -72,11 +74,35 @@ abstract class HttpRequest {
         queryParameters.isNotEmpty ? queryParameters : null,
       );
 
+  String _genSuperProps(Map<String, dynamic> object) =>
+      base64Encode(utf8.encode(jsonEncode(object)));
+
   Map<String, String> _getHeaders(Firebridge client) => {
-        userAgent: client.apiOptions.userAgent,
-        if (auditLogReason != null)
-          xAuditLogReason: Uri.encodeComponent(auditLogReason!),
+        // userAgent: client.apiOptions.userAgent,
+        if (auditLogReason != null) xAuditLogReason: auditLogReason!,
         if (authenticated) authorization: client.apiOptions.authorizationHeader,
+        "Accept-Language": "en-US",
+        // "Cache-Control": "no-cache",
+        // "Pragma": "no-cache",
+        "X-Discord-Locale": "en-US",
+        "X-Debug-Options": "bugReporterEnabled",
+        "X-Super-Properties": _genSuperProps({
+          'os': 'Windows',
+          'browser': 'Chrome',
+          'device': '',
+          'browser_user_agent': client.apiOptions.userAgent,
+          'browser_version': "111.0.0.0",
+          'os_version': '10',
+          'referrer': '',
+          'referring_domain': '',
+          'referrer_current': '',
+          'referring_domain_current': '',
+          'release_channel': 'stable',
+          'system_locale': 'en-US',
+          'client_build_number': 181113,
+          'client_event_source': null,
+          'design_id': 0,
+        }),
         ...headers,
       };
 

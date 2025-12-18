@@ -6,7 +6,8 @@ part 'read_state.mapper.dart';
 
 @MappableClass()
 class ReadState with ToStringHelper, ReadStateMappable {
-  Snowflake id;
+  @MappableField(key: "id")
+  Snowflake channelId;
   int? flags;
   int? mentionCount;
   Snowflake? lastMessageId;
@@ -14,7 +15,7 @@ class ReadState with ToStringHelper, ReadStateMappable {
   DateTime? lastPinTimestamp;
 
   ReadState({
-    required this.id,
+    required this.channelId,
     this.flags,
     this.mentionCount,
     this.lastMessageId,
