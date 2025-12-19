@@ -21,7 +21,7 @@ dependencies:
 
 dev_dependencies:
   test: ^1.25.14
-  lints: ^2.1.1
+  lints: ^6.0.0
   nock: ^1.2.3
   mocktail: ^1.0.4
   matcher: ^0.12.17
