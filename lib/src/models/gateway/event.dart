@@ -8,7 +8,7 @@ part 'event.mapper.dart';
 /// The base class for all events received from the Gateway.
 /// {@endtemplate}
 @MappableClass()
-abstract class GatewayEvent with ToStringHelper {
+abstract class GatewayEvent with GatewayEventMappable, ToStringHelper {
   /// The opcode of this event.
   final Opcode opcode;
 
