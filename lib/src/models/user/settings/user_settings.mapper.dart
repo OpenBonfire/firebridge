@@ -17,6 +17,7 @@ class UserSettingsMapper extends ClassMapperBase<UserSettings> {
       UserStatusMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
       CustomStatusMapper.ensureInitialized();
+      GuildFolderMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -246,6 +247,12 @@ class UserSettingsMapper extends ClassMapperBase<UserSettings> {
     _$timezoneName,
     key: r'timezone_name',
   );
+  static List<GuildFolder> _$guildFolders(UserSettings v) => v.guildFolders;
+  static const Field<UserSettings, List<GuildFolder>> _f$guildFolders = Field(
+    'guildFolders',
+    _$guildFolders,
+    key: r'guild_folders',
+  );
 
   @override
   final MappableFields<UserSettings> fields = const {
@@ -285,6 +292,7 @@ class UserSettingsMapper extends ClassMapperBase<UserSettings> {
     #passwordless: _f$passwordless,
     #renderReactions: _f$renderReactions,
     #timezoneName: _f$timezoneName,
+    #guildFolders: _f$guildFolders,
   };
 
   static UserSettings _instantiate(DecodingData data) {
@@ -330,6 +338,7 @@ class UserSettingsMapper extends ClassMapperBase<UserSettings> {
       passwordless: data.dec(_f$passwordless),
       renderReactions: data.dec(_f$renderReactions),
       timezoneName: data.dec(_f$timezoneName),
+      guildFolders: data.dec(_f$guildFolders),
     );
   }
 
@@ -402,6 +411,12 @@ abstract class UserSettingsCopyWith<$R, $In extends UserSettings, $Out>
   ListCopyWith<$R, Object, ObjectCopyWith<$R, Object, Object>>
   get restrictedGuilds;
   CustomStatusCopyWith<$R, CustomStatus, CustomStatus>? get customStatus;
+  ListCopyWith<
+    $R,
+    GuildFolder,
+    GuildFolderCopyWith<$R, GuildFolder, GuildFolder>
+  >
+  get guildFolders;
   $R call({
     bool? detectPlatformAccounts,
     int? animateStickers,
@@ -438,6 +453,7 @@ abstract class UserSettingsCopyWith<$R, $In extends UserSettings, $Out>
     bool? passwordless,
     bool? renderReactions,
     String? timezoneName,
+    List<GuildFolder>? guildFolders,
   });
   UserSettingsCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -475,6 +491,17 @@ class _UserSettingsCopyWithImpl<$R, $Out>
   CustomStatusCopyWith<$R, CustomStatus, CustomStatus>? get customStatus =>
       $value.customStatus?.copyWith.$chain((v) => call(customStatus: v));
   @override
+  ListCopyWith<
+    $R,
+    GuildFolder,
+    GuildFolderCopyWith<$R, GuildFolder, GuildFolder>
+  >
+  get guildFolders => ListCopyWith(
+    $value.guildFolders,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(guildFolders: v),
+  );
+  @override
   $R call({
     bool? detectPlatformAccounts,
     int? animateStickers,
@@ -511,6 +538,7 @@ class _UserSettingsCopyWithImpl<$R, $Out>
     bool? passwordless,
     bool? renderReactions,
     Object? timezoneName = $none,
+    List<GuildFolder>? guildFolders,
   }) => $apply(
     FieldCopyWithData({
       if (detectPlatformAccounts != null)
@@ -563,6 +591,7 @@ class _UserSettingsCopyWithImpl<$R, $Out>
       if (passwordless != null) #passwordless: passwordless,
       if (renderReactions != null) #renderReactions: renderReactions,
       if (timezoneName != $none) #timezoneName: timezoneName,
+      if (guildFolders != null) #guildFolders: guildFolders,
     }),
   );
   @override
@@ -647,6 +676,7 @@ class _UserSettingsCopyWithImpl<$R, $Out>
     passwordless: data.get(#passwordless, or: $value.passwordless),
     renderReactions: data.get(#renderReactions, or: $value.renderReactions),
     timezoneName: data.get(#timezoneName, or: $value.timezoneName),
+    guildFolders: data.get(#guildFolders, or: $value.guildFolders),
   );
 
   @override

@@ -6,7 +6,7 @@ part 'guild_folder.mapper.dart';
 @MappableClass()
 class GuildFolder with GuildFolderMappable {
   final String? name;
-  final Snowflake id;
+  final int? id;
   final String? color;
   final List<Snowflake> guildIds;
 

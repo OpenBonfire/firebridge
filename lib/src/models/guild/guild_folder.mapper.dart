@@ -28,8 +28,8 @@ class GuildFolderMapper extends ClassMapperBase<GuildFolder> {
     _$name,
     opt: true,
   );
-  static Snowflake _$id(GuildFolder v) => v.id;
-  static const Field<GuildFolder, Snowflake> _f$id = Field('id', _$id);
+  static int? _$id(GuildFolder v) => v.id;
+  static const Field<GuildFolder, int> _f$id = Field('id', _$id);
   static String? _$color(GuildFolder v) => v.color;
   static const Field<GuildFolder, String> _f$color = Field(
     'color',
@@ -120,15 +120,9 @@ extension GuildFolderValueCopy<$R, $Out>
 
 abstract class GuildFolderCopyWith<$R, $In extends GuildFolder, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
   get guildIds;
-  $R call({
-    String? name,
-    Snowflake? id,
-    String? color,
-    List<Snowflake>? guildIds,
-  });
+  $R call({String? name, int? id, String? color, List<Snowflake>? guildIds});
   GuildFolderCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -141,9 +135,6 @@ class _GuildFolderCopyWithImpl<$R, $Out>
   late final ClassMapperBase<GuildFolder> $mapper =
       GuildFolderMapper.ensureInitialized();
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
-      $value.id.copyWith.$chain((v) => call(id: v));
-  @override
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
   get guildIds => ListCopyWith(
     $value.guildIds,
@@ -153,13 +144,13 @@ class _GuildFolderCopyWithImpl<$R, $Out>
   @override
   $R call({
     Object? name = $none,
-    Snowflake? id,
+    Object? id = $none,
     Object? color = $none,
     List<Snowflake>? guildIds,
   }) => $apply(
     FieldCopyWithData({
       if (name != $none) #name: name,
-      if (id != null) #id: id,
+      if (id != $none) #id: id,
       if (color != $none) #color: color,
       if (guildIds != null) #guildIds: guildIds,
     }),
