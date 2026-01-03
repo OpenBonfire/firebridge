@@ -13,6 +13,9 @@ abstract class GuildChannel extends Channel with GuildChannelMappable {
   GuildChannel({required super.id});
 
   /// The ID of the [Guild] this channel is in.
+  // TODO: I don't think this has to be nullable.
+  // the ready event gives it us null, the guild id is defined in the outer scope
+  // I really just need a custom parser
   Snowflake? get guildId;
 
   /// The positing on this channel in the guild's channel list.
