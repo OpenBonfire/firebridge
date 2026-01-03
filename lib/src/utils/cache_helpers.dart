@@ -52,7 +52,9 @@
 import 'package:firebridge/firebridge.dart';
 
 extension CacheUpdates on FirebridgeRest {
-  void updateCacheWith(Object? entity) {}
+  void updateCacheWith(Object? entity) {
+    notifyCacheUpdate(entity);
+  }
 }
 
 // extension CacheUpdates on FirebridgeRest {

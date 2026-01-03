@@ -63,6 +63,7 @@ class Gateway extends GatewayManager with EventParser {
   })).asBroadcastStream();
 
   bool _closing = false;
+  StreamSubscription<DispatchEvent>? _eventsSubscription;
 
   /// The average latency across all shards in this [Gateway].
   ///
@@ -150,6 +151,8 @@ class Gateway extends GatewayManager with EventParser {
         },
         cancelOnError: false,
       );
+
+      _eventsSubscription = events.listen((_) {});
     }
   }
 
@@ -246,6 +249,7 @@ class Gateway extends GatewayManager with EventParser {
   /// Close this [Gateway] instance, disconnecting all shards and closing the event streams.
   Future<void> close() async {
     _closing = true;
+    _eventsSubscription?.cancel();
     // Make sure we don't start any shards after we have closed.
     for (final timer in _startOrIdentifyTimers) {
       timer.cancel();
