@@ -343,8 +343,12 @@ class UserGuildMapper extends ClassMapperBase<UserGuild> {
   static const Field<UserGuild, Snowflake> _f$id = Field('id', _$id);
   static String _$name(UserGuild v) => v.name;
   static const Field<UserGuild, String> _f$name = Field('name', _$name);
-  static String? _$icon(UserGuild v) => v.icon;
-  static const Field<UserGuild, String> _f$icon = Field('icon', _$icon);
+  static String? _$iconHash(UserGuild v) => v.iconHash;
+  static const Field<UserGuild, String> _f$iconHash = Field(
+    'iconHash',
+    _$iconHash,
+    key: r'icon',
+  );
   static bool? _$isOwnedByCurrentUser(UserGuild v) => v.isOwnedByCurrentUser;
   static const Field<UserGuild, bool> _f$isOwnedByCurrentUser = Field(
     'isOwnedByCurrentUser',
@@ -382,7 +386,7 @@ class UserGuildMapper extends ClassMapperBase<UserGuild> {
   final MappableFields<UserGuild> fields = const {
     #id: _f$id,
     #name: _f$name,
-    #icon: _f$icon,
+    #iconHash: _f$iconHash,
     #isOwnedByCurrentUser: _f$isOwnedByCurrentUser,
     #currentUserPermissions: _f$currentUserPermissions,
     #approximateMemberCount: _f$approximateMemberCount,
@@ -394,7 +398,7 @@ class UserGuildMapper extends ClassMapperBase<UserGuild> {
     return UserGuild(
       id: data.dec(_f$id),
       name: data.dec(_f$name),
-      icon: data.dec(_f$icon),
+      iconHash: data.dec(_f$iconHash),
       isOwnedByCurrentUser: data.dec(_f$isOwnedByCurrentUser),
       currentUserPermissions: data.dec(_f$currentUserPermissions),
       approximateMemberCount: data.dec(_f$approximateMemberCount),
@@ -467,7 +471,7 @@ abstract class UserGuildCopyWith<$R, $In extends UserGuild, $Out>
   $R call({
     Snowflake? id,
     String? name,
-    String? icon,
+    String? iconHash,
     bool? isOwnedByCurrentUser,
     Permissions? currentUserPermissions,
     int? approximateMemberCount,
@@ -497,7 +501,7 @@ class _UserGuildCopyWithImpl<$R, $Out>
   $R call({
     Snowflake? id,
     String? name,
-    Object? icon = $none,
+    Object? iconHash = $none,
     Object? isOwnedByCurrentUser = $none,
     Object? currentUserPermissions = $none,
     Object? approximateMemberCount = $none,
@@ -507,7 +511,7 @@ class _UserGuildCopyWithImpl<$R, $Out>
     FieldCopyWithData({
       if (id != null) #id: id,
       if (name != null) #name: name,
-      if (icon != $none) #icon: icon,
+      if (iconHash != $none) #iconHash: iconHash,
       if (isOwnedByCurrentUser != $none)
         #isOwnedByCurrentUser: isOwnedByCurrentUser,
       if (currentUserPermissions != $none)
@@ -523,7 +527,7 @@ class _UserGuildCopyWithImpl<$R, $Out>
   UserGuild $make(CopyWithData data) => UserGuild(
     id: data.get(#id, or: $value.id),
     name: data.get(#name, or: $value.name),
-    icon: data.get(#icon, or: $value.icon),
+    iconHash: data.get(#iconHash, or: $value.iconHash),
     isOwnedByCurrentUser: data.get(
       #isOwnedByCurrentUser,
       or: $value.isOwnedByCurrentUser,
@@ -583,8 +587,12 @@ class GuildMapper extends ClassMapperBase<Guild> {
   static const Field<Guild, Snowflake> _f$id = Field('id', _$id);
   static String _$name(Guild v) => v.name;
   static const Field<Guild, String> _f$name = Field('name', _$name);
-  static String? _$icon(Guild v) => v.icon;
-  static const Field<Guild, String> _f$icon = Field('icon', _$icon);
+  static String? _$iconHash(Guild v) => v.iconHash;
+  static const Field<Guild, String> _f$iconHash = Field(
+    'iconHash',
+    _$iconHash,
+    key: r'icon',
+  );
   static String? _$splashHash(Guild v) => v.splashHash;
   static const Field<Guild, String> _f$splashHash = Field(
     'splashHash',
@@ -820,7 +828,7 @@ class GuildMapper extends ClassMapperBase<Guild> {
   final MappableFields<Guild> fields = const {
     #id: _f$id,
     #name: _f$name,
-    #icon: _f$icon,
+    #iconHash: _f$iconHash,
     #splashHash: _f$splashHash,
     #discoverySplashHash: _f$discoverySplashHash,
     #isOwnedByCurrentUser: _f$isOwnedByCurrentUser,
@@ -865,7 +873,7 @@ class GuildMapper extends ClassMapperBase<Guild> {
     return Guild(
       id: data.dec(_f$id),
       name: data.dec(_f$name),
-      icon: data.dec(_f$icon),
+      iconHash: data.dec(_f$iconHash),
       splashHash: data.dec(_f$splashHash),
       discoverySplashHash: data.dec(_f$discoverySplashHash),
       isOwnedByCurrentUser: data.dec(_f$isOwnedByCurrentUser),
@@ -981,7 +989,7 @@ abstract class GuildCopyWith<$R, $In extends Guild, $Out>
   $R call({
     Snowflake? id,
     String? name,
-    String? icon,
+    String? iconHash,
     String? splashHash,
     String? discoverySplashHash,
     bool? isOwnedByCurrentUser,
@@ -1106,7 +1114,7 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
   $R call({
     Snowflake? id,
     String? name,
-    Object? icon = $none,
+    Object? iconHash = $none,
     Object? splashHash = $none,
     Object? discoverySplashHash = $none,
     Object? isOwnedByCurrentUser = $none,
@@ -1149,7 +1157,7 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
     FieldCopyWithData({
       if (id != null) #id: id,
       if (name != null) #name: name,
-      if (icon != $none) #icon: icon,
+      if (iconHash != $none) #iconHash: iconHash,
       if (splashHash != $none) #splashHash: splashHash,
       if (discoverySplashHash != $none)
         #discoverySplashHash: discoverySplashHash,
@@ -1207,7 +1215,7 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
   Guild $make(CopyWithData data) => Guild(
     id: data.get(#id, or: $value.id),
     name: data.get(#name, or: $value.name),
-    icon: data.get(#icon, or: $value.icon),
+    iconHash: data.get(#iconHash, or: $value.iconHash),
     splashHash: data.get(#splashHash, or: $value.splashHash),
     discoverySplashHash: data.get(
       #discoverySplashHash,

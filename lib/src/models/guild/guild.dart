@@ -1,4 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:firebridge/src/http/cdn/cdn_asset.dart';
+import 'package:firebridge/src/http/route.dart';
 import 'package:firebridge/src/models/channel/channel.dart';
 import 'package:firebridge/src/models/guild/welcome_screen.dart';
 import 'package:firebridge/src/models/invite/invite.dart';
@@ -21,7 +23,8 @@ class UserGuild with UserGuildMappable {
   final String name;
 
   /// The hash of this guild's icon.
-  final String? icon;
+  @MappableField(key: "icon")
+  final String? iconHash;
 
   /// Whether this guild is owned by the current user.
   final bool? isOwnedByCurrentUser;
@@ -52,7 +55,7 @@ class UserGuild with UserGuildMappable {
   UserGuild({
     required this.id,
     required this.name,
-    required this.icon,
+    required this.iconHash,
     required this.isOwnedByCurrentUser,
     required this.currentUserPermissions,
     // required this.features,
@@ -60,6 +63,22 @@ class UserGuild with UserGuildMappable {
     required this.approximatePresenceCount,
     required this.bannerHash,
   });
+
+  /// This guild's icon.
+  CdnAsset? get icon => iconHash == null
+      ? null
+      : CdnAsset(
+          base: HttpRoute()..icons(id: id.toString()),
+          hash: iconHash!,
+        );
+
+  /// This guild's banner.
+  CdnAsset? get banner => bannerHash == null
+      ? null
+      : CdnAsset(
+          base: HttpRoute()..banners(id: id.toString()),
+          hash: bannerHash!,
+        );
 }
 
 /// {@template guild}
@@ -178,7 +197,7 @@ class Guild extends UserGuild with GuildMappable {
   Guild({
     required super.id,
     required super.name,
-    required super.icon,
+    required super.iconHash,
     required this.splashHash,
     required this.discoverySplashHash,
     required super.isOwnedByCurrentUser,

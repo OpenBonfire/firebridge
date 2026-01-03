@@ -88,8 +88,6 @@ class CdnAssetMapper extends ClassMapperBase<CdnAsset> {
   static const Field<CdnAsset, HttpRoute> _f$base = Field('base', _$base);
   static String _$hash(CdnAsset v) => v.hash;
   static const Field<CdnAsset, String> _f$hash = Field('hash', _$hash);
-  static Uri _$url(CdnAsset v) => v.url;
-  static const Field<CdnAsset, Uri> _f$url = Field('url', _$url);
   static CdnFormat _$defaultFormat(CdnAsset v) => v.defaultFormat;
   static const Field<CdnAsset, CdnFormat> _f$defaultFormat = Field(
     'defaultFormat',
@@ -108,7 +106,6 @@ class CdnAssetMapper extends ClassMapperBase<CdnAsset> {
   final MappableFields<CdnAsset> fields = const {
     #base: _f$base,
     #hash: _f$hash,
-    #url: _f$url,
     #defaultFormat: _f$defaultFormat,
     #animated: _f$animated,
   };
@@ -117,7 +114,6 @@ class CdnAssetMapper extends ClassMapperBase<CdnAsset> {
     return CdnAsset(
       base: data.dec(_f$base),
       hash: data.dec(_f$hash),
-      url: data.dec(_f$url),
       defaultFormat: data.dec(_f$defaultFormat),
       animated: data.dec(_f$animated),
     );
@@ -183,7 +179,6 @@ abstract class CdnAssetCopyWith<$R, $In extends CdnAsset, $Out>
   $R call({
     HttpRoute? base,
     String? hash,
-    Uri? url,
     CdnFormat? defaultFormat,
     bool? animated,
   });
@@ -202,14 +197,12 @@ class _CdnAssetCopyWithImpl<$R, $Out>
   $R call({
     HttpRoute? base,
     String? hash,
-    Uri? url,
     Object? defaultFormat = $none,
     Object? animated = $none,
   }) => $apply(
     FieldCopyWithData({
       if (base != null) #base: base,
       if (hash != null) #hash: hash,
-      if (url != null) #url: url,
       if (defaultFormat != $none) #defaultFormat: defaultFormat,
       if (animated != $none) #animated: animated,
     }),
@@ -218,7 +211,6 @@ class _CdnAssetCopyWithImpl<$R, $Out>
   CdnAsset $make(CopyWithData data) => CdnAsset(
     base: data.get(#base, or: $value.base),
     hash: data.get(#hash, or: $value.hash),
-    url: data.get(#url, or: $value.url),
     defaultFormat: data.get(#defaultFormat, or: $value.defaultFormat),
     animated: data.get(#animated, or: $value.animated),
   );
