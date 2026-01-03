@@ -93,6 +93,7 @@ export 'src/models/user/connection.dart';
 export 'src/models/user/user.dart';
 export 'src/models/user/avatar_decoration_data.dart';
 export 'src/models/user/settings/read_state.dart';
+export 'src/models/user/settings/user_settings.dart';
 export 'src/models/soundboard/soundboard.dart';
 export 'src/models/channel/channel.dart';
 export 'src/models/channel/followed_channel.dart';
