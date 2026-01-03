@@ -150,9 +150,16 @@ extension CacheUpdates on FirebridgeRest {
 
       // Events
 
-      case ReadyEvent(:final user, :final userSettings):
+      case ReadyEvent(
+          :final user,
+          :final userSettings,
+          :final guilds,
+          :final readState
+        ):
         updateCacheWith(user);
         updateCacheWith(userSettings);
+        guilds.forEach(updateCacheWith);
+        readState.forEach(updateCacheWith);
 
       case ApplicationCommandPermissionsUpdateEvent(:final permissions):
         updateCacheWith(permissions);
