@@ -14,7 +14,7 @@ part 'team.mapper.dart';
 @MappableClass()
 class Team with ToStringHelper, TeamMappable {
   /// The hash of this team's icon.
-  final String? iconHash;
+  final String? icon;
 
   /// This team's ID.
   final Snowflake id;
@@ -31,7 +31,7 @@ class Team with ToStringHelper, TeamMappable {
   /// {@macro team}
   /// @nodoc
   Team({
-    required this.iconHash,
+    required this.icon,
     required this.id,
     required this.members,
     required this.name,

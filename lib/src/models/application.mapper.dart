@@ -499,12 +499,8 @@ class ApplicationMapper extends ClassMapperBase<Application> {
   static const Field<Application, Snowflake> _f$id = Field('id', _$id);
   static String _$name(Application v) => v.name;
   static const Field<Application, String> _f$name = Field('name', _$name);
-  static String? _$iconHash(Application v) => v.iconHash;
-  static const Field<Application, String> _f$iconHash = Field(
-    'iconHash',
-    _$iconHash,
-    key: r'icon_hash',
-  );
+  static String? _$icon(Application v) => v.icon;
+  static const Field<Application, String> _f$icon = Field('icon', _$icon);
   static String _$description(Application v) => v.description;
   static const Field<Application, String> _f$description = Field(
     'description',
@@ -649,7 +645,7 @@ class ApplicationMapper extends ClassMapperBase<Application> {
   final MappableFields<Application> fields = const {
     #id: _f$id,
     #name: _f$name,
-    #iconHash: _f$iconHash,
+    #icon: _f$icon,
     #description: _f$description,
     #rpcOrigins: _f$rpcOrigins,
     #botPublic: _f$botPublic,
@@ -680,7 +676,7 @@ class ApplicationMapper extends ClassMapperBase<Application> {
     return Application(
       id: data.dec(_f$id),
       name: data.dec(_f$name),
-      iconHash: data.dec(_f$iconHash),
+      icon: data.dec(_f$icon),
       description: data.dec(_f$description),
       rpcOrigins: data.dec(_f$rpcOrigins),
       botPublic: data.dec(_f$botPublic),
@@ -800,7 +796,7 @@ abstract class ApplicationCopyWith<$R, $In extends Application, $Out>
   $R call({
     Snowflake? id,
     String? name,
-    String? iconHash,
+    String? icon,
     String? description,
     List<String>? rpcOrigins,
     bool? botPublic,
@@ -917,7 +913,7 @@ class _ApplicationCopyWithImpl<$R, $Out>
   $R call({
     Snowflake? id,
     String? name,
-    Object? iconHash = $none,
+    Object? icon = $none,
     String? description,
     Object? rpcOrigins = $none,
     bool? botPublic,
@@ -946,7 +942,7 @@ class _ApplicationCopyWithImpl<$R, $Out>
     FieldCopyWithData({
       if (id != null) #id: id,
       if (name != null) #name: name,
-      if (iconHash != $none) #iconHash: iconHash,
+      if (icon != $none) #icon: icon,
       if (description != null) #description: description,
       if (rpcOrigins != $none) #rpcOrigins: rpcOrigins,
       if (botPublic != null) #botPublic: botPublic,
@@ -984,7 +980,7 @@ class _ApplicationCopyWithImpl<$R, $Out>
   Application $make(CopyWithData data) => Application(
     id: data.get(#id, or: $value.id),
     name: data.get(#name, or: $value.name),
-    iconHash: data.get(#iconHash, or: $value.iconHash),
+    icon: data.get(#icon, or: $value.icon),
     description: data.get(#description, or: $value.description),
     rpcOrigins: data.get(#rpcOrigins, or: $value.rpcOrigins),
     botPublic: data.get(#botPublic, or: $value.botPublic),

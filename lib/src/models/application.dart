@@ -31,7 +31,7 @@ class Application with ApplicationMappable {
   final String name;
 
   /// The hash of this application's icon.
-  final String? iconHash;
+  final String? icon;
 
   /// This application's description.
   final String description;
@@ -116,7 +116,7 @@ class Application with ApplicationMappable {
   Application({
     required this.id,
     required this.name,
-    required this.iconHash,
+    required this.icon,
     required this.description,
     required this.rpcOrigins,
     required this.botPublic,

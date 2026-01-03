@@ -68,7 +68,7 @@ final sampleApplication = {
 void checkApplication(Application application) {
   expect(application.id, equals(Snowflake(172150183260323840)));
   expect(application.name, equals('Baba O-Riley'));
-  expect(application.iconHash, isNull);
+  expect(application.icon, isNull);
   expect(application.description, equals('Test'));
   expect(application.rpcOrigins, isNull);
   expect(application.isBotPublic, isTrue);

@@ -552,11 +552,10 @@ class IntegrationApplicationMapper
     'name',
     _$name,
   );
-  static String? _$iconHash(IntegrationApplication v) => v.iconHash;
-  static const Field<IntegrationApplication, String> _f$iconHash = Field(
-    'iconHash',
-    _$iconHash,
-    key: r'icon_hash',
+  static String? _$icon(IntegrationApplication v) => v.icon;
+  static const Field<IntegrationApplication, String> _f$icon = Field(
+    'icon',
+    _$icon,
   );
   static String _$description(IntegrationApplication v) => v.description;
   static const Field<IntegrationApplication, String> _f$description = Field(
@@ -570,7 +569,7 @@ class IntegrationApplicationMapper
   final MappableFields<IntegrationApplication> fields = const {
     #id: _f$id,
     #name: _f$name,
-    #iconHash: _f$iconHash,
+    #icon: _f$icon,
     #description: _f$description,
     #bot: _f$bot,
   };
@@ -579,7 +578,7 @@ class IntegrationApplicationMapper
     return IntegrationApplication(
       id: data.dec(_f$id),
       name: data.dec(_f$name),
-      iconHash: data.dec(_f$iconHash),
+      icon: data.dec(_f$icon),
       description: data.dec(_f$description),
       bot: data.dec(_f$bot),
     );
@@ -660,7 +659,7 @@ abstract class IntegrationApplicationCopyWith<
   $R call({
     Snowflake? id,
     String? name,
-    String? iconHash,
+    String? icon,
     String? description,
     User? bot,
   });
@@ -688,14 +687,14 @@ class _IntegrationApplicationCopyWithImpl<$R, $Out>
   $R call({
     Snowflake? id,
     String? name,
-    Object? iconHash = $none,
+    Object? icon = $none,
     String? description,
     Object? bot = $none,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
       if (name != null) #name: name,
-      if (iconHash != $none) #iconHash: iconHash,
+      if (icon != $none) #icon: icon,
       if (description != null) #description: description,
       if (bot != $none) #bot: bot,
     }),
@@ -704,7 +703,7 @@ class _IntegrationApplicationCopyWithImpl<$R, $Out>
   IntegrationApplication $make(CopyWithData data) => IntegrationApplication(
     id: data.get(#id, or: $value.id),
     name: data.get(#name, or: $value.name),
-    iconHash: data.get(#iconHash, or: $value.iconHash),
+    icon: data.get(#icon, or: $value.icon),
     description: data.get(#description, or: $value.description),
     bot: data.get(#bot, or: $value.bot),
   );

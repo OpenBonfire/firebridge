@@ -31,7 +31,7 @@ class Role with RoleMappable implements CommandOptionMentionable<Role> {
   final bool hoist;
 
   /// The hash string of this role's icon.
-  final String? iconHash;
+  final String? icon;
 
   /// The unicode emoji for this role.
   final String? unicodeEmoji;
@@ -62,7 +62,7 @@ class Role with RoleMappable implements CommandOptionMentionable<Role> {
     required this.color,
     required this.colors,
     required this.hoist,
-    required this.iconHash,
+    required this.icon,
     required this.unicodeEmoji,
     required this.position,
     required this.permissions,

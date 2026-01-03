@@ -112,7 +112,7 @@ class IntegrationApplication
   final String name;
 
   /// The hash of this application's icon.
-  final String? iconHash;
+  final String? icon;
 
   /// The description of this application.
   final String description;
@@ -125,7 +125,7 @@ class IntegrationApplication
   IntegrationApplication({
     required this.id,
     required this.name,
-    required this.iconHash,
+    required this.icon,
     required this.description,
     required this.bot,
   });

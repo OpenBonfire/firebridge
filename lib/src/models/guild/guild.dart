@@ -21,7 +21,7 @@ class UserGuild with UserGuildMappable {
   final String name;
 
   /// The hash of this guild's icon.
-  final String? iconHash;
+  final String? icon;
 
   /// Whether this guild is owned by the current user.
   final bool? isOwnedByCurrentUser;
@@ -52,7 +52,7 @@ class UserGuild with UserGuildMappable {
   UserGuild({
     required this.id,
     required this.name,
-    required this.iconHash,
+    required this.icon,
     required this.isOwnedByCurrentUser,
     required this.currentUserPermissions,
     // required this.features,
@@ -178,7 +178,7 @@ class Guild extends UserGuild with GuildMappable {
   Guild({
     required super.id,
     required super.name,
-    required super.iconHash,
+    required super.icon,
     required this.splashHash,
     required this.discoverySplashHash,
     required super.isOwnedByCurrentUser,

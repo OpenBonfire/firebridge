@@ -119,12 +119,8 @@ class TeamMapper extends ClassMapperBase<Team> {
   @override
   final String id = 'Team';
 
-  static String? _$iconHash(Team v) => v.iconHash;
-  static const Field<Team, String> _f$iconHash = Field(
-    'iconHash',
-    _$iconHash,
-    key: r'icon_hash',
-  );
+  static String? _$icon(Team v) => v.icon;
+  static const Field<Team, String> _f$icon = Field('icon', _$icon);
   static Snowflake _$id(Team v) => v.id;
   static const Field<Team, Snowflake> _f$id = Field('id', _$id);
   static List<TeamMember> _$members(Team v) => v.members;
@@ -143,7 +139,7 @@ class TeamMapper extends ClassMapperBase<Team> {
 
   @override
   final MappableFields<Team> fields = const {
-    #iconHash: _f$iconHash,
+    #icon: _f$icon,
     #id: _f$id,
     #members: _f$members,
     #name: _f$name,
@@ -152,7 +148,7 @@ class TeamMapper extends ClassMapperBase<Team> {
 
   static Team _instantiate(DecodingData data) {
     return Team(
-      iconHash: data.dec(_f$iconHash),
+      icon: data.dec(_f$icon),
       id: data.dec(_f$id),
       members: data.dec(_f$members),
       name: data.dec(_f$name),
@@ -211,7 +207,7 @@ abstract class TeamCopyWith<$R, $In extends Team, $Out>
   get members;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get ownerId;
   $R call({
-    String? iconHash,
+    String? icon,
     Snowflake? id,
     List<TeamMember>? members,
     String? name,
@@ -241,14 +237,14 @@ class _TeamCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Team, $Out>
       $value.ownerId.copyWith.$chain((v) => call(ownerId: v));
   @override
   $R call({
-    Object? iconHash = $none,
+    Object? icon = $none,
     Snowflake? id,
     List<TeamMember>? members,
     String? name,
     Snowflake? ownerId,
   }) => $apply(
     FieldCopyWithData({
-      if (iconHash != $none) #iconHash: iconHash,
+      if (icon != $none) #icon: icon,
       if (id != null) #id: id,
       if (members != null) #members: members,
       if (name != null) #name: name,
@@ -257,7 +253,7 @@ class _TeamCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Team, $Out>
   );
   @override
   Team $make(CopyWithData data) => Team(
-    iconHash: data.get(#iconHash, or: $value.iconHash),
+    icon: data.get(#icon, or: $value.icon),
     id: data.get(#id, or: $value.id),
     members: data.get(#members, or: $value.members),
     name: data.get(#name, or: $value.name),

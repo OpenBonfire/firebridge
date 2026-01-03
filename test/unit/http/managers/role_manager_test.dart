@@ -29,7 +29,7 @@ void checkRole(Role role) {
   // ignore: deprecated_member_use_from_same_package
   expect(role.color, equals(DiscordColor(3447003)));
   expect(role.isHoisted, isTrue);
-  expect(role.iconHash, equals('cf3ced8600b777c9486c6d8d84fb4327'));
+  expect(role.icon, equals('cf3ced8600b777c9486c6d8d84fb4327'));
   expect(role.unicodeEmoji, isNull);
   expect(role.position, equals(1));
   expect(role.permissions, equals(Permissions(66321471)));

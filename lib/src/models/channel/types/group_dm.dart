@@ -18,7 +18,7 @@ class GroupDmChannel extends TextChannel with GroupDmChannelMappable {
   final List<User> recipients;
 
   /// The hash of this channel's icon.
-  final String? iconHash;
+  final String? icon;
 
   /// The ID of this channel's owner.
   final Snowflake ownerId;
@@ -47,7 +47,7 @@ class GroupDmChannel extends TextChannel with GroupDmChannelMappable {
     required super.id,
     required this.name,
     required this.recipients,
-    required this.iconHash,
+    required this.icon,
     required this.ownerId,
     required this.applicationId,
     required this.managed,

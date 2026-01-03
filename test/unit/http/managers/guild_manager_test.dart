@@ -60,7 +60,7 @@ final sampleGuild = {
 void checkGuild(Guild guild) {
   expect(guild.id, equals(Snowflake(197038439483310086)));
   expect(guild.name, equals('Discord Testers'));
-  expect(guild.iconHash, equals('f64c482b807da4f539cff778d174971c'));
+  expect(guild.icon, equals('f64c482b807da4f539cff778d174971c'));
   expect(guild.splashHash, isNull);
   expect(guild.discoverySplashHash, isNull);
   expect(guild.isOwnedByCurrentUser, isNull);
@@ -193,7 +193,7 @@ final sampleGuild2 = {
 void checkGuild2(Guild guild) {
   expect(guild.id, equals(Snowflake(2909267986263572999)));
   expect(guild.name, equals("Mason's Test Server"));
-  expect(guild.iconHash, equals('389030ec9db118cb5b85a732333b7c98'));
+  expect(guild.icon, equals('389030ec9db118cb5b85a732333b7c98'));
   expect(guild.splashHash, '75610b05a0dd09ec2c3c7df9f6975ea0');
   expect(guild.discoverySplashHash, isNull);
   expect(guild.isOwnedByCurrentUser, isNull);
@@ -323,7 +323,7 @@ final sampleGuildPreview = {
 void checkGuildPreview(GuildPreview preview) {
   expect(preview.id, equals(Snowflake(197038439483310086)));
   expect(preview.name, equals('Discord Testers'));
-  expect(preview.iconHash, equals('f64c482b807da4f539cff778d174971c'));
+  expect(preview.icon, equals('f64c482b807da4f539cff778d174971c'));
   expect(preview.splashHash, isNull);
   expect(preview.discoverySplashHash, isNull);
   expect(

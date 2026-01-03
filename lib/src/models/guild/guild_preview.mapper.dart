@@ -29,12 +29,8 @@ class GuildPreviewMapper extends ClassMapperBase<GuildPreview> {
   static const Field<GuildPreview, Snowflake> _f$id = Field('id', _$id);
   static String _$name(GuildPreview v) => v.name;
   static const Field<GuildPreview, String> _f$name = Field('name', _$name);
-  static String? _$iconHash(GuildPreview v) => v.iconHash;
-  static const Field<GuildPreview, String> _f$iconHash = Field(
-    'iconHash',
-    _$iconHash,
-    key: r'icon_hash',
-  );
+  static String? _$icon(GuildPreview v) => v.icon;
+  static const Field<GuildPreview, String> _f$icon = Field('icon', _$icon);
   static String? _$splashHash(GuildPreview v) => v.splashHash;
   static const Field<GuildPreview, String> _f$splashHash = Field(
     'splashHash',
@@ -88,7 +84,7 @@ class GuildPreviewMapper extends ClassMapperBase<GuildPreview> {
   final MappableFields<GuildPreview> fields = const {
     #id: _f$id,
     #name: _f$name,
-    #iconHash: _f$iconHash,
+    #icon: _f$icon,
     #splashHash: _f$splashHash,
     #discoverySplashHash: _f$discoverySplashHash,
     #emojiList: _f$emojiList,
@@ -103,7 +99,7 @@ class GuildPreviewMapper extends ClassMapperBase<GuildPreview> {
     return GuildPreview(
       id: data.dec(_f$id),
       name: data.dec(_f$name),
-      iconHash: data.dec(_f$iconHash),
+      icon: data.dec(_f$icon),
       splashHash: data.dec(_f$splashHash),
       discoverySplashHash: data.dec(_f$discoverySplashHash),
       emojiList: data.dec(_f$emojiList),
@@ -189,7 +185,7 @@ abstract class GuildPreviewCopyWith<$R, $In extends GuildPreview, $Out>
   $R call({
     Snowflake? id,
     String? name,
-    String? iconHash,
+    String? icon,
     String? splashHash,
     String? discoverySplashHash,
     List<Emoji>? emojiList,
@@ -238,7 +234,7 @@ class _GuildPreviewCopyWithImpl<$R, $Out>
   $R call({
     Snowflake? id,
     String? name,
-    Object? iconHash = $none,
+    Object? icon = $none,
     Object? splashHash = $none,
     Object? discoverySplashHash = $none,
     List<Emoji>? emojiList,
@@ -251,7 +247,7 @@ class _GuildPreviewCopyWithImpl<$R, $Out>
     FieldCopyWithData({
       if (id != null) #id: id,
       if (name != null) #name: name,
-      if (iconHash != $none) #iconHash: iconHash,
+      if (icon != $none) #icon: icon,
       if (splashHash != $none) #splashHash: splashHash,
       if (discoverySplashHash != $none)
         #discoverySplashHash: discoverySplashHash,
@@ -269,7 +265,7 @@ class _GuildPreviewCopyWithImpl<$R, $Out>
   GuildPreview $make(CopyWithData data) => GuildPreview(
     id: data.get(#id, or: $value.id),
     name: data.get(#name, or: $value.name),
-    iconHash: data.get(#iconHash, or: $value.iconHash),
+    icon: data.get(#icon, or: $value.icon),
     splashHash: data.get(#splashHash, or: $value.splashHash),
     discoverySplashHash: data.get(
       #discoverySplashHash,

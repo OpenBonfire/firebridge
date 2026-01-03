@@ -33,12 +33,8 @@ class GroupDmChannelMapper extends SubClassMapperBase<GroupDmChannel> {
     'recipients',
     _$recipients,
   );
-  static String? _$iconHash(GroupDmChannel v) => v.iconHash;
-  static const Field<GroupDmChannel, String> _f$iconHash = Field(
-    'iconHash',
-    _$iconHash,
-    key: r'icon_hash',
-  );
+  static String? _$icon(GroupDmChannel v) => v.icon;
+  static const Field<GroupDmChannel, String> _f$icon = Field('icon', _$icon);
   static Snowflake _$ownerId(GroupDmChannel v) => v.ownerId;
   static const Field<GroupDmChannel, Snowflake> _f$ownerId = Field(
     'ownerId',
@@ -80,7 +76,7 @@ class GroupDmChannelMapper extends SubClassMapperBase<GroupDmChannel> {
     #id: _f$id,
     #name: _f$name,
     #recipients: _f$recipients,
-    #iconHash: _f$iconHash,
+    #icon: _f$icon,
     #ownerId: _f$ownerId,
     #applicationId: _f$applicationId,
     #managed: _f$managed,
@@ -102,7 +98,7 @@ class GroupDmChannelMapper extends SubClassMapperBase<GroupDmChannel> {
       id: data.dec(_f$id),
       name: data.dec(_f$name),
       recipients: data.dec(_f$recipients),
-      iconHash: data.dec(_f$iconHash),
+      icon: data.dec(_f$icon),
       ownerId: data.dec(_f$ownerId),
       applicationId: data.dec(_f$applicationId),
       managed: data.dec(_f$managed),
@@ -185,7 +181,7 @@ abstract class GroupDmChannelCopyWith<$R, $In extends GroupDmChannel, $Out>
     Snowflake? id,
     String? name,
     List<User>? recipients,
-    String? iconHash,
+    String? icon,
     Snowflake? ownerId,
     Snowflake? applicationId,
     bool? managed,
@@ -230,7 +226,7 @@ class _GroupDmChannelCopyWithImpl<$R, $Out>
     Snowflake? id,
     String? name,
     List<User>? recipients,
-    Object? iconHash = $none,
+    Object? icon = $none,
     Snowflake? ownerId,
     Object? applicationId = $none,
     bool? managed,
@@ -242,7 +238,7 @@ class _GroupDmChannelCopyWithImpl<$R, $Out>
       if (id != null) #id: id,
       if (name != null) #name: name,
       if (recipients != null) #recipients: recipients,
-      if (iconHash != $none) #iconHash: iconHash,
+      if (icon != $none) #icon: icon,
       if (ownerId != null) #ownerId: ownerId,
       if (applicationId != $none) #applicationId: applicationId,
       if (managed != null) #managed: managed,
@@ -256,7 +252,7 @@ class _GroupDmChannelCopyWithImpl<$R, $Out>
     id: data.get(#id, or: $value.id),
     name: data.get(#name, or: $value.name),
     recipients: data.get(#recipients, or: $value.recipients),
-    iconHash: data.get(#iconHash, or: $value.iconHash),
+    icon: data.get(#icon, or: $value.icon),
     ownerId: data.get(#ownerId, or: $value.ownerId),
     applicationId: data.get(#applicationId, or: $value.applicationId),
     managed: data.get(#managed, or: $value.managed),

@@ -36,12 +36,8 @@ class RoleMapper extends ClassMapperBase<Role> {
   static const Field<Role, RoleColors> _f$colors = Field('colors', _$colors);
   static bool _$hoist(Role v) => v.hoist;
   static const Field<Role, bool> _f$hoist = Field('hoist', _$hoist);
-  static String? _$iconHash(Role v) => v.iconHash;
-  static const Field<Role, String> _f$iconHash = Field(
-    'iconHash',
-    _$iconHash,
-    key: r'icon_hash',
-  );
+  static String? _$icon(Role v) => v.icon;
+  static const Field<Role, String> _f$icon = Field('icon', _$icon);
   static String? _$unicodeEmoji(Role v) => v.unicodeEmoji;
   static const Field<Role, String> _f$unicodeEmoji = Field(
     'unicodeEmoji',
@@ -72,7 +68,7 @@ class RoleMapper extends ClassMapperBase<Role> {
     #color: _f$color,
     #colors: _f$colors,
     #hoist: _f$hoist,
-    #iconHash: _f$iconHash,
+    #icon: _f$icon,
     #unicodeEmoji: _f$unicodeEmoji,
     #position: _f$position,
     #permissions: _f$permissions,
@@ -88,7 +84,7 @@ class RoleMapper extends ClassMapperBase<Role> {
       color: data.dec(_f$color),
       colors: data.dec(_f$colors),
       hoist: data.dec(_f$hoist),
-      iconHash: data.dec(_f$iconHash),
+      icon: data.dec(_f$icon),
       unicodeEmoji: data.dec(_f$unicodeEmoji),
       position: data.dec(_f$position),
       permissions: data.dec(_f$permissions),
@@ -155,7 +151,7 @@ abstract class RoleCopyWith<$R, $In extends Role, $Out>
     DiscordColor? color,
     RoleColors? colors,
     bool? hoist,
-    String? iconHash,
+    String? icon,
     String? unicodeEmoji,
     int? position,
     Permissions? permissions,
@@ -194,7 +190,7 @@ class _RoleCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Role, $Out>
     DiscordColor? color,
     RoleColors? colors,
     bool? hoist,
-    Object? iconHash = $none,
+    Object? icon = $none,
     Object? unicodeEmoji = $none,
     int? position,
     Permissions? permissions,
@@ -208,7 +204,7 @@ class _RoleCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Role, $Out>
       if (color != null) #color: color,
       if (colors != null) #colors: colors,
       if (hoist != null) #hoist: hoist,
-      if (iconHash != $none) #iconHash: iconHash,
+      if (icon != $none) #icon: icon,
       if (unicodeEmoji != $none) #unicodeEmoji: unicodeEmoji,
       if (position != null) #position: position,
       if (permissions != null) #permissions: permissions,
@@ -224,7 +220,7 @@ class _RoleCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Role, $Out>
     color: data.get(#color, or: $value.color),
     colors: data.get(#colors, or: $value.colors),
     hoist: data.get(#hoist, or: $value.hoist),
-    iconHash: data.get(#iconHash, or: $value.iconHash),
+    icon: data.get(#icon, or: $value.icon),
     unicodeEmoji: data.get(#unicodeEmoji, or: $value.unicodeEmoji),
     position: data.get(#position, or: $value.position),
     permissions: data.get(#permissions, or: $value.permissions),

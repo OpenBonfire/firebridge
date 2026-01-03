@@ -17,7 +17,7 @@ class GuildPreview with GuildPreviewMappable {
   final String name;
 
   /// The hash of the guild's icon.
-  final String? iconHash;
+  final String? icon;
 
   /// The hash of the guild's splash image.
   final String? splashHash;
@@ -48,7 +48,7 @@ class GuildPreview with GuildPreviewMappable {
   GuildPreview({
     required this.id,
     required this.name,
-    required this.iconHash,
+    required this.icon,
     required this.splashHash,
     required this.discoverySplashHash,
     required this.emojiList,

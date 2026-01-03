@@ -169,7 +169,7 @@ void checkGroupDm(Channel channel) {
   expect(channel.id, equals(Snowflake(319674150115710528)));
   expect(channel.name, equals('Some test channel'));
   expect(channel.recipients, hasLength(2));
-  expect(channel.iconHash, isNull);
+  expect(channel.icon, isNull);
   expect(channel.ownerId, equals(Snowflake(82198810841029460)));
   expect(channel.applicationId, isNull);
   expect(channel.isManaged, isFalse);
