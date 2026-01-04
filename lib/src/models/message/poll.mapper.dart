@@ -185,7 +185,11 @@ class PollAnswerMapper extends ClassMapperBase<PollAnswer> {
   final String id = 'PollAnswer';
 
   static int _$id(PollAnswer v) => v.id;
-  static const Field<PollAnswer, int> _f$id = Field('id', _$id);
+  static const Field<PollAnswer, int> _f$id = Field(
+    'id',
+    _$id,
+    key: r'answer_id',
+  );
   static PollMedia _$pollMedia(PollAnswer v) => v.pollMedia;
   static const Field<PollAnswer, PollMedia> _f$pollMedia = Field(
     'pollMedia',

@@ -46,6 +46,7 @@ class PollMedia with ToStringHelper, PollMediaMappable {
 @MappableClass()
 class PollAnswer with ToStringHelper, PollAnswerMappable {
   /// The ID of the answer.
+  @MappableField(key: "answer_id")
   final int id;
 
   /// The data of the answer.
