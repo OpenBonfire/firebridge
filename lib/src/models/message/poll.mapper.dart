@@ -618,11 +618,11 @@ class PollMapper extends ClassMapperBase<Poll> {
     _$endsAt,
     key: r'ends_at',
   );
-  static bool _$allowsMultiselect(Poll v) => v.allowsMultiselect;
-  static const Field<Poll, bool> _f$allowsMultiselect = Field(
-    'allowsMultiselect',
-    _$allowsMultiselect,
-    key: r'allows_multiselect',
+  static bool _$allowMultiselect(Poll v) => v.allowMultiselect;
+  static const Field<Poll, bool> _f$allowMultiselect = Field(
+    'allowMultiselect',
+    _$allowMultiselect,
+    key: r'allow_multiselect',
   );
   static PollLayoutType _$layoutType(Poll v) => v.layoutType;
   static const Field<Poll, PollLayoutType> _f$layoutType = Field(
@@ -641,7 +641,7 @@ class PollMapper extends ClassMapperBase<Poll> {
     #question: _f$question,
     #answers: _f$answers,
     #endsAt: _f$endsAt,
-    #allowsMultiselect: _f$allowsMultiselect,
+    #allowMultiselect: _f$allowMultiselect,
     #layoutType: _f$layoutType,
     #results: _f$results,
   };
@@ -651,7 +651,7 @@ class PollMapper extends ClassMapperBase<Poll> {
       question: data.dec(_f$question),
       answers: data.dec(_f$answers),
       endsAt: data.dec(_f$endsAt),
-      allowsMultiselect: data.dec(_f$allowsMultiselect),
+      allowMultiselect: data.dec(_f$allowMultiselect),
       layoutType: data.dec(_f$layoutType),
       results: data.dec(_f$results),
     );
@@ -711,7 +711,7 @@ abstract class PollCopyWith<$R, $In extends Poll, $Out>
     PollMedia? question,
     List<PollAnswer>? answers,
     DateTime? endsAt,
-    bool? allowsMultiselect,
+    bool? allowMultiselect,
     PollLayoutType? layoutType,
     PollResults? results,
   });
@@ -742,7 +742,7 @@ class _PollCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Poll, $Out>
     PollMedia? question,
     List<PollAnswer>? answers,
     Object? endsAt = $none,
-    bool? allowsMultiselect,
+    bool? allowMultiselect,
     PollLayoutType? layoutType,
     Object? results = $none,
   }) => $apply(
@@ -750,7 +750,7 @@ class _PollCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Poll, $Out>
       if (question != null) #question: question,
       if (answers != null) #answers: answers,
       if (endsAt != $none) #endsAt: endsAt,
-      if (allowsMultiselect != null) #allowsMultiselect: allowsMultiselect,
+      if (allowMultiselect != null) #allowMultiselect: allowMultiselect,
       if (layoutType != null) #layoutType: layoutType,
       if (results != $none) #results: results,
     }),
@@ -760,10 +760,7 @@ class _PollCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Poll, $Out>
     question: data.get(#question, or: $value.question),
     answers: data.get(#answers, or: $value.answers),
     endsAt: data.get(#endsAt, or: $value.endsAt),
-    allowsMultiselect: data.get(
-      #allowsMultiselect,
-      or: $value.allowsMultiselect,
-    ),
+    allowMultiselect: data.get(#allowMultiselect, or: $value.allowMultiselect),
     layoutType: data.get(#layoutType, or: $value.layoutType),
     results: data.get(#results, or: $value.results),
   );

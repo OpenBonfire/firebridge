@@ -117,7 +117,7 @@ class Poll with ToStringHelper, PollMappable {
   final DateTime? endsAt;
 
   /// Whether a user can select multiple answers.
-  final bool allowsMultiselect;
+  final bool allowMultiselect;
 
   /// The layout type of the poll.
   final PollLayoutType layoutType;
@@ -131,7 +131,7 @@ class Poll with ToStringHelper, PollMappable {
       {required this.question,
       required this.answers,
       required this.endsAt,
-      required this.allowsMultiselect,
+      required this.allowMultiselect,
       required this.layoutType,
       required this.results});
 }
