@@ -24,11 +24,6 @@ class AttachmentMapper extends ClassMapperBase<Attachment> {
 
   static Snowflake _$id(Attachment v) => v.id;
   static const Field<Attachment, Snowflake> _f$id = Field('id', _$id);
-  static MessageManager _$manager(Attachment v) => v.manager;
-  static const Field<Attachment, MessageManager> _f$manager = Field(
-    'manager',
-    _$manager,
-  );
   static String _$fileName(Attachment v) => v.fileName;
   static const Field<Attachment, String> _f$fileName = Field(
     'fileName',
@@ -90,7 +85,6 @@ class AttachmentMapper extends ClassMapperBase<Attachment> {
   @override
   final MappableFields<Attachment> fields = const {
     #id: _f$id,
-    #manager: _f$manager,
     #fileName: _f$fileName,
     #description: _f$description,
     #contentType: _f$contentType,
@@ -109,7 +103,6 @@ class AttachmentMapper extends ClassMapperBase<Attachment> {
   static Attachment _instantiate(DecodingData data) {
     return Attachment(
       id: data.dec(_f$id),
-      manager: data.dec(_f$manager),
       fileName: data.dec(_f$fileName),
       description: data.dec(_f$description),
       contentType: data.dec(_f$contentType),
@@ -190,7 +183,6 @@ abstract class AttachmentCopyWith<$R, $In extends Attachment, $Out>
   ListCopyWith<$R, int, ObjectCopyWith<$R, int, int>>? get waveform;
   $R call({
     Snowflake? id,
-    MessageManager? manager,
     String? fileName,
     String? description,
     String? contentType,
@@ -231,7 +223,6 @@ class _AttachmentCopyWithImpl<$R, $Out>
   @override
   $R call({
     Snowflake? id,
-    MessageManager? manager,
     String? fileName,
     Object? description = $none,
     Object? contentType = $none,
@@ -248,7 +239,6 @@ class _AttachmentCopyWithImpl<$R, $Out>
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
-      if (manager != null) #manager: manager,
       if (fileName != null) #fileName: fileName,
       if (description != $none) #description: description,
       if (contentType != $none) #contentType: contentType,
@@ -267,7 +257,6 @@ class _AttachmentCopyWithImpl<$R, $Out>
   @override
   Attachment $make(CopyWithData data) => Attachment(
     id: data.get(#id, or: $value.id),
-    manager: data.get(#manager, or: $value.manager),
     fileName: data.get(#fileName, or: $value.fileName),
     description: data.get(#description, or: $value.description),
     contentType: data.get(#contentType, or: $value.contentType),

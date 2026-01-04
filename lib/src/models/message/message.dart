@@ -40,7 +40,7 @@ class Message with MessageMappable implements MessageSnapshot {
   /// The author of this message.
   ///
   /// This could be a [User] or a [WebhookAuthor].
-  final MessageAuthor author;
+  final PartialUser author;
 
   @override
   final String content;
@@ -61,10 +61,10 @@ class Message with MessageMappable implements MessageSnapshot {
   final List<User> mentions;
 
   @override
-  final List<Snowflake> roleMentionIds;
+  final List<Snowflake> mentionRoles;
 
   /// A list of channels specifically mentioned in this message.
-  final List<ChannelMention> channelMentions;
+  final List<ChannelMention> mentionChannels;
 
   @override
   final List<Attachment> attachments;
@@ -144,20 +144,20 @@ class Message with MessageMappable implements MessageSnapshot {
 
   /// {@macro message}
   /// @nodoc
-  Message({
+  const Message({
     required this.id,
     required this.author,
     required this.content,
     required this.timestamp,
     required this.editedTimestamp,
     required this.tts,
-    required this.mentionsEveryone,
+    this.mentionsEveryone = false,
     required this.mentions,
-    required this.roleMentionIds,
-    required this.channelMentions,
+    required this.mentionRoles,
+    this.mentionChannels = const [],
     required this.attachments,
     required this.embeds,
-    required this.reactions,
+    this.reactions = const [],
     required this.nonce,
     required this.pinned,
     required this.webhookId,
@@ -174,7 +174,7 @@ class Message with MessageMappable implements MessageSnapshot {
     required this.components,
     required this.position,
     required this.roleSubscriptionData,
-    required this.stickers,
+    this.stickers = const [],
     required this.resolved,
     required this.poll,
     required this.callInfo,
@@ -426,10 +426,6 @@ class MessageInteractionMetadata
     required this.interactedMessageId,
     required this.triggeringInteractionMetadata,
   });
-
-  /// ID of the user that triggered the interaction.
-  @Deprecated('Use user.id instead.')
-  Snowflake get userId => user.id;
 }
 
 /// A limited set of fields of a [Message].
@@ -474,7 +470,7 @@ class MessageSnapshot with MessageSnapshotMappable {
   final List<User> mentions;
 
   /// A list of roles mentioned in the message.
-  final List<Snowflake> roleMentionIds;
+  final List<Snowflake> mentionRoles;
 
   /// A list of Stickers attached to this message.
   final List<StickerItem> stickers;
@@ -492,7 +488,7 @@ class MessageSnapshot with MessageSnapshotMappable {
     required this.embeds,
     required this.flags,
     required this.mentions,
-    required this.roleMentionIds,
+    required this.mentionRoles,
     required this.stickers,
     required this.components,
   });

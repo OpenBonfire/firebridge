@@ -17,9 +17,6 @@ part 'attachment.mapper.dart';
 /// {@endtemplate}
 @MappableClass()
 class Attachment with ToStringHelper, AttachmentMappable {
-  /// The manager for this [Attachment].
-  final MessageManager manager;
-
   /// This attachment's ID.
   final Snowflake id;
 
@@ -66,7 +63,6 @@ class Attachment with ToStringHelper, AttachmentMappable {
   /// @nodoc
   Attachment(
       {required this.id,
-      required this.manager,
       required this.fileName,
       required this.description,
       required this.contentType,

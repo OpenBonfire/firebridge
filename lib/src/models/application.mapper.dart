@@ -29,9 +29,9 @@ class ApplicationIntegrationTypeMapper
   @override
   ApplicationIntegrationType decode(dynamic value) {
     switch (value) {
-      case 0:
+      case r'guild_install':
         return ApplicationIntegrationType.guildInstall;
-      case 1:
+      case r'user_install':
         return ApplicationIntegrationType.userInstall;
       default:
         throw MapperException.unknownEnumValue(value);
@@ -42,18 +42,19 @@ class ApplicationIntegrationTypeMapper
   dynamic encode(ApplicationIntegrationType self) {
     switch (self) {
       case ApplicationIntegrationType.guildInstall:
-        return 0;
+        return r'guild_install';
       case ApplicationIntegrationType.userInstall:
-        return 1;
+        return r'user_install';
     }
   }
 }
 
 extension ApplicationIntegrationTypeMapperExtension
     on ApplicationIntegrationType {
-  dynamic toValue() {
+  String toValue() {
     ApplicationIntegrationTypeMapper.ensureInitialized();
-    return MapperContainer.globals.toValue<ApplicationIntegrationType>(this);
+    return MapperContainer.globals.toValue<ApplicationIntegrationType>(this)
+        as String;
   }
 }
 

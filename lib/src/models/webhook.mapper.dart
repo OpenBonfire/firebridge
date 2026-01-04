@@ -57,6 +57,150 @@ extension WebhookTypeMapperExtension on WebhookType {
   }
 }
 
+class WebhookAuthorMapper extends ClassMapperBase<WebhookAuthor> {
+  WebhookAuthorMapper._();
+
+  static WebhookAuthorMapper? _instance;
+  static WebhookAuthorMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = WebhookAuthorMapper._());
+      SnowflakeMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'WebhookAuthor';
+
+  static Snowflake _$id(WebhookAuthor v) => v.id;
+  static const Field<WebhookAuthor, Snowflake> _f$id = Field('id', _$id);
+  static String? _$avatarHash(WebhookAuthor v) => v.avatarHash;
+  static const Field<WebhookAuthor, String> _f$avatarHash = Field(
+    'avatarHash',
+    _$avatarHash,
+    key: r'avatar_hash',
+  );
+  static String _$username(WebhookAuthor v) => v.username;
+  static const Field<WebhookAuthor, String> _f$username = Field(
+    'username',
+    _$username,
+  );
+
+  @override
+  final MappableFields<WebhookAuthor> fields = const {
+    #id: _f$id,
+    #avatarHash: _f$avatarHash,
+    #username: _f$username,
+  };
+
+  static WebhookAuthor _instantiate(DecodingData data) {
+    return WebhookAuthor(
+      id: data.dec(_f$id),
+      avatarHash: data.dec(_f$avatarHash),
+      username: data.dec(_f$username),
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static WebhookAuthor fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<WebhookAuthor>(map);
+  }
+
+  static WebhookAuthor fromJson(String json) {
+    return ensureInitialized().decodeJson<WebhookAuthor>(json);
+  }
+}
+
+mixin WebhookAuthorMappable {
+  String toJson() {
+    return WebhookAuthorMapper.ensureInitialized().encodeJson<WebhookAuthor>(
+      this as WebhookAuthor,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return WebhookAuthorMapper.ensureInitialized().encodeMap<WebhookAuthor>(
+      this as WebhookAuthor,
+    );
+  }
+
+  WebhookAuthorCopyWith<WebhookAuthor, WebhookAuthor, WebhookAuthor>
+  get copyWith => _WebhookAuthorCopyWithImpl<WebhookAuthor, WebhookAuthor>(
+    this as WebhookAuthor,
+    $identity,
+    $identity,
+  );
+  @override
+  String toString() {
+    return WebhookAuthorMapper.ensureInitialized().stringifyValue(
+      this as WebhookAuthor,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return WebhookAuthorMapper.ensureInitialized().equalsValue(
+      this as WebhookAuthor,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return WebhookAuthorMapper.ensureInitialized().hashValue(
+      this as WebhookAuthor,
+    );
+  }
+}
+
+extension WebhookAuthorValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, WebhookAuthor, $Out> {
+  WebhookAuthorCopyWith<$R, WebhookAuthor, $Out> get $asWebhookAuthor =>
+      $base.as((v, t, t2) => _WebhookAuthorCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class WebhookAuthorCopyWith<$R, $In extends WebhookAuthor, $Out>
+    implements ClassCopyWith<$R, $In, $Out> {
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  $R call({Snowflake? id, String? avatarHash, String? username});
+  WebhookAuthorCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+}
+
+class _WebhookAuthorCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, WebhookAuthor, $Out>
+    implements WebhookAuthorCopyWith<$R, WebhookAuthor, $Out> {
+  _WebhookAuthorCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<WebhookAuthor> $mapper =
+      WebhookAuthorMapper.ensureInitialized();
+  @override
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
+      $value.id.copyWith.$chain((v) => call(id: v));
+  @override
+  $R call({Snowflake? id, Object? avatarHash = $none, String? username}) =>
+      $apply(
+        FieldCopyWithData({
+          if (id != null) #id: id,
+          if (avatarHash != $none) #avatarHash: avatarHash,
+          if (username != null) #username: username,
+        }),
+      );
+  @override
+  WebhookAuthor $make(CopyWithData data) => WebhookAuthor(
+    id: data.get(#id, or: $value.id),
+    avatarHash: data.get(#avatarHash, or: $value.avatarHash),
+    username: data.get(#username, or: $value.username),
+  );
+
+  @override
+  WebhookAuthorCopyWith<$R2, WebhookAuthor, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _WebhookAuthorCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
 class WebhookMapper extends ClassMapperBase<Webhook> {
   WebhookMapper._();
 

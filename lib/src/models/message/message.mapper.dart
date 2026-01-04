@@ -202,10 +202,12 @@ class MessageMapper extends ClassMapperBase<Message> {
       MapperContainer.globals.use(_instance = MessageMapper._());
       MessageSnapshotMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
+      PartialUserMapper.ensureInitialized();
       UserMapper.ensureInitialized();
       ChannelMentionMapper.ensureInitialized();
       AttachmentMapper.ensureInitialized();
       EmbedMapper.ensureInitialized();
+      ReactionMapper.ensureInitialized();
       MessageTypeMapper.ensureInitialized();
       MessageReferenceMapper.ensureInitialized();
       MessageSnapshotMapper.ensureInitialized();
@@ -229,8 +231,8 @@ class MessageMapper extends ClassMapperBase<Message> {
 
   static Snowflake _$id(Message v) => v.id;
   static const Field<Message, Snowflake> _f$id = Field('id', _$id);
-  static MessageAuthor _$author(Message v) => v.author;
-  static const Field<Message, MessageAuthor> _f$author = Field(
+  static PartialUser _$author(Message v) => v.author;
+  static const Field<Message, PartialUser> _f$author = Field(
     'author',
     _$author,
   );
@@ -254,23 +256,27 @@ class MessageMapper extends ClassMapperBase<Message> {
     'mentionsEveryone',
     _$mentionsEveryone,
     key: r'mentions_everyone',
+    opt: true,
+    def: false,
   );
   static List<User> _$mentions(Message v) => v.mentions;
   static const Field<Message, List<User>> _f$mentions = Field(
     'mentions',
     _$mentions,
   );
-  static List<Snowflake> _$roleMentionIds(Message v) => v.roleMentionIds;
-  static const Field<Message, List<Snowflake>> _f$roleMentionIds = Field(
-    'roleMentionIds',
-    _$roleMentionIds,
-    key: r'role_mention_ids',
+  static List<Snowflake> _$mentionRoles(Message v) => v.mentionRoles;
+  static const Field<Message, List<Snowflake>> _f$mentionRoles = Field(
+    'mentionRoles',
+    _$mentionRoles,
+    key: r'mention_roles',
   );
-  static List<ChannelMention> _$channelMentions(Message v) => v.channelMentions;
-  static const Field<Message, List<ChannelMention>> _f$channelMentions = Field(
-    'channelMentions',
-    _$channelMentions,
-    key: r'channel_mentions',
+  static List<ChannelMention> _$mentionChannels(Message v) => v.mentionChannels;
+  static const Field<Message, List<ChannelMention>> _f$mentionChannels = Field(
+    'mentionChannels',
+    _$mentionChannels,
+    key: r'mention_channels',
+    opt: true,
+    def: const [],
   );
   static List<Attachment> _$attachments(Message v) => v.attachments;
   static const Field<Message, List<Attachment>> _f$attachments = Field(
@@ -286,6 +292,8 @@ class MessageMapper extends ClassMapperBase<Message> {
   static const Field<Message, List<Reaction>> _f$reactions = Field(
     'reactions',
     _$reactions,
+    opt: true,
+    def: const [],
   );
   static dynamic _$nonce(Message v) => v.nonce;
   static const Field<Message, dynamic> _f$nonce = Field('nonce', _$nonce);
@@ -361,6 +369,8 @@ class MessageMapper extends ClassMapperBase<Message> {
   static const Field<Message, List<StickerItem>> _f$stickers = Field(
     'stickers',
     _$stickers,
+    opt: true,
+    def: const [],
   );
   static ResolvedData? _$resolved(Message v) => v.resolved;
   static const Field<Message, ResolvedData> _f$resolved = Field(
@@ -386,8 +396,8 @@ class MessageMapper extends ClassMapperBase<Message> {
     #tts: _f$tts,
     #mentionsEveryone: _f$mentionsEveryone,
     #mentions: _f$mentions,
-    #roleMentionIds: _f$roleMentionIds,
-    #channelMentions: _f$channelMentions,
+    #mentionRoles: _f$mentionRoles,
+    #mentionChannels: _f$mentionChannels,
     #attachments: _f$attachments,
     #embeds: _f$embeds,
     #reactions: _f$reactions,
@@ -423,8 +433,8 @@ class MessageMapper extends ClassMapperBase<Message> {
       tts: data.dec(_f$tts),
       mentionsEveryone: data.dec(_f$mentionsEveryone),
       mentions: data.dec(_f$mentions),
-      roleMentionIds: data.dec(_f$roleMentionIds),
-      channelMentions: data.dec(_f$channelMentions),
+      mentionRoles: data.dec(_f$mentionRoles),
+      mentionChannels: data.dec(_f$mentionChannels),
       attachments: data.dec(_f$attachments),
       embeds: data.dec(_f$embeds),
       reactions: data.dec(_f$reactions),
@@ -509,19 +519,20 @@ extension MessageValueCopy<$R, $Out> on ObjectCopyWith<$R, Message, $Out> {
 abstract class MessageCopyWith<$R, $In extends Message, $Out>
     implements MessageSnapshotCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  PartialUserCopyWith<$R, PartialUser, PartialUser> get author;
   ListCopyWith<$R, User, UserCopyWith<$R, User, User>> get mentions;
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
-  get roleMentionIds;
+  get mentionRoles;
   ListCopyWith<
     $R,
     ChannelMention,
     ChannelMentionCopyWith<$R, ChannelMention, ChannelMention>
   >
-  get channelMentions;
+  get mentionChannels;
   ListCopyWith<$R, Attachment, AttachmentCopyWith<$R, Attachment, Attachment>>
   get attachments;
   ListCopyWith<$R, Embed, EmbedCopyWith<$R, Embed, Embed>> get embeds;
-  ListCopyWith<$R, Reaction, ObjectCopyWith<$R, Reaction, Reaction>>
+  ListCopyWith<$R, Reaction, ReactionCopyWith<$R, Reaction, Reaction>>
   get reactions;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get webhookId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get applicationId;
@@ -564,15 +575,15 @@ abstract class MessageCopyWith<$R, $In extends Message, $Out>
   @override
   $R call({
     Snowflake? id,
-    MessageAuthor? author,
+    PartialUser? author,
     String? content,
     DateTime? timestamp,
     DateTime? editedTimestamp,
     bool? tts,
     bool? mentionsEveryone,
     List<User>? mentions,
-    List<Snowflake>? roleMentionIds,
-    List<ChannelMention>? channelMentions,
+    List<Snowflake>? mentionRoles,
+    List<ChannelMention>? mentionChannels,
     List<Attachment>? attachments,
     List<Embed>? embeds,
     List<Reaction>? reactions,
@@ -612,6 +623,9 @@ class _MessageCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
+  PartialUserCopyWith<$R, PartialUser, PartialUser> get author =>
+      $value.author.copyWith.$chain((v) => call(author: v));
+  @override
   ListCopyWith<$R, User, UserCopyWith<$R, User, User>> get mentions =>
       ListCopyWith(
         $value.mentions,
@@ -620,10 +634,10 @@ class _MessageCopyWithImpl<$R, $Out>
       );
   @override
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
-  get roleMentionIds => ListCopyWith(
-    $value.roleMentionIds,
+  get mentionRoles => ListCopyWith(
+    $value.mentionRoles,
     (v, t) => v.copyWith.$chain(t),
-    (v) => call(roleMentionIds: v),
+    (v) => call(mentionRoles: v),
   );
   @override
   ListCopyWith<
@@ -631,10 +645,10 @@ class _MessageCopyWithImpl<$R, $Out>
     ChannelMention,
     ChannelMentionCopyWith<$R, ChannelMention, ChannelMention>
   >
-  get channelMentions => ListCopyWith(
-    $value.channelMentions,
+  get mentionChannels => ListCopyWith(
+    $value.mentionChannels,
     (v, t) => v.copyWith.$chain(t),
-    (v) => call(channelMentions: v),
+    (v) => call(mentionChannels: v),
   );
   @override
   ListCopyWith<$R, Attachment, AttachmentCopyWith<$R, Attachment, Attachment>>
@@ -651,10 +665,10 @@ class _MessageCopyWithImpl<$R, $Out>
         (v) => call(embeds: v),
       );
   @override
-  ListCopyWith<$R, Reaction, ObjectCopyWith<$R, Reaction, Reaction>>
+  ListCopyWith<$R, Reaction, ReactionCopyWith<$R, Reaction, Reaction>>
   get reactions => ListCopyWith(
     $value.reactions,
-    (v, t) => ObjectCopyWith(v, $identity, t),
+    (v, t) => v.copyWith.$chain(t),
     (v) => call(reactions: v),
   );
   @override
@@ -744,15 +758,15 @@ class _MessageCopyWithImpl<$R, $Out>
   @override
   $R call({
     Snowflake? id,
-    MessageAuthor? author,
+    PartialUser? author,
     String? content,
     DateTime? timestamp,
     Object? editedTimestamp = $none,
     bool? tts,
     bool? mentionsEveryone,
     List<User>? mentions,
-    List<Snowflake>? roleMentionIds,
-    List<ChannelMention>? channelMentions,
+    List<Snowflake>? mentionRoles,
+    List<ChannelMention>? mentionChannels,
     List<Attachment>? attachments,
     List<Embed>? embeds,
     List<Reaction>? reactions,
@@ -786,8 +800,8 @@ class _MessageCopyWithImpl<$R, $Out>
       if (tts != null) #tts: tts,
       if (mentionsEveryone != null) #mentionsEveryone: mentionsEveryone,
       if (mentions != null) #mentions: mentions,
-      if (roleMentionIds != null) #roleMentionIds: roleMentionIds,
-      if (channelMentions != null) #channelMentions: channelMentions,
+      if (mentionRoles != null) #mentionRoles: mentionRoles,
+      if (mentionChannels != null) #mentionChannels: mentionChannels,
       if (attachments != null) #attachments: attachments,
       if (embeds != null) #embeds: embeds,
       if (reactions != null) #reactions: reactions,
@@ -825,8 +839,8 @@ class _MessageCopyWithImpl<$R, $Out>
     tts: data.get(#tts, or: $value.tts),
     mentionsEveryone: data.get(#mentionsEveryone, or: $value.mentionsEveryone),
     mentions: data.get(#mentions, or: $value.mentions),
-    roleMentionIds: data.get(#roleMentionIds, or: $value.roleMentionIds),
-    channelMentions: data.get(#channelMentions, or: $value.channelMentions),
+    mentionRoles: data.get(#mentionRoles, or: $value.mentionRoles),
+    mentionChannels: data.get(#mentionChannels, or: $value.mentionChannels),
     attachments: data.get(#attachments, or: $value.attachments),
     embeds: data.get(#embeds, or: $value.embeds),
     reactions: data.get(#reactions, or: $value.reactions),
@@ -930,10 +944,12 @@ class MessageSnapshotMapper extends ClassMapperBase<MessageSnapshot> {
     'mentions',
     _$mentions,
   );
-  static List<Snowflake> _$roleMentionIds(MessageSnapshot v) =>
-      v.roleMentionIds;
-  static const Field<MessageSnapshot, List<Snowflake>> _f$roleMentionIds =
-      Field('roleMentionIds', _$roleMentionIds, key: r'role_mention_ids');
+  static List<Snowflake> _$mentionRoles(MessageSnapshot v) => v.mentionRoles;
+  static const Field<MessageSnapshot, List<Snowflake>> _f$mentionRoles = Field(
+    'mentionRoles',
+    _$mentionRoles,
+    key: r'mention_roles',
+  );
   static List<StickerItem> _$stickers(MessageSnapshot v) => v.stickers;
   static const Field<MessageSnapshot, List<StickerItem>> _f$stickers = Field(
     'stickers',
@@ -954,7 +970,7 @@ class MessageSnapshotMapper extends ClassMapperBase<MessageSnapshot> {
     #embeds: _f$embeds,
     #flags: _f$flags,
     #mentions: _f$mentions,
-    #roleMentionIds: _f$roleMentionIds,
+    #mentionRoles: _f$mentionRoles,
     #stickers: _f$stickers,
     #components: _f$components,
   };
@@ -969,7 +985,7 @@ class MessageSnapshotMapper extends ClassMapperBase<MessageSnapshot> {
       embeds: data.dec(_f$embeds),
       flags: data.dec(_f$flags),
       mentions: data.dec(_f$mentions),
-      roleMentionIds: data.dec(_f$roleMentionIds),
+      mentionRoles: data.dec(_f$mentionRoles),
       stickers: data.dec(_f$stickers),
       components: data.dec(_f$components),
     );
@@ -1043,7 +1059,7 @@ abstract class MessageSnapshotCopyWith<$R, $In extends MessageSnapshot, $Out>
   MessageFlagsCopyWith<$R, MessageFlags, MessageFlags> get flags;
   ListCopyWith<$R, User, UserCopyWith<$R, User, User>> get mentions;
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
-  get roleMentionIds;
+  get mentionRoles;
   ListCopyWith<
     $R,
     StickerItem,
@@ -1065,7 +1081,7 @@ abstract class MessageSnapshotCopyWith<$R, $In extends MessageSnapshot, $Out>
     List<Embed>? embeds,
     MessageFlags? flags,
     List<User>? mentions,
-    List<Snowflake>? roleMentionIds,
+    List<Snowflake>? mentionRoles,
     List<StickerItem>? stickers,
     List<MessageComponent>? components,
   });
@@ -1108,10 +1124,10 @@ class _MessageSnapshotCopyWithImpl<$R, $Out>
       );
   @override
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
-  get roleMentionIds => ListCopyWith(
-    $value.roleMentionIds,
+  get mentionRoles => ListCopyWith(
+    $value.mentionRoles,
     (v, t) => v.copyWith.$chain(t),
-    (v) => call(roleMentionIds: v),
+    (v) => call(mentionRoles: v),
   );
   @override
   ListCopyWith<
@@ -1147,7 +1163,7 @@ class _MessageSnapshotCopyWithImpl<$R, $Out>
     List<Embed>? embeds,
     MessageFlags? flags,
     List<User>? mentions,
-    List<Snowflake>? roleMentionIds,
+    List<Snowflake>? mentionRoles,
     List<StickerItem>? stickers,
     Object? components = $none,
   }) => $apply(
@@ -1160,7 +1176,7 @@ class _MessageSnapshotCopyWithImpl<$R, $Out>
       if (embeds != null) #embeds: embeds,
       if (flags != null) #flags: flags,
       if (mentions != null) #mentions: mentions,
-      if (roleMentionIds != null) #roleMentionIds: roleMentionIds,
+      if (mentionRoles != null) #mentionRoles: mentionRoles,
       if (stickers != null) #stickers: stickers,
       if (components != $none) #components: components,
     }),
@@ -1175,7 +1191,7 @@ class _MessageSnapshotCopyWithImpl<$R, $Out>
     embeds: data.get(#embeds, or: $value.embeds),
     flags: data.get(#flags, or: $value.flags),
     mentions: data.get(#mentions, or: $value.mentions),
-    roleMentionIds: data.get(#roleMentionIds, or: $value.roleMentionIds),
+    mentionRoles: data.get(#mentionRoles, or: $value.mentionRoles),
     stickers: data.get(#stickers, or: $value.stickers),
     components: data.get(#components, or: $value.components),
   );

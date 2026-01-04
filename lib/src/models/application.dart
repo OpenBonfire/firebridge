@@ -145,8 +145,13 @@ class Application with ApplicationMappable {
   });
 }
 
-@MappableEnum(mode: ValuesMode.indexed)
-enum ApplicationIntegrationType { guildInstall, userInstall }
+@MappableEnum()
+enum ApplicationIntegrationType {
+  @MappableField(key: "0")
+  guildInstall,
+  @MappableField(key: "1")
+  userInstall
+}
 
 /// Flags for an [Application].
 @MappableClass()

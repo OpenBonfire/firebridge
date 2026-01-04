@@ -7,13 +7,10 @@ import 'package:firebridge/src/models/user/user.dart';
 part 'webhook.mapper.dart';
 
 /// A partial [Webhook] sent as part of a [Message].
-class WebhookAuthor implements MessageAuthor {
-  @override
+@MappableClass()
+class WebhookAuthor with WebhookAuthorMappable {
   final Snowflake id;
-  @override
   final String? avatarHash;
-
-  @override
   final String username;
 
   /// Create a new [WebhookAuthor].

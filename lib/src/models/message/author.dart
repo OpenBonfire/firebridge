@@ -1,15 +1,19 @@
-import 'package:firebridge/src/models/snowflake.dart';
+// import 'package:dart_mappable/dart_mappable.dart';
+// import 'package:firebridge/src/models/snowflake.dart';
 
-/// An author of a message.
-///
-/// Will normally be a [User] or a [WebhookAuthor].
-abstract class MessageAuthor {
-  /// The ID of this entity.
-  Snowflake get id;
+// part 'author.mapper.dart';
 
-  /// The username of this entity.
-  String get username;
+// /// An author of a message.
+// ///
+// /// Will normally be a [User] or a [WebhookAuthor].
+// @MappableClass()
+// abstract class MessageAuthor with MessageAuthorMappable {
+//   /// The ID of this entity.
+//   Snowflake get id;
 
-  /// The avatar hash of this entity.
-  String? get avatarHash;
-}
+//   /// The username of this entity.
+//   String get username;
+
+//   /// The avatar hash of this entity.
+//   String? get avatarHash;
+// }

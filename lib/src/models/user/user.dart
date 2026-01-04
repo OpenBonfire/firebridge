@@ -1,7 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/models/commands/application_command_option.dart';
 import 'package:firebridge/src/models/locale.dart';
-import 'package:firebridge/src/models/message/author.dart';
 import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/models/snowflake_entity/snowflake_entity.dart';
 import 'package:firebridge/src/models/user/avatar_decoration_data.dart';
@@ -59,7 +58,7 @@ class PartialUser extends ManagedSnowflakeEntity<User>
 @MappableClass()
 class User extends PartialUser
     with UserMappable
-    implements MessageAuthor, CommandOptionMentionable<User> {
+    implements CommandOptionMentionable<User> {
   /// The user's avatar hash, if they have an avatar.
   @override
   final String? avatarHash;

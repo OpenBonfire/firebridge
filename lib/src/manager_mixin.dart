@@ -5,12 +5,14 @@ import 'package:firebridge/src/http/managers/interaction_manager.dart';
 import 'package:firebridge/src/http/managers/invite_manager.dart';
 import 'package:firebridge/src/http/managers/gateway_manager.dart';
 import 'package:firebridge/src/http/managers/guild_manager.dart';
+import 'package:firebridge/src/http/managers/message_manager.dart';
 import 'package:firebridge/src/http/managers/soundboard_manager.dart';
 import 'package:firebridge/src/http/managers/sticker_manager.dart';
 import 'package:firebridge/src/http/managers/user_manager.dart';
 import 'package:firebridge/src/http/managers/webhook_manager.dart';
 import 'package:firebridge/src/http/managers/application_manager.dart';
 import 'package:firebridge/src/http/managers/voice_manager.dart';
+import 'package:firebridge/src/models/snowflake.dart';
 
 /// An internal mixin to add managers to a [Firebridge] instance.
 mixin ManagerMixin implements Firebridge {
@@ -65,6 +67,12 @@ mixin ManagerMixin implements Firebridge {
   // late final GlobalApplicationCommandManager _commands =
   //     GlobalApplicationCommandManager(
   //         options.applicationCommandConfig, this as FirebridgeRest);
+
+  // hmmmm
+  MessageManager messages({required Snowflake channelId}) {
+    return MessageManager(options.messageCacheConfig, this as FirebridgeRest,
+        channelId: channelId);
+  }
 
   /// An [InteractionManager] that manages interactions received by the client.
   InteractionManager get interactions => _interactions;

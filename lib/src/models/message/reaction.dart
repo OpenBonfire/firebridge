@@ -1,6 +1,9 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/models/discord_color.dart';
 import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
+
+part 'reaction.mapper.dart';
 
 /// {@template reaction}
 /// A reaction to a message.
@@ -8,7 +11,8 @@ import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#reaction-object
 /// {@endtemplate}
-class Reaction with ToStringHelper {
+@MappableClass()
+class Reaction with ToStringHelper, ReactionMappable {
   /// The number of times this emoji has been used to react.
   final int count;
 
@@ -29,7 +33,7 @@ class Reaction with ToStringHelper {
 
   /// {@macro reaction}
   /// @nodoc
-  Reaction({
+  const Reaction({
     required this.count,
     required this.countDetails,
     required this.me,
@@ -42,7 +46,8 @@ class Reaction with ToStringHelper {
 /// {@template reaction_count_details}
 /// Details about a [Reaction]'s [Reaction.count].
 /// {@endtemplate}
-class ReactionCountDetails with ToStringHelper {
+@MappableClass()
+class ReactionCountDetails with ToStringHelper, ReactionCountDetailsMappable {
   /// The number of burst reactions.
   final int burst;
 
@@ -51,5 +56,5 @@ class ReactionCountDetails with ToStringHelper {
 
   /// {@macro reaction_count_details}
   /// @nodoc
-  ReactionCountDetails({required this.burst, required this.normal});
+  const ReactionCountDetails({required this.burst, required this.normal});
 }
