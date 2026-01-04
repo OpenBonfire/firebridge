@@ -15,7 +15,7 @@ class GuildCategory extends Channel
     with GuildCategoryMappable
     implements GuildChannel {
   @override
-  final Snowflake? guildId;
+  final Snowflake guildId;
 
   @override
   final bool nsfw;
@@ -39,7 +39,7 @@ class GuildCategory extends Channel
   /// @nodoc
   GuildCategory({
     required super.id,
-    this.guildId,
+    required this.guildId,
     this.nsfw = false,
     required this.name,
     required this.parentId,

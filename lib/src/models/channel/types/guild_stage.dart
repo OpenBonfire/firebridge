@@ -19,7 +19,7 @@ class GuildStageChannel extends TextChannel
   final int bitrate;
 
   @override
-  final Snowflake? guildId;
+  final Snowflake guildId;
 
   @override
   final bool nsfw;

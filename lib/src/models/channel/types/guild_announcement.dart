@@ -26,7 +26,7 @@ class GuildAnnouncementChannel extends TextChannel
   final Duration? defaultThreadRateLimitPerUser;
 
   @override
-  final Snowflake? guildId;
+  final Snowflake guildId;
 
   @override
   final bool nsfw;

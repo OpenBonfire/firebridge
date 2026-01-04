@@ -31,7 +31,7 @@ class PrivateThread extends TextChannel
   final DateTime createdAt;
 
   @override
-  final Snowflake? guildId;
+  final Snowflake guildId;
 
   @override
   final bool archived;

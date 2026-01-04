@@ -26,12 +26,11 @@ class GuildCategoryMapper extends SubClassMapperBase<GuildCategory> {
 
   static Snowflake _$id(GuildCategory v) => v.id;
   static const Field<GuildCategory, Snowflake> _f$id = Field('id', _$id);
-  static Snowflake? _$guildId(GuildCategory v) => v.guildId;
+  static Snowflake _$guildId(GuildCategory v) => v.guildId;
   static const Field<GuildCategory, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
     key: r'guild_id',
-    opt: true,
   );
   static bool _$nsfw(GuildCategory v) => v.nsfw;
   static const Field<GuildCategory, bool> _f$nsfw = Field(
@@ -158,7 +157,7 @@ abstract class GuildCategoryCopyWith<$R, $In extends GuildCategory, $Out>
         GuildChannelCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
   ListCopyWith<
     $R,
@@ -191,8 +190,8 @@ class _GuildCategoryCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
-      $value.guildId?.copyWith.$chain((v) => call(guildId: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
+      $value.guildId.copyWith.$chain((v) => call(guildId: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId =>
       $value.parentId?.copyWith.$chain((v) => call(parentId: v));
@@ -210,7 +209,7 @@ class _GuildCategoryCopyWithImpl<$R, $Out>
   @override
   $R call({
     Snowflake? id,
-    Object? guildId = $none,
+    Snowflake? guildId,
     bool? nsfw,
     String? name,
     Object? parentId = $none,
@@ -219,7 +218,7 @@ class _GuildCategoryCopyWithImpl<$R, $Out>
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
-      if (guildId != $none) #guildId: guildId,
+      if (guildId != null) #guildId: guildId,
       if (nsfw != null) #nsfw: nsfw,
       if (name != null) #name: name,
       if (parentId != $none) #parentId: parentId,

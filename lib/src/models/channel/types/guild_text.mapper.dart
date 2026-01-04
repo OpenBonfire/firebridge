@@ -50,7 +50,7 @@ class GuildTextChannelMapper extends SubClassMapperBase<GuildTextChannel> {
     _$defaultThreadRateLimitPerUser,
     key: r'default_thread_rate_limit_per_user',
   );
-  static Snowflake? _$guildId(GuildTextChannel v) => v.guildId;
+  static Snowflake _$guildId(GuildTextChannel v) => v.guildId;
   static const Field<GuildTextChannel, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
@@ -211,7 +211,7 @@ abstract class GuildTextChannelCopyWith<$R, $In extends GuildTextChannel, $Out>
         HasThreadsChannelCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
   ListCopyWith<
@@ -253,8 +253,8 @@ class _GuildTextChannelCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
-      $value.guildId?.copyWith.$chain((v) => call(guildId: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
+      $value.guildId.copyWith.$chain((v) => call(guildId: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId =>
       $value.lastMessageId?.copyWith.$chain((v) => call(lastMessageId: v));
@@ -279,7 +279,7 @@ class _GuildTextChannelCopyWithImpl<$R, $Out>
     Object? topic = $none,
     Object? defaultAutoArchiveDuration = $none,
     Object? defaultThreadRateLimitPerUser = $none,
-    Object? guildId = $none,
+    Snowflake? guildId,
     bool? nsfw,
     Object? lastMessageId = $none,
     Object? lastPinTimestamp = $none,
@@ -296,7 +296,7 @@ class _GuildTextChannelCopyWithImpl<$R, $Out>
         #defaultAutoArchiveDuration: defaultAutoArchiveDuration,
       if (defaultThreadRateLimitPerUser != $none)
         #defaultThreadRateLimitPerUser: defaultThreadRateLimitPerUser,
-      if (guildId != $none) #guildId: guildId,
+      if (guildId != null) #guildId: guildId,
       if (nsfw != null) #nsfw: nsfw,
       if (lastMessageId != $none) #lastMessageId: lastMessageId,
       if (lastPinTimestamp != $none) #lastPinTimestamp: lastPinTimestamp,

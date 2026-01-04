@@ -49,7 +49,7 @@ class ForumChannel extends Channel
   final Duration? defaultThreadRateLimitPerUser;
 
   @override
-  final Snowflake? guildId;
+  final Snowflake guildId;
 
   @override
   final bool nsfw;
@@ -84,7 +84,7 @@ class ForumChannel extends Channel
     required this.defaultSortOrder,
     this.defaultAutoArchiveDuration,
     required this.defaultThreadRateLimitPerUser,
-    this.guildId,
+    required this.guildId,
     this.nsfw = false,
     required this.name,
     required this.parentId,

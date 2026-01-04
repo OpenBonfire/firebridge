@@ -32,12 +32,11 @@ class GuildVoiceChannelMapper extends SubClassMapperBase<GuildVoiceChannel> {
     'bitrate',
     _$bitrate,
   );
-  static Snowflake? _$guildId(GuildVoiceChannel v) => v.guildId;
+  static Snowflake _$guildId(GuildVoiceChannel v) => v.guildId;
   static const Field<GuildVoiceChannel, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
     key: r'guild_id',
-    opt: true,
   );
   static bool _$nsfw(GuildVoiceChannel v) => v.nsfw;
   static const Field<GuildVoiceChannel, bool> _f$nsfw = Field(
@@ -231,7 +230,7 @@ abstract class GuildVoiceChannelCopyWith<
         VoiceChannelCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
   ListCopyWith<
@@ -274,8 +273,8 @@ class _GuildVoiceChannelCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
-      $value.guildId?.copyWith.$chain((v) => call(guildId: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
+      $value.guildId.copyWith.$chain((v) => call(guildId: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId =>
       $value.lastMessageId?.copyWith.$chain((v) => call(lastMessageId: v));
@@ -297,7 +296,7 @@ class _GuildVoiceChannelCopyWithImpl<$R, $Out>
   $R call({
     Snowflake? id,
     int? bitrate,
-    Object? guildId = $none,
+    Snowflake? guildId,
     bool? nsfw,
     Object? lastMessageId = $none,
     Object? lastPinTimestamp = $none,
@@ -313,7 +312,7 @@ class _GuildVoiceChannelCopyWithImpl<$R, $Out>
     FieldCopyWithData({
       if (id != null) #id: id,
       if (bitrate != null) #bitrate: bitrate,
-      if (guildId != $none) #guildId: guildId,
+      if (guildId != null) #guildId: guildId,
       if (nsfw != null) #nsfw: nsfw,
       if (lastMessageId != $none) #lastMessageId: lastMessageId,
       if (lastPinTimestamp != $none) #lastPinTimestamp: lastPinTimestamp,

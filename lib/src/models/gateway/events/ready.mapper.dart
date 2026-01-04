@@ -222,6 +222,8 @@ class ReadyEventMapper extends SubClassMapperBase<ReadyEvent> {
   late final ClassMapperBase superMapper =
       DispatchEventMapper.ensureInitialized();
 
+  @override
+  final MappingHook hook = const ReadyHook();
   static ReadyEvent _instantiate(DecodingData data) {
     return ReadyEvent(
       version: data.dec(_f$version),

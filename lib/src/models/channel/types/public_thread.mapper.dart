@@ -59,7 +59,7 @@ class PublicThreadMapper extends SubClassMapperBase<PublicThread> {
     _$createdAt,
     key: r'created_at',
   );
-  static Snowflake? _$guildId(PublicThread v) => v.guildId;
+  static Snowflake _$guildId(PublicThread v) => v.guildId;
   static const Field<PublicThread, Snowflake> _f$guildId = Field(
     'guildId',
     _$guildId,
@@ -269,7 +269,7 @@ abstract class PublicThreadCopyWith<$R, $In extends PublicThread, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>?
   get appliedTags;
-  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get ownerId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
@@ -328,8 +328,8 @@ class _PublicThreadCopyWithImpl<$R, $Out>
         )
       : null;
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
-      $value.guildId?.copyWith.$chain((v) => call(guildId: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId =>
+      $value.guildId.copyWith.$chain((v) => call(guildId: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId =>
       $value.lastMessageId?.copyWith.$chain((v) => call(lastMessageId: v));
@@ -361,7 +361,7 @@ class _PublicThreadCopyWithImpl<$R, $Out>
     DateTime? archiveTimestamp,
     Duration? autoArchiveDuration,
     DateTime? createdAt,
-    Object? guildId = $none,
+    Snowflake? guildId,
     bool? archived,
     bool? locked,
     bool? nsfw,
@@ -386,7 +386,7 @@ class _PublicThreadCopyWithImpl<$R, $Out>
       if (autoArchiveDuration != null)
         #autoArchiveDuration: autoArchiveDuration,
       if (createdAt != null) #createdAt: createdAt,
-      if (guildId != $none) #guildId: guildId,
+      if (guildId != null) #guildId: guildId,
       if (archived != null) #archived: archived,
       if (locked != null) #locked: locked,
       if (nsfw != null) #nsfw: nsfw,

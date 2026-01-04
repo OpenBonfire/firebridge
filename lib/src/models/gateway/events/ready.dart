@@ -19,7 +19,7 @@ part 'ready.mapper.dart';
 /// {@template ready_event}
 /// Emitted when the client's Gateway session is established.
 /// {@endtemplate}
-@MappableClass(discriminatorValue: 'READY')
+@MappableClass(discriminatorValue: 'READY', hook: ReadyHook())
 class ReadyEvent extends DispatchEvent with ReadyEventMappable {
   /// The version of the API being used.
   @MappableField(key: "v")
@@ -102,6 +102,40 @@ class ReadyEvent extends DispatchEvent with ReadyEventMappable {
       required this.authSessionIdHash,
       required this.broadcasterUserIds,
       required this.notificationSettings});
+}
+
+class ReadyHook extends MappingHook {
+  const ReadyHook();
+
+  @override
+  Object? beforeDecode(Object? value) {
+    if (value is! Map<String, dynamic>) {
+      return value;
+    }
+    /*
+    It's my understanding that guild_id is only not passed in guild channels on the 
+    ready event, because it's extremely wasteful. This handles what I *believe* is
+    the only reason you couldn't assume guildId is required.
+
+    I don't know how slow this is, I don't think it's too bad, 
+    */
+    final guilds = value["guilds"] as List<dynamic>;
+    for (final guild in guilds) {
+      final channels = guild["channels"] as List<dynamic>;
+      for (final channel in channels) {
+        channel["guild_id"] = guild["id"];
+      }
+    }
+    return value;
+  }
+
+  @override
+  Object? beforeEncode(Object? value) {
+    if (value is Snowflake) {
+      return value.value.toString();
+    }
+    return value;
+  }
 }
 
 /// {@template resumed_event}

@@ -20,7 +20,7 @@ class GuildVoiceChannel extends TextChannel
   final int bitrate;
 
   @override
-  final Snowflake? guildId;
+  final Snowflake guildId;
 
   @override
   final bool nsfw;
@@ -63,7 +63,7 @@ class GuildVoiceChannel extends TextChannel
   GuildVoiceChannel({
     required super.id,
     required this.bitrate,
-    this.guildId,
+    required this.guildId,
     this.nsfw = false,
     required this.lastMessageId,
     required this.lastPinTimestamp,
