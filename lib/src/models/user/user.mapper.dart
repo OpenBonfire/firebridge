@@ -104,7 +104,7 @@ class PartialUserMapper extends ClassMapperBase<PartialUser> {
   static const Field<PartialUser, String> _f$avatarHash = Field(
     'avatarHash',
     _$avatarHash,
-    key: r'avatar_hash',
+    key: r'avatar',
     opt: true,
   );
   static UserPrimaryGuild? _$primaryGuild(PartialUser v) => v.primaryGuild;
@@ -126,7 +126,7 @@ class PartialUserMapper extends ClassMapperBase<PartialUser> {
   static const Field<PartialUser, String> _f$bannerHash = Field(
     'bannerHash',
     _$bannerHash,
-    key: r'banner_hash',
+    key: r'banner',
     opt: true,
   );
   static int? _$accentColor(PartialUser v) => v.accentColor;
@@ -502,7 +502,7 @@ class UserMapper extends ClassMapperBase<User> {
   static const Field<User, String> _f$avatarHash = Field(
     'avatarHash',
     _$avatarHash,
-    key: r'avatar_hash',
+    key: r'avatar',
   );
   static bool? _$bot(User v) => v.bot;
   static const Field<User, bool> _f$bot = Field('bot', _$bot, opt: true);
@@ -524,7 +524,7 @@ class UserMapper extends ClassMapperBase<User> {
   static const Field<User, String> _f$bannerHash = Field(
     'bannerHash',
     _$bannerHash,
-    key: r'banner_hash',
+    key: r'banner',
   );
   static int? _$accentColor(User v) => v.accentColor;
   static const Field<User, int> _f$accentColor = Field(
@@ -659,6 +659,7 @@ abstract class UserCopyWith<$R, $In extends User, $Out>
   @override
   AvatarDecorationDataCopyWith<$R, AvatarDecorationData, AvatarDecorationData>?
   get avatarDecorationData;
+  @override
   UserPrimaryGuildCopyWith<$R, UserPrimaryGuild, UserPrimaryGuild>?
   get primaryGuild;
   @override

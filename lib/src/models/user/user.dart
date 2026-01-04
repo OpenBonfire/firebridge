@@ -20,12 +20,12 @@ class PartialUser extends ManagedSnowflakeEntity<User>
   final String? globalName;
 
   /// The user's avatar hash
-  @MappableValue("avatar")
+  @MappableField(key: "avatar")
   final String? avatarHash;
   final UserPrimaryGuild? primaryGuild;
   final bool? bot;
   final bool? system;
-  @MappableValue("banner")
+  @MappableField(key: "banner")
   final String? bannerHash;
   final int? accentColor;
   final UserFlags? publicFlags;
@@ -95,21 +95,8 @@ class PartialUser extends ManagedSnowflakeEntity<User>
 class User extends PartialUser
     with UserMappable
     implements CommandOptionMentionable<User> {
-  /// The user's avatar hash, if they have an avatar.
-  @override
-  final String? avatarHash;
-
-  /// Whether the user is a bot.
-  final bool? bot;
-
-  /// Whether the user is a system user.
-  final bool? system;
-
   /// Whether the user has two factor authentication enabled.
   final bool? mfaEnabled;
-
-  /// The user's banner hash, if they have a banner.
-  final String? bannerHash;
 
   /// The user's locale, if they have a locale.
   final Locale? locale;
@@ -125,9 +112,6 @@ class User extends PartialUser
   /// The hash of this user's avatar decoration.
   final String? avatarDecorationHash;
 
-  /// The user's clan data.
-  final UserPrimaryGuild? primaryGuild;
-
   /// {@macro user}
   /// @nodoc
   User({
@@ -135,11 +119,11 @@ class User extends PartialUser
     required super.username,
     required super.discriminator,
     required super.globalName,
-    required this.avatarHash,
-    this.bot,
-    this.system,
+    required super.avatarHash,
+    super.bot,
+    super.system,
     this.mfaEnabled = false,
-    required this.bannerHash,
+    required super.bannerHash,
     required super.accentColor,
     required this.locale,
     required this.flags,
@@ -147,7 +131,7 @@ class User extends PartialUser
     required super.publicFlags,
     required this.avatarDecorationHash,
     super.avatarDecorationData,
-    required this.primaryGuild,
+    required super.primaryGuild,
   });
 }
 

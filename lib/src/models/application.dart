@@ -147,7 +147,8 @@ class Application with ApplicationMappable {
 
 @MappableEnum()
 enum ApplicationIntegrationType {
-  @MappableValue(0)
+  // it can be both it's really weird
+  @MappableValue('0')
   guildInstall,
   @MappableValue(1)
   userInstall,

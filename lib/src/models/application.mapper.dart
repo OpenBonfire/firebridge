@@ -29,7 +29,7 @@ class ApplicationIntegrationTypeMapper
   @override
   ApplicationIntegrationType decode(dynamic value) {
     switch (value) {
-      case 0:
+      case '0':
         return ApplicationIntegrationType.guildInstall;
       case 1:
         return ApplicationIntegrationType.userInstall;
@@ -42,7 +42,7 @@ class ApplicationIntegrationTypeMapper
   dynamic encode(ApplicationIntegrationType self) {
     switch (self) {
       case ApplicationIntegrationType.guildInstall:
-        return 0;
+        return '0';
       case ApplicationIntegrationType.userInstall:
         return 1;
     }
