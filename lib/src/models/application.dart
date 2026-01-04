@@ -147,10 +147,9 @@ class Application with ApplicationMappable {
 
 @MappableEnum()
 enum ApplicationIntegrationType {
-  // it can be both it's really weird
   @MappableValue('0')
   guildInstall,
-  @MappableValue(1)
+  @MappableValue('1')
   userInstall,
 }
 

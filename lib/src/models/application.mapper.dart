@@ -31,7 +31,7 @@ class ApplicationIntegrationTypeMapper
     switch (value) {
       case '0':
         return ApplicationIntegrationType.guildInstall;
-      case 1:
+      case '1':
         return ApplicationIntegrationType.userInstall;
       default:
         throw MapperException.unknownEnumValue(value);
@@ -44,7 +44,7 @@ class ApplicationIntegrationTypeMapper
       case ApplicationIntegrationType.guildInstall:
         return '0';
       case ApplicationIntegrationType.userInstall:
-        return 1;
+        return '1';
     }
   }
 }

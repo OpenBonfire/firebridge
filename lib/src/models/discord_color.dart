@@ -89,7 +89,15 @@ class DiscordColorMapper extends SimpleMapper<DiscordColor> {
   const DiscordColorMapper();
 
   @override
-  DiscordColor decode(Object value) => DiscordColor(value as int);
+  DiscordColor decode(Object value) {
+    if (value is String) {
+      if (value[0] == "#") {
+        return DiscordColor.parseHexString(value);
+      }
+      // TODO: handle other types
+    }
+    return DiscordColor(value as int);
+  }
 
   @override
   int encode(DiscordColor self) => self.value;

@@ -121,7 +121,10 @@ class ReadyHook extends MappingHook {
     */
     final guilds = value["guilds"] as List<dynamic>;
     for (final guild in guilds) {
-      final channels = guild["channels"] as List<dynamic>;
+      // I think channels is null if the guild is unavailable,
+      // but I think there's also a lot of other issues with that
+      // that i still need to solve
+      final channels = guild["channels"] as List<dynamic>? ?? [];
       for (final channel in channels) {
         channel["guild_id"] = guild["id"];
       }
