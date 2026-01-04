@@ -13,6 +13,7 @@ class AttachmentBuilder extends Builder<Attachment>
     with AttachmentBuilderMappable {
   List<int> data;
 
+  @MappableField(key: "filename")
   String fileName;
 
   String? description;

@@ -1,4 +1,4 @@
-/// @docImport 'package:firebridge/nyxx.dart';
+/// @docImport 'package:firebridge/firebridge.dart';
 library;
 
 import 'package:dart_mappable/dart_mappable.dart';

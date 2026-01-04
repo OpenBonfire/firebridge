@@ -28,7 +28,7 @@ class AttachmentMapper extends ClassMapperBase<Attachment> {
   static const Field<Attachment, String> _f$fileName = Field(
     'fileName',
     _$fileName,
-    key: r'file_name',
+    key: r'filename',
   );
   static String? _$description(Attachment v) => v.description;
   static const Field<Attachment, String> _f$description = Field(
@@ -45,11 +45,11 @@ class AttachmentMapper extends ClassMapperBase<Attachment> {
   static const Field<Attachment, int> _f$size = Field('size', _$size);
   static Uri _$url(Attachment v) => v.url;
   static const Field<Attachment, Uri> _f$url = Field('url', _$url);
-  static Uri _$proxiedUrl(Attachment v) => v.proxiedUrl;
-  static const Field<Attachment, Uri> _f$proxiedUrl = Field(
-    'proxiedUrl',
-    _$proxiedUrl,
-    key: r'proxied_url',
+  static Uri _$proxyUrl(Attachment v) => v.proxyUrl;
+  static const Field<Attachment, Uri> _f$proxyUrl = Field(
+    'proxyUrl',
+    _$proxyUrl,
+    key: r'proxy_url',
   );
   static int? _$height(Attachment v) => v.height;
   static const Field<Attachment, int> _f$height = Field('height', _$height);
@@ -59,6 +59,8 @@ class AttachmentMapper extends ClassMapperBase<Attachment> {
   static const Field<Attachment, bool> _f$ephemeral = Field(
     'ephemeral',
     _$ephemeral,
+    opt: true,
+    def: false,
   );
   static Duration? _$duration(Attachment v) => v.duration;
   static const Field<Attachment, Duration> _f$duration = Field(
@@ -90,7 +92,7 @@ class AttachmentMapper extends ClassMapperBase<Attachment> {
     #contentType: _f$contentType,
     #size: _f$size,
     #url: _f$url,
-    #proxiedUrl: _f$proxiedUrl,
+    #proxyUrl: _f$proxyUrl,
     #height: _f$height,
     #width: _f$width,
     #ephemeral: _f$ephemeral,
@@ -108,7 +110,7 @@ class AttachmentMapper extends ClassMapperBase<Attachment> {
       contentType: data.dec(_f$contentType),
       size: data.dec(_f$size),
       url: data.dec(_f$url),
-      proxiedUrl: data.dec(_f$proxiedUrl),
+      proxyUrl: data.dec(_f$proxyUrl),
       height: data.dec(_f$height),
       width: data.dec(_f$width),
       ephemeral: data.dec(_f$ephemeral),
@@ -188,7 +190,7 @@ abstract class AttachmentCopyWith<$R, $In extends Attachment, $Out>
     String? contentType,
     int? size,
     Uri? url,
-    Uri? proxiedUrl,
+    Uri? proxyUrl,
     int? height,
     int? width,
     bool? ephemeral,
@@ -228,7 +230,7 @@ class _AttachmentCopyWithImpl<$R, $Out>
     Object? contentType = $none,
     int? size,
     Uri? url,
-    Uri? proxiedUrl,
+    Uri? proxyUrl,
     Object? height = $none,
     Object? width = $none,
     bool? ephemeral,
@@ -244,7 +246,7 @@ class _AttachmentCopyWithImpl<$R, $Out>
       if (contentType != $none) #contentType: contentType,
       if (size != null) #size: size,
       if (url != null) #url: url,
-      if (proxiedUrl != null) #proxiedUrl: proxiedUrl,
+      if (proxyUrl != null) #proxyUrl: proxyUrl,
       if (height != $none) #height: height,
       if (width != $none) #width: width,
       if (ephemeral != null) #ephemeral: ephemeral,
@@ -262,7 +264,7 @@ class _AttachmentCopyWithImpl<$R, $Out>
     contentType: data.get(#contentType, or: $value.contentType),
     size: data.get(#size, or: $value.size),
     url: data.get(#url, or: $value.url),
-    proxiedUrl: data.get(#proxiedUrl, or: $value.proxiedUrl),
+    proxyUrl: data.get(#proxyUrl, or: $value.proxyUrl),
     height: data.get(#height, or: $value.height),
     width: data.get(#width, or: $value.width),
     ephemeral: data.get(#ephemeral, or: $value.ephemeral),

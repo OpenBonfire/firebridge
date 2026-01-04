@@ -30,7 +30,7 @@ class AttachmentBuilderMapper extends ClassMapperBase<AttachmentBuilder> {
   static const Field<AttachmentBuilder, String> _f$fileName = Field(
     'fileName',
     _$fileName,
-    key: r'file_name',
+    key: r'filename',
   );
   static String? _$description(AttachmentBuilder v) => v.description;
   static const Field<AttachmentBuilder, String> _f$description = Field(

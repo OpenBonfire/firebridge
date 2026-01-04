@@ -1,6 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/http/cdn/cdn_asset.dart';
-import 'package:firebridge/src/http/managers/message_manager.dart';
 import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/utils/flags.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
@@ -21,6 +20,7 @@ class Attachment with ToStringHelper, AttachmentMappable {
   final Snowflake id;
 
   /// The name of the attached file.
+  @MappableField(key: "filename")
   final String fileName;
 
   /// A description of the attached file.
@@ -36,7 +36,7 @@ class Attachment with ToStringHelper, AttachmentMappable {
   final Uri url;
 
   /// A proxied URL from which the attached file can be downloaded.
-  final Uri proxiedUrl;
+  final Uri proxyUrl;
 
   /// If the file is an image, the height of the image in pixels.
   final int? height;
@@ -68,10 +68,10 @@ class Attachment with ToStringHelper, AttachmentMappable {
       required this.contentType,
       required this.size,
       required this.url,
-      required this.proxiedUrl,
+      required this.proxyUrl,
       required this.height,
       required this.width,
-      required this.ephemeral,
+      this.ephemeral = false,
       required this.duration,
       required this.waveform,
       required this.flags,

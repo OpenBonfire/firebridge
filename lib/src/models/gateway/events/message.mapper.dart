@@ -1044,6 +1044,7 @@ abstract class MessageReactionAddEventCopyWith<
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get messageId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   MemberCopyWith<$R, Member, Member>? get member;
+  EmojiCopyWith<$R, Emoji, Emoji> get emoji;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get messageAuthorId;
   @override
   $R call({
@@ -1084,6 +1085,9 @@ class _MessageReactionAddEventCopyWithImpl<$R, $Out>
   @override
   MemberCopyWith<$R, Member, Member>? get member =>
       $value.member?.copyWith.$chain((v) => call(member: v));
+  @override
+  EmojiCopyWith<$R, Emoji, Emoji> get emoji =>
+      $value.emoji.copyWith.$chain((v) => call(emoji: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get messageAuthorId =>
       $value.messageAuthorId?.copyWith.$chain((v) => call(messageAuthorId: v));
@@ -1280,6 +1284,7 @@ abstract class MessageReactionRemoveEventCopyWith<
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get channelId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get messageId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
+  EmojiCopyWith<$R, Emoji, Emoji> get emoji;
   @override
   $R call({
     Snowflake? userId,
@@ -1318,6 +1323,9 @@ class _MessageReactionRemoveEventCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
       $value.guildId?.copyWith.$chain((v) => call(guildId: v));
+  @override
+  EmojiCopyWith<$R, Emoji, Emoji> get emoji =>
+      $value.emoji.copyWith.$chain((v) => call(emoji: v));
   @override
   $R call({
     Snowflake? userId,
@@ -1699,6 +1707,7 @@ abstract class MessageReactionRemoveEmojiEventCopyWith<
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get channelId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get messageId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
+  EmojiCopyWith<$R, Emoji, Emoji> get emoji;
   @override
   $R call({
     Snowflake? channelId,
@@ -1737,6 +1746,9 @@ class _MessageReactionRemoveEmojiEventCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
       $value.guildId?.copyWith.$chain((v) => call(guildId: v));
+  @override
+  EmojiCopyWith<$R, Emoji, Emoji> get emoji =>
+      $value.emoji.copyWith.$chain((v) => call(emoji: v));
   @override
   $R call({
     Snowflake? channelId,

@@ -89,7 +89,8 @@ enum EmbedType {
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure
 /// {@endtemplate}
-class EmbedFooter with ToStringHelper {
+@MappableClass()
+class EmbedFooter with ToStringHelper, EmbedFooterMappable {
   /// This footer's text.
   final String text;
 
@@ -114,7 +115,8 @@ class EmbedFooter with ToStringHelper {
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#embed-object-embed-image-structure
 /// {@endtemplate}
-class EmbedImage with ToStringHelper {
+@MappableClass()
+class EmbedImage with ToStringHelper, EmbedImageMappable {
   /// The URL of this image.
   final Uri url;
 
@@ -143,7 +145,8 @@ class EmbedImage with ToStringHelper {
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#embed-object-embed-thumbnail-structure
 /// {@endtemplate}
-class EmbedThumbnail with ToStringHelper {
+@MappableClass()
+class EmbedThumbnail with ToStringHelper, EmbedThumbnailMappable {
   /// The URL of this footer's image.
   final Uri url;
 
@@ -172,7 +175,8 @@ class EmbedThumbnail with ToStringHelper {
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure
 /// {@endtemplate}
-class EmbedVideo with ToStringHelper {
+@MappableClass()
+class EmbedVideo with ToStringHelper, EmbedVideoMappable {
   /// The URL of this video.
   final Uri? url;
 
@@ -201,7 +205,8 @@ class EmbedVideo with ToStringHelper {
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#embed-object-embed-provider-structure
 /// {@endtemplate}
-class EmbedProvider with ToStringHelper {
+@MappableClass()
+class EmbedProvider with ToStringHelper, EmbedProviderMappable {
   /// The name of this provider.
   final String? name;
 
@@ -222,7 +227,8 @@ class EmbedProvider with ToStringHelper {
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#embed-object-embed-author-structure
 /// {@endtemplate}
-class EmbedAuthor with ToStringHelper {
+@MappableClass()
+class EmbedAuthor with ToStringHelper, EmbedAuthorMappable {
   /// The name of this author.
   final String name;
 
@@ -251,7 +257,8 @@ class EmbedAuthor with ToStringHelper {
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure
 /// {@endtemplate}
-class EmbedField with ToStringHelper {
+@MappableClass()
+class EmbedField with ToStringHelper, EmbedFieldMappable {
   /// The name of this field.
   final String name;
 

@@ -1,5 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/models/discord_color.dart';
+import 'package:firebridge/src/models/emoji.dart';
 import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
 
@@ -26,7 +27,7 @@ class Reaction with ToStringHelper, ReactionMappable {
   final bool meBurst;
 
   /// The emoji for this reaction.
-  final Snowflake emoji;
+  final TextEmoji emoji;
 
   /// The colors used for this the super reaction.
   final List<DiscordColor> burstColors;

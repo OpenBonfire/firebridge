@@ -15,7 +15,7 @@ class ReactionMapper extends ClassMapperBase<Reaction> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ReactionMapper._());
       ReactionCountDetailsMapper.ensureInitialized();
-      SnowflakeMapper.ensureInitialized();
+      TextEmojiMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -39,8 +39,8 @@ class ReactionMapper extends ClassMapperBase<Reaction> {
     _$meBurst,
     key: r'me_burst',
   );
-  static Snowflake _$emoji(Reaction v) => v.emoji;
-  static const Field<Reaction, Snowflake> _f$emoji = Field('emoji', _$emoji);
+  static TextEmoji _$emoji(Reaction v) => v.emoji;
+  static const Field<Reaction, TextEmoji> _f$emoji = Field('emoji', _$emoji);
   static List<DiscordColor> _$burstColors(Reaction v) => v.burstColors;
   static const Field<Reaction, List<DiscordColor>> _f$burstColors = Field(
     'burstColors',
@@ -128,7 +128,7 @@ abstract class ReactionCopyWith<$R, $In extends Reaction, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   ReactionCountDetailsCopyWith<$R, ReactionCountDetails, ReactionCountDetails>
   get countDetails;
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get emoji;
+  TextEmojiCopyWith<$R, TextEmoji, TextEmoji> get emoji;
   ListCopyWith<$R, DiscordColor, ObjectCopyWith<$R, DiscordColor, DiscordColor>>
   get burstColors;
   $R call({
@@ -136,7 +136,7 @@ abstract class ReactionCopyWith<$R, $In extends Reaction, $Out>
     ReactionCountDetails? countDetails,
     bool? me,
     bool? meBurst,
-    Snowflake? emoji,
+    TextEmoji? emoji,
     List<DiscordColor>? burstColors,
   });
   ReactionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
@@ -155,7 +155,7 @@ class _ReactionCopyWithImpl<$R, $Out>
   get countDetails =>
       $value.countDetails.copyWith.$chain((v) => call(countDetails: v));
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get emoji =>
+  TextEmojiCopyWith<$R, TextEmoji, TextEmoji> get emoji =>
       $value.emoji.copyWith.$chain((v) => call(emoji: v));
   @override
   ListCopyWith<$R, DiscordColor, ObjectCopyWith<$R, DiscordColor, DiscordColor>>
@@ -170,7 +170,7 @@ class _ReactionCopyWithImpl<$R, $Out>
     ReactionCountDetails? countDetails,
     bool? me,
     bool? meBurst,
-    Snowflake? emoji,
+    TextEmoji? emoji,
     List<DiscordColor>? burstColors,
   }) => $apply(
     FieldCopyWithData({
