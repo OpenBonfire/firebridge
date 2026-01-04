@@ -147,10 +147,10 @@ class Application with ApplicationMappable {
 
 @MappableEnum()
 enum ApplicationIntegrationType {
-  @MappableField(key: "0")
+  @MappableValue(0)
   guildInstall,
-  @MappableField(key: "1")
-  userInstall
+  @MappableValue(1)
+  userInstall,
 }
 
 /// Flags for an [Application].

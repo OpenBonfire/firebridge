@@ -1,4 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:firebridge/src/http/cdn/cdn_asset.dart';
+import 'package:firebridge/src/http/route.dart';
 import 'package:firebridge/src/models/commands/application_command_option.dart';
 import 'package:firebridge/src/models/locale.dart';
 import 'package:firebridge/src/models/snowflake.dart';
@@ -18,11 +20,13 @@ class PartialUser extends ManagedSnowflakeEntity<User>
   final String? globalName;
 
   /// The user's avatar hash
-  final String? avatar;
+  @MappableValue("avatar")
+  final String? avatarHash;
   final UserPrimaryGuild? primaryGuild;
   final bool? bot;
   final bool? system;
-  final String? banner;
+  @MappableValue("banner")
+  final String? bannerHash;
   final int? accentColor;
   final UserFlags? publicFlags;
 
@@ -36,14 +40,46 @@ class PartialUser extends ManagedSnowflakeEntity<User>
       required this.username,
       required this.discriminator,
       this.globalName,
-      this.avatar,
+      this.avatarHash,
       this.primaryGuild,
       this.bot,
       this.system,
-      this.banner,
+      this.bannerHash,
       this.accentColor,
       this.publicFlags,
       this.avatarDecorationData});
+
+  String get displayName => globalName ?? username;
+
+  /// This user's banner.
+  CdnAsset? get banner => bannerHash == null
+      ? null
+      : CdnAsset(
+          base: HttpRoute()..banners(id: id.toString()),
+          hash: bannerHash!,
+        );
+
+  /// This user's default avatar.
+  CdnAsset get defaultAvatar {
+    final parsedDiscriminator = int.tryParse(discriminator);
+    final hash = parsedDiscriminator == null || parsedDiscriminator == 0
+        ? (id.value >> 22) % 6
+        : parsedDiscriminator % 5;
+
+    return CdnAsset(
+      base: HttpRoute()
+        ..embed()
+        ..avatars(),
+      hash: hash.toString(),
+    );
+  }
+
+  CdnAsset get avatar => avatarHash == null
+      ? defaultAvatar
+      : CdnAsset(
+          base: HttpRoute()..avatars(id: id.toString()),
+          hash: avatarHash!,
+        );
 }
 
 /// {@template user}

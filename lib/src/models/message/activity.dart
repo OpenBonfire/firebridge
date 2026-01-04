@@ -9,7 +9,8 @@ part 'activity.mapper.dart';
 /// External references:
 /// * Discord API Reference: https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure
 /// {@endtemplate}
-class MessageActivity with ToStringHelper {
+@MappableClass()
+class MessageActivity with ToStringHelper, MessageActivityMappable {
   /// The type of this activity.
   final MessageActivityType type;
 

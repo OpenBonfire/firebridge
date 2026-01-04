@@ -100,10 +100,11 @@ class PartialUserMapper extends ClassMapperBase<PartialUser> {
     key: r'global_name',
     opt: true,
   );
-  static String? _$avatar(PartialUser v) => v.avatar;
-  static const Field<PartialUser, String> _f$avatar = Field(
-    'avatar',
-    _$avatar,
+  static String? _$avatarHash(PartialUser v) => v.avatarHash;
+  static const Field<PartialUser, String> _f$avatarHash = Field(
+    'avatarHash',
+    _$avatarHash,
+    key: r'avatar_hash',
     opt: true,
   );
   static UserPrimaryGuild? _$primaryGuild(PartialUser v) => v.primaryGuild;
@@ -121,10 +122,11 @@ class PartialUserMapper extends ClassMapperBase<PartialUser> {
     _$system,
     opt: true,
   );
-  static String? _$banner(PartialUser v) => v.banner;
-  static const Field<PartialUser, String> _f$banner = Field(
-    'banner',
-    _$banner,
+  static String? _$bannerHash(PartialUser v) => v.bannerHash;
+  static const Field<PartialUser, String> _f$bannerHash = Field(
+    'bannerHash',
+    _$bannerHash,
+    key: r'banner_hash',
     opt: true,
   );
   static int? _$accentColor(PartialUser v) => v.accentColor;
@@ -157,11 +159,11 @@ class PartialUserMapper extends ClassMapperBase<PartialUser> {
     #username: _f$username,
     #discriminator: _f$discriminator,
     #globalName: _f$globalName,
-    #avatar: _f$avatar,
+    #avatarHash: _f$avatarHash,
     #primaryGuild: _f$primaryGuild,
     #bot: _f$bot,
     #system: _f$system,
-    #banner: _f$banner,
+    #bannerHash: _f$bannerHash,
     #accentColor: _f$accentColor,
     #publicFlags: _f$publicFlags,
     #avatarDecorationData: _f$avatarDecorationData,
@@ -173,11 +175,11 @@ class PartialUserMapper extends ClassMapperBase<PartialUser> {
       username: data.dec(_f$username),
       discriminator: data.dec(_f$discriminator),
       globalName: data.dec(_f$globalName),
-      avatar: data.dec(_f$avatar),
+      avatarHash: data.dec(_f$avatarHash),
       primaryGuild: data.dec(_f$primaryGuild),
       bot: data.dec(_f$bot),
       system: data.dec(_f$system),
-      banner: data.dec(_f$banner),
+      bannerHash: data.dec(_f$bannerHash),
       accentColor: data.dec(_f$accentColor),
       publicFlags: data.dec(_f$publicFlags),
       avatarDecorationData: data.dec(_f$avatarDecorationData),
@@ -257,9 +259,11 @@ abstract class PartialUserCopyWith<$R, $In extends PartialUser, $Out>
     String? username,
     String? discriminator,
     String? globalName,
+    String? avatarHash,
     UserPrimaryGuild? primaryGuild,
     bool? bot,
     bool? system,
+    String? bannerHash,
     int? accentColor,
     UserFlags? publicFlags,
     AvatarDecorationData? avatarDecorationData,
@@ -296,9 +300,11 @@ class _PartialUserCopyWithImpl<$R, $Out>
     String? username,
     String? discriminator,
     Object? globalName = $none,
+    Object? avatarHash = $none,
     Object? primaryGuild = $none,
     Object? bot = $none,
     Object? system = $none,
+    Object? bannerHash = $none,
     Object? accentColor = $none,
     Object? publicFlags = $none,
     Object? avatarDecorationData = $none,
@@ -308,9 +314,11 @@ class _PartialUserCopyWithImpl<$R, $Out>
       if (username != null) #username: username,
       if (discriminator != null) #discriminator: discriminator,
       if (globalName != $none) #globalName: globalName,
+      if (avatarHash != $none) #avatarHash: avatarHash,
       if (primaryGuild != $none) #primaryGuild: primaryGuild,
       if (bot != $none) #bot: bot,
       if (system != $none) #system: system,
+      if (bannerHash != $none) #bannerHash: bannerHash,
       if (accentColor != $none) #accentColor: accentColor,
       if (publicFlags != $none) #publicFlags: publicFlags,
       if (avatarDecorationData != $none)
@@ -323,11 +331,11 @@ class _PartialUserCopyWithImpl<$R, $Out>
     username: data.get(#username, or: $value.username),
     discriminator: data.get(#discriminator, or: $value.discriminator),
     globalName: data.get(#globalName, or: $value.globalName),
-    avatar: data.get(#avatar, or: $value.avatar),
+    avatarHash: data.get(#avatarHash, or: $value.avatarHash),
     primaryGuild: data.get(#primaryGuild, or: $value.primaryGuild),
     bot: data.get(#bot, or: $value.bot),
     system: data.get(#system, or: $value.system),
-    banner: data.get(#banner, or: $value.banner),
+    bannerHash: data.get(#bannerHash, or: $value.bannerHash),
     accentColor: data.get(#accentColor, or: $value.accentColor),
     publicFlags: data.get(#publicFlags, or: $value.publicFlags),
     avatarDecorationData: data.get(
@@ -555,18 +563,6 @@ class UserMapper extends ClassMapperBase<User> {
     _$primaryGuild,
     key: r'primary_guild',
   );
-  static String? _$avatar(User v) => v.avatar;
-  static const Field<User, String> _f$avatar = Field(
-    'avatar',
-    _$avatar,
-    mode: FieldMode.member,
-  );
-  static String? _$banner(User v) => v.banner;
-  static const Field<User, String> _f$banner = Field(
-    'banner',
-    _$banner,
-    mode: FieldMode.member,
-  );
 
   @override
   final MappableFields<User> fields = const {
@@ -586,8 +582,6 @@ class UserMapper extends ClassMapperBase<User> {
     #avatarDecorationHash: _f$avatarDecorationHash,
     #avatarDecorationData: _f$avatarDecorationData,
     #primaryGuild: _f$primaryGuild,
-    #avatar: _f$avatar,
-    #banner: _f$banner,
   };
 
   static User _instantiate(DecodingData data) {

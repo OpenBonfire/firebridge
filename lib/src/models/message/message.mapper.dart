@@ -209,6 +209,7 @@ class MessageMapper extends ClassMapperBase<Message> {
       EmbedMapper.ensureInitialized();
       ReactionMapper.ensureInitialized();
       MessageTypeMapper.ensureInitialized();
+      MessageActivityMapper.ensureInitialized();
       MessageReferenceMapper.ensureInitialized();
       MessageSnapshotMapper.ensureInitialized();
       MessageFlagsMapper.ensureInitialized();
@@ -535,6 +536,7 @@ abstract class MessageCopyWith<$R, $In extends Message, $Out>
   ListCopyWith<$R, Reaction, ReactionCopyWith<$R, Reaction, Reaction>>
   get reactions;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get webhookId;
+  MessageActivityCopyWith<$R, MessageActivity, MessageActivity>? get activity;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get applicationId;
   MessageReferenceCopyWith<$R, MessageReference, MessageReference>?
   get reference;
@@ -674,6 +676,9 @@ class _MessageCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get webhookId =>
       $value.webhookId?.copyWith.$chain((v) => call(webhookId: v));
+  @override
+  MessageActivityCopyWith<$R, MessageActivity, MessageActivity>? get activity =>
+      $value.activity?.copyWith.$chain((v) => call(activity: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get applicationId =>
       $value.applicationId?.copyWith.$chain((v) => call(applicationId: v));
