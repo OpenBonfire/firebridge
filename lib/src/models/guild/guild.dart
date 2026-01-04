@@ -48,6 +48,7 @@ class UserGuild with UserGuildMappable {
   final int? approximatePresenceCount;
 
   /// The hash of this guild's banner.
+  @MappableField(key: "banner")
   final String? bannerHash;
 
   /// {@macro guild}
@@ -239,6 +240,22 @@ class Guild extends UserGuild with GuildMappable {
     required this.incidentsData,
     required this.channels,
   });
+
+  /// This guild's splash image.
+  CdnAsset? get splash => splashHash == null
+      ? null
+      : CdnAsset(
+          base: HttpRoute()..splashes(id: id.toString()),
+          hash: splashHash!,
+        );
+
+  /// This guild's discovery splash image.
+  CdnAsset? get discoverySplash => discoverySplashHash == null
+      ? null
+      : CdnAsset(
+          base: HttpRoute()..discoverySplashes(id: id.toString()),
+          hash: discoverySplashHash!,
+        );
 }
 
 /// The verification level for a guild.

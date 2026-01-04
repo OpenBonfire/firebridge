@@ -379,7 +379,7 @@ class UserGuildMapper extends ClassMapperBase<UserGuild> {
   static const Field<UserGuild, String> _f$bannerHash = Field(
     'bannerHash',
     _$bannerHash,
-    key: r'banner_hash',
+    key: r'banner',
   );
 
   @override
@@ -731,7 +731,7 @@ class GuildMapper extends ClassMapperBase<Guild> {
   static const Field<Guild, String> _f$bannerHash = Field(
     'bannerHash',
     _$bannerHash,
-    key: r'banner_hash',
+    key: r'banner',
   );
   static PremiumTier _$premiumTier(Guild v) => v.premiumTier;
   static const Field<Guild, PremiumTier> _f$premiumTier = Field(
