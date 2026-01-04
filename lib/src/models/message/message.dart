@@ -9,7 +9,6 @@ import 'package:firebridge/src/models/message/attachment.dart';
 import 'package:firebridge/src/models/message/channel_mention.dart';
 import 'package:firebridge/src/models/message/component.dart';
 import 'package:firebridge/src/models/message/embed.dart';
-import 'package:firebridge/src/models/message/author.dart';
 import 'package:firebridge/src/models/message/poll.dart';
 import 'package:firebridge/src/models/message/reference.dart';
 import 'package:firebridge/src/models/message/reaction.dart';

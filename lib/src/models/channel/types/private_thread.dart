@@ -1,6 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/models/channel/channel.dart';
-import 'package:firebridge/src/models/channel/text_channel.dart';
 import 'package:firebridge/src/models/channel/thread.dart';
 import 'package:firebridge/src/models/permission_overwrite.dart';
 import 'package:firebridge/src/models/snowflake.dart';
@@ -10,9 +9,7 @@ part 'private_thread.mapper.dart';
 /// A private [Thread] channel.
 /// {@endtemplate}
 @MappableClass(discriminatorValue: 12)
-class PrivateThread extends TextChannel
-    with PrivateThreadMappable
-    implements Thread {
+class PrivateThread extends Thread with PrivateThreadMappable {
   final bool invitable;
 
   @override

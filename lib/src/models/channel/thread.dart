@@ -10,12 +10,11 @@ part 'thread.mapper.dart';
 
 /// A thread channel.
 @MappableClass()
-abstract class Thread with ThreadMappable implements TextChannel, GuildChannel {
-  @override
-  Snowflake get id;
-
+abstract class Thread extends TextChannel
+    with ThreadMappable
+    implements GuildChannel {
   /// @nodoc
-  Thread({required Snowflake id});
+  Thread({required super.id});
 
   /// The ID of the user that created this thread.
   Snowflake get ownerId;

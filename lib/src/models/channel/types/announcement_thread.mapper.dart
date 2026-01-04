@@ -14,7 +14,7 @@ class AnnouncementThreadMapper extends SubClassMapperBase<AnnouncementThread> {
   static AnnouncementThreadMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = AnnouncementThreadMapper._());
-      TextChannelMapper.ensureInitialized().addSubMapper(_instance!);
+      ThreadMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       PermissionOverwriteMapper.ensureInitialized();
       ChannelFlagsMapper.ensureInitialized();
@@ -180,8 +180,7 @@ class AnnouncementThreadMapper extends SubClassMapperBase<AnnouncementThread> {
   @override
   final dynamic discriminatorValue = 10;
   @override
-  late final ClassMapperBase superMapper =
-      TextChannelMapper.ensureInitialized();
+  late final ClassMapperBase superMapper = ThreadMapper.ensureInitialized();
 
   static AnnouncementThread _instantiate(DecodingData data) {
     return AnnouncementThread(
@@ -279,9 +278,7 @@ abstract class AnnouncementThreadCopyWith<
   $In extends AnnouncementThread,
   $Out
 >
-    implements
-        TextChannelCopyWith<$R, $In, $Out>,
-        ThreadCopyWith<$R, $In, $Out> {
+    implements ThreadCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>?

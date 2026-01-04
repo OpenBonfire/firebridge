@@ -1,6 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/models/channel/channel.dart';
-import 'package:firebridge/src/models/channel/text_channel.dart';
 import 'package:firebridge/src/models/channel/thread.dart';
 import 'package:firebridge/src/models/permission_overwrite.dart';
 import 'package:firebridge/src/models/snowflake.dart';
@@ -11,9 +10,7 @@ part 'public_thread.mapper.dart';
 /// A public [Thread] channel.
 /// {@endtemplate}
 @MappableClass(discriminatorValue: 11)
-class PublicThread extends TextChannel
-    with PublicThreadMappable
-    implements Thread {
+class PublicThread extends Thread with PublicThreadMappable {
   @override
   final List<Snowflake>? appliedTags;
 

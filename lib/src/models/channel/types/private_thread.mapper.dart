@@ -14,7 +14,7 @@ class PrivateThreadMapper extends SubClassMapperBase<PrivateThread> {
   static PrivateThreadMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = PrivateThreadMapper._());
-      TextChannelMapper.ensureInitialized().addSubMapper(_instance!);
+      ThreadMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       PermissionOverwriteMapper.ensureInitialized();
       ChannelFlagsMapper.ensureInitialized();
@@ -178,8 +178,7 @@ class PrivateThreadMapper extends SubClassMapperBase<PrivateThread> {
   @override
   final dynamic discriminatorValue = 12;
   @override
-  late final ClassMapperBase superMapper =
-      TextChannelMapper.ensureInitialized();
+  late final ClassMapperBase superMapper = ThreadMapper.ensureInitialized();
 
   static PrivateThread _instantiate(DecodingData data) {
     return PrivateThread(
@@ -269,9 +268,7 @@ extension PrivateThreadValueCopy<$R, $Out>
 }
 
 abstract class PrivateThreadCopyWith<$R, $In extends PrivateThread, $Out>
-    implements
-        TextChannelCopyWith<$R, $In, $Out>,
-        ThreadCopyWith<$R, $In, $Out> {
+    implements ThreadCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>?

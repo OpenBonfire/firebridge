@@ -1,6 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/models/channel/channel.dart';
-import 'package:firebridge/src/models/channel/text_channel.dart';
 import 'package:firebridge/src/models/channel/thread.dart';
 import 'package:firebridge/src/models/permission_overwrite.dart';
 import 'package:firebridge/src/models/snowflake.dart';
@@ -8,9 +7,7 @@ import 'package:firebridge/src/models/snowflake.dart';
 part 'announcement_thread.mapper.dart';
 
 @MappableClass(discriminatorValue: 10)
-class AnnouncementThread extends TextChannel
-    with AnnouncementThreadMappable
-    implements Thread {
+class AnnouncementThread extends Thread with AnnouncementThreadMappable {
   @override
   final List<Snowflake>? appliedTags;
 

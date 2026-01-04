@@ -63,6 +63,7 @@ abstract class ThreadCopyWith<$R, $In extends Thread, $Out>
     implements
         TextChannelCopyWith<$R, $In, $Out>,
         GuildChannelCopyWith<$R, $In, $Out> {
+  @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   @override
   $R call({Snowflake? id});
