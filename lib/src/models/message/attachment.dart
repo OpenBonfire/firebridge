@@ -79,7 +79,9 @@ class Attachment with ToStringHelper, AttachmentMappable {
 }
 
 /// The flags for an [Attachment].
-class AttachmentFlags extends Flags<AttachmentFlags> {
+@MappableClass(hook: FlagsHook())
+class AttachmentFlags extends Flags<AttachmentFlags>
+    with AttachmentFlagsMappable {
   /// The attachment is a remix.
   static const isRemix = Flag<AttachmentFlags>.fromOffset(2);
 

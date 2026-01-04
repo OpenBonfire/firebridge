@@ -15,6 +15,7 @@ class AttachmentMapper extends ClassMapperBase<Attachment> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = AttachmentMapper._());
       SnowflakeMapper.ensureInitialized();
+      AttachmentFlagsMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -183,6 +184,7 @@ abstract class AttachmentCopyWith<$R, $In extends Attachment, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   ListCopyWith<$R, int, ObjectCopyWith<$R, int, int>>? get waveform;
+  AttachmentFlagsCopyWith<$R, AttachmentFlags, AttachmentFlags>? get flags;
   $R call({
     Snowflake? id,
     String? fileName,
@@ -222,6 +224,9 @@ class _AttachmentCopyWithImpl<$R, $Out>
           (v) => call(waveform: v),
         )
       : null;
+  @override
+  AttachmentFlagsCopyWith<$R, AttachmentFlags, AttachmentFlags>? get flags =>
+      $value.flags?.copyWith.$chain((v) => call(flags: v));
   @override
   $R call({
     Snowflake? id,
@@ -278,5 +283,125 @@ class _AttachmentCopyWithImpl<$R, $Out>
   AttachmentCopyWith<$R2, Attachment, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   ) => _AttachmentCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
+class AttachmentFlagsMapper extends ClassMapperBase<AttachmentFlags> {
+  AttachmentFlagsMapper._();
+
+  static AttachmentFlagsMapper? _instance;
+  static AttachmentFlagsMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = AttachmentFlagsMapper._());
+      FlagsMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'AttachmentFlags';
+
+  static int _$value(AttachmentFlags v) => v.value;
+  static const Field<AttachmentFlags, int> _f$value = Field('value', _$value);
+
+  @override
+  final MappableFields<AttachmentFlags> fields = const {#value: _f$value};
+
+  @override
+  final MappingHook hook = const FlagsHook();
+  @override
+  final MappingHook superHook = const FlagsHook();
+
+  static AttachmentFlags _instantiate(DecodingData data) {
+    return AttachmentFlags(data.dec(_f$value));
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static AttachmentFlags fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<AttachmentFlags>(map);
+  }
+
+  static AttachmentFlags fromJson(String json) {
+    return ensureInitialized().decodeJson<AttachmentFlags>(json);
+  }
+}
+
+mixin AttachmentFlagsMappable {
+  String toJson() {
+    return AttachmentFlagsMapper.ensureInitialized()
+        .encodeJson<AttachmentFlags>(this as AttachmentFlags);
+  }
+
+  Map<String, dynamic> toMap() {
+    return AttachmentFlagsMapper.ensureInitialized().encodeMap<AttachmentFlags>(
+      this as AttachmentFlags,
+    );
+  }
+
+  AttachmentFlagsCopyWith<AttachmentFlags, AttachmentFlags, AttachmentFlags>
+  get copyWith =>
+      _AttachmentFlagsCopyWithImpl<AttachmentFlags, AttachmentFlags>(
+        this as AttachmentFlags,
+        $identity,
+        $identity,
+      );
+  @override
+  String toString() {
+    return AttachmentFlagsMapper.ensureInitialized().stringifyValue(
+      this as AttachmentFlags,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return AttachmentFlagsMapper.ensureInitialized().equalsValue(
+      this as AttachmentFlags,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return AttachmentFlagsMapper.ensureInitialized().hashValue(
+      this as AttachmentFlags,
+    );
+  }
+}
+
+extension AttachmentFlagsValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, AttachmentFlags, $Out> {
+  AttachmentFlagsCopyWith<$R, AttachmentFlags, $Out> get $asAttachmentFlags =>
+      $base.as((v, t, t2) => _AttachmentFlagsCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class AttachmentFlagsCopyWith<$R, $In extends AttachmentFlags, $Out>
+    implements FlagsCopyWith<$R, $In, $Out, AttachmentFlags> {
+  @override
+  $R call({int? value});
+  AttachmentFlagsCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  );
+}
+
+class _AttachmentFlagsCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, AttachmentFlags, $Out>
+    implements AttachmentFlagsCopyWith<$R, AttachmentFlags, $Out> {
+  _AttachmentFlagsCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<AttachmentFlags> $mapper =
+      AttachmentFlagsMapper.ensureInitialized();
+  @override
+  $R call({int? value}) =>
+      $apply(FieldCopyWithData({if (value != null) #value: value}));
+  @override
+  AttachmentFlags $make(CopyWithData data) =>
+      AttachmentFlags(data.get(#value, or: $value.value));
+
+  @override
+  AttachmentFlagsCopyWith<$R2, AttachmentFlags, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _AttachmentFlagsCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
