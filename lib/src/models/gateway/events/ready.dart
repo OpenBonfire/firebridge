@@ -117,7 +117,7 @@ class ReadyHook extends MappingHook {
     ready event, because it's extremely wasteful. This handles what I *believe* is
     the only reason you couldn't assume guildId is required.
 
-    I don't know how slow this is, I don't think it's too bad, 
+    I don't know how slow this is, I don't think it's too bad though.
     */
     final guilds = value["guilds"] as List<dynamic>;
     for (final guild in guilds) {
