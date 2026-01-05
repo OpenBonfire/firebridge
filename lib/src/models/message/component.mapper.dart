@@ -524,6 +524,8 @@ class MessageComponentMapper extends ClassMapperBase<MessageComponent> {
     #type: _f$type,
   };
 
+  @override
+  final MappingHook hook = const ComponentHook();
   static MessageComponent _instantiate(DecodingData data) {
     throw MapperException.missingSubclass(
       'MessageComponent',
@@ -602,6 +604,9 @@ class ActionRowComponentMapper extends SubClassMapperBase<ActionRowComponent> {
   @override
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
+
+  @override
+  final MappingHook superHook = const ComponentHook();
 
   static ActionRowComponent _instantiate(DecodingData data) {
     return ActionRowComponent(
@@ -822,6 +827,9 @@ class ButtonComponentMapper extends SubClassMapperBase<ButtonComponent> {
   @override
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
+
+  @override
+  final MappingHook superHook = const ComponentHook();
 
   static ButtonComponent _instantiate(DecodingData data) {
     return ButtonComponent(
@@ -1071,6 +1079,9 @@ class SelectMenuComponentMapper
   @override
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
+
+  @override
+  final MappingHook superHook = const ComponentHook();
 
   static SelectMenuComponent _instantiate(DecodingData data) {
     return SelectMenuComponent(
@@ -1644,6 +1655,9 @@ class UnknownComponentMapper extends SubClassMapperBase<UnknownComponent> {
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
 
+  @override
+  final MappingHook superHook = const ComponentHook();
+
   static UnknownComponent _instantiate(DecodingData data) {
     return UnknownComponent(id: data.dec(_f$id), type: data.dec(_f$type));
   }
@@ -1791,6 +1805,9 @@ class SectionComponentMapper extends SubClassMapperBase<SectionComponent> {
   @override
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
+
+  @override
+  final MappingHook superHook = const ComponentHook();
 
   static SectionComponent _instantiate(DecodingData data) {
     return SectionComponent(
@@ -1976,6 +1993,9 @@ class TextDisplayComponentMapper
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
 
+  @override
+  final MappingHook superHook = const ComponentHook();
+
   static TextDisplayComponent _instantiate(DecodingData data) {
     return TextDisplayComponent(
       id: data.dec(_f$id),
@@ -2147,6 +2167,9 @@ class ThumbnailComponentMapper extends SubClassMapperBase<ThumbnailComponent> {
   @override
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
+
+  @override
+  final MappingHook superHook = const ComponentHook();
 
   static ThumbnailComponent _instantiate(DecodingData data) {
     return ThumbnailComponent(
@@ -2479,6 +2502,9 @@ class MediaGalleryComponentMapper
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
 
+  @override
+  final MappingHook superHook = const ComponentHook();
+
   static MediaGalleryComponent _instantiate(DecodingData data) {
     return MediaGalleryComponent(
       id: data.dec(_f$id),
@@ -2664,6 +2690,9 @@ class SeparatorComponentMapper extends SubClassMapperBase<SeparatorComponent> {
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
 
+  @override
+  final MappingHook superHook = const ComponentHook();
+
   static SeparatorComponent _instantiate(DecodingData data) {
     return SeparatorComponent(
       id: data.dec(_f$id),
@@ -2844,6 +2873,9 @@ class FileComponentMapper extends SubClassMapperBase<FileComponent> {
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
 
+  @override
+  final MappingHook superHook = const ComponentHook();
+
   static FileComponent _instantiate(DecodingData data) {
     return FileComponent(
       id: data.dec(_f$id),
@@ -3022,6 +3054,9 @@ class ContainerComponentMapper extends SubClassMapperBase<ContainerComponent> {
   @override
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
+
+  @override
+  final MappingHook superHook = const ComponentHook();
 
   static ContainerComponent _instantiate(DecodingData data) {
     return ContainerComponent(
@@ -3240,6 +3275,9 @@ class FileUploadComponentMapper
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
 
+  @override
+  final MappingHook superHook = const ComponentHook();
+
   static FileUploadComponent _instantiate(DecodingData data) {
     return FileUploadComponent(
       id: data.dec(_f$id),
@@ -3421,6 +3459,9 @@ class SubmittedComponentMapper extends SubClassMapperBase<SubmittedComponent> {
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
 
+  @override
+  final MappingHook superHook = const ComponentHook();
+
   static SubmittedComponent _instantiate(DecodingData data) {
     throw MapperException.missingSubclass(
       'SubmittedComponent',
@@ -3518,6 +3559,9 @@ class SubmittedFileUploadComponentMapper
   @override
   late final ClassMapperBase superMapper =
       SubmittedComponentMapper.ensureInitialized();
+
+  @override
+  final MappingHook superHook = const ComponentHook();
 
   static SubmittedFileUploadComponent _instantiate(DecodingData data) {
     return SubmittedFileUploadComponent(
@@ -3715,6 +3759,9 @@ class SubmittedActionRowComponentMapper
   @override
   late final ClassMapperBase superMapper =
       SubmittedComponentMapper.ensureInitialized();
+
+  @override
+  final MappingHook superHook = const ComponentHook();
 
   static SubmittedActionRowComponent _instantiate(DecodingData data) {
     return SubmittedActionRowComponent(
@@ -3924,6 +3971,9 @@ class SubmittedTextInputComponentMapper
   late final ClassMapperBase superMapper =
       SubmittedComponentMapper.ensureInitialized();
 
+  @override
+  final MappingHook superHook = const ComponentHook();
+
   static SubmittedTextInputComponent _instantiate(DecodingData data) {
     return SubmittedTextInputComponent(
       id: data.dec(_f$id),
@@ -4110,6 +4160,9 @@ class SubmittedLabelComponentMapper
   late final ClassMapperBase superMapper =
       SubmittedComponentMapper.ensureInitialized();
 
+  @override
+  final MappingHook superHook = const ComponentHook();
+
   static SubmittedLabelComponent _instantiate(DecodingData data) {
     return SubmittedLabelComponent(
       id: data.dec(_f$id),
@@ -4286,6 +4339,9 @@ class SubmittedSelectMenuComponentMapper
   @override
   late final ClassMapperBase superMapper =
       SubmittedComponentMapper.ensureInitialized();
+
+  @override
+  final MappingHook superHook = const ComponentHook();
 
   static SubmittedSelectMenuComponent _instantiate(DecodingData data) {
     return SubmittedSelectMenuComponent(
@@ -4476,6 +4532,9 @@ class SubmittedTextDisplayComponentMapper
   @override
   late final ClassMapperBase superMapper =
       SubmittedComponentMapper.ensureInitialized();
+
+  @override
+  final MappingHook superHook = const ComponentHook();
 
   static SubmittedTextDisplayComponent _instantiate(DecodingData data) {
     return SubmittedTextDisplayComponent(

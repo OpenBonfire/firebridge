@@ -73,7 +73,7 @@ class UnfurledMediaItem with ToStringHelper, UnfurledMediaItemMappable {
 }
 
 /// A component in a [Message].
-@MappableClass(discriminatorKey: "type")
+@MappableClass(discriminatorKey: "type", hook: ComponentHook())
 abstract class MessageComponent with ToStringHelper, MessageComponentMappable {
   /// The type of this component.
   final MessageComponentType type;
@@ -83,6 +83,21 @@ abstract class MessageComponent with ToStringHelper, MessageComponentMappable {
 
   /// @nodoc
   MessageComponent({required this.id, required this.type});
+}
+
+class ComponentHook extends MappingHook {
+  const ComponentHook();
+  @override
+  Object? beforeDecode(Object? value) {
+    final val = value as Map<String, dynamic>;
+    final type = val["type"] as int;
+
+    // TODO: Anything 3 -> 8 uses a SelectMenuComponent
+    if (type > 2 && type < 9) {
+      val["type"] = 3;
+    }
+    return value;
+  }
 }
 
 /// A [MessageComponent] that contains multiple child [MessageComponent]s.
@@ -158,8 +173,6 @@ enum ButtonStyle {
   @MappableValue(6)
   premium
 }
-
-// TODO: This will need a hook, anything 3 -> 8 is this one
 
 /// A dropdown menu in which users can select from on or more choices.
 @MappableClass(discriminatorValue: 3)
