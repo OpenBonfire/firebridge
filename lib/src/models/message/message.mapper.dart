@@ -424,6 +424,9 @@ class MessageMapper extends ClassMapperBase<Message> {
     #callInfo: _f$callInfo,
   };
 
+  @override
+  final MappingHook superHook = const SnapshotHook();
+
   static Message _instantiate(DecodingData data) {
     return Message(
       id: data.dec(_f$id),
@@ -959,6 +962,8 @@ class MessageSnapshotMapper extends ClassMapperBase<MessageSnapshot> {
   static const Field<MessageSnapshot, List<StickerItem>> _f$stickers = Field(
     'stickers',
     _$stickers,
+    opt: true,
+    def: const [],
   );
   static List<MessageComponent>? _$components(MessageSnapshot v) =>
       v.components;
@@ -980,6 +985,8 @@ class MessageSnapshotMapper extends ClassMapperBase<MessageSnapshot> {
     #components: _f$components,
   };
 
+  @override
+  final MappingHook hook = const SnapshotHook();
   static MessageSnapshot _instantiate(DecodingData data) {
     return MessageSnapshot(
       timestamp: data.dec(_f$timestamp),

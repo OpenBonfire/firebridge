@@ -434,7 +434,7 @@ class MessageInteractionMetadata
 // object. Since this object would then be useless as it cannot contain any
 // useful data using existing nyxx types, we instead forward the field of the
 // nested object into this type.
-@MappableClass()
+@MappableClass(hook: SnapshotHook())
 class MessageSnapshot with MessageSnapshotMappable {
   /// The time when this message was sent.
   final DateTime timestamp;
@@ -478,7 +478,7 @@ class MessageSnapshot with MessageSnapshotMappable {
   final List<MessageComponent>? components;
 
   /// @nodoc
-  MessageSnapshot({
+  const MessageSnapshot({
     required this.timestamp,
     required this.editedTimestamp,
     required this.type,
@@ -488,9 +488,22 @@ class MessageSnapshot with MessageSnapshotMappable {
     required this.flags,
     required this.mentions,
     required this.mentionRoles,
-    required this.stickers,
+    this.stickers = const [],
     required this.components,
   });
+}
+
+class SnapshotHook extends MappingHook {
+  const SnapshotHook();
+  @override
+  Object? beforeDecode(Object? value) {
+    // idk sometimes snapshot is dumb and has a single key of "message"
+    if ((value as Map).keys.length == 1) {
+      return value["message"];
+    }
+
+    return value;
+  }
 }
 
 /// Information about a call in a private channel.
