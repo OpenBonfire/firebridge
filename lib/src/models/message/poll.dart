@@ -60,17 +60,17 @@ class PollAnswer with ToStringHelper, PollAnswerMappable {
 @MappableClass()
 class PollAnswerCount with ToStringHelper, PollAnswerCountMappable {
   /// The ID of the answer.
-  final int answerId;
+  final int id;
 
   /// The number of votes for this answer.
   final int count;
 
   /// Whether the current user voted for this answer.
-  final bool me;
+  final bool meVoted;
 
   /// @nodoc
   PollAnswerCount(
-      {required this.answerId, required this.count, required this.me});
+      {required this.id, required this.count, required this.meVoted});
 }
 
 /// {@template poll_results}
@@ -87,14 +87,14 @@ class PollAnswerCount with ToStringHelper, PollAnswerCountMappable {
 @MappableClass()
 class PollResults with ToStringHelper, PollResultsMappable {
   /// Whether the votes have been precisely counted.
-  final bool finalized;
+  final bool isFinalized;
 
   /// The counts for each answer.
   final List<PollAnswerCount> answerCounts;
 
   /// {@macro poll_results}
   /// @nodoc
-  PollResults({required this.finalized, required this.answerCounts});
+  const PollResults({required this.isFinalized, required this.answerCounts});
 }
 
 /// {@template poll}
@@ -127,7 +127,7 @@ class Poll with ToStringHelper, PollMappable {
 
   /// {@macro poll}
   /// @nodoc
-  Poll(
+  const Poll(
       {required this.question,
       required this.answers,
       required this.endsAt,

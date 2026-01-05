@@ -316,29 +316,29 @@ class PollAnswerCountMapper extends ClassMapperBase<PollAnswerCount> {
   @override
   final String id = 'PollAnswerCount';
 
-  static int _$answerId(PollAnswerCount v) => v.answerId;
-  static const Field<PollAnswerCount, int> _f$answerId = Field(
-    'answerId',
-    _$answerId,
-    key: r'answer_id',
-  );
+  static int _$id(PollAnswerCount v) => v.id;
+  static const Field<PollAnswerCount, int> _f$id = Field('id', _$id);
   static int _$count(PollAnswerCount v) => v.count;
   static const Field<PollAnswerCount, int> _f$count = Field('count', _$count);
-  static bool _$me(PollAnswerCount v) => v.me;
-  static const Field<PollAnswerCount, bool> _f$me = Field('me', _$me);
+  static bool _$meVoted(PollAnswerCount v) => v.meVoted;
+  static const Field<PollAnswerCount, bool> _f$meVoted = Field(
+    'meVoted',
+    _$meVoted,
+    key: r'me_voted',
+  );
 
   @override
   final MappableFields<PollAnswerCount> fields = const {
-    #answerId: _f$answerId,
+    #id: _f$id,
     #count: _f$count,
-    #me: _f$me,
+    #meVoted: _f$meVoted,
   };
 
   static PollAnswerCount _instantiate(DecodingData data) {
     return PollAnswerCount(
-      answerId: data.dec(_f$answerId),
+      id: data.dec(_f$id),
       count: data.dec(_f$count),
-      me: data.dec(_f$me),
+      meVoted: data.dec(_f$meVoted),
     );
   }
 
@@ -404,7 +404,7 @@ extension PollAnswerCountValueCopy<$R, $Out>
 
 abstract class PollAnswerCountCopyWith<$R, $In extends PollAnswerCount, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({int? answerId, int? count, bool? me});
+  $R call({int? id, int? count, bool? meVoted});
   PollAnswerCountCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -419,18 +419,18 @@ class _PollAnswerCountCopyWithImpl<$R, $Out>
   late final ClassMapperBase<PollAnswerCount> $mapper =
       PollAnswerCountMapper.ensureInitialized();
   @override
-  $R call({int? answerId, int? count, bool? me}) => $apply(
+  $R call({int? id, int? count, bool? meVoted}) => $apply(
     FieldCopyWithData({
-      if (answerId != null) #answerId: answerId,
+      if (id != null) #id: id,
       if (count != null) #count: count,
-      if (me != null) #me: me,
+      if (meVoted != null) #meVoted: meVoted,
     }),
   );
   @override
   PollAnswerCount $make(CopyWithData data) => PollAnswerCount(
-    answerId: data.get(#answerId, or: $value.answerId),
+    id: data.get(#id, or: $value.id),
     count: data.get(#count, or: $value.count),
-    me: data.get(#me, or: $value.me),
+    meVoted: data.get(#meVoted, or: $value.meVoted),
   );
 
   @override
@@ -454,10 +454,11 @@ class PollResultsMapper extends ClassMapperBase<PollResults> {
   @override
   final String id = 'PollResults';
 
-  static bool _$finalized(PollResults v) => v.finalized;
-  static const Field<PollResults, bool> _f$finalized = Field(
-    'finalized',
-    _$finalized,
+  static bool _$isFinalized(PollResults v) => v.isFinalized;
+  static const Field<PollResults, bool> _f$isFinalized = Field(
+    'isFinalized',
+    _$isFinalized,
+    key: r'is_finalized',
   );
   static List<PollAnswerCount> _$answerCounts(PollResults v) => v.answerCounts;
   static const Field<PollResults, List<PollAnswerCount>> _f$answerCounts =
@@ -465,13 +466,13 @@ class PollResultsMapper extends ClassMapperBase<PollResults> {
 
   @override
   final MappableFields<PollResults> fields = const {
-    #finalized: _f$finalized,
+    #isFinalized: _f$isFinalized,
     #answerCounts: _f$answerCounts,
   };
 
   static PollResults _instantiate(DecodingData data) {
     return PollResults(
-      finalized: data.dec(_f$finalized),
+      isFinalized: data.dec(_f$isFinalized),
       answerCounts: data.dec(_f$answerCounts),
     );
   }
@@ -542,7 +543,7 @@ abstract class PollResultsCopyWith<$R, $In extends PollResults, $Out>
     PollAnswerCountCopyWith<$R, PollAnswerCount, PollAnswerCount>
   >
   get answerCounts;
-  $R call({bool? finalized, List<PollAnswerCount>? answerCounts});
+  $R call({bool? isFinalized, List<PollAnswerCount>? answerCounts});
   PollResultsCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -566,15 +567,15 @@ class _PollResultsCopyWithImpl<$R, $Out>
     (v) => call(answerCounts: v),
   );
   @override
-  $R call({bool? finalized, List<PollAnswerCount>? answerCounts}) => $apply(
+  $R call({bool? isFinalized, List<PollAnswerCount>? answerCounts}) => $apply(
     FieldCopyWithData({
-      if (finalized != null) #finalized: finalized,
+      if (isFinalized != null) #isFinalized: isFinalized,
       if (answerCounts != null) #answerCounts: answerCounts,
     }),
   );
   @override
   PollResults $make(CopyWithData data) => PollResults(
-    finalized: data.get(#finalized, or: $value.finalized),
+    isFinalized: data.get(#isFinalized, or: $value.isFinalized),
     answerCounts: data.get(#answerCounts, or: $value.answerCounts),
   );
 
