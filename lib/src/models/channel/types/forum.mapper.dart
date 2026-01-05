@@ -118,6 +118,7 @@ class ForumChannelMapper extends SubClassMapperBase<ForumChannel> {
       DefaultReactionMapper.ensureInitialized();
       ForumSortMapper.ensureInitialized();
       PermissionOverwriteMapper.ensureInitialized();
+      ChannelTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -228,6 +229,8 @@ class ForumChannelMapper extends SubClassMapperBase<ForumChannel> {
     'position',
     _$position,
   );
+  static ChannelType _$type(ForumChannel v) => v.type;
+  static const Field<ForumChannel, ChannelType> _f$type = Field('type', _$type);
 
   @override
   final MappableFields<ForumChannel> fields = const {
@@ -249,6 +252,7 @@ class ForumChannelMapper extends SubClassMapperBase<ForumChannel> {
     #parentId: _f$parentId,
     #permissionOverwrites: _f$permissionOverwrites,
     #position: _f$position,
+    #type: _f$type,
   };
 
   @override
@@ -278,6 +282,7 @@ class ForumChannelMapper extends SubClassMapperBase<ForumChannel> {
       parentId: data.dec(_f$parentId),
       permissionOverwrites: data.dec(_f$permissionOverwrites),
       position: data.dec(_f$position),
+      type: data.dec(_f$type),
     );
   }
 
@@ -382,6 +387,7 @@ abstract class ForumChannelCopyWith<$R, $In extends ForumChannel, $Out>
     Snowflake? parentId,
     List<PermissionOverwrite>? permissionOverwrites,
     int? position,
+    ChannelType? type,
   });
   ForumChannelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -451,6 +457,7 @@ class _ForumChannelCopyWithImpl<$R, $Out>
     Object? parentId = $none,
     List<PermissionOverwrite>? permissionOverwrites,
     int? position,
+    ChannelType? type,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
@@ -474,6 +481,7 @@ class _ForumChannelCopyWithImpl<$R, $Out>
       if (permissionOverwrites != null)
         #permissionOverwrites: permissionOverwrites,
       if (position != null) #position: position,
+      if (type != null) #type: type,
     }),
   );
   @override
@@ -505,6 +513,7 @@ class _ForumChannelCopyWithImpl<$R, $Out>
       or: $value.permissionOverwrites,
     ),
     position: data.get(#position, or: $value.position),
+    type: data.get(#type, or: $value.type),
   );
 
   @override

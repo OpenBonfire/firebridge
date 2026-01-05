@@ -14,5 +14,5 @@ class DirectoryChannel extends Channel with DirectoryChannelMappable {
 
   /// {@macro directory_channel}
   /// @nodoc
-  DirectoryChannel({required super.id});
+  DirectoryChannel({required super.id, required super.type});
 }

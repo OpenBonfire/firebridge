@@ -90,6 +90,7 @@ class ForumChannel extends Channel
     required this.parentId,
     required this.permissionOverwrites,
     required this.position,
+    required super.type,
   });
 }
 

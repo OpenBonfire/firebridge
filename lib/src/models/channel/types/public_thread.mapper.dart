@@ -18,6 +18,7 @@ class PublicThreadMapper extends SubClassMapperBase<PublicThread> {
       SnowflakeMapper.ensureInitialized();
       PermissionOverwriteMapper.ensureInitialized();
       ChannelFlagsMapper.ensureInitialized();
+      ChannelTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -33,31 +34,24 @@ class PublicThreadMapper extends SubClassMapperBase<PublicThread> {
     _$appliedTags,
     key: r'applied_tags',
   );
-  static int _$approximateMemberCount(PublicThread v) =>
-      v.approximateMemberCount;
-  static const Field<PublicThread, int> _f$approximateMemberCount = Field(
-    'approximateMemberCount',
-    _$approximateMemberCount,
-    key: r'approximate_member_count',
+  static int _$memberCount(PublicThread v) => v.memberCount;
+  static const Field<PublicThread, int> _f$memberCount = Field(
+    'memberCount',
+    _$memberCount,
+    key: r'member_count',
   );
-  static DateTime _$archiveTimestamp(PublicThread v) => v.archiveTimestamp;
+  static DateTime? _$archiveTimestamp(PublicThread v) => v.archiveTimestamp;
   static const Field<PublicThread, DateTime> _f$archiveTimestamp = Field(
     'archiveTimestamp',
     _$archiveTimestamp,
     key: r'archive_timestamp',
   );
-  static Duration _$autoArchiveDuration(PublicThread v) =>
+  static Duration? _$autoArchiveDuration(PublicThread v) =>
       v.autoArchiveDuration;
   static const Field<PublicThread, Duration> _f$autoArchiveDuration = Field(
     'autoArchiveDuration',
     _$autoArchiveDuration,
     key: r'auto_archive_duration',
-  );
-  static DateTime _$createdAt(PublicThread v) => v.createdAt;
-  static const Field<PublicThread, DateTime> _f$createdAt = Field(
-    'createdAt',
-    _$createdAt,
-    key: r'created_at',
   );
   static Snowflake _$guildId(PublicThread v) => v.guildId;
   static const Field<PublicThread, Snowflake> _f$guildId = Field(
@@ -65,13 +59,6 @@ class PublicThreadMapper extends SubClassMapperBase<PublicThread> {
     _$guildId,
     key: r'guild_id',
   );
-  static bool _$archived(PublicThread v) => v.archived;
-  static const Field<PublicThread, bool> _f$archived = Field(
-    'archived',
-    _$archived,
-  );
-  static bool _$locked(PublicThread v) => v.locked;
-  static const Field<PublicThread, bool> _f$locked = Field('locked', _$locked);
   static bool _$nsfw(PublicThread v) => v.nsfw;
   static const Field<PublicThread, bool> _f$nsfw = Field(
     'nsfw',
@@ -91,16 +78,16 @@ class PublicThreadMapper extends SubClassMapperBase<PublicThread> {
     _$lastPinTimestamp,
     key: r'last_pin_timestamp',
   );
-  static int _$messageCount(PublicThread v) => v.messageCount;
-  static const Field<PublicThread, int> _f$messageCount = Field(
+  static Snowflake _$messageCount(PublicThread v) => v.messageCount;
+  static const Field<PublicThread, Snowflake> _f$messageCount = Field(
     'messageCount',
     _$messageCount,
     key: r'message_count',
   );
   static String _$name(PublicThread v) => v.name;
   static const Field<PublicThread, String> _f$name = Field('name', _$name);
-  static Snowflake _$ownerId(PublicThread v) => v.ownerId;
-  static const Field<PublicThread, Snowflake> _f$ownerId = Field(
+  static int _$ownerId(PublicThread v) => v.ownerId;
+  static const Field<PublicThread, int> _f$ownerId = Field(
     'ownerId',
     _$ownerId,
     key: r'owner_id',
@@ -118,11 +105,8 @@ class PublicThreadMapper extends SubClassMapperBase<PublicThread> {
     'permissionOverwrites',
     _$permissionOverwrites,
     key: r'permission_overwrites',
-  );
-  static int _$position(PublicThread v) => v.position;
-  static const Field<PublicThread, int> _f$position = Field(
-    'position',
-    _$position,
+    opt: true,
+    def: const [],
   );
   static Duration? _$rateLimitPerUser(PublicThread v) => v.rateLimitPerUser;
   static const Field<PublicThread, Duration> _f$rateLimitPerUser = Field(
@@ -130,29 +114,29 @@ class PublicThreadMapper extends SubClassMapperBase<PublicThread> {
     _$rateLimitPerUser,
     key: r'rate_limit_per_user',
   );
-  static int _$totalMessagesSent(PublicThread v) => v.totalMessagesSent;
-  static const Field<PublicThread, int> _f$totalMessagesSent = Field(
-    'totalMessagesSent',
-    _$totalMessagesSent,
-    key: r'total_messages_sent',
-  );
   static ChannelFlags? _$flags(PublicThread v) => v.flags;
   static const Field<PublicThread, ChannelFlags> _f$flags = Field(
     'flags',
     _$flags,
+  );
+  static ChannelType _$type(PublicThread v) => v.type;
+  static const Field<PublicThread, ChannelType> _f$type = Field('type', _$type);
+  static int _$position(PublicThread v) => v.position;
+  static const Field<PublicThread, int> _f$position = Field(
+    'position',
+    _$position,
+    opt: true,
+    def: -1,
   );
 
   @override
   final MappableFields<PublicThread> fields = const {
     #id: _f$id,
     #appliedTags: _f$appliedTags,
-    #approximateMemberCount: _f$approximateMemberCount,
+    #memberCount: _f$memberCount,
     #archiveTimestamp: _f$archiveTimestamp,
     #autoArchiveDuration: _f$autoArchiveDuration,
-    #createdAt: _f$createdAt,
     #guildId: _f$guildId,
-    #archived: _f$archived,
-    #locked: _f$locked,
     #nsfw: _f$nsfw,
     #lastMessageId: _f$lastMessageId,
     #lastPinTimestamp: _f$lastPinTimestamp,
@@ -161,10 +145,10 @@ class PublicThreadMapper extends SubClassMapperBase<PublicThread> {
     #ownerId: _f$ownerId,
     #parentId: _f$parentId,
     #permissionOverwrites: _f$permissionOverwrites,
-    #position: _f$position,
     #rateLimitPerUser: _f$rateLimitPerUser,
-    #totalMessagesSent: _f$totalMessagesSent,
     #flags: _f$flags,
+    #type: _f$type,
+    #position: _f$position,
   };
 
   @override
@@ -178,13 +162,10 @@ class PublicThreadMapper extends SubClassMapperBase<PublicThread> {
     return PublicThread(
       id: data.dec(_f$id),
       appliedTags: data.dec(_f$appliedTags),
-      approximateMemberCount: data.dec(_f$approximateMemberCount),
+      memberCount: data.dec(_f$memberCount),
       archiveTimestamp: data.dec(_f$archiveTimestamp),
       autoArchiveDuration: data.dec(_f$autoArchiveDuration),
-      createdAt: data.dec(_f$createdAt),
       guildId: data.dec(_f$guildId),
-      archived: data.dec(_f$archived),
-      locked: data.dec(_f$locked),
       nsfw: data.dec(_f$nsfw),
       lastMessageId: data.dec(_f$lastMessageId),
       lastPinTimestamp: data.dec(_f$lastPinTimestamp),
@@ -193,10 +174,10 @@ class PublicThreadMapper extends SubClassMapperBase<PublicThread> {
       ownerId: data.dec(_f$ownerId),
       parentId: data.dec(_f$parentId),
       permissionOverwrites: data.dec(_f$permissionOverwrites),
-      position: data.dec(_f$position),
       rateLimitPerUser: data.dec(_f$rateLimitPerUser),
-      totalMessagesSent: data.dec(_f$totalMessagesSent),
       flags: data.dec(_f$flags),
+      type: data.dec(_f$type),
+      position: data.dec(_f$position),
     );
   }
 
@@ -264,42 +245,46 @@ abstract class PublicThreadCopyWith<$R, $In extends PublicThread, $Out>
     implements ThreadCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  @override
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>?
   get appliedTags;
+  @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
+  @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId;
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get ownerId;
+  @override
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get messageCount;
+  @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
+  @override
   ListCopyWith<
     $R,
     PermissionOverwrite,
     PermissionOverwriteCopyWith<$R, PermissionOverwrite, PermissionOverwrite>
   >
   get permissionOverwrites;
+  @override
   ChannelFlagsCopyWith<$R, ChannelFlags, ChannelFlags>? get flags;
   @override
   $R call({
     Snowflake? id,
     List<Snowflake>? appliedTags,
-    int? approximateMemberCount,
+    int? memberCount,
     DateTime? archiveTimestamp,
     Duration? autoArchiveDuration,
-    DateTime? createdAt,
     Snowflake? guildId,
-    bool? archived,
-    bool? locked,
     bool? nsfw,
     Snowflake? lastMessageId,
     DateTime? lastPinTimestamp,
-    int? messageCount,
+    Snowflake? messageCount,
     String? name,
-    Snowflake? ownerId,
+    int? ownerId,
     Snowflake? parentId,
     List<PermissionOverwrite>? permissionOverwrites,
-    int? position,
     Duration? rateLimitPerUser,
-    int? totalMessagesSent,
     ChannelFlags? flags,
+    ChannelType? type,
+    int? position,
   });
   PublicThreadCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -331,8 +316,8 @@ class _PublicThreadCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId =>
       $value.lastMessageId?.copyWith.$chain((v) => call(lastMessageId: v));
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get ownerId =>
-      $value.ownerId.copyWith.$chain((v) => call(ownerId: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get messageCount =>
+      $value.messageCount.copyWith.$chain((v) => call(messageCount: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId =>
       $value.parentId?.copyWith.$chain((v) => call(parentId: v));
@@ -354,38 +339,31 @@ class _PublicThreadCopyWithImpl<$R, $Out>
   $R call({
     Snowflake? id,
     Object? appliedTags = $none,
-    int? approximateMemberCount,
-    DateTime? archiveTimestamp,
-    Duration? autoArchiveDuration,
-    DateTime? createdAt,
+    int? memberCount,
+    Object? archiveTimestamp = $none,
+    Object? autoArchiveDuration = $none,
     Snowflake? guildId,
-    bool? archived,
-    bool? locked,
     bool? nsfw,
     Object? lastMessageId = $none,
     Object? lastPinTimestamp = $none,
-    int? messageCount,
+    Snowflake? messageCount,
     String? name,
-    Snowflake? ownerId,
+    int? ownerId,
     Object? parentId = $none,
     List<PermissionOverwrite>? permissionOverwrites,
-    int? position,
     Object? rateLimitPerUser = $none,
-    int? totalMessagesSent,
     Object? flags = $none,
+    ChannelType? type,
+    int? position,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
       if (appliedTags != $none) #appliedTags: appliedTags,
-      if (approximateMemberCount != null)
-        #approximateMemberCount: approximateMemberCount,
-      if (archiveTimestamp != null) #archiveTimestamp: archiveTimestamp,
-      if (autoArchiveDuration != null)
+      if (memberCount != null) #memberCount: memberCount,
+      if (archiveTimestamp != $none) #archiveTimestamp: archiveTimestamp,
+      if (autoArchiveDuration != $none)
         #autoArchiveDuration: autoArchiveDuration,
-      if (createdAt != null) #createdAt: createdAt,
       if (guildId != null) #guildId: guildId,
-      if (archived != null) #archived: archived,
-      if (locked != null) #locked: locked,
       if (nsfw != null) #nsfw: nsfw,
       if (lastMessageId != $none) #lastMessageId: lastMessageId,
       if (lastPinTimestamp != $none) #lastPinTimestamp: lastPinTimestamp,
@@ -395,29 +373,23 @@ class _PublicThreadCopyWithImpl<$R, $Out>
       if (parentId != $none) #parentId: parentId,
       if (permissionOverwrites != null)
         #permissionOverwrites: permissionOverwrites,
-      if (position != null) #position: position,
       if (rateLimitPerUser != $none) #rateLimitPerUser: rateLimitPerUser,
-      if (totalMessagesSent != null) #totalMessagesSent: totalMessagesSent,
       if (flags != $none) #flags: flags,
+      if (type != null) #type: type,
+      if (position != null) #position: position,
     }),
   );
   @override
   PublicThread $make(CopyWithData data) => PublicThread(
     id: data.get(#id, or: $value.id),
     appliedTags: data.get(#appliedTags, or: $value.appliedTags),
-    approximateMemberCount: data.get(
-      #approximateMemberCount,
-      or: $value.approximateMemberCount,
-    ),
+    memberCount: data.get(#memberCount, or: $value.memberCount),
     archiveTimestamp: data.get(#archiveTimestamp, or: $value.archiveTimestamp),
     autoArchiveDuration: data.get(
       #autoArchiveDuration,
       or: $value.autoArchiveDuration,
     ),
-    createdAt: data.get(#createdAt, or: $value.createdAt),
     guildId: data.get(#guildId, or: $value.guildId),
-    archived: data.get(#archived, or: $value.archived),
-    locked: data.get(#locked, or: $value.locked),
     nsfw: data.get(#nsfw, or: $value.nsfw),
     lastMessageId: data.get(#lastMessageId, or: $value.lastMessageId),
     lastPinTimestamp: data.get(#lastPinTimestamp, or: $value.lastPinTimestamp),
@@ -429,13 +401,10 @@ class _PublicThreadCopyWithImpl<$R, $Out>
       #permissionOverwrites,
       or: $value.permissionOverwrites,
     ),
-    position: data.get(#position, or: $value.position),
     rateLimitPerUser: data.get(#rateLimitPerUser, or: $value.rateLimitPerUser),
-    totalMessagesSent: data.get(
-      #totalMessagesSent,
-      or: $value.totalMessagesSent,
-    ),
     flags: data.get(#flags, or: $value.flags),
+    type: data.get(#type, or: $value.type),
+    position: data.get(#position, or: $value.position),
   );
 
   @override

@@ -362,11 +362,11 @@ class UserGuildMapper extends ClassMapperBase<UserGuild> {
     _$currentUserPermissions,
     key: r'current_user_permissions',
   );
-  static int? _$approximateMemberCount(UserGuild v) => v.approximateMemberCount;
-  static const Field<UserGuild, int> _f$approximateMemberCount = Field(
-    'approximateMemberCount',
-    _$approximateMemberCount,
-    key: r'approximate_member_count',
+  static int? _$memberCount(UserGuild v) => v.memberCount;
+  static const Field<UserGuild, int> _f$memberCount = Field(
+    'memberCount',
+    _$memberCount,
+    key: r'member_count',
   );
   static int? _$approximatePresenceCount(UserGuild v) =>
       v.approximatePresenceCount;
@@ -389,7 +389,7 @@ class UserGuildMapper extends ClassMapperBase<UserGuild> {
     #iconHash: _f$iconHash,
     #isOwnedByCurrentUser: _f$isOwnedByCurrentUser,
     #currentUserPermissions: _f$currentUserPermissions,
-    #approximateMemberCount: _f$approximateMemberCount,
+    #memberCount: _f$memberCount,
     #approximatePresenceCount: _f$approximatePresenceCount,
     #bannerHash: _f$bannerHash,
   };
@@ -401,7 +401,7 @@ class UserGuildMapper extends ClassMapperBase<UserGuild> {
       iconHash: data.dec(_f$iconHash),
       isOwnedByCurrentUser: data.dec(_f$isOwnedByCurrentUser),
       currentUserPermissions: data.dec(_f$currentUserPermissions),
-      approximateMemberCount: data.dec(_f$approximateMemberCount),
+      memberCount: data.dec(_f$memberCount),
       approximatePresenceCount: data.dec(_f$approximatePresenceCount),
       bannerHash: data.dec(_f$bannerHash),
     );
@@ -474,7 +474,7 @@ abstract class UserGuildCopyWith<$R, $In extends UserGuild, $Out>
     String? iconHash,
     bool? isOwnedByCurrentUser,
     Permissions? currentUserPermissions,
-    int? approximateMemberCount,
+    int? memberCount,
     int? approximatePresenceCount,
     String? bannerHash,
   });
@@ -504,7 +504,7 @@ class _UserGuildCopyWithImpl<$R, $Out>
     Object? iconHash = $none,
     Object? isOwnedByCurrentUser = $none,
     Object? currentUserPermissions = $none,
-    Object? approximateMemberCount = $none,
+    Object? memberCount = $none,
     Object? approximatePresenceCount = $none,
     Object? bannerHash = $none,
   }) => $apply(
@@ -516,8 +516,7 @@ class _UserGuildCopyWithImpl<$R, $Out>
         #isOwnedByCurrentUser: isOwnedByCurrentUser,
       if (currentUserPermissions != $none)
         #currentUserPermissions: currentUserPermissions,
-      if (approximateMemberCount != $none)
-        #approximateMemberCount: approximateMemberCount,
+      if (memberCount != $none) #memberCount: memberCount,
       if (approximatePresenceCount != $none)
         #approximatePresenceCount: approximatePresenceCount,
       if (bannerHash != $none) #bannerHash: bannerHash,
@@ -536,10 +535,7 @@ class _UserGuildCopyWithImpl<$R, $Out>
       #currentUserPermissions,
       or: $value.currentUserPermissions,
     ),
-    approximateMemberCount: data.get(
-      #approximateMemberCount,
-      or: $value.approximateMemberCount,
-    ),
+    memberCount: data.get(#memberCount, or: $value.memberCount),
     approximatePresenceCount: data.get(
       #approximatePresenceCount,
       or: $value.approximatePresenceCount,
@@ -770,11 +766,11 @@ class GuildMapper extends ClassMapperBase<Guild> {
     _$maxStageChannelUsers,
     key: r'max_stage_channel_users',
   );
-  static int? _$approximateMemberCount(Guild v) => v.approximateMemberCount;
-  static const Field<Guild, int> _f$approximateMemberCount = Field(
-    'approximateMemberCount',
-    _$approximateMemberCount,
-    key: r'approximate_member_count',
+  static int? _$memberCount(Guild v) => v.memberCount;
+  static const Field<Guild, int> _f$memberCount = Field(
+    'memberCount',
+    _$memberCount,
+    key: r'member_count',
   );
   static int? _$approximatePresenceCount(Guild v) => v.approximatePresenceCount;
   static const Field<Guild, int> _f$approximatePresenceCount = Field(
@@ -858,7 +854,7 @@ class GuildMapper extends ClassMapperBase<Guild> {
     #publicUpdatesChannelId: _f$publicUpdatesChannelId,
     #maxVideoChannelUsers: _f$maxVideoChannelUsers,
     #maxStageChannelUsers: _f$maxStageChannelUsers,
-    #approximateMemberCount: _f$approximateMemberCount,
+    #memberCount: _f$memberCount,
     #approximatePresenceCount: _f$approximatePresenceCount,
     #welcomeScreen: _f$welcomeScreen,
     #nsfwLevel: _f$nsfwLevel,
@@ -903,7 +899,7 @@ class GuildMapper extends ClassMapperBase<Guild> {
       publicUpdatesChannelId: data.dec(_f$publicUpdatesChannelId),
       maxVideoChannelUsers: data.dec(_f$maxVideoChannelUsers),
       maxStageChannelUsers: data.dec(_f$maxStageChannelUsers),
-      approximateMemberCount: data.dec(_f$approximateMemberCount),
+      memberCount: data.dec(_f$memberCount),
       approximatePresenceCount: data.dec(_f$approximatePresenceCount),
       welcomeScreen: data.dec(_f$welcomeScreen),
       nsfwLevel: data.dec(_f$nsfwLevel),
@@ -1019,7 +1015,7 @@ abstract class GuildCopyWith<$R, $In extends Guild, $Out>
     Snowflake? publicUpdatesChannelId,
     int? maxVideoChannelUsers,
     int? maxStageChannelUsers,
-    int? approximateMemberCount,
+    int? memberCount,
     int? approximatePresenceCount,
     WelcomeScreen? welcomeScreen,
     NsfwLevel? nsfwLevel,
@@ -1144,7 +1140,7 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
     Object? publicUpdatesChannelId = $none,
     Object? maxVideoChannelUsers = $none,
     Object? maxStageChannelUsers = $none,
-    Object? approximateMemberCount = $none,
+    Object? memberCount = $none,
     Object? approximatePresenceCount = $none,
     Object? welcomeScreen = $none,
     NsfwLevel? nsfwLevel,
@@ -1196,8 +1192,7 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
         #maxVideoChannelUsers: maxVideoChannelUsers,
       if (maxStageChannelUsers != $none)
         #maxStageChannelUsers: maxStageChannelUsers,
-      if (approximateMemberCount != $none)
-        #approximateMemberCount: approximateMemberCount,
+      if (memberCount != $none) #memberCount: memberCount,
       if (approximatePresenceCount != $none)
         #approximatePresenceCount: approximatePresenceCount,
       if (welcomeScreen != $none) #welcomeScreen: welcomeScreen,
@@ -1278,10 +1273,7 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
       #maxStageChannelUsers,
       or: $value.maxStageChannelUsers,
     ),
-    approximateMemberCount: data.get(
-      #approximateMemberCount,
-      or: $value.approximateMemberCount,
-    ),
+    memberCount: data.get(#memberCount, or: $value.memberCount),
     approximatePresenceCount: data.get(
       #approximatePresenceCount,
       or: $value.approximatePresenceCount,

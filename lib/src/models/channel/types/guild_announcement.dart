@@ -32,12 +32,6 @@ class GuildAnnouncementChannel extends TextChannel
   final bool nsfw;
 
   @override
-  final Snowflake? lastMessageId;
-
-  @override
-  final DateTime? lastPinTimestamp;
-
-  @override
   final String name;
 
   @override
@@ -49,12 +43,6 @@ class GuildAnnouncementChannel extends TextChannel
   @override
   final int position;
 
-  @override
-  final Duration? rateLimitPerUser;
-
-  @override
-  ChannelType get type => ChannelType.guildAnnouncement;
-
   /// {@macro guild_announcement_channel}
   /// @nodoc
   GuildAnnouncementChannel({
@@ -64,12 +52,13 @@ class GuildAnnouncementChannel extends TextChannel
     required this.defaultThreadRateLimitPerUser,
     required this.guildId,
     this.nsfw = false,
-    required this.lastMessageId,
-    required this.lastPinTimestamp,
+    required super.lastMessageId,
+    required super.lastPinTimestamp,
     required this.name,
     required this.parentId,
     required this.permissionOverwrites,
     required this.position,
-    required this.rateLimitPerUser,
+    required super.rateLimitPerUser,
+    required super.type,
   });
 }

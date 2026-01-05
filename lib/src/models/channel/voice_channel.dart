@@ -8,22 +8,32 @@ part 'voice_channel.mapper.dart';
 @MappableClass()
 abstract class VoiceChannel with VoiceChannelMappable implements Channel {
   @override
-  Snowflake get id;
+  final Snowflake id;
 
-  /// @nodoc
-  VoiceChannel({required Snowflake id});
+  @override
+  final ChannelType type;
 
   /// The bitrate of the channel in bits/s.
-  int get bitrate;
+  final int bitrate;
 
   /// The maximum number of users that can join this channel at once.
-  int? get userLimit;
+  final int? userLimit;
 
   /// The ID of the voice region for this channel, or automatic if `null`.
-  String? get rtcRegion;
+  final String? rtcRegion;
 
   /// The [VideoQualityMode] for cameras in this channel.
-  VideoQualityMode? get videoQualityMode;
+  final VideoQualityMode? videoQualityMode;
+
+  /// @nodoc
+  const VoiceChannel({
+    required this.id,
+    required this.type,
+    required this.bitrate,
+    required this.userLimit,
+    required this.rtcRegion,
+    required this.videoQualityMode,
+  });
 }
 
 /// The quality mode of cameras in a [VoiceChannel].

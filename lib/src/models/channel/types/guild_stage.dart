@@ -25,12 +25,6 @@ class GuildStageChannel extends TextChannel
   final bool nsfw;
 
   @override
-  final Snowflake? lastMessageId;
-
-  @override
-  final DateTime? lastPinTimestamp;
-
-  @override
   final String name;
 
   @override
@@ -43,9 +37,6 @@ class GuildStageChannel extends TextChannel
   final int position;
 
   @override
-  final Duration? rateLimitPerUser;
-
-  @override
   final String? rtcRegion;
 
   @override
@@ -54,9 +45,6 @@ class GuildStageChannel extends TextChannel
   @override
   final VideoQualityMode? videoQualityMode;
 
-  @override
-  ChannelType get type => ChannelType.guildStageVoice;
-
   /// {@macro guild_stage_channel}
   /// @nodoc
   GuildStageChannel({
@@ -64,15 +52,16 @@ class GuildStageChannel extends TextChannel
     required this.bitrate,
     required this.guildId,
     this.nsfw = false,
-    required this.lastMessageId,
-    required this.lastPinTimestamp,
+    required super.lastMessageId,
+    required super.lastPinTimestamp,
     required this.name,
     required this.parentId,
     required this.permissionOverwrites,
     required this.position,
-    required this.rateLimitPerUser,
+    required super.rateLimitPerUser,
     required this.rtcRegion,
     required this.userLimit,
     this.videoQualityMode,
+    required super.type,
   });
 }

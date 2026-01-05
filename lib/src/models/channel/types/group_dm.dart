@@ -30,20 +30,11 @@ class GroupDmChannel extends TextChannel with GroupDmChannelMappable {
   final bool managed;
 
   @override
-  final Snowflake? lastMessageId;
-
-  @override
-  final DateTime? lastPinTimestamp;
-
-  @override
-  final Duration? rateLimitPerUser;
-
-  @override
   ChannelType get type => ChannelType.groupDm;
 
   /// {@macro group_dm_channel}
   /// @nodoc
-  GroupDmChannel({
+  const GroupDmChannel({
     required super.id,
     required this.name,
     required this.recipients,
@@ -51,8 +42,9 @@ class GroupDmChannel extends TextChannel with GroupDmChannelMappable {
     required this.ownerId,
     required this.applicationId,
     required this.managed,
-    required this.lastMessageId,
-    required this.lastPinTimestamp,
-    required this.rateLimitPerUser,
+    required super.lastMessageId,
+    required super.lastPinTimestamp,
+    required super.rateLimitPerUser,
+    required super.type,
   });
 }

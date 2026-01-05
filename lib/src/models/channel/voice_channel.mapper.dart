@@ -62,6 +62,8 @@ class VoiceChannelMapper extends SubClassMapperBase<VoiceChannel> {
       MapperContainer.globals.use(_instance = VoiceChannelMapper._());
       ChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
+      ChannelTypeMapper.ensureInitialized();
+      VideoQualityModeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -71,9 +73,39 @@ class VoiceChannelMapper extends SubClassMapperBase<VoiceChannel> {
 
   static Snowflake _$id(VoiceChannel v) => v.id;
   static const Field<VoiceChannel, Snowflake> _f$id = Field('id', _$id);
+  static ChannelType _$type(VoiceChannel v) => v.type;
+  static const Field<VoiceChannel, ChannelType> _f$type = Field('type', _$type);
+  static int _$bitrate(VoiceChannel v) => v.bitrate;
+  static const Field<VoiceChannel, int> _f$bitrate = Field(
+    'bitrate',
+    _$bitrate,
+  );
+  static int? _$userLimit(VoiceChannel v) => v.userLimit;
+  static const Field<VoiceChannel, int> _f$userLimit = Field(
+    'userLimit',
+    _$userLimit,
+    key: r'user_limit',
+  );
+  static String? _$rtcRegion(VoiceChannel v) => v.rtcRegion;
+  static const Field<VoiceChannel, String> _f$rtcRegion = Field(
+    'rtcRegion',
+    _$rtcRegion,
+    key: r'rtc_region',
+  );
+  static VideoQualityMode? _$videoQualityMode(VoiceChannel v) =>
+      v.videoQualityMode;
+  static const Field<VoiceChannel, VideoQualityMode> _f$videoQualityMode =
+      Field('videoQualityMode', _$videoQualityMode, key: r'video_quality_mode');
 
   @override
-  final MappableFields<VoiceChannel> fields = const {#id: _f$id};
+  final MappableFields<VoiceChannel> fields = const {
+    #id: _f$id,
+    #type: _f$type,
+    #bitrate: _f$bitrate,
+    #userLimit: _f$userLimit,
+    #rtcRegion: _f$rtcRegion,
+    #videoQualityMode: _f$videoQualityMode,
+  };
 
   @override
   final String discriminatorKey = 'type';
@@ -108,7 +140,14 @@ abstract class VoiceChannelCopyWith<$R, $In extends VoiceChannel, $Out>
     implements ChannelCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   @override
-  $R call({Snowflake? id});
+  $R call({
+    Snowflake? id,
+    ChannelType? type,
+    int? bitrate,
+    int? userLimit,
+    String? rtcRegion,
+    VideoQualityMode? videoQualityMode,
+  });
   VoiceChannelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 

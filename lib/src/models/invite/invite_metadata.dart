@@ -34,7 +34,7 @@ class InviteWithMetadata extends Invite with InviteWithMetadataMappable {
     required super.targetType,
     required super.targetUser,
     required super.targetApplication,
-    required super.approximateMemberCount,
+    required super.memberCount,
     required super.approximatePresenceCount,
     required super.expiresAt,
     required super.guildScheduledEvent,

@@ -14,11 +14,11 @@ abstract class Channel with ChannelMappable {
   final Snowflake id;
 
   /// The type of this channel.
-  ChannelType get type;
+  final ChannelType type;
 
   /// {@macro channel}
   /// @nodoc
-  Channel({required this.id});
+  const Channel({required this.id, required this.type});
 }
 
 /// The type of a channel.

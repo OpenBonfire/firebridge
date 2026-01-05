@@ -54,12 +54,11 @@ class GuildPreviewMapper extends ClassMapperBase<GuildPreview> {
     'features',
     _$features,
   );
-  static int _$approximateMemberCount(GuildPreview v) =>
-      v.approximateMemberCount;
-  static const Field<GuildPreview, int> _f$approximateMemberCount = Field(
-    'approximateMemberCount',
-    _$approximateMemberCount,
-    key: r'approximate_member_count',
+  static int _$memberCount(GuildPreview v) => v.memberCount;
+  static const Field<GuildPreview, int> _f$memberCount = Field(
+    'memberCount',
+    _$memberCount,
+    key: r'member_count',
   );
   static int _$approximatePresenceCount(GuildPreview v) =>
       v.approximatePresenceCount;
@@ -89,7 +88,7 @@ class GuildPreviewMapper extends ClassMapperBase<GuildPreview> {
     #discoverySplashHash: _f$discoverySplashHash,
     #emojiList: _f$emojiList,
     #features: _f$features,
-    #approximateMemberCount: _f$approximateMemberCount,
+    #memberCount: _f$memberCount,
     #approximatePresenceCount: _f$approximatePresenceCount,
     #description: _f$description,
     #stickerList: _f$stickerList,
@@ -104,7 +103,7 @@ class GuildPreviewMapper extends ClassMapperBase<GuildPreview> {
       discoverySplashHash: data.dec(_f$discoverySplashHash),
       emojiList: data.dec(_f$emojiList),
       features: data.dec(_f$features),
-      approximateMemberCount: data.dec(_f$approximateMemberCount),
+      memberCount: data.dec(_f$memberCount),
       approximatePresenceCount: data.dec(_f$approximatePresenceCount),
       description: data.dec(_f$description),
       stickerList: data.dec(_f$stickerList),
@@ -190,7 +189,7 @@ abstract class GuildPreviewCopyWith<$R, $In extends GuildPreview, $Out>
     String? discoverySplashHash,
     List<Emoji>? emojiList,
     GuildFeatures? features,
-    int? approximateMemberCount,
+    int? memberCount,
     int? approximatePresenceCount,
     String? description,
     List<GuildSticker>? stickerList,
@@ -239,7 +238,7 @@ class _GuildPreviewCopyWithImpl<$R, $Out>
     Object? discoverySplashHash = $none,
     List<Emoji>? emojiList,
     GuildFeatures? features,
-    int? approximateMemberCount,
+    int? memberCount,
     int? approximatePresenceCount,
     Object? description = $none,
     List<GuildSticker>? stickerList,
@@ -253,8 +252,7 @@ class _GuildPreviewCopyWithImpl<$R, $Out>
         #discoverySplashHash: discoverySplashHash,
       if (emojiList != null) #emojiList: emojiList,
       if (features != null) #features: features,
-      if (approximateMemberCount != null)
-        #approximateMemberCount: approximateMemberCount,
+      if (memberCount != null) #memberCount: memberCount,
       if (approximatePresenceCount != null)
         #approximatePresenceCount: approximatePresenceCount,
       if (description != $none) #description: description,
@@ -273,10 +271,7 @@ class _GuildPreviewCopyWithImpl<$R, $Out>
     ),
     emojiList: data.get(#emojiList, or: $value.emojiList),
     features: data.get(#features, or: $value.features),
-    approximateMemberCount: data.get(
-      #approximateMemberCount,
-      or: $value.approximateMemberCount,
-    ),
+    memberCount: data.get(#memberCount, or: $value.memberCount),
     approximatePresenceCount: data.get(
       #approximatePresenceCount,
       or: $value.approximatePresenceCount,

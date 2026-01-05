@@ -16,6 +16,7 @@ class DirectoryChannelMapper extends SubClassMapperBase<DirectoryChannel> {
       MapperContainer.globals.use(_instance = DirectoryChannelMapper._());
       ChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
+      ChannelTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -25,9 +26,17 @@ class DirectoryChannelMapper extends SubClassMapperBase<DirectoryChannel> {
 
   static Snowflake _$id(DirectoryChannel v) => v.id;
   static const Field<DirectoryChannel, Snowflake> _f$id = Field('id', _$id);
+  static ChannelType _$type(DirectoryChannel v) => v.type;
+  static const Field<DirectoryChannel, ChannelType> _f$type = Field(
+    'type',
+    _$type,
+  );
 
   @override
-  final MappableFields<DirectoryChannel> fields = const {#id: _f$id};
+  final MappableFields<DirectoryChannel> fields = const {
+    #id: _f$id,
+    #type: _f$type,
+  };
 
   @override
   final String discriminatorKey = 'type';
@@ -37,7 +46,7 @@ class DirectoryChannelMapper extends SubClassMapperBase<DirectoryChannel> {
   late final ClassMapperBase superMapper = ChannelMapper.ensureInitialized();
 
   static DirectoryChannel _instantiate(DecodingData data) {
-    return DirectoryChannel(id: data.dec(_f$id));
+    return DirectoryChannel(id: data.dec(_f$id), type: data.dec(_f$type));
   }
 
   @override
@@ -105,7 +114,7 @@ abstract class DirectoryChannelCopyWith<$R, $In extends DirectoryChannel, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   @override
-  $R call({Snowflake? id});
+  $R call({Snowflake? id, ChannelType? type});
   DirectoryChannelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -123,11 +132,14 @@ class _DirectoryChannelCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
-  $R call({Snowflake? id}) =>
-      $apply(FieldCopyWithData({if (id != null) #id: id}));
+  $R call({Snowflake? id, ChannelType? type}) => $apply(
+    FieldCopyWithData({if (id != null) #id: id, if (type != null) #type: type}),
+  );
   @override
-  DirectoryChannel $make(CopyWithData data) =>
-      DirectoryChannel(id: data.get(#id, or: $value.id));
+  DirectoryChannel $make(CopyWithData data) => DirectoryChannel(
+    id: data.get(#id, or: $value.id),
+    type: data.get(#type, or: $value.type),
+  );
 
   @override
   DirectoryChannelCopyWith<$R2, DirectoryChannel, $Out2> $chain<$R2, $Out2>(

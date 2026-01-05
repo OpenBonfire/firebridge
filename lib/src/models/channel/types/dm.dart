@@ -15,24 +15,16 @@ class DmChannel extends TextChannel with DmChannelMappable {
   final List<User> recipients;
 
   @override
-  final Snowflake? lastMessageId;
-
-  @override
-  final DateTime? lastPinTimestamp;
-
-  @override
-  final Duration? rateLimitPerUser;
-
-  @override
   ChannelType get type => ChannelType.dm;
 
   /// {@macro dm_channel}
   /// @nodoc
-  DmChannel({
+  const DmChannel({
     required super.id,
     required this.recipients,
-    required this.lastMessageId,
-    required this.lastPinTimestamp,
-    required this.rateLimitPerUser,
+    required super.lastMessageId,
+    required super.lastPinTimestamp,
+    required super.rateLimitPerUser,
+    required super.type,
   });
 }

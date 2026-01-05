@@ -35,12 +35,6 @@ class GuildTextChannel extends TextChannel
   final bool nsfw;
 
   @override
-  final Snowflake? lastMessageId;
-
-  @override
-  final DateTime? lastPinTimestamp;
-
-  @override
   final Snowflake? parentId;
 
   @override
@@ -48,12 +42,6 @@ class GuildTextChannel extends TextChannel
 
   @override
   final int position;
-
-  @override
-  final Duration? rateLimitPerUser;
-
-  @override
-  ChannelType get type => ChannelType.guildText;
 
   /// {@macro guild_text_channel}
   /// @nodoc
@@ -65,11 +53,12 @@ class GuildTextChannel extends TextChannel
     required this.defaultThreadRateLimitPerUser,
     required this.guildId,
     this.nsfw = false,
-    required this.lastMessageId,
-    required this.lastPinTimestamp,
+    required super.lastMessageId,
+    required super.lastPinTimestamp,
     required this.parentId,
     required this.permissionOverwrites,
     required this.position,
-    required this.rateLimitPerUser,
+    required super.rateLimitPerUser,
+    required super.type,
   });
 }

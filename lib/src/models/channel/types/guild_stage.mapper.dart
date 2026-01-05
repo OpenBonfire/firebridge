@@ -18,6 +18,7 @@ class GuildStageChannelMapper extends SubClassMapperBase<GuildStageChannel> {
       SnowflakeMapper.ensureInitialized();
       PermissionOverwriteMapper.ensureInitialized();
       VideoQualityModeMapper.ensureInitialized();
+      ChannelTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -108,6 +109,11 @@ class GuildStageChannelMapper extends SubClassMapperBase<GuildStageChannel> {
         key: r'video_quality_mode',
         opt: true,
       );
+  static ChannelType _$type(GuildStageChannel v) => v.type;
+  static const Field<GuildStageChannel, ChannelType> _f$type = Field(
+    'type',
+    _$type,
+  );
 
   @override
   final MappableFields<GuildStageChannel> fields = const {
@@ -125,6 +131,7 @@ class GuildStageChannelMapper extends SubClassMapperBase<GuildStageChannel> {
     #rtcRegion: _f$rtcRegion,
     #userLimit: _f$userLimit,
     #videoQualityMode: _f$videoQualityMode,
+    #type: _f$type,
   };
 
   @override
@@ -151,6 +158,7 @@ class GuildStageChannelMapper extends SubClassMapperBase<GuildStageChannel> {
       rtcRegion: data.dec(_f$rtcRegion),
       userLimit: data.dec(_f$userLimit),
       videoQualityMode: data.dec(_f$videoQualityMode),
+      type: data.dec(_f$type),
     );
   }
 
@@ -231,6 +239,7 @@ abstract class GuildStageChannelCopyWith<
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
+  @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
   ListCopyWith<
@@ -255,6 +264,7 @@ abstract class GuildStageChannelCopyWith<
     String? rtcRegion,
     int? userLimit,
     VideoQualityMode? videoQualityMode,
+    ChannelType? type,
   });
   GuildStageChannelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -308,6 +318,7 @@ class _GuildStageChannelCopyWithImpl<$R, $Out>
     Object? rtcRegion = $none,
     Object? userLimit = $none,
     Object? videoQualityMode = $none,
+    ChannelType? type,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
@@ -325,6 +336,7 @@ class _GuildStageChannelCopyWithImpl<$R, $Out>
       if (rtcRegion != $none) #rtcRegion: rtcRegion,
       if (userLimit != $none) #userLimit: userLimit,
       if (videoQualityMode != $none) #videoQualityMode: videoQualityMode,
+      if (type != null) #type: type,
     }),
   );
   @override
@@ -346,6 +358,7 @@ class _GuildStageChannelCopyWithImpl<$R, $Out>
     rtcRegion: data.get(#rtcRegion, or: $value.rtcRegion),
     userLimit: data.get(#userLimit, or: $value.userLimit),
     videoQualityMode: data.get(#videoQualityMode, or: $value.videoQualityMode),
+    type: data.get(#type, or: $value.type),
   );
 
   @override

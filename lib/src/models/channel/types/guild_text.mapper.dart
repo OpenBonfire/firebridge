@@ -17,6 +17,7 @@ class GuildTextChannelMapper extends SubClassMapperBase<GuildTextChannel> {
       TextChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       PermissionOverwriteMapper.ensureInitialized();
+      ChannelTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -100,6 +101,11 @@ class GuildTextChannelMapper extends SubClassMapperBase<GuildTextChannel> {
     _$rateLimitPerUser,
     key: r'rate_limit_per_user',
   );
+  static ChannelType _$type(GuildTextChannel v) => v.type;
+  static const Field<GuildTextChannel, ChannelType> _f$type = Field(
+    'type',
+    _$type,
+  );
 
   @override
   final MappableFields<GuildTextChannel> fields = const {
@@ -116,6 +122,7 @@ class GuildTextChannelMapper extends SubClassMapperBase<GuildTextChannel> {
     #permissionOverwrites: _f$permissionOverwrites,
     #position: _f$position,
     #rateLimitPerUser: _f$rateLimitPerUser,
+    #type: _f$type,
   };
 
   @override
@@ -141,6 +148,7 @@ class GuildTextChannelMapper extends SubClassMapperBase<GuildTextChannel> {
       permissionOverwrites: data.dec(_f$permissionOverwrites),
       position: data.dec(_f$position),
       rateLimitPerUser: data.dec(_f$rateLimitPerUser),
+      type: data.dec(_f$type),
     );
   }
 
@@ -212,6 +220,7 @@ abstract class GuildTextChannelCopyWith<$R, $In extends GuildTextChannel, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
+  @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
   ListCopyWith<
@@ -235,6 +244,7 @@ abstract class GuildTextChannelCopyWith<$R, $In extends GuildTextChannel, $Out>
     List<PermissionOverwrite>? permissionOverwrites,
     int? position,
     Duration? rateLimitPerUser,
+    ChannelType? type,
   });
   GuildTextChannelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -287,6 +297,7 @@ class _GuildTextChannelCopyWithImpl<$R, $Out>
     List<PermissionOverwrite>? permissionOverwrites,
     int? position,
     Object? rateLimitPerUser = $none,
+    ChannelType? type,
   }) => $apply(
     FieldCopyWithData({
       if (name != null) #name: name,
@@ -305,6 +316,7 @@ class _GuildTextChannelCopyWithImpl<$R, $Out>
         #permissionOverwrites: permissionOverwrites,
       if (position != null) #position: position,
       if (rateLimitPerUser != $none) #rateLimitPerUser: rateLimitPerUser,
+      if (type != null) #type: type,
     }),
   );
   @override
@@ -331,6 +343,7 @@ class _GuildTextChannelCopyWithImpl<$R, $Out>
     ),
     position: data.get(#position, or: $value.position),
     rateLimitPerUser: data.get(#rateLimitPerUser, or: $value.rateLimitPerUser),
+    type: data.get(#type, or: $value.type),
   );
 
   @override

@@ -74,12 +74,11 @@ class InviteWithMetadataMapper extends ClassMapperBase<InviteWithMetadata> {
         _$targetApplication,
         key: r'target_application',
       );
-  static int? _$approximateMemberCount(InviteWithMetadata v) =>
-      v.approximateMemberCount;
-  static const Field<InviteWithMetadata, int> _f$approximateMemberCount = Field(
-    'approximateMemberCount',
-    _$approximateMemberCount,
-    key: r'approximate_member_count',
+  static int? _$memberCount(InviteWithMetadata v) => v.memberCount;
+  static const Field<InviteWithMetadata, int> _f$memberCount = Field(
+    'memberCount',
+    _$memberCount,
+    key: r'member_count',
   );
   static int? _$approximatePresenceCount(InviteWithMetadata v) =>
       v.approximatePresenceCount;
@@ -144,7 +143,7 @@ class InviteWithMetadataMapper extends ClassMapperBase<InviteWithMetadata> {
     #targetType: _f$targetType,
     #targetUser: _f$targetUser,
     #targetApplication: _f$targetApplication,
-    #approximateMemberCount: _f$approximateMemberCount,
+    #memberCount: _f$memberCount,
     #approximatePresenceCount: _f$approximatePresenceCount,
     #expiresAt: _f$expiresAt,
     #guildScheduledEvent: _f$guildScheduledEvent,
@@ -166,7 +165,7 @@ class InviteWithMetadataMapper extends ClassMapperBase<InviteWithMetadata> {
       targetType: data.dec(_f$targetType),
       targetUser: data.dec(_f$targetUser),
       targetApplication: data.dec(_f$targetApplication),
-      approximateMemberCount: data.dec(_f$approximateMemberCount),
+      memberCount: data.dec(_f$memberCount),
       approximatePresenceCount: data.dec(_f$approximatePresenceCount),
       expiresAt: data.dec(_f$expiresAt),
       guildScheduledEvent: data.dec(_f$guildScheduledEvent),
@@ -275,7 +274,7 @@ abstract class InviteWithMetadataCopyWith<
     TargetType? targetType,
     User? targetUser,
     Snowflake? targetApplication,
-    int? approximateMemberCount,
+    int? memberCount,
     int? approximatePresenceCount,
     DateTime? expiresAt,
     ScheduledEvent? guildScheduledEvent,
@@ -334,7 +333,7 @@ class _InviteWithMetadataCopyWithImpl<$R, $Out>
     Object? targetType = $none,
     Object? targetUser = $none,
     Object? targetApplication = $none,
-    Object? approximateMemberCount = $none,
+    Object? memberCount = $none,
     Object? approximatePresenceCount = $none,
     Object? expiresAt = $none,
     Object? guildScheduledEvent = $none,
@@ -354,8 +353,7 @@ class _InviteWithMetadataCopyWithImpl<$R, $Out>
       if (targetType != $none) #targetType: targetType,
       if (targetUser != $none) #targetUser: targetUser,
       if (targetApplication != $none) #targetApplication: targetApplication,
-      if (approximateMemberCount != $none)
-        #approximateMemberCount: approximateMemberCount,
+      if (memberCount != $none) #memberCount: memberCount,
       if (approximatePresenceCount != $none)
         #approximatePresenceCount: approximatePresenceCount,
       if (expiresAt != $none) #expiresAt: expiresAt,
@@ -382,10 +380,7 @@ class _InviteWithMetadataCopyWithImpl<$R, $Out>
       #targetApplication,
       or: $value.targetApplication,
     ),
-    approximateMemberCount: data.get(
-      #approximateMemberCount,
-      or: $value.approximateMemberCount,
-    ),
+    memberCount: data.get(#memberCount, or: $value.memberCount),
     approximatePresenceCount: data.get(
       #approximatePresenceCount,
       or: $value.approximatePresenceCount,

@@ -17,6 +17,7 @@ class DmChannelMapper extends SubClassMapperBase<DmChannel> {
       TextChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
+      ChannelTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -49,6 +50,8 @@ class DmChannelMapper extends SubClassMapperBase<DmChannel> {
     _$rateLimitPerUser,
     key: r'rate_limit_per_user',
   );
+  static ChannelType _$type(DmChannel v) => v.type;
+  static const Field<DmChannel, ChannelType> _f$type = Field('type', _$type);
 
   @override
   final MappableFields<DmChannel> fields = const {
@@ -57,6 +60,7 @@ class DmChannelMapper extends SubClassMapperBase<DmChannel> {
     #lastMessageId: _f$lastMessageId,
     #lastPinTimestamp: _f$lastPinTimestamp,
     #rateLimitPerUser: _f$rateLimitPerUser,
+    #type: _f$type,
   };
 
   @override
@@ -74,6 +78,7 @@ class DmChannelMapper extends SubClassMapperBase<DmChannel> {
       lastMessageId: data.dec(_f$lastMessageId),
       lastPinTimestamp: data.dec(_f$lastPinTimestamp),
       rateLimitPerUser: data.dec(_f$rateLimitPerUser),
+      type: data.dec(_f$type),
     );
   }
 
@@ -139,6 +144,7 @@ abstract class DmChannelCopyWith<$R, $In extends DmChannel, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
   ListCopyWith<$R, User, UserCopyWith<$R, User, User>> get recipients;
+  @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId;
   @override
   $R call({
@@ -147,6 +153,7 @@ abstract class DmChannelCopyWith<$R, $In extends DmChannel, $Out>
     Snowflake? lastMessageId,
     DateTime? lastPinTimestamp,
     Duration? rateLimitPerUser,
+    ChannelType? type,
   });
   DmChannelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -179,6 +186,7 @@ class _DmChannelCopyWithImpl<$R, $Out>
     Object? lastMessageId = $none,
     Object? lastPinTimestamp = $none,
     Object? rateLimitPerUser = $none,
+    ChannelType? type,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
@@ -186,6 +194,7 @@ class _DmChannelCopyWithImpl<$R, $Out>
       if (lastMessageId != $none) #lastMessageId: lastMessageId,
       if (lastPinTimestamp != $none) #lastPinTimestamp: lastPinTimestamp,
       if (rateLimitPerUser != $none) #rateLimitPerUser: rateLimitPerUser,
+      if (type != null) #type: type,
     }),
   );
   @override
@@ -195,6 +204,7 @@ class _DmChannelCopyWithImpl<$R, $Out>
     lastMessageId: data.get(#lastMessageId, or: $value.lastMessageId),
     lastPinTimestamp: data.get(#lastPinTimestamp, or: $value.lastPinTimestamp),
     rateLimitPerUser: data.get(#rateLimitPerUser, or: $value.rateLimitPerUser),
+    type: data.get(#type, or: $value.type),
   );
 
   @override

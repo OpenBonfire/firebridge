@@ -47,7 +47,7 @@ class Invite with ToStringHelper, InviteMappable {
   /// {@template invite_approximate_member_count}
   /// This is only available when [InviteManager.fetch] is called with `withCounts` set to `true`.
   /// {@endtemplate}
-  final int? approximateMemberCount;
+  final int? memberCount;
 
   /// The approximate count of online members in the [Guild] this invite is for.
   ///
@@ -76,7 +76,7 @@ class Invite with ToStringHelper, InviteMappable {
     required this.targetType,
     required this.targetUser,
     required this.targetApplication,
-    required this.approximateMemberCount,
+    required this.memberCount,
     required this.approximatePresenceCount,
     required this.expiresAt,
     required this.guildScheduledEvent,

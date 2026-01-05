@@ -37,7 +37,7 @@ class GuildCategory extends Channel
 
   /// {@macro guild_category}
   /// @nodoc
-  GuildCategory({
+  const GuildCategory({
     required super.id,
     required this.guildId,
     this.nsfw = false,
@@ -45,5 +45,6 @@ class GuildCategory extends Channel
     required this.parentId,
     required this.permissionOverwrites,
     required this.position,
+    required super.type,
   });
 }

@@ -17,6 +17,7 @@ class GuildCategoryMapper extends SubClassMapperBase<GuildCategory> {
       ChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       PermissionOverwriteMapper.ensureInitialized();
+      ChannelTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -60,6 +61,11 @@ class GuildCategoryMapper extends SubClassMapperBase<GuildCategory> {
     'position',
     _$position,
   );
+  static ChannelType _$type(GuildCategory v) => v.type;
+  static const Field<GuildCategory, ChannelType> _f$type = Field(
+    'type',
+    _$type,
+  );
 
   @override
   final MappableFields<GuildCategory> fields = const {
@@ -70,6 +76,7 @@ class GuildCategoryMapper extends SubClassMapperBase<GuildCategory> {
     #parentId: _f$parentId,
     #permissionOverwrites: _f$permissionOverwrites,
     #position: _f$position,
+    #type: _f$type,
   };
 
   @override
@@ -88,6 +95,7 @@ class GuildCategoryMapper extends SubClassMapperBase<GuildCategory> {
       parentId: data.dec(_f$parentId),
       permissionOverwrites: data.dec(_f$permissionOverwrites),
       position: data.dec(_f$position),
+      type: data.dec(_f$type),
     );
   }
 
@@ -174,6 +182,7 @@ abstract class GuildCategoryCopyWith<$R, $In extends GuildCategory, $Out>
     Snowflake? parentId,
     List<PermissionOverwrite>? permissionOverwrites,
     int? position,
+    ChannelType? type,
   });
   GuildCategoryCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -215,6 +224,7 @@ class _GuildCategoryCopyWithImpl<$R, $Out>
     Object? parentId = $none,
     List<PermissionOverwrite>? permissionOverwrites,
     int? position,
+    ChannelType? type,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
@@ -225,6 +235,7 @@ class _GuildCategoryCopyWithImpl<$R, $Out>
       if (permissionOverwrites != null)
         #permissionOverwrites: permissionOverwrites,
       if (position != null) #position: position,
+      if (type != null) #type: type,
     }),
   );
   @override
@@ -239,6 +250,7 @@ class _GuildCategoryCopyWithImpl<$R, $Out>
       or: $value.permissionOverwrites,
     ),
     position: data.get(#position, or: $value.position),
+    type: data.get(#type, or: $value.type),
   );
 
   @override

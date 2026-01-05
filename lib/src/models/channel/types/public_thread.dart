@@ -11,92 +11,25 @@ part 'public_thread.mapper.dart';
 /// {@endtemplate}
 @MappableClass(discriminatorValue: 11)
 class PublicThread extends Thread with PublicThreadMappable {
-  @override
-  final List<Snowflake>? appliedTags;
-
-  @override
-  final int approximateMemberCount;
-
-  @override
-  final DateTime archiveTimestamp;
-
-  @override
-  final Duration autoArchiveDuration;
-
-  @override
-  final DateTime createdAt;
-
-  @override
-  final Snowflake guildId;
-
-  @override
-  final bool archived;
-
-  @override
-  final bool locked;
-
-  @override
-  final bool nsfw;
-
-  @override
-  final Snowflake? lastMessageId;
-
-  @override
-  final DateTime? lastPinTimestamp;
-
-  @override
-  final int messageCount;
-
-  @override
-  final String name;
-
-  @override
-  final Snowflake ownerId;
-
-  @override
-  final Snowflake? parentId;
-
-  @override
-  final List<PermissionOverwrite> permissionOverwrites;
-
-  @override
-  final int position;
-
-  @override
-  final Duration? rateLimitPerUser;
-
-  @override
-  final int totalMessagesSent;
-
-  @override
-  final ChannelFlags? flags;
-
-  @override
-  ChannelType get type => ChannelType.publicThread;
-
   /// {@macro public_thread}
   /// @nodoc
-  PublicThread({
-    required super.id,
-    required this.appliedTags,
-    required this.approximateMemberCount,
-    required this.archiveTimestamp,
-    required this.autoArchiveDuration,
-    required this.createdAt,
-    required this.guildId,
-    required this.archived,
-    required this.locked,
-    this.nsfw = false,
-    required this.lastMessageId,
-    required this.lastPinTimestamp,
-    required this.messageCount,
-    required this.name,
-    required this.ownerId,
-    required this.parentId,
-    required this.permissionOverwrites,
-    required this.position,
-    required this.rateLimitPerUser,
-    required this.totalMessagesSent,
-    required this.flags,
-  });
+  PublicThread(
+      {required super.id,
+      required super.appliedTags,
+      required super.memberCount,
+      required super.archiveTimestamp,
+      required super.autoArchiveDuration,
+      required super.guildId,
+      super.nsfw,
+      required super.lastMessageId,
+      required super.lastPinTimestamp,
+      required super.messageCount,
+      required super.name,
+      required super.ownerId,
+      required super.parentId,
+      super.permissionOverwrites,
+      required super.rateLimitPerUser,
+      required super.flags,
+      required super.type,
+      super.position});
 }

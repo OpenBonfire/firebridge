@@ -16,6 +16,7 @@ class TextChannelMapper extends SubClassMapperBase<TextChannel> {
       MapperContainer.globals.use(_instance = TextChannelMapper._());
       ChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
+      ChannelTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -25,9 +26,38 @@ class TextChannelMapper extends SubClassMapperBase<TextChannel> {
 
   static Snowflake _$id(TextChannel v) => v.id;
   static const Field<TextChannel, Snowflake> _f$id = Field('id', _$id);
+  static ChannelType _$type(TextChannel v) => v.type;
+  static const Field<TextChannel, ChannelType> _f$type = Field('type', _$type);
+  static Snowflake? _$lastMessageId(TextChannel v) => v.lastMessageId;
+  static const Field<TextChannel, Snowflake> _f$lastMessageId = Field(
+    'lastMessageId',
+    _$lastMessageId,
+    key: r'last_message_id',
+    opt: true,
+  );
+  static Duration? _$rateLimitPerUser(TextChannel v) => v.rateLimitPerUser;
+  static const Field<TextChannel, Duration> _f$rateLimitPerUser = Field(
+    'rateLimitPerUser',
+    _$rateLimitPerUser,
+    key: r'rate_limit_per_user',
+    opt: true,
+  );
+  static DateTime? _$lastPinTimestamp(TextChannel v) => v.lastPinTimestamp;
+  static const Field<TextChannel, DateTime> _f$lastPinTimestamp = Field(
+    'lastPinTimestamp',
+    _$lastPinTimestamp,
+    key: r'last_pin_timestamp',
+    opt: true,
+  );
 
   @override
-  final MappableFields<TextChannel> fields = const {#id: _f$id};
+  final MappableFields<TextChannel> fields = const {
+    #id: _f$id,
+    #type: _f$type,
+    #lastMessageId: _f$lastMessageId,
+    #rateLimitPerUser: _f$rateLimitPerUser,
+    #lastPinTimestamp: _f$lastPinTimestamp,
+  };
 
   @override
   final String discriminatorKey = 'type';
@@ -62,8 +92,15 @@ abstract class TextChannelCopyWith<$R, $In extends TextChannel, $Out>
     implements ChannelCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId;
   @override
-  $R call({Snowflake? id});
+  $R call({
+    Snowflake? id,
+    ChannelType? type,
+    Snowflake? lastMessageId,
+    Duration? rateLimitPerUser,
+    DateTime? lastPinTimestamp,
+  });
   TextChannelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 

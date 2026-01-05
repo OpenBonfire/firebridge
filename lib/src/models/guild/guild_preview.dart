@@ -32,7 +32,7 @@ class GuildPreview with GuildPreviewMappable {
   final GuildFeatures features;
 
   /// An approximate number of members in the guild.
-  final int approximateMemberCount;
+  final int memberCount;
 
   /// An approximate number of presences in the guild.
   final int approximatePresenceCount;
@@ -53,7 +53,7 @@ class GuildPreview with GuildPreviewMappable {
     required this.discoverySplashHash,
     required this.emojiList,
     required this.features,
-    required this.approximateMemberCount,
+    required this.memberCount,
     required this.approximatePresenceCount,
     required this.description,
     required this.stickerList,

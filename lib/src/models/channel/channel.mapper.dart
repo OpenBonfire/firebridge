@@ -105,6 +105,7 @@ class ChannelMapper extends ClassMapperBase<Channel> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ChannelMapper._());
       SnowflakeMapper.ensureInitialized();
+      ChannelTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -114,9 +115,11 @@ class ChannelMapper extends ClassMapperBase<Channel> {
 
   static Snowflake _$id(Channel v) => v.id;
   static const Field<Channel, Snowflake> _f$id = Field('id', _$id);
+  static ChannelType _$type(Channel v) => v.type;
+  static const Field<Channel, ChannelType> _f$type = Field('type', _$type);
 
   @override
-  final MappableFields<Channel> fields = const {#id: _f$id};
+  final MappableFields<Channel> fields = const {#id: _f$id, #type: _f$type};
 
   static Channel _instantiate(DecodingData data) {
     throw MapperException.missingConstructor('Channel');
@@ -143,7 +146,7 @@ mixin ChannelMappable {
 abstract class ChannelCopyWith<$R, $In extends Channel, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  $R call({Snowflake? id});
+  $R call({Snowflake? id, ChannelType? type});
   ChannelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 

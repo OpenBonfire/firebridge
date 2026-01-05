@@ -40,7 +40,7 @@ class UserGuild with UserGuildMappable {
   /// {@template fetch_with_counts_only}
   /// This is only returned when fetching this guild with `withCounts` set to `true`.
   /// {@endtemplate}
-  final int? approximateMemberCount;
+  final int? memberCount;
 
   /// An approximate number of presences in this guild.
   ///
@@ -60,7 +60,7 @@ class UserGuild with UserGuildMappable {
     required this.isOwnedByCurrentUser,
     required this.currentUserPermissions,
     // required this.features,
-    required this.approximateMemberCount,
+    required this.memberCount,
     required this.approximatePresenceCount,
     required this.bannerHash,
   });
@@ -229,7 +229,7 @@ class Guild extends UserGuild with GuildMappable {
     required this.publicUpdatesChannelId,
     required this.maxVideoChannelUsers,
     required this.maxStageChannelUsers,
-    required super.approximateMemberCount,
+    required super.memberCount,
     required super.approximatePresenceCount,
     required this.welcomeScreen,
     required this.nsfwLevel,

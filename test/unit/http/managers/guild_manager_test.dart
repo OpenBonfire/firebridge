@@ -106,7 +106,7 @@ void checkGuild(Guild guild) {
   expect(guild.publicUpdatesChannelId, equals(Snowflake(281283303326089216)));
   expect(guild.maxVideoChannelUsers, isNull);
   expect(guild.maxStageChannelUsers, isNull);
-  expect(guild.approximateMemberCount, isNull);
+  expect(guild.memberCount, isNull);
   expect(guild.approximatePresenceCount, isNull);
   expect(guild.welcomeScreen, isNull);
   expect(guild.nsfwLevel, NsfwLevel.safe);
@@ -236,7 +236,7 @@ void checkGuild2(Guild guild) {
   expect(guild.publicUpdatesChannelId, isNull);
   expect(guild.maxVideoChannelUsers, equals(25));
   expect(guild.maxStageChannelUsers, isNull);
-  expect(guild.approximateMemberCount, equals(2));
+  expect(guild.memberCount, equals(2));
   expect(guild.approximatePresenceCount, equals(2));
   expect(guild.welcomeScreen, isNull);
   expect(guild.nsfwLevel, NsfwLevel.safe);
@@ -339,7 +339,7 @@ void checkGuildPreview(GuildPreview preview) {
           GuildFeatures.verified,
     ),
   );
-  expect(preview.approximateMemberCount, equals(60814));
+  expect(preview.memberCount, equals(60814));
   expect(preview.approximatePresenceCount, equals(20034));
   expect(preview.description,
       equals('The official place to report Discord Bugs!'));

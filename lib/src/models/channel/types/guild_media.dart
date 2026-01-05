@@ -68,7 +68,7 @@ class GuildMediaChannel extends Channel
 
   /// {@macro guild_media_channel}
   /// @nodoc
-  GuildMediaChannel({
+  const GuildMediaChannel({
     required super.id,
     required this.topic,
     required this.rateLimitPerUser,
@@ -86,5 +86,6 @@ class GuildMediaChannel extends Channel
     required this.parentId,
     required this.permissionOverwrites,
     required this.position,
+    required super.type,
   });
 }

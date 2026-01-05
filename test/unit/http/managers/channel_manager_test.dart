@@ -230,7 +230,7 @@ void checkThread(Channel channel) {
 
   expect(channel.id, equals(Snowflake(41771983423143937)));
   expect(channel.appliedTags, isNull);
-  expect(channel.approximateMemberCount, equals(5));
+  expect(channel.memberCount, equals(5));
   expect(channel.archiveTimestamp,
       equals(DateTime.utc(2021, 04, 12, 23, 40, 39, 855, 793)));
   expect(channel.autoArchiveDuration, equals(Duration(minutes: 1440)));
@@ -281,7 +281,7 @@ void checkAnnouncementThread(Channel channel) {
 
   expect(channel.id, equals(Snowflake(1093553602909442119)));
   expect(channel.appliedTags, isNull);
-  expect(channel.approximateMemberCount, equals(1));
+  expect(channel.memberCount, equals(1));
   expect(channel.archiveTimestamp,
       equals(DateTime.utc(2023, 04, 06, 15, 11, 36, 177)));
   expect(channel.autoArchiveDuration, equals(Duration(minutes: 4320)));
@@ -343,7 +343,7 @@ void checkPrivateThread(Channel channel) {
   expect(channel.id, equals(Snowflake(1093556383640715314)));
   expect(channel.isInvitable, isTrue);
   expect(channel.appliedTags, isNull);
-  expect(channel.approximateMemberCount, equals(2));
+  expect(channel.memberCount, equals(2));
   expect(channel.archiveTimestamp,
       equals(DateTime.utc(2023, 04, 06, 15, 22, 39, 155)));
   expect(channel.autoArchiveDuration, equals(Duration(minutes: 4320)));

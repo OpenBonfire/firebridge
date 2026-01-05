@@ -17,6 +17,7 @@ class GroupDmChannelMapper extends SubClassMapperBase<GroupDmChannel> {
       TextChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
       UserMapper.ensureInitialized();
+      ChannelTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -70,6 +71,11 @@ class GroupDmChannelMapper extends SubClassMapperBase<GroupDmChannel> {
     _$rateLimitPerUser,
     key: r'rate_limit_per_user',
   );
+  static ChannelType _$type(GroupDmChannel v) => v.type;
+  static const Field<GroupDmChannel, ChannelType> _f$type = Field(
+    'type',
+    _$type,
+  );
 
   @override
   final MappableFields<GroupDmChannel> fields = const {
@@ -83,6 +89,7 @@ class GroupDmChannelMapper extends SubClassMapperBase<GroupDmChannel> {
     #lastMessageId: _f$lastMessageId,
     #lastPinTimestamp: _f$lastPinTimestamp,
     #rateLimitPerUser: _f$rateLimitPerUser,
+    #type: _f$type,
   };
 
   @override
@@ -105,6 +112,7 @@ class GroupDmChannelMapper extends SubClassMapperBase<GroupDmChannel> {
       lastMessageId: data.dec(_f$lastMessageId),
       lastPinTimestamp: data.dec(_f$lastPinTimestamp),
       rateLimitPerUser: data.dec(_f$rateLimitPerUser),
+      type: data.dec(_f$type),
     );
   }
 
@@ -175,6 +183,7 @@ abstract class GroupDmChannelCopyWith<$R, $In extends GroupDmChannel, $Out>
   ListCopyWith<$R, User, UserCopyWith<$R, User, User>> get recipients;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get ownerId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get applicationId;
+  @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId;
   @override
   $R call({
@@ -188,6 +197,7 @@ abstract class GroupDmChannelCopyWith<$R, $In extends GroupDmChannel, $Out>
     Snowflake? lastMessageId,
     DateTime? lastPinTimestamp,
     Duration? rateLimitPerUser,
+    ChannelType? type,
   });
   GroupDmChannelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -233,6 +243,7 @@ class _GroupDmChannelCopyWithImpl<$R, $Out>
     Object? lastMessageId = $none,
     Object? lastPinTimestamp = $none,
     Object? rateLimitPerUser = $none,
+    ChannelType? type,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
@@ -245,6 +256,7 @@ class _GroupDmChannelCopyWithImpl<$R, $Out>
       if (lastMessageId != $none) #lastMessageId: lastMessageId,
       if (lastPinTimestamp != $none) #lastPinTimestamp: lastPinTimestamp,
       if (rateLimitPerUser != $none) #rateLimitPerUser: rateLimitPerUser,
+      if (type != null) #type: type,
     }),
   );
   @override
@@ -259,6 +271,7 @@ class _GroupDmChannelCopyWithImpl<$R, $Out>
     lastMessageId: data.get(#lastMessageId, or: $value.lastMessageId),
     lastPinTimestamp: data.get(#lastPinTimestamp, or: $value.lastPinTimestamp),
     rateLimitPerUser: data.get(#rateLimitPerUser, or: $value.rateLimitPerUser),
+    type: data.get(#type, or: $value.type),
   );
 
   @override

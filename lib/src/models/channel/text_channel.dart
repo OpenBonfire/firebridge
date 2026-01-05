@@ -9,14 +9,19 @@ part 'text_channel.mapper.dart';
 @MappableClass()
 abstract class TextChannel extends Channel with TextChannelMappable {
   /// The ID of the last [Message] sent in this channel, or `null` if no messages have been sent.
-  Snowflake? get lastMessageId;
+  final Snowflake? lastMessageId;
 
   /// The rate limit duration per user.
-  Duration? get rateLimitPerUser;
+  final Duration? rateLimitPerUser;
 
   /// The time at which the last message was pinned, or `null` if no messages have been pinned.
-  DateTime? get lastPinTimestamp;
+  final DateTime? lastPinTimestamp;
 
   /// @nodoc
-  TextChannel({required super.id});
+  const TextChannel(
+      {required super.id,
+      required super.type,
+      this.lastMessageId,
+      this.rateLimitPerUser,
+      this.lastPinTimestamp});
 }

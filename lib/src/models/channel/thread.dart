@@ -3,55 +3,66 @@ import 'package:firebridge/src/models/channel/channel.dart';
 import 'package:firebridge/src/models/channel/guild_channel.dart';
 import 'package:firebridge/src/models/channel/text_channel.dart';
 import 'package:firebridge/src/models/guild/member.dart';
+import 'package:firebridge/src/models/permission_overwrite.dart';
 import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/utils/flags.dart';
 
 part 'thread.mapper.dart';
+
+// TODO: Thread metadata
 
 /// A thread channel.
 @MappableClass()
 abstract class Thread extends TextChannel
     with ThreadMappable
     implements GuildChannel {
+  final Snowflake messageCount;
+  final int ownerId;
+  final int memberCount;
+  final Duration? autoArchiveDuration;
+  final DateTime? archiveTimestamp;
+  final List<Snowflake>? appliedTags;
+  final ChannelFlags? flags;
+
+  @override
+  final Snowflake guildId;
+
+  @override
+  final List<PermissionOverwrite> permissionOverwrites;
+
+  @override
+  final String name;
+
+  @override
+  final bool nsfw;
+
+  @override
+  final Snowflake? parentId;
+
+  @override
+  final int position;
+
   /// @nodoc
-  Thread({required super.id});
-
-  /// The ID of the user that created this thread.
-  Snowflake get ownerId;
-
-  /// An approximate count of messages in this channel.
-  ///
-  /// Stops counting after 50.
-  int get messageCount;
-
-  /// An approximate number of members in this thread.
-  int get approximateMemberCount;
-
-  /// Whether this thread is archived.
-  bool get archived;
-
-  /// The time after which this thread will be archived.
-  Duration get autoArchiveDuration;
-
-  /// The time at which this thread's archive status was last updated.
-  ///
-  /// Will be the creation time if [archived] is `false`.
-  DateTime get archiveTimestamp;
-
-  /// Whether this thread is locked.
-  bool get locked;
-
-  /// The time at which this thread was created.
-  DateTime get createdAt;
-
-  /// The total number of messages sent in this thread, including deleted messages.
-  int get totalMessagesSent;
-
-  /// If this thread is in a [ForumChannel], the IDs of the [ForumTag]s applied to this thread.
-  List<Snowflake>? get appliedTags;
-
-  /// The flags this thread has applied.
-  ChannelFlags? get flags;
+  const Thread({
+    required super.id,
+    required super.type,
+    required this.ownerId,
+    required this.messageCount,
+    required this.memberCount,
+    this.autoArchiveDuration,
+    this.archiveTimestamp,
+    this.appliedTags,
+    this.flags,
+    required this.guildId,
+    this.permissionOverwrites = const [],
+    required this.name,
+    this.nsfw = false,
+    required this.parentId,
+    this.position = -1,
+    super.lastMessageId,
+    super.lastPinTimestamp,
+    super.rateLimitPerUser,
+  });
 }
 
 /// {@template partial_thread_member}

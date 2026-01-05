@@ -16,6 +16,9 @@ class ThreadMapper extends SubClassMapperBase<Thread> {
       MapperContainer.globals.use(_instance = ThreadMapper._());
       TextChannelMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
+      ChannelTypeMapper.ensureInitialized();
+      ChannelFlagsMapper.ensureInitialized();
+      PermissionOverwriteMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -25,9 +28,134 @@ class ThreadMapper extends SubClassMapperBase<Thread> {
 
   static Snowflake _$id(Thread v) => v.id;
   static const Field<Thread, Snowflake> _f$id = Field('id', _$id);
+  static ChannelType _$type(Thread v) => v.type;
+  static const Field<Thread, ChannelType> _f$type = Field('type', _$type);
+  static int _$ownerId(Thread v) => v.ownerId;
+  static const Field<Thread, int> _f$ownerId = Field(
+    'ownerId',
+    _$ownerId,
+    key: r'owner_id',
+  );
+  static Snowflake _$messageCount(Thread v) => v.messageCount;
+  static const Field<Thread, Snowflake> _f$messageCount = Field(
+    'messageCount',
+    _$messageCount,
+    key: r'message_count',
+  );
+  static int _$memberCount(Thread v) => v.memberCount;
+  static const Field<Thread, int> _f$memberCount = Field(
+    'memberCount',
+    _$memberCount,
+    key: r'member_count',
+  );
+  static Duration? _$autoArchiveDuration(Thread v) => v.autoArchiveDuration;
+  static const Field<Thread, Duration> _f$autoArchiveDuration = Field(
+    'autoArchiveDuration',
+    _$autoArchiveDuration,
+    key: r'auto_archive_duration',
+    opt: true,
+  );
+  static DateTime? _$archiveTimestamp(Thread v) => v.archiveTimestamp;
+  static const Field<Thread, DateTime> _f$archiveTimestamp = Field(
+    'archiveTimestamp',
+    _$archiveTimestamp,
+    key: r'archive_timestamp',
+    opt: true,
+  );
+  static List<Snowflake>? _$appliedTags(Thread v) => v.appliedTags;
+  static const Field<Thread, List<Snowflake>> _f$appliedTags = Field(
+    'appliedTags',
+    _$appliedTags,
+    key: r'applied_tags',
+    opt: true,
+  );
+  static ChannelFlags? _$flags(Thread v) => v.flags;
+  static const Field<Thread, ChannelFlags> _f$flags = Field(
+    'flags',
+    _$flags,
+    opt: true,
+  );
+  static Snowflake _$guildId(Thread v) => v.guildId;
+  static const Field<Thread, Snowflake> _f$guildId = Field(
+    'guildId',
+    _$guildId,
+    key: r'guild_id',
+  );
+  static List<PermissionOverwrite> _$permissionOverwrites(Thread v) =>
+      v.permissionOverwrites;
+  static const Field<Thread, List<PermissionOverwrite>>
+  _f$permissionOverwrites = Field(
+    'permissionOverwrites',
+    _$permissionOverwrites,
+    key: r'permission_overwrites',
+    opt: true,
+    def: const [],
+  );
+  static String _$name(Thread v) => v.name;
+  static const Field<Thread, String> _f$name = Field('name', _$name);
+  static bool _$nsfw(Thread v) => v.nsfw;
+  static const Field<Thread, bool> _f$nsfw = Field(
+    'nsfw',
+    _$nsfw,
+    opt: true,
+    def: false,
+  );
+  static Snowflake? _$parentId(Thread v) => v.parentId;
+  static const Field<Thread, Snowflake> _f$parentId = Field(
+    'parentId',
+    _$parentId,
+    key: r'parent_id',
+  );
+  static int _$position(Thread v) => v.position;
+  static const Field<Thread, int> _f$position = Field(
+    'position',
+    _$position,
+    opt: true,
+    def: -1,
+  );
+  static Snowflake? _$lastMessageId(Thread v) => v.lastMessageId;
+  static const Field<Thread, Snowflake> _f$lastMessageId = Field(
+    'lastMessageId',
+    _$lastMessageId,
+    key: r'last_message_id',
+    opt: true,
+  );
+  static DateTime? _$lastPinTimestamp(Thread v) => v.lastPinTimestamp;
+  static const Field<Thread, DateTime> _f$lastPinTimestamp = Field(
+    'lastPinTimestamp',
+    _$lastPinTimestamp,
+    key: r'last_pin_timestamp',
+    opt: true,
+  );
+  static Duration? _$rateLimitPerUser(Thread v) => v.rateLimitPerUser;
+  static const Field<Thread, Duration> _f$rateLimitPerUser = Field(
+    'rateLimitPerUser',
+    _$rateLimitPerUser,
+    key: r'rate_limit_per_user',
+    opt: true,
+  );
 
   @override
-  final MappableFields<Thread> fields = const {#id: _f$id};
+  final MappableFields<Thread> fields = const {
+    #id: _f$id,
+    #type: _f$type,
+    #ownerId: _f$ownerId,
+    #messageCount: _f$messageCount,
+    #memberCount: _f$memberCount,
+    #autoArchiveDuration: _f$autoArchiveDuration,
+    #archiveTimestamp: _f$archiveTimestamp,
+    #appliedTags: _f$appliedTags,
+    #flags: _f$flags,
+    #guildId: _f$guildId,
+    #permissionOverwrites: _f$permissionOverwrites,
+    #name: _f$name,
+    #nsfw: _f$nsfw,
+    #parentId: _f$parentId,
+    #position: _f$position,
+    #lastMessageId: _f$lastMessageId,
+    #lastPinTimestamp: _f$lastPinTimestamp,
+    #rateLimitPerUser: _f$rateLimitPerUser,
+  };
 
   @override
   final String discriminatorKey = 'type';
@@ -65,8 +193,41 @@ abstract class ThreadCopyWith<$R, $In extends Thread, $Out>
         GuildChannelCopyWith<$R, $In, $Out> {
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get messageCount;
+  ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>?
+  get appliedTags;
+  ChannelFlagsCopyWith<$R, ChannelFlags, ChannelFlags>? get flags;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get guildId;
+  ListCopyWith<
+    $R,
+    PermissionOverwrite,
+    PermissionOverwriteCopyWith<$R, PermissionOverwrite, PermissionOverwrite>
+  >
+  get permissionOverwrites;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
   @override
-  $R call({Snowflake? id});
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lastMessageId;
+  @override
+  $R call({
+    Snowflake? id,
+    ChannelType? type,
+    int? ownerId,
+    Snowflake? messageCount,
+    int? memberCount,
+    Duration? autoArchiveDuration,
+    DateTime? archiveTimestamp,
+    List<Snowflake>? appliedTags,
+    ChannelFlags? flags,
+    Snowflake? guildId,
+    List<PermissionOverwrite>? permissionOverwrites,
+    String? name,
+    bool? nsfw,
+    Snowflake? parentId,
+    int? position,
+    Snowflake? lastMessageId,
+    DateTime? lastPinTimestamp,
+    Duration? rateLimitPerUser,
+  });
   ThreadCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
