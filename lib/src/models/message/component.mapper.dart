@@ -598,7 +598,7 @@ class ActionRowComponentMapper extends SubClassMapperBase<ActionRowComponent> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = 'ActionRowComponent';
+  final dynamic discriminatorValue = 1;
   @override
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
@@ -818,7 +818,7 @@ class ButtonComponentMapper extends SubClassMapperBase<ButtonComponent> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = 'ButtonComponent';
+  final dynamic discriminatorValue = 2;
   @override
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
@@ -1067,7 +1067,7 @@ class SelectMenuComponentMapper
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = 'SelectMenuComponent';
+  final dynamic discriminatorValue = 3;
   @override
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
@@ -1787,7 +1787,7 @@ class SectionComponentMapper extends SubClassMapperBase<SectionComponent> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = 'SectionComponent';
+  final dynamic discriminatorValue = 9;
   @override
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
@@ -1971,7 +1971,7 @@ class TextDisplayComponentMapper
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = 'TextDisplayComponent';
+  final dynamic discriminatorValue = 10;
   @override
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
@@ -2143,7 +2143,7 @@ class ThumbnailComponentMapper extends SubClassMapperBase<ThumbnailComponent> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = 'ThumbnailComponent';
+  final dynamic discriminatorValue = 11;
   @override
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
@@ -2474,7 +2474,7 @@ class MediaGalleryComponentMapper
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = 'MediaGalleryComponent';
+  final dynamic discriminatorValue = 12;
   @override
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
@@ -2659,7 +2659,7 @@ class SeparatorComponentMapper extends SubClassMapperBase<SeparatorComponent> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = 'SeparatorComponent';
+  final dynamic discriminatorValue = 14;
   @override
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
@@ -2839,7 +2839,7 @@ class FileComponentMapper extends SubClassMapperBase<FileComponent> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = 'FileComponent';
+  final dynamic discriminatorValue = 13;
   @override
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
@@ -3018,7 +3018,7 @@ class ContainerComponentMapper extends SubClassMapperBase<ContainerComponent> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = 'ContainerComponent';
+  final dynamic discriminatorValue = 17;
   @override
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();
@@ -3235,7 +3235,7 @@ class FileUploadComponentMapper
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = 'FileUploadComponent';
+  final dynamic discriminatorValue = 19;
   @override
   late final ClassMapperBase superMapper =
       MessageComponentMapper.ensureInitialized();

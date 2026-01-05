@@ -86,7 +86,7 @@ abstract class MessageComponent with ToStringHelper, MessageComponentMappable {
 }
 
 /// A [MessageComponent] that contains multiple child [MessageComponent]s.
-@MappableClass(discriminatorKey: "1")
+@MappableClass(discriminatorValue: 1)
 class ActionRowComponent extends MessageComponent
     with ActionRowComponentMappable {
   @override
@@ -102,7 +102,7 @@ class ActionRowComponent extends MessageComponent
 }
 
 /// A clickable button.
-@MappableClass(discriminatorKey: "2")
+@MappableClass(discriminatorValue: 2)
 class ButtonComponent extends MessageComponent with ButtonComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.button;
@@ -162,7 +162,7 @@ enum ButtonStyle {
 // TODO: This will need a hook, anything 3 -> 8 is this one
 
 /// A dropdown menu in which users can select from on or more choices.
-@MappableClass(discriminatorKey: "3")
+@MappableClass(discriminatorValue: 3)
 class SelectMenuComponent extends MessageComponent
     with SelectMenuComponentMappable {
   /// This component's custom ID.
@@ -282,7 +282,7 @@ class UnknownComponent extends MessageComponent with UnknownComponentMappable {
 }
 
 /// A section in a message, with small accessory component.
-@MappableClass(discriminatorKey: "9")
+@MappableClass(discriminatorValue: 9)
 class SectionComponent extends MessageComponent with SectionComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.section;
@@ -302,7 +302,7 @@ class SectionComponent extends MessageComponent with SectionComponentMappable {
 }
 
 /// A component that displays text.
-@MappableClass(discriminatorKey: "10")
+@MappableClass(discriminatorValue: 10)
 class TextDisplayComponent extends MessageComponent
     with TextDisplayComponentMappable {
   @override
@@ -317,7 +317,7 @@ class TextDisplayComponent extends MessageComponent
 }
 
 /// A component that shows a small image.
-@MappableClass(discriminatorKey: "11")
+@MappableClass(discriminatorValue: 11)
 class ThumbnailComponent extends MessageComponent
     with ThumbnailComponentMappable {
   @override
@@ -360,7 +360,7 @@ class MediaGalleryItem with ToStringHelper, MediaGalleryItemMappable {
 }
 
 /// A component that displays several child media items.
-@MappableClass(discriminatorKey: "12")
+@MappableClass(discriminatorValue: 12)
 class MediaGalleryComponent extends MessageComponent
     with MediaGalleryComponentMappable {
   @override
@@ -384,7 +384,7 @@ enum SeparatorSpacingSize {
 }
 
 /// A component that introduces space between two other components.
-@MappableClass(discriminatorKey: "14")
+@MappableClass(discriminatorValue: 14)
 class SeparatorComponent extends MessageComponent
     with SeparatorComponentMappable {
   @override
@@ -405,7 +405,7 @@ class SeparatorComponent extends MessageComponent
 }
 
 /// A component that displays a downloadable file.
-@MappableClass(discriminatorKey: "13")
+@MappableClass(discriminatorValue: 13)
 class FileComponent extends MessageComponent with FileComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.file;
@@ -425,7 +425,7 @@ class FileComponent extends MessageComponent with FileComponentMappable {
 }
 
 /// A component that contains several other components.
-@MappableClass(discriminatorKey: "17")
+@MappableClass(discriminatorValue: 17)
 class ContainerComponent extends MessageComponent
     with ContainerComponentMappable {
   @override
@@ -449,7 +449,7 @@ class ContainerComponent extends MessageComponent
       required super.type});
 }
 
-@MappableClass(discriminatorKey: "19")
+@MappableClass(discriminatorValue: 19)
 class FileUploadComponent extends MessageComponent
     with FileUploadComponentMappable {
   @override
