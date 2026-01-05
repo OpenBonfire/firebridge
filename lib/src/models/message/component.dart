@@ -1,4 +1,4 @@
-/// @docImport 'package:firebridge/nyxx.dart';
+/// @docImport 'package:firebridge/firebridge.dart';
 library;
 
 import 'package:dart_mappable/dart_mappable.dart';
@@ -73,20 +73,20 @@ class UnfurledMediaItem with ToStringHelper, UnfurledMediaItemMappable {
 }
 
 /// A component in a [Message].
-@MappableClass()
+@MappableClass(discriminatorKey: "type")
 abstract class MessageComponent with ToStringHelper, MessageComponentMappable {
   /// The type of this component.
-  MessageComponentType get type;
+  final MessageComponentType type;
 
   /// An identifier for this component.
   final int id;
 
   /// @nodoc
-  MessageComponent({required this.id});
+  MessageComponent({required this.id, required this.type});
 }
 
 /// A [MessageComponent] that contains multiple child [MessageComponent]s.
-@MappableClass()
+@MappableClass(discriminatorKey: "1")
 class ActionRowComponent extends MessageComponent
     with ActionRowComponentMappable {
   @override
@@ -97,11 +97,12 @@ class ActionRowComponent extends MessageComponent
 
   /// Create a new [ActionRowComponent].
   /// @nodoc
-  ActionRowComponent({required this.components, required super.id});
+  ActionRowComponent(
+      {required this.components, required super.id, required super.type});
 }
 
 /// A clickable button.
-@MappableClass()
+@MappableClass(discriminatorKey: "2")
 class ButtonComponent extends MessageComponent with ButtonComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.button;
@@ -129,16 +130,16 @@ class ButtonComponent extends MessageComponent with ButtonComponentMappable {
 
   /// Create a new [ButtonComponent].
   /// @nodoc
-  ButtonComponent({
-    required this.style,
-    required this.label,
-    required this.emoji,
-    required this.customId,
-    required this.skuId,
-    required this.url,
-    required this.isDisabled,
-    required super.id,
-  });
+  ButtonComponent(
+      {required this.style,
+      required this.label,
+      required this.emoji,
+      required this.customId,
+      required this.skuId,
+      required this.url,
+      required this.isDisabled,
+      required super.id,
+      required super.type});
 }
 
 /// The style of a [ButtonComponent].
@@ -158,13 +159,12 @@ enum ButtonStyle {
   premium
 }
 
+// TODO: This will need a hook, anything 3 -> 8 is this one
+
 /// A dropdown menu in which users can select from on or more choices.
-@MappableClass()
+@MappableClass(discriminatorKey: "3")
 class SelectMenuComponent extends MessageComponent
     with SelectMenuComponentMappable {
-  @override
-  final MessageComponentType type;
-
   /// This component's custom ID.
   final String customId;
 
@@ -201,7 +201,6 @@ class SelectMenuComponent extends MessageComponent
   /// Create a new [SelectMenuComponent].
   /// @nodoc
   SelectMenuComponent({
-    required this.type,
     required this.customId,
     required this.options,
     required this.channelTypes,
@@ -212,6 +211,7 @@ class SelectMenuComponent extends MessageComponent
     required this.isDisabled,
     required super.id,
     required this.isRequired,
+    required super.type,
   });
 }
 
@@ -262,64 +262,6 @@ class SelectMenuOption with ToStringHelper, SelectMenuOptionMappable {
   });
 }
 
-/// A text field in a modal.
-@Deprecated(
-    'Use SubmittedTextInputComponent instead. The fields on this class are never populated.')
-@MappableClass()
-class TextInputComponent extends MessageComponent
-    with TextInputComponentMappable
-    implements SubmittedTextInputComponent {
-  @override
-  MessageComponentType get type => MessageComponentType.textInput;
-
-  /// This component's custom ID.
-  @override
-  final String customId;
-
-  /// The style of this [TextInputComponent].
-  @Deprecated('This field is never populated.')
-  final TextInputStyle? style;
-
-  /// This component's label.
-  @Deprecated('This field is never populated.')
-  final String? label;
-
-  /// The minimum number of characters the user must input.
-  @Deprecated('This field is never populated.')
-  final int? minLength;
-
-  /// The maximum number of characters the user can input.
-  @Deprecated('This field is never populated.')
-  final int? maxLength;
-
-  /// Whether this component requires input.
-  @Deprecated('This field is never populated.')
-  final bool? isRequired;
-
-  /// The text contained in this component.
-  @Deprecated('This field is never populated.')
-  @override
-  final String? value;
-
-  /// Placeholder text shown when this component is empty.
-  @Deprecated('This field is never populated.')
-  final String? placeholder;
-
-  /// Create a new [TextInputComponent].
-  /// @nodoc
-  TextInputComponent({
-    required this.customId,
-    required this.style,
-    required this.label,
-    required this.minLength,
-    required this.maxLength,
-    required this.isRequired,
-    required this.value,
-    required this.placeholder,
-    required super.id,
-  });
-}
-
 /// The type of a [SubmittedTextInputComponent].
 @MappableEnum()
 enum TextInputStyle {
@@ -331,18 +273,16 @@ enum TextInputStyle {
 
 /// An unknown component.
 @MappableClass()
-class UnknownComponent extends MessageComponent
-    with UnknownComponentMappable
-    implements SubmittedComponent {
-  @override
-  final MessageComponentType type;
-
+class UnknownComponent extends MessageComponent with UnknownComponentMappable {
   /// @nodoc
-  UnknownComponent({required this.type, required super.id});
+  UnknownComponent({
+    required super.id,
+    required super.type,
+  });
 }
 
 /// A section in a message, with small accessory component.
-@MappableClass()
+@MappableClass(discriminatorKey: "9")
 class SectionComponent extends MessageComponent with SectionComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.section;
@@ -355,11 +295,14 @@ class SectionComponent extends MessageComponent with SectionComponentMappable {
 
   /// @nodoc
   SectionComponent(
-      {required super.id, required this.components, required this.accessory});
+      {required super.id,
+      required this.components,
+      required this.accessory,
+      required super.type});
 }
 
 /// A component that displays text.
-@MappableClass()
+@MappableClass(discriminatorKey: "10")
 class TextDisplayComponent extends MessageComponent
     with TextDisplayComponentMappable {
   @override
@@ -369,11 +312,12 @@ class TextDisplayComponent extends MessageComponent
   final String content;
 
   /// @nodoc
-  TextDisplayComponent({required super.id, required this.content});
+  TextDisplayComponent(
+      {required super.id, required this.content, required super.type});
 }
 
 /// A component that shows a small image.
-@MappableClass()
+@MappableClass(discriminatorKey: "11")
 class ThumbnailComponent extends MessageComponent
     with ThumbnailComponentMappable {
   @override
@@ -393,7 +337,8 @@ class ThumbnailComponent extends MessageComponent
       {required super.id,
       required this.media,
       required this.description,
-      required this.isSpoiler});
+      required this.isSpoiler,
+      required super.type});
 }
 
 @MappableClass()
@@ -415,7 +360,7 @@ class MediaGalleryItem with ToStringHelper, MediaGalleryItemMappable {
 }
 
 /// A component that displays several child media items.
-@MappableClass()
+@MappableClass(discriminatorKey: "12")
 class MediaGalleryComponent extends MessageComponent
     with MediaGalleryComponentMappable {
   @override
@@ -425,7 +370,8 @@ class MediaGalleryComponent extends MessageComponent
   final List<MediaGalleryItem> items;
 
   /// @nodoc
-  MediaGalleryComponent({required super.id, required this.items});
+  MediaGalleryComponent(
+      {required super.id, required this.items, required super.type});
 }
 
 /// The size of the spacing introduced by a [SeparatorComponent].
@@ -438,7 +384,7 @@ enum SeparatorSpacingSize {
 }
 
 /// A component that introduces space between two other components.
-@MappableClass()
+@MappableClass(discriminatorKey: "14")
 class SeparatorComponent extends MessageComponent
     with SeparatorComponentMappable {
   @override
@@ -452,11 +398,14 @@ class SeparatorComponent extends MessageComponent
 
   /// @nodoc
   SeparatorComponent(
-      {required super.id, required this.isDivider, required this.spacing});
+      {required super.id,
+      required this.isDivider,
+      required this.spacing,
+      required super.type});
 }
 
 /// A component that displays a downloadable file.
-@MappableClass()
+@MappableClass(discriminatorKey: "13")
 class FileComponent extends MessageComponent with FileComponentMappable {
   @override
   MessageComponentType get type => MessageComponentType.file;
@@ -469,11 +418,14 @@ class FileComponent extends MessageComponent with FileComponentMappable {
 
   /// @nodoc
   FileComponent(
-      {required super.id, required this.file, required this.isSpoiler});
+      {required super.id,
+      required this.file,
+      required this.isSpoiler,
+      required super.type});
 }
 
 /// A component that contains several other components.
-@MappableClass()
+@MappableClass(discriminatorKey: "17")
 class ContainerComponent extends MessageComponent
     with ContainerComponentMappable {
   @override
@@ -493,10 +445,11 @@ class ContainerComponent extends MessageComponent
       {required super.id,
       required this.accentColor,
       required this.isSpoiler,
-      required this.components});
+      required this.components,
+      required super.type});
 }
 
-@MappableClass()
+@MappableClass(discriminatorKey: "19")
 class FileUploadComponent extends MessageComponent
     with FileUploadComponentMappable {
   @override
@@ -520,7 +473,8 @@ class FileUploadComponent extends MessageComponent
       required this.customId,
       required this.minValues,
       required this.maxValues,
-      required this.isRequired});
+      required this.isRequired,
+      required super.type});
 }
 
 /// A component received as part of an [Interaction].
@@ -528,7 +482,7 @@ class FileUploadComponent extends MessageComponent
 abstract class SubmittedComponent extends MessageComponent
     with SubmittedComponentMappable {
   /// @nodoc
-  SubmittedComponent({required super.id});
+  SubmittedComponent({required super.id, required super.type});
 }
 
 @MappableClass()
@@ -545,7 +499,10 @@ class SubmittedFileUploadComponent extends SubmittedComponent
 
   /// @nodoc
   SubmittedFileUploadComponent(
-      {required super.id, required this.customId, required this.values});
+      {required super.id,
+      required this.customId,
+      required this.values,
+      required super.type});
 }
 
 /// An [ActionRowComponent] received in an [Interaction].
@@ -559,7 +516,8 @@ class SubmittedActionRowComponent extends SubmittedComponent
   final List<SubmittedComponent> components;
 
   /// @nodoc
-  SubmittedActionRowComponent({required this.components, required super.id});
+  SubmittedActionRowComponent(
+      {required this.components, required super.id, required super.type});
 }
 
 /// A text input received in an [Interaction].
@@ -577,7 +535,10 @@ class SubmittedTextInputComponent extends SubmittedComponent
 
   /// @nodoc
   SubmittedTextInputComponent(
-      {required super.id, required this.customId, required this.value});
+      {required super.id,
+      required this.customId,
+      required this.value,
+      required super.type});
 }
 
 /// A label received in an [Interaction].
@@ -591,16 +552,14 @@ class SubmittedLabelComponent extends SubmittedComponent
   final SubmittedComponent component;
 
   /// @nodoc
-  SubmittedLabelComponent({required super.id, required this.component});
+  SubmittedLabelComponent(
+      {required super.id, required this.component, required super.type});
 }
 
 /// A [SelectMenuComponent] received in an [Interaction].
 @MappableClass()
 class SubmittedSelectMenuComponent extends SubmittedComponent
     with SubmittedSelectMenuComponentMappable {
-  @override
-  final MessageComponentType type;
-
   /// The custom ID of this select menu.
   final String customId;
 
@@ -609,10 +568,10 @@ class SubmittedSelectMenuComponent extends SubmittedComponent
 
   /// @nodoc
   SubmittedSelectMenuComponent({
-    required this.type,
     required super.id,
     required this.customId,
     required this.values,
+    required super.type,
   });
 }
 
@@ -624,5 +583,5 @@ class SubmittedTextDisplayComponent extends SubmittedComponent
   MessageComponentType get type => MessageComponentType.textDisplay;
 
   /// @nodoc
-  SubmittedTextDisplayComponent({required super.id});
+  SubmittedTextDisplayComponent({required super.id, required super.type});
 }

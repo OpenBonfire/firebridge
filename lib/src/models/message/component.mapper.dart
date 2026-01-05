@@ -492,8 +492,6 @@ class MessageComponentMapper extends ClassMapperBase<MessageComponent> {
       ActionRowComponentMapper.ensureInitialized();
       ButtonComponentMapper.ensureInitialized();
       SelectMenuComponentMapper.ensureInitialized();
-      TextInputComponentMapper.ensureInitialized();
-      SubmittedComponentMapper.ensureInitialized();
       UnknownComponentMapper.ensureInitialized();
       SectionComponentMapper.ensureInitialized();
       TextDisplayComponentMapper.ensureInitialized();
@@ -503,6 +501,8 @@ class MessageComponentMapper extends ClassMapperBase<MessageComponent> {
       FileComponentMapper.ensureInitialized();
       ContainerComponentMapper.ensureInitialized();
       FileUploadComponentMapper.ensureInitialized();
+      SubmittedComponentMapper.ensureInitialized();
+      MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -512,12 +512,24 @@ class MessageComponentMapper extends ClassMapperBase<MessageComponent> {
 
   static int _$id(MessageComponent v) => v.id;
   static const Field<MessageComponent, int> _f$id = Field('id', _$id);
+  static MessageComponentType _$type(MessageComponent v) => v.type;
+  static const Field<MessageComponent, MessageComponentType> _f$type = Field(
+    'type',
+    _$type,
+  );
 
   @override
-  final MappableFields<MessageComponent> fields = const {#id: _f$id};
+  final MappableFields<MessageComponent> fields = const {
+    #id: _f$id,
+    #type: _f$type,
+  };
 
   static MessageComponent _instantiate(DecodingData data) {
-    throw MapperException.missingConstructor('MessageComponent');
+    throw MapperException.missingSubclass(
+      'MessageComponent',
+      'type',
+      '${data.value['type']}',
+    );
   }
 
   @override
@@ -541,21 +553,22 @@ mixin MessageComponentMappable {
 
 abstract class MessageComponentCopyWith<$R, $In extends MessageComponent, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({int? id});
+  $R call({int? id, MessageComponentType? type});
   MessageComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
 }
 
-class ActionRowComponentMapper extends ClassMapperBase<ActionRowComponent> {
+class ActionRowComponentMapper extends SubClassMapperBase<ActionRowComponent> {
   ActionRowComponentMapper._();
 
   static ActionRowComponentMapper? _instance;
   static ActionRowComponentMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ActionRowComponentMapper._());
+      MessageComponentMapper.ensureInitialized().addSubMapper(_instance!);
       MessageComponentMapper.ensureInitialized();
-      MessageComponentMapper.ensureInitialized();
+      MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -569,17 +582,32 @@ class ActionRowComponentMapper extends ClassMapperBase<ActionRowComponent> {
       Field('components', _$components);
   static int _$id(ActionRowComponent v) => v.id;
   static const Field<ActionRowComponent, int> _f$id = Field('id', _$id);
+  static MessageComponentType _$type(ActionRowComponent v) => v.type;
+  static const Field<ActionRowComponent, MessageComponentType> _f$type = Field(
+    'type',
+    _$type,
+  );
 
   @override
   final MappableFields<ActionRowComponent> fields = const {
     #components: _f$components,
     #id: _f$id,
+    #type: _f$type,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'ActionRowComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      MessageComponentMapper.ensureInitialized();
 
   static ActionRowComponent _instantiate(DecodingData data) {
     return ActionRowComponent(
       components: data.dec(_f$components),
       id: data.dec(_f$id),
+      type: data.dec(_f$type),
     );
   }
 
@@ -661,7 +689,11 @@ abstract class ActionRowComponentCopyWith<
   >
   get components;
   @override
-  $R call({List<MessageComponent>? components, int? id});
+  $R call({
+    List<MessageComponent>? components,
+    int? id,
+    MessageComponentType? type,
+  });
   ActionRowComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -687,16 +719,22 @@ class _ActionRowComponentCopyWithImpl<$R, $Out>
     (v) => call(components: v),
   );
   @override
-  $R call({List<MessageComponent>? components, int? id}) => $apply(
+  $R call({
+    List<MessageComponent>? components,
+    int? id,
+    MessageComponentType? type,
+  }) => $apply(
     FieldCopyWithData({
       if (components != null) #components: components,
       if (id != null) #id: id,
+      if (type != null) #type: type,
     }),
   );
   @override
   ActionRowComponent $make(CopyWithData data) => ActionRowComponent(
     components: data.get(#components, or: $value.components),
     id: data.get(#id, or: $value.id),
+    type: data.get(#type, or: $value.type),
   );
 
   @override
@@ -705,17 +743,18 @@ class _ActionRowComponentCopyWithImpl<$R, $Out>
   ) => _ActionRowComponentCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class ButtonComponentMapper extends ClassMapperBase<ButtonComponent> {
+class ButtonComponentMapper extends SubClassMapperBase<ButtonComponent> {
   ButtonComponentMapper._();
 
   static ButtonComponentMapper? _instance;
   static ButtonComponentMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ButtonComponentMapper._());
-      MessageComponentMapper.ensureInitialized();
+      MessageComponentMapper.ensureInitialized().addSubMapper(_instance!);
       ButtonStyleMapper.ensureInitialized();
       EmojiMapper.ensureInitialized();
       SnowflakeMapper.ensureInitialized();
+      MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -757,6 +796,11 @@ class ButtonComponentMapper extends ClassMapperBase<ButtonComponent> {
   );
   static int _$id(ButtonComponent v) => v.id;
   static const Field<ButtonComponent, int> _f$id = Field('id', _$id);
+  static MessageComponentType _$type(ButtonComponent v) => v.type;
+  static const Field<ButtonComponent, MessageComponentType> _f$type = Field(
+    'type',
+    _$type,
+  );
 
   @override
   final MappableFields<ButtonComponent> fields = const {
@@ -768,7 +812,16 @@ class ButtonComponentMapper extends ClassMapperBase<ButtonComponent> {
     #url: _f$url,
     #isDisabled: _f$isDisabled,
     #id: _f$id,
+    #type: _f$type,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'ButtonComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      MessageComponentMapper.ensureInitialized();
 
   static ButtonComponent _instantiate(DecodingData data) {
     return ButtonComponent(
@@ -780,6 +833,7 @@ class ButtonComponentMapper extends ClassMapperBase<ButtonComponent> {
       url: data.dec(_f$url),
       isDisabled: data.dec(_f$isDisabled),
       id: data.dec(_f$id),
+      type: data.dec(_f$type),
     );
   }
 
@@ -856,6 +910,7 @@ abstract class ButtonComponentCopyWith<$R, $In extends ButtonComponent, $Out>
     Uri? url,
     bool? isDisabled,
     int? id,
+    MessageComponentType? type,
   });
   ButtonComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -883,6 +938,7 @@ class _ButtonComponentCopyWithImpl<$R, $Out>
     Object? url = $none,
     Object? isDisabled = $none,
     int? id,
+    MessageComponentType? type,
   }) => $apply(
     FieldCopyWithData({
       if (style != null) #style: style,
@@ -893,6 +949,7 @@ class _ButtonComponentCopyWithImpl<$R, $Out>
       if (url != $none) #url: url,
       if (isDisabled != $none) #isDisabled: isDisabled,
       if (id != null) #id: id,
+      if (type != null) #type: type,
     }),
   );
   @override
@@ -905,6 +962,7 @@ class _ButtonComponentCopyWithImpl<$R, $Out>
     url: data.get(#url, or: $value.url),
     isDisabled: data.get(#isDisabled, or: $value.isDisabled),
     id: data.get(#id, or: $value.id),
+    type: data.get(#type, or: $value.type),
   );
 
   @override
@@ -913,18 +971,19 @@ class _ButtonComponentCopyWithImpl<$R, $Out>
   ) => _ButtonComponentCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class SelectMenuComponentMapper extends ClassMapperBase<SelectMenuComponent> {
+class SelectMenuComponentMapper
+    extends SubClassMapperBase<SelectMenuComponent> {
   SelectMenuComponentMapper._();
 
   static SelectMenuComponentMapper? _instance;
   static SelectMenuComponentMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = SelectMenuComponentMapper._());
-      MessageComponentMapper.ensureInitialized();
-      MessageComponentTypeMapper.ensureInitialized();
+      MessageComponentMapper.ensureInitialized().addSubMapper(_instance!);
       SelectMenuOptionMapper.ensureInitialized();
       ChannelTypeMapper.ensureInitialized();
       SelectMenuDefaultValueMapper.ensureInitialized();
+      MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -932,11 +991,6 @@ class SelectMenuComponentMapper extends ClassMapperBase<SelectMenuComponent> {
   @override
   final String id = 'SelectMenuComponent';
 
-  static MessageComponentType _$type(SelectMenuComponent v) => v.type;
-  static const Field<SelectMenuComponent, MessageComponentType> _f$type = Field(
-    'type',
-    _$type,
-  );
   static String _$customId(SelectMenuComponent v) => v.customId;
   static const Field<SelectMenuComponent, String> _f$customId = Field(
     'customId',
@@ -989,10 +1043,14 @@ class SelectMenuComponentMapper extends ClassMapperBase<SelectMenuComponent> {
     _$isRequired,
     key: r'is_required',
   );
+  static MessageComponentType _$type(SelectMenuComponent v) => v.type;
+  static const Field<SelectMenuComponent, MessageComponentType> _f$type = Field(
+    'type',
+    _$type,
+  );
 
   @override
   final MappableFields<SelectMenuComponent> fields = const {
-    #type: _f$type,
     #customId: _f$customId,
     #options: _f$options,
     #channelTypes: _f$channelTypes,
@@ -1003,11 +1061,19 @@ class SelectMenuComponentMapper extends ClassMapperBase<SelectMenuComponent> {
     #isDisabled: _f$isDisabled,
     #id: _f$id,
     #isRequired: _f$isRequired,
+    #type: _f$type,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'SelectMenuComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      MessageComponentMapper.ensureInitialized();
 
   static SelectMenuComponent _instantiate(DecodingData data) {
     return SelectMenuComponent(
-      type: data.dec(_f$type),
       customId: data.dec(_f$customId),
       options: data.dec(_f$options),
       channelTypes: data.dec(_f$channelTypes),
@@ -1018,6 +1084,7 @@ class SelectMenuComponentMapper extends ClassMapperBase<SelectMenuComponent> {
       isDisabled: data.dec(_f$isDisabled),
       id: data.dec(_f$id),
       isRequired: data.dec(_f$isRequired),
+      type: data.dec(_f$type),
     );
   }
 
@@ -1111,7 +1178,6 @@ abstract class SelectMenuComponentCopyWith<
   get defaultValues;
   @override
   $R call({
-    MessageComponentType? type,
     String? customId,
     List<SelectMenuOption>? options,
     List<ChannelType>? channelTypes,
@@ -1122,6 +1188,7 @@ abstract class SelectMenuComponentCopyWith<
     bool? isDisabled,
     int? id,
     bool? isRequired,
+    MessageComponentType? type,
   });
   SelectMenuComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -1177,7 +1244,6 @@ class _SelectMenuComponentCopyWithImpl<$R, $Out>
       : null;
   @override
   $R call({
-    MessageComponentType? type,
     String? customId,
     Object? options = $none,
     Object? channelTypes = $none,
@@ -1188,9 +1254,9 @@ class _SelectMenuComponentCopyWithImpl<$R, $Out>
     Object? isDisabled = $none,
     int? id,
     Object? isRequired = $none,
+    MessageComponentType? type,
   }) => $apply(
     FieldCopyWithData({
-      if (type != null) #type: type,
       if (customId != null) #customId: customId,
       if (options != $none) #options: options,
       if (channelTypes != $none) #channelTypes: channelTypes,
@@ -1201,11 +1267,11 @@ class _SelectMenuComponentCopyWithImpl<$R, $Out>
       if (isDisabled != $none) #isDisabled: isDisabled,
       if (id != null) #id: id,
       if (isRequired != $none) #isRequired: isRequired,
+      if (type != null) #type: type,
     }),
   );
   @override
   SelectMenuComponent $make(CopyWithData data) => SelectMenuComponent(
-    type: data.get(#type, or: $value.type),
     customId: data.get(#customId, or: $value.customId),
     options: data.get(#options, or: $value.options),
     channelTypes: data.get(#channelTypes, or: $value.channelTypes),
@@ -1216,6 +1282,7 @@ class _SelectMenuComponentCopyWithImpl<$R, $Out>
     isDisabled: data.get(#isDisabled, or: $value.isDisabled),
     id: data.get(#id, or: $value.id),
     isRequired: data.get(#isRequired, or: $value.isRequired),
+    type: data.get(#type, or: $value.type),
   );
 
   @override
@@ -1539,484 +1606,14 @@ class _SelectMenuDefaultValueCopyWithImpl<$R, $Out>
       _SelectMenuDefaultValueCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class TextInputComponentMapper extends ClassMapperBase<TextInputComponent> {
-  TextInputComponentMapper._();
-
-  static TextInputComponentMapper? _instance;
-  static TextInputComponentMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = TextInputComponentMapper._());
-      MessageComponentMapper.ensureInitialized();
-      TextInputStyleMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'TextInputComponent';
-
-  static String _$customId(TextInputComponent v) => v.customId;
-  static const Field<TextInputComponent, String> _f$customId = Field(
-    'customId',
-    _$customId,
-    key: r'custom_id',
-  );
-  static TextInputStyle? _$style(TextInputComponent v) => v.style;
-  static const Field<TextInputComponent, TextInputStyle> _f$style = Field(
-    'style',
-    _$style,
-  );
-  static String? _$label(TextInputComponent v) => v.label;
-  static const Field<TextInputComponent, String> _f$label = Field(
-    'label',
-    _$label,
-  );
-  static int? _$minLength(TextInputComponent v) => v.minLength;
-  static const Field<TextInputComponent, int> _f$minLength = Field(
-    'minLength',
-    _$minLength,
-    key: r'min_length',
-  );
-  static int? _$maxLength(TextInputComponent v) => v.maxLength;
-  static const Field<TextInputComponent, int> _f$maxLength = Field(
-    'maxLength',
-    _$maxLength,
-    key: r'max_length',
-  );
-  static bool? _$isRequired(TextInputComponent v) => v.isRequired;
-  static const Field<TextInputComponent, bool> _f$isRequired = Field(
-    'isRequired',
-    _$isRequired,
-    key: r'is_required',
-  );
-  static String? _$value(TextInputComponent v) => v.value;
-  static const Field<TextInputComponent, String> _f$value = Field(
-    'value',
-    _$value,
-  );
-  static String? _$placeholder(TextInputComponent v) => v.placeholder;
-  static const Field<TextInputComponent, String> _f$placeholder = Field(
-    'placeholder',
-    _$placeholder,
-  );
-  static int _$id(TextInputComponent v) => v.id;
-  static const Field<TextInputComponent, int> _f$id = Field('id', _$id);
-
-  @override
-  final MappableFields<TextInputComponent> fields = const {
-    #customId: _f$customId,
-    #style: _f$style,
-    #label: _f$label,
-    #minLength: _f$minLength,
-    #maxLength: _f$maxLength,
-    #isRequired: _f$isRequired,
-    #value: _f$value,
-    #placeholder: _f$placeholder,
-    #id: _f$id,
-  };
-
-  static TextInputComponent _instantiate(DecodingData data) {
-    return TextInputComponent(
-      customId: data.dec(_f$customId),
-      style: data.dec(_f$style),
-      label: data.dec(_f$label),
-      minLength: data.dec(_f$minLength),
-      maxLength: data.dec(_f$maxLength),
-      isRequired: data.dec(_f$isRequired),
-      value: data.dec(_f$value),
-      placeholder: data.dec(_f$placeholder),
-      id: data.dec(_f$id),
-    );
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static TextInputComponent fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<TextInputComponent>(map);
-  }
-
-  static TextInputComponent fromJson(String json) {
-    return ensureInitialized().decodeJson<TextInputComponent>(json);
-  }
-}
-
-mixin TextInputComponentMappable {
-  String toJson() {
-    return TextInputComponentMapper.ensureInitialized()
-        .encodeJson<TextInputComponent>(this as TextInputComponent);
-  }
-
-  Map<String, dynamic> toMap() {
-    return TextInputComponentMapper.ensureInitialized()
-        .encodeMap<TextInputComponent>(this as TextInputComponent);
-  }
-
-  TextInputComponentCopyWith<
-    TextInputComponent,
-    TextInputComponent,
-    TextInputComponent
-  >
-  get copyWith =>
-      _TextInputComponentCopyWithImpl<TextInputComponent, TextInputComponent>(
-        this as TextInputComponent,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return TextInputComponentMapper.ensureInitialized().stringifyValue(
-      this as TextInputComponent,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return TextInputComponentMapper.ensureInitialized().equalsValue(
-      this as TextInputComponent,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return TextInputComponentMapper.ensureInitialized().hashValue(
-      this as TextInputComponent,
-    );
-  }
-}
-
-extension TextInputComponentValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, TextInputComponent, $Out> {
-  TextInputComponentCopyWith<$R, TextInputComponent, $Out>
-  get $asTextInputComponent => $base.as(
-    (v, t, t2) => _TextInputComponentCopyWithImpl<$R, $Out>(v, t, t2),
-  );
-}
-
-abstract class TextInputComponentCopyWith<
-  $R,
-  $In extends TextInputComponent,
-  $Out
->
-    implements
-        MessageComponentCopyWith<$R, $In, $Out>,
-        SubmittedTextInputComponentCopyWith<$R, $In, $Out> {
-  @override
-  $R call({
-    String? customId,
-    TextInputStyle? style,
-    String? label,
-    int? minLength,
-    int? maxLength,
-    bool? isRequired,
-    String? value,
-    String? placeholder,
-    int? id,
-  });
-  TextInputComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _TextInputComponentCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, TextInputComponent, $Out>
-    implements TextInputComponentCopyWith<$R, TextInputComponent, $Out> {
-  _TextInputComponentCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<TextInputComponent> $mapper =
-      TextInputComponentMapper.ensureInitialized();
-  @override
-  $R call({
-    String? customId,
-    Object? style = $none,
-    Object? label = $none,
-    Object? minLength = $none,
-    Object? maxLength = $none,
-    Object? isRequired = $none,
-    Object? value = $none,
-    Object? placeholder = $none,
-    int? id,
-  }) => $apply(
-    FieldCopyWithData({
-      if (customId != null) #customId: customId,
-      if (style != $none) #style: style,
-      if (label != $none) #label: label,
-      if (minLength != $none) #minLength: minLength,
-      if (maxLength != $none) #maxLength: maxLength,
-      if (isRequired != $none) #isRequired: isRequired,
-      if (value != $none) #value: value,
-      if (placeholder != $none) #placeholder: placeholder,
-      if (id != null) #id: id,
-    }),
-  );
-  @override
-  TextInputComponent $make(CopyWithData data) => TextInputComponent(
-    customId: data.get(#customId, or: $value.customId),
-    style: data.get(#style, or: $value.style),
-    label: data.get(#label, or: $value.label),
-    minLength: data.get(#minLength, or: $value.minLength),
-    maxLength: data.get(#maxLength, or: $value.maxLength),
-    isRequired: data.get(#isRequired, or: $value.isRequired),
-    value: data.get(#value, or: $value.value),
-    placeholder: data.get(#placeholder, or: $value.placeholder),
-    id: data.get(#id, or: $value.id),
-  );
-
-  @override
-  TextInputComponentCopyWith<$R2, TextInputComponent, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _TextInputComponentCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
-class SubmittedTextInputComponentMapper
-    extends ClassMapperBase<SubmittedTextInputComponent> {
-  SubmittedTextInputComponentMapper._();
-
-  static SubmittedTextInputComponentMapper? _instance;
-  static SubmittedTextInputComponentMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(
-        _instance = SubmittedTextInputComponentMapper._(),
-      );
-      SubmittedComponentMapper.ensureInitialized();
-      TextInputComponentMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'SubmittedTextInputComponent';
-
-  static int _$id(SubmittedTextInputComponent v) => v.id;
-  static const Field<SubmittedTextInputComponent, int> _f$id = Field(
-    'id',
-    _$id,
-  );
-  static String _$customId(SubmittedTextInputComponent v) => v.customId;
-  static const Field<SubmittedTextInputComponent, String> _f$customId = Field(
-    'customId',
-    _$customId,
-    key: r'custom_id',
-  );
-  static String? _$value(SubmittedTextInputComponent v) => v.value;
-  static const Field<SubmittedTextInputComponent, String> _f$value = Field(
-    'value',
-    _$value,
-  );
-
-  @override
-  final MappableFields<SubmittedTextInputComponent> fields = const {
-    #id: _f$id,
-    #customId: _f$customId,
-    #value: _f$value,
-  };
-
-  static SubmittedTextInputComponent _instantiate(DecodingData data) {
-    return SubmittedTextInputComponent(
-      id: data.dec(_f$id),
-      customId: data.dec(_f$customId),
-      value: data.dec(_f$value),
-    );
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static SubmittedTextInputComponent fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<SubmittedTextInputComponent>(map);
-  }
-
-  static SubmittedTextInputComponent fromJson(String json) {
-    return ensureInitialized().decodeJson<SubmittedTextInputComponent>(json);
-  }
-}
-
-mixin SubmittedTextInputComponentMappable {
-  String toJson() {
-    return SubmittedTextInputComponentMapper.ensureInitialized()
-        .encodeJson<SubmittedTextInputComponent>(
-          this as SubmittedTextInputComponent,
-        );
-  }
-
-  Map<String, dynamic> toMap() {
-    return SubmittedTextInputComponentMapper.ensureInitialized()
-        .encodeMap<SubmittedTextInputComponent>(
-          this as SubmittedTextInputComponent,
-        );
-  }
-
-  SubmittedTextInputComponentCopyWith<
-    SubmittedTextInputComponent,
-    SubmittedTextInputComponent,
-    SubmittedTextInputComponent
-  >
-  get copyWith =>
-      _SubmittedTextInputComponentCopyWithImpl<
-        SubmittedTextInputComponent,
-        SubmittedTextInputComponent
-      >(this as SubmittedTextInputComponent, $identity, $identity);
-  @override
-  String toString() {
-    return SubmittedTextInputComponentMapper.ensureInitialized().stringifyValue(
-      this as SubmittedTextInputComponent,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return SubmittedTextInputComponentMapper.ensureInitialized().equalsValue(
-      this as SubmittedTextInputComponent,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return SubmittedTextInputComponentMapper.ensureInitialized().hashValue(
-      this as SubmittedTextInputComponent,
-    );
-  }
-}
-
-extension SubmittedTextInputComponentValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, SubmittedTextInputComponent, $Out> {
-  SubmittedTextInputComponentCopyWith<$R, SubmittedTextInputComponent, $Out>
-  get $asSubmittedTextInputComponent => $base.as(
-    (v, t, t2) => _SubmittedTextInputComponentCopyWithImpl<$R, $Out>(v, t, t2),
-  );
-}
-
-abstract class SubmittedTextInputComponentCopyWith<
-  $R,
-  $In extends SubmittedTextInputComponent,
-  $Out
->
-    implements SubmittedComponentCopyWith<$R, $In, $Out> {
-  @override
-  $R call({int? id, String? customId, String? value});
-  SubmittedTextInputComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _SubmittedTextInputComponentCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, SubmittedTextInputComponent, $Out>
-    implements
-        SubmittedTextInputComponentCopyWith<
-          $R,
-          SubmittedTextInputComponent,
-          $Out
-        > {
-  _SubmittedTextInputComponentCopyWithImpl(
-    super.value,
-    super.then,
-    super.then2,
-  );
-
-  @override
-  late final ClassMapperBase<SubmittedTextInputComponent> $mapper =
-      SubmittedTextInputComponentMapper.ensureInitialized();
-  @override
-  $R call({int? id, String? customId, Object? value = $none}) => $apply(
-    FieldCopyWithData({
-      if (id != null) #id: id,
-      if (customId != null) #customId: customId,
-      if (value != $none) #value: value,
-    }),
-  );
-  @override
-  SubmittedTextInputComponent $make(CopyWithData data) =>
-      SubmittedTextInputComponent(
-        id: data.get(#id, or: $value.id),
-        customId: data.get(#customId, or: $value.customId),
-        value: data.get(#value, or: $value.value),
-      );
-
-  @override
-  SubmittedTextInputComponentCopyWith<$R2, SubmittedTextInputComponent, $Out2>
-  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _SubmittedTextInputComponentCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
-class SubmittedComponentMapper extends ClassMapperBase<SubmittedComponent> {
-  SubmittedComponentMapper._();
-
-  static SubmittedComponentMapper? _instance;
-  static SubmittedComponentMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = SubmittedComponentMapper._());
-      MessageComponentMapper.ensureInitialized();
-      SubmittedTextInputComponentMapper.ensureInitialized();
-      UnknownComponentMapper.ensureInitialized();
-      SubmittedFileUploadComponentMapper.ensureInitialized();
-      SubmittedActionRowComponentMapper.ensureInitialized();
-      SubmittedLabelComponentMapper.ensureInitialized();
-      SubmittedSelectMenuComponentMapper.ensureInitialized();
-      SubmittedTextDisplayComponentMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'SubmittedComponent';
-
-  static int _$id(SubmittedComponent v) => v.id;
-  static const Field<SubmittedComponent, int> _f$id = Field('id', _$id);
-
-  @override
-  final MappableFields<SubmittedComponent> fields = const {#id: _f$id};
-
-  static SubmittedComponent _instantiate(DecodingData data) {
-    throw MapperException.missingConstructor('SubmittedComponent');
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static SubmittedComponent fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<SubmittedComponent>(map);
-  }
-
-  static SubmittedComponent fromJson(String json) {
-    return ensureInitialized().decodeJson<SubmittedComponent>(json);
-  }
-}
-
-mixin SubmittedComponentMappable {
-  String toJson();
-  Map<String, dynamic> toMap();
-  SubmittedComponentCopyWith<
-    SubmittedComponent,
-    SubmittedComponent,
-    SubmittedComponent
-  >
-  get copyWith;
-}
-
-abstract class SubmittedComponentCopyWith<
-  $R,
-  $In extends SubmittedComponent,
-  $Out
->
-    implements MessageComponentCopyWith<$R, $In, $Out> {
-  @override
-  $R call({int? id});
-  SubmittedComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class UnknownComponentMapper extends ClassMapperBase<UnknownComponent> {
+class UnknownComponentMapper extends SubClassMapperBase<UnknownComponent> {
   UnknownComponentMapper._();
 
   static UnknownComponentMapper? _instance;
   static UnknownComponentMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = UnknownComponentMapper._());
-      MessageComponentMapper.ensureInitialized();
+      MessageComponentMapper.ensureInitialized().addSubMapper(_instance!);
       MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
@@ -2025,22 +1622,30 @@ class UnknownComponentMapper extends ClassMapperBase<UnknownComponent> {
   @override
   final String id = 'UnknownComponent';
 
+  static int _$id(UnknownComponent v) => v.id;
+  static const Field<UnknownComponent, int> _f$id = Field('id', _$id);
   static MessageComponentType _$type(UnknownComponent v) => v.type;
   static const Field<UnknownComponent, MessageComponentType> _f$type = Field(
     'type',
     _$type,
   );
-  static int _$id(UnknownComponent v) => v.id;
-  static const Field<UnknownComponent, int> _f$id = Field('id', _$id);
 
   @override
   final MappableFields<UnknownComponent> fields = const {
-    #type: _f$type,
     #id: _f$id,
+    #type: _f$type,
   };
 
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'UnknownComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      MessageComponentMapper.ensureInitialized();
+
   static UnknownComponent _instantiate(DecodingData data) {
-    return UnknownComponent(type: data.dec(_f$type), id: data.dec(_f$id));
+    return UnknownComponent(id: data.dec(_f$id), type: data.dec(_f$type));
   }
 
   @override
@@ -2104,11 +1709,9 @@ extension UnknownComponentValueCopy<$R, $Out>
 }
 
 abstract class UnknownComponentCopyWith<$R, $In extends UnknownComponent, $Out>
-    implements
-        MessageComponentCopyWith<$R, $In, $Out>,
-        SubmittedComponentCopyWith<$R, $In, $Out> {
+    implements MessageComponentCopyWith<$R, $In, $Out> {
   @override
-  $R call({MessageComponentType? type, int? id});
+  $R call({int? id, MessageComponentType? type});
   UnknownComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -2123,13 +1726,13 @@ class _UnknownComponentCopyWithImpl<$R, $Out>
   late final ClassMapperBase<UnknownComponent> $mapper =
       UnknownComponentMapper.ensureInitialized();
   @override
-  $R call({MessageComponentType? type, int? id}) => $apply(
-    FieldCopyWithData({if (type != null) #type: type, if (id != null) #id: id}),
+  $R call({int? id, MessageComponentType? type}) => $apply(
+    FieldCopyWithData({if (id != null) #id: id, if (type != null) #type: type}),
   );
   @override
   UnknownComponent $make(CopyWithData data) => UnknownComponent(
-    type: data.get(#type, or: $value.type),
     id: data.get(#id, or: $value.id),
+    type: data.get(#type, or: $value.type),
   );
 
   @override
@@ -2138,16 +1741,17 @@ class _UnknownComponentCopyWithImpl<$R, $Out>
   ) => _UnknownComponentCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class SectionComponentMapper extends ClassMapperBase<SectionComponent> {
+class SectionComponentMapper extends SubClassMapperBase<SectionComponent> {
   SectionComponentMapper._();
 
   static SectionComponentMapper? _instance;
   static SectionComponentMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = SectionComponentMapper._());
-      MessageComponentMapper.ensureInitialized();
+      MessageComponentMapper.ensureInitialized().addSubMapper(_instance!);
       TextDisplayComponentMapper.ensureInitialized();
       MessageComponentMapper.ensureInitialized();
+      MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -2166,19 +1770,34 @@ class SectionComponentMapper extends ClassMapperBase<SectionComponent> {
     'accessory',
     _$accessory,
   );
+  static MessageComponentType _$type(SectionComponent v) => v.type;
+  static const Field<SectionComponent, MessageComponentType> _f$type = Field(
+    'type',
+    _$type,
+  );
 
   @override
   final MappableFields<SectionComponent> fields = const {
     #id: _f$id,
     #components: _f$components,
     #accessory: _f$accessory,
+    #type: _f$type,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'SectionComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      MessageComponentMapper.ensureInitialized();
 
   static SectionComponent _instantiate(DecodingData data) {
     return SectionComponent(
       id: data.dec(_f$id),
       components: data.dec(_f$components),
       accessory: data.dec(_f$accessory),
+      type: data.dec(_f$type),
     );
   }
 
@@ -2257,6 +1876,7 @@ abstract class SectionComponentCopyWith<$R, $In extends SectionComponent, $Out>
     int? id,
     List<TextDisplayComponent>? components,
     MessageComponent? accessory,
+    MessageComponentType? type,
   });
   SectionComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -2290,11 +1910,13 @@ class _SectionComponentCopyWithImpl<$R, $Out>
     int? id,
     List<TextDisplayComponent>? components,
     MessageComponent? accessory,
+    MessageComponentType? type,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
       if (components != null) #components: components,
       if (accessory != null) #accessory: accessory,
+      if (type != null) #type: type,
     }),
   );
   @override
@@ -2302,6 +1924,7 @@ class _SectionComponentCopyWithImpl<$R, $Out>
     id: data.get(#id, or: $value.id),
     components: data.get(#components, or: $value.components),
     accessory: data.get(#accessory, or: $value.accessory),
+    type: data.get(#type, or: $value.type),
   );
 
   @override
@@ -2310,14 +1933,16 @@ class _SectionComponentCopyWithImpl<$R, $Out>
   ) => _SectionComponentCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class TextDisplayComponentMapper extends ClassMapperBase<TextDisplayComponent> {
+class TextDisplayComponentMapper
+    extends SubClassMapperBase<TextDisplayComponent> {
   TextDisplayComponentMapper._();
 
   static TextDisplayComponentMapper? _instance;
   static TextDisplayComponentMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = TextDisplayComponentMapper._());
-      MessageComponentMapper.ensureInitialized();
+      MessageComponentMapper.ensureInitialized().addSubMapper(_instance!);
+      MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -2332,17 +1957,30 @@ class TextDisplayComponentMapper extends ClassMapperBase<TextDisplayComponent> {
     'content',
     _$content,
   );
+  static MessageComponentType _$type(TextDisplayComponent v) => v.type;
+  static const Field<TextDisplayComponent, MessageComponentType> _f$type =
+      Field('type', _$type);
 
   @override
   final MappableFields<TextDisplayComponent> fields = const {
     #id: _f$id,
     #content: _f$content,
+    #type: _f$type,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'TextDisplayComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      MessageComponentMapper.ensureInitialized();
 
   static TextDisplayComponent _instantiate(DecodingData data) {
     return TextDisplayComponent(
       id: data.dec(_f$id),
       content: data.dec(_f$content),
+      type: data.dec(_f$type),
     );
   }
 
@@ -2417,7 +2055,7 @@ abstract class TextDisplayComponentCopyWith<
 >
     implements MessageComponentCopyWith<$R, $In, $Out> {
   @override
-  $R call({int? id, String? content});
+  $R call({int? id, String? content, MessageComponentType? type});
   TextDisplayComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -2432,16 +2070,18 @@ class _TextDisplayComponentCopyWithImpl<$R, $Out>
   late final ClassMapperBase<TextDisplayComponent> $mapper =
       TextDisplayComponentMapper.ensureInitialized();
   @override
-  $R call({int? id, String? content}) => $apply(
+  $R call({int? id, String? content, MessageComponentType? type}) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
       if (content != null) #content: content,
+      if (type != null) #type: type,
     }),
   );
   @override
   TextDisplayComponent $make(CopyWithData data) => TextDisplayComponent(
     id: data.get(#id, or: $value.id),
     content: data.get(#content, or: $value.content),
+    type: data.get(#type, or: $value.type),
   );
 
   @override
@@ -2450,15 +2090,16 @@ class _TextDisplayComponentCopyWithImpl<$R, $Out>
       _TextDisplayComponentCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class ThumbnailComponentMapper extends ClassMapperBase<ThumbnailComponent> {
+class ThumbnailComponentMapper extends SubClassMapperBase<ThumbnailComponent> {
   ThumbnailComponentMapper._();
 
   static ThumbnailComponentMapper? _instance;
   static ThumbnailComponentMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ThumbnailComponentMapper._());
-      MessageComponentMapper.ensureInitialized();
+      MessageComponentMapper.ensureInitialized().addSubMapper(_instance!);
       UnfurledMediaItemMapper.ensureInitialized();
+      MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -2484,6 +2125,11 @@ class ThumbnailComponentMapper extends ClassMapperBase<ThumbnailComponent> {
     _$isSpoiler,
     key: r'is_spoiler',
   );
+  static MessageComponentType _$type(ThumbnailComponent v) => v.type;
+  static const Field<ThumbnailComponent, MessageComponentType> _f$type = Field(
+    'type',
+    _$type,
+  );
 
   @override
   final MappableFields<ThumbnailComponent> fields = const {
@@ -2491,7 +2137,16 @@ class ThumbnailComponentMapper extends ClassMapperBase<ThumbnailComponent> {
     #media: _f$media,
     #description: _f$description,
     #isSpoiler: _f$isSpoiler,
+    #type: _f$type,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'ThumbnailComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      MessageComponentMapper.ensureInitialized();
 
   static ThumbnailComponent _instantiate(DecodingData data) {
     return ThumbnailComponent(
@@ -2499,6 +2154,7 @@ class ThumbnailComponentMapper extends ClassMapperBase<ThumbnailComponent> {
       media: data.dec(_f$media),
       description: data.dec(_f$description),
       isSpoiler: data.dec(_f$isSpoiler),
+      type: data.dec(_f$type),
     );
   }
 
@@ -2580,6 +2236,7 @@ abstract class ThumbnailComponentCopyWith<
     UnfurledMediaItem? media,
     String? description,
     bool? isSpoiler,
+    MessageComponentType? type,
   });
   ThumbnailComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -2603,12 +2260,14 @@ class _ThumbnailComponentCopyWithImpl<$R, $Out>
     UnfurledMediaItem? media,
     Object? description = $none,
     Object? isSpoiler = $none,
+    MessageComponentType? type,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
       if (media != null) #media: media,
       if (description != $none) #description: description,
       if (isSpoiler != $none) #isSpoiler: isSpoiler,
+      if (type != null) #type: type,
     }),
   );
   @override
@@ -2617,6 +2276,7 @@ class _ThumbnailComponentCopyWithImpl<$R, $Out>
     media: data.get(#media, or: $value.media),
     description: data.get(#description, or: $value.description),
     isSpoiler: data.get(#isSpoiler, or: $value.isSpoiler),
+    type: data.get(#type, or: $value.type),
   );
 
   @override
@@ -2778,15 +2438,16 @@ class _MediaGalleryItemCopyWithImpl<$R, $Out>
 }
 
 class MediaGalleryComponentMapper
-    extends ClassMapperBase<MediaGalleryComponent> {
+    extends SubClassMapperBase<MediaGalleryComponent> {
   MediaGalleryComponentMapper._();
 
   static MediaGalleryComponentMapper? _instance;
   static MediaGalleryComponentMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = MediaGalleryComponentMapper._());
-      MessageComponentMapper.ensureInitialized();
+      MessageComponentMapper.ensureInitialized().addSubMapper(_instance!);
       MediaGalleryItemMapper.ensureInitialized();
+      MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -2799,17 +2460,30 @@ class MediaGalleryComponentMapper
   static List<MediaGalleryItem> _$items(MediaGalleryComponent v) => v.items;
   static const Field<MediaGalleryComponent, List<MediaGalleryItem>> _f$items =
       Field('items', _$items);
+  static MessageComponentType _$type(MediaGalleryComponent v) => v.type;
+  static const Field<MediaGalleryComponent, MessageComponentType> _f$type =
+      Field('type', _$type);
 
   @override
   final MappableFields<MediaGalleryComponent> fields = const {
     #id: _f$id,
     #items: _f$items,
+    #type: _f$type,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'MediaGalleryComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      MessageComponentMapper.ensureInitialized();
 
   static MediaGalleryComponent _instantiate(DecodingData data) {
     return MediaGalleryComponent(
       id: data.dec(_f$id),
       items: data.dec(_f$items),
+      type: data.dec(_f$type),
     );
   }
 
@@ -2890,7 +2564,7 @@ abstract class MediaGalleryComponentCopyWith<
   >
   get items;
   @override
-  $R call({int? id, List<MediaGalleryItem>? items});
+  $R call({int? id, List<MediaGalleryItem>? items, MessageComponentType? type});
   MediaGalleryComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -2916,16 +2590,22 @@ class _MediaGalleryComponentCopyWithImpl<$R, $Out>
     (v) => call(items: v),
   );
   @override
-  $R call({int? id, List<MediaGalleryItem>? items}) => $apply(
+  $R call({
+    int? id,
+    List<MediaGalleryItem>? items,
+    MessageComponentType? type,
+  }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
       if (items != null) #items: items,
+      if (type != null) #type: type,
     }),
   );
   @override
   MediaGalleryComponent $make(CopyWithData data) => MediaGalleryComponent(
     id: data.get(#id, or: $value.id),
     items: data.get(#items, or: $value.items),
+    type: data.get(#type, or: $value.type),
   );
 
   @override
@@ -2934,15 +2614,16 @@ class _MediaGalleryComponentCopyWithImpl<$R, $Out>
       _MediaGalleryComponentCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class SeparatorComponentMapper extends ClassMapperBase<SeparatorComponent> {
+class SeparatorComponentMapper extends SubClassMapperBase<SeparatorComponent> {
   SeparatorComponentMapper._();
 
   static SeparatorComponentMapper? _instance;
   static SeparatorComponentMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = SeparatorComponentMapper._());
-      MessageComponentMapper.ensureInitialized();
+      MessageComponentMapper.ensureInitialized().addSubMapper(_instance!);
       SeparatorSpacingSizeMapper.ensureInitialized();
+      MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -2961,19 +2642,34 @@ class SeparatorComponentMapper extends ClassMapperBase<SeparatorComponent> {
   static SeparatorSpacingSize? _$spacing(SeparatorComponent v) => v.spacing;
   static const Field<SeparatorComponent, SeparatorSpacingSize> _f$spacing =
       Field('spacing', _$spacing);
+  static MessageComponentType _$type(SeparatorComponent v) => v.type;
+  static const Field<SeparatorComponent, MessageComponentType> _f$type = Field(
+    'type',
+    _$type,
+  );
 
   @override
   final MappableFields<SeparatorComponent> fields = const {
     #id: _f$id,
     #isDivider: _f$isDivider,
     #spacing: _f$spacing,
+    #type: _f$type,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'SeparatorComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      MessageComponentMapper.ensureInitialized();
 
   static SeparatorComponent _instantiate(DecodingData data) {
     return SeparatorComponent(
       id: data.dec(_f$id),
       isDivider: data.dec(_f$isDivider),
       spacing: data.dec(_f$spacing),
+      type: data.dec(_f$type),
     );
   }
 
@@ -3049,7 +2745,12 @@ abstract class SeparatorComponentCopyWith<
 >
     implements MessageComponentCopyWith<$R, $In, $Out> {
   @override
-  $R call({int? id, bool? isDivider, SeparatorSpacingSize? spacing});
+  $R call({
+    int? id,
+    bool? isDivider,
+    SeparatorSpacingSize? spacing,
+    MessageComponentType? type,
+  });
   SeparatorComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -3064,19 +2765,25 @@ class _SeparatorComponentCopyWithImpl<$R, $Out>
   late final ClassMapperBase<SeparatorComponent> $mapper =
       SeparatorComponentMapper.ensureInitialized();
   @override
-  $R call({int? id, Object? isDivider = $none, Object? spacing = $none}) =>
-      $apply(
-        FieldCopyWithData({
-          if (id != null) #id: id,
-          if (isDivider != $none) #isDivider: isDivider,
-          if (spacing != $none) #spacing: spacing,
-        }),
-      );
+  $R call({
+    int? id,
+    Object? isDivider = $none,
+    Object? spacing = $none,
+    MessageComponentType? type,
+  }) => $apply(
+    FieldCopyWithData({
+      if (id != null) #id: id,
+      if (isDivider != $none) #isDivider: isDivider,
+      if (spacing != $none) #spacing: spacing,
+      if (type != null) #type: type,
+    }),
+  );
   @override
   SeparatorComponent $make(CopyWithData data) => SeparatorComponent(
     id: data.get(#id, or: $value.id),
     isDivider: data.get(#isDivider, or: $value.isDivider),
     spacing: data.get(#spacing, or: $value.spacing),
+    type: data.get(#type, or: $value.type),
   );
 
   @override
@@ -3085,15 +2792,16 @@ class _SeparatorComponentCopyWithImpl<$R, $Out>
   ) => _SeparatorComponentCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class FileComponentMapper extends ClassMapperBase<FileComponent> {
+class FileComponentMapper extends SubClassMapperBase<FileComponent> {
   FileComponentMapper._();
 
   static FileComponentMapper? _instance;
   static FileComponentMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = FileComponentMapper._());
-      MessageComponentMapper.ensureInitialized();
+      MessageComponentMapper.ensureInitialized().addSubMapper(_instance!);
       UnfurledMediaItemMapper.ensureInitialized();
+      MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -3114,19 +2822,34 @@ class FileComponentMapper extends ClassMapperBase<FileComponent> {
     _$isSpoiler,
     key: r'is_spoiler',
   );
+  static MessageComponentType _$type(FileComponent v) => v.type;
+  static const Field<FileComponent, MessageComponentType> _f$type = Field(
+    'type',
+    _$type,
+  );
 
   @override
   final MappableFields<FileComponent> fields = const {
     #id: _f$id,
     #file: _f$file,
     #isSpoiler: _f$isSpoiler,
+    #type: _f$type,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'FileComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      MessageComponentMapper.ensureInitialized();
 
   static FileComponent _instantiate(DecodingData data) {
     return FileComponent(
       id: data.dec(_f$id),
       file: data.dec(_f$file),
       isSpoiler: data.dec(_f$isSpoiler),
+      type: data.dec(_f$type),
     );
   }
 
@@ -3194,7 +2917,12 @@ abstract class FileComponentCopyWith<$R, $In extends FileComponent, $Out>
     implements MessageComponentCopyWith<$R, $In, $Out> {
   UnfurledMediaItemCopyWith<$R, UnfurledMediaItem, UnfurledMediaItem> get file;
   @override
-  $R call({int? id, UnfurledMediaItem? file, bool? isSpoiler});
+  $R call({
+    int? id,
+    UnfurledMediaItem? file,
+    bool? isSpoiler,
+    MessageComponentType? type,
+  });
   FileComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -3210,19 +2938,25 @@ class _FileComponentCopyWithImpl<$R, $Out>
   UnfurledMediaItemCopyWith<$R, UnfurledMediaItem, UnfurledMediaItem>
   get file => $value.file.copyWith.$chain((v) => call(file: v));
   @override
-  $R call({int? id, UnfurledMediaItem? file, Object? isSpoiler = $none}) =>
-      $apply(
-        FieldCopyWithData({
-          if (id != null) #id: id,
-          if (file != null) #file: file,
-          if (isSpoiler != $none) #isSpoiler: isSpoiler,
-        }),
-      );
+  $R call({
+    int? id,
+    UnfurledMediaItem? file,
+    Object? isSpoiler = $none,
+    MessageComponentType? type,
+  }) => $apply(
+    FieldCopyWithData({
+      if (id != null) #id: id,
+      if (file != null) #file: file,
+      if (isSpoiler != $none) #isSpoiler: isSpoiler,
+      if (type != null) #type: type,
+    }),
+  );
   @override
   FileComponent $make(CopyWithData data) => FileComponent(
     id: data.get(#id, or: $value.id),
     file: data.get(#file, or: $value.file),
     isSpoiler: data.get(#isSpoiler, or: $value.isSpoiler),
+    type: data.get(#type, or: $value.type),
   );
 
   @override
@@ -3231,15 +2965,16 @@ class _FileComponentCopyWithImpl<$R, $Out>
   ) => _FileComponentCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class ContainerComponentMapper extends ClassMapperBase<ContainerComponent> {
+class ContainerComponentMapper extends SubClassMapperBase<ContainerComponent> {
   ContainerComponentMapper._();
 
   static ContainerComponentMapper? _instance;
   static ContainerComponentMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ContainerComponentMapper._());
+      MessageComponentMapper.ensureInitialized().addSubMapper(_instance!);
       MessageComponentMapper.ensureInitialized();
-      MessageComponentMapper.ensureInitialized();
+      MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -3265,6 +3000,11 @@ class ContainerComponentMapper extends ClassMapperBase<ContainerComponent> {
       v.components;
   static const Field<ContainerComponent, List<MessageComponent>> _f$components =
       Field('components', _$components);
+  static MessageComponentType _$type(ContainerComponent v) => v.type;
+  static const Field<ContainerComponent, MessageComponentType> _f$type = Field(
+    'type',
+    _$type,
+  );
 
   @override
   final MappableFields<ContainerComponent> fields = const {
@@ -3272,7 +3012,16 @@ class ContainerComponentMapper extends ClassMapperBase<ContainerComponent> {
     #accentColor: _f$accentColor,
     #isSpoiler: _f$isSpoiler,
     #components: _f$components,
+    #type: _f$type,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'ContainerComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      MessageComponentMapper.ensureInitialized();
 
   static ContainerComponent _instantiate(DecodingData data) {
     return ContainerComponent(
@@ -3280,6 +3029,7 @@ class ContainerComponentMapper extends ClassMapperBase<ContainerComponent> {
       accentColor: data.dec(_f$accentColor),
       isSpoiler: data.dec(_f$isSpoiler),
       components: data.dec(_f$components),
+      type: data.dec(_f$type),
     );
   }
 
@@ -3366,6 +3116,7 @@ abstract class ContainerComponentCopyWith<
     DiscordColor? accentColor,
     bool? isSpoiler,
     List<MessageComponent>? components,
+    MessageComponentType? type,
   });
   ContainerComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -3397,12 +3148,14 @@ class _ContainerComponentCopyWithImpl<$R, $Out>
     Object? accentColor = $none,
     Object? isSpoiler = $none,
     List<MessageComponent>? components,
+    MessageComponentType? type,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
       if (accentColor != $none) #accentColor: accentColor,
       if (isSpoiler != $none) #isSpoiler: isSpoiler,
       if (components != null) #components: components,
+      if (type != null) #type: type,
     }),
   );
   @override
@@ -3411,6 +3164,7 @@ class _ContainerComponentCopyWithImpl<$R, $Out>
     accentColor: data.get(#accentColor, or: $value.accentColor),
     isSpoiler: data.get(#isSpoiler, or: $value.isSpoiler),
     components: data.get(#components, or: $value.components),
+    type: data.get(#type, or: $value.type),
   );
 
   @override
@@ -3419,14 +3173,16 @@ class _ContainerComponentCopyWithImpl<$R, $Out>
   ) => _ContainerComponentCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class FileUploadComponentMapper extends ClassMapperBase<FileUploadComponent> {
+class FileUploadComponentMapper
+    extends SubClassMapperBase<FileUploadComponent> {
   FileUploadComponentMapper._();
 
   static FileUploadComponentMapper? _instance;
   static FileUploadComponentMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = FileUploadComponentMapper._());
-      MessageComponentMapper.ensureInitialized();
+      MessageComponentMapper.ensureInitialized().addSubMapper(_instance!);
+      MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -3460,6 +3216,11 @@ class FileUploadComponentMapper extends ClassMapperBase<FileUploadComponent> {
     _$isRequired,
     key: r'is_required',
   );
+  static MessageComponentType _$type(FileUploadComponent v) => v.type;
+  static const Field<FileUploadComponent, MessageComponentType> _f$type = Field(
+    'type',
+    _$type,
+  );
 
   @override
   final MappableFields<FileUploadComponent> fields = const {
@@ -3468,7 +3229,16 @@ class FileUploadComponentMapper extends ClassMapperBase<FileUploadComponent> {
     #minValues: _f$minValues,
     #maxValues: _f$maxValues,
     #isRequired: _f$isRequired,
+    #type: _f$type,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'FileUploadComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      MessageComponentMapper.ensureInitialized();
 
   static FileUploadComponent _instantiate(DecodingData data) {
     return FileUploadComponent(
@@ -3477,6 +3247,7 @@ class FileUploadComponentMapper extends ClassMapperBase<FileUploadComponent> {
       minValues: data.dec(_f$minValues),
       maxValues: data.dec(_f$maxValues),
       isRequired: data.dec(_f$isRequired),
+      type: data.dec(_f$type),
     );
   }
 
@@ -3557,6 +3328,7 @@ abstract class FileUploadComponentCopyWith<
     int? minValues,
     int? maxValues,
     bool? isRequired,
+    MessageComponentType? type,
   });
   FileUploadComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -3578,6 +3350,7 @@ class _FileUploadComponentCopyWithImpl<$R, $Out>
     Object? minValues = $none,
     Object? maxValues = $none,
     Object? isRequired = $none,
+    MessageComponentType? type,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
@@ -3585,6 +3358,7 @@ class _FileUploadComponentCopyWithImpl<$R, $Out>
       if (minValues != $none) #minValues: minValues,
       if (maxValues != $none) #maxValues: maxValues,
       if (isRequired != $none) #isRequired: isRequired,
+      if (type != null) #type: type,
     }),
   );
   @override
@@ -3594,6 +3368,7 @@ class _FileUploadComponentCopyWithImpl<$R, $Out>
     minValues: data.get(#minValues, or: $value.minValues),
     maxValues: data.get(#maxValues, or: $value.maxValues),
     isRequired: data.get(#isRequired, or: $value.isRequired),
+    type: data.get(#type, or: $value.type),
   );
 
   @override
@@ -3602,8 +3377,96 @@ class _FileUploadComponentCopyWithImpl<$R, $Out>
       _FileUploadComponentCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
+class SubmittedComponentMapper extends SubClassMapperBase<SubmittedComponent> {
+  SubmittedComponentMapper._();
+
+  static SubmittedComponentMapper? _instance;
+  static SubmittedComponentMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = SubmittedComponentMapper._());
+      MessageComponentMapper.ensureInitialized().addSubMapper(_instance!);
+      SubmittedFileUploadComponentMapper.ensureInitialized();
+      SubmittedActionRowComponentMapper.ensureInitialized();
+      SubmittedTextInputComponentMapper.ensureInitialized();
+      SubmittedLabelComponentMapper.ensureInitialized();
+      SubmittedSelectMenuComponentMapper.ensureInitialized();
+      SubmittedTextDisplayComponentMapper.ensureInitialized();
+      MessageComponentTypeMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'SubmittedComponent';
+
+  static int _$id(SubmittedComponent v) => v.id;
+  static const Field<SubmittedComponent, int> _f$id = Field('id', _$id);
+  static MessageComponentType _$type(SubmittedComponent v) => v.type;
+  static const Field<SubmittedComponent, MessageComponentType> _f$type = Field(
+    'type',
+    _$type,
+  );
+
+  @override
+  final MappableFields<SubmittedComponent> fields = const {
+    #id: _f$id,
+    #type: _f$type,
+  };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'SubmittedComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      MessageComponentMapper.ensureInitialized();
+
+  static SubmittedComponent _instantiate(DecodingData data) {
+    throw MapperException.missingSubclass(
+      'SubmittedComponent',
+      'type',
+      '${data.value['type']}',
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static SubmittedComponent fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<SubmittedComponent>(map);
+  }
+
+  static SubmittedComponent fromJson(String json) {
+    return ensureInitialized().decodeJson<SubmittedComponent>(json);
+  }
+}
+
+mixin SubmittedComponentMappable {
+  String toJson();
+  Map<String, dynamic> toMap();
+  SubmittedComponentCopyWith<
+    SubmittedComponent,
+    SubmittedComponent,
+    SubmittedComponent
+  >
+  get copyWith;
+}
+
+abstract class SubmittedComponentCopyWith<
+  $R,
+  $In extends SubmittedComponent,
+  $Out
+>
+    implements MessageComponentCopyWith<$R, $In, $Out> {
+  @override
+  $R call({int? id, MessageComponentType? type});
+  SubmittedComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  );
+}
+
 class SubmittedFileUploadComponentMapper
-    extends ClassMapperBase<SubmittedFileUploadComponent> {
+    extends SubClassMapperBase<SubmittedFileUploadComponent> {
   SubmittedFileUploadComponentMapper._();
 
   static SubmittedFileUploadComponentMapper? _instance;
@@ -3612,8 +3475,9 @@ class SubmittedFileUploadComponentMapper
       MapperContainer.globals.use(
         _instance = SubmittedFileUploadComponentMapper._(),
       );
-      SubmittedComponentMapper.ensureInitialized();
+      SubmittedComponentMapper.ensureInitialized().addSubMapper(_instance!);
       SnowflakeMapper.ensureInitialized();
+      MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -3635,19 +3499,32 @@ class SubmittedFileUploadComponentMapper
   static List<Snowflake> _$values(SubmittedFileUploadComponent v) => v.values;
   static const Field<SubmittedFileUploadComponent, List<Snowflake>> _f$values =
       Field('values', _$values);
+  static MessageComponentType _$type(SubmittedFileUploadComponent v) => v.type;
+  static const Field<SubmittedFileUploadComponent, MessageComponentType>
+  _f$type = Field('type', _$type);
 
   @override
   final MappableFields<SubmittedFileUploadComponent> fields = const {
     #id: _f$id,
     #customId: _f$customId,
     #values: _f$values,
+    #type: _f$type,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'SubmittedFileUploadComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      SubmittedComponentMapper.ensureInitialized();
 
   static SubmittedFileUploadComponent _instantiate(DecodingData data) {
     return SubmittedFileUploadComponent(
       id: data.dec(_f$id),
       customId: data.dec(_f$customId),
       values: data.dec(_f$values),
+      type: data.dec(_f$type),
     );
   }
 
@@ -3727,7 +3604,12 @@ abstract class SubmittedFileUploadComponentCopyWith<
   ListCopyWith<$R, Snowflake, SnowflakeCopyWith<$R, Snowflake, Snowflake>>
   get values;
   @override
-  $R call({int? id, String? customId, List<Snowflake>? values});
+  $R call({
+    int? id,
+    String? customId,
+    List<Snowflake>? values,
+    MessageComponentType? type,
+  });
   SubmittedFileUploadComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -3758,11 +3640,17 @@ class _SubmittedFileUploadComponentCopyWithImpl<$R, $Out>
     (v) => call(values: v),
   );
   @override
-  $R call({int? id, String? customId, List<Snowflake>? values}) => $apply(
+  $R call({
+    int? id,
+    String? customId,
+    List<Snowflake>? values,
+    MessageComponentType? type,
+  }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
       if (customId != null) #customId: customId,
       if (values != null) #values: values,
+      if (type != null) #type: type,
     }),
   );
   @override
@@ -3771,6 +3659,7 @@ class _SubmittedFileUploadComponentCopyWithImpl<$R, $Out>
         id: data.get(#id, or: $value.id),
         customId: data.get(#customId, or: $value.customId),
         values: data.get(#values, or: $value.values),
+        type: data.get(#type, or: $value.type),
       );
 
   @override
@@ -3780,7 +3669,7 @@ class _SubmittedFileUploadComponentCopyWithImpl<$R, $Out>
 }
 
 class SubmittedActionRowComponentMapper
-    extends ClassMapperBase<SubmittedActionRowComponent> {
+    extends SubClassMapperBase<SubmittedActionRowComponent> {
   SubmittedActionRowComponentMapper._();
 
   static SubmittedActionRowComponentMapper? _instance;
@@ -3789,8 +3678,9 @@ class SubmittedActionRowComponentMapper
       MapperContainer.globals.use(
         _instance = SubmittedActionRowComponentMapper._(),
       );
+      SubmittedComponentMapper.ensureInitialized().addSubMapper(_instance!);
       SubmittedComponentMapper.ensureInitialized();
-      SubmittedComponentMapper.ensureInitialized();
+      MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -3807,17 +3697,30 @@ class SubmittedActionRowComponentMapper
     'id',
     _$id,
   );
+  static MessageComponentType _$type(SubmittedActionRowComponent v) => v.type;
+  static const Field<SubmittedActionRowComponent, MessageComponentType>
+  _f$type = Field('type', _$type);
 
   @override
   final MappableFields<SubmittedActionRowComponent> fields = const {
     #components: _f$components,
     #id: _f$id,
+    #type: _f$type,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'SubmittedActionRowComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      SubmittedComponentMapper.ensureInitialized();
 
   static SubmittedActionRowComponent _instantiate(DecodingData data) {
     return SubmittedActionRowComponent(
       components: data.dec(_f$components),
       id: data.dec(_f$id),
+      type: data.dec(_f$type),
     );
   }
 
@@ -3902,7 +3805,11 @@ abstract class SubmittedActionRowComponentCopyWith<
   >
   get components;
   @override
-  $R call({List<SubmittedComponent>? components, int? id});
+  $R call({
+    List<SubmittedComponent>? components,
+    int? id,
+    MessageComponentType? type,
+  });
   SubmittedActionRowComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -3937,10 +3844,15 @@ class _SubmittedActionRowComponentCopyWithImpl<$R, $Out>
     (v) => call(components: v),
   );
   @override
-  $R call({List<SubmittedComponent>? components, int? id}) => $apply(
+  $R call({
+    List<SubmittedComponent>? components,
+    int? id,
+    MessageComponentType? type,
+  }) => $apply(
     FieldCopyWithData({
       if (components != null) #components: components,
       if (id != null) #id: id,
+      if (type != null) #type: type,
     }),
   );
   @override
@@ -3948,6 +3860,7 @@ class _SubmittedActionRowComponentCopyWithImpl<$R, $Out>
       SubmittedActionRowComponent(
         components: data.get(#components, or: $value.components),
         id: data.get(#id, or: $value.id),
+        type: data.get(#type, or: $value.type),
       );
 
   @override
@@ -3956,8 +3869,204 @@ class _SubmittedActionRowComponentCopyWithImpl<$R, $Out>
       _SubmittedActionRowComponentCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
+class SubmittedTextInputComponentMapper
+    extends SubClassMapperBase<SubmittedTextInputComponent> {
+  SubmittedTextInputComponentMapper._();
+
+  static SubmittedTextInputComponentMapper? _instance;
+  static SubmittedTextInputComponentMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(
+        _instance = SubmittedTextInputComponentMapper._(),
+      );
+      SubmittedComponentMapper.ensureInitialized().addSubMapper(_instance!);
+      MessageComponentTypeMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'SubmittedTextInputComponent';
+
+  static int _$id(SubmittedTextInputComponent v) => v.id;
+  static const Field<SubmittedTextInputComponent, int> _f$id = Field(
+    'id',
+    _$id,
+  );
+  static String _$customId(SubmittedTextInputComponent v) => v.customId;
+  static const Field<SubmittedTextInputComponent, String> _f$customId = Field(
+    'customId',
+    _$customId,
+    key: r'custom_id',
+  );
+  static String? _$value(SubmittedTextInputComponent v) => v.value;
+  static const Field<SubmittedTextInputComponent, String> _f$value = Field(
+    'value',
+    _$value,
+  );
+  static MessageComponentType _$type(SubmittedTextInputComponent v) => v.type;
+  static const Field<SubmittedTextInputComponent, MessageComponentType>
+  _f$type = Field('type', _$type);
+
+  @override
+  final MappableFields<SubmittedTextInputComponent> fields = const {
+    #id: _f$id,
+    #customId: _f$customId,
+    #value: _f$value,
+    #type: _f$type,
+  };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'SubmittedTextInputComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      SubmittedComponentMapper.ensureInitialized();
+
+  static SubmittedTextInputComponent _instantiate(DecodingData data) {
+    return SubmittedTextInputComponent(
+      id: data.dec(_f$id),
+      customId: data.dec(_f$customId),
+      value: data.dec(_f$value),
+      type: data.dec(_f$type),
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static SubmittedTextInputComponent fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<SubmittedTextInputComponent>(map);
+  }
+
+  static SubmittedTextInputComponent fromJson(String json) {
+    return ensureInitialized().decodeJson<SubmittedTextInputComponent>(json);
+  }
+}
+
+mixin SubmittedTextInputComponentMappable {
+  String toJson() {
+    return SubmittedTextInputComponentMapper.ensureInitialized()
+        .encodeJson<SubmittedTextInputComponent>(
+          this as SubmittedTextInputComponent,
+        );
+  }
+
+  Map<String, dynamic> toMap() {
+    return SubmittedTextInputComponentMapper.ensureInitialized()
+        .encodeMap<SubmittedTextInputComponent>(
+          this as SubmittedTextInputComponent,
+        );
+  }
+
+  SubmittedTextInputComponentCopyWith<
+    SubmittedTextInputComponent,
+    SubmittedTextInputComponent,
+    SubmittedTextInputComponent
+  >
+  get copyWith =>
+      _SubmittedTextInputComponentCopyWithImpl<
+        SubmittedTextInputComponent,
+        SubmittedTextInputComponent
+      >(this as SubmittedTextInputComponent, $identity, $identity);
+  @override
+  String toString() {
+    return SubmittedTextInputComponentMapper.ensureInitialized().stringifyValue(
+      this as SubmittedTextInputComponent,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return SubmittedTextInputComponentMapper.ensureInitialized().equalsValue(
+      this as SubmittedTextInputComponent,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return SubmittedTextInputComponentMapper.ensureInitialized().hashValue(
+      this as SubmittedTextInputComponent,
+    );
+  }
+}
+
+extension SubmittedTextInputComponentValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, SubmittedTextInputComponent, $Out> {
+  SubmittedTextInputComponentCopyWith<$R, SubmittedTextInputComponent, $Out>
+  get $asSubmittedTextInputComponent => $base.as(
+    (v, t, t2) => _SubmittedTextInputComponentCopyWithImpl<$R, $Out>(v, t, t2),
+  );
+}
+
+abstract class SubmittedTextInputComponentCopyWith<
+  $R,
+  $In extends SubmittedTextInputComponent,
+  $Out
+>
+    implements SubmittedComponentCopyWith<$R, $In, $Out> {
+  @override
+  $R call({
+    int? id,
+    String? customId,
+    String? value,
+    MessageComponentType? type,
+  });
+  SubmittedTextInputComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  );
+}
+
+class _SubmittedTextInputComponentCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, SubmittedTextInputComponent, $Out>
+    implements
+        SubmittedTextInputComponentCopyWith<
+          $R,
+          SubmittedTextInputComponent,
+          $Out
+        > {
+  _SubmittedTextInputComponentCopyWithImpl(
+    super.value,
+    super.then,
+    super.then2,
+  );
+
+  @override
+  late final ClassMapperBase<SubmittedTextInputComponent> $mapper =
+      SubmittedTextInputComponentMapper.ensureInitialized();
+  @override
+  $R call({
+    int? id,
+    String? customId,
+    Object? value = $none,
+    MessageComponentType? type,
+  }) => $apply(
+    FieldCopyWithData({
+      if (id != null) #id: id,
+      if (customId != null) #customId: customId,
+      if (value != $none) #value: value,
+      if (type != null) #type: type,
+    }),
+  );
+  @override
+  SubmittedTextInputComponent $make(CopyWithData data) =>
+      SubmittedTextInputComponent(
+        id: data.get(#id, or: $value.id),
+        customId: data.get(#customId, or: $value.customId),
+        value: data.get(#value, or: $value.value),
+        type: data.get(#type, or: $value.type),
+      );
+
+  @override
+  SubmittedTextInputComponentCopyWith<$R2, SubmittedTextInputComponent, $Out2>
+  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
+      _SubmittedTextInputComponentCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
 class SubmittedLabelComponentMapper
-    extends ClassMapperBase<SubmittedLabelComponent> {
+    extends SubClassMapperBase<SubmittedLabelComponent> {
   SubmittedLabelComponentMapper._();
 
   static SubmittedLabelComponentMapper? _instance;
@@ -3966,8 +4075,9 @@ class SubmittedLabelComponentMapper
       MapperContainer.globals.use(
         _instance = SubmittedLabelComponentMapper._(),
       );
+      SubmittedComponentMapper.ensureInitialized().addSubMapper(_instance!);
       SubmittedComponentMapper.ensureInitialized();
-      SubmittedComponentMapper.ensureInitialized();
+      MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -3981,17 +4091,30 @@ class SubmittedLabelComponentMapper
       v.component;
   static const Field<SubmittedLabelComponent, SubmittedComponent> _f$component =
       Field('component', _$component);
+  static MessageComponentType _$type(SubmittedLabelComponent v) => v.type;
+  static const Field<SubmittedLabelComponent, MessageComponentType> _f$type =
+      Field('type', _$type);
 
   @override
   final MappableFields<SubmittedLabelComponent> fields = const {
     #id: _f$id,
     #component: _f$component,
+    #type: _f$type,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'SubmittedLabelComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      SubmittedComponentMapper.ensureInitialized();
 
   static SubmittedLabelComponent _instantiate(DecodingData data) {
     return SubmittedLabelComponent(
       id: data.dec(_f$id),
       component: data.dec(_f$component),
+      type: data.dec(_f$type),
     );
   }
 
@@ -4068,7 +4191,7 @@ abstract class SubmittedLabelComponentCopyWith<
   SubmittedComponentCopyWith<$R, SubmittedComponent, SubmittedComponent>
   get component;
   @override
-  $R call({int? id, SubmittedComponent? component});
+  $R call({int? id, SubmittedComponent? component, MessageComponentType? type});
   SubmittedLabelComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -4087,16 +4210,22 @@ class _SubmittedLabelComponentCopyWithImpl<$R, $Out>
   SubmittedComponentCopyWith<$R, SubmittedComponent, SubmittedComponent>
   get component => $value.component.copyWith.$chain((v) => call(component: v));
   @override
-  $R call({int? id, SubmittedComponent? component}) => $apply(
+  $R call({
+    int? id,
+    SubmittedComponent? component,
+    MessageComponentType? type,
+  }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
       if (component != null) #component: component,
+      if (type != null) #type: type,
     }),
   );
   @override
   SubmittedLabelComponent $make(CopyWithData data) => SubmittedLabelComponent(
     id: data.get(#id, or: $value.id),
     component: data.get(#component, or: $value.component),
+    type: data.get(#type, or: $value.type),
   );
 
   @override
@@ -4106,7 +4235,7 @@ class _SubmittedLabelComponentCopyWithImpl<$R, $Out>
 }
 
 class SubmittedSelectMenuComponentMapper
-    extends ClassMapperBase<SubmittedSelectMenuComponent> {
+    extends SubClassMapperBase<SubmittedSelectMenuComponent> {
   SubmittedSelectMenuComponentMapper._();
 
   static SubmittedSelectMenuComponentMapper? _instance;
@@ -4115,7 +4244,7 @@ class SubmittedSelectMenuComponentMapper
       MapperContainer.globals.use(
         _instance = SubmittedSelectMenuComponentMapper._(),
       );
-      SubmittedComponentMapper.ensureInitialized();
+      SubmittedComponentMapper.ensureInitialized().addSubMapper(_instance!);
       MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
@@ -4124,9 +4253,6 @@ class SubmittedSelectMenuComponentMapper
   @override
   final String id = 'SubmittedSelectMenuComponent';
 
-  static MessageComponentType _$type(SubmittedSelectMenuComponent v) => v.type;
-  static const Field<SubmittedSelectMenuComponent, MessageComponentType>
-  _f$type = Field('type', _$type);
   static int _$id(SubmittedSelectMenuComponent v) => v.id;
   static const Field<SubmittedSelectMenuComponent, int> _f$id = Field(
     'id',
@@ -4141,21 +4267,32 @@ class SubmittedSelectMenuComponentMapper
   static List<String> _$values(SubmittedSelectMenuComponent v) => v.values;
   static const Field<SubmittedSelectMenuComponent, List<String>> _f$values =
       Field('values', _$values);
+  static MessageComponentType _$type(SubmittedSelectMenuComponent v) => v.type;
+  static const Field<SubmittedSelectMenuComponent, MessageComponentType>
+  _f$type = Field('type', _$type);
 
   @override
   final MappableFields<SubmittedSelectMenuComponent> fields = const {
-    #type: _f$type,
     #id: _f$id,
     #customId: _f$customId,
     #values: _f$values,
+    #type: _f$type,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'SubmittedSelectMenuComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      SubmittedComponentMapper.ensureInitialized();
 
   static SubmittedSelectMenuComponent _instantiate(DecodingData data) {
     return SubmittedSelectMenuComponent(
-      type: data.dec(_f$type),
       id: data.dec(_f$id),
       customId: data.dec(_f$customId),
       values: data.dec(_f$values),
+      type: data.dec(_f$type),
     );
   }
 
@@ -4235,10 +4372,10 @@ abstract class SubmittedSelectMenuComponentCopyWith<
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get values;
   @override
   $R call({
-    MessageComponentType? type,
     int? id,
     String? customId,
     List<String>? values,
+    MessageComponentType? type,
   });
   SubmittedSelectMenuComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -4271,25 +4408,25 @@ class _SubmittedSelectMenuComponentCopyWithImpl<$R, $Out>
       );
   @override
   $R call({
-    MessageComponentType? type,
     int? id,
     String? customId,
     List<String>? values,
+    MessageComponentType? type,
   }) => $apply(
     FieldCopyWithData({
-      if (type != null) #type: type,
       if (id != null) #id: id,
       if (customId != null) #customId: customId,
       if (values != null) #values: values,
+      if (type != null) #type: type,
     }),
   );
   @override
   SubmittedSelectMenuComponent $make(CopyWithData data) =>
       SubmittedSelectMenuComponent(
-        type: data.get(#type, or: $value.type),
         id: data.get(#id, or: $value.id),
         customId: data.get(#customId, or: $value.customId),
         values: data.get(#values, or: $value.values),
+        type: data.get(#type, or: $value.type),
       );
 
   @override
@@ -4299,7 +4436,7 @@ class _SubmittedSelectMenuComponentCopyWithImpl<$R, $Out>
 }
 
 class SubmittedTextDisplayComponentMapper
-    extends ClassMapperBase<SubmittedTextDisplayComponent> {
+    extends SubClassMapperBase<SubmittedTextDisplayComponent> {
   SubmittedTextDisplayComponentMapper._();
 
   static SubmittedTextDisplayComponentMapper? _instance;
@@ -4308,7 +4445,8 @@ class SubmittedTextDisplayComponentMapper
       MapperContainer.globals.use(
         _instance = SubmittedTextDisplayComponentMapper._(),
       );
-      SubmittedComponentMapper.ensureInitialized();
+      SubmittedComponentMapper.ensureInitialized().addSubMapper(_instance!);
+      MessageComponentTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -4321,14 +4459,29 @@ class SubmittedTextDisplayComponentMapper
     'id',
     _$id,
   );
+  static MessageComponentType _$type(SubmittedTextDisplayComponent v) => v.type;
+  static const Field<SubmittedTextDisplayComponent, MessageComponentType>
+  _f$type = Field('type', _$type);
 
   @override
   final MappableFields<SubmittedTextDisplayComponent> fields = const {
     #id: _f$id,
+    #type: _f$type,
   };
 
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'SubmittedTextDisplayComponent';
+  @override
+  late final ClassMapperBase superMapper =
+      SubmittedComponentMapper.ensureInitialized();
+
   static SubmittedTextDisplayComponent _instantiate(DecodingData data) {
-    return SubmittedTextDisplayComponent(id: data.dec(_f$id));
+    return SubmittedTextDisplayComponent(
+      id: data.dec(_f$id),
+      type: data.dec(_f$type),
+    );
   }
 
   @override
@@ -4406,7 +4559,7 @@ abstract class SubmittedTextDisplayComponentCopyWith<
 >
     implements SubmittedComponentCopyWith<$R, $In, $Out> {
   @override
-  $R call({int? id});
+  $R call({int? id, MessageComponentType? type});
   SubmittedTextDisplayComponentCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -4430,10 +4583,15 @@ class _SubmittedTextDisplayComponentCopyWithImpl<$R, $Out>
   late final ClassMapperBase<SubmittedTextDisplayComponent> $mapper =
       SubmittedTextDisplayComponentMapper.ensureInitialized();
   @override
-  $R call({int? id}) => $apply(FieldCopyWithData({if (id != null) #id: id}));
+  $R call({int? id, MessageComponentType? type}) => $apply(
+    FieldCopyWithData({if (id != null) #id: id, if (type != null) #type: type}),
+  );
   @override
   SubmittedTextDisplayComponent $make(CopyWithData data) =>
-      SubmittedTextDisplayComponent(id: data.get(#id, or: $value.id));
+      SubmittedTextDisplayComponent(
+        id: data.get(#id, or: $value.id),
+        type: data.get(#type, or: $value.type),
+      );
 
   @override
   SubmittedTextDisplayComponentCopyWith<
