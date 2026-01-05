@@ -133,3 +133,6 @@ class GuildMemberListUpdateItem with GuildMemberListUpdateItemMappable {
 
   const GuildMemberListUpdateItem({this.group, this.member});
 }
+
+@MappableEnum(caseStyle: CaseStyle.upperSnakeCase)
+enum MemberListUpdateType { sync, update, delete, insert, invalidate, unknown }

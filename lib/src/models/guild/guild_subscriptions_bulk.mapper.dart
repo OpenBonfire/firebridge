@@ -7,6 +7,69 @@
 
 part of 'guild_subscriptions_bulk.dart';
 
+class MemberListUpdateTypeMapper extends EnumMapper<MemberListUpdateType> {
+  MemberListUpdateTypeMapper._();
+
+  static MemberListUpdateTypeMapper? _instance;
+  static MemberListUpdateTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = MemberListUpdateTypeMapper._());
+    }
+    return _instance!;
+  }
+
+  static MemberListUpdateType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  MemberListUpdateType decode(dynamic value) {
+    switch (value) {
+      case r'SYNC':
+        return MemberListUpdateType.sync;
+      case r'UPDATE':
+        return MemberListUpdateType.update;
+      case r'DELETE':
+        return MemberListUpdateType.delete;
+      case r'INSERT':
+        return MemberListUpdateType.insert;
+      case r'INVALIDATE':
+        return MemberListUpdateType.invalidate;
+      case r'UNKNOWN':
+        return MemberListUpdateType.unknown;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(MemberListUpdateType self) {
+    switch (self) {
+      case MemberListUpdateType.sync:
+        return r'SYNC';
+      case MemberListUpdateType.update:
+        return r'UPDATE';
+      case MemberListUpdateType.delete:
+        return r'DELETE';
+      case MemberListUpdateType.insert:
+        return r'INSERT';
+      case MemberListUpdateType.invalidate:
+        return r'INVALIDATE';
+      case MemberListUpdateType.unknown:
+        return r'UNKNOWN';
+    }
+  }
+}
+
+extension MemberListUpdateTypeMapperExtension on MemberListUpdateType {
+  String toValue() {
+    MemberListUpdateTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<MemberListUpdateType>(this)
+        as String;
+  }
+}
+
 class GuildSubscriptionsBulkEventMapper
     extends ClassMapperBase<GuildSubscriptionsBulkEvent> {
   GuildSubscriptionsBulkEventMapper._();

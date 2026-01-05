@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebridge/src/builders/guild/guild_subscriptions_bulk.dart';
 import 'package:firebridge/src/models/common_hooks.dart';
 import 'package:logging/logging.dart';
 import 'package:meta/meta.dart';
@@ -257,6 +258,10 @@ class FirebridgeGateway
   /// Update the client's presence on all shards.
   void updatePresence(PresenceBuilder builder) =>
       gateway.updatePresence(builder);
+
+  /// Update the client's guild subscriptions.
+  void updateGuildSubscriptionsBulk(GuildSubscriptionsBulkBuilder builder) =>
+      gateway.updateGuildSubscriptionsBulk(builder);
 
   @override
   Future<void> close() {
