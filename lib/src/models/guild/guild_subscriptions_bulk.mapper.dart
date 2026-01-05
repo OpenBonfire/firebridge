@@ -562,8 +562,8 @@ class GuildMemberListUpdateEventMapper
     List<MemberListUpdateOperation>
   >
   _f$operations = Field('operations', _$operations, key: r'ops');
-  static Snowflake _$roleId(GuildMemberListUpdateEvent v) => v.roleId;
-  static const Field<GuildMemberListUpdateEvent, Snowflake> _f$roleId = Field(
+  static String _$roleId(GuildMemberListUpdateEvent v) => v.roleId;
+  static const Field<GuildMemberListUpdateEvent, String> _f$roleId = Field(
     'roleId',
     _$roleId,
     key: r'id',
@@ -696,7 +696,6 @@ abstract class GuildMemberListUpdateEventCopyWith<
     >
   >
   get operations;
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get roleId;
   @override
   $R call({
     Snowflake? guildId,
@@ -704,7 +703,7 @@ abstract class GuildMemberListUpdateEventCopyWith<
     int? memberCount,
     List<GuildMemberListGroup>? groups,
     List<MemberListUpdateOperation>? operations,
-    Snowflake? roleId,
+    String? roleId,
   });
   GuildMemberListUpdateEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -754,16 +753,13 @@ class _GuildMemberListUpdateEventCopyWithImpl<$R, $Out>
     (v) => call(operations: v),
   );
   @override
-  SnowflakeCopyWith<$R, Snowflake, Snowflake> get roleId =>
-      $value.roleId.copyWith.$chain((v) => call(roleId: v));
-  @override
   $R call({
     Snowflake? guildId,
     int? onlineCount,
     int? memberCount,
     List<GuildMemberListGroup>? groups,
     List<MemberListUpdateOperation>? operations,
-    Snowflake? roleId,
+    String? roleId,
   }) => $apply(
     FieldCopyWithData({
       if (guildId != null) #guildId: guildId,

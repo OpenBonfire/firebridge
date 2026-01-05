@@ -48,7 +48,7 @@ class GuildMemberListUpdateEvent extends DispatchEvent
   final List<MemberListUpdateOperation> operations;
 
   @MappableField(key: 'id')
-  final Snowflake roleId;
+  final String roleId;
 
   GuildMemberListUpdateEvent({
     required this.guildId,
