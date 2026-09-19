@@ -2,6 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 // ignore_for_file: type=lint
+// ignore_for_file: invalid_use_of_protected_member
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
@@ -173,7 +174,7 @@ extension GuildPreviewValueCopy<$R, $Out>
 abstract class GuildPreviewCopyWith<$R, $In extends GuildPreview, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
-  ListCopyWith<$R, Emoji, ObjectCopyWith<$R, Emoji, Emoji>> get emojiList;
+  ListCopyWith<$R, Emoji, EmojiCopyWith<$R, Emoji, Emoji>> get emojiList;
   GuildFeaturesCopyWith<$R, GuildFeatures, GuildFeatures> get features;
   ListCopyWith<
     $R,
@@ -209,10 +210,10 @@ class _GuildPreviewCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
   @override
-  ListCopyWith<$R, Emoji, ObjectCopyWith<$R, Emoji, Emoji>> get emojiList =>
+  ListCopyWith<$R, Emoji, EmojiCopyWith<$R, Emoji, Emoji>> get emojiList =>
       ListCopyWith(
         $value.emojiList,
-        (v, t) => ObjectCopyWith(v, $identity, t),
+        (v, t) => v.copyWith.$chain(t),
         (v) => call(emojiList: v),
       );
   @override

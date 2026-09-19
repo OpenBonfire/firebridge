@@ -15,9 +15,9 @@ dependencies:
   path: ^1.9.1
   eterl: ^1.1.0
   runtime_type: ^1.1.0
-  meta: ^1.16.0
+  meta: ^1.19.0
   oauth2: ^2.0.5
-  dart_mappable: ^4.6.1
+  dart_mappable: ^4.10.0
 
 dev_dependencies:
   test: ^1.25.14

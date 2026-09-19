@@ -2,6 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 // ignore_for_file: type=lint
+// ignore_for_file: invalid_use_of_protected_member
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
@@ -907,6 +908,7 @@ extension ButtonComponentValueCopy<$R, $Out>
 
 abstract class ButtonComponentCopyWith<$R, $In extends ButtonComponent, $Out>
     implements MessageComponentCopyWith<$R, $In, $Out> {
+  EmojiCopyWith<$R, Emoji, Emoji>? get emoji;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get skuId;
   @override
   $R call({
@@ -933,6 +935,9 @@ class _ButtonComponentCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<ButtonComponent> $mapper =
       ButtonComponentMapper.ensureInitialized();
+  @override
+  EmojiCopyWith<$R, Emoji, Emoji>? get emoji =>
+      $value.emoji?.copyWith.$chain((v) => call(emoji: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get skuId =>
       $value.skuId?.copyWith.$chain((v) => call(skuId: v));
@@ -1425,6 +1430,7 @@ extension SelectMenuOptionValueCopy<$R, $Out>
 
 abstract class SelectMenuOptionCopyWith<$R, $In extends SelectMenuOption, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
+  EmojiCopyWith<$R, Emoji, Emoji>? get emoji;
   $R call({
     String? label,
     String? value,
@@ -1445,6 +1451,9 @@ class _SelectMenuOptionCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<SelectMenuOption> $mapper =
       SelectMenuOptionMapper.ensureInitialized();
+  @override
+  EmojiCopyWith<$R, Emoji, Emoji>? get emoji =>
+      $value.emoji?.copyWith.$chain((v) => call(emoji: v));
   @override
   $R call({
     String? label,

@@ -2,6 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 // ignore_for_file: type=lint
+// ignore_for_file: invalid_use_of_protected_member
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
@@ -151,6 +152,7 @@ extension SoundboardSoundValueCopy<$R, $Out>
 abstract class SoundboardSoundCopyWith<$R, $In extends SoundboardSound, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id;
+  EmojiCopyWith<$R, Emoji, Emoji>? get emoji;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get emojiId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   UserCopyWith<$R, User, User>? get user;
@@ -181,6 +183,9 @@ class _SoundboardSoundCopyWithImpl<$R, $Out>
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get id =>
       $value.id.copyWith.$chain((v) => call(id: v));
+  @override
+  EmojiCopyWith<$R, Emoji, Emoji>? get emoji =>
+      $value.emoji?.copyWith.$chain((v) => call(emoji: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get emojiId =>
       $value.emojiId?.copyWith.$chain((v) => call(emojiId: v));

@@ -2,6 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 // ignore_for_file: type=lint
+// ignore_for_file: invalid_use_of_protected_member
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
@@ -308,6 +309,7 @@ extension ButtonBuilderValueCopy<$R, $Out>
 
 abstract class ButtonBuilderCopyWith<$R, $In extends ButtonBuilder, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
+  EmojiCopyWith<$R, Emoji, Emoji>? get emoji;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get skuId;
   $R call({
     ButtonStyle? style,
@@ -330,6 +332,9 @@ class _ButtonBuilderCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<ButtonBuilder> $mapper =
       ButtonBuilderMapper.ensureInitialized();
+  @override
+  EmojiCopyWith<$R, Emoji, Emoji>? get emoji =>
+      $value.emoji?.copyWith.$chain((v) => call(emoji: v));
   @override
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get skuId =>
       $value.skuId?.copyWith.$chain((v) => call(skuId: v));
@@ -836,6 +841,7 @@ abstract class SelectMenuOptionBuilderCopyWith<
   $Out
 >
     implements ClassCopyWith<$R, $In, $Out> {
+  EmojiCopyWith<$R, Emoji, Emoji>? get emoji;
   $R call({
     String? label,
     String? value,
@@ -857,6 +863,9 @@ class _SelectMenuOptionBuilderCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<SelectMenuOptionBuilder> $mapper =
       SelectMenuOptionBuilderMapper.ensureInitialized();
+  @override
+  EmojiCopyWith<$R, Emoji, Emoji>? get emoji =>
+      $value.emoji?.copyWith.$chain((v) => call(emoji: v));
   @override
   $R call({
     String? label,

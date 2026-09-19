@@ -2,6 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 // ignore_for_file: type=lint
+// ignore_for_file: invalid_use_of_protected_member
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
@@ -980,7 +981,7 @@ abstract class GuildCopyWith<$R, $In extends Guild, $Out>
   get stickers;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get safetyAlertsChannelId;
   IncidentsDataCopyWith<$R, IncidentsData, IncidentsData>? get incidentsData;
-  ListCopyWith<$R, Channel, ObjectCopyWith<$R, Channel, Channel>> get channels;
+  ListCopyWith<$R, Channel, ChannelCopyWith<$R, Channel, Channel>> get channels;
   @override
   $R call({
     Snowflake? id,
@@ -1100,10 +1101,10 @@ class _GuildCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Guild, $Out>
   IncidentsDataCopyWith<$R, IncidentsData, IncidentsData>? get incidentsData =>
       $value.incidentsData?.copyWith.$chain((v) => call(incidentsData: v));
   @override
-  ListCopyWith<$R, Channel, ObjectCopyWith<$R, Channel, Channel>>
+  ListCopyWith<$R, Channel, ChannelCopyWith<$R, Channel, Channel>>
   get channels => ListCopyWith(
     $value.channels,
-    (v, t) => ObjectCopyWith(v, $identity, t),
+    (v, t) => v.copyWith.$chain(t),
     (v) => call(channels: v),
   );
   @override

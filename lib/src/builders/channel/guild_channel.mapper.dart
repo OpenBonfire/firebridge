@@ -2,6 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 // ignore_for_file: type=lint
+// ignore_for_file: invalid_use_of_protected_member
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
@@ -163,7 +164,7 @@ abstract class GuildChannelBuilderCopyWith<
       $R,
       CreateBuilder<PermissionOverwrite>,
       CreateBuilder<PermissionOverwrite>
-    >?
+    >
   >?
   get permissionOverwrites;
   $R call({
@@ -193,7 +194,7 @@ class _GuildChannelBuilderCopyWithImpl<$R, $Out, T extends GuildChannel>
       $R,
       CreateBuilder<PermissionOverwrite>,
       CreateBuilder<PermissionOverwrite>
-    >?
+    >
   >?
   get permissionOverwrites => $value.permissionOverwrites != null
       ? ListCopyWith(
@@ -391,7 +392,7 @@ abstract class GuildChannelUpdateBuilderCopyWith<
       $R,
       CreateBuilder<PermissionOverwrite>,
       CreateBuilder<PermissionOverwrite>
-    >?
+    >
   >?
   get permissionOverwrites;
   $R call({
@@ -426,7 +427,7 @@ class _GuildChannelUpdateBuilderCopyWithImpl<$R, $Out, T extends GuildChannel>
       $R,
       CreateBuilder<PermissionOverwrite>,
       CreateBuilder<PermissionOverwrite>
-    >?
+    >
   >?
   get permissionOverwrites => $value.permissionOverwrites != null
       ? ListCopyWith(
@@ -2615,7 +2616,7 @@ abstract class GuildVoiceOrStageChannelBuilderCopyWith<
       $R,
       CreateBuilder<PermissionOverwrite>,
       CreateBuilder<PermissionOverwrite>
-    >?
+    >
   >?
   get permissionOverwrites;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
@@ -3460,7 +3461,7 @@ abstract class GuildVoiceOrStageChannelUpdateBuilderCopyWith<
       $R,
       CreateBuilder<PermissionOverwrite>,
       CreateBuilder<PermissionOverwrite>
-    >?
+    >
   >?
   get permissionOverwrites;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get parentId;
@@ -3511,7 +3512,7 @@ class _GuildVoiceOrStageChannelUpdateBuilderCopyWithImpl<
       $R,
       CreateBuilder<PermissionOverwrite>,
       CreateBuilder<PermissionOverwrite>
-    >?
+    >
   >?
   get permissionOverwrites => $value.permissionOverwrites != null
       ? ListCopyWith(

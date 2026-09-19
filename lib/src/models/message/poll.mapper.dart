@@ -2,6 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 // ignore_for_file: type=lint
+// ignore_for_file: invalid_use_of_protected_member
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
@@ -138,6 +139,7 @@ extension PollMediaValueCopy<$R, $Out> on ObjectCopyWith<$R, PollMedia, $Out> {
 
 abstract class PollMediaCopyWith<$R, $In extends PollMedia, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
+  EmojiCopyWith<$R, Emoji, Emoji>? get emoji;
   $R call({String? text, Emoji? emoji});
   PollMediaCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -150,6 +152,9 @@ class _PollMediaCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<PollMedia> $mapper =
       PollMediaMapper.ensureInitialized();
+  @override
+  EmojiCopyWith<$R, Emoji, Emoji>? get emoji =>
+      $value.emoji?.copyWith.$chain((v) => call(emoji: v));
   @override
   $R call({Object? text = $none, Object? emoji = $none}) => $apply(
     FieldCopyWithData({

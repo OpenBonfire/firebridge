@@ -2,6 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 // ignore_for_file: type=lint
+// ignore_for_file: invalid_use_of_protected_member
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
@@ -563,7 +564,7 @@ abstract class MessageCopyWith<$R, $In extends Message, $Out>
   ListCopyWith<
     $R,
     MessageComponent,
-    ObjectCopyWith<$R, MessageComponent, MessageComponent>
+    MessageComponentCopyWith<$R, MessageComponent, MessageComponent>
   >?
   get components;
   RoleSubscriptionDataCopyWith<$R, RoleSubscriptionData, RoleSubscriptionData>?
@@ -729,12 +730,12 @@ class _MessageCopyWithImpl<$R, $Out>
   ListCopyWith<
     $R,
     MessageComponent,
-    ObjectCopyWith<$R, MessageComponent, MessageComponent>
+    MessageComponentCopyWith<$R, MessageComponent, MessageComponent>
   >?
   get components => $value.components != null
       ? ListCopyWith(
           $value.components!,
-          (v, t) => ObjectCopyWith(v, $identity, t),
+          (v, t) => v.copyWith.$chain(t),
           (v) => call(components: v),
         )
       : null;
@@ -1081,7 +1082,7 @@ abstract class MessageSnapshotCopyWith<$R, $In extends MessageSnapshot, $Out>
   ListCopyWith<
     $R,
     MessageComponent,
-    ObjectCopyWith<$R, MessageComponent, MessageComponent>?
+    MessageComponentCopyWith<$R, MessageComponent, MessageComponent>
   >?
   get components;
   $R call({
@@ -1156,12 +1157,12 @@ class _MessageSnapshotCopyWithImpl<$R, $Out>
   ListCopyWith<
     $R,
     MessageComponent,
-    ObjectCopyWith<$R, MessageComponent, MessageComponent>?
+    MessageComponentCopyWith<$R, MessageComponent, MessageComponent>
   >?
   get components => $value.components != null
       ? ListCopyWith(
           $value.components!,
-          (v, t) => ObjectCopyWith(v, $identity, t),
+          (v, t) => v.copyWith.$chain(t),
           (v) => call(components: v),
         )
       : null;
