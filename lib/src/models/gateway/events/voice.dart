@@ -2,6 +2,7 @@ import 'package:dart_mappable/dart_mappable.dart';
 import 'package:firebridge/src/models/emoji.dart';
 import 'package:firebridge/src/models/gateway/event.dart';
 import 'package:firebridge/src/models/gateway/opcode.dart';
+import 'package:firebridge/src/models/guild/member.dart';
 import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/models/voice/voice_state.dart';
 
@@ -9,19 +10,93 @@ part 'voice.mapper.dart';
 
 /// {@template voice_state_update_event}
 /// Emitted when a user's voice state is updated.
+///
+/// The payload Discord sends for this dispatch event is a flat voice state
+/// object (same shape as [VoiceState]) - there's no separate "old"/"new"
+/// wrapper. This mirrors those fields directly rather than by extending
+/// [VoiceState]: [DispatchEvent] subtypes are discriminated by the gateway's
+/// `type` field, which requires this class's generated mapper to register
+/// itself under [DispatchEventMapper] - extending [VoiceState] instead would
+/// register it under [VoiceStateMapper] and this event would never be
+/// resolved when decoding raw dispatch payloads.
 /// {@endtemplate}
 @MappableClass(discriminatorValue: "VOICE_STATE_UPDATE")
 class VoiceStateUpdateEvent extends DispatchEvent
     with VoiceStateUpdateEventMappable {
-  /// The updated voice state.
-  final VoiceState state;
+  /// The ID of the guild this state is in.
+  final Snowflake? guildId;
 
-  /// The voice state as it was cached before the update.
-  final VoiceState? oldState;
+  /// The ID of the channel the user is connected to.
+  final Snowflake? channelId;
+
+  /// The ID of the lobby this user is connected to
+  final Snowflake? lobbyId;
+
+  /// The ID of the user this state is for.
+  final Snowflake userId;
+
+  /// The member this voice state is for.
+  final Member? member;
+
+  /// This state's session ID.
+  final String sessionId;
+
+  /// Whether the user is deafened by the server.
+  @MappableField(key: 'deaf')
+  final bool serverDeafened;
+
+  /// Whether the user is muted by the server.
+  @MappableField(key: 'mute')
+  final bool serverMuted;
+
+  /// Whether the user has deafened themselves.
+  @MappableField(key: 'self_deaf')
+  final bool selfDeafened;
+
+  /// Whether the used has muted themselves.
+  @MappableField(key: 'self_mute')
+  final bool selfMuted;
+
+  /// Whether the user is streaming.
+  @MappableField(key: 'self_stream')
+  final bool? streaming;
+
+  /// Whether the user's camera is enabled.
+  @MappableField(key: 'self_video')
+  final bool videoEnabled;
+
+  /// Whether the user is not permitted to speak.
+  @MappableField(key: 'suppress')
+  final bool suppressed;
+
+  /// The timestamp at which this user requested to speak.
+  @MappableField(key: 'request_to_speak_timestamp')
+  final DateTime? requestedToSpeakAt;
 
   /// {@macro voice_state_update_event}
   /// @nodoc
-  VoiceStateUpdateEvent({required this.oldState, required this.state});
+  VoiceStateUpdateEvent({
+    required this.guildId,
+    required this.channelId,
+    required this.lobbyId,
+    required this.userId,
+    required this.member,
+    required this.sessionId,
+    required this.selfDeafened,
+    required this.serverMuted,
+    required this.serverDeafened,
+    required this.selfMuted,
+    required this.streaming,
+    required this.videoEnabled,
+    required this.suppressed,
+    required this.requestedToSpeakAt,
+  });
+
+  /// Whether this user is deafened.
+  bool get isDeafened => serverDeafened || selfDeafened;
+
+  /// Whether this user is muted.
+  bool get isMuted => serverMuted || selfMuted;
 }
 
 /// {@template voice_server_update_event}

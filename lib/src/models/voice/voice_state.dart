@@ -1,5 +1,4 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:firebridge/src/http/managers/voice_manager.dart';
 import 'package:firebridge/src/models/guild/member.dart';
 import 'package:firebridge/src/models/snowflake.dart';
 import 'package:firebridge/src/utils/to_string_helper/to_string_helper.dart';
@@ -14,14 +13,14 @@ part 'voice_state.mapper.dart';
 /// {@endtemplate}
 @MappableClass()
 class VoiceState with ToStringHelper, VoiceStateMappable {
-  /// The manager for this [VoiceState].
-  final VoiceManager manager;
-
   /// The ID of the guild this state is in.
   final Snowflake? guildId;
 
   /// The ID of the channel the user is connected to.
   final Snowflake? channelId;
+
+  /// The ID of the lobby this user is connected to
+  final Snowflake? lobbyId;
 
   /// The ID of the user this state is for.
   final Snowflake userId;
@@ -33,36 +32,44 @@ class VoiceState with ToStringHelper, VoiceStateMappable {
   final String sessionId;
 
   /// Whether the user is deafened by the server.
+  @MappableField(key: 'deaf')
   final bool serverDeafened;
 
   /// Whether the user is muted by the server.
+  @MappableField(key: 'mute')
   final bool serverMuted;
 
   /// Whether the user has deafened themselves.
+  @MappableField(key: 'self_deaf')
   final bool selfDeafened;
 
   /// Whether the used has muted themselves.
+  @MappableField(key: 'self_mute')
   final bool selfMuted;
 
   /// Whether the user is streaming.
+  @MappableField(key: 'self_stream')
   final bool streaming;
 
   /// Whether the user's camera is enabled.
+  @MappableField(key: 'self_video')
   final bool videoEnabled;
 
   /// Whether the user is not permitted to speak.
+  @MappableField(key: 'suppress')
   final bool suppressed;
 
   /// The timestamp at which this user requested to speak.
+  @MappableField(key: 'request_to_speak_timestamp')
   final DateTime? requestedToSpeakAt;
 
   /// {@macro voice_state}
   /// @nodoc
   VoiceState({
-    required this.manager,
     required this.guildId,
     required this.channelId,
     required this.userId,
+    required this.lobbyId,
     required this.member,
     required this.sessionId,
     required this.selfDeafened,

@@ -28,6 +28,7 @@ import 'package:firebridge/src/models/gateway/event.dart';
 import 'package:firebridge/src/models/gateway/events/message.dart';
 import 'package:firebridge/src/models/gateway/events/presence.dart';
 import 'package:firebridge/src/models/gateway/events/ready.dart';
+import 'package:firebridge/src/models/gateway/events/voice.dart';
 import 'package:firebridge/src/models/guild/guild.dart';
 import 'package:firebridge/src/models/guild/guild_subscriptions_bulk.dart';
 import 'package:firebridge/src/models/guild/integration.dart';
@@ -123,6 +124,15 @@ void initMappers() {
   PresenceUpdateEventMapper.ensureInitialized();
   SoundboardSoundMapper.ensureInitialized();
   VoiceStateMapper.ensureInitialized();
+  // These self-register as DispatchEvent subtypes (see their generated
+  // ensureInitialized()), but only if something actually calls this method
+  // somewhere - without it, Discord's VOICE_STATE_UPDATE/VOICE_SERVER_UPDATE
+  // dispatch payloads silently decode as UnknownDispatchEvent instead of
+  // VoiceStateUpdateEvent/VoiceServerUpdateEvent, and `onVoiceStateUpdate`/
+  // `onVoiceServerUpdate` never fire.
+  VoiceStateUpdateEventMapper.ensureInitialized();
+  VoiceServerUpdateEventMapper.ensureInitialized();
+  VoiceChannelEffectSendEventMapper.ensureInitialized();
 
   ChannelMapper.ensureInitialized();
   FollowedChannelMapper.ensureInitialized();

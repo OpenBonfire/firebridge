@@ -24,11 +24,6 @@ class VoiceStateMapper extends ClassMapperBase<VoiceState> {
   @override
   final String id = 'VoiceState';
 
-  static VoiceManager _$manager(VoiceState v) => v.manager;
-  static const Field<VoiceState, VoiceManager> _f$manager = Field(
-    'manager',
-    _$manager,
-  );
   static Snowflake? _$guildId(VoiceState v) => v.guildId;
   static const Field<VoiceState, Snowflake> _f$guildId = Field(
     'guildId',
@@ -47,6 +42,12 @@ class VoiceStateMapper extends ClassMapperBase<VoiceState> {
     _$userId,
     key: r'user_id',
   );
+  static Snowflake? _$lobbyId(VoiceState v) => v.lobbyId;
+  static const Field<VoiceState, Snowflake> _f$lobbyId = Field(
+    'lobbyId',
+    _$lobbyId,
+    key: r'lobby_id',
+  );
   static Member? _$member(VoiceState v) => v.member;
   static const Field<VoiceState, Member> _f$member = Field('member', _$member);
   static String _$sessionId(VoiceState v) => v.sessionId;
@@ -59,55 +60,57 @@ class VoiceStateMapper extends ClassMapperBase<VoiceState> {
   static const Field<VoiceState, bool> _f$selfDeafened = Field(
     'selfDeafened',
     _$selfDeafened,
-    key: r'self_deafened',
+    key: r'self_deaf',
   );
   static bool _$serverMuted(VoiceState v) => v.serverMuted;
   static const Field<VoiceState, bool> _f$serverMuted = Field(
     'serverMuted',
     _$serverMuted,
-    key: r'server_muted',
+    key: r'mute',
   );
   static bool _$serverDeafened(VoiceState v) => v.serverDeafened;
   static const Field<VoiceState, bool> _f$serverDeafened = Field(
     'serverDeafened',
     _$serverDeafened,
-    key: r'server_deafened',
+    key: r'deaf',
   );
   static bool _$selfMuted(VoiceState v) => v.selfMuted;
   static const Field<VoiceState, bool> _f$selfMuted = Field(
     'selfMuted',
     _$selfMuted,
-    key: r'self_muted',
+    key: r'self_mute',
   );
   static bool _$streaming(VoiceState v) => v.streaming;
   static const Field<VoiceState, bool> _f$streaming = Field(
     'streaming',
     _$streaming,
+    key: r'self_stream',
   );
   static bool _$videoEnabled(VoiceState v) => v.videoEnabled;
   static const Field<VoiceState, bool> _f$videoEnabled = Field(
     'videoEnabled',
     _$videoEnabled,
-    key: r'video_enabled',
+    key: r'self_video',
   );
   static bool _$suppressed(VoiceState v) => v.suppressed;
   static const Field<VoiceState, bool> _f$suppressed = Field(
     'suppressed',
     _$suppressed,
+    key: r'suppress',
   );
   static DateTime? _$requestedToSpeakAt(VoiceState v) => v.requestedToSpeakAt;
   static const Field<VoiceState, DateTime> _f$requestedToSpeakAt = Field(
     'requestedToSpeakAt',
     _$requestedToSpeakAt,
-    key: r'requested_to_speak_at',
+    key: r'request_to_speak_timestamp',
   );
 
   @override
   final MappableFields<VoiceState> fields = const {
-    #manager: _f$manager,
     #guildId: _f$guildId,
     #channelId: _f$channelId,
     #userId: _f$userId,
+    #lobbyId: _f$lobbyId,
     #member: _f$member,
     #sessionId: _f$sessionId,
     #selfDeafened: _f$selfDeafened,
@@ -122,10 +125,10 @@ class VoiceStateMapper extends ClassMapperBase<VoiceState> {
 
   static VoiceState _instantiate(DecodingData data) {
     return VoiceState(
-      manager: data.dec(_f$manager),
       guildId: data.dec(_f$guildId),
       channelId: data.dec(_f$channelId),
       userId: data.dec(_f$userId),
+      lobbyId: data.dec(_f$lobbyId),
       member: data.dec(_f$member),
       sessionId: data.dec(_f$sessionId),
       selfDeafened: data.dec(_f$selfDeafened),
@@ -202,12 +205,13 @@ abstract class VoiceStateCopyWith<$R, $In extends VoiceState, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get userId;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lobbyId;
   MemberCopyWith<$R, Member, Member>? get member;
   $R call({
-    VoiceManager? manager,
     Snowflake? guildId,
     Snowflake? channelId,
     Snowflake? userId,
+    Snowflake? lobbyId,
     Member? member,
     String? sessionId,
     bool? selfDeafened,
@@ -240,14 +244,17 @@ class _VoiceStateCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake> get userId =>
       $value.userId.copyWith.$chain((v) => call(userId: v));
   @override
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lobbyId =>
+      $value.lobbyId?.copyWith.$chain((v) => call(lobbyId: v));
+  @override
   MemberCopyWith<$R, Member, Member>? get member =>
       $value.member?.copyWith.$chain((v) => call(member: v));
   @override
   $R call({
-    VoiceManager? manager,
     Object? guildId = $none,
     Object? channelId = $none,
     Snowflake? userId,
+    Object? lobbyId = $none,
     Object? member = $none,
     String? sessionId,
     bool? selfDeafened,
@@ -260,10 +267,10 @@ class _VoiceStateCopyWithImpl<$R, $Out>
     Object? requestedToSpeakAt = $none,
   }) => $apply(
     FieldCopyWithData({
-      if (manager != null) #manager: manager,
       if (guildId != $none) #guildId: guildId,
       if (channelId != $none) #channelId: channelId,
       if (userId != null) #userId: userId,
+      if (lobbyId != $none) #lobbyId: lobbyId,
       if (member != $none) #member: member,
       if (sessionId != null) #sessionId: sessionId,
       if (selfDeafened != null) #selfDeafened: selfDeafened,
@@ -278,10 +285,10 @@ class _VoiceStateCopyWithImpl<$R, $Out>
   );
   @override
   VoiceState $make(CopyWithData data) => VoiceState(
-    manager: data.get(#manager, or: $value.manager),
     guildId: data.get(#guildId, or: $value.guildId),
     channelId: data.get(#channelId, or: $value.channelId),
     userId: data.get(#userId, or: $value.userId),
+    lobbyId: data.get(#lobbyId, or: $value.lobbyId),
     member: data.get(#member, or: $value.member),
     sessionId: data.get(#sessionId, or: $value.sessionId),
     selfDeafened: data.get(#selfDeafened, or: $value.selfDeafened),

@@ -63,7 +63,8 @@ class VoiceStateUpdateEventMapper
     if (_instance == null) {
       MapperContainer.globals.use(_instance = VoiceStateUpdateEventMapper._());
       DispatchEventMapper.ensureInitialized().addSubMapper(_instance!);
-      VoiceStateMapper.ensureInitialized();
+      SnowflakeMapper.ensureInitialized();
+      MemberMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -71,17 +72,91 @@ class VoiceStateUpdateEventMapper
   @override
   final String id = 'VoiceStateUpdateEvent';
 
-  static VoiceState? _$oldState(VoiceStateUpdateEvent v) => v.oldState;
-  static const Field<VoiceStateUpdateEvent, VoiceState> _f$oldState = Field(
-    'oldState',
-    _$oldState,
-    key: r'old_state',
+  static Snowflake? _$guildId(VoiceStateUpdateEvent v) => v.guildId;
+  static const Field<VoiceStateUpdateEvent, Snowflake> _f$guildId = Field(
+    'guildId',
+    _$guildId,
+    key: r'guild_id',
   );
-  static VoiceState _$state(VoiceStateUpdateEvent v) => v.state;
-  static const Field<VoiceStateUpdateEvent, VoiceState> _f$state = Field(
-    'state',
-    _$state,
+  static Snowflake? _$channelId(VoiceStateUpdateEvent v) => v.channelId;
+  static const Field<VoiceStateUpdateEvent, Snowflake> _f$channelId = Field(
+    'channelId',
+    _$channelId,
+    key: r'channel_id',
   );
+  static Snowflake? _$lobbyId(VoiceStateUpdateEvent v) => v.lobbyId;
+  static const Field<VoiceStateUpdateEvent, Snowflake> _f$lobbyId = Field(
+    'lobbyId',
+    _$lobbyId,
+    key: r'lobby_id',
+  );
+  static Snowflake _$userId(VoiceStateUpdateEvent v) => v.userId;
+  static const Field<VoiceStateUpdateEvent, Snowflake> _f$userId = Field(
+    'userId',
+    _$userId,
+    key: r'user_id',
+  );
+  static Member? _$member(VoiceStateUpdateEvent v) => v.member;
+  static const Field<VoiceStateUpdateEvent, Member> _f$member = Field(
+    'member',
+    _$member,
+  );
+  static String _$sessionId(VoiceStateUpdateEvent v) => v.sessionId;
+  static const Field<VoiceStateUpdateEvent, String> _f$sessionId = Field(
+    'sessionId',
+    _$sessionId,
+    key: r'session_id',
+  );
+  static bool _$selfDeafened(VoiceStateUpdateEvent v) => v.selfDeafened;
+  static const Field<VoiceStateUpdateEvent, bool> _f$selfDeafened = Field(
+    'selfDeafened',
+    _$selfDeafened,
+    key: r'self_deaf',
+  );
+  static bool _$serverMuted(VoiceStateUpdateEvent v) => v.serverMuted;
+  static const Field<VoiceStateUpdateEvent, bool> _f$serverMuted = Field(
+    'serverMuted',
+    _$serverMuted,
+    key: r'mute',
+  );
+  static bool _$serverDeafened(VoiceStateUpdateEvent v) => v.serverDeafened;
+  static const Field<VoiceStateUpdateEvent, bool> _f$serverDeafened = Field(
+    'serverDeafened',
+    _$serverDeafened,
+    key: r'deaf',
+  );
+  static bool _$selfMuted(VoiceStateUpdateEvent v) => v.selfMuted;
+  static const Field<VoiceStateUpdateEvent, bool> _f$selfMuted = Field(
+    'selfMuted',
+    _$selfMuted,
+    key: r'self_mute',
+  );
+  static bool? _$streaming(VoiceStateUpdateEvent v) => v.streaming;
+  static const Field<VoiceStateUpdateEvent, bool> _f$streaming = Field(
+    'streaming',
+    _$streaming,
+    key: r'self_stream',
+  );
+  static bool _$videoEnabled(VoiceStateUpdateEvent v) => v.videoEnabled;
+  static const Field<VoiceStateUpdateEvent, bool> _f$videoEnabled = Field(
+    'videoEnabled',
+    _$videoEnabled,
+    key: r'self_video',
+  );
+  static bool _$suppressed(VoiceStateUpdateEvent v) => v.suppressed;
+  static const Field<VoiceStateUpdateEvent, bool> _f$suppressed = Field(
+    'suppressed',
+    _$suppressed,
+    key: r'suppress',
+  );
+  static DateTime? _$requestedToSpeakAt(VoiceStateUpdateEvent v) =>
+      v.requestedToSpeakAt;
+  static const Field<VoiceStateUpdateEvent, DateTime> _f$requestedToSpeakAt =
+      Field(
+        'requestedToSpeakAt',
+        _$requestedToSpeakAt,
+        key: r'request_to_speak_timestamp',
+      );
   static Opcode _$opcode(VoiceStateUpdateEvent v) => v.opcode;
   static const Field<VoiceStateUpdateEvent, Opcode> _f$opcode = Field(
     'opcode',
@@ -91,8 +166,20 @@ class VoiceStateUpdateEventMapper
 
   @override
   final MappableFields<VoiceStateUpdateEvent> fields = const {
-    #oldState: _f$oldState,
-    #state: _f$state,
+    #guildId: _f$guildId,
+    #channelId: _f$channelId,
+    #lobbyId: _f$lobbyId,
+    #userId: _f$userId,
+    #member: _f$member,
+    #sessionId: _f$sessionId,
+    #selfDeafened: _f$selfDeafened,
+    #serverMuted: _f$serverMuted,
+    #serverDeafened: _f$serverDeafened,
+    #selfMuted: _f$selfMuted,
+    #streaming: _f$streaming,
+    #videoEnabled: _f$videoEnabled,
+    #suppressed: _f$suppressed,
+    #requestedToSpeakAt: _f$requestedToSpeakAt,
     #opcode: _f$opcode,
   };
 
@@ -106,8 +193,20 @@ class VoiceStateUpdateEventMapper
 
   static VoiceStateUpdateEvent _instantiate(DecodingData data) {
     return VoiceStateUpdateEvent(
-      oldState: data.dec(_f$oldState),
-      state: data.dec(_f$state),
+      guildId: data.dec(_f$guildId),
+      channelId: data.dec(_f$channelId),
+      lobbyId: data.dec(_f$lobbyId),
+      userId: data.dec(_f$userId),
+      member: data.dec(_f$member),
+      sessionId: data.dec(_f$sessionId),
+      selfDeafened: data.dec(_f$selfDeafened),
+      serverMuted: data.dec(_f$serverMuted),
+      serverDeafened: data.dec(_f$serverDeafened),
+      selfMuted: data.dec(_f$selfMuted),
+      streaming: data.dec(_f$streaming),
+      videoEnabled: data.dec(_f$videoEnabled),
+      suppressed: data.dec(_f$suppressed),
+      requestedToSpeakAt: data.dec(_f$requestedToSpeakAt),
     );
   }
 
@@ -181,10 +280,28 @@ abstract class VoiceStateUpdateEventCopyWith<
   $Out
 >
     implements DispatchEventCopyWith<$R, $In, $Out> {
-  VoiceStateCopyWith<$R, VoiceState, VoiceState>? get oldState;
-  VoiceStateCopyWith<$R, VoiceState, VoiceState> get state;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lobbyId;
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get userId;
+  MemberCopyWith<$R, Member, Member>? get member;
   @override
-  $R call({VoiceState? oldState, VoiceState? state});
+  $R call({
+    Snowflake? guildId,
+    Snowflake? channelId,
+    Snowflake? lobbyId,
+    Snowflake? userId,
+    Member? member,
+    String? sessionId,
+    bool? selfDeafened,
+    bool? serverMuted,
+    bool? serverDeafened,
+    bool? selfMuted,
+    bool? streaming,
+    bool? videoEnabled,
+    bool? suppressed,
+    DateTime? requestedToSpeakAt,
+  });
   VoiceStateUpdateEventCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -199,22 +316,73 @@ class _VoiceStateUpdateEventCopyWithImpl<$R, $Out>
   late final ClassMapperBase<VoiceStateUpdateEvent> $mapper =
       VoiceStateUpdateEventMapper.ensureInitialized();
   @override
-  VoiceStateCopyWith<$R, VoiceState, VoiceState>? get oldState =>
-      $value.oldState?.copyWith.$chain((v) => call(oldState: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get guildId =>
+      $value.guildId?.copyWith.$chain((v) => call(guildId: v));
   @override
-  VoiceStateCopyWith<$R, VoiceState, VoiceState> get state =>
-      $value.state.copyWith.$chain((v) => call(state: v));
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId =>
+      $value.channelId?.copyWith.$chain((v) => call(channelId: v));
   @override
-  $R call({Object? oldState = $none, VoiceState? state}) => $apply(
+  SnowflakeCopyWith<$R, Snowflake, Snowflake>? get lobbyId =>
+      $value.lobbyId?.copyWith.$chain((v) => call(lobbyId: v));
+  @override
+  SnowflakeCopyWith<$R, Snowflake, Snowflake> get userId =>
+      $value.userId.copyWith.$chain((v) => call(userId: v));
+  @override
+  MemberCopyWith<$R, Member, Member>? get member =>
+      $value.member?.copyWith.$chain((v) => call(member: v));
+  @override
+  $R call({
+    Object? guildId = $none,
+    Object? channelId = $none,
+    Object? lobbyId = $none,
+    Snowflake? userId,
+    Object? member = $none,
+    String? sessionId,
+    bool? selfDeafened,
+    bool? serverMuted,
+    bool? serverDeafened,
+    bool? selfMuted,
+    Object? streaming = $none,
+    bool? videoEnabled,
+    bool? suppressed,
+    Object? requestedToSpeakAt = $none,
+  }) => $apply(
     FieldCopyWithData({
-      if (oldState != $none) #oldState: oldState,
-      if (state != null) #state: state,
+      if (guildId != $none) #guildId: guildId,
+      if (channelId != $none) #channelId: channelId,
+      if (lobbyId != $none) #lobbyId: lobbyId,
+      if (userId != null) #userId: userId,
+      if (member != $none) #member: member,
+      if (sessionId != null) #sessionId: sessionId,
+      if (selfDeafened != null) #selfDeafened: selfDeafened,
+      if (serverMuted != null) #serverMuted: serverMuted,
+      if (serverDeafened != null) #serverDeafened: serverDeafened,
+      if (selfMuted != null) #selfMuted: selfMuted,
+      if (streaming != $none) #streaming: streaming,
+      if (videoEnabled != null) #videoEnabled: videoEnabled,
+      if (suppressed != null) #suppressed: suppressed,
+      if (requestedToSpeakAt != $none) #requestedToSpeakAt: requestedToSpeakAt,
     }),
   );
   @override
   VoiceStateUpdateEvent $make(CopyWithData data) => VoiceStateUpdateEvent(
-    oldState: data.get(#oldState, or: $value.oldState),
-    state: data.get(#state, or: $value.state),
+    guildId: data.get(#guildId, or: $value.guildId),
+    channelId: data.get(#channelId, or: $value.channelId),
+    lobbyId: data.get(#lobbyId, or: $value.lobbyId),
+    userId: data.get(#userId, or: $value.userId),
+    member: data.get(#member, or: $value.member),
+    sessionId: data.get(#sessionId, or: $value.sessionId),
+    selfDeafened: data.get(#selfDeafened, or: $value.selfDeafened),
+    serverMuted: data.get(#serverMuted, or: $value.serverMuted),
+    serverDeafened: data.get(#serverDeafened, or: $value.serverDeafened),
+    selfMuted: data.get(#selfMuted, or: $value.selfMuted),
+    streaming: data.get(#streaming, or: $value.streaming),
+    videoEnabled: data.get(#videoEnabled, or: $value.videoEnabled),
+    suppressed: data.get(#suppressed, or: $value.suppressed),
+    requestedToSpeakAt: data.get(
+      #requestedToSpeakAt,
+      or: $value.requestedToSpeakAt,
+    ),
   );
 
   @override

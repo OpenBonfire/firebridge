@@ -32,8 +32,10 @@ class GatewayVoiceStateBuilder extends CreateBuilder<VoiceState>
     with GatewayVoiceStateBuilderMappable {
   Snowflake? channelId;
 
+  @MappableField(key: 'self_mute')
   bool muted;
 
+  @MappableField(key: 'self_deaf')
   bool deafened;
 
   GatewayVoiceStateBuilder(

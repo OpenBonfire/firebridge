@@ -272,8 +272,8 @@ extension CacheUpdates on FirebridgeRest {
         updateCacheWith(member);
       case UserUpdateEvent(:final user):
         updateCacheWith(user);
-      case VoiceStateUpdateEvent(:final state):
-        updateCacheWith(state);
+      // case VoiceStateUpdateEvent():
+      //   updateCacheWith(entity);
       case InteractionCreateEvent(:final interaction):
         updateCacheWith(interaction);
       case StageInstanceCreateEvent(:final instance):

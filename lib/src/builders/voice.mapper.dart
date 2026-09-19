@@ -392,11 +392,13 @@ class GatewayVoiceStateBuilderMapper
   static const Field<GatewayVoiceStateBuilder, bool> _f$muted = Field(
     'muted',
     _$muted,
+    key: r'self_mute',
   );
   static bool _$deafened(GatewayVoiceStateBuilder v) => v.deafened;
   static const Field<GatewayVoiceStateBuilder, bool> _f$deafened = Field(
     'deafened',
     _$deafened,
+    key: r'self_deaf',
   );
 
   @override
