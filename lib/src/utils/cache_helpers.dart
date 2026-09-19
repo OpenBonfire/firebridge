@@ -44,6 +44,7 @@ import 'package:firebridge/src/models/webhook.dart';
 
 extension CacheUpdates on FirebridgeRest {
   /// Update the caches for this client using [entity] by registering (or removing, if [entity] is a delete event) any cacheable entities reachable from [entity].
+  // TODO: Instead of iterating, we should do iterables or List<t> as the type itself, so we can do bulk actions in the caller
   void updateCacheWith(Object? entity) {
     notifyCacheUpdate(entity);
     switch (entity) {
