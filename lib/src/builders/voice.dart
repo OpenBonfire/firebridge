@@ -38,6 +38,24 @@ class GatewayVoiceStateBuilder extends CreateBuilder<VoiceState>
   @MappableField(key: 'self_deaf')
   bool deafened;
 
-  GatewayVoiceStateBuilder(
-      {required this.channelId, required this.muted, required this.deafened});
+  /// Whether the client's camera is enabled. Real clients set this to `true`
+  /// over the *main* gateway's Voice State Update (this class, opcode 4) the
+  /// moment the camera turns on - it's what drives the "live" camera
+  /// indicator other clients see, entirely separately from the voice
+  /// gateway's own Video opcode (12), which only negotiates SSRC/stream
+  /// metadata for the actual WebRTC media and is never surfaced in any UI.
+  @MappableField(key: 'self_video')
+  bool selfVideo;
+
+  /// Whether the client is running a "Go Live" screen share stream.
+  @MappableField(key: 'self_stream')
+  bool selfStream;
+
+  GatewayVoiceStateBuilder({
+    required this.channelId,
+    required this.muted,
+    required this.deafened,
+    this.selfVideo = false,
+    this.selfStream = false,
+  });
 }

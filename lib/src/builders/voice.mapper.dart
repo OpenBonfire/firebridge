@@ -400,12 +400,30 @@ class GatewayVoiceStateBuilderMapper
     _$deafened,
     key: r'self_deaf',
   );
+  static bool _$selfVideo(GatewayVoiceStateBuilder v) => v.selfVideo;
+  static const Field<GatewayVoiceStateBuilder, bool> _f$selfVideo = Field(
+    'selfVideo',
+    _$selfVideo,
+    key: r'self_video',
+    opt: true,
+    def: false,
+  );
+  static bool _$selfStream(GatewayVoiceStateBuilder v) => v.selfStream;
+  static const Field<GatewayVoiceStateBuilder, bool> _f$selfStream = Field(
+    'selfStream',
+    _$selfStream,
+    key: r'self_stream',
+    opt: true,
+    def: false,
+  );
 
   @override
   final MappableFields<GatewayVoiceStateBuilder> fields = const {
     #channelId: _f$channelId,
     #muted: _f$muted,
     #deafened: _f$deafened,
+    #selfVideo: _f$selfVideo,
+    #selfStream: _f$selfStream,
   };
 
   static GatewayVoiceStateBuilder _instantiate(DecodingData data) {
@@ -413,6 +431,8 @@ class GatewayVoiceStateBuilderMapper
       channelId: data.dec(_f$channelId),
       muted: data.dec(_f$muted),
       deafened: data.dec(_f$deafened),
+      selfVideo: data.dec(_f$selfVideo),
+      selfStream: data.dec(_f$selfStream),
     );
   }
 
@@ -487,7 +507,13 @@ abstract class GatewayVoiceStateBuilderCopyWith<
 >
     implements ClassCopyWith<$R, $In, $Out> {
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId;
-  $R call({Snowflake? channelId, bool? muted, bool? deafened});
+  $R call({
+    Snowflake? channelId,
+    bool? muted,
+    bool? deafened,
+    bool? selfVideo,
+    bool? selfStream,
+  });
   GatewayVoiceStateBuilderCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -506,11 +532,19 @@ class _GatewayVoiceStateBuilderCopyWithImpl<$R, $Out>
   SnowflakeCopyWith<$R, Snowflake, Snowflake>? get channelId =>
       $value.channelId?.copyWith.$chain((v) => call(channelId: v));
   @override
-  $R call({Object? channelId = $none, bool? muted, bool? deafened}) => $apply(
+  $R call({
+    Object? channelId = $none,
+    bool? muted,
+    bool? deafened,
+    bool? selfVideo,
+    bool? selfStream,
+  }) => $apply(
     FieldCopyWithData({
       if (channelId != $none) #channelId: channelId,
       if (muted != null) #muted: muted,
       if (deafened != null) #deafened: deafened,
+      if (selfVideo != null) #selfVideo: selfVideo,
+      if (selfStream != null) #selfStream: selfStream,
     }),
   );
   @override
@@ -518,6 +552,8 @@ class _GatewayVoiceStateBuilderCopyWithImpl<$R, $Out>
     channelId: data.get(#channelId, or: $value.channelId),
     muted: data.get(#muted, or: $value.muted),
     deafened: data.get(#deafened, or: $value.deafened),
+    selfVideo: data.get(#selfVideo, or: $value.selfVideo),
+    selfStream: data.get(#selfStream, or: $value.selfStream),
   );
 
   @override
