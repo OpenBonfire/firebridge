@@ -11,6 +11,7 @@ import 'package:firebridge/src/client_options.dart';
 import 'package:firebridge/src/errors.dart';
 import 'package:firebridge/src/event_mixin.dart';
 import 'package:firebridge/src/gateway/gateway.dart';
+import 'package:firebridge/src/gateway/voice_gateway.dart';
 import 'package:firebridge/src/http/handler.dart';
 import 'package:firebridge/src/http/managers/gateway_manager.dart';
 import 'package:firebridge/src/manager_mixin.dart';
@@ -255,6 +256,36 @@ class FirebridgeGateway
   void updateVoiceState(Snowflake guildId, GatewayVoiceStateBuilder builder) =>
       gateway.updateVoiceState(guildId, builder);
 
+  /// The currently active per-guild voice gateway connection, if any - at
+  /// most one at a time, since Discord only ever allows a single account to
+  /// be connected to one voice channel at a time across the whole client.
+  /// Set by [connectVoice]; closing it (and clearing this field) is the
+  /// caller's responsibility - see [VoiceGateway.close].
+  VoiceGateway? voiceGateway;
+
+  /// Creates (but does not connect - call [VoiceGateway.connect] once ready
+  /// to listen for its events) a [VoiceGateway] for [guildId], using this
+  /// client's own user ID.
+  VoiceGateway connectVoice({
+    required Snowflake guildId,
+    required String sessionId,
+    required String token,
+    required String endpoint,
+    int maxDaveProtocolVersion = 0,
+  }) {
+    final voice = VoiceGateway(
+      client: this,
+      endpoint: endpoint,
+      guildId: guildId,
+      userId: user.id,
+      sessionId: sessionId,
+      token: token,
+      maxDaveProtocolVersion: maxDaveProtocolVersion,
+    );
+    voiceGateway = voice;
+    return voice;
+  }
+
   /// Update the client's presence on all shards.
   void updatePresence(PresenceBuilder builder) =>
       gateway.updatePresence(builder);
@@ -267,6 +298,7 @@ class FirebridgeGateway
   Future<void> close() {
     logger.info('Closing client');
     return _doClose(this, () async {
+      await voiceGateway?.close();
       await gateway.close();
       httpHandler.close();
     }, options.plugins);
